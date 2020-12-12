@@ -1,0 +1,8 @@
+package gd.fintech.lms.studentcontroller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class LoginStudentController {
+
+}

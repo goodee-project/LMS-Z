@@ -1,0 +1,5 @@
+package gd.fintech.lms.teachermapper;
+
+public interface LoginTeacherMapper {
+
+}

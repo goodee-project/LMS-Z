@@ -1,0 +1,5 @@
+package gd.fintech.lms.studentcontroller;
+
+public class LoginStudentController {
+
+}

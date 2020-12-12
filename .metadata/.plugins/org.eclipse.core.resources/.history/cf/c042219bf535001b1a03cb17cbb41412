@@ -1,0 +1,5 @@
+package gd.fintech.lms.studentservice;
+
+public class LoginStudentService {
+
+}

@@ -1,0 +1,5 @@
+package gd.fintech.lms.operatormapper;
+
+public interface LoginOperatorMapper {
+
+}

@@ -1,0 +1,5 @@
+package gd.fintech.lms.operatorservice;
+
+public class LoginOperatorService {
+
+}

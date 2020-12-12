@@ -1,0 +1,5 @@
+package gd.fintech.lms.studentmapper;
+
+public interface LoginStudentMapper {
+
+}

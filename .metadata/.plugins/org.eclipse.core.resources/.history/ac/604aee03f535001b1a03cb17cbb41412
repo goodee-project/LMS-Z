@@ -1,0 +1,5 @@
+package gd.fintech.lms.adminservice;
+
+public class LoginAdminService {
+
+}
