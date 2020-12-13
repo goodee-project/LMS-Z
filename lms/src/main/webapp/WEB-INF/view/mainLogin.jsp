@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <link href="${path}/css/login.css" rel="stylesheet" type="text/css" media="all" />
-<title>lms</title>
+<title>LMS</title>
 </head>
 <body>
 
