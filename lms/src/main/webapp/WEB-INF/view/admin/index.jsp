@@ -66,19 +66,10 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">박대표</span> <i data-feather="chevron-down"
-                                        class="svg-icon"></i></span>
+                                        class="text-dark">박대표</span> 
+                                       <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
+                                </span>
                             </a>
-                            <!-- 드롭다운 내용 -->
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Logout</a>
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -95,42 +86,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.html"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Index</span></a></li>
-                        <!-- 사용 시 줄 표시 -->
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.html"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">1
-                                </span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">2</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">3</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">4</span></a>
-                            <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-1
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-2
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-3
-                                        </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
+                       
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.html"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -144,12 +100,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">소제목</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">승인 대기자</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="index.html">index</a>
+                                    <li class="breadcrumb-item"><a href="index.html">운영자</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -158,193 +114,100 @@
                 </div>
             </div>
 
-
-            <div class="container-fluid">
-               
-                <!-- 카드를 만들어서 바로 옆에 공백 없이 이어 버리고 싶을때 사용하고 싶으시면 아래 주석 참고 -->
-                <!--
-                <div class="card-group">
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">236</h2>
-                                        <span
-                                            class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">New Clients</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">$</sup>18,306</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Earnings of Month
-                                    </h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				 -->
-
-				<!-- 1번째 라인 카드 -->
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">1</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">2</h4>
-                                <!-- pl이 가로로 여백 mb가 세로로 여백 -->
-                                <div class="pl-4 mb-3">
-                                	내용 내용 내용
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">3</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 2번째 라인 카드 -->
-                <div class="row">
-                    <div class="col-md-6 col-lg-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">4</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pl-4 mb-5">
-                                	내용 내용 내용
-                                </div>
-                                <ul class="list-inline text-center mt-4 mb-0">
-                                    <li class="list-inline-item text-muted font-italic">test</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">5</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 3번째 라인 카드 -->
+                <!-- 테이블 -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <h4 class="card-title">6</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="table-responsive">
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용1</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">내용2</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용3</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">내용4</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">내용5</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용6</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">아이디</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">이름</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">전화번호</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">이메일</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">성별</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">생일</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">주소</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">상세주소</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="border-top-0 px-2 py-4">
-                                                    <div class="d-flex no-block align-items-center">
-                                                    	<!-- 굵은 글씨 -->
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">내용1 굵은</h5>
-                                                        <!-- 앏은 글씨 -->
-                                                        <span class="text-muted font-14">내용1 앏은</span>
-                                                    </div>
-                                                </td>
-                                                <td class="border-top-0 text-muted px-2 py-4 font-14">내용2</td>
-                                                
-                                                <!-- 아이콘 활용한 부트스트랩 -->
-                                                <td class="border-top-0 px-2 py-4">
-                                                    <div class="popover-icon">
-                                                        <a class="btn btn-primary rounded-circle btn-circle font-12"
-                                                            href="javascript:void(0)">DS</a>
-                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item"
-                                                            href="javascript:void(0)">SS</a>
-                                                        <a class="btn btn-cyan rounded-circle btn-circle font-12 popover-item"
-                                                            href="javascript:void(0)">RP</a>
-                                                        <a class="btn btn-success text-white rounded-circle btn-circle font-20"
-                                                            href="javascript:void(0)">+</a>
-                                                    </div>
-                                                </td>
-                                                
-                                                <!-- 눌렀을때 추가 옵션 -->
-                                                <td class="border-top-0 text-center px-2 py-4"><i
-                                                        class="fa fa-circle text-primary font-12" data-toggle="tooltip"
-                                                        data-placement="top" title="In Testing"></i></td>
-                                                
-                                                <!-- 살짝 굵은 글씨 -->
-                                                <td
-                                                    class="bord	er-top-0 text-center font-weight-medium text-muted px-2 py-4">
-                                                    살짝 굵은 글씨
-                                                </td>
-                                                
-                                                <!-- 일반적인 글씨 -->
-                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">일반적인 글씨
-                                                </td>
-                                            </tr>   
+                                        	<c:forEach var="c" items="${managerQueueList}">
+	                                            <tr>
+	                                                <td class="border-top-0 px-2 py-4">
+	                                                    <div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerId}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
+	                                               		<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerName}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                
+	                                                <!-- 아이콘 활용한 부트스트랩 -->
+	                                                <td class="border-top-0 px-2 py-4">
+	                                                    <div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerPhone}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                
+	                                                <!-- 눌렀을때 추가 옵션 -->
+	                                                <td class="border-top-0 text-center px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerEmail}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                
+	                                                <!-- 살짝 굵은 글씨 -->
+	                                                <td class="bord	er-top-0 text-center font-weight-medium text-muted px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerGender}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                
+	                                                <!-- 일반적인 글씨 -->
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerBirth}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerAddressMain}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerAddressSub}</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td>
+	                                                	<div class="popover-icon">
+	                                                        <a class="btn btn-primary rounded-circle btn-circle font-12"
+	                                                            href="${path}/admin/approved/${c.managerId}">승인</a>
+                                                        </div>
+	                                                </td>
+	                                                <td>
+	                                                	<div class="popover-icon">
+	                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item"
+                                                            	href="${path}/admin/disavowal/${c.managerId}">거부</a>
+                                                        </div>
+	                                                </td>
+	                                            </tr>
+	                                         </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -356,7 +219,6 @@
 
         </div>
 
-    </div>
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
