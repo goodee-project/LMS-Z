@@ -14,4 +14,9 @@ public class LoginTeacherController {
 	public String login() {
 		return "teacher/login";
 	}
+	
+	@GetMapping("/teacher/index")
+	public String index() {
+		return "teacher/lndex";
+	}
 }

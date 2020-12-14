@@ -14,4 +14,9 @@ public class LoginStudentController {
 	public String login() {
 		return "student/login";
 	}
+	
+	@GetMapping("/student/index")
+	public String index() {
+		return "student/lndex";
+	}
 }

@@ -19,5 +19,10 @@ public class LoginAdminController {
 	public String login() {
 		return "admin/login";
 	}
+	
+	@GetMapping(value = {"/admin/index"})
+	public String index() {
+		return "admin/index";
+	}
 
 }

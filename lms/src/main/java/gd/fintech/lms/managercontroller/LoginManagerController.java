@@ -14,4 +14,9 @@ public class LoginManagerController {
 	public String login() {
 		return "manager/login";
 	}
+	
+	@GetMapping("/manager/index")
+	public String index() {
+		return "manager/index";
+	}
 }
