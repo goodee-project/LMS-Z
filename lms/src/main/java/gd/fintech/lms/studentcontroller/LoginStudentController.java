@@ -17,6 +17,6 @@ public class LoginStudentController {
 	
 	@GetMapping("/student/index")
 	public String index() {
-		return "student/lndex";
+		return "student/index";
 	}
 }
