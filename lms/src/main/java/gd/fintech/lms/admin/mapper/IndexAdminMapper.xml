@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.admin.mapper.IndexAdminMapper">
+	<!-- 운영자 승인 대기 리스트 출력 -->
+	<select id="selectManagerQueue" resultType="gd.fintech.lms.vo.ManagerQueue">
+		SELECT manager_id managerId,
+				manager_name managerName,
+				manager_phone managerPhone,
+				manager_email managerEmail,
+				manager_gender managerGender,
+				manager_birth managerBirth,
+				manager_address_main managerAddressMain,
+				manager_address_sub managerAddressSub
+		FROM manager_queue
+		ORDER BY manager_id DESC
+	</select>
+	<!-- 승인/거부 하려는 운영자 정보 가져오기 -->
+	<select id="selectManagerQueueOne" parameterType="java.lang.String" resultType="gd.fintech.lms.vo.ManagerQueue">
+		SELECT manager_id managerId,
+				manager_name managerName,
+				manager_phone managerPhone,
+				manager_email managerEmail,
+				manager_gender managerGender,
+				manager_birth managerBirth,
+				manager_address_main managerAddressMain,
+				manager_address_sub managerAddressSub
+		FROM manager_queue
+		WHERE manager_id=#{managerId}
+	</select>
+	
+	<!-- 운영자 승인 -->
+	<insert id="insertManagerInformation" parameterType="gd.fintech.lms.vo.ManagerQueue">
+		INSERT INTO manager(
+			manager_id,
+			manager_name,
+			manager_phone,
+			manager_email,
+			manager_gender,
+			manager_birth,
+			manager_address_main,
+			manager_address_sub,
+			manager_accessdate,
+			manager_updatedate
+		)
+		VALUES(
+			#{managerId},
+			#{managerName},
+			#{managerPhone},
+			#{managerEmail},
+			#{managerGender},
+			#{managerBirth},
+			#{managerAddressMain},
+			#{managerAddressSub},
+			NOW(),
+			NOW()
+		) 
+	</insert>
+	
+	<!-- 운영자 미승인 -->
+	<delete id="deleteManagerQueue" parameterType="java.lang.String">
+		DELETE FROM manager_queue
+		WHERE manager_id = #{managerId}
+	</delete>
+</mapper>
