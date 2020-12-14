@@ -37,7 +37,7 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
-                        <a href="index.html">
+                        <a href="index">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -92,16 +92,16 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Index</span></a></li>
                         <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.html"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/manager/member"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">1
+                                    class="hide-menu">강사/학생 관리
                                 </span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html"

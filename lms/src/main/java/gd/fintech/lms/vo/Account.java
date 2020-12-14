@@ -1,14 +1,17 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class Account {
-	private int testNo;
-	private int lectureNo;
-	private String testStartdate;
-	private String testEnddate;
-	private String testContent;
-	private String testCreatedate;
-	private String testUpdatedate;
+	private String accountId;
+    private String accountPw;
+    private String accountState;
+    private int accountLevel;
+    private String accountCreateDate;
+    private String accountUpdatedate;
+    private List<StudentQueue> studentQueue;
+    private List<TeacherQueue> teacherQueue;
 }
