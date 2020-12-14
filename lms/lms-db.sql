@@ -12,7 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- 테이블 lms.account 구조 내보내기
-DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `account_id` varchar(50) NOT NULL,
   `account_pw` varchar(50) NOT NULL,
@@ -26,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.address 구조 내보내기
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `zip_code` char(5) NOT NULL DEFAULT '' COMMENT '우편번호',
@@ -58,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.admin 구조 내보내기
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `admin_id` varchar(50) NOT NULL,
   `admin_email` varchar(200) NOT NULL,
@@ -71,7 +68,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.answer_sheet 구조 내보내기
-DROP TABLE IF EXISTS `answer_sheet`;
 CREATE TABLE IF NOT EXISTS `answer_sheet` (
   `multiplechoice_no` int(11) NOT NULL,
   `acount_id` varchar(50) CHARACTER SET utf8mb4 NOT NULL COMMENT '학생아이디',
@@ -86,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `answer_sheet` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.attendance 구조 내보내기
-DROP TABLE IF EXISTS `attendance`;
 CREATE TABLE IF NOT EXISTS `attendance` (
   `lecture_no` int(11) NOT NULL,
   `account_id` varchar(50) NOT NULL,
@@ -104,7 +99,6 @@ CREATE TABLE IF NOT EXISTS `attendance` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.career 구조 내보내기
-DROP TABLE IF EXISTS `career`;
 CREATE TABLE IF NOT EXISTS `career` (
   `career_no` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` varchar(50) NOT NULL,
@@ -119,7 +113,6 @@ CREATE TABLE IF NOT EXISTS `career` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.classroom 구조 내보내기
-DROP TABLE IF EXISTS `classroom`;
 CREATE TABLE IF NOT EXISTS `classroom` (
   `classroom_no` int(11) NOT NULL AUTO_INCREMENT,
   `classroom_number` int(11) NOT NULL,
@@ -131,7 +124,6 @@ CREATE TABLE IF NOT EXISTS `classroom` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.class_registration 구조 내보내기
-DROP TABLE IF EXISTS `class_registration`;
 CREATE TABLE IF NOT EXISTS `class_registration` (
   `class_registration_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '학생들 수강신청목록',
   `lecture_no` int(11) NOT NULL,
@@ -150,7 +142,6 @@ CREATE TABLE IF NOT EXISTS `class_registration` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.class_registration_cancel 구조 내보내기
-DROP TABLE IF EXISTS `class_registration_cancel`;
 CREATE TABLE IF NOT EXISTS `class_registration_cancel` (
   `class_registration_no` int(11) NOT NULL,
   `cancel_createdate` datetime NOT NULL,
@@ -162,7 +153,6 @@ CREATE TABLE IF NOT EXISTS `class_registration_cancel` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.education 구조 내보내기
-DROP TABLE IF EXISTS `education`;
 CREATE TABLE IF NOT EXISTS `education` (
   `education_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '학력(강사,운영자)',
   `account_Id` varchar(50) NOT NULL,
@@ -178,7 +168,6 @@ CREATE TABLE IF NOT EXISTS `education` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.faq 구조 내보내기
-DROP TABLE IF EXISTS `faq`;
 CREATE TABLE IF NOT EXISTS `faq` (
   `faq_no` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` varchar(50) NOT NULL,
@@ -199,7 +188,6 @@ CREATE TABLE IF NOT EXISTS `faq` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.faq_category 구조 내보내기
-DROP TABLE IF EXISTS `faq_category`;
 CREATE TABLE IF NOT EXISTS `faq_category` (
   `faq_category` varchar(50) NOT NULL,
   PRIMARY KEY (`faq_category`) USING BTREE
@@ -208,7 +196,6 @@ CREATE TABLE IF NOT EXISTS `faq_category` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.lecture 구조 내보내기
-DROP TABLE IF EXISTS `lecture`;
 CREATE TABLE IF NOT EXISTS `lecture` (
   `lecture_no` int(11) NOT NULL AUTO_INCREMENT,
   `account_id` varchar(50) NOT NULL,
@@ -239,7 +226,6 @@ CREATE TABLE IF NOT EXISTS `lecture` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.lecture_archive 구조 내보내기
-DROP TABLE IF EXISTS `lecture_archive`;
 CREATE TABLE IF NOT EXISTS `lecture_archive` (
   `lecture_archive_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
@@ -260,7 +246,6 @@ CREATE TABLE IF NOT EXISTS `lecture_archive` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.lecture_archive_file 구조 내보내기
-DROP TABLE IF EXISTS `lecture_archive_file`;
 CREATE TABLE IF NOT EXISTS `lecture_archive_file` (
   `lecture_archive_file_uuid` varchar(500) NOT NULL,
   `lecture_archive_file_original` varchar(500) NOT NULL,
@@ -277,7 +262,6 @@ CREATE TABLE IF NOT EXISTS `lecture_archive_file` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.lecture_notice 구조 내보내기
-DROP TABLE IF EXISTS `lecture_notice`;
 CREATE TABLE IF NOT EXISTS `lecture_notice` (
   `lecture_notice_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
@@ -294,7 +278,6 @@ CREATE TABLE IF NOT EXISTS `lecture_notice` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.license 구조 내보내기
-DROP TABLE IF EXISTS `license`;
 CREATE TABLE IF NOT EXISTS `license` (
   `license_no` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto increment',
   `account_id` varchar(50) NOT NULL,
@@ -310,7 +293,6 @@ CREATE TABLE IF NOT EXISTS `license` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.lms_notice 구조 내보내기
-DROP TABLE IF EXISTS `lms_notice`;
 CREATE TABLE IF NOT EXISTS `lms_notice` (
   `lms_notice_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '게시글 번호',
   `account_id` varchar(50) NOT NULL COMMENT '작성자 아이디',
@@ -328,7 +310,6 @@ CREATE TABLE IF NOT EXISTS `lms_notice` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.manager 구조 내보내기
-DROP TABLE IF EXISTS `manager`;
 CREATE TABLE IF NOT EXISTS `manager` (
   `manager_id` varchar(50) NOT NULL,
   `manager_email` varchar(200) NOT NULL,
@@ -349,7 +330,6 @@ CREATE TABLE IF NOT EXISTS `manager` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.manager_queue 구조 내보내기
-DROP TABLE IF EXISTS `manager_queue`;
 CREATE TABLE IF NOT EXISTS `manager_queue` (
   `manager_id` varchar(50) NOT NULL,
   `manager_email` varchar(200) NOT NULL,
@@ -366,7 +346,6 @@ CREATE TABLE IF NOT EXISTS `manager_queue` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.multiplechoice 구조 내보내기
-DROP TABLE IF EXISTS `multiplechoice`;
 CREATE TABLE IF NOT EXISTS `multiplechoice` (
   `multiplechoice_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
@@ -383,7 +362,6 @@ CREATE TABLE IF NOT EXISTS `multiplechoice` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.multiplechoice_example 구조 내보내기
-DROP TABLE IF EXISTS `multiplechoice_example`;
 CREATE TABLE IF NOT EXISTS `multiplechoice_example` (
   `multiplechoice_example_no` int(11) NOT NULL AUTO_INCREMENT,
   `multiplechoice_no` int(11) NOT NULL,
@@ -399,7 +377,6 @@ CREATE TABLE IF NOT EXISTS `multiplechoice_example` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.question 구조 내보내기
-DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
   `question_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
@@ -421,7 +398,6 @@ CREATE TABLE IF NOT EXISTS `question` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.question_comment 구조 내보내기
-DROP TABLE IF EXISTS `question_comment`;
 CREATE TABLE IF NOT EXISTS `question_comment` (
   `question_comment_no` int(11) NOT NULL AUTO_INCREMENT,
   `question_no` int(11) NOT NULL,
@@ -440,7 +416,6 @@ CREATE TABLE IF NOT EXISTS `question_comment` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.question_file 구조 내보내기
-DROP TABLE IF EXISTS `question_file`;
 CREATE TABLE IF NOT EXISTS `question_file` (
   `question_file_uuid` varchar(500) NOT NULL,
   `question_file_original` varchar(500) NOT NULL,
@@ -457,7 +432,6 @@ CREATE TABLE IF NOT EXISTS `question_file` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.report 구조 내보내기
-DROP TABLE IF EXISTS `report`;
 CREATE TABLE IF NOT EXISTS `report` (
   `report_no` int(11) NOT NULL,
   `lecture_no` int(11) NOT NULL,
@@ -475,11 +449,11 @@ CREATE TABLE IF NOT EXISTS `report` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.report_submit 구조 내보내기
-DROP TABLE IF EXISTS `report_submit`;
 CREATE TABLE IF NOT EXISTS `report_submit` (
   `report_submit_no` int(11) NOT NULL,
   `report_no` int(11) NOT NULL,
   `account_id` varchar(50) NOT NULL,
+  `report_submit_writer` varchar(50) NOT NULL,
   `report_submit_createdate` datetime NOT NULL,
   `report_submit_updatedate` datetime NOT NULL,
   `report_submit_title` varchar(200) NOT NULL,
@@ -496,7 +470,6 @@ CREATE TABLE IF NOT EXISTS `report_submit` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.report_submit_file 구조 내보내기
-DROP TABLE IF EXISTS `report_submit_file`;
 CREATE TABLE IF NOT EXISTS `report_submit_file` (
   `report_submit_file_uuid` varchar(500) NOT NULL,
   `report_submit_file_original` varchar(500) NOT NULL,
@@ -513,7 +486,6 @@ CREATE TABLE IF NOT EXISTS `report_submit_file` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.student 구조 내보내기
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `student_id` varchar(50) NOT NULL,
   `student_email` varchar(200) NOT NULL,
@@ -536,7 +508,6 @@ CREATE TABLE IF NOT EXISTS `student` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.student_queue 구조 내보내기
-DROP TABLE IF EXISTS `student_queue`;
 CREATE TABLE IF NOT EXISTS `student_queue` (
   `student_id` varchar(50) NOT NULL,
   `student_email` varchar(200) NOT NULL,
@@ -553,7 +524,6 @@ CREATE TABLE IF NOT EXISTS `student_queue` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.subject 구조 내보내기
-DROP TABLE IF EXISTS `subject`;
 CREATE TABLE IF NOT EXISTS `subject` (
   `subject_no` int(11) NOT NULL AUTO_INCREMENT,
   `subject_name` varchar(50) NOT NULL COMMENT '과목 이름',
@@ -567,7 +537,6 @@ CREATE TABLE IF NOT EXISTS `subject` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.syllabus 구조 내보내기
-DROP TABLE IF EXISTS `syllabus`;
 CREATE TABLE IF NOT EXISTS `syllabus` (
   `syllabus_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
@@ -584,7 +553,6 @@ CREATE TABLE IF NOT EXISTS `syllabus` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.teacher 구조 내보내기
-DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
   `teacher_id` varchar(50) NOT NULL,
   `teacher_email` varchar(200) NOT NULL,
@@ -608,7 +576,6 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.teacher_queue 구조 내보내기
-DROP TABLE IF EXISTS `teacher_queue`;
 CREATE TABLE IF NOT EXISTS `teacher_queue` (
   `teacher_id` varchar(50) NOT NULL,
   `teacher_email` varchar(200) NOT NULL,
@@ -626,12 +593,11 @@ CREATE TABLE IF NOT EXISTS `teacher_queue` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.test 구조 내보내기
-DROP TABLE IF EXISTS `test`;
 CREATE TABLE IF NOT EXISTS `test` (
   `test_no` int(11) NOT NULL AUTO_INCREMENT,
   `lecture_no` int(11) NOT NULL,
-  `test_startdate` date NOT NULL COMMENT '시험 시작일',
-  `test_enddate` date NOT NULL COMMENT '시험 종료일',
+  `test_startdate` datetime NOT NULL COMMENT '시험 시작일',
+  `test_enddate` datetime NOT NULL COMMENT '시험 종료일',
   `test_content` text CHARACTER SET utf8mb4 NOT NULL COMMENT '시험내용',
   `test_createdate` datetime NOT NULL,
   `test_updatedate` datetime NOT NULL,
@@ -643,7 +609,6 @@ CREATE TABLE IF NOT EXISTS `test` (
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 lms.textbook 구조 내보내기
-DROP TABLE IF EXISTS `textbook`;
 CREATE TABLE IF NOT EXISTS `textbook` (
   `textbook_isbn` int(13) NOT NULL,
   `textbook_title` varchar(200) NOT NULL COMMENT '교재 이름',
