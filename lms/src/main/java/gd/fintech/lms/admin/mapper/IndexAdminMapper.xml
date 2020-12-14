@@ -57,10 +57,25 @@
 			NOW()
 		) 
 	</insert>
+	<!-- 승인 후 계정 활성화 -->
+	<update id="updateManagerStateActivity" parameterType="java.lang.String">
+		UPDATE account
+		SET account_state='활성화',
+			account_updatedate=NOW()
+		WHERE account_id= #{managerId}
+	</update>
 	
 	<!-- 운영자 미승인 -->
 	<delete id="deleteManagerQueue" parameterType="java.lang.String">
 		DELETE FROM manager_queue
 		WHERE manager_id = #{managerId}
 	</delete>
+	
+	<!-- 미승인 후 계정 활성화 -->
+	<update id="updateManagerStateSecession" parameterType="java.lang.String">
+		UPDATE account
+		SET account_state='탈퇴',
+			account_updatedate=NOW()
+		WHERE account_id= #{managerId}
+	</update>
 </mapper>

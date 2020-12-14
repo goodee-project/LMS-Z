@@ -26,8 +26,16 @@ public class IndexAdminService {
 	public int addManagerInformation(ManagerQueue managerQueue) {
 		return indexAdminMapper.insertManagerInformation(managerQueue);
 	}
+	// 운영자 승인 후 계정 활성화
+	public int modifyManagerStateActivity(String managerId) {
+		return indexAdminMapper.updateManagerStateActivity(managerId);
+	}
 	// 운영자 승인 거부
 	public int removeManagerQueue(String managerId) {
 		return indexAdminMapper.deleteManagerQueue(managerId);
+	}
+	// 운영자 미승인 후 계정 탈퇴
+	public int modifyManagerStateSecession(String managerId) {
+		return indexAdminMapper.updateManagerStateSecession(managerId);
 	}
 }

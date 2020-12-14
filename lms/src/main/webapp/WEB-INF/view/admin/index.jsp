@@ -66,7 +66,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">박대표</span> 
+                                        class="text-dark"><c:out value="${sessionScope.adminId}"/></span> 
                                        <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
                                 </span>
                             </a>
@@ -83,11 +83,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.html"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                                    class="hide-menu">Index</span></a></li>
-                       
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/admin/logout"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
                     </ul>
