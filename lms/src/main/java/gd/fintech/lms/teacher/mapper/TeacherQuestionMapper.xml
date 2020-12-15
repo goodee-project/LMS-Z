@@ -3,10 +3,10 @@
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherQuestionMapper">
 	<select id="selectQuestionList" resultType="gd.fintech.lms.vo.Question">
 		SELECT 
-				question_no questionNo,
-				question_writer questionWriter,
-				question_title questionTitle,
-				question_count questionCount
+			question_no questionNo,
+			question_writer questionWriter,
+			question_title questionTitle,
+			question_count questionCount
 		FROM question
 	</select>
 </mapper>
