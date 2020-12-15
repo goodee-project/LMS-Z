@@ -43,7 +43,6 @@
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
-							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
 								GOODEE LMS

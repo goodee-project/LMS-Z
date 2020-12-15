@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Textbook {
-	private String textbookIsbn;
+	private int textbookIsbn; //String=>int
 	private String textbookTitle;
 	private String textbookWriter;
 	private String textbookPublisher;

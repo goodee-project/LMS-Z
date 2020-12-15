@@ -21,4 +21,65 @@
 			COUNT(*)
 		FROM lecture
 	</select>
+	
+	<!-- **** 강의 목록 상세보기 ****** -->
+	<!-- 1. 강의실 정보 -->
+	<select id="selectLectureListOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Lecture">
+		SELECT
+			lecture_no lectureNo,
+			account_id accountId,
+			teacher_name teacherName,
+			lecture_name lectureName,
+			lecture_startdate lectureStartdate,
+			lecture_enddate lectureEnddate,
+			lecture_total lectureTotal,
+			lecture_updatedate lectureUpdatedate,
+			subject_no subjectNo,
+			textbook_isbn textbookIsbn,
+			syllabus_no syllabusNo,
+			classroom_no classroomNo
+		FROM lecture
+		WHERE lecture_no=#{lectureNo}
+	</select>
+	<!-- 2. 과목 정보  -->
+	<select id="selectSubjectOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Subject">
+		SELECT
+			subject_no subjectNo,
+			subject_name subjectName,
+			subject_totalday subjectTotalday,
+			subject_info subjectInfo
+		FROM subject
+		WHERE subject_no=#{subjectNo}
+	</select>
+	<!-- 3. 교재 정보  -->
+	<select id="selectTextbookOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Textbook">
+		SELECT
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle,
+			textbook_writer textbookWriter,
+			textbook_publisher textbookPublisher,
+			textbook_publishdate textbookPublishdate,
+			textbook_info textbookInfo,
+			textbook_price textbookPrice
+		FROM textbook
+		WHERE textbook_isbn = #{textbookIsbn}
+	</select>
+	<!-- 4. 강의계획서  -->
+	<select id="selectSyllabusOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Syllabus">
+		SELECT
+			syllabus_no syllabusNo,
+			syllabus_content syllabusContent
+		FROM syllabus
+		WHERE syllabus_no=#{syllabusNo}
+	</select>
+	<!-- 5. 강의실 정보  -->
+	<select id="selectClassroomOne" parameterType="Integer" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT
+			classroom_no classroomNo,
+			classroom_number classrommNumber,
+			classroom_size classroomSize,
+			classroom_total classroomTotal
+		FROM classroom
+		WHERE classroom_no = #{classroomNo}
+	</select>
 </mapper>

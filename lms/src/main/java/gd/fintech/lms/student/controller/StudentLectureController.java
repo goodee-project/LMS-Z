@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.student.service.StudentLectureService;
+import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Subject;
+import gd.fintech.lms.vo.Syllabus;
+import gd.fintech.lms.vo.Textbook;
 
 @Controller
 public class StudentLectureController {
@@ -37,5 +41,28 @@ public class StudentLectureController {
 		model.addAttribute("lectureList",lectureList);
 		model.addAttribute("lastPage",lastPage);
 		return "student/lectureList";
+	}
+	
+	// 강의 목록 상세보기
+	@GetMapping("/student/lectureListOne/{lectureNo}")
+	public String lectureListOne(Model model,
+								@PathVariable(name="lectureNo") int lectureNo) {
+		// 1. 강의실 정보
+		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
+		// 2. 과목 정보
+		Subject subjectOne = studentLectureService.getSubjectOne(lectureOne.getSubjectNo());
+		// 3. 교재 정보
+		Textbook textbookOne = studentLectureService.getTextbookOne(lectureOne.getTextbookIsbn());
+		// 4. 강의계획서
+		Syllabus syllabusOne = studentLectureService.getSyllabusOne(lectureOne.getSyllabusNo());
+		// 5. 강의실 정보
+		Classroom classroomOne = studentLectureService.getClassroomOne(lectureOne.getClassroomNo());
+		
+		model.addAttribute("lectureOne",lectureOne);
+		model.addAttribute("subjectOne",subjectOne);
+		model.addAttribute("textbookOne",textbookOne);
+		model.addAttribute("syllabusOne",syllabusOne);
+		model.addAttribute("classroomOne",classroomOne);
+		return "student/lectureListOne";
 	}
 }

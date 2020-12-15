@@ -13,7 +13,7 @@ public class Lecture {
 	private String lectureStartdate;
 	private String lectureEnddate;
 	private int lectureTotal;
-	private int sqllabusNo;
+	private int syllabusNo;
 	private int classroomNo;
 	private String lectureCreatedate;
 	private String lectureUpdatedate;
