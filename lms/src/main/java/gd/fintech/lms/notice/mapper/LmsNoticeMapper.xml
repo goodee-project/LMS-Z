@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.notice.mapper.LmsNoticeMapper">
+<mapper namespace="gd.fintech.lms.noticeMapper.LmsNoticeMapper">
+	<!-- LMS 공지사항 리스트 -->
+<select id="selectLmsNoticeList" parameterType = "java.util.Map" resultType = "gd.fintech.lms.vo.LmsNotice">
+	SELECT
+		lms_notice_no lmsNotcieNo,
+		account_id accountId,
+		lms_notice_writer lmsNotcieWriter,
+		lms_notice_title lmsNotcieTitle,
+		lms_notice_content lmsNotcieContent,
+		lms_notice_createdate lmsNotcieCreateDate,
+		lms_notice_updatedate lmsNotcieUpdateDate,
+		lms_notice_count lmsNotcieCount,
+		FROM lms_notice
+		WHERE lms_notice_no = #{lmsNoticeNo}
+		LIMIT #{beginRow}, #{rowPerPage}
+		</select>
 </mapper>
