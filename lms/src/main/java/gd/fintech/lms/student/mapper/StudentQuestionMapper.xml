@@ -5,21 +5,68 @@
   	
   	<!-- 질문목록 리스트 페이징 -->
   	<select id="selectQuestionListPage" resultType="gd.fintech.lms.vo.Question" parameterType="java.util.Map">
-	  	select 
+	  	SELECT 
+	  		question_no questionNo,
 	  		lecture_no lectureNo,
 	  		question_writer questionWriter,
 	  		question_title questionTitle,
 	  		question_createdate questionCreatedate
-	  	from question
+	  	FROM question
 	  	order by question_createdate DESC
-	  	limit #{beginRow},#{rowPerPage}
+	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	
   	<!-- 질문목록 리스트 총 행의 갯수 -->
   	<select id="totalCountQuestion" resultType="int">
-  		select 
+  		SELECT 
   			count(*) count
-  		from question
+  		FROM question
   	</select>
   	
+  	<!-- 질문 자세히 보기 -->
+  	<select id="selectQuestionOne" resultType="gd.fintech.lms.vo.Question" parameterType="int">
+  		SELECT
+  			question_no questionNo, 
+	  		lecture_no lectureNo,
+	  		account_id accountId,
+	  		question_writer questionWriter,
+	  		question_title questionTitle,
+	  		question_content questionContent,
+	  		question_createdate questionCreatedate,
+	  		question_updatedate questionUpdatedate
+	  	FROM question
+  	</select>
+  	
+  	<!-- 질문 등록 -->
+  	<insert id="insertQuestion" parameterType="gd.fintech.lms.vo.Question">
+  		INSERT INTO 
+  			question(
+	  			lecture_no,
+	  			account_id,
+	  			question_writer,
+	  			question_title,
+	  			question_content,
+	  			question_createdate,
+	  			question_updatedate,
+	  			question_password
+  			)VALUES(
+  				#{lectureNo},
+  				#{accountId},
+  				#{questionWriter},
+  				#{questionTitle},
+  				#{questionContent},
+  				Now(),
+  				Now(),
+  				#{questionPassword}
+  			)
+  	</insert>
+  	
+  	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
+  	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
+  		SELECT 
+  			lecture_no lectureNo
+  		FROM lecture
+  	</select>
   </mapper>
+  
+  

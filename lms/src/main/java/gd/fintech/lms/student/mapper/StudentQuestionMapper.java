@@ -5,11 +5,23 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
 
 @Mapper
 public interface StudentQuestionMapper {
-	List<Question> selectQuestionListPage(Map<String, Integer> map); // 질문목록 리스트 (페이징)
+	// 질문목록 리스트 (페이징)
+	List<Question> selectQuestionListPage(Map<String, Integer> map); 
 	
-	int totalCountQuestion(); // 질문목록 페이징에 사용되는 총 행의 갯수
+	// 질문목록 페이징에 사용되는 총 행의 갯수
+	int totalCountQuestion(); 
+	
+	// 질문 등록
+	int insertQuestion(Question question); 
+	
+	//질문 자세히 보기
+	Question selectQuestionOne(int questionNo); 
+	
+	// 질문 등록에서 강의번호를 선택하기위해 사용(강의 번호 리스트를 가져오기 위해)
+	List<Lecture> selectLectureList();  
 }
