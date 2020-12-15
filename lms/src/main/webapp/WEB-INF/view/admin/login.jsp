@@ -129,7 +129,8 @@
 	                        </div>
 	                    </div>
 	                </div>
-               
+      			</div>
+      			</div>         
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>

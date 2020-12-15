@@ -36,11 +36,17 @@ public class ManagerLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("managerId", account.getAccountId());
 		
-		return "/manager/index";
+		return "redirect:/manager/index";
 	}
 	
 	@GetMapping("/managerSignup")
 	public String signup() {
 		return "manager/signup";
+	}
+	
+	@GetMapping("/manager/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/managerLogin#";
 	}
 }

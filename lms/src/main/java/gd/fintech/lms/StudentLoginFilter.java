@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter(urlPatterns = "/student/*")
 public class StudentLoginFilter implements Filter {
+	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -23,9 +24,10 @@ public class StudentLoginFilter implements Filter {
 		if(session.getAttribute("studentId") == null) {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/studentLogin");
+			((HttpServletResponse)response).sendRedirect(cPath + "/studentLogin#");
 			return;
 		}
 		chain.doFilter(request, response);
 	}
 }
+

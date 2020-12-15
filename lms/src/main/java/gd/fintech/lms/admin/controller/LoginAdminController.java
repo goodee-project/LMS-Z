@@ -22,6 +22,7 @@ public class LoginAdminController {
 	
 	@GetMapping(value = {"/adminLogin"})
 	public String login(HttpSession session) {
+		//세션에 adminId로 로그인이 되지 않았다면
 		if(session.getAttribute("adminId") != null) {
 			return "redirect:/admin/index";
 		}
@@ -42,6 +43,6 @@ public class LoginAdminController {
 	@GetMapping("/admin/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/adminLogin";
+		return "redirect:/adminLogin#";
 	}
 }

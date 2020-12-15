@@ -14,6 +14,7 @@ import gd.fintech.lms.vo.LmsNotice;
 @Service
 @Transactional
 public class LmsNoticeService {
+	
 	@Autowired LmsNoticeMapper lmsNoticeMapper;
 
 	//공지사항 리스트, 페이징

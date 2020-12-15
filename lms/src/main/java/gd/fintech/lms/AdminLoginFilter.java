@@ -23,7 +23,7 @@ public class AdminLoginFilter implements Filter {
 		if(session.getAttribute("adminId") == null) {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/adminLogin");
+			((HttpServletResponse)response).sendRedirect(cPath + "/adminLogin#");
 			return;
 		}
 		chain.doFilter(request, response);

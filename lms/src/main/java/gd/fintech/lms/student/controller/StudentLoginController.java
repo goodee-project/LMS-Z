@@ -34,7 +34,11 @@ public class StudentLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("studentId", account.getAccountId());
 		
-		return "/manager/index";
+		return "redirect:/student/index";
 	}
-	
+	@GetMapping("/student/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/studentLogin#";
+	}
 }

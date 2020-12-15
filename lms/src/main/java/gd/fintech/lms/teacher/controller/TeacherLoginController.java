@@ -36,6 +36,11 @@ public class TeacherLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("teacherId", account.getAccountId());
 		
-		return "/teacher/index";
+		return "redirect:/teacher/index";
+	}
+	@GetMapping("/teacher/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/teacherLogin#";
 	}
 }
