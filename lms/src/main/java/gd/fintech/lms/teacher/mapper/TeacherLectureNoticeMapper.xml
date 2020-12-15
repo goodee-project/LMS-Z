@@ -43,7 +43,7 @@
 	</insert>
 
 	<!-- 강좌별 공지사항 상세보기 -->
-	<select id="selectLectureNoticeOne" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LectureNotice">
+	<select id="selectLectureNoticeOne" parameterType="int" resultType="gd.fintech.lms.vo.LectureNotice">
 		SELECT
 			lecture_notice_no lectureNoitceNo,
 			lecture_notice_title lectureNoticeTitle,
@@ -51,7 +51,22 @@
 			lecture_notice_createdate lectureNoticeCreatedate,
 			lecture_notice_updatedate lectureNoticeUpdatedate
 		FROM lecture_notice
-		WHERE lecture_no = #{lectureNo}
-		AND lecture_notice_no = #{lectureNoticeNo}
+		WHERE lecture_notice_no = #{lectureNoticeNo}
 	</select>
+	
+	<!-- 강좌별 공지사항 수정 -->
+	<update id="updateLectureNotice" parameterType="gd.fintech.lms.vo.LectureNotice">
+		UPDATE lecture_notice
+		SET
+			lecture_notice_title = #{lectureNoticeTitle},
+			lecture_notice_content = #{lectureNoticeContent},
+			lecture_notice_updatedate = NOW()
+		WHERE lecture_notice_no = #{lectureNoticeNo}
+	</update>
+	
+	<!-- 강좌별 공지사항 삭제 -->
+	<delete id="deleteLectureNotice" parameterType="int">
+		DELETE FROM lecture_notice
+		WHERE lecture_notice_no = #{lectureNoticeNo}
+	</delete>
 </mapper>

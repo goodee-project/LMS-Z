@@ -18,13 +18,17 @@ public class TeacherLectureNoticeService {
 	
 	// 강좌별 공지사항 목록 출력(강좌번호(lectureNo), 페이징을 위한 현재페이지(currentPage), 한 페이지에 출력될 개수(rowPerPage))  
 	public List<LectureNotice> getLectureNoticeList(int lectureNo, int currentPage, int rowPerPage){
+		// 페이지마다 시작하는 번호
 		int beginRow = (currentPage - 1) * rowPerPage;
+		// Map 객체 생성
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		
+		// map 안에 mapper에 필요한 값 입력
 		map.put("lectureNo", lectureNo);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		
+		// lectureNotice 객체 선언 및 초기화
 		List<LectureNotice> noticeList = teacherLectureNoticeMapper.selectLectureNoticeList(map);
 		return noticeList;
 	}
@@ -40,13 +44,20 @@ public class TeacherLectureNoticeService {
 	}
 	
 	// 강좌별 공지사항 상세보기
-	public LectureNotice getLectureNoticeOne(int lectureNo, int lectureNoticeNo) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		
-		map.put("lectureNo", lectureNo);
-		map.put("lectureNoticeNo", lectureNoticeNo);
-		
-		LectureNotice lectureNotice = teacherLectureNoticeMapper.selectLectureNoticeOne(map);
+	public LectureNotice getLectureNoticeOne(int lectureNoticeNo) {
+		// LectureNotice 객체 선언 및 초기화
+		LectureNotice lectureNotice = teacherLectureNoticeMapper.selectLectureNoticeOne(lectureNoticeNo);
 		return lectureNotice;
+	}
+	
+	// 강좌별 공지사항 수정
+	public int modifyLectureNotice(LectureNotice lectureNotice) {
+		return teacherLectureNoticeMapper.updateLectureNotice(lectureNotice);
+	}
+	
+	// 강좌별 공지사항 삭제
+	public int removeLectureNotice(int lectureNoticeNo) {
+		// mapper 메소드 호출 및 반환
+		return teacherLectureNoticeMapper.deleteLectureNotice(lectureNoticeNo);
 	}
 }
