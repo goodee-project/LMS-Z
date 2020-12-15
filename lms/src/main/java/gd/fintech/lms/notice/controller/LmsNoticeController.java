@@ -15,7 +15,7 @@ public class LmsNoticeController {
 	@Autowired LmsNoticeService lmsNoticeService;
 	
 	//공지사항 리스트 
-	@GetMapping ("")
+	@GetMapping ("/notice/")
 	public String LmsNotice(Model model, @RequestParam(value = "lmsNoticeNo") int lmsNoticeNo, @RequestParam(value = "currentPage") int currentPage) {
 		int rowPerPage = 10;
 		int lastPage = 0; 

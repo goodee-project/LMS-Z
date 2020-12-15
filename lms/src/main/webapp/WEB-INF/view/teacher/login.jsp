@@ -109,7 +109,7 @@
 	               <div class="row">
 	                    <div class="col-md-10 col-lg-10">
 	                        <div class="card">
-	                        	<form method="post" action="${path}/studentLogin">
+	                        	<form method="post" action="${path}/teacherLogin">
 		                            <div class="card-body">
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                    <span class="list-inline-item text-muted font-italic">
@@ -123,6 +123,7 @@
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
+		                                	<a href="${path}/teacher/siginup" class="btn btn-success font-3">회원가입</a>
 		                                </div>
 		                            </div>
 	                            </form>

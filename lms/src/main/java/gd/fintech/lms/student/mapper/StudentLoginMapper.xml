@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentLoginMapper">
+	<select id="selectAccountToStudentLogin" parameterType="gd.fintech.lms.vo.Account" resultType="String">
+  		SELECT account_id accountId
+		FROM account
+		WHERE
+			account_id = #{accountId} and 
+			account_pw = #{accountPw} and
+			account_state = #{accountState} and
+			account_level = #{accountLevel} 
+	</select>
+</mapper>
