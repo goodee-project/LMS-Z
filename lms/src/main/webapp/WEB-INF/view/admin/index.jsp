@@ -37,6 +37,9 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
+                        <span class="logo-text">
+								GOODEE LMS
+                        </span>
                         <a href="index.html">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
@@ -101,7 +104,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="index.html">운영자</a>
+                                    <li class="breadcrumb-item">운영자
                                     </li>
                                 </ol>
                             </nav>
