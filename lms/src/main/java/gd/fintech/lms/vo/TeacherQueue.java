@@ -12,4 +12,5 @@ public class TeacherQueue {
 	private String teacherBirth;
 	private String teacherAddressMain;
 	private String teacherAddressSub;
+	private Account account;
 }
