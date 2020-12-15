@@ -16,6 +16,6 @@ public interface TeacherLectureNoticeMapper {
 	// 강좌별 공지사항 등록
 	int insertLectureNotice(LectureNotice lectureNotice);
 
-	// 강좌별 공지사항 상세보기(수정폼)
-	LectureNotice selectLectureNoticeOne(int lectureNo);
+	// 강좌별 공지사항 상세보기
+	LectureNotice selectLectureNoticeOne(Map<String, Integer> map);
 }

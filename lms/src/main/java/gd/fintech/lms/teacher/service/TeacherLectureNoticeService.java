@@ -38,4 +38,15 @@ public class TeacherLectureNoticeService {
 	public int addLectureNotice(LectureNotice lectureNotice) {
 		return teacherLectureNoticeMapper.insertLectureNotice(lectureNotice);
 	}
+	
+	// 강좌별 공지사항 상세보기
+	public LectureNotice getLectureNoticeOne(int lectureNo, int lectureNoticeNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("lectureNo", lectureNo);
+		map.put("lectureNoticeNo", lectureNoticeNo);
+		
+		LectureNotice lectureNotice = teacherLectureNoticeMapper.selectLectureNoticeOne(map);
+		return lectureNotice;
+	}
 }
