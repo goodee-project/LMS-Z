@@ -37,7 +37,7 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
-                        <a href="index.html">
+                        <a href="index">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -46,7 +46,7 @@
 							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
-								GOODEE LMS
+								
                             </span>
                         </a>
                     </div>
@@ -56,29 +56,14 @@
         
         <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        
-                        <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/adminLogin#"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">관리자 로그인
-                                </span></a>
-                        </li>
+                        <li class="nav-small-cap"><span class="hide-menu">옵션</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">매니저 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin#"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">강사 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin#"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">학생 로그인</span></a>
+                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
+                                    class="hide-menu">돌아가기</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -89,12 +74,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">로그인</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">SIGN UP</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">운영자
+                                    <li class="breadcrumb-item"><a href="index.html">Manager</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -103,34 +88,103 @@
                 </div>
             </div>
 
-				<br>
-				
-                <!-- 2번째 라인 카드 -->
-	               <div class="row">
-	                    <div class="col-md-10 col-lg-10">
-	                        <div class="card">
-	                        	<form method="post" action="${path}/managerLogin">
-		                            <div class="card-body">
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                	<a href="${path}/manager/siginup" class="btn btn-success font-3">회원가입</a>
-		                                </div>
-		                            </div>
-	                            </form>
-	                        </div>
-	                    </div>
-	                </div>
-               
+
+            <div class="container-fluid text-center">
+                <!-- 회원가입 란-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                	<form method="post" action="${path}/managerSignup">
+	                                    <table class="table no-wrap v-middle mb-0">
+	                                    	<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">아이디</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="text" id="managerId" name="managerId">
+	                                    			<div id="textId"></div>
+	                                    		</td>
+	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button">중복검사</button></td>    
+	                                   		</tr>
+	                                   		
+	                                    	<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">비닐번호</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<div>
+	                                    				<input type="password" name="managerPw">                                    			
+	                                    			</div>
+	                                    			<div>
+	                                    				<input type="password">                                    			
+	                                    			</div>
+	                                    		</td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">이름</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerName"></td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">이메일</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerEmail"></td>
+	                                    		<td class="border-0"><button class="btn btn-light" type="button">중복검사</button></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">핸드폰 번호</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<select name="managerPhone1">
+	                                    				<option value="010">010</option>
+	                                    				<option value="011">011</option>
+	                                    			</select>-
+	                                    			<!-- insert테스트를 위한 name 변경 -->
+	                                    			<input type="text" name="managerPhone">-
+	                                    			<input type="text" name="managerPhone3">
+	                                    		</td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">성별</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="radio" name="managerGender" value="남">남
+	                                    			<input type="radio" name="managerGender" value="여">여
+	                                    		</td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">메인 주소</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerAddressMain"></td>
+	                                    		<td class="border-0"><button class="btn btn-light" type="button">찾기</button></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">서브 주소</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerAddressSub"></td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                   		
+	                                   		<tr class="border-0">
+	                                    		<th class="border-0 font-14 font-weight-medium">생일</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="date" name="managerBirth"></td>
+	                                    		<td class="border-0"></td>    
+	                                   		</tr>
+	                                    </table>
+                                    <button type="submit">Sign Up</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -148,6 +202,39 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-</body>
+    <script>
+    	// 아이디에 대한 제약 (정규 표현식)
+    	// 첫 글자 영문, 영문하고 숫자 조합으로만 조합 가능, 6~14글자
+		var checkId = /^[A-Za-z][A-Z0-9a-z]{5,13}$/;
+		// 아이디 입력란의 input 실시간 감지
+		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
+		$("#managerId").on("propertychange change keyup paste input", function(){
+			if(!checkId.test($('#managerId').val())){
+				$('#textId').text("아이디 형식을 확인해 주세요");
+			}
+			else{
+				$('#textId').text("형식 확인");
+			}
+		});
 
+    </script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,4 +12,22 @@
 			account_state = #{accountState} and
 			account_level = #{accountLevel} 
 	</select>
+	
+	<insert id="insertAccountToSignup" parameterType="gd.fintech.lms.vo.ManagerForm">
+		INSERT INTO account(account_id, account_pw,
+							account_state, account_level,
+							account_createdate, account_updatedate)
+		VALUES(#{managerId}, #{managerPw},
+			   #{accountState}, #{accountLevel},
+			   NOW(), NOW())
+	</insert>
+	
+	<insert id="insertManagerQueueToSignup" parameterType="gd.fintech.lms.vo.ManagerForm">
+		INSERT INTO manager_queue(manager_id, manager_email,
+								  manager_phone, manager_name,
+								  manager_gender, manager_birth)
+		VALUES(#{managerId}, #{managerEmail},
+			   #{managerPhone}, #{managerName},
+			   #{managerGender}, #{managerBirth})
+	</insert>
 </mapper>

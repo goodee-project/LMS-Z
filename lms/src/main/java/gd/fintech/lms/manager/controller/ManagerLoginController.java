@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.manager.service.ManagerLoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.ManagerForm;
 
 @Controller
 public class ManagerLoginController {
@@ -42,6 +43,13 @@ public class ManagerLoginController {
 	@GetMapping("/managerSignup")
 	public String signup() {
 		return "manager/signup";
+	}
+	
+	@PostMapping("/managerSignup")
+	public String signup(ManagerForm managerForm) {
+		
+		managerLoginService.addSignup(managerForm);
+		return "redirect:/managerLogin";
 	}
 	
 	@GetMapping("/manager/logout")
