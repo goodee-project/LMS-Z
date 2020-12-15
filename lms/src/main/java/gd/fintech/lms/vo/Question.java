@@ -16,4 +16,5 @@ public class Question {
 	private String questionUpdatedate;
 	private int questionCount;
 	private String questionPassword;
+	private List<QuestionComment> questionCommentList;
 }

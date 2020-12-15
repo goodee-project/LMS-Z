@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherQuestionMapper">
+	<!-- 질문게시판 목록 출력 -->
 	<select id="selectQuestionList" resultType="gd.fintech.lms.vo.Question">
 		SELECT 
 			question_no questionNo,
@@ -8,5 +9,42 @@
 			question_title questionTitle,
 			question_count questionCount
 		FROM question
+	</select>
+	
+	<!-- 질문게시판 상세보기 + 댓글 출력 -->
+	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOneResult">
+		<result property="questionNo" column="question_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="questionWriter" column="question_writer"/>
+		<result property="questionTitle" column="question_title"/>
+		<result property="questionContent" column="question_content"/>
+		<result property="questionCreatedate" column="question_createdate"/>
+		<result property="questionUpdatedate" column="question_updatedate"/>
+		<result property="questionCount" column="question_count"/>
+		<result property="questionPassword" column="question_password"/>
+			<collection property="questionCommentList" ofType="gd.fintech.lms.vo.QuestionComment">
+				<result property="questionCommentNo" column="question_comment_no" />
+				<result property="questionNo" column="question_no" />
+				<result property="accountId" column="account_id" />
+				<result property="questionCommentWriter" column="question_comment_writer" />
+				<result property="questionCommentContent" column="question_comment_content" />
+				<result property="questionCommentCreatedate" column="question_comment_createdate" />
+				<result property="questionCommentUpdatedate" column="question_comment_updatedate" />
+			</collection>
+	</resultMap>
+	<select id="selectQuestionOne" resultMap="selectQuestionOneResult" parameterType="int">
+		SELECT
+			q.question_no,
+			q.question_writer,
+			q.question_title,
+			q.question_content,
+			qc.question_no,
+			qc.question_comment_no,
+			qc.question_comment_writer,
+			qc.question_comment_content
+		FROM question q LEFT JOIN question_comment qc
+		ON q.question_no = qc.question_no
+		WHERE q.question_no = #{questionNo}
 	</select>
 </mapper>

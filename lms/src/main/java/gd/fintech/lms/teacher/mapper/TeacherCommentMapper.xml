@@ -4,8 +4,34 @@
 	<select id="selectQuestionCommentList" resultType="gd.fintech.lms.vo.QuestionComment">
 		SELECT
 			question_comment_no questionCommentNo,
+			account_id accountId,
 			question_comment_writer questionCommentWriter,
 			question_comment_content questionCommentContent
 		FROM question_comment
 	</select>
+	
+	<!-- 댓글입력 -->
+	<insert id="insertQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+		INSERT INTO question_comment(
+			question_no,
+			account_id,
+			question_comment_writer,
+			question_comment_content,
+			question_comment_createdate,
+			question_comment_updatedate
+		) VALUES(
+			#{questionNo},
+			#{accountId},
+			#{questionCommentWriter},
+			#{questionCommentContent},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteQuestionComment" parameterType="int">
+		DELETE FROM question_comment
+		WHERE question_comment_no = #{questionCommentNo}
+	</delete>
 </mapper>

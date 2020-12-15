@@ -23,7 +23,7 @@
 					<tr>
 						<td>${q.questionNo}</td>
 						<td>${q.questionWriter}</td>
-						<td>${q.questionTitle}</td>
+						<td><a href="${path}/teacher/questionOne/${q.questionNo}">${q.questionTitle}</a></td>
 						<td>${q.questionCount}</td>
 					</tr>
 				</c:forEach>

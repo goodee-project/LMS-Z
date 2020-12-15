@@ -9,4 +9,6 @@ import gd.fintech.lms.vo.QuestionComment;
 @Mapper
 public interface TeacherCommentMapper {
 	List<QuestionComment> selectQuestionCommentList();
+	int insertQuestionComment(QuestionComment questionComment);
+	int deleteQuestionComment(int questionCommentNo);
 }

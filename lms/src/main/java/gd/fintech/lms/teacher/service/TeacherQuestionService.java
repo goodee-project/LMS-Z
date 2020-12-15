@@ -12,9 +12,15 @@ import gd.fintech.lms.vo.Question;
 @Service
 @Transactional
 public class TeacherQuestionService {
-	@Autowired TeacherQuestionMapper TeacherquestionMapper;
+	@Autowired TeacherQuestionMapper teacherQuestionMapper;
 	
+	//질문게시판 목록 출력
 	public List<Question> getQuestionList(){
-		return TeacherquestionMapper.selectQuestionList();
+		return teacherQuestionMapper.selectQuestionList();
+	}
+	
+	//질문게시판 상세보기
+	public Question getQuestionOne(int questionNo) {
+		return teacherQuestionMapper.selectQuestionOne(questionNo);
 	}
 }

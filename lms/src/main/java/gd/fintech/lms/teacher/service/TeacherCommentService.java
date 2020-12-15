@@ -18,4 +18,12 @@ public class TeacherCommentService {
 	public List<QuestionComment> getQuestionCommentList(){
 		return teacherCommentMapper.selectQuestionCommentList();
 	}
+	
+	public int addQuestionComment(QuestionComment questionComment) {
+		return teacherCommentMapper.insertQuestionComment(questionComment);
+	}
+	
+	public int removeQuestionComment(int questionCommentNo) {
+		return teacherCommentMapper.deleteQuestionComment(questionCommentNo);
+	}
 }

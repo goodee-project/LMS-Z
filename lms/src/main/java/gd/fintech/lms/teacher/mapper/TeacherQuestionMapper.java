@@ -9,4 +9,5 @@ import gd.fintech.lms.vo.Question;
 @Mapper
 public interface TeacherQuestionMapper {
 	List<Question> selectQuestionList();
+	Question selectQuestionOne(int questionNo);
 }
