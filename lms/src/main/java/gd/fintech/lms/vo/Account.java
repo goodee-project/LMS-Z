@@ -11,7 +11,7 @@ public class Account {
     private String accountState;
     private int accountLevel;
     private String accountCreateDate;
-    private String accountUpdatedate;
+    private String accountUpdateDate;
     private List<StudentQueue> studentQueue;
     private List<TeacherQueue> teacherQueue;
 }

@@ -13,17 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebFilter(urlPatterns = "/admin/*")
-public class AdminLoginFilter implements Filter {
+@WebFilter(urlPatterns = "/manager/*")
+public class ManagerLoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("admin login filter 실행.....");
+		System.out.println("manager login filter 실행.....");
 		HttpSession session = ((HttpServletRequest)request).getSession();
-		if(session.getAttribute("adminId") == null) {
+		if(session.getAttribute("managerId") == null) {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/adminLogin");
+			((HttpServletResponse)response).sendRedirect(cPath + "/managerLogin");
 			return;
 		}
 		chain.doFilter(request, response);
