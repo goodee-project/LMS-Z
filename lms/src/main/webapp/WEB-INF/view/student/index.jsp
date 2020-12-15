@@ -37,7 +37,7 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
-                        <a href="index.html">
+                        <a href="">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -46,7 +46,7 @@
 							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
-
+								GOODEE LMS
                             </span>
                         </a>
                     </div>
@@ -66,7 +66,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">박대표</span> <i data-feather="chevron-down"
+                                        class="text-dark"><c:out value="${sessionScope.studentId}"/></span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <!-- 드롭다운 내용 -->
@@ -85,52 +85,36 @@
             </nav>
         </header>
         
-        <!-- 로고 밑 메뉴 -->
+         <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Index</span></a></li>
                         <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.html"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">1
+                                    class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">2</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">3</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">4</span></a>
-                            <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-1
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-2
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-3
-                                        </span></a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/logout"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -149,7 +133,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="index.html">index</a>
+                                    <li class="breadcrumb-item"><a href="">index</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -161,45 +145,6 @@
 
             <div class="container-fluid">
                
-                <!-- 카드를 만들어서 바로 옆에 공백 없이 이어 버리고 싶을때 사용하고 싶으시면 아래 주석 참고 -->
-                <!--
-                <div class="card-group">
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">236</h2>
-                                        <span
-                                            class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">New Clients</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">$</sup>18,306</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Earnings of Month
-                                    </h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				 -->
 
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
