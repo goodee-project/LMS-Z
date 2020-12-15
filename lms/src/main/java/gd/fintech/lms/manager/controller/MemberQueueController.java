@@ -27,9 +27,32 @@ public class MemberQueueController {
 		System.out.println(teacherList);
 		return "/manager/member";
 	}
-	@GetMapping("/manager/deleteStudentQueue/{studentId}")
-	public String deleteStudentQueue(@PathVariable(name = "studentId", required=true ) String studentId) {
-		memberQueueService.deleteStudentQueue(studentId);
+	//학생 승인 거절시 작동하는 컨트롤러
+	@GetMapping("/manager/deleteStudentQueue/{studentId}/{accountState}")
+	public String deleteStudentQueue(@PathVariable(name = "studentId", required=true ) String studentId,
+				@PathVariable(name = "accountState", required=true) String accountState) {
+		memberQueueService.deleteStudentQueue(studentId, accountState);
+		return "redirect:/manager/member";
+	}
+	//강사 승인 거절시 작동하는 컨트롤러
+	@GetMapping("/manager/deleteTeacherQueue/{teacherid}/{accountState}")
+	public String deleteTeacherQueue(@PathVariable(name="teacherId", required=true) String teacherId,
+				@PathVariable(name = "accountState", required=true) String accountState) {
+		memberQueueService.deleteTeacherQueue(teacherId, accountState);
+		return "redirect:/manager/member";
+	}
+	//학생 승인 허가시 작동하는 컨트롤러
+	@GetMapping("/manager/insertStudentQueue/{studentId}/{accountState}")
+	public String insertStudentQueue(@PathVariable(name= "studentId", required=true ) String studentId,
+				@PathVariable(name = "accountState", required=true) String accountState) {
+		memberQueueService.insertStudent(studentId, accountState);
+		return "redirect:/manager/member";
+	}
+	//강사 승인 허가시 작동하는 컨트롤러
+	@GetMapping("/manager/insertTeacherQueue/{teacherId}/{accountState}")
+	public String insertTeacherQueue(@PathVariable(name= "teacherId", required=true ) String teacherId,
+				@PathVariable(name = "accountState", required=true) String accountState) {
+		memberQueueService.insertTeacher(teacherId, accountState);
 		return "redirect:/manager/member";
 	}
 }

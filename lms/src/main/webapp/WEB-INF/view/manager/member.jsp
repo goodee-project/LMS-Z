@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>강사/학생 승인</h1>
-	<table>
+	<table border="1">
 		<thead>
 			<tr>
 				<th>student_id</th>
@@ -38,8 +38,42 @@
 					<td>${s.studentAddressMain }</td>
 					<td>${s.studentAddressSub }</td>
 					<td>${s.account.accountLevel }</td>
-					<td><a href="#">승인</a></td>
-					<td><a href="${path}/manager/deleteStudentQueue/${s.studentId}">거절</a></td>
+					<td><a href="${path}/manager/insertStudentQueue/${s.studentId}/활성화">승인</a></td>
+					<td><a href="${path}/manager/deleteStudentQueue/${s.studentId}/거절">거절</a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+		</table>
+		<table border="1">
+		<thead>
+			<tr>
+				<th>teacher_id</th>
+				<th>teacher_email</th>
+				<th>teacher_name</th>
+				<th>teacher_phone</th>
+				<th>teacher_gender</th>
+				<th>teacher_birth</th>
+				<th>teacher_address_main</th>
+				<th>teacher_address_sub</th>
+				<th>account_level</th>
+				<th>승인</th>
+				<th>거절</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="t" items="${teacherList }">
+				<tr>
+					<td>${t.teacherId }</td>
+					<td>${t.teacherEmail }</td>
+					<td>${t.teacherName }</td>
+					<td>${t.teacherPhone }</td>
+					<td>${t.teacherGender }</td>
+					<td>${t.teacherBirth }</td>
+					<td>${t.teacherAddressMain }</td>
+					<td>${t.teacherAddressSub }</td>
+					<td>${t.account.accountLevel }</td>
+					<td><a href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화">승인</a></td>
+					<td><a href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절">거절</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
