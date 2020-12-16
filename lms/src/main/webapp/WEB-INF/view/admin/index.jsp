@@ -69,7 +69,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark"><c:out value="${sessionScope.adminId}"/></span> 
+                                        class="text-dark"><c:out value="${adminId}"/></span> 
                                        <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
                                 </span>
                             </a>

@@ -76,7 +76,7 @@
             </nav>
         </header>
         
-         <!-- 로고 밑 메뉴 -->
+        <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -90,12 +90,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">수강신청</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"

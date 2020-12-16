@@ -15,7 +15,7 @@ import gd.fintech.lms.vo.Textbook;
 public interface StudentLectureMapper {
 	// 페이징 처리한 전체 강의 목록 map => beginRow, rowPerPage
 	public List<Lecture> selectLectureList(Map<String, Object> map);
-	//페이징처리) 전체 강의목록 갯수
+	// 페이징처리) 전체 강의목록 갯수
 	public int selectLectureListTotal();
 	
 	//**** 강의 목록 상세보기 ******
@@ -29,5 +29,10 @@ public interface StudentLectureMapper {
 	public Syllabus selectSyllabusOne(int syllabusNo);
 	// 5. 강의실 정보
 	public Classroom selectClassroomOne(int classroomNo);
+	
+	//===== 강의 수강 신청 ====
+	public int insertClassRegistration(Map<String,Object> map);
+	
+	//==== 수강중/신청한 전체 강의 목록 =========
 	
 }

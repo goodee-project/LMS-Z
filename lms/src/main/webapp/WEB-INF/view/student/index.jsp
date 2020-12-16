@@ -65,7 +65,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark"><c:out value="${sessionScope.studentId}"/></span> <i data-feather="chevron-down"
+                                        class="text-dark"><c:out value="${studentId}"/></span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <!-- 드롭다운 내용 -->
@@ -98,14 +98,14 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lectureList/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">2</span></a></li>
+                                    class="hide-menu">수강 신청</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">3</span></a></li>

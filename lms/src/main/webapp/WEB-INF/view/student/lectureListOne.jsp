@@ -54,7 +54,13 @@
 				<!-- 로고 오른쪽 메뉴 -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
+					
+                    <span class="navbar-nav float-left mr-auto ml-3 pl-1">
+	                    <a class="btn btn-success font-20 popover-item" href="${path }/student/lectureList/${currentPage}">
+	                        	목록으로
+	                    </a>
+                    </span>
+                	 
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->
@@ -65,7 +71,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark"><c:out value="${sessionScope.studentId}"/></span> 
+                                        class="text-dark"><c:out value="${studentId}"/></span> 
                                        <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
                                 </span>
                             </a>
@@ -89,14 +95,14 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lectureList/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">2</span></a></li>
+                                    class="hide-menu">수강신청</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">3</span></a></li>
@@ -131,8 +137,14 @@
                             </nav>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="col-5 align-self-center text-right">
+                    	<div class="col-7 align-self-center">
+                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}">
+                        	수강 신청
+                        </a>
+		                </div>
+		           </div>
+		       </div>
 			<br>
 				
 				<!-- 1번째 라인 카드 -->
@@ -274,6 +286,8 @@
                 </div>
             </div>
         </div>
+    </div>
+        
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>

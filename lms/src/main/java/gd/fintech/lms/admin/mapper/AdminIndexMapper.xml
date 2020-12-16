@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.admin.mapper.IndexAdminMapper">
+<mapper namespace="gd.fintech.lms.admin.mapper.AdminIndexMapper">
 	<!-- 운영자 승인 대기 리스트 출력 -->
 	<select id="selectManagerQueue" resultType="gd.fintech.lms.vo.ManagerQueue">
 		SELECT 

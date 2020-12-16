@@ -40,13 +40,15 @@ public class StudentLectureController {
 		}
 		model.addAttribute("lectureList",lectureList);
 		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("currentPage",currentPage);
 		return "student/lectureList";
 	}
 	
 	// 강의 목록 상세보기
-	@GetMapping("/student/lectureListOne/{lectureNo}")
+	@GetMapping("/student/lectureListOne/{lectureNo}/{currentPage}")
 	public String lectureListOne(Model model,
-								@PathVariable(name="lectureNo") int lectureNo) {
+								@PathVariable(name="lectureNo") int lectureNo,
+								@PathVariable(name="currentPage") int currentPage) {
 		// 1. 강의실 정보
 		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
 		// 2. 과목 정보
@@ -63,6 +65,21 @@ public class StudentLectureController {
 		model.addAttribute("textbookOne",textbookOne);
 		model.addAttribute("syllabusOne",syllabusOne);
 		model.addAttribute("classroomOne",classroomOne);
+		model.addAttribute("currentPage",currentPage);
 		return "student/lectureListOne";
+	}
+	
+	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}")
+	public String classRegistration(@PathVariable(name="studentId") String studentId,
+									@PathVariable(name="lectureNo") int lectureNo) {
+		
+		studentLectureService.addClassRegistration(studentId,lectureNo);
+		return "redirect:/student/myLectureList";
+	}
+	
+	//나의 강의목록 리스트 출력
+	@GetMapping("/student/myLectureList/{currentPage}")
+	public String myLectureList() {
+		return "student/myLectureList";
 	}
 }

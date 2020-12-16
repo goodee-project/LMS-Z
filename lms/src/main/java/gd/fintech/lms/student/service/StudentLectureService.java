@@ -53,4 +53,30 @@ public class StudentLectureService {
 	public Classroom getClassroomOne(int classroomNo) {
 		return studentLectureMapper.selectClassroomOne(classroomNo);
 	}
+	
+	//===== 강의 수강 신청 ==== 
+	public int addClassRegistration(String studentId,int lectureNo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("studentId", studentId);
+		map.put("lectureNo", lectureNo);
+		return studentLectureMapper.insertClassRegistration(map);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

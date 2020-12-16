@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import gd.fintech.lms.admin.service.LoginAdminService;
+import gd.fintech.lms.admin.service.AdminLoginService;
 import gd.fintech.lms.vo.Account;
 
 @Controller
-public class LoginAdminController {
-	@Autowired LoginAdminService loginAdminService;
+public class AdminLoginController {
+	@Autowired AdminLoginService adminLoginService;
 	
 	@GetMapping("/")
 	public String mainLogin() {
@@ -31,7 +31,7 @@ public class LoginAdminController {
 	
 	@PostMapping("/adminLogin")
 	public String login(Account account, HttpSession session) {
-		String adminId = loginAdminService.getAdminAccount(account);
+		String adminId = adminLoginService.getAdminAccount(account);
 		if(adminId == null) {
 			return "redirect:/adminLogin";
 		}

@@ -82,4 +82,22 @@
 		FROM classroom
 		WHERE classroom_no = #{classroomNo}
 	</select>
+	
+	<!-- 수강신청 -->
+	<insert id ="insertClassRegistration" parameterType="java.util.Map">
+		INSERT INTO 
+			class_registration(
+				lecture_no,
+				account_id,
+				class_registration_state,
+				class_registration_createdate
+				)
+			VALUES(
+				#{lectureNo},
+				#{studentId},
+				'대기',
+				NOW()
+				)
+		
+	</insert>
 </mapper>
