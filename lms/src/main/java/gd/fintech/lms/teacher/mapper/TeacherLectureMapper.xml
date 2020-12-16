@@ -9,9 +9,87 @@
 			teacher_name teacherName,
 			lecture_name lectureName,
 			lecture_startdate lectureStartdate,
-			lecture_enddate lectureEnddate
+			lecture_enddate lectureEnddate,
 			lecture_total lectureTotal
 		FROM lecture
 		WHERE account_id = #{accountId}
+	</select>
+	
+	<!-- 강의 상세보기 resultMap -->
+	<resultMap type="gd.fintech.lms.vo.Lecture" id="selectLectureOne">
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="subjectNo" column="subject_no"/>
+		<result property="teacherName" column="teacher_name"/>
+		<result property="lectureName" column="lecture_name"/>
+		<result property="textbookIsbn" column="textbook_isbn"/>
+		<result property="lectureStartdate" column="lecture_startdate"/>
+		<result property="lectureEnddate" column="lecture_enddate"/>
+		<result property="lectureTotal" column="lecture_total"/>
+		<result property="syllabusNo" column="syllabus_no"/>
+		<result property="classroomNo" column="classroom_no"/>
+		<result property="lectureCreatedate" column="lecture_createdate"/>
+		<result property="lectureUpdatedate" column="lecture_updatedate"/>
+		<association property="account" javaType="gd.fintech.lms.vo.Account">
+			<result property="accountId" column="account_id"/>
+		</association>
+		<association property="subject" javaType="gd.fintech.lms.vo.Subject">
+			<result property="subjectNo" column="subject_no"/>
+			<result property="subjectName" column="subject_name"/>
+			<result property="subjectTotalday" column="subject_totalday"/>
+		</association>
+		<association property="teacher" javaType="gd.fintech.lms.vo.Teacher">
+			<result property="teacherId" column="teacher_id"/>
+			<result property="teacherName" column="teacher_name"/>
+			<result property="teacherEmail" column="teacher_email"/>
+			<result property="teacherPhone" column="teacher_phone"/>
+		</association>
+		<association property="textbook" javaType="gd.fintech.lms.vo.Textbook">
+			<result property="textbookIsbn" column="textbook_isbn"/>
+			<result property="textbookTitle" column="textbook_title"/>
+			<result property="textbookWriter" column="textbook_writer"/>
+			<result property="textbookPublisher" column="textbook_publisher"/>
+			<result property="textbookPublisherdate" column="textbook_publisherdate"/>
+			<result property="textbookInfo" column="textbook_info"/>
+		</association>
+		<association property="syllabus" javaType="gd.fintech.lms.vo.Syllabus">
+			<result property="syllabusNo" column="syllabus_no"/>
+			<result property="syllabusContent" column="syllabus_content"/>
+		</association>
+		<association property="classroom" javaType="gd.fintech.lms.vo.Classroom">
+			<result property="classroomNo" column="classroom_no"/>
+			<result property="classroomNumber" column="classroom_number"/>
+		</association>
+	</resultMap>
+	
+	<!-- 강의 상세정보, 강의계획서 출력 -->
+	<select id="selectLectureOne" resultMap="selectLectureOne">
+		SELECT 
+			l.lecture_no, 
+			a.account_id, 
+			s.subject_name,
+			s.subject_totalday,
+			t.teacher_name,
+			t.teacher_email,
+			t.teacher_phone,
+			l.lecture_name,
+			tb.textbook_title,
+			tb.textbook_writer,
+			tb.textbook_publisher,
+			tb.textbook_publisherdate,
+			tb.textbook_info
+			l.lecture_startdate, 
+			l.lecture_enddate, 
+			l.lecture_total,
+			sy.syllabus_content,
+			c.classroom_number
+		FROM lecture l , account a, teacher t, subject s, syllabus sy, textbook tb, classroom c
+		WHERE l.account_id = a.account_id 
+		AND l.subject_no = s.subject_no 
+		AND a.account_id = t.teacher_id 
+		AND l.textbook_isbn = tb.textbook_isbn 
+		AND l.syllabus_no = sy.syllabus_no 
+		AND l.classroom_no = c.classroom_no
+		AND l.lecture_no = #{lectureNo}
 	</select>
 </mapper>

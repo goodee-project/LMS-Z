@@ -66,7 +66,7 @@
                                 <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">박대표</span> <i data-feather="chevron-down"
+                                        class="text-dark">${teacherId}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <!-- 드롭다운 내용 -->
@@ -115,6 +115,11 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lectureNoticeList/1/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">강좌별 공지사항
+                                </span></a>
+                        </li>
+                          <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lectureList/${teacherId}"
+                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
+                                    class="hide-menu">강의목록
                                 </span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
