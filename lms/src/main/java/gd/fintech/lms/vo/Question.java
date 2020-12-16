@@ -17,4 +17,5 @@ public class Question {
 	private int questionCount;
 	private String questionPassword;
 	private List<QuestionComment> questionCommentList;
+	private List<QuestionFile> questionfile;
 }

@@ -10,6 +10,7 @@
 	  		lecture_no lectureNo,
 	  		question_writer questionWriter,
 	  		question_title questionTitle,
+	  		question_count questionCount,
 	  		question_createdate questionCreatedate
 	  	FROM question
 	  	order by question_createdate DESC
@@ -23,18 +24,62 @@
   		FROM question
   	</select>
   	
+  	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOne">
+	 	<result property="questionNo" column="question_no"/>
+	 	<result property="lectureNo" column="lecture_no"/>
+	 	<result property="accountId" column="account_id"/>
+	 	<result property="questionWriter" column="question_writer"/>
+	 	<result property="questionTitle" column="question_title"/>
+	 	<result property="questionContent" column="question_content"/>
+	 	<result property="questionCreatedate" column="question_createdate"/>
+	 	<result property="questionUpdatedate" column="question_updatedate"/>
+ 	
+ 	<collection property="questionfile" ofType="gd.fintech.lms.vo.QuestionFile">
+ 		<result property="questionFileUuid" column="question_file_uuid"/>
+ 		<result property="questionFileOriginal" column="question_file_original"/>
+ 		<result property="questionNo" column="question_no"/>
+ 		<result property="questionFileSize" column="question_file_size"/>
+ 		<result property="questionFileType" column="question_file_type"/>
+ 		<result property="questionFileCount" column="question_file_count"/>
+ 		<result property="questionFileCreatedate" column="question_file_createdate"/>
+ 	</collection>
+ 	
+ 	<collection property="questionCommentList" ofType="gd.fintech.lms.vo.QuestionComment">
+ 		<result property="questionCommentNo" column="question_comment_no"/>
+ 		<result property="questionNo" column="question_no"/>
+ 		<result property="accountId" column="account_id"/>
+ 		<result property="questionCommentWriter" column="question_comment_writer"/>
+ 		<result property="questionCommentContent" column="question_comment_content"/>
+ 		<result property="questionCommentCreatedate" column="question_comment_createdate"/>
+ 		<result property="questionCommentUpdatedate" column="question_comment_updatedate"/>
+ 	</collection>
+ 	</resultMap>
+  	
   	<!-- 질문 자세히 보기 -->
-  	<select id="selectQuestionOne" resultType="gd.fintech.lms.vo.Question" parameterType="int">
+  	<select id="selectQuestionOne" resultMap="selectQuestionOne" parameterType="int">
   		SELECT
-  			question_no questionNo, 
-	  		lecture_no lectureNo,
-	  		account_id accountId,
-	  		question_writer questionWriter,
-	  		question_title questionTitle,
-	  		question_content questionContent,
-	  		question_createdate questionCreatedate,
-	  		question_updatedate questionUpdatedate
-	  	FROM question
+  			q.question_no, 
+	  		q.lecture_no,
+	  		q.account_id,
+	  		q.question_writer,
+	  		q.question_title,
+	  		q.question_content,
+	  		q.question_createdate,
+	  		q.question_updatedate,
+	  		qf.question_file_original,
+	  		qf.question_file_count,
+	  		qf.question_file_createdate,
+	  		c.account_id,
+	  		c.question_comment_writer,
+	  		c.question_comment_content,
+	  		c.question_comment_createdate,
+	  		c.question_comment_updatedate
+	  		
+	  	FROM question q left join question_file qf
+	  		on q.question_no = qf.question_no
+	  		left join question_comment c
+	  		on q.question_no = c.question_no
+	  		where q.question_no = #{questionNo}
   	</select>
   	
   	<!-- 질문 등록 -->

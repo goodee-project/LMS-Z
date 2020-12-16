@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +41,28 @@
 			<td>questionUdateDate</td>
 			<td>${question.questionUpdatedate }</td>
 		</tr>
+	</table>
+	
+	<table border="1">
+		<c:forEach var="qf" items="${question.questionfile}">
+			<tr>
+				<td>questionfile</td>
+				<td>${qf.questionFileOriginal}</td>
+			</tr>
+		</c:forEach>	
+	</table>
+	
+	<table border="1">
+		<c:forEach var="qc" items="${question.questionCommentList}">
+			<tr>
+				<td>commentWriter</td>
+				<td>${qc.questionCommentWriter}</td>
+			</tr>
+			<tr>
+				<td>commentContent</td>
+				<td>${qc.questionCommentContent}</td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>
