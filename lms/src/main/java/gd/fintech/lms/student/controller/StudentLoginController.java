@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.StudentForm;
 
 @Controller
 public class StudentLoginController {
@@ -36,9 +37,35 @@ public class StudentLoginController {
 		
 		return "redirect:/student/index";
 	}
+	
 	@GetMapping("/student/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/studentLogin#";
 	}
+	
+	@GetMapping("/studentSignup")
+	public String signup() {
+		return "student/signup";
+	}
+	
+	@PostMapping("/studentSignup")
+	public String signup(StudentForm studentForm) {
+		studentLoginService.addSignup(studentForm);
+		
+		return "redirect:/studentLogin";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

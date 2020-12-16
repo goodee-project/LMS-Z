@@ -11,4 +11,22 @@
 			account_state = #{accountState} and
 			account_level = #{accountLevel} 
 	</select>
+	
+	<insert id="insertAccountToSignup" parameterType="gd.fintech.lms.vo.StudentForm">
+		INSERT INTO account(account_id, account_pw,
+							account_state, account_level,
+							account_createdate, account_updatedate)
+		VALUES(#{studentId}, #{studentPw},
+			   #{accountState}, #{accountLevel},
+			   NOW(), NOW())
+	</insert>
+	
+	<insert id="insertstudentQueueToSignup" parameterType="gd.fintech.lms.vo.StudentForm">
+		INSERT INTO student_queue(student_id, student_email,
+								  student_phone, student_name,
+								  student_gender, student_birth)
+		VALUES(#{studentId}, #{studentEmail},
+			   #{studentPhone}, #{studentName},
+			   #{studentGender}, #{studentBirth})
+	</insert>
 </mapper>

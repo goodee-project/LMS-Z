@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentLoginMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.ManagerForm;
+import gd.fintech.lms.vo.StudentForm;
 
 @Service
 @Transactional
@@ -18,5 +20,14 @@ public class StudentLoginService {
 		account.setAccountState("활성화");
 		
 		return studentLoginMapper.selectAccountToStudentLogin(account);
+	}
+	
+	// 회원가입하는 mapper2개를 가져와 manager_queue와 account 순서로 insert실행
+	public void addSignup(StudentForm studentForm) {
+		studentForm.setAccountLevel(4);
+		studentForm.setAccountState("대기");
+			
+		studentLoginMapper.insertstudentQueueToSignup(studentForm);
+		studentLoginMapper.insertAccountToSignup(studentForm);
 	}
 }
