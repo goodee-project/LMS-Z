@@ -2,6 +2,7 @@ package gd.fintech.lms.manager.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,8 @@ public class MemberQueueController {
 		List<TeacherQueue> teacherList = memberQueueService.getTeacherMemberQueueList();
 		model.addAttribute("studentList",studentList);
 		model.addAttribute("teacherList",teacherList);
-		System.out.println("******************");
-		System.out.println(studentList);
-		System.out.println(teacherList);
+		//System.out.println(studentList);
+		//System.out.println(teacherList);
 		return "/manager/member";
 	}
 	//학생 승인 거절시 작동하는 컨트롤러
@@ -42,17 +42,20 @@ public class MemberQueueController {
 		return "redirect:/manager/member";
 	}
 	//학생 승인 허가시 작동하는 컨트롤러
-	@GetMapping("/manager/insertStudentQueue/{studentId}/{accountState}")
+	@GetMapping("/manager/insertStudentQueue/{studentId}/{accountState}/{managerId}")
 	public String insertStudentQueue(@PathVariable(name= "studentId", required=true ) String studentId,
-				@PathVariable(name = "accountState", required=true) String accountState) {
-		memberQueueService.insertStudent(studentId, accountState);
+				@PathVariable(name = "accountState", required=true) String accountState,
+				@PathVariable(name = "managerId", required=true) String managerId) {
+		memberQueueService.insertStudent(studentId, accountState, managerId);
 		return "redirect:/manager/member";
 	}
 	//강사 승인 허가시 작동하는 컨트롤러
-	@GetMapping("/manager/insertTeacherQueue/{teacherId}/{accountState}")
+	@GetMapping("/manager/insertTeacherQueue/{teacherId}/{accountState}/{managerId}")
 	public String insertTeacherQueue(@PathVariable(name= "teacherId", required=true ) String teacherId,
-				@PathVariable(name = "accountState", required=true) String accountState) {
-		memberQueueService.insertTeacher(teacherId, accountState);
+				@PathVariable(name = "accountState", required=true) String accountState,
+				@PathVariable(name = "managerId", required=true) String managerId) {
+		System.out.println(managerId);
+		memberQueueService.insertTeacher(teacherId, accountState, managerId);
 		return "redirect:/manager/member";
 	}
 }

@@ -26,11 +26,15 @@ public class MemberQueueService {
 		return memberQueueMapper.selectTeacherMemberQueue();
 	}
 	//학생 승인
-	public void insertStudent(String studentId, String accountState) {
+	public void insertStudent(String studentId, String accountState, String managerId) {
 		StudentQueue studentQueue = memberQueueMapper.selectStudentOne(studentId);
-		System.out.println(studentQueue);
-		System.out.println(studentId);
-		memberQueueMapper.insertStudent(studentQueue);
+		//System.out.println(studentQueue);
+		//System.out.println(studentId);
+		Map<String, Object> s = new HashMap<String,Object>();
+		s.put("s", studentQueue);
+		s.put("managerId", managerId);
+		//System.out.println(s);
+		memberQueueMapper.insertStudent(s);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("memberId", studentId);
 		map.put("accountState", accountState);
@@ -38,11 +42,15 @@ public class MemberQueueService {
 		memberQueueMapper.deleteStudentQueue(studentId);
 	}
 	//강사 승인
-	public void insertTeacher(String teacherId, String accountState) {
+	public void insertTeacher(String teacherId, String accountState, String managerId) {
 		TeacherQueue teacherQueue = memberQueueMapper.selectTeacherOne(teacherId);
-		System.out.println(teacherQueue);
-		System.out.println(teacherId);
-		memberQueueMapper.insertTeacher(teacherQueue);
+		//System.out.println(teacherQueue);
+		//System.out.println(teacherId);
+		Map<String, Object> t = new HashMap<String,Object>();
+		t.put("t", teacherQueue);
+		t.put("managerId", managerId);
+		//System.out.println(t);
+		memberQueueMapper.insertTeacher(t);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("memberId", teacherId);
 		map.put("accountState", accountState);

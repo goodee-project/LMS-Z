@@ -23,9 +23,9 @@ public interface MemberQueueMapper {
 	//승인한 학생의 정보를 불러오기위해 연결하는 메퍼
 	StudentQueue selectStudentOne(String studentId);
 	//승인된 학생을 학생테이블에 추가하기 위해 연결하는 메퍼
-	int insertStudent(StudentQueue studentQueue);
+	int insertStudent(Map<String, Object> map);
 	//승인한 강사의 정보를 불러오기위해 연결하는 메퍼
 	TeacherQueue selectTeacherOne(String teacherId);
 	//승인된 강사을 강사테이블에 추가하기 위해 연결하는 메퍼
-	int insertTeacher(TeacherQueue teacherQueue);
+	int insertTeacher(Map<String, Object> map);
 }

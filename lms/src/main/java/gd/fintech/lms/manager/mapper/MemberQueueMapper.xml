@@ -88,7 +88,7 @@
 		WHERE student_id= #{studentId}
 	</select>
 	<!-- 승인 후 학생 리스트에 추가해주는 쿼리 -->
-	<insert id="insertStudent" parameterType="gd.fintech.lms.vo.StudentQueue">
+	<insert id="insertStudent" parameterType="java.util.Map">
 		INSERT INTO student(
 			student_id,
 			student_email,
@@ -99,18 +99,20 @@
 			student_address_main,
 			student_address_sub,
 			student_accessdate,
-			student_updatedate
+			student_updatedate,
+			manager_id_access
 		) VALUES(
-			#{studentId},
-			#{studentEmail},
-			#{studentName},
-			#{studentPhone},
-			#{studentGender},
-			#{studentBirth},
-			#{studentAddressMain},
-			#{studentAddressSub},
+			#{s.studentId},
+			#{s.studentEmail},
+			#{s.studentName},
+			#{s.studentPhone},
+			#{s.studentGender},
+			#{s.studentBirth},
+			#{s.studentAddressMain},
+			#{s.studentAddressSub},
 			NOW(),
-			NOW()
+			NOW(),
+			#{managerId}
 		)
 	</insert>
 	<!-- 승인할 강사의 정보를 가져오는 쿼리 -->
@@ -128,7 +130,7 @@
 		WHERE teacher_id= #{teacherId}
 	</select>
 	<!-- 승인 후 강사 리스트에 추가해주는 쿼리 -->
-	<insert id="insertTeacher" parameterType="gd.fintech.lms.vo.TeacherQueue">
+	<insert id="insertTeacher" parameterType="java.util.Map">
 		INSERT INTO teacher(
 			teacher_id,
 			teacher_email,
@@ -139,18 +141,20 @@
 			teacher_address_main,
 			teacher_address_sub,
 			teacher_accessdate,
-			teacher_updatedate
+			teacher_updatedate,
+			manager_id_access
 		) VALUES(
-			#{teacherId},
-			#{teacherEmail},
-			#{teacherName},
-			#{teacherPhone},
-			#{teacherGender},
-			#{teacherBirth},
-			#{teacherAddressMain},
-			#{teacherAddressSub},
+			#{t.teacherId},
+			#{t.teacherEmail},
+			#{t.teacherName},
+			#{t.teacherPhone},
+			#{t.teacherGender},
+			#{t.teacherBirth},
+			#{t.teacherAddressMain},
+			#{t.teacherAddressSub},
 			NOW(),
-			NOW()
+			NOW(),
+			#{managerId}
 		)
 	</insert>
 	<!-- 승인을 거부한 학생을 대기상태에서 삭제하는 쿼리 -->
