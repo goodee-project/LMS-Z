@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!-- lms공지사항 mapper -->
 <mapper namespace="gd.fintech.lms.manager.mapper.LMSNoticeMapper">
-	<!-- lms공지사항 페이징 -->
-	<select id="selectLMSNoticeListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.manager.vo.LMSNotice">
-		SELECT 
-			lms_notice_no lmsNoticeNo, 
-			lms_notice_title lmsNoticeTitle, 
-			lms_notice_writer lmsNoticeWriter, 
-			lms_notice_updatedate lmsNoticeUpdateDate
-		FROM lms_notice
-		LIMIT #{beginRow}, #{rowPerPage}
-	</select>
 	
 	<!-- 공지사항 상세 내용 -->
-	<select id="selectLMSNoticeDetail" parameterType="int" resultType="gd.fintech.lms.manager.vo.LMSNotice">
+	<select id="selectLmsNoticeDetail" parameterType="int" resultType="gd.fintech.lms.vo.LmsNotice">
 		SELECT 
 			lms_notice_no lmsNoticeNo, 
 			lms_notice_title lmsNoticeTitle, 
@@ -27,7 +16,7 @@
 	</select>
 	
 	<!-- 공지사항 추가 -->
-	<insert id="insertLMSNotice" parameterType="gd.fintech.lms.manager.vo.LMSNotice">
+	<insert id="insertLmsNotice" parameterType="gd.fintech.lms.vo.LmsNotice">
 		INSERT INTO lms_notice(
 			account_id, 
 			lms_notice_writer, 
@@ -46,7 +35,7 @@
 	</insert>
 	
 	<!-- 공지사항 수정 -->
-	<update id="updateLMSNotice" parameterType="gd.fintech.lms.manager.vo.LMSNotice">
+	<update id="updateLmsNotice" parameterType="gd.fintech.lms.vo.LmsNotice">
 		UPDATE lms_notice 
 		SET 
 			lms_notice_title = #{lmsNoticeTitle}, 
@@ -55,8 +44,8 @@
 		WHERE lms_notice_no = #{lmsNoticeNo}
 	</update>
 	
-	<!-- lms공지사항 삭제 -->
-	<delete id="deleteLMSNotice" parameterType="int">
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteLmsNotice" parameterType="int">
 		DELETE FROM lms_notice
 		WHERE lms_notice_no = #{lmsNoticeNo}
 	</delete>
