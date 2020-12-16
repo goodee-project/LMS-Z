@@ -76,7 +76,7 @@
             </nav>
         </header>
         
-        <!-- 로고 밑 메뉴 -->
+         <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -95,7 +95,7 @@
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/student/lectureList/1"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">수강신청</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
@@ -119,7 +119,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 목록</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 현황</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -142,28 +142,21 @@
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강좌 정원</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의 상태</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="c" items="${lectureList}">
+                                        	<c:forEach var="c" items="${myLectureList}">
 	                                            <tr>
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium" hidden="hidden">${c.lectureNo}</h5>
-	                                                        
-	                                                    </div>
-	                                                </td>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
 	                                               		<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
 	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${c.lectureNo}/${currentPage}">${c.lectureName}</a>
+	                                                        	<a href="${path}/student/lectureListOne/${c.lectureNo}/${currentPage}">${c.lecture.lectureName}</a>
 	                                                        </h5>
 	                                                    </div>
 	                                                </td>
@@ -172,7 +165,7 @@
 	                                                <td class="border-top-0 px-2 py-4">
 	                                                    <div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.teacherName}</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lecture.teacherName}</h5>
 	                                                    </div>
 	                                                </td>
 	                                                
@@ -180,7 +173,7 @@
 	                                                <td class="border-top-0 text-center px-2 py-4">
 	                                                	<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureStartdate } ~ ${c.lectureEnddate }</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lecture.lectureStartdate } ~ ${c.lecture.lectureEnddate }</h5>
 	                                                    </div>
 	                                                </td>
 	                                                
@@ -188,7 +181,13 @@
 	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
 	                                                	<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureTotal }</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lecture.lectureTotal }</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.classRegistrationState }</h5>
 	                                                    </div>
 	                                                </td>
 	                                            </tr>

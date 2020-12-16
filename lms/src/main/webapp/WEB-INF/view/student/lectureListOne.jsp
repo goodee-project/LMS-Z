@@ -95,7 +95,7 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList/${studentId}/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
@@ -130,7 +130,7 @@
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
                                     <li class="breadcrumb-item">
-                                    	<a href="">${lectureOne.teacherName }(${lectureOne.accountId})</a>
+                                    	<a href="">${lectureOne.teacher.teacherName }(${lectureOne.accountId})</a>
                                     	<span class="text-center mt-4 mb-0"> ${lectureOne.lectureUpdatedate}</span>
                                     </li>
                                 </ol>
@@ -158,21 +158,21 @@
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">과목</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${subjectOne.subjectName }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectName }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">이수인정기산</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${subjectOne.subjectTotalday }시간</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectTotalday }시간</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">과목설명</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${subjectOne.subjectInfo }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectInfo }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
@@ -193,28 +193,28 @@
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">강의계획서</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${syllabusOne.syllabusContent }</textarea>
+                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${lectureOne.syllabus.syllabusContent }</textarea>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">강의실</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${classroomOne.classrommNumber }호</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomNumber }호</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">강의실 크기</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${classroomOne.classroomSize }㎡</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomSize }㎡</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">강의실 수용인원</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${classroomOne.classroomTotal }명</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomTotal }명</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
@@ -232,49 +232,49 @@
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">교재 제목</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookTitle }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookTitle }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">저자</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookWriter }시간</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookWriter }시간</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">출판사</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookPublisher }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPublisher }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">발행</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookPublishdate }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPublishdate }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">가격</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookPrice }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPrice }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                          <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">ISBN</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${textbookOne.textbookIsbn }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookIsbn }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">책 정보</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	<textarea style="resize:none" cols="30" rows="3" class="font-weight-medium text-dark border-0 px-2 py-4">${textbookOne.textbookInfo }</textarea>
+                                            	<textarea style="resize:none" cols="30" rows="3" class="font-weight-medium text-dark border-0 px-2 py-4">${lectureOne.textbook.textbookInfo }</textarea>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>

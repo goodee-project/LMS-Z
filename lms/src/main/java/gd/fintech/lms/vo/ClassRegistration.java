@@ -11,4 +11,5 @@ public class ClassRegistration {
 	private String classRegistrationPoint;
 	private String classRegistrationReview;
 	private String classRegistrationCreateDate;
+	private Lecture lecture;
 }

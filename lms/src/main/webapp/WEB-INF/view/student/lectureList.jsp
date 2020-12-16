@@ -90,7 +90,7 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList/${studentId}/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
@@ -142,7 +142,6 @@
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
@@ -152,13 +151,6 @@
                                         <tbody>
                                         	<c:forEach var="c" items="${lectureList}">
 	                                            <tr>
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium" hidden="hidden">${c.lectureNo}</h5>
-	                                                        
-	                                                    </div>
-	                                                </td>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
 	                                               		<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
