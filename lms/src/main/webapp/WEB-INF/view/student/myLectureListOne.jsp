@@ -56,7 +56,7 @@
 					<!-- 뛰어쓰기 용 ul -->
 					
                     <span class="navbar-nav float-left mr-auto ml-3 pl-1">
-	                    <a class="btn btn-success font-20 popover-item" href="${path }/student/lectureList/${currentPage}">
+	                    <a class="btn btn-success font-20 popover-item" href="${path }/student/myLectureList/${studentId}/${currentPage}">
 	                        	목록으로
 	                    </a>
                     </span>
@@ -95,12 +95,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList/${studentId}/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">수강신청</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
@@ -124,14 +124,14 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">${lectureOne.lectureName }</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">${myLectureListOne.lecture.lectureName }</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
                                     <li class="breadcrumb-item">
-                                    	<a href="">${lectureOne.teacher.teacherName }(${lectureOne.accountId})</a>
-                                    	<span class="text-center mt-4 mb-0"> ${lectureOne.lectureUpdatedate}</span>
+                                    	<a href="">${myLectureListOne.teacher.teacherName }(${myLectureListOne.lecture.accountId})</a>
+                                    	<span class="text-center mt-4 mb-0"> ${myLectureListOne.lecture.lectureUpdatedate}</span>
                                     </li>
                                 </ol>
                             </nav>
@@ -139,9 +139,31 @@
                     </div>
                     <div class="col-5 align-self-center text-right">
                     	<div class="col-12 align-self-center">
-                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}">
-                        	수강 신청
-                        </a>
+                    		<c:if test="${myLectureListOne.classRegistrationState=='대기'}">
+		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+	                        </c:if>
+	                        <c:if test="${myLectureListOne.classRegistrationState=='수강중'}">
+		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+	                        </c:if>
+	                        <c:if test="${myLectureListOne.classRegistrationState=='수료'}">
+		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+	                        </c:if>
+	                        <c:if test="${myLectureListOne.classRegistrationState=='과락'}">
+		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+	                        </c:if>
+	                        <c:if test="${myLectureListOne.classRegistrationState=='취소'}">
+		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+	                        </c:if>
 		                </div>
 		           </div>
 		       </div>
@@ -158,63 +180,67 @@
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">과목</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectName }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.subject.subjectName }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">이수인정기산</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectTotalday }시간</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.subject.subjectTotalday }시간</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">과목설명</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.subject.subjectInfo }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.subject.subjectInfo }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">강의 기간</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.lectureStartdate } ~ ${lectureOne.lectureEnddate }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+                                            	 	${myLectureListOne.lecture.lectureStartdate } ~ ${myLectureListOne.lecture.lectureEnddate }
+                                            	 </span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">강좌 정원</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.lectureTotal }명</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+                                            	 	${myLectureListOne.lecture.lectureTotal }명
+                                            	 </span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">강의계획서</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${lectureOne.syllabus.syllabusContent }</textarea>
+                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${myLectureListOne.syllabus.syllabusContent }</textarea>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">강의실</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomNumber }호</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.classroom.classroomNumber }호</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">강의실 크기</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomSize }㎡</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.classroom.classroomSize }㎡</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">강의실 수용인원</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.classroom.classroomTotal }명</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.classroom.classroomTotal }명</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
@@ -232,49 +258,49 @@
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">교재 제목</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookTitle }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookTitle }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">저자</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookWriter }시간</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookWriter }시간</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">출판사</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPublisher }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookPublisher }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">발행</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPublishdate }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookPublishdate }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">가격</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookPrice }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookPrice }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                          <tr class="border-top-0 px-2 py-4">
                                             <th class="border-0 font-14 font-weight-medium text-muted">ISBN</th>
                                             <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureOne.textbook.textbookIsbn }</span>
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.textbook.textbookIsbn }</span>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">책 정보</th>
                                             <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	<textarea style="resize:none" cols="30" rows="3" class="font-weight-medium text-dark border-0 px-2 py-4">${lectureOne.textbook.textbookInfo }</textarea>
+                                            	<textarea style="resize:none" cols="30" rows="3" class="font-weight-medium text-dark border-0 px-2 py-4">${myLectureListOne.textbook.textbookInfo }</textarea>
                                            	</td>
                                            	<td class="border-0"></td>
                                         </tr>

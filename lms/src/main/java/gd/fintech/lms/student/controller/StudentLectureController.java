@@ -2,7 +2,6 @@ package gd.fintech.lms.student.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
 
 @Controller
@@ -48,7 +48,7 @@ public class StudentLectureController {
 	public String lectureListOne(Model model,
 								@PathVariable(name="lectureNo") int lectureNo,
 								@PathVariable(name="currentPage") int currentPage) {
-		// 1. 강의실 정보
+		// 강의실 정보
 		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
 		
 		model.addAttribute("lectureOne",lectureOne);
@@ -75,8 +75,8 @@ public class StudentLectureController {
 		int beginRow = (currentPage-1)*rowPerPage; 
 		// 페이징 처리한 나의 강의 현황 리스트
 		List<ClassRegistration> myLectureList = studentLectureService.getMyLectureList(studentId, beginRow, rowPerPage); 
-		// 전체 강의 목록 갯수
-		int listTotal = studentLectureService.getLectureListTotal(); 
+		// 전체 나의 강의 목록 갯수
+		int listTotal = studentLectureService.getMyLectureListTotal(studentId); 
 		// 마지막 페이지
 		int lastPage = 0;
 		if(listTotal%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
@@ -88,5 +88,18 @@ public class StudentLectureController {
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
 		return "student/myLectureList";
+	}
+	//==== 나의 수강 현황 상세보기 ====
+	@GetMapping("/student/myLectureListOne/{studentId}/{lectureNo}/{currentPage}")
+	public String myLectureListOne(Model model,
+								@PathVariable(name="studentId") String studentId,
+								@PathVariable(name="lectureNo") int lectureNo,
+								@PathVariable(name="currentPage") int currentPage) {
+		// 강의실 정보
+		ClassRegistrationForm myLectureListOne = studentLectureService.getMyLectureListOne(studentId, lectureNo);
+		
+		model.addAttribute("myLectureListOne",myLectureListOne);
+		model.addAttribute("currentPage",currentPage);
+		return "student/myLectureListOne";
 	}
 }

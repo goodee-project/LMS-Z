@@ -95,12 +95,12 @@
                                     class="hide-menu">강의 목록
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">수강신청</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">3</span></a></li>
+                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
+                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
+                                    class="hide-menu">질문 목록</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">4</span></a>
@@ -156,7 +156,7 @@
 	                                               		<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
 	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${c.lectureNo}/${currentPage}">${c.lecture.lectureName}</a>
+	                                                        	<a href="${path}/student/myLectureListOne/${studentId}/${c.lecture.lectureNo}/${currentPage}">${c.lecture.lectureName}</a>
 	                                                        </h5>
 	                                                    </div>
 	                                                </td>

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
 
 @Transactional
@@ -41,7 +42,6 @@ public class StudentLectureService {
 		map.put("lectureNo", lectureNo);
 		return studentLectureMapper.insertClassRegistration(map);
 	}
-	
 	//==== 나의 수강 현황 목록 =========
 	public List<ClassRegistration> getMyLectureList(String studentId,int beginRow, int rowPerPage){
 		Map<String,Object> map = new HashMap<>();
@@ -49,6 +49,17 @@ public class StudentLectureService {
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		return studentLectureMapper.selectMyLectureList(map);
+	}
+	//==== 페이징)전체 나의 수강 현황 목록 수 =====
+	public int getMyLectureListTotal(String studentId) {
+		return studentLectureMapper.selectMyLectureListTotal(studentId);
+	}
+	//==== 나의 수강 현황 상세보기 ====
+	public ClassRegistrationForm getMyLectureListOne(String studentId, int lectureNo){
+		Map<String,Object> map = new HashMap<>();
+		map.put("studentId", studentId);
+		map.put("lectureNo", lectureNo);
+		return studentLectureMapper.selectMyLectureListOne(map);
 	}
 }
 
