@@ -23,7 +23,7 @@
 					<tr>
 						<td>${l.lmsNoticeNo}</td>
 						<td>${l.lmsNoticeWriter}</td>
-						<td>${l.lmsNoticeTitle}</td>
+						<td><a href="${path}/teacher/lmsNoticeOne/${l.lmsNoticeNo}">${l.lmsNoticeTitle}</a></td>
 						<td>${l.lmsNoticeCount}</td>
 					</tr>
 				</c:forEach>

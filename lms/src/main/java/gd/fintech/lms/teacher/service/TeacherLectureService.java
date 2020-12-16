@@ -22,6 +22,6 @@ public class TeacherLectureService {
 	
 	// 강의 상세정보, 강의계획서 출력
 	public Lecture getLectureOne(int lectureNo) {
-		return teacherLectureMapper.selectLectoreOne(lectureNo);
+		return teacherLectureMapper.selectLectureOne(lectureNo);
 	}
 }

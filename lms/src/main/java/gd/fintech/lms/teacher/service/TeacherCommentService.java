@@ -26,4 +26,12 @@ public class TeacherCommentService {
 	public int removeQuestionComment(int questionCommentNo) {
 		return teacherCommentMapper.deleteQuestionComment(questionCommentNo);
 	}
+	
+	public int modifyQuestionComment(QuestionComment questionComment) {
+		return teacherCommentMapper.updateQuestionComment(questionComment);
+	}
+	
+	public QuestionComment questionCommentOne(int questionCommentNo) {
+		return teacherCommentMapper.selectQuestionCommentOne(questionCommentNo);
+	}
 }

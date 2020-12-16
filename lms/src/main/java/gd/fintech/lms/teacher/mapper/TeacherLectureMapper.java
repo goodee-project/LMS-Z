@@ -13,5 +13,5 @@ public interface TeacherLectureMapper {
 	List<Lecture> selectLectureList(String accountId);
 	
 	// 강의 상세보기(강의계획서)(강의번호 -> lectureNo)
-	Lecture selectLectoreOne(int lectureNo);
+	Lecture selectLectureOne(int lectureNo);
 }

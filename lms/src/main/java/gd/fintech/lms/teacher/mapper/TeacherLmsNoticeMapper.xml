@@ -11,4 +11,15 @@
 			lms_notice_count lmsNoticeCount
 		FROM lms_notice
 	</select>
+	
+	<!-- 공지사항 상세보기 -->
+	<select id="selectLmsNoticeOne" parameterType="int" resultType="gd.fintech.lms.vo.LmsNotice">
+		SELECT
+			lms_notice_no lmsNoticeNo,
+			lms_notice_writer lmsNoticeWriter,
+			lms_notice_title lmsNoticeTitle,
+			lms_notice_content lmsNoticeContent
+		FROM lms_notice
+		WHERE lms_notice_no = #{lmsNoticeNo}
+	</select>
 </mapper>

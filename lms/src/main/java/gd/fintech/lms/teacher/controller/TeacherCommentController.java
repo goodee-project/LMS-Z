@@ -44,4 +44,33 @@ public class TeacherCommentController {
 		
 		return "redirect:/teacher/questionOne/"+questionNo;
 	}
+	
+	//댓글상세보기
+	@GetMapping("/teacher/questionCommentOne/{questionCommentNo}")
+	public String questionCommentOne(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo) {
+		
+		QuestionComment questionComment = teacherCommentService.questionCommentOne(questionCommentNo);
+		model.addAttribute("questionComment", questionComment);
+		
+		return "teacher/questionCommentOne";
+	}
+	
+	//댓글수정 폼
+	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}")
+	public String modifyQuestionComment(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo) {
+		
+		QuestionComment questionComment = teacherCommentService.questionCommentOne(questionCommentNo);
+		model.addAttribute(questionComment);
+		
+		return "teacher/modifyQuestionComment";
+	}
+	
+	//댓글수정 액션
+	@PostMapping("/teacher/modifyQuestionComment/{questionNo}")
+	public String modifyQuestionComment(QuestionComment questionComment) {
+		
+		teacherCommentService.modifyQuestionComment(questionComment);
+		
+		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo();
+	}
 }

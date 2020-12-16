@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherCommentMapper">
+	<!-- 댓글목록 -->
 	<select id="selectQuestionCommentList" resultType="gd.fintech.lms.vo.QuestionComment">
 		SELECT
 			question_comment_no questionCommentNo,
 			account_id accountId,
 			question_comment_writer questionCommentWriter,
-			question_comment_content questionCommentContent
+			question_comment_content questionCommentContent,
+			question_comment_createdate questionCommentCreatedate,
+			question_comment_updatedate questionCommentUpdatedate
 		FROM question_comment
 	</select>
 	
@@ -34,4 +37,24 @@
 		DELETE FROM question_comment
 		WHERE question_comment_no = #{questionCommentNo}
 	</delete>
+	
+	<!-- 댓글수정 -->
+	<update id="updateQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+		UPDATE question_comment
+		SET
+			question_comment_content = #{questionCommentContent}
+			question_comment_updatedate = NOW()
+		WHERE question_comment_no = #{questionCommentNo}
+	</update>
+	
+	<!-- 댓글 상세보기 -->
+	<select id="selectQuestionCommentOne" parameterType="int" resultType="gd.fintech.lms.vo.QuestionComment">
+		SELECT
+			question_comment_no questionCommentNo,
+			account_id accountId,
+			question_comment_writer questionCommentWriter,
+			question_comment_content questionCommentContent,
+			question_comment_updatedate questionCommentUpdatedate
+		FROM question_comment
+	</select>
 </mapper>

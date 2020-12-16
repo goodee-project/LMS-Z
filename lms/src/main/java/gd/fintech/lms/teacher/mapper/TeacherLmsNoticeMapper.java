@@ -10,4 +10,7 @@ import gd.fintech.lms.vo.LmsNotice;
 public interface TeacherLmsNoticeMapper {
 	//공지사항 목록
 	List<LmsNotice> selectLmsNoticeList();
+	
+	//공지사항 상세보기
+	LmsNotice selectLmsNoticeOne(int lmsNoticeNo);
 }

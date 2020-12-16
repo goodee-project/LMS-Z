@@ -44,7 +44,9 @@
 			qc.account_id,
 			qc.question_comment_no,
 			qc.question_comment_writer,
-			qc.question_comment_content
+			qc.question_comment_content,
+			qc.question_comment_createdate,
+			qc.question_comment_updatedate
 		FROM question q LEFT JOIN question_comment qc
 		ON q.question_no = qc.question_no
 		WHERE q.question_no = #{questionNo}

@@ -18,4 +18,9 @@ public class TeacherLmsNoticeService {
 	public List<LmsNotice> getLmsNoticeList(){
 		return teacherLmsNoticeMapper.selectLmsNoticeList();
 	}
+	
+	//공지사항 상세보기
+	public LmsNotice getLmsNoticeOne(int lmsNoticeNo) {
+		return teacherLmsNoticeMapper.selectLmsNoticeOne(lmsNoticeNo);
+	}
 }

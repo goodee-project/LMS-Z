@@ -11,4 +11,6 @@ public interface TeacherCommentMapper {
 	List<QuestionComment> selectQuestionCommentList();
 	int insertQuestionComment(QuestionComment questionComment);
 	int deleteQuestionComment(int questionCommentNo);
+	int updateQuestionComment(QuestionComment QuestionComment);
+	QuestionComment selectQuestionCommentOne(int questionCommentNo);
 }
