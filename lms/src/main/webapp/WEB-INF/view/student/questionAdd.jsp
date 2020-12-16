@@ -6,10 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="${path}/student/questionAdd">
+<form method="post" id="questionAdd" action="${path}/student/questionAdd" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<td>lecture_no
@@ -37,7 +38,44 @@
 			<td>question_password: <input type="text" name="questionPassword"></td>
 		</tr>
 	</table>
-	<button type="submit">등록완료</button>
+	
+	<table border="1">
+		<tr>
+			<td>question_file</td>
+			<td>
+				<div>
+					<button type="button" id="addBtn">파일 추가</button>
+					<button type="button" id="delBtn">파일 삭제</button>
+				</div>
+				<div id="fileinput"></div>
+			</td>
+		</tr>
+	</table>
+	<button type="button" id="submitBtn">등록완료</button>
 </form>		
 </body>
+<script>
+	$('#addBtn').click(function(){
+		let html= '<div><input type="file" name="questionFile" class="questionFile"></div>';	
+		$('#fileinput').append(html);
+	});
+
+	$('#delBtn').click(function(){
+		$('#fileinput').children().last().remove();
+	});
+
+	$('#submitBtn').click(function(){
+		let ck = true;
+		$('.questionFile').each(function(index, item){
+			if($(item).val()==''){
+				ck = false;	
+			}
+		})
+		if(ck == false){
+			alert('파일을 선택해 주세요');
+		}else{
+			$('#questionAdd').submit();
+		}
+	});
+</script>
 </html>

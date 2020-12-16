@@ -1,0 +1,26 @@
+bur5698
+letsrember12
+db
+http://localhost/LMS-Z/student/questionList
+추가 - insert, add 
+수정 - update, modify
+삭제 - delete, remove
+조회 - select, get
+
+
+7. 질문 목록 - o
+질문 상세보기 - o
+
+8. 질문 등록 - o
+
+9. 질문 수정
+
+10. 질문 삭제
+
+11. 과제 조회
+
+12. 과제 제출
+
+13. 과제 수정
+
+14. 과제 삭제

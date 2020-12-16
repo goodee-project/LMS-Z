@@ -19,9 +19,14 @@ public interface StudentQuestionMapper {
 	// 질문 등록
 	int insertQuestion(Question question); 
 	
+	// 질문 삭제
+	int deleteQuestion(int questionNo);
+	
 	//질문 자세히 보기
 	Question selectQuestionOne(int questionNo); 
 	
 	// 질문 등록에서 강의번호를 선택하기위해 사용(강의 번호 리스트를 가져오기 위해)
 	List<Lecture> selectLectureList();  
+	
+	
 }

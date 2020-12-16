@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="path" value="${pageContext.request.contextPath}"/>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
+		<a href="${path}/student/removeQuestion/${question.questionNo}">질문 삭제</a>
+	</div>
+	<h1>question</h1>
 	<table border="1">
 		<tr>
 			<td>questionNo</td>
@@ -43,6 +48,7 @@
 		</tr>
 	</table>
 	
+	<h1>question_file</h1>
 	<table border="1">
 		<c:forEach var="qf" items="${question.questionfile}">
 			<tr>
@@ -52,17 +58,19 @@
 		</c:forEach>	
 	</table>
 	
+	<h1>question_comment</h1>
 	<table border="1">
 		<c:forEach var="qc" items="${question.questionCommentList}">
 			<tr>
-				<td>commentWriter</td>
+				<td>작성자</td>
 				<td>${qc.questionCommentWriter}</td>
-			</tr>
-			<tr>
-				<td>commentContent</td>
+	
+				<td>내용</td>
 				<td>${qc.questionCommentContent}</td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+
 </body>
 </html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentQuestionFileMapper">
+	<insert id="insertQuestionFile" parameterType="gd.fintech.lms.vo.QuestionFile">
+		INSERT INTO 
+			question_file(
+			question_file_uuid,
+			question_file_original,
+			question_no,
+			question_file_size,
+			question_file_type,
+			question_file_count,
+			question_file_createdate
+		)values(
+			#{questionFileUuid},
+			#{questionFileOriginal},
+			#{questionNo},
+			#{questionFileSize},
+			#{questionFileType},
+			#{questionFileCount},
+			NOW()		
+		)
+	</insert>
+	
+	<delete id="deleteAllQuestionFile" parameterType="int">
+		DELETE
+		FROM question_file
+		WHERE question_no=#{questionNo}
+	</delete>
+	
+	<select id="selectQuestionFileUuid" resultType="String" parameterType="int">
+		SELECT 
+			question_file_uuid questionFileUuid
+		FROM question_file
+		WHERE question_no = #{questionNo}
+	</select>
+</mapper>

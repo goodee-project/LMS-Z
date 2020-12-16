@@ -84,6 +84,9 @@
   	
   	<!-- 질문 등록 -->
   	<insert id="insertQuestion" parameterType="gd.fintech.lms.vo.Question">
+  		<selectKey resultType="int" keyProperty="questionNo" order="AFTER">
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>
   		INSERT INTO 
   			question(
 	  			lecture_no,
@@ -106,6 +109,13 @@
   			)
   	</insert>
   	
+  	<!-- 질문 삭제 -->
+	<delete id="deleteQuestion" parameterType="int">
+		DELETE 
+		FROM question
+		WHERE question_no = #{questionNo}
+	</delete>
+	  	
   	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
   	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
   		SELECT 

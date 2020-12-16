@@ -7,7 +7,7 @@ public class QuestionFile {
 	private String questionFileUuid;
 	private String questionFileOriginal;
 	private int questionNo;
-	private int questionFileSize;
+	private long questionFileSize;
 	private String questionFileType;
 	private int questionFileCount;
 	private String questionFileCreatedate;
