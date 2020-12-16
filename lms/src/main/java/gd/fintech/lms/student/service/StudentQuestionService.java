@@ -20,6 +20,7 @@ import gd.fintech.lms.vo.QuestionFile;
 
 @Service
 public class StudentQuestionService {
+	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
 	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
 	
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
