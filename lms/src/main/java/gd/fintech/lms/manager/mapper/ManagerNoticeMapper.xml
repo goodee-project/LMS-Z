@@ -1,36 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- lms공지사항 mapper -->
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerNoticeMapper">
-	<!-- LMS 공지사항 리스트 -->
-<select id="selectLmsNoticeList" parameterType = "java.util.Map" resultType="gd.fintech.lms.vo.LmsNotice">
-	SELECT
-		lms_notice_no lmsNotcieNo,
-		account_id accountId,
-		lms_notice_writer lmsNotcieWriter,
-		lms_notice_title lmsNotcieTitle,
-		lms_notice_content lmsNotcieContent,
-		lms_notice_createdate lmsNotcieCreateDate,
-		lms_notice_updatedate lmsNotcieUpdateDate,
-		lms_notice_count lmsNotcieCount,
+	<!-- lms공지사항 페이징 -->
+	<select id="selectLMSNoticeListByPage" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LmsNotice">
+		SELECT 
+			lms_notice_no lmsNoticeNo, 
+			lms_notice_title lmsNoticeTitle, 
+			lms_notice_writer lmsNoticeWriter, 
+			lms_notice_updatedate lmsNoticeUpdateDate
+		FROM lms_notice
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 공지사항 상세 내용 -->
+	<select id="selectLMSNoticeDetail" parameterType="int" resultType="gd.fintech.lms.vo.LmsNotice">
+		SELECT 
+			lms_notice_no lmsNoticeNo, 
+			lms_notice_title lmsNoticeTitle, 
+			lms_notice_content lmsNoticeContent, 
+			lms_notice_writer lmsNoticeWriter, 
+			lms_notice_updatedate lmsNoticeUpdateDate, 
+			lms_notice_count lmsNoticeCount
 		FROM lms_notice
 		WHERE lms_notice_no = #{lmsNoticeNo}
-		LIMIT #{beginRow}, #{rowPerPage}
-		</select>
-<select id= "selectLmsNoticeCount" parameterType = "int" resultType ="int">
-	SELECT
-		COUNT(*)
-	FROM Lms_notice
-	WHERE Lms_notice_no = #{lmsNoticeNo}
-</select>		
-	<!-- 공지사항 등록 -->
+	</select>
+	
+	<!-- 공지사항 추가 -->
 	<insert id="insertLMSNotice" parameterType="gd.fintech.lms.vo.LmsNotice">
-		INSERT INTO 
-		lms_notice account_id, 
-		lms_notice_writer, 
-		lms_notice_title, 
-		lms_notice_content, 
-		lms_notice_createdate, 
-		lms_notice_updatedate
-		VALUES (#{accountId}, #{lmsNoticeWriter}, #{lmsNoticeTitle}, #{lmsNoticeContent}, NOW(), NOW())
+		INSERT INTO lms_notice(
+			account_id, 
+			lms_notice_writer, 
+			lms_notice_title, 
+			lms_notice_content, 
+			lms_notice_createdate, 
+			lms_notice_updatedate
+		) VALUES (
+			#{accountId}, 
+			#{lmsNoticeWriter}, 
+			#{lmsNoticeTitle}, 
+			#{lmsNoticeContent}, 
+			NOW(), 
+			NOW()
+		)
 	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateLMSNotice" parameterType="gd.fintech.lms.vo.LmsNotice">
+		UPDATE lms_notice 
+		SET 
+			lms_notice_title = #{lmsNoticeTitle}, 
+			lms_notice_content = #{lmsNoticeContent}, 
+			lms_notice_updatedate = NOW()
+		WHERE lms_notice_no = #{lmsNoticeNo}
+	</update>
+	
+	<!-- lms공지사항 삭제 -->
+	<delete id="deleteLMSNotice" parameterType="int">
+		DELETE FROM lms_notice
+		WHERE lms_notice_no = #{lmsNoticeNo}
+	</delete>
 </mapper>
