@@ -36,10 +36,12 @@
 	<select id="selectQuestionOne" resultMap="selectQuestionOneResult" parameterType="int">
 		SELECT
 			q.question_no,
+			q.account_id,
 			q.question_writer,
 			q.question_title,
 			q.question_content,
 			qc.question_no,
+			qc.account_id,
 			qc.question_comment_no,
 			qc.question_comment_writer,
 			qc.question_comment_content

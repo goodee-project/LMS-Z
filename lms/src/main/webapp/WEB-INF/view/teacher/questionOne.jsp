@@ -49,11 +49,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<!-- 댓글 추가 -->
 		<form method="post" action="${path}/teacher/addQuestionComment">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">
-			<input type="hidden" name="accountId" value="123123">
-			<textarea name="questionCommentWriter" rows="3" cols="50"></textarea>
-			<textarea name="questionCommentContent" rows="3" cols="50"></textarea>
+			<input type="hidden" name="accountId" value="${question.accountId}">
+			작성자<br><input type="text" name="questionCommentWriter"><br>
+			댓글<br><textarea name="questionCommentContent" rows="3" cols="50"></textarea>
 			<button type="submit">댓글입력</button>
 		</form>
 </body>
