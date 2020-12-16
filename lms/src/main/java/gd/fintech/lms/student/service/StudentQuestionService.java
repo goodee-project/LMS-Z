@@ -20,7 +20,7 @@ import gd.fintech.lms.vo.QuestionFile;
 
 @Service
 public class StudentQuestionService {
-	private final String PATH ="C:\\Users\\박연원\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
+	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
 	
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
 	@Autowired private StudentQuestionFileMapper studentQuestionFileMapper;
