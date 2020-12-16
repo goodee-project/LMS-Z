@@ -48,14 +48,18 @@ public class ManagerNoticeController {
 	
 	//공지사항 작성 폼 
 	@GetMapping ("/manager/addLmsNotice/{LmsNotice}")
-	public String addLmsNotice(@PathVariable(value="LmsNotice")int lmsNoticeNo) {
+	public String addLmsNotice(@PathVariable(value="LmsNotice")int lmsNotice) {
 		return "mananger/addLmsNotice";
 	}
 	
 	//공지사항 작성 액션 
 	@PostMapping("/manager/addLmsNotice/{LmsNotice}")
 	public String addLmsNotice(LmsNotice lmsNotice) {
-		return "";
+		return "redirect:/manager/LmsNoticeList/"+lmsNotice.getLmsNoticeNo();
 	}
-	
+	//공지사항 상세내용 
+	@GetMapping("/manager/LmsNoticeOne/{LmsNotice}/{lmsNoticeNo}")
+	public String managerNoticeOne(Model model, @PathVariable(value = "LmsNotice") int LmsNotice, @PathVariable(value = "LmsNoticeNo")int LmsNoticeNo) {
+	return""; 
+	}
 }
