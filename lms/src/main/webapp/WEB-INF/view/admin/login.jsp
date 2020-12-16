@@ -113,12 +113,12 @@
 		                            <div class="card-body">
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId">
+		                                    	ID : <input type="text" name="accountId" value="admin1">
 		                                    </span>
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw">
+		                                    	PW : <input type="password" name="accountPw" value="1234">
 		                                    </span>
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
