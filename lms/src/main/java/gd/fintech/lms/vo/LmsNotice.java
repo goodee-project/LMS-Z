@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class LmsNotice {
-	
 	//lms공지사항 번호 
 	private int lmsNoticeNo; 
 	
