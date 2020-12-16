@@ -104,7 +104,7 @@
 	                                    			<input type="text" id="managerId" name="managerId">
 	                                    			<div id="textId"></div>
 	                                    		</td>
-	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button">중복검사</button></td>    
+	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button" disabled=true>중복검사</button></td>    
 	                                   		</tr>
 	                                   		
 	                                    	<tr class="border-0">
@@ -128,7 +128,7 @@
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이메일</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerEmail"></td>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" id="managerEmail" name="managerEmail"></td>
 	                                    		<td class="border-0"><button class="btn btn-light" type="button">중복검사</button></td>    
 	                                   		</tr>
 	                                   		
@@ -209,13 +209,28 @@
 		// 아이디 입력란의 input 실시간 감지
 		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
 		$("#managerId").on("propertychange change keyup paste input", function(){
-			if(!checkId.test($('#managerId').val())){
-				$('#textId').text("아이디 형식을 확인해 주세요");
+			if(checkId.test($('#managerId').val())){				
+				$('#textId').text("형식 확인");
+				$('#btnId').prop("disabled", false);				
 			}
 			else{
-				$('#textId').text("형식 확인");
+				$('#textId').text("아이디 형식을 확인해 주세요");
+				$('#btnId').prop("disabled", true);
 			}
 		});
+
+		$('#btnId').click(function(){
+			$.ajax({
+				url:'${path}/manager/overlap',
+				type:'GET',
+				data:{accountId: $('#managerId').val()},
+				success:function(data){
+					alert("check");
+				}
+			});	
+		});
+
+		
 
     </script>
 </body>

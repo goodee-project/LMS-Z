@@ -16,11 +16,6 @@ import gd.fintech.lms.vo.StudentForm;
 public class StudentLoginController {
 	@Autowired StudentLoginService studentLoginService;
 	
-	@GetMapping(value={"/student", "/student/index"})
-	public String index() {
-		return "student/index";
-	}
-	
 	@GetMapping("/studentLogin")
 	public String login() {
 		return "student/login";
@@ -35,7 +30,7 @@ public class StudentLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("studentId", account.getAccountId());
 		
-		return "redirect:/student/index";
+		return "student/index";
 	}
 	
 	@GetMapping("/student/logout")

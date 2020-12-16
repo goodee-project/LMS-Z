@@ -15,11 +15,6 @@ import gd.fintech.lms.vo.Account;
 public class TeacherLoginController {
 	@Autowired TeacherLoginService teacherLoginService;
 	
-	@GetMapping(value={"/teacher" ,"/teacher/index"})
-	public String index() {
-		return "teacher/index";
-	}
-	
 	@GetMapping("/teacherLogin")
 	public String login() {
 		return "teacher/login";
@@ -36,7 +31,7 @@ public class TeacherLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("teacherId", account.getAccountId());
 		
-		return "redirect:/teacher/index";
+		return "teacher/index";
 	}
 	@GetMapping("/teacher/logout")
 	public String logout(HttpSession session) {

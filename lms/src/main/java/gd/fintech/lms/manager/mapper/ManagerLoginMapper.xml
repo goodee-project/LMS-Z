@@ -3,6 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerLoginMapper">
+	<select id="selectAccountToSignupByoverlap" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM account
+		<where>
+			<if test="accountId != null">account_id = #{accountId}</if>
+			<if test="accountEmail != null">account_Email = #{accountEmail}</if>
+		</where>
+	</select>
+
 	<select id="selectAccountToManagerLogin" parameterType="gd.fintech.lms.vo.Account" resultType="String">
 		SELECT account_id accountId
 		FROM account

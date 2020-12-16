@@ -13,6 +13,11 @@ import gd.fintech.lms.vo.ManagerForm;
 public class ManagerLoginService {
 	@Autowired ManagerLoginMapper managerLoginMapper;
 	
+	// 회원가입하는 사람의 아이디 또는 이메일의 중복검사 service
+	public int getAccountToSignupByoverlap(String accountId, String accountEmail) {
+		return managerLoginMapper.selectAccountToSignupByoverlap(accountId, accountEmail);
+	}
+	
 	public String getAccountToManagerLogin(Account account) {
 		
 		account.setAccountLevel(2);

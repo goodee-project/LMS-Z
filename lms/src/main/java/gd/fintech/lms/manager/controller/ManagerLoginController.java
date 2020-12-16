@@ -16,12 +16,6 @@ import gd.fintech.lms.vo.ManagerForm;
 public class ManagerLoginController {
 	@Autowired ManagerLoginService managerLoginService;
 	
-	
-	@GetMapping(value={"/manager", "/manager/index"})
-	public String index() {
-		return "manager/index";
-	}
-	
 	@GetMapping("/managerLogin")
 	public String login() {
 		return "manager/login";
@@ -37,7 +31,7 @@ public class ManagerLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("managerId", account.getAccountId());
 		
-		return "redirect:/manager/index";
+		return "manager/index";
 	}
 	
 	@GetMapping("/managerSignup")
