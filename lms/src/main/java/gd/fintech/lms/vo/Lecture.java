@@ -17,4 +17,10 @@ public class Lecture {
 	private int classroomNo;
 	private String lectureCreatedate;
 	private String lectureUpdatedate;
+	private Account account;
+	private Classroom classroom;
+	private Teacher teacher;
+	private Subject subject;
+	private Syllabus syllabus;
+	private Textbook textbook;
 }

@@ -38,7 +38,7 @@
 					<td>${s.studentAddressMain }</td>
 					<td>${s.studentAddressSub }</td>
 					<td>${s.account.accountLevel }</td>
-					<td><a href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${sessionScope.managerId}">승인</a></td>
+					<td><a href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${managerId}">승인</a></td>
 					<td><a href="${path}/manager/deleteStudentQueue/${s.studentId}/거절">거절</a></td>
 				</tr>
 			</c:forEach>
@@ -72,7 +72,7 @@
 					<td>${t.teacherAddressMain }</td>
 					<td>${t.teacherAddressSub }</td>
 					<td>${t.account.accountLevel }</td>
-					<td><a href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${sessionScope.managerId}">승인</a></td>
+					<td><a href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${managerId}">승인</a></td>
 					<td><a href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절">거절</a></td>
 				</tr>
 			</c:forEach>

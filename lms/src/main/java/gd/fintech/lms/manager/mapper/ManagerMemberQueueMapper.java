@@ -9,7 +9,7 @@ import gd.fintech.lms.vo.StudentQueue;
 import gd.fintech.lms.vo.TeacherQueue;
 
 @Mapper
-public interface MemberQueueMapper {
+public interface ManagerMemberQueueMapper {
 	//승인 대기상태의 학생리스트를 연결하는 메퍼
 	List<StudentQueue> selectStudentMemberQueue(); 
 	//승인 대기상태의 강사리스트를 연결하는 메퍼

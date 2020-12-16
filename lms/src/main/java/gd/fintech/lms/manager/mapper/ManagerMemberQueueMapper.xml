@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.manager.mapper.MemberQueueMapper">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerMemberQueueMapper">
 	<!-- 학생의 승인을 위한 조인 -->
 	<resultMap type="gd.fintech.lms.vo.StudentQueue" id="selectStudentQueueList">
 		<result property="studentId" column="student_id"/>
