@@ -104,17 +104,19 @@
 	                                    			<input type="text" id="managerId" name="managerId">
 	                                    			<div id="textId"></div>
 	                                    		</td>
-	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button" disabled=true>중복검사</button></td>    
+	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button" disabled="disabled">중복검사</button></td>    
 	                                   		</tr>
 	                                   		
 	                                    	<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">비닐번호</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
 	                                    			<div>
-	                                    				<input type="password" name="managerPw">                                    			
+	                                    				<input type="password" id="managerPw" name="managerPw">
+	                                    				<div id="textPw"></div>                                    			
 	                                    			</div>
 	                                    			<div>
-	                                    				<input type="password">                                    			
+	                                    				<input type="password" id="managerPw2" readonly>
+	                                    				<div id="textPw2"></div>                                    			
 	                                    			</div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -208,30 +210,71 @@
 		var checkId = /^[A-Za-z][A-Z0-9a-z]{5,13}$/;
 		// 아이디 입력란의 input 실시간 감지
 		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
-		$("#managerId").on("propertychange change keyup paste input", function(){
+		$('#managerId').on('propertychange change keyup paste input', function(){
 			if(checkId.test($('#managerId').val())){				
-				$('#textId').text("형식 확인");
-				$('#btnId').prop("disabled", false);				
+				$('#textId').text('형식 확인');
+				$('#btnId').prop('disabled', false);				
 			}
 			else{
-				$('#textId').text("아이디 형식을 확인해 주세요");
-				$('#btnId').prop("disabled", true);
+				$('#textId').text('아이디 형식을 확인해 주세요');
+				$('#btnId').prop('disabled', true);
 			}
 		});
 
+		// 아이디에 대한 규약이 맞을 때만 중복검사 버튼 활성화
+		// ajax를 통해 아이디값을 비교 후 값이 있다면 confirm창, 없다면 바로 alert창 실행
 		$('#btnId').click(function(){
 			$.ajax({
-				url:'${path}/manager/overlap',
+				url:'${path}/managerOverlap',
 				type:'GET',
 				data:{accountId: $('#managerId').val()},
 				success:function(data){
-					alert("check");
+					if(data.overlap == 0){
+						if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
+							$('#managerId').prop('readonly', true);
+							$('#btnId').prop("disabled", true);
+							$('#textId').text('');
+						}
+					} else{
+						alert('중복 된 아이디입니다');
+					}
 				}
 			});	
 		});
 
-		
+		// checkPw는 입력란에 8~20자를 적을 수 있고 영문자와 숫자, 특수문자를 포함하는 지 확인하기 위한 변수
+		// checkPw2는 특수문자가 비닐번호에 하나라도 포함됬는지 확인하기 위한 변수
+		var checkPw = /^[A-z0-9a-z~!@#$%^&*()_+|<>?:{}]{8,20}$/;
+		var checkPw2 = /[~!@#$%^&*()_+|<>?:{}]/;
+		// managerPw에 대해서 실시간으로 입력감지를 하게 하고 managerPw2는 비활성화
+		// 만약 비닐번호가 특수문자를 포함하고 규약에 맞다면 Pw 활성화
+		$('#managerPw').on('ropertychange change keyup paste input', function(){
+			if(checkPw.test($('#managerPw').val())){
+				if(checkPw2.test($('#managerPw').val())){
+					$('#textPw').text('형식 확인');
+					$('#managerPw2').prop('readonly', false);
+				} else{
+					$('#textPw').text('특수문자를 포합해주세요');
+					$('#managerPw2').prop('readonly', true);
+					
+				}
+			} else{
+				$('#textPw').text('비닐번호 형식을 확인해 주세요');
+				$('#managerPw2').prop('readonly', true);
+			}
+		});
 
+		// managerPw2에 대한 체크 규약
+		// managerPw2는 비닐번호를 제대로 입력하였는지 확인 하는 수단으로 managerPw와 managerPw2가 같을 경우 textPw2를 통해 출력
+		$('#managerPw2').on('ropertychange change keyup paste input', function(){
+			if($('#managerPw').val() == $('#managerPw2').val()){
+				$('#textPw2').text('형식 확인');
+			} else if($('#managerPw2').val() == ""){
+				$('#textPw2').text('');
+			} else{
+				$('#textPw2').text('비닐번호가 다릅니다');
+			}
+		});
     </script>
 </body>
 </html>
