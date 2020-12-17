@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentReportMapper">
+	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportListPage">
+		<result property="reportNo" column="report_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="reportTitle" column="report_title"/>
+		<result property="reportContent" column="report_content"/>
+		<result property="reportCreatedate" column="report_createdate"/>
+		<result property="reportUpdatedate" column="report_updatedate"/>
+		<result property="reportStartdate" column="report_startdate"/>
+		<result property="reportEnddate" column="report_enddate"/>
+		
+	<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+	</collection>	
+	</resultMap>
+	
+	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
+		SELECT
+			r.lecture_no,
+			r.report_title,
+			r.report_content,
+			r.report_createdate,
+			r.report_updatedate,
+			r.report_startdate,
+			r.report_enddate,
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId}
+		ORDER BY r.report_createdate DESC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+</mapper>

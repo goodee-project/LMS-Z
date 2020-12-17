@@ -71,7 +71,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
-
+		<a href="${path}/student/questionList/1">이전 페이지</a>
 </body>
 </html>

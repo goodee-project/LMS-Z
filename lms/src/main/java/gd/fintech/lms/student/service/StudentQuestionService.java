@@ -103,6 +103,7 @@ public class StudentQuestionService {
 	// 작성 질문 수정
 	public void updateQuestion(QuestionAddForm questionAddForm) {
 		Question question = new Question();
+		question.setQuestionNo(questionAddForm.getQuestionNo());
 		question.setLectureNo(questionAddForm.getLectureNo());
 		question.setQuestionWriter(questionAddForm.getQuestionWriter());
 		question.setQuestionTitle(questionAddForm.getQuestionTitle());
@@ -110,8 +111,6 @@ public class StudentQuestionService {
 		question.setQuestionUpdatedate(questionAddForm.getQuestionUpdatedate());
 		question.setQuestionPassword(questionAddForm.getQuestionPassword());
 		studentQuestionMapper.updateQuestion(question);
-		
-		
 		
 		List<QuestionFile> questionFile=null;
 		if(questionAddForm.getQuestionFile() != null) {
@@ -159,5 +158,13 @@ public class StudentQuestionService {
 		studentQuestionFileMapper.deleteAllQuestionFile(questionNo);
 		studentQuestionMapper.deleteQuestionAllComment(questionNo);
 		studentQuestionMapper.deleteQuestion(questionNo);
+	}
+	
+	public int deleteQuestionOneFile(String questionFileUuid) {
+		File file = new File(PATH+questionFileUuid);
+		if(file.exists()) {
+			file.delete();
+		}
+		return studentQuestionFileMapper.deleteOneQuestionFile(questionFileUuid);
 	}
 }

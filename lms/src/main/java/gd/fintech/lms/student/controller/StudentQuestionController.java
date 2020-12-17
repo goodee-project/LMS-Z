@@ -74,7 +74,6 @@ public class StudentQuestionController {
 	@PostMapping("student/questionModify")
 	public String modifyQuestion(QuestionAddForm questionAddForm,@RequestParam(value="questionNo")int questionNo) {
 		studentQuestionService.updateQuestion(questionAddForm);
-		System.out.println(questionAddForm+"<<<<<<<<<<<>>>>>>>>>>");
 		return "redirect:/student/questionOne/"+questionNo;
 	}
 	// 질문 삭제 
@@ -84,5 +83,10 @@ public class StudentQuestionController {
 		return "redirect:/student/questionList/1";
 	}
 	
-	
+	@GetMapping("/student/questionFileRemove")
+	public String removeQuestionFile(@RequestParam(value="questionFileUuid")String questionFileUuid,
+			@RequestParam(value="questionNo")int questionNo) {
+		studentQuestionService.deleteQuestionOneFile(questionFileUuid);
+		return "redirect:/student/questionModify/"+questionNo;
+	}
 }

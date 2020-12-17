@@ -1,5 +1,7 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +14,5 @@ public class Report {
 	private String reportUpdatedate;
 	private String reportStartdate;
 	private String reportEnddate;
+	private List<ClassRegistration> classRegistrationList;
 }

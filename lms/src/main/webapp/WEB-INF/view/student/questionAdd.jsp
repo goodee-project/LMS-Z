@@ -52,6 +52,7 @@
 	</table>
 	<button type="button" id="submitBtn">등록완료</button>
 </form>		
+	<a href="${path}/student/questionList/1">이전 페이지</a>
 </body>
 <script>
 	$('#addBtn').click(function(){
