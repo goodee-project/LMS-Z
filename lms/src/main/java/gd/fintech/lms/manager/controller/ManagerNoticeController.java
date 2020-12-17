@@ -55,11 +55,29 @@ public class ManagerNoticeController {
 	//공지사항 작성 액션 
 	@PostMapping("/manager/addLmsNotice/{LmsNotice}")
 	public String addLmsNotice(LmsNotice lmsNotice) {
+		managerNoticeService.addLmsNotice(lmsNotice);
 		return "redirect:/manager/LmsNoticeList/"+lmsNotice.getLmsNoticeNo();
 	}
 	//공지사항 상세내용 
 	@GetMapping("/manager/LmsNoticeOne/{LmsNotice}/{lmsNoticeNo}")
 	public String managerNoticeOne(Model model, @PathVariable(value = "LmsNotice") int LmsNotice, @PathVariable(value = "LmsNoticeNo")int LmsNoticeNo) {
-	return""; 
+		LmsNotice LmsNoticeOne = managerNoticeService.getLmsNoticeOne(LmsNoticeNo);
+		model.addAttribute("noticeOne", LmsNoticeOne);
+		return "manager/LmsNoticeOne"; 
 	}
+	//공지사항 수정 폼 
+	@GetMapping("/manager/modifyLmsNotice/{LmsNotice}/{lmsNoticeNo}")
+	public String modifyLmsNotice(Model model, @PathVariable(value="LmsNotice")int LmsNotice, @PathVariable(value ="lmsNoticeNo")int lmsNoticeNo) {
+		LmsNotice LmsNoticeOne = managerNoticeService.getLmsNoticeOne(lmsNoticeNo);
+		model.addAttribute("noticeOne", LmsNoticeOne);
+		return "manager/modifyLmsNotice";
+	}
+	//공지사항 수정 액션 
+	@PostMapping("/manager/modifyLmsNotice/{LmsNotice}/{lmsNoticeNo}")
+	public String modifyLmsNotice(LmsNotice lmsNotice) {
+		managerNoticeService.addLmsNotice(lmsNotice);
+		return "redirect:/manager";
+		
+	}
+	
 }
