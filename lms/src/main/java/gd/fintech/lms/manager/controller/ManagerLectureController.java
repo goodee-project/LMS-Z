@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import gd.fintech.lms.manager.service.ManagerLectureService;
+import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Subject;
+import gd.fintech.lms.vo.Syllabus;
 import gd.fintech.lms.vo.Teacher;
-
+import gd.fintech.lms.vo.Textbook;
 
 @Controller
 public class ManagerLectureController {
@@ -31,14 +34,23 @@ public class ManagerLectureController {
 	public String insertLecture(Model model) {
 		List<Teacher> teacherList = managerLectureService.getTeacherList();
 		logger.debug("teacherList="+teacherList.toString());
+		List<Subject> subjectList = managerLectureService.getSubjectList();
+		logger.debug("subjectList="+subjectList.toString());
+		List<Textbook> textbookList = managerLectureService.getTextbookList();
+		List<Syllabus> syllabusList = managerLectureService.getSyllabusList();
+		List<Classroom> classroomList = managerLectureService.getClassroomList();
 		
 		model.addAttribute("teacherList",teacherList);
+		model.addAttribute("subjectList",subjectList);
+		model.addAttribute("textbookList",textbookList);
+		model.addAttribute("syllabusList",syllabusList);
+		model.addAttribute("classroomList",classroomList);
 		return "/manager/insertLecture";
 	}
 	@PostMapping("/manager/insertAction")
 	public String insertAction(Lecture lecture) {
-		logger.debug("lecture"+lecture);
-		
+		logger.debug("lecture"+lecture.toString());
+		managerLectureService.insertLecture(lecture);
 		return "redirect:/manager/lectureList";
 	}
 }

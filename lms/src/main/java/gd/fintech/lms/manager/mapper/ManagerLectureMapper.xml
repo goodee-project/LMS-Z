@@ -67,7 +67,66 @@
 	<!-- 강사 목록을 불러오는 쿼리 -->
 	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT
+			teacher_id teacherId,
 			teacher_name teacherName
 		FROM teacher
 	</select>
+	<!-- 과목 리스트를 출력해주는 쿼리 -->
+	<select id="selectSubjectList" resultType="gd.fintech.lms.vo.Subject">
+		SELECT
+			subject_no subjectNo,
+			subject_name subjectName
+		FROM subject
+	</select>
+	<!-- 교재 리스트를 출력해주는 쿼리 -->
+	<select id="selectTextbookList" resultType="gd.fintech.lms.vo.Textbook">
+		SELECT
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle
+		FROM textbook
+	</select>
+	<!-- 강의계획서 리스트를 출력하는 쿼리 -->
+	<select id="selectSyllabusList" resultType="gd.fintech.lms.vo.Syllabus">
+		SELECT
+			syllabus_no syllabusNo,
+			syllabus_content syllabusContent
+		FROM syllabus 
+	</select>
+	<!-- 강의실 목록을 출력하는 쿼리 -->
+	<select id="selectClassroomList" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT
+			classroom_no classroomNo,
+			classroom_number classroomNumber
+		FROM classroom
+	</select>
+	<!-- 강좌를 추가해주는 쿼리 -->
+	<insert id="insertLecture" parameterType="gd.fintech.lms.vo.Lecture">
+		INSERT INTO lecture(
+			account_id,
+			subject_no,
+			teacher_name,
+			lecture_name,
+			textbook_isbn,
+			lecture_startdate,
+			lecture_enddate,
+			lecture_total,
+			syllabus_no,
+			classroom_no,
+			lecture_createdate,
+			lecture_updatedate
+		) VALUES (
+			#{accountId},
+			#{subjectNo},
+			#{teacherName},
+			#{lectureName},
+			#{textbookIsbn},
+			NOW(),
+			NOW(),
+			#{lectureTotal},
+			#{syllabusNo},
+			#{classroomNo},
+			NOW(),
+			NOW()
+		)
+	</insert>
 </mapper>
