@@ -1,5 +1,6 @@
 package gd.fintech.lms.student.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.vo.ClassRegistration;
@@ -37,6 +39,12 @@ public class StudentLectureController {
 		}else { // 나누어 떨어진다면 
 			lastPage = listTotal/rowPerPage;
 		}
+		// 해당 강의를 신청한 학생 인원
+		List<Integer> numberOfApplicants = new ArrayList<Integer>();
+		for(Lecture l : lectureList) {
+			numberOfApplicants.add(studentLectureService.getNumberOfApplicants(l.getLectureNo()));
+		}
+		model.addAttribute("numberOfApplicants",numberOfApplicants);
 		model.addAttribute("lectureList",lectureList);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
@@ -108,5 +116,14 @@ public class StudentLectureController {
 		model.addAttribute("myLectureListOne",myLectureListOne);
 		model.addAttribute("currentPage",currentPage);
 		return "student/myLectureListOne";
+	}
+	@PostMapping("/student/lectureReview/{currentPage}")
+	public String lectureReview(ClassRegistration classRegistration,
+								@PathVariable(name="currentPage") int currentPage) {
+		//스크립트 방지
+		String content = classRegistration.getClassRegistrationReview().replaceAll("(?i)<script", "&lt;script");
+		classRegistration.setClassRegistrationReview(content);
+		studentLectureService.modifyLectureReview(classRegistration);
+		return "redirect://student/myLectureListOne/"+classRegistration.getAccountId()+"/"+classRegistration.getLectureNo()+"/"+currentPage;
 	}
 }

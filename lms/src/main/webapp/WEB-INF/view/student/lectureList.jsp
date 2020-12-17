@@ -145,11 +145,11 @@
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강좌 정원</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">신청 인원/강좌 정원</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="c" items="${lectureList}">
+                                        	<c:forEach var="c" items="${lectureList}" varStatus="status">
 	                                            <tr>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
 	                                               		<div class="d-flex no-block align-items-center">
@@ -177,10 +177,21 @@
 	                                                </td>
 	                                                
 	                                                <!-- 일반적인 글씨 -->
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
+	                                                	<div class="d-flex no-block align-self-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureTotal }</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
+	                                                        	<c:if test="${numberOfApplicants[status.index] != c.lectureTotal}">
+		                                                        	<span style="color:blue">${numberOfApplicants[status.index]}&nbsp;</span>
+		                                                        	<span>/ ${c.lectureTotal }&nbsp;</span>
+		                                                        	<span>&nbsp;[신청가능]</span>
+	                                                        	</c:if>
+	                                                        	<c:if test="${numberOfApplicants[status.index] == c.lectureTotal}">
+		                                                        	<span style="color:red">${numberOfApplicants[status.index]} </span>
+		                                                        	<span>/ ${c.lectureTotal }</span>
+		                                                        	<span>&nbsp;[정원초과]</span>
+	                                                        	</c:if>
+	                                                        </h5>
 	                                                    </div>
 	                                                </td>
 	                                            </tr>

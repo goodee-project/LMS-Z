@@ -115,6 +115,13 @@
 		WHERE lecture_no = #{lectureNo}
 		AND account_id = #{studentId}
 	</select>
+	<!-- ==== 강의 신청 인원 -->
+	<select id="selectNumberOfApplicants" parameterType="Integer" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM class_registration
+		WHERE lecture_no = #{lectureNo}
+	</select>
 	<!-- 수강신청 -->
 	<insert id ="insertClassRegistration" parameterType="java.util.Map">
 		INSERT INTO 
@@ -172,6 +179,8 @@
 	<resultMap type="gd.fintech.lms.vo.ClassRegistrationForm" id="selectMyLectureListOneResult">
 		<result property="classRegistrationNo" column="class_registration_no"/>
 		<result property="classRegistrationState" column="class_registration_state"/>
+		<result property="classRegistrationPoint" column="class_registration_point"/>
+		<result property="classRegistrationReview" column="class_registration_review"/>
 		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
 			<result property="lectureNo" column="lecture_no"/>
 			<result property="accountId" column="account_id"/>
@@ -225,6 +234,8 @@
 		SELECT
 			cr.class_registration_no,
 			cr.class_registration_state,
+			cr.class_registration_point,
+			cr.class_registration_review,
 			l.lecture_no,
 			l.account_id,
 			l.subject_no,
@@ -261,4 +272,13 @@
 		WHERE cr.account_id = #{studentId}
 		AND l.lecture_no = #{lectureNo}
 	</select>
+	<!-- ==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 ==== -->
+	<update id="updateLectureReview" parameterType="gd.fintech.lms.vo.ClassRegistration">
+		UPDATE class_registration
+		SET 
+			class_registration_point = #{classRegistrationPoint},
+			class_registration_review = #{classRegistrationReview}
+		WHERE lecture_no = #{lectureNo}
+		AND account_id = #{accountId}
+	</update>
 </mapper>

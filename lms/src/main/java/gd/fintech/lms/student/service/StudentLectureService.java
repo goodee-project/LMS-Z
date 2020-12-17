@@ -30,7 +30,6 @@ public class StudentLectureService {
 	public int getLectureListTotal() {
 		return studentLectureMapper.selectLectureListTotal();
 	}
-	
 	//**** 강의 목록 상세보기 ******
 	public Lecture getLectureListOne(int lectureNo) {
 		return studentLectureMapper.selectLectureListOne(lectureNo);
@@ -48,6 +47,10 @@ public class StudentLectureService {
 		map.put("studentId", studentId);
 		map.put("lectureNo", lectureNo);
 		return studentLectureMapper.insertClassRegistration(map);
+	}
+	// ==== 강의 신청 인원 ===
+	public int getNumberOfApplicants(int lectureNo) {
+		return studentLectureMapper.selectNumberOfApplicants(lectureNo);
 	}
 	//==== 나의 수강 현황 목록 =========
 	public List<ClassRegistration> getMyLectureList(String studentId,int beginRow, int rowPerPage){
@@ -67,6 +70,10 @@ public class StudentLectureService {
 		map.put("studentId", studentId);
 		map.put("lectureNo", lectureNo);
 		return studentLectureMapper.selectMyLectureListOne(map);
+	}
+	//==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 =====
+	public int modifyLectureReview(ClassRegistration classRegistration) {
+		return studentLectureMapper.updateLectureReview(classRegistration);
 	}
 }
 

@@ -199,7 +199,7 @@
                                   	<div class="list-inline text-center mt-4 mb-0">
 	                                  	<c:forEach var="i" begin="1" end="${lastPage }">
 	                                  		<span>
-	                                  			<a href="${path}/student/lectureList/${i}">${i}&nbsp;&nbsp;</a>
+	                                  			<a href="${path}/student/myLectureList/${studentId }/${i}">${i}&nbsp;&nbsp;</a>
 	                                  		</span>
 	                                  	</c:forEach>
                                   	</div>

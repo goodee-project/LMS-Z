@@ -56,11 +56,13 @@
 					<!-- 뛰어쓰기 용 ul -->
 					
                     <span class="navbar-nav float-left mr-auto ml-3 pl-1">
-	                    <a class="btn btn-success font-20 popover-item" href="${path }/student/myLectureList/${studentId}/${currentPage}">
+	                    <a class="btn btn-success font-20 popover-item " href="${path }/student/myLectureList/${studentId}/${currentPage}">
 	                        	목록으로
 	                    </a>
+	                    <a class="btn btn-success font-20 popover-item ml-3" id="reviewBtn" style="color:white">
+	                        	수강후기
+	                   </a>
                     </span>
-                	 
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->
@@ -131,7 +133,7 @@
                                 	<!-- 소제목 밑 글씨 -->
                                     <li class="breadcrumb-item">
                                     	<a href="">${myLectureListOne.teacher.teacherName }(${myLectureListOne.lecture.accountId})</a>
-                                    	<span class="text-center mt-4 mb-0"> ${myLectureListOne.lecture.lectureUpdatedate}</span>
+                                    	<span class="text-center mt-4 mb-0"> ${myLectureListOne.lecture.lectureCreatedate}</span>
                                     </li>
                                 </ol>
                             </nav>
@@ -145,22 +147,22 @@
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='수강중'}">
-		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="btn btn-primary font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='수료'}">
-		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="btn btn-warning font-20 popover-item" id="state" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='과락'}">
-		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="btn btn-danger font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='취소'}">
-		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="btn btn-secondary font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 	                        </c:if>
@@ -168,7 +170,50 @@
 		           </div>
 		       </div>
 			<br>
-				
+				<!-- 수강평 작성란 -->
+				<div class="row" hidden="hidden" id="reviewDiv">
+                    <div class="col-md-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start">
+                                    <h4 class="card-title mb-0">수강 후기</h4>
+                                    <button class="btn btn-light text-dark rounded-circle btn-circle font-20 ml-auto" 
+                                    type="button" id="reviewCloseBtn">▲</button>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                <form method="post" action="${path }/student/lectureReview/${currentPage}">
+                                	<div hidden="hidden">
+                                		<input type="text" name="lectureNo" value="${myLectureListOne.lecture.lectureNo}">
+                                		<input type="text" name="accountId" value="${studentId }">
+                                	</div>
+	                                <div>
+	                                	수강평점 : &emsp;<input type="radio" name=classRegistrationPoint value="0">&nbsp;0&emsp;
+	                                					<input type="radio" name=classRegistrationPoint value="1">&nbsp;1&emsp;
+	                                					<input type="radio" name=classRegistrationPoint value="2">&nbsp;2&emsp;
+	                                					<input type="radio" name=classRegistrationPoint value="3">&nbsp;3&emsp;
+	                                					<input type="radio" name=classRegistrationPoint value="4">&nbsp;4&emsp;
+	                                					<input type="radio" name=classRegistrationPoint value="5">&nbsp;5
+	                                </div>
+	                                <br>
+	                                <div>
+	                                	수강후기
+	                                	<div class="font-14 font-weight-medium text-muted px-2 py-2">
+	                                         <textarea style="resize:none" cols="70" rows="6" id="classRegistrationReview"
+	                                         	name="classRegistrationReview" class="font-weight-medium text-dark px-4 py-4"></textarea>
+	                                    </div>
+	                                </div>
+	                                <div class="d-flex align-items-start">
+	                                    <button class="btn btn-warning text-white font-20" 
+	                                    type="button" id="reviewInputBtn">입력</button>
+	                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
                     <div class="col-md-5 col-lg-7">
@@ -331,6 +376,35 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			$("#reviewBtn").click(function(){
+				if("${myLectureListOne.classRegistrationState}"=="수료"){
+						$("#reviewDiv").removeAttr('hidden');
+						if("${myLectureListOne.classRegistrationPoint}"!="0" && "${myLectureListOne.classRegistrationReview}"!= null){
+								$('input:radio[name="classRegistrationPoint"]:input[value="${myLectureListOne.classRegistrationPoint}"]').attr("checked",true);
+								$('textarea[name="classRegistrationReview"]').text("${myLectureListOne.classRegistrationReview}");
+						}
+					}else{
+						alert("수료한 학생만 작성할 수 있습니다.");
+					}
+				})
+			$("#reviewCloseBtn").click(function(){
+				$("#reviewDiv").attr("hidden","hidden");
+				})
+			})
+			$("#reviewInputBtn").click(function(){
+					if($("input[name='classRegistrationPoint']:checked").val() == null){
+						alert("평점을 체크해주세요");
+					}else if($("#classRegistrationReview").val() == ""){
+						alert("후기를 입력해주세요");
+					}else{
+						$("#reviewInputBtn").removeAttr('type');
+						$("#reviewInputBtn").attr('type','submit');
+						alert("수강후기가 저장되었습니다.")
+					}
+				})
+    </script>
 </body>
 
 </html>
