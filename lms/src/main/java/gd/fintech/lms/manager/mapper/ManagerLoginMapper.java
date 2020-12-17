@@ -1,8 +1,11 @@
 package gd.fintech.lms.manager.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Address;
 import gd.fintech.lms.vo.ManagerForm;
 
 @Mapper
@@ -14,5 +17,10 @@ public interface ManagerLoginMapper {
 	int insertManagerQueueToSignup(ManagerForm managerForm);
 	
 	// 회원가입 중복검사
-	int selectAccountToSignupByoverlap(String accountId, String accountEmail);
+	int selectAccountToSignupByOverlapId(String accountId);
+	int selectManagerToSignupByOverLapEmail(String managerEmail);
+	
+	// 회원가입 주소검색
+	List<Address> selectAddressToSearch(String doro, int currentPage, int limitPage);
+	int selectAddressToSearchCount(String doro);
 }

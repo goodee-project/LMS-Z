@@ -124,26 +124,30 @@
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이름</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerName"></td>
+	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" id="managerName" name="managerName"></td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이메일</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" id="managerEmail" name="managerEmail"></td>
-	                                    		<td class="border-0"><button class="btn btn-light" type="button">중복검사</button></td>    
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="text" id="managerEmail" name="managerEmail">
+	                                    			<div id="textEmail"></div>
+	                                    		</td>
+	                                    		<td class="border-0"><button class="btn btn-light" id="btnEmail" type="button" disabled="disabled">중복검사</button></td>    
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">핸드폰 번호</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<select name="managerPhone1">
+	                                    			<select id="managerPhone1" name="managerPhone1">
+	                                    				<option value="">선택</option>
 	                                    				<option value="010">010</option>
 	                                    				<option value="011">011</option>
 	                                    			</select>-
-	                                    			<!-- insert테스트를 위한 name 변경 -->
-	                                    			<input type="text" name="managerPhone">-
-	                                    			<input type="text" name="managerPhone3">
+	                                    			<input type="text" id="managerPhone2" name="managerPhone2">-
+	                                    			<input type="text" id="managerPhone3" name="managerPhone3">
+	                                    			<div id="textPhone"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
@@ -158,9 +162,12 @@
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">메인 주소</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerAddressMain"></td>
-	                                    		<td class="border-0"><button class="btn btn-light" type="button">찾기</button></td>    
+	                                    		<th class="border-0 font-14 font-weight-medium"">메인 주소</th>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="text" id="managerAddressMain" name="managerAddressMain">
+	                                    			<div id="addressSearch"></div>
+	                                    		</td>
+	                                    		<td class="border-0"><button class="btn btn-light" id="" type="button">찾기</button></td>    
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
@@ -225,11 +232,11 @@
 		// ajax를 통해 아이디값을 비교 후 값이 있다면 confirm창, 없다면 바로 alert창 실행
 		$('#btnId').click(function(){
 			$.ajax({
-				url:'${path}/managerOverlap',
+				url:'${path}/managerOverlapId',
 				type:'GET',
 				data:{accountId: $('#managerId').val()},
 				success:function(data){
-					if(data.overlap == 0){
+					if(data.overlapId == 0){
 						if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
 							$('#managerId').prop('readonly', true);
 							$('#btnId').prop("disabled", true);
@@ -275,6 +282,85 @@
 				$('#textPw2').text('비닐번호가 다릅니다');
 			}
 		});
+
+		// manageEmail 입력란에 @을 포합해야되는 등의 규약
+		// 그것을 실시간으로 입력감지하여 text로 표시
+		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		$('#managerEmail').on('ropertychange change keyup paste input', function(){
+			if(checkEmail.test($('#managerEmail').val())){
+				$('#textEmail').text('형식 확인');
+				$('#btnEmail').prop('disabled', false);
+			} else{
+				$('#textEmail').text('');
+				$('#btnEmail').prop('disabled', true);
+			}
+		});
+
+		// managerEmail옆에 중복검사 버튼을 눌렀을 경우 ajax를 통해 중복검사
+		// 중복되었을 경우 alert로 사용 가능 할 경우 confirm으로 알림창 표시
+		$('#btnEmail').click(function(){
+			$.ajax({
+				url:'${path}/managerOverlapEmail',
+				type:'GET',
+				data:{managerEmail: $('#managerEmail').val()},
+				success:function(data){
+					if(data.overlapEmail == 0){
+						if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
+							$('#managerEmail').prop('readonly', true);
+							$('#btnEmail').prop("disabled", true);
+							$('#textEmail').text('');
+						}
+					} else{
+						alert('중복 된 이메일입니다');
+					}
+				}
+			});	
+		});
+
+		// managerPhone을 총 3개로 나누고 그 중 2개에 규약 설정
+		// 가운데 번호와 끝번호에는 4자리의 번호로만 이루어져야함
+		var checkPhone2 = /^\d{4}$/;
+		var checkPhone3 = /^\d{4}$/;
+
+		// managerPhone을 3개를 실시간 입력감지하여 text로 표시
+		// 3개 다 규약에 맞는 값이 들어가야 완료
+		$('#managerPhone1').on('ropertychange change keyup paste input', function(){
+			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('형식확인');
+			}
+		});
+
+		$('#managerPhone2').on('ropertychange change keyup paste input', function(){
+			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('형식확인');
+			}
+		});
+
+		$('#managerPhone3').on('ropertychange change keyup paste input', function(){
+			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('형식확인');
+			}
+		});
+
+		// managerAddressMain 옆에 있는 버튼을 누를경우 ajax를 통해 주소 검색란 표시
+		// 현재 restcontroller에서 json으로 데이터 만들어 지는거 까지 확인
+		$('#btnAddress').click(function(){
+			$.ajax({
+				url:'${path}/managerAddressSearch',
+				type:'GET',
+				data:{doro: $('#managerAddressMain').val()},
+				success:function(data){
+					
+				}
+			});	
+		})
+		
     </script>
 </body>
 </html>

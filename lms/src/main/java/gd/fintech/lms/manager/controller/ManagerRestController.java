@@ -14,15 +14,34 @@ import gd.fintech.lms.manager.service.ManagerLoginService;
 public class ManagerRestController {
 	@Autowired ManagerLoginService managerLoginService;
 	
-	@GetMapping("/managerOverlap")
-	public Map<String, Object> getAccountToSignupByoverlap(
-			@RequestParam(value="accountId", required=false) String accountId,
-			@RequestParam(value="accountEmail", required=false) String accountEmail){
+	@GetMapping("/managerAddressSearch")
+	public Map<String, Object> getAddressToSearch(
+			@RequestParam(value="doro", required=false, defaultValue = "") String doro,
+			@RequestParam(value="currentPage", required=false, defaultValue = "1") int currentPage){
+		
+		return managerLoginService.getAddressToSearch(doro, currentPage);
+	}
+	
+	@GetMapping("/managerOverlapId")
+	public Map<String, Object> getAccountToSignupByOverlapId(
+			@RequestParam(value="accountId", required=false) String accountId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int overlap = managerLoginService.getAccountToSignupByoverlap(accountId, accountEmail);
+		int overlapId = managerLoginService.getAccountToSignupByOverlapId(accountId);
 		
-		map.put("overlap", overlap);
+		map.put("overlapId", overlapId);
+		
+		return map;
+	}
+	
+	@GetMapping("/managerOverlapEmail")
+	public Map<String, Object> getManagerToSignupByOverLapEmail(
+			@RequestParam(value="managerEmail", required=false) String managerEmail){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int overlapEmail = managerLoginService.getManagerToSignupByOverLapEmail(managerEmail);
+		
+		map.put("overlapEmail", overlapEmail);
 		
 		return map;
 	}

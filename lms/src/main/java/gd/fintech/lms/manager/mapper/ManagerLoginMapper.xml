@@ -3,13 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerLoginMapper">
-	<select id="selectAccountToSignupByoverlap" parameterType="java.util.Map" resultType="int">
+	<select id="selectAddressToSearchCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM address
+		WHERE doro like CONCAT('%', #{doro}, '%')
+	</select>
+
+	<select id="selectAddressToSearch" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Address">
+		SELECT
+			sido,
+			sigungu,
+			doro,
+			buildno1,
+			buildno2
+		FROM address
+		WHERE doro like CONCAT('%', #{doro}, '%')
+		LIMIT #{currentPage}, #{limitPage}
+	</select>
+
+	<select id="selectAccountToSignupByOverlapId" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM account
-		<where>
-			<if test="accountId != null">account_id = #{accountId}</if>
-			<if test="accountEmail != null">account_Email = #{accountEmail}</if>
-		</where>
+		WHERE account_id = #{accountId}
+	</select>
+	
+	<select id="selectManagerToSignupByOverLapEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM manager
+		WHERE manager_email = #{managerEmail}
 	</select>
 
 	<select id="selectAccountToManagerLogin" parameterType="gd.fintech.lms.vo.Account" resultType="String">

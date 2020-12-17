@@ -1,11 +1,16 @@
 package gd.fintech.lms.manager.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.manager.mapper.ManagerLoginMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Address;
 import gd.fintech.lms.vo.ManagerForm;
 
 @Service
@@ -13,9 +18,34 @@ import gd.fintech.lms.vo.ManagerForm;
 public class ManagerLoginService {
 	@Autowired ManagerLoginMapper managerLoginMapper;
 	
-	// 회원가입하는 사람의 아이디 또는 이메일의 중복검사 service
-	public int getAccountToSignupByoverlap(String accountId, String accountEmail) {
-		return managerLoginMapper.selectAccountToSignupByoverlap(accountId, accountEmail);
+	// 회원가입 주소 찾기 service
+	public Map<String, Object> getAddressToSearch(String doro, int currentPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		int limitPage = 10;
+		
+		List<Address> addressList = managerLoginMapper.selectAddressToSearch(doro, (currentPage-1)*limitPage, limitPage);
+		int lastPage = managerLoginMapper.selectAddressToSearchCount(doro);
+		
+		if(lastPage % lastPage == 0) {
+			lastPage = lastPage / limitPage;
+		} else {
+			lastPage = lastPage / limitPage + 1;
+		}
+		
+		map.put("addressList", addressList);
+		map.put("lastPage", lastPage);
+		
+		return map;
+	}
+	
+	// 회원가입하는 사람의 이메일 중복검사 service
+	public int getManagerToSignupByOverLapEmail(String managerEmail) {
+		return managerLoginMapper.selectManagerToSignupByOverLapEmail(managerEmail);
+	}
+	
+	// 회원가입하는 사람의 아이디 중복검사 service
+	public int getAccountToSignupByOverlapId(String accountId) {
+		return managerLoginMapper.selectAccountToSignupByOverlapId(accountId);
 	}
 	
 	public String getAccountToManagerLogin(Account account) {
