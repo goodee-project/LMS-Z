@@ -64,4 +64,10 @@
 		AND l.syllabus_no = sy.syllabus_no 
 		AND l.classroom_no = c.classroom_no
 	</select>
+	<!-- 강사 목록을 불러오는 쿼리 -->
+	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT
+			teacher_name teacherName
+		FROM teacher
+	</select>
 </mapper>

@@ -10,6 +10,40 @@
 </head>
 <body>
 	<h1>강좌 목록</h1>
-	<a href="${path }/manager/lectureList">디버그확인</a>
+	<a href="${path }/manager/insertLecture">강좌 등록</a>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>no</th>
+				<th>account_id</th>
+				<th>sub_name</th>
+				<th>teacher_name</th>
+				<th>lecture_name</th>
+				<th>textbook_title</th>
+				<th>startdate</th>
+				<th>enddate</th>
+				<th>total</th>
+				<th>syllabus</th>
+				<th>classroom</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="l" items="${lectureList }">
+				<tr>
+					<td>${l.lectureNo }</td>
+					<td>${l.accountId }</td>
+					<td>${l.subject.subjectName }</td>
+					<td>${l.teacherName }</td>
+					<td>${l.lectureName }</td>
+					<td>${l.textbook.textbookTitle }</td>
+					<td>${l.lectureStartdate }</td>
+					<td>${l.lectureEnddate }</td>
+					<td>${l.lectureTotal }</td>
+					<td>${l.syllabus.syllabusContent }</td>
+					<td>${l.classroom.classroomNumber }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
