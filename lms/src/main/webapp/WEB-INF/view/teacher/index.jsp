@@ -71,9 +71,9 @@
                             </a>
                             <!-- 드롭다운 내용 -->
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
+                                <a class="dropdown-item" href="${path}/teacher/myInfo/${teacherId}"><i data-feather="mail"
                                         class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
+                                    MY PAGE</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
@@ -260,7 +260,41 @@
                                     </div>
                                 </div>
                                 <div class="pl-4 mb-5">
-                                	내용 내용 내용
+	                                <div class="table-responsive">
+	                                    <table class="table no-wrap v-middle mb-0">
+	                                        <thead>
+	                                            <tr class="border-0">
+	                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
+	                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
+	                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">정원</th>
+	                                            </tr>
+	                                        </thead>
+	                                        <tbody>
+	                                        	<c:forEach var="l" items="${list}">
+		                                            <tr>
+		                                                <td class="border-top-0 px-2 py-4">
+		                                                    <div class="d-flex no-block align-items-center">
+		                                                    	<!-- 굵은 글씨 -->
+		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium"><a href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></h5>
+		                                                    </div>
+		                                                </td>
+		                                                <td class="border-top-0 px-2 py-4">
+		                                                    <div class="d-flex no-block align-items-center">
+		                                                    	<!-- 굵은 글씨 -->
+		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lectureStartdate} ~ ${l.lectureEnddate}</h5>
+		                                                    </div>
+		                                                </td>
+		                                                <td class="border-top-0 px-2 py-4">
+		                                                    <div class="d-flex no-block align-items-center">
+		                                                    	<!-- 굵은 글씨 -->
+		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lectureTotal}</h5>
+		                                                    </div>
+		                                                </td>
+		                                            </tr>
+	                                            </c:forEach>
+	                                        </tbody>
+	                                    </table>
+	                                </div>
                                 </div>
                                 <ul class="list-inline text-center mt-4 mb-0">
                                     <li class="list-inline-item text-muted font-italic">test</li>

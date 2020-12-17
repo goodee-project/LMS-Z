@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherInfoMapper">
+	<!-- 강사 마이페이지 정보 -->
+	<select id="selectTeacherInfo" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT
+			teacher_id teacherId,
+			teacher_email teacherEmail,
+			teacher_name teacherName,
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_address_main teacherAddressMain,
+			teacher_address_sub teacherAddressSub,
+			teacher_image teacherImage,
+			teacher_info teacherInfo
+		FROM teacher
+		WHERE teacher_id = #{teacherId}
+	</select>
+</mapper>

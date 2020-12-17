@@ -11,7 +11,7 @@
 <body>
 	<h1>강의 상세페이지</h1>
 	
-	<a href="${path}/teacher/lectureNoticeList/${lectureNo}/1">강의 공지사항(여기로 옮길 예정)</a>
+	<a href="${path}/teacher/lectureNoticeList/${lectureNo}/1">강의 공지사항</a>
 	<a href="${path}/teacher/lecturePlan/${lectureNo}">강의계획서</a>
 </body>
 </html>
