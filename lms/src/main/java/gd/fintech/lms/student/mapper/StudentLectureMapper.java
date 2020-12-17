@@ -18,6 +18,8 @@ public interface StudentLectureMapper {
 	public int selectLectureListTotal();
 	//**** 강의 목록 상세보기 ******
 	public Lecture selectLectureListOne(int lectureNo);
+	// ==== 강의 신청 여부 체크 ====
+	public int selectClassRegistrationCk(Map<String,Object> map);
 	//===== 강의 수강 신청 ====
 	public int insertClassRegistration(Map<String,Object> map);
 	//==== 페이징)나의 수강 현황 목록 =========

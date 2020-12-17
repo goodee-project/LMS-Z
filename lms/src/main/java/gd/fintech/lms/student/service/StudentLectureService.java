@@ -35,6 +35,13 @@ public class StudentLectureService {
 	public Lecture getLectureListOne(int lectureNo) {
 		return studentLectureMapper.selectLectureListOne(lectureNo);
 	}
+	// ==== 강의 신청 여부 체크 ====
+	public int getClassRegistrationCk(String studentId, int lectureNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("studentId", studentId);
+		map.put("lectureNo", lectureNo);
+		return studentLectureMapper.selectClassRegistrationCk(map);
+	}
 	//===== 강의 수강 신청 ==== 
 	public int addClassRegistration(String studentId,int lectureNo) {
 		Map<String,Object> map = new HashMap<>();

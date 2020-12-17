@@ -107,7 +107,14 @@
 		LEFT JOIN classroom c ON l.classroom_no = c.classroom_no
 		WHERE l.lecture_no = #{lectureNo}
 	</select>
-	
+	<!--  ==== 강의 신청 여부 체크 ==== -->
+	<select id="selectClassRegistrationCk" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM class_registration
+		WHERE lecture_no = #{lectureNo}
+		AND account_id = #{studentId}
+	</select>
 	<!-- 수강신청 -->
 	<insert id ="insertClassRegistration" parameterType="java.util.Map">
 		INSERT INTO 

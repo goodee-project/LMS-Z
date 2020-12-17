@@ -155,7 +155,7 @@
 	                                               		<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
 	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${c.lectureNo}/${currentPage}">${c.lectureName}</a>
+	                                                        	<a href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${currentPage}">${c.lectureName}</a>
 	                                                        </h5>
 	                                                    </div>
 	                                                </td>

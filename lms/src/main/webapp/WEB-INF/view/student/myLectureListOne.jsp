@@ -185,7 +185,7 @@
                                            	<td class="border-0"></td>
                                         </tr>
                                         <tr class="border-top-0 px-2 py-4">
-                                            <th class="border-0 font-14 font-weight-medium text-muted">이수인정기산</th>
+                                            <th class="border-0 font-14 font-weight-medium text-muted">이수인정시간</th>
                                             <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
                                             	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${myLectureListOne.subject.subjectTotalday }시간</span>
                                            	</td>

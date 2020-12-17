@@ -43,25 +43,32 @@ public class StudentLectureController {
 		return "student/lectureList";
 	}
 	
-	// 강의 목록 상세보기
-	@GetMapping("/student/lectureListOne/{lectureNo}/{currentPage}")
+	// 강의목록 상세보기
+	@GetMapping("/student/lectureListOne/{studentId}/{lectureNo}/{currentPage}")
 	public String lectureListOne(Model model,
+								@PathVariable(name="studentId") String studentId,
 								@PathVariable(name="lectureNo") int lectureNo,
 								@PathVariable(name="currentPage") int currentPage) {
-		// 강의실 정보
+		// 강의 정보
 		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
-		
+		// ==== 강의 신청 여부 체크 ====
+		boolean classRegistrationCk = false;
+		if(studentLectureService.getClassRegistrationCk(studentId, lectureNo) != 0) {
+			classRegistrationCk = true;
+		}
+		model.addAttribute("classRegistrationCk",classRegistrationCk);
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
 		return "student/lectureListOne";
 	}
-	
-	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}")
+	// 수강 신청
+	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}/{currentPage}")
 	public String classRegistration(@PathVariable(name="studentId") String studentId,
-									@PathVariable(name="lectureNo") int lectureNo) {
-		
+									@PathVariable(name="lectureNo") int lectureNo,
+									@PathVariable(name="currentPage") int currentPage) {
+		// 나의 강의목록에 추가
 		studentLectureService.addClassRegistration(studentId,lectureNo);
-		return "redirect:/student/myLectureList/1";
+		return "redirect:/student/lectureListOne/"+studentId+"/"+lectureNo+"/"+currentPage;
 	}
 	
 	//나의 강의목록 리스트 출력
