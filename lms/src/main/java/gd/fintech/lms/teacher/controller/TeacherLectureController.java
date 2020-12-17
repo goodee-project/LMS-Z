@@ -28,17 +28,23 @@ public class TeacherLectureController {
 		return "teacher/lectureList";
 	}
 	
-	// 강의 상세보기, 강의 계획서 출력
-	@GetMapping("/teacher/lectureList/{lectureNo}")
-	public String lectureOne(Model model, 
+	// 강의 상세보기
+	@GetMapping("/teacher/lectureOne/{lectureNo}")
+	public String lectureOne(@PathVariable(value="lectureNo") int lectureNo) {
+		return "teacher/lectureOne";
+	}
+	
+	// 강의 상세보기->강의 계획서 출력
+	@GetMapping("/teacher/lecturePlan/{lectureNo}")
+	public String lecturePlan(Model model, 
 							@PathVariable(value="lectureNo") int lectureNo) {
 		// Lecture 객체 선언 및 service 메소드 호출해서 객체에 값 입력
-		Lecture lectureOne = teacherLectureService.getLectureOne(lectureNo);
+		Lecture plan = teacherLectureService.getLectureOne(lectureNo);
 		// debug test
-		logger.debug("lectureOne : " + lectureOne.toString());
+		logger.debug("plan : " + plan.toString());
 		// model에 lectureOne값 입력
-		model.addAttribute("lectureOne", lectureOne);
+		model.addAttribute("plan", plan);
 		
-		return "teacher/lectureOne";
+		return "teacher/lecturePlan";
 	}
 }

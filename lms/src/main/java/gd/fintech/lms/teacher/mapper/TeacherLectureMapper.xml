@@ -49,7 +49,7 @@
 			<result property="textbookTitle" column="textbook_title"/>
 			<result property="textbookWriter" column="textbook_writer"/>
 			<result property="textbookPublisher" column="textbook_publisher"/>
-			<result property="textbookPublishdate" column="textbook_publisherdate"/>
+			<result property="textbookPublishdate" column="textbook_publishdate"/>
 			<result property="textbookInfo" column="textbook_info"/>
 		</association>
 		<association property="syllabus" javaType="gd.fintech.lms.vo.Syllabus">
@@ -76,8 +76,8 @@
 			tb.textbook_title,
 			tb.textbook_writer,
 			tb.textbook_publisher,
-			tb.textbook_publisherdate,
-			tb.textbook_info
+			tb.textbook_publishdate,
+			tb.textbook_info,
 			l.lecture_startdate, 
 			l.lecture_enddate, 
 			l.lecture_total,

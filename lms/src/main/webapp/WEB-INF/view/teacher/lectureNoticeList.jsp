@@ -25,7 +25,7 @@
 			<c:forEach var="n" items="${noticeList}">
 				<tr>
 					<td>${n.lectureNoticeNo}</td>
-					<td><a href="${path}/teacher/lectureNoticeOne/${n.lectureNo}/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
+					<td><a href="${path}/teacher/lectureNoticeOne/${lectureNo}/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
 					<td>${n.lectureNoticeCreatedate}</td>
 					<td>${n.lectureNoticeUpdatedate}</td>
 					<td>${n.lectureNoticeCount}</td>
