@@ -162,12 +162,14 @@
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium"">메인 주소</th>
+	                                    		<th class="border-0 font-14 font-weight-medium">메인 주소</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
 	                                    			<input type="text" id="managerAddressMain" name="managerAddressMain">
-	                                    			<div id="addressSearch"></div>
+	                                    			<div style="width:100%; height:200px; overflow:auto">
+		                                    			<table id="addressTable"></table>
+	                                    			</div>
 	                                    		</td>
-	                                    		<td class="border-0"><button class="btn btn-light" id="" type="button">찾기</button></td>    
+	                                    		<td class="border-0"><button class="btn btn-light" id="btnAddress" type="button">찾기</button></td>    
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
@@ -349,17 +351,34 @@
 		});
 
 		// managerAddressMain 옆에 있는 버튼을 누를경우 ajax를 통해 주소 검색란 표시
-		// 현재 restcontroller에서 json으로 데이터 만들어 지는거 까지 확인
 		$('#btnAddress').click(function(){
+			$('#addressTable').empty();
 			$.ajax({
 				url:'${path}/managerAddressSearch',
 				type:'GET',
 				data:{doro: $('#managerAddressMain').val()},
 				success:function(data){
+					var strHead = '<thead>';
+					strHead += '</tr><td>';
+					strHead += '주소';			
+					strHead += '<td></tr>';
+					strHead += '</thead>';
+	
+					$('#addressTable').append(strHead);
 					
+					$.each(data.addressList, function(index, address){
+						
+						var strBody = '<tbody>';
+						strBody += '<tr><td>';
+						strBody += address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1;
+						strBody += '</td></tr>';
+						strBody += '</tbody>';
+
+						$('#addressTable').append(strBody);
+					})
 				}
 			});	
-		})
+		});
 		
     </script>
 </body>

@@ -21,6 +21,7 @@ public interface ManagerLoginMapper {
 	int selectManagerToSignupByOverLapEmail(String managerEmail);
 	
 	// 회원가입 주소검색
-	List<Address> selectAddressToSearch(String doro, int currentPage, int limitPage);
+	//List<Address> selectAddressToSearch(String doro, int currentPage, int limitPage);
+	List<Address> selectAddressToSearch(String doro);
 	int selectAddressToSearchCount(String doro);
 }

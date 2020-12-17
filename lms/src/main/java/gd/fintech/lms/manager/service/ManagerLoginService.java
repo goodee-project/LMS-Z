@@ -19,21 +19,23 @@ public class ManagerLoginService {
 	@Autowired ManagerLoginMapper managerLoginMapper;
 	
 	// 회원가입 주소 찾기 service
-	public Map<String, Object> getAddressToSearch(String doro, int currentPage){
+	public Map<String, Object> getAddressToSearch(String doro){
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		//List<Address> addressList = managerLoginMapper.selectAddressToSearch(doro, (currentPage-1)*limitPage, limitPage);
+		List<Address> addressList = managerLoginMapper.selectAddressToSearch(doro);
+		
+		/*
 		int limitPage = 10;
-		
-		List<Address> addressList = managerLoginMapper.selectAddressToSearch(doro, (currentPage-1)*limitPage, limitPage);
 		int lastPage = managerLoginMapper.selectAddressToSearchCount(doro);
-		
 		if(lastPage % lastPage == 0) {
 			lastPage = lastPage / limitPage;
 		} else {
 			lastPage = lastPage / limitPage + 1;
 		}
+		*/
 		
 		map.put("addressList", addressList);
-		map.put("lastPage", lastPage);
 		
 		return map;
 	}

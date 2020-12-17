@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gd.fintech.lms.manager.service.ManagerLoginService;
+import gd.fintech.lms.vo.Address;
 
 @RestController
 public class ManagerRestController {
@@ -16,10 +18,9 @@ public class ManagerRestController {
 	
 	@GetMapping("/managerAddressSearch")
 	public Map<String, Object> getAddressToSearch(
-			@RequestParam(value="doro", required=false, defaultValue = "") String doro,
-			@RequestParam(value="currentPage", required=false, defaultValue = "1") int currentPage){
+			@RequestParam(value="doro", required=false, defaultValue = "") String doro){
 		
-		return managerLoginService.getAddressToSearch(doro, currentPage);
+		return managerLoginService.getAddressToSearch(doro);
 	}
 	
 	@GetMapping("/managerOverlapId")
