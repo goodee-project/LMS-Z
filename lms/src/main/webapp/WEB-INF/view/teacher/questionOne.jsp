@@ -35,7 +35,10 @@
 					<th>question_comment_no</th>
 					<th>question_comment_writer</th>
 					<th>question_comment_content</th>
+					<th>question_comment_createdate</th>
+					<th>question_comment_updatedate</th>
 					<th>삭제</th>
+					<th>수정</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,7 +47,10 @@
 						<td>${qc.questionCommentNo}</td>
 						<td>${qc.questionCommentWriter}</td>
 						<td>${qc.questionCommentContent}</td>
+						<td>${qc.questionCommentCreatedate}</td>
+						<td>${qc.questionCommentUpdatedate}</td>
 						<td><a href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}">삭제</a></td>
+						<td><a href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}">수정</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

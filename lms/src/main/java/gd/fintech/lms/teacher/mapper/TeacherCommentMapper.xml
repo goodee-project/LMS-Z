@@ -42,7 +42,7 @@
 	<update id="updateQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
 		UPDATE question_comment
 		SET
-			question_comment_content = #{questionCommentContent}
+			question_comment_content = #{questionCommentContent},
 			question_comment_updatedate = NOW()
 		WHERE question_comment_no = #{questionCommentNo}
 	</update>
@@ -56,5 +56,6 @@
 			question_comment_content questionCommentContent,
 			question_comment_updatedate questionCommentUpdatedate
 		FROM question_comment
+		WHERE question_comment_no = #{questionCommentNo}
 	</select>
 </mapper>
