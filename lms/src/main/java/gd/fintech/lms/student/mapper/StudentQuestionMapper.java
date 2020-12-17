@@ -19,8 +19,14 @@ public interface StudentQuestionMapper {
 	// 질문 등록
 	int insertQuestion(Question question); 
 	
+	// 질문 수정
+	int updateQuestion(Question question);
+	
 	// 질문 삭제
 	int deleteQuestion(int questionNo);
+	
+	// 질문에 대한 댓글 모두 삭제
+	int deleteQuestionAllComment(int questionNo);
 	
 	//질문 자세히 보기
 	Question selectQuestionOne(int questionNo); 

@@ -122,6 +122,26 @@
   			lecture_no lectureNo
   		FROM lecture
   	</select>
+  	
+  	<!-- 질문에 대한 댓글 모두 삭제 -->
+  	<delete id="deleteQuestionAllComment" parameterType="int">
+  		DELETE
+  		FROM question_comment
+  		WHERE question_no = #{questionNo}
+  	</delete>
+  	
+  	<!-- 질문 수정 -->
+  	<update id="updateQuestion" parameterType="gd.fintech.lms.vo.Question">
+  		UPDATE question
+  		SET
+  			lecture_no = #{lectureNo},
+	  		question_writer = #{questionWriter},
+	  		question_title = #{questionTitle},
+	 		question_content = #{questionContent},
+	  		question_updatedate = NOW(),
+	 		question_password = #{questionPassword}
+  		WHERE question_no = #{questionNo}
+  	</update>
   </mapper>
   
   

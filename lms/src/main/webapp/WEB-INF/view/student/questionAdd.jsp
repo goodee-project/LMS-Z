@@ -14,7 +14,6 @@
 	<table border="1">
 		<tr>
 			<td>lecture_no
-			
 				<select name="lectureNo">
 					<c:forEach var="l" items="${lectureList}">
 						<option value="${l.lectureNo}">${l.lectureNo}</option>

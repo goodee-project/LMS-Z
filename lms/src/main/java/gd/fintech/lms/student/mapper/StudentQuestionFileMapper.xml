@@ -29,6 +29,12 @@
 		WHERE question_no=#{questionNo}
 	</delete>
 	
+	<delete id="deleteOneQuestionFile" parameterType="String">
+		DELETE
+		FROM question_file
+		WHERE question_file_uuid = #{questionFileUuid}
+	</delete>
+	
 	<select id="selectQuestionFileUuid" resultType="String" parameterType="int">
 		SELECT 
 			question_file_uuid questionFileUuid

@@ -100,6 +100,54 @@ public class StudentQuestionService {
 		return studentQuestionMapper.selectLectureList();
 	}
 	
+	// 작성 질문 수정
+	public void updateQuestion(QuestionAddForm questionAddForm) {
+		Question question = new Question();
+		question.setLectureNo(questionAddForm.getLectureNo());
+		question.setQuestionWriter(questionAddForm.getQuestionWriter());
+		question.setQuestionTitle(questionAddForm.getQuestionTitle());
+		question.setQuestionContent(questionAddForm.getQuestionContent());
+		question.setQuestionUpdatedate(questionAddForm.getQuestionUpdatedate());
+		question.setQuestionPassword(questionAddForm.getQuestionPassword());
+		studentQuestionMapper.updateQuestion(question);
+		
+		
+		
+		List<QuestionFile> questionFile=null;
+		if(questionAddForm.getQuestionFile() != null) {
+			questionFile = new ArrayList<QuestionFile>();
+			for(MultipartFile mf : questionAddForm.getQuestionFile()) {
+				QuestionFile qf = new QuestionFile();
+				qf.setQuestionNo(question.getQuestionNo());
+				int count = 0;
+				int p = mf.getOriginalFilename().lastIndexOf(".");
+				
+				String ext = mf.getOriginalFilename().substring(p).toLowerCase();
+				String filename = UUID.randomUUID().toString().replace("-","");
+				
+				qf.setQuestionFileUuid(filename+ext);
+				qf.setQuestionFileOriginal(mf.getOriginalFilename());
+				qf.setQuestionFileSize(mf.getSize());
+				qf.setQuestionFileType(mf.getContentType());
+				qf.setQuestionFileCount(count);
+				questionFile.add(qf);
+				
+				try {
+					mf.transferTo(new File(PATH+filename+ext));
+				}catch(Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException();
+				}
+			}
+		} 
+		if(questionFile != null) {
+			for(QuestionFile qf : questionFile) {
+				studentQuestionFileMapper.insertQuestionFile(qf);
+			}
+		}
+	}
+	
+	// 작성 질문 전체 삭제 (삭제는 작성자만 할 수 있게 스크립트 코드를 사용합니다)
 	public void deleteQuestion(int questionNo) {
 		List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(questionNo);
 		for(String s : questionFileUuid) {
@@ -109,6 +157,7 @@ public class StudentQuestionService {
 			}
 		}
 		studentQuestionFileMapper.deleteAllQuestionFile(questionNo);
+		studentQuestionMapper.deleteQuestionAllComment(questionNo);
 		studentQuestionMapper.deleteQuestion(questionNo);
 	}
 }

@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div>
-		<a href="${path}/student/removeQuestion/${question.questionNo}">질문 삭제</a>
+		<a href="${path}/student/questionRemove/${question.questionNo}">질문 삭제</a>
+		<a href="${path}/student/questionModify/${question.questionNo}">질문 수정</a>
 	</div>
 	<h1>question</h1>
 	<table border="1">

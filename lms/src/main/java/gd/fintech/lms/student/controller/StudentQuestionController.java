@@ -60,8 +60,25 @@ public class StudentQuestionController {
 		return "redirect:/student/questionList/1";
 	}
 	
+	//질문 수정 폼
+	@GetMapping("/student/questionModify/{questionNo}")
+	public String modifyQuestion(Model model,@PathVariable(name="questionNo")int questionNo) {
+		Question question = studentQuestionService.getQuestionOne(questionNo);
+		List<Lecture> lectureList = studentQuestionService.getLectureList();
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("question",question);
+		return "/student/questionModify";
+	}
+	
+	//질문 수정 액션
+	@PostMapping("student/questionModify")
+	public String modifyQuestion(QuestionAddForm questionAddForm,@RequestParam(value="questionNo")int questionNo) {
+		studentQuestionService.updateQuestion(questionAddForm);
+		System.out.println(questionAddForm+"<<<<<<<<<<<>>>>>>>>>>");
+		return "redirect:/student/questionOne/"+questionNo;
+	}
 	// 질문 삭제 
-	@GetMapping("/student/removeQuestion/{questionNo}")
+	@GetMapping("/student/questionRemove/{questionNo}")
 	public String removeQuestion(@PathVariable(name="questionNo")int questionNo) {
 		studentQuestionService.deleteQuestion(questionNo);
 		return "redirect:/student/questionList/1";
