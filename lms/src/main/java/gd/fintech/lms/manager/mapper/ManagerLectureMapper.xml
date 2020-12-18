@@ -68,7 +68,10 @@
 	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
 		SELECT
 			teacher_id teacherId,
-			teacher_name teacherName
+			teacher_name teacherName,
+			teacher_email teacherEmail,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth
 		FROM teacher
 	</select>
 	<!-- 과목 리스트를 출력해주는 쿼리 -->
@@ -129,4 +132,14 @@
 			NOW()
 		)
 	</insert>
+	<!-- 강좌 추가하기 위해 필요한 선생님 아이디 가져오는 쿼리 -->
+	<select id="selectTeacherId" parameterType="gd.fintech.lms.vo.Teacher" resultType="java.lang.String">
+		SELECT
+			teacher_id teacherId
+		FROM teacher
+		WHERE teacher_name = #{teacherName}
+		AND teacher_email = #{teacherEmail}
+		AND teacher_gender = #{teacherGender}
+		AND teacher_birth = #{teacherBirth}
+	</select>
 </mapper>

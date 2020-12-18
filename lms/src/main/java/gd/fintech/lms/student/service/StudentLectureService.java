@@ -75,6 +75,10 @@ public class StudentLectureService {
 	public int modifyLectureReview(ClassRegistration classRegistration) {
 		return studentLectureMapper.updateLectureReview(classRegistration);
 	}
+	//=== 승인 대기중인 강의 취소 ====
+	public int removeWaitingClassCancle(int classRegistrationNo) {
+		return studentLectureMapper.deleteWaitingClassCancle(classRegistrationNo);
+	}
 }
 
 

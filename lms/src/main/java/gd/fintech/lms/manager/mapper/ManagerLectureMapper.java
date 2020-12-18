@@ -27,4 +27,6 @@ public interface ManagerLectureMapper {
 	List<Classroom> selectClassroomList();
 	//강좌 등록정보를 강좌목록에 추가하기위해 연결하는 메퍼
 	int insertLecture(Lecture lecture);
+	//강좌 추가하기 위해 필요한 선생님 아이디 가져오는 메퍼
+	String selectTeacherId(Teacher teacher);
 }

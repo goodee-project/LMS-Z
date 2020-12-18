@@ -46,4 +46,8 @@ public class ManagerLectureService {
 	public void insertLecture(Lecture lecture) {
 		managerLectureMapper.insertLecture(lecture);
 	}
+	//강좌 추가하기 위해 필요한 선생님 아이디 가져오는 메퍼 호출
+	public String getTeacherId(Teacher teacher) {
+		return managerLectureMapper.selectTeacherId(teacher);
+	}
 }

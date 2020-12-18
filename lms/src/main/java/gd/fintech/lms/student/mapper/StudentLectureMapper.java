@@ -32,4 +32,6 @@ public interface StudentLectureMapper {
 	public ClassRegistrationForm selectMyLectureListOne(Map<String,Object> map);
 	//==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 =====
 	public int updateLectureReview(ClassRegistration classRegistration);
+	//=== 승인 대기중인 강의 취소 ====
+	public int deleteWaitingClassCancle(int classRegistrationNo);
 }

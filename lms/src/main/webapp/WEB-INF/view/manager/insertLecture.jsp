@@ -13,6 +13,8 @@
 <h1>강좌 등록</h1>
 <form method="post" action="${path }/manager/insertAction">
 	<table>
+		<tr hidden="hidden">
+			<td><input type="text" name="accountId" id="accountId"></td>
 		<tr>
 			<td>subject_name</td>
 			<td>
@@ -24,6 +26,7 @@
 			</td>
 		</tr>
 		<tr>
+			<!--
 			<td>account_id/Name</td>
 			<td>
 				<select name="accountId">
@@ -31,10 +34,14 @@
 						<option value="${t.teacherId }">${t.teacherId}/${t.teacherName }</option>
 					</c:forEach>
 				</select>
-			</td>
-		</tr>
+			<!-- 	
+				원래 등록 할때 이름 아이디 db에 들어가야함
+				등록 눌렀을때 매칭할 때 운영자가 이 아이디를 쓰고잇는 강사이름 모름
+				이름만 선택하고 insert할 때 id도 같이 입력햇음 좋겠다 -> 입력에 아이디 표시는 제거할 수 있잖아 
+			
 		<tr>
-			<td>account_id/Name</td>
+		
+			<td>Name</td>
 			<td>
 				<select name="teacherName">
 					<c:forEach var="t" items="${teacherList }">
@@ -43,7 +50,14 @@
 				</select>
 			</td>
 		</tr>
-		
+		 -->
+		 <tr>
+			<td>Name</td>
+			<td>
+				<input type="text" name="teacherName" id="teacherNameSelect" readonly>
+				<button type="button" id="searchBtn">강사 검색</button>
+			</td>
+		</tr>
 		<tr>
 			<td>lecture_name</td>
 			<td>
@@ -89,5 +103,83 @@
 	</table>
 	<button id="btn" type="submit">등록</button>
 </form>
+	<form>
+		<div id="teacherList" hidden="hidden">
+			<table>
+				<thead>
+				<tr>
+					<th></th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>성별</th>
+					<th>설명</th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody class="tableBody">
+					<c:forEach var="t" items="${teacherList }" varStatus="status">
+						<tr>
+							<td></td>
+							<td id="name${status.index }">${t.teacherName}</td>
+							<td id="email${status.index }">${t.teacherEmail}</td>
+							<td id="gender${status.index }">${t.teacherGender}</td>
+							<td id="birth${status.index }">${t.teacherBirth}</td>
+							<td>
+								<button type="button" id="${status.index }" value="">선택</button>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</form>
+	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${path}/dist/js/app-style-switcher.js"></script>
+    <script src="${path}/dist/js/feather.min.js"></script>
+    <script src="${path}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="${path}/dist/js/sidebarmenu.js"></script>
+    <script src="${path}/dist/js/custom.min.js"></script>
+    <script src="${path}/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="${path}/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="${path}/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#searchBtn").click(function(){
+				$("#teacherList").removeAttr("hidden");
+			})
+			$('.tableBody button').each(function(index,item){
+					//해당 선생님 정보를 선택했을 때
+					$('#'+index).click(function(){
+						console.log($('#name'+index).text());
+						// 해당 선생님 이름 기입
+						$('#teacherNameSelect').attr("value",$('#name'+index).text());
+						// 해당 선생님 아이디 가져오기
+						$.ajax({
+							//restController
+							url:'${path}/manager/searchTeacherId',
+							type:'post',
+							data:{
+								teacherName:$('#name'+index).text(),
+								teacherEmail:$('#email'+index).text(),
+								teacherGender:$('#gender'+index).text(),
+								teacherBirth:$('#birth'+index).text()
+								},
+							success:function(data){
+								console.log(data);
+								$('#accountId').attr("value",data);
+								}
+							})
+						})
+				})
+				
+		})
+		
+	</script>
 </body>
 </html>

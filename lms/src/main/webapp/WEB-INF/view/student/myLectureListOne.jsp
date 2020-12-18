@@ -140,15 +140,25 @@
                         </div>
                     </div>
                     <div class="col-5 align-self-center text-right">
-                    	<div class="col-12 align-self-center">
+                    	<div class="align-self-center">
                     		<c:if test="${myLectureListOne.classRegistrationState=='대기'}">
-		                        <a class="btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="col-2 btn btn-success font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
+		                        href="${path }/student/WaitingClassCancle/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
+		                        style="color:white;">
+		                        	수강 취소
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='수강중'}">
-		                        <a class="btn btn-primary font-20 popover-item" style="color:white;">
+		                        <a class="col-2 btn btn-primary font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
+		                        </a>
+		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
+		                        href="" 
+		                        style="color:white;">
+		                        	수강 취소
 		                        </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='수료'}">

@@ -117,6 +117,7 @@ public class StudentLectureController {
 		model.addAttribute("currentPage",currentPage);
 		return "student/myLectureListOne";
 	}
+	//==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 =====
 	@PostMapping("/student/lectureReview/{currentPage}")
 	public String lectureReview(ClassRegistration classRegistration,
 								@PathVariable(name="currentPage") int currentPage) {
@@ -126,4 +127,30 @@ public class StudentLectureController {
 		studentLectureService.modifyLectureReview(classRegistration);
 		return "redirect://student/myLectureListOne/"+classRegistration.getAccountId()+"/"+classRegistration.getLectureNo()+"/"+currentPage;
 	}
+	//=== 승인 대기중인 강의 취소 ====
+	@GetMapping("/student/WaitingClassCancle/{classRegistrationNo}/{studentId}/{currentPage}")
+	public String WaitingClassCancle(@PathVariable(name="classRegistrationNo") int classRegistrationNo,
+									@PathVariable(name="studentId") String studentId,
+									@PathVariable(name="currentPage") int currentPage){
+		studentLectureService.removeWaitingClassCancle(classRegistrationNo);
+		return "redirect:/student/myLectureList/"+studentId+"/"+currentPage;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

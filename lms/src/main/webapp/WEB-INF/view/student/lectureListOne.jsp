@@ -146,7 +146,7 @@
 	                        </c:if>
 	                        <c:if test="${classRegistrationCk == true}">
 		                        <a class="btn btn-danger font-20 popover-item" style="color:white">
-		                        	수강중
+		                        	신청함
 		                        </a>
 	                        </c:if>
 		                </div>

@@ -281,4 +281,9 @@
 		WHERE lecture_no = #{lectureNo}
 		AND account_id = #{accountId}
 	</update>
+	<!-- === 승인 대기중인 강의 취소 ==== -->
+	<delete id="deleteWaitingClassCancle" parameterType="Integer">
+		DELETE FROM class_registration
+		WHERE class_registration_no=#{classRegistrationNo}
+	</delete>
 </mapper>

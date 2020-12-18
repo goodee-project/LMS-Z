@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import gd.fintech.lms.manager.service.ManagerLectureService;
@@ -50,7 +51,9 @@ public class ManagerLectureController {
 	@PostMapping("/manager/insertAction")
 	public String insertAction(Lecture lecture) {
 		logger.debug("lecture"+lecture.toString());
+		
 		managerLectureService.insertLecture(lecture);
 		return "redirect:/manager/lectureList";
 	}
+	
 }
