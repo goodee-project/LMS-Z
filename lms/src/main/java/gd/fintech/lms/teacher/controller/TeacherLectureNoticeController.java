@@ -24,6 +24,8 @@ public class TeacherLectureNoticeController {
 								@PathVariable(value="currentPage") int currentPage) {
 		// 한 페이지에 출력할 개수
 		int rowPerPage = 5; 
+		
+		int beginRow = (currentPage - 1) * rowPerPage;
 		// 마지막 페이지
 		int lastPage = 0; 
 		// 공지사항 전체 개수
@@ -38,7 +40,7 @@ public class TeacherLectureNoticeController {
 		}
 		
 		// 리스트로 출력하기 위해 List형태의 LectureNotice 객체 선언 및 초기화
-		List<LectureNotice> noticeList = teacherLectureNoticeService.getLectureNoticeList(lectureNo, currentPage, rowPerPage);
+		List<LectureNotice> noticeList = teacherLectureNoticeService.getLectureNoticeList(lectureNo, beginRow, rowPerPage);
 		
 		// jsp파일에 필요한 변수값 model에 입력(현재 페이지, 마지막 페이지, 공지사항 목록)
 		model.addAttribute("currentPage", currentPage);

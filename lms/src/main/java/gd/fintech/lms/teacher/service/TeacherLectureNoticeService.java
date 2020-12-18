@@ -16,10 +16,8 @@ import gd.fintech.lms.vo.LectureNotice;
 public class TeacherLectureNoticeService {
 	@Autowired TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	
-	// 강좌별 공지사항 목록 출력(강좌번호(lectureNo), 페이징을 위한 현재페이지(currentPage), 한 페이지에 출력될 개수(rowPerPage))  
-	public List<LectureNotice> getLectureNoticeList(int lectureNo, int currentPage, int rowPerPage){
-		// 페이지마다 시작하는 번호
-		int beginRow = (currentPage - 1) * rowPerPage;
+	// 강좌별 공지사항 목록 출력(강좌번호(lectureNo), 각 페이지마다 시작하는 번호(beginRow), 한 페이지에 출력될 개수(rowPerPage))  
+	public List<LectureNotice> getLectureNoticeList(int lectureNo, int beginRow, int rowPerPage){
 		// Map 객체 생성
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		

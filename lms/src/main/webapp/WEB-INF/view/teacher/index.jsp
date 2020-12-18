@@ -112,7 +112,7 @@
                                 </span></a>
                         </li>
 						<!-- 강의목록 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lectureList/${teacherId}"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lectureList/${teacherId}/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">강의목록
                                 </span></a>
@@ -266,7 +266,8 @@
                                     </div>
                                 </div>
                                 <div class="pl-4 mb-5">
-	                                <div class="table-responsive">
+                                	<!-- 강의목록 출력부분 -->
+	                                <!--<div class="table-responsive">
 	                                    <table class="table no-wrap v-middle mb-0">
 	                                        <thead>
 	                                            <tr class="border-0">
@@ -280,19 +281,16 @@
 		                                            <tr>
 		                                                <td class="border-top-0 px-2 py-4">
 		                                                    <div class="d-flex no-block align-items-center">
-		                                                    	<!-- 굵은 글씨 -->
 		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium"><a href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></h5>
 		                                                    </div>
 		                                                </td>
 		                                                <td class="border-top-0 px-2 py-4">
 		                                                    <div class="d-flex no-block align-items-center">
-		                                                    	<!-- 굵은 글씨 -->
 		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lectureStartdate} ~ ${l.lectureEnddate}</h5>
 		                                                    </div>
 		                                                </td>
 		                                                <td class="border-top-0 px-2 py-4">
 		                                                    <div class="d-flex no-block align-items-center">
-		                                                    	<!-- 굵은 글씨 -->
 		                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lectureTotal}</h5>
 		                                                    </div>
 		                                                </td>
@@ -300,7 +298,7 @@
 	                                            </c:forEach>
 	                                        </tbody>
 	                                    </table>
-	                                </div>
+	                                </div>-->
                                 </div>
                                 <ul class="list-inline text-center mt-4 mb-0">
                                     <li class="list-inline-item text-muted font-italic">test</li>

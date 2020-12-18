@@ -18,12 +18,27 @@ public class TeacherLectureController {
 	@Autowired TeacherLectureService teacherLectureService;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// 강사별 강의목록 출력(accountId를 받아와서 강사 구분)
-	@GetMapping("/teacher/lectureList/{teacherId}")
+	@GetMapping("/teacher/lectureList/{teacherId}/{currentPage}")
 	public String lectureList(Model model,
-								@PathVariable(value="teacherId") String teacherId) {
+								@PathVariable(value="teacherId") String teacherId,
+								@PathVariable(value="currentPage") int currentPage) {
+		// 페이징에 필요한 변수 선언 및 초기화
+		int rowPerPage = 5;
+		int beginRow = (currentPage - 1) * rowPerPage;
+		int lastPage = 0;
+		int totalCount = teacherLectureService.getLectureCount(teacherId);
+		// 마지막 페이지 구하기
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		}else {
+			lastPage = totalCount / rowPerPage + 1;
+		}
+		
 		// 리스트 객체 선언 및 service 메소드 호출해서 객체에 값 입력
-		List<Lecture> list = teacherLectureService.getLectureList(teacherId);
-		// model에 list값 입력
+		List<Lecture> list = teacherLectureService.getLectureList(teacherId, beginRow, rowPerPage);
+		// model에 페이징값, list값 입력
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
 		return "teacher/lectureList";
 	}
