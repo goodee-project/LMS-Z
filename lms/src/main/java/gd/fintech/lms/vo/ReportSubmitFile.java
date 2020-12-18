@@ -7,7 +7,7 @@ public class ReportSubmitFile {
 	private String reportSubmitFileUuid;
 	private String reportSubmitFileOriginal;
 	private int reportSubmitNo;
-	private int reportSubmitFileSize;
+	private long reportSubmitFileSize;
 	private String reportSubmitFileType;
 	private int reportSubmitFileCount;
 	private String reportSubmitFileCreatedate;

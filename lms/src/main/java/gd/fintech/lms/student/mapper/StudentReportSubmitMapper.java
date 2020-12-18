@@ -9,7 +9,9 @@ import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
 
 @Mapper
-public interface StudentReportMapper {
+public interface StudentReportSubmitMapper {
+	
+	Report selectReportOne(int reportNo);
 	
 	int insertReport(ReportSubmit reportSubmit);
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.student.mapper.StudentReportMapper">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentReportSubmitMapper">
 	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportListPage">
 		<result property="reportNo" column="report_no"/>
 		<result property="lectureNo" column="lecture_no"/>
@@ -20,6 +20,7 @@
 	
 	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="String">
 		SELECT
+			r.report_no,
 			r.lecture_no,
 			r.report_title,
 			r.report_content,
@@ -33,12 +34,29 @@
 		ORDER BY r.report_createdate DESC
 	</select>
 	
+	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">
+	SELECT
+		report_no reportNo,
+		lecture_no lectureNo,
+		report_title reportTitle,
+		report_content reportContent,
+		report_startdate reportStartdate,
+		report_enddate reportEnddate
+	FROM report
+	WHERE report_no = #{reportNo} 	
+	
+	</select>
+	
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.ReportSubmit">
+		<selectKey resultType="int" keyProperty="reportSubmitNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO
 			report_submit(
 				report_no,
 				account_id,
 				report_submit_writer,
+				report_submit_createdate,
 				report_submit_updatedate,
 				report_submit_title,
 				report_submit_content
@@ -46,7 +64,9 @@
 				#{reportNo},
 				#{accountId},
 				#{reportSubmitWriter},
-				#{reportSubmitUpdatedate},
+				NOW(),
+				NOW(),
+				#{reportSubmitTitle},
 				#{reportSubmitContent}
 			)
 	</insert>
