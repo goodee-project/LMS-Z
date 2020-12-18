@@ -1,11 +1,16 @@
 package gd.fintech.lms.student.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentLoginMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Address;
 import gd.fintech.lms.vo.ManagerForm;
 import gd.fintech.lms.vo.StudentForm;
 
@@ -14,6 +19,26 @@ import gd.fintech.lms.vo.StudentForm;
 public class StudentLoginService {
 	@Autowired StudentLoginMapper studentLoginMapper;
 	
+	// 회원가입 주소 찾기 service
+	public Map<String, Object> getAddressToSearch(String doro){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Address> addressList = studentLoginMapper.selectAddressToSearch(doro);
+		map.put("addressList", addressList);
+		
+		return map;
+	}
+	
+	// 회원가입하는 사람의 이메일 중복검사 service
+	public int getStudentToSignupByOverLapEmail(String studentEmail) {
+		return studentLoginMapper.selectStudentToSignupByOverLapEmail(studentEmail);
+	}
+	
+	// 회원가입하는 사람의 아이디 중복검사 service
+	public int getAccountToSignupByOverlapId(String accountId) {
+		return studentLoginMapper.selectAccountToSignupByOverlapId(accountId);
+	}
+	
+	// 로그인 액션
 	public String getAccountToStudentLogin(Account account) {
 		
 		account.setAccountLevel(4);
@@ -26,6 +51,8 @@ public class StudentLoginService {
 	public void addSignup(StudentForm studentForm) {
 		studentForm.setAccountLevel(4);
 		studentForm.setAccountState("대기");
+		
+		studentForm.setStudentPhone(studentForm.getStudentPhone1()+studentForm.getStudentPhone2()+studentForm.getStudentPhone3());
 			
 		studentLoginMapper.insertstudentQueueToSignup(studentForm);
 		studentLoginMapper.insertAccountToSignup(studentForm);

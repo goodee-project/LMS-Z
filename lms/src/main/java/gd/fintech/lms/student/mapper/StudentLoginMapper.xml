@@ -2,6 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentLoginMapper">
+	<!-- 도로명을 입력 하였을 경우 주소 리스트 출력 -->
+	<select id="selectAddressToSearch" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Address">
+		SELECT
+			sido,
+			sigungu,
+			doro,
+			buildno1,
+			buildno2,
+			id
+		FROM address
+		WHERE doro like CONCAT(#{doro}, '%')
+		ORDER BY doro, buildno1, buildno2
+		<!-- LIMIT #{currentPage}, #{limitPage}-->
+	</select>
+	
+	<!-- 아이디 중복검사 -->
+	<select id="selectAccountToSignupByOverlapId" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM account
+		WHERE account_id = #{accountId}
+	</select>
+	
+	<!-- 이메일 중복검사 -->
+	<select id="selectStudentToSignupByOverLapEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM student_queue
+		WHERE student_email = #{studentEmail}
+	</select>
+	
+	
 	<select id="selectAccountToStudentLogin" parameterType="gd.fintech.lms.vo.Account" resultType="String">
   		SELECT account_id accountId
 		FROM account
@@ -12,21 +42,25 @@
 			account_level = #{accountLevel} 
 	</select>
 	
+	<!-- 회원가입 account 테이블 추가 -->
 	<insert id="insertAccountToSignup" parameterType="gd.fintech.lms.vo.StudentForm">
 		INSERT INTO account(account_id, account_pw,
 							account_state, account_level,
 							account_createdate, account_updatedate)
-		VALUES(#{studentId}, #{studentPw},
+		VALUES(#{studentId}, PASSWORD(#{studentPw}),
 			   #{accountState}, #{accountLevel},
 			   NOW(), NOW())
 	</insert>
 	
+	<!-- 회원가입 student_queue 테이블 추가 -->
 	<insert id="insertstudentQueueToSignup" parameterType="gd.fintech.lms.vo.StudentForm">
 		INSERT INTO student_queue(student_id, student_email,
 								  student_phone, student_name,
-								  student_gender, student_birth)
+								  student_gender, student_birth,
+								  student_address_main, student_address_sub)
 		VALUES(#{studentId}, #{studentEmail},
 			   #{studentPhone}, #{studentName},
-			   #{studentGender}, #{studentBirth})
+			   #{studentGender}, #{studentBirth},
+			   #{studentAddressMain}, #{studentAddressSub})
 	</insert>
 </mapper>

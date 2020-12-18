@@ -123,7 +123,7 @@
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                	<a href="${path}/teacher/siginup" class="btn btn-success font-3">회원가입</a>
+		                                	<a href="${path}/teacherSignup" class="btn btn-success font-3">회원가입</a>
 		                                </div>
 		                            </div>
 	                            </form>

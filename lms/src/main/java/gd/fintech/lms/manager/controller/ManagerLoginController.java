@@ -16,11 +16,13 @@ import gd.fintech.lms.vo.ManagerForm;
 public class ManagerLoginController {
 	@Autowired ManagerLoginService managerLoginService;
 	
+	// 로그인 폼으로 이동
 	@GetMapping("/managerLogin")
 	public String login() {
 		return "manager/login";
 	}
 	
+	// 로그인 액션
 	@PostMapping("/managerLogin")
 	public String login(Account account, HttpServletRequest request) {
 		
@@ -34,11 +36,13 @@ public class ManagerLoginController {
 		return "manager/index";
 	}
 	
+	// 회원가입 폼으로 이동
 	@GetMapping("/managerSignup")
 	public String signup() {
 		return "manager/signup";
 	}
 	
+	// 회원가입 액션
 	@PostMapping("/managerSignup")
 	public String signup(ManagerForm managerForm) {
 		
@@ -46,6 +50,7 @@ public class ManagerLoginController {
 		return "redirect:/managerLogin";
 	}
 	
+	// 로그아웃 액션
 	@GetMapping("/manager/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

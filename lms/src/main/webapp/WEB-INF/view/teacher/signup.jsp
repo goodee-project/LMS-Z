@@ -61,7 +61,7 @@
                     <ul id="sidebarnav">
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">옵션</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">돌아가기</span></a></li>
                     </ul>
@@ -79,7 +79,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="index.html">student</a>
+                                    <li class="breadcrumb-item"><a href="index.html">teacher</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -96,12 +96,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                	<form method="post" action="${path}/studentSignup">
+                                	<form method="post" action="${path}/teacherSignup">
 	                                    <table class="table no-wrap v-middle mb-0">
 	                                    	<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">아이디</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="studentId" name="studentId">
+	                                    			<input type="text" id="teacherId" name="teacherId">
 	                                    			<div id="textId"></div>
 	                                    		</td>
 	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button" disabled="disabled">중복검사</button></td>    
@@ -111,11 +111,11 @@
 	                                    		<th class="border-0 font-14 font-weight-medium">비닐번호</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
 	                                    			<div>
-	                                    				<input type="password" id="studentPw" name="studentPw">
+	                                    				<input type="password" id="teacherPw" name="teacherPw">
 	                                    				<div id="textPw"></div>                                    			
 	                                    			</div>
 	                                    			<div>
-	                                    				<input type="password" id="studentPw2" readonly>
+	                                    				<input type="password" id="teacherPw2" readonly>
 	                                    				<div id="textPw2"></div>                                    			
 	                                    			</div>
 	                                    		</td>
@@ -125,7 +125,7 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이름</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="studentName" name="studentName">
+	                                    			<input type="text" id="teacherName" name="teacherName">
 	                                    			<div id="textName"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -134,7 +134,7 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이메일</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="studentEmail" name="studentEmail">
+	                                    			<input type="text" id="teacherEmail" name="teacherEmail">
 	                                    			<div id="textEmail"></div>
 	                                    		</td>
 	                                    		<td class="border-0"><button class="btn btn-light" id="btnEmail" type="button" disabled="disabled">중복검사</button></td>    
@@ -143,13 +143,13 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">핸드폰 번호</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<select id="studentPhone1" name="studentPhone1">
+	                                    			<select id="teacherPhone1" name="teacherPhone1">
 	                                    				<option value="">선택</option>
 	                                    				<option value="010">010</option>
 	                                    				<option value="011">011</option>
 	                                    			</select>-
-	                                    			<input type="text" id="studentPhone2" name="studentPhone2">-
-	                                    			<input type="text" id="studentPhone3" name="studentPhone3">
+	                                    			<input type="text" id="teacherPhone2" name="teacherPhone2">-
+	                                    			<input type="text" id="teacherPhone3" name="teacherPhone3">
 	                                    			<div id="textPhone"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -158,8 +158,8 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">성별</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="radio" class="studentGender" name="studentGender" value="남">남
-	                                    			<input type="radio" class="studentGender" name="studentGender" value="여">여
+	                                    			<input type="radio" class="teacherGender" name="teacherGender" value="남">남
+	                                    			<input type="radio" class="teacherGender" name="teacherGender" value="여">여
 	                                    			<div id="textGender"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -168,7 +168,7 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">메인 주소</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="studentAddressMain" name="studentAddressMain">
+	                                    			<input type="text" id="teacherAddressMain" name="teacherAddressMain">
 	                                    			<div style="width:100%; height:200px; overflow:auto">
 		                                    			<table id="addressTable"></table>
 	                                    			</div>
@@ -179,7 +179,7 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">서브 주소</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="studentAddressSub" name="studentAddressSub">
+	                                    			<input type="text" id="teacherAddressSub" name="teacherAddressSub">
 	                                    			<div id="textAddressSub"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -188,7 +188,7 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">생일</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="date" id="studentBirth" name="studentBirth">
+	                                    			<input type="date" id="teacherBirth" name="teacherBirth">
 	                                    			<div id="textBirth"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
@@ -250,8 +250,8 @@
 		var checkId = /^[A-Za-z][A-Z0-9a-z]{5,13}$/;
 		// 아이디 입력란의 input 실시간 감지
 		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
-		$('#studentId').on('propertychange change keyup paste input', function(){
-			if(checkId.test($('#studentId').val())){				
+		$('#teacherId').on('propertychange change keyup paste input', function(){
+			if(checkId.test($('#teacherId').val())){				
 				$('#textId').text('중복 검사를 해주세요');
 				$('#btnId').prop('disabled', false);				
 			}
@@ -266,13 +266,13 @@
 		// ajax를 통해 아이디값을 비교 후 값이 있다면 confirm창, 없다면 바로 alert창 실행
 		$('#btnId').click(function(){
 			$.ajax({
-				url:'${path}/studentOverlapId',
+				url:'${path}/teacherOverlapId',
 				type:'GET',
-				data:{accountId: $('#studentId').val()},
+				data:{accountId: $('#teacherId').val()},
 				success:function(data){
 					if(data.overlapId == 0){
 						if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
-							$('#studentId').prop('readonly', true);
+							$('#teacherId').prop('readonly', true);
 							$('#btnId').prop("disabled", true);
 							$('#textId').text('');
 							successId = 'success';
@@ -289,31 +289,31 @@
 		// checkPw2는 특수문자가 비닐번호에 하나라도 포함됬는지 확인하기 위한 변수
 		var checkPw = /^[A-z0-9a-z~!@#$%^&*()_+|<>?:{}]{8,20}$/;
 		var checkPw2 = /[~!@#$%^&*()_+|<>?:{}]/;
-		// studentPw에 대해서 실시간으로 입력감지를 하게 하고 studentPw2는 비활성화
+		// teacherPw에 대해서 실시간으로 입력감지를 하게 하고 teacherPw2는 비활성화
 		// 만약 비닐번호가 특수문자를 포함하고 규약에 맞다면 Pw 활성화
-		$('#studentPw').on('ropertychange change keyup paste input', function(){
-			if(checkPw.test($('#studentPw').val())){
-				if(checkPw2.test($('#studentPw').val())){
+		$('#teacherPw').on('ropertychange change keyup paste input', function(){
+			if(checkPw.test($('#teacherPw').val())){
+				if(checkPw2.test($('#teacherPw').val())){
 					$('#textPw').text('형식 확인');
-					$('#studentPw2').prop('readonly', false);
+					$('#teacherPw2').prop('readonly', false);
 				} else{
 					$('#textPw').text('특수문자를 포합해주세요');
-					$('#studentPw2').prop('readonly', true);
+					$('#teacherPw2').prop('readonly', true);
 					
 				}
 			} else{
 				$('#textPw').text('비닐번호 형식을 확인해 주세요');
-				$('#studentPw2').prop('readonly', true);
+				$('#teacherPw2').prop('readonly', true);
 			}
 		});
 
-		// studentPw2에 대한 체크 규약
-		// studentPw2는 비닐번호를 제대로 입력하였는지 확인 하는 수단으로 studentPw와 studentPw2가 같을 경우 textPw2를 통해 출력
-		$('#studentPw2').on('ropertychange change keyup paste input', function(){
-			if($('#studentPw').val() == $('#studentPw2').val()){
+		// teacherPw2에 대한 체크 규약
+		// teacherPw2는 비닐번호를 제대로 입력하였는지 확인 하는 수단으로 teacherPw와 teacherPw2가 같을 경우 textPw2를 통해 출력
+		$('#teacherPw2').on('ropertychange change keyup paste input', function(){
+			if($('#teacherPw').val() == $('#teacherPw2').val()){
 				$('#textPw2').text('형식 확인');
 				successPw = 'success';
-			} else if($('#studentPw2').val() == ""){
+			} else if($('#teacherPw2').val() == ""){
 				$('#textPw2').text('');
 				successPw = '';
 			} else{
@@ -322,9 +322,9 @@
 			}
 		});
 
-		// studentName의 값이 들어가있다면 형식 확인 출력 없다면 공백
-		$('#studentName').on('ropertychange change keyup paste input', function(){
-			if($('#studentName').val().length < 1){
+		// teacherName의 값이 들어가있다면 형식 확인 출력 없다면 공백
+		$('#teacherName').on('ropertychange change keyup paste input', function(){
+			if($('#teacherName').val().length < 1){
 				$('#textName').text('');
 				successName = '';
 			} else{
@@ -336,8 +336,8 @@
 		// manageEmail 입력란에 @을 포합해야되는 등의 규약
 		// 그것을 실시간으로 입력감지하여 text로 표시
 		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		$('#studentEmail').on('ropertychange change keyup paste input', function(){
-			if(checkEmail.test($('#studentEmail').val())){
+		$('#teacherEmail').on('ropertychange change keyup paste input', function(){
+			if(checkEmail.test($('#teacherEmail').val())){
 				$('#textEmail').text('중복 검사를 해주세요');
 				$('#btnEmail').prop('disabled', false);
 			} else{
@@ -347,17 +347,17 @@
 			}
 		});
 
-		// studentEmail옆에 중복검사 버튼을 눌렀을 경우 ajax를 통해 중복검사
+		// teacherEmail옆에 중복검사 버튼을 눌렀을 경우 ajax를 통해 중복검사
 		// 중복되었을 경우 alert로 사용 가능 할 경우 confirm으로 알림창 표시
 		$('#btnEmail').click(function(){
 			$.ajax({
-				url:'${path}/studentOverlapEmail',
+				url:'${path}/teacherOverlapEmail',
 				type:'GET',
-				data:{studentEmail: $('#studentEmail').val()},
+				data:{teacherEmail: $('#teacherEmail').val()},
 				success:function(data){
 					if(data.overlapEmail == 0){
 						if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
-							$('#studentEmail').prop('readonly', true);
+							$('#teacherEmail').prop('readonly', true);
 							$('#btnEmail').prop("disabled", true);
 							$('#textEmail').text('');
 							successEmail = 'success';
@@ -369,21 +369,21 @@
 			});	
 		});
 
-		// studentGender의 radio 버튼을 누를경우 선택을 한 것이므로 형식 확인 출력
-		$('.studentGender').on('ropertychange change keyup paste input', function(){
+		// teacherGender의 radio 버튼을 누를경우 선택을 한 것이므로 형식 확인 출력
+		$('.teacherGender').on('ropertychange change keyup paste input', function(){
 			$('#textGender').text('형식 확인');
 			successGender = 'success';
 		});
 
-		// studentPhone을 총 3개로 나누고 그 중 2개에 규약 설정
+		// teacherPhone을 총 3개로 나누고 그 중 2개에 규약 설정
 		// 가운데 번호와 끝번호에는 4자리의 번호로만 이루어져야함
 		var checkPhone2 = /^\d{4}$/;
 		var checkPhone3 = /^\d{4}$/;
 
-		// studentPhone을 3개를 실시간 입력감지하여 text로 표시
+		// teacherPhone을 3개를 실시간 입력감지하여 text로 표시
 		// 3개 다 규약에 맞는 값이 들어가야 완료
-		$('#studentPhone1').on('ropertychange change keyup paste input', function(){
-			if(($('#studentPhone1').val() == "") || !checkPhone2.test($('#studentPhone2').val()) || !checkPhone3.test($('#studentPhone3').val())){
+		$('#teacherPhone1').on('ropertychange change keyup paste input', function(){
+			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
 				$('#textPhone').text('');
 				successPhone = '';
 			} else{
@@ -392,8 +392,8 @@
 			}
 		});
 
-		$('#studentPhone2').on('ropertychange change keyup paste input', function(){
-			if(($('#studentPhone1').val() == "") || !checkPhone2.test($('#studentPhone2').val()) || !checkPhone3.test($('#studentPhone3').val())){
+		$('#teacherPhone2').on('ropertychange change keyup paste input', function(){
+			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
 				$('#textPhone').text('');
 				successPhone = '';
 			} else{
@@ -402,8 +402,8 @@
 			}
 		});
 
-		$('#studentPhone3').on('ropertychange change keyup paste input', function(){
-			if(($('#studentPhone1').val() == "") || !checkPhone2.test($('#studentPhone2').val()) || !checkPhone3.test($('#studentPhone3').val())){
+		$('#teacherPhone3').on('ropertychange change keyup paste input', function(){
+			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
 				$('#textPhone').text('');
 				successPhone = '';
 			} else{
@@ -412,14 +412,14 @@
 			}
 		});
 
-		// studentAddressMain 옆에 있는 버튼을 누를경우 ajax를 통해 주소 검색란 표시
+		// teacherAddressMain 옆에 있는 버튼을 누를경우 ajax를 통해 주소 검색란 표시
 		// 테이블을 스크롤의 형태로 출력을 하고 a태그의 oneclick옵션을 이용하여 키 값을 스크립트의 함수로 옮겨준뒤 처리한다
 		$('#btnAddress').click(function(){
 			$('#addressTable').empty();
 			$.ajax({
-				url:'${path}/studentAddressSearch',
+				url:'${path}/teacherAddressSearch',
 				type:'GET',
-				data:{doro: $('#studentAddressMain').val()},
+				data:{doro: $('#teacherAddressMain').val()},
 				success:function(data){
 					var strHead = '<thead>';
 					strHead += '</tr><td>';
@@ -446,16 +446,16 @@
 			});	
 		});
 
-		// 주소 검색 테이블에서 해당 버튼을 눌렀을 경우 studentAddressMain이 채워진다.
+		// 주소 검색 테이블에서 해당 버튼을 눌렀을 경우 teacherAddressMain이 채워진다.
 		function addressClick(dataSet){
-			$('#studentAddressMain').val(dataSet);
+			$('#teacherAddressMain').val(dataSet);
 			$('#addressTable').empty();
 			successAddressMain = 'success';
 		}
 
-		// studentAddressSub의 input text 안에 값이 있다면 형식 확인 출력
-		$('#studentAddressSub').on('ropertychange change keyup paste input', function(){
-			if($('#studentAddressSub').val().length < 1){
+		// teacherAddressSub의 input text 안에 값이 있다면 형식 확인 출력
+		$('#teacherAddressSub').on('ropertychange change keyup paste input', function(){
+			if($('#teacherAddressSub').val().length < 1){
 				$('#textAddressSub').text('');
 				successAddressSub = ''
 			} else{
@@ -464,9 +464,9 @@
 			}
 		});
 
-		// studentBirth의 input타입 birth를 선택을 하였다면 형식 확인 출력
-		$('#studentBirth').on('ropertychange change keyup paste input', function(){
-			if($('#studentBirth').val().length < 1){
+		// teacherBirth의 input타입 birth를 선택을 하였다면 형식 확인 출력
+		$('#teacherBirth').on('ropertychange change keyup paste input', function(){
+			if($('#teacherBirth').val().length < 1){
 				$('#textBirth').text('');
 				successBirth = '';
 			} else{

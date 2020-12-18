@@ -8,6 +8,9 @@ public class StudentForm {
 	private String studentPw;
 	private String studentEmail;
 	private String studentPhone;
+	private String studentPhone1;
+	private String studentPhone2;
+	private String studentPhone3;
 	private String studentName;
 	private String studentGender;
 	private String studentBirth;

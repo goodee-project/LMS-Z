@@ -50,6 +50,7 @@ public class ManagerLoginService {
 		return managerLoginMapper.selectAccountToSignupByOverlapId(accountId);
 	}
 	
+	// 로그인 액션
 	public String getAccountToManagerLogin(Account account) {
 		
 		account.setAccountLevel(2);
