@@ -25,6 +25,7 @@
 				<th>total</th>
 				<th>syllabus</th>
 				<th>classroom</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +42,7 @@
 					<td>${l.lectureTotal }</td>
 					<td>${l.syllabus.syllabusContent }</td>
 					<td>${l.classroom.classroomNumber }</td>
+					<td><a href="${path }/manager/deleteLecture/${l.lectureNo}">삭제</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

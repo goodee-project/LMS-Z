@@ -29,4 +29,10 @@ public interface ManagerLectureMapper {
 	int insertLecture(Lecture lecture);
 	//강좌 추가하기 위해 필요한 선생님 아이디 가져오는 메퍼
 	String selectTeacherId(Teacher teacher);
+	//강좌를 삭제하기 위해 필요한 메퍼
+	int deleteLecture(int lectureNo);
+	//강좌에 해당하는 레포트를 삭제하기 위해 필요한 메퍼
+	int deleteReport(int lectureNo);
+	//강좌에 수강하는 학생들을 삭제하기 위해 필요한 메퍼
+	int deleteClassRegistration(int lectureNo);
 }

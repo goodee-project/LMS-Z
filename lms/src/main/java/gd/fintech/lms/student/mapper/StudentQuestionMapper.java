@@ -33,6 +33,7 @@ public interface StudentQuestionMapper {
 	
 	// 질문 등록에서 강의번호를 선택하기위해 사용(강의 번호 리스트를 가져오기 위해)
 	List<Lecture> selectLectureList();  
-	
+	//강좌 삭제를 위한 questionNO를 구하기 위한 메퍼
+	List<Integer> selectLectureNo(int lectureNo);
 	
 }

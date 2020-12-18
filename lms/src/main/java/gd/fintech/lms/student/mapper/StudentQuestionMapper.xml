@@ -142,6 +142,13 @@
 	 		question_password = #{questionPassword}
   		WHERE question_no = #{questionNo}
   	</update>
+  	<!-- 강좌 번호에 대한 questionNo를 반환하는 쿼리 -->
+  	<select id="selectLectureNo" parameterType="int" resultType="int">
+  		SELECT 
+  			question_no
+  		FROM question
+  		WHERE lecture_no = #{lectureNo}
+  	</select>
   </mapper>
   
   

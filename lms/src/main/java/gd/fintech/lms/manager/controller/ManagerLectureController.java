@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
@@ -48,6 +49,7 @@ public class ManagerLectureController {
 		model.addAttribute("classroomList",classroomList);
 		return "/manager/insertLecture";
 	}
+	//강좌정보를 입력후 등록버튼 클릭시 form안의 데이터를 받아와 서비스를 호출
 	@PostMapping("/manager/insertAction")
 	public String insertAction(Lecture lecture) {
 		logger.debug("lecture"+lecture.toString());
@@ -55,5 +57,10 @@ public class ManagerLectureController {
 		managerLectureService.insertLecture(lecture);
 		return "redirect:/manager/lectureList";
 	}
-	
+	//강좌 삭제버튼 클릭시 해당 강좌를 삭제하기 위한 서비스 호출
+	@GetMapping("/manager/deleteLecture/{lectureNo}")
+	public String deleteLecture(@PathVariable(name="lectureNo") int lectureNo) {
+		managerLectureService.deleteLecture(lectureNo);
+		return "redirect:/manager/lectureList";
+	}
 }
