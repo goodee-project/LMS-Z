@@ -12,4 +12,9 @@ public interface TeacherReportMapper {
 	List<Report> selectReportList();
 	//과제등록
 	int insertReport(Report report);
+	//과제삭제
+	int deleteReport(int reportNo);
+	//과제 상세보기
+	Report selectReportOne(int reportNo);
+
 }

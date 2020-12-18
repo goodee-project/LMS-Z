@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherReportService;
@@ -40,4 +41,24 @@ public class TeacherReportController {
 		
 		return "redirect:/teacher/reportList";
 	}
+	
+	//과제삭제
+	@GetMapping("/teacher/removeReport/{reportNo}")
+	public String removeReport(@PathVariable(value = "reportNo") int reportNo) {
+		
+		teacherReportService.removeReport(reportNo);
+		
+		return "redirect:/teacher/reportList";
+	}
+	
+	//과제 상세보기
+	@GetMapping("/teacher/reportOne/{reportNo}")
+	public String reportOne(Model model, @PathVariable(value = "reportNo") int reportNo) {
+		
+		Report reportOne = teacherReportService.getReportOne(reportNo);
+		model.addAttribute("reportOne", reportOne);
+		
+		return "teacher/reportOne";
+	}
+
 }

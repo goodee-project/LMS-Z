@@ -23,4 +23,15 @@ public class TeacherReportService {
 	public int addReport(Report report) {
 		return teacherReportMapper.insertReport(report);
 	}
+	
+	//과제삭제
+	public int removeReport(int reportNo) {
+		return teacherReportMapper.deleteReport(reportNo);
+	}
+	
+	//과제 상세보기
+	public Report getReportOne(int reportNo) {
+		return teacherReportMapper.selectReportOne(reportNo);
+	}
+
 }

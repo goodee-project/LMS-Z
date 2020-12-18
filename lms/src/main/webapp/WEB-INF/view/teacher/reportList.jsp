@@ -19,6 +19,7 @@
 						<th>report_content</th>
 						<th>report_startdate</th>
 						<th>report_enddate</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,10 +27,11 @@
 						<tr>
 							<td>${r.reportNo}</td>
 							<td>${r.lectureNo}</td>
-							<td>${r.reportTitle}</td>
+							<td><a href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
 							<td>${r.reportContent}</td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
+							<td><a href="${path}/teacher/removeReport/${r.reportNo}">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
