@@ -28,7 +28,7 @@
         </div>
     </div>
 
-
+	
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
@@ -53,8 +53,14 @@
 
 				<!-- 로고 오른쪽 메뉴 -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
+					<span class="navbar-nav float-left mr-auto ml-3 pl-1">
+	                    <a class="btn btn-success font-20 popover-item " href="${path}/student/index">
+	                        	뒤로가기
+	                    </a>
+	                    <a class="btn btn-success font-20 popover-item ml-3" style="color:white">
+	                        	강의 공지사항
+	                    </a>
+                    </span>
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->
@@ -105,7 +111,7 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">과제목록</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">공지사항</span></a>
                         </li>
@@ -123,7 +129,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 목록</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">LMS 공지사항</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -146,21 +152,19 @@
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">신청 인원/강좌 정원</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">NO.</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">제목</th>
+                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">조회수</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="c" items="${lectureList}" varStatus="status">
+                                        	<c:forEach var="l" items="${lmsNoticeList}">
 	                                            <tr>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
 	                                               		<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${currentPage}">${c.lectureName}</a>
-	                                                        </h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lmsNoticeNo}</h5>
 	                                                    </div>
 	                                                </td>
 	                                                
@@ -168,7 +172,7 @@
 	                                                <td class="border-top-0 px-2 py-4">
 	                                                    <div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.teacherName}</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lmsNoticeWriter}</h5>
 	                                                    </div>
 	                                                </td>
 	                                                
@@ -176,26 +180,17 @@
 	                                                <td class="border-top-0 text-center px-2 py-4">
 	                                                	<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureStartdate } ~ ${c.lectureEnddate }</h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
+	                                                        	<a href="${path}/student/lmsNoticeOne/${l.lmsNoticeNo}">${l.lmsNoticeTitle}</a>
+	                                                        </h5>
 	                                                    </div>
 	                                                </td>
 	                                                
 	                                                <!-- 일반적인 글씨 -->
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-	                                                	<div class="d-flex no-block align-self-center">
+	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+	                                                	<div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
-	                                                        	<c:if test="${numberOfApplicants[status.index] != c.lectureTotal}">
-		                                                        	<span style="color:blue">${numberOfApplicants[status.index]}&nbsp;</span>
-		                                                        	<span>/ ${c.lectureTotal }&nbsp;</span>
-		                                                        	<span>&nbsp;[신청가능]</span>
-	                                                        	</c:if>
-	                                                        	<c:if test="${numberOfApplicants[status.index] == c.lectureTotal}">
-		                                                        	<span style="color:red">${numberOfApplicants[status.index]} </span>
-		                                                        	<span>/ ${c.lectureTotal }</span>
-		                                                        	<span>&nbsp;[정원초과]</span>
-	                                                        	</c:if>
-	                                                        </h5>
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${l.lmsNoticeCount}</h5>
 	                                                    </div>
 	                                                </td>
 	                                            </tr>
@@ -207,7 +202,7 @@
                                   	<div class="list-inline text-center mt-4 mb-0">
 	                                  	<c:forEach var="i" begin="1" end="${lastPage }">
 	                                  		<span>
-	                                  			<a href="${path}/student/lectureList/${i}">${i}&nbsp;&nbsp;</a>
+	                                  			<a href="${path}/student/myLectureList/${studentId }/${i}">${i}&nbsp;&nbsp;</a>
 	                                  		</span>
 	                                  	</c:forEach>
                                   	</div>

@@ -36,17 +36,17 @@
             	<!-- 사이드바 로고 -->
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
-                        <a href="${path}/student/index">
+                        <!-- 사이트 이름 -->
+                         <a href="${path}/student/index">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
-							
 							<!-- 사이트 이름 -->
-	                        <span class="logo-text">
-									GOODEE LMS
-	                        </span>
+                            <span class="logo-text">
+								GOODEE LMS
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -54,7 +54,16 @@
 				<!-- 로고 오른쪽 메뉴 -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
+					
+                    <span class="navbar-nav float-left mr-auto ml-3 pl-1">
+	                    <a class="btn btn-success font-20 popover-item " href="${path }/student/myLectureList/${studentId}/${currentPage}">
+	                        	목록으로
+	                    </a>
+	                    <a class="btn btn-success font-20 popover-item ml-3" style="color:white"
+	                    	href="${path }/student/lectureNoticeList/${lectureNo}/${currentPage}">
+	                        	강의 공지사항
+	                    </a>
+                    </span>
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->
@@ -66,7 +75,6 @@
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
                                         class="text-dark"><c:out value="${studentId}"/></span> 
-                                        <!-- <c:out value="${sessionScope.studentId}"/> 세션에 저장되어있는 변수 호출 -->
                                        <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
                                 </span>
                             </a>
@@ -75,8 +83,7 @@
                 </div>
             </nav>
         </header>
-        
-         <!-- 로고 밑 메뉴 -->
+        <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -90,7 +97,7 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList/${studentId}/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강의 목록
                                 </span></a>
@@ -98,7 +105,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">수강신청</span></a></li>
-                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">질문 목록</span></a></li>
                          <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/reportList/${studentId}"
@@ -122,104 +129,68 @@
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
-                    <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 목록</h3>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                <!-- 테이블 -->
+                   
+                    <div class="col-5 align-self-center text-right">
+                    	<div class="align-self-center">
+                    		
+		                </div>
+		           </div>
+		       </div>
+			<br>
+				
+				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-5 col-lg-7">
                         <div class="card">
                             <div class="card-body">
+                            	<h4 class="card-title"></h4>
                                 <div class="table-responsive">
                                     <table class="table no-wrap v-middle mb-0">
-                                        <thead>
-                                            <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">신청 인원/강좌 정원</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        	<c:forEach var="c" items="${lectureList}" varStatus="status">
-	                                            <tr>
-	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
-	                                               		<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${currentPage}">${c.lectureName}</a>
-	                                                        </h5>
-	                                                    </div>
-	                                                </td>
-	                                                
-	                                                <!-- 아이콘 활용한 부트스트랩 -->
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.teacherName}</h5>
-	                                                    </div>
-	                                                </td>
-	                                                
-	                                                <!-- 눌렀을때 추가 옵션 -->
-	                                                <td class="border-top-0 text-center px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureStartdate } ~ ${c.lectureEnddate }</h5>
-	                                                    </div>
-	                                                </td>
-	                                                
-	                                                <!-- 일반적인 글씨 -->
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-	                                                	<div class="d-flex no-block align-self-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
-	                                                        	<c:if test="${numberOfApplicants[status.index] != c.lectureTotal}">
-		                                                        	<span style="color:blue">${numberOfApplicants[status.index]}&nbsp;</span>
-		                                                        	<span>/ ${c.lectureTotal }&nbsp;</span>
-		                                                        	<span>&nbsp;[신청가능]</span>
-	                                                        	</c:if>
-	                                                        	<c:if test="${numberOfApplicants[status.index] == c.lectureTotal}">
-		                                                        	<span style="color:red">${numberOfApplicants[status.index]} </span>
-		                                                        	<span>/ ${c.lectureTotal }</span>
-		                                                        	<span>&nbsp;[정원초과]</span>
-	                                                        	</c:if>
-	                                                        </h5>
-	                                                    </div>
-	                                                </td>
-	                                            </tr>
-	                                         </c:forEach>
-                                        </tbody>
+                                        <tr class="border-top-0 px-2 py-4">
+                                            <th class="font-14 font-weight-medium text-muted">번호</th>
+                                            <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lectureNoticeNo}</span>
+                                           	</td>
+                                           	<td class="border-0"></td>
+                                        </tr>
+                                        <tr class="border-top-0 px-2 py-4">
+                                            <th class="border-0 font-14 font-weight-medium text-muted">제목</th>
+                                            <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${noticeOne.lectureNoticeTitle}</span>
+                                           	</td>
+                                           	<td class="border-0"></td>
+                                        </tr>
+                                        <tr class="border-top-0 px-2 py-4">
+                                            <th class="border-0 font-14 font-weight-medium text-muted">게시일</th>
+                                            <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${noticeOne.lectureNoticeCreatedate}</span>
+                                           	</td>
+                                           	<td class="border-0"></td>
+                                        </tr>
+                                        <tr class="border-top-0 px-2 py-4">
+                                            <th class="border-0 font-14 font-weight-medium text-muted">수정일</th>
+                                            <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
+                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${noticeOne.lectureNoticeUpdatedate}</span>
+                                           	</td>
+                                           	<td class="border-0"></td>
+                                        </tr>
+                                        <tr class="border-top-0 px-2 py-4">
+                                            <th class="font-14 font-weight-medium text-muted">내용</th>
+                                            <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
+                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${noticeOne.lectureNoticeContent}</textarea>
+                                           	</td>
+                                           	<td class="border-0"></td>
+                                        </tr>
                                     </table>
-                                  	<!-- 페이징 -->
-                                  	<br>
-                                  	<div class="list-inline text-center mt-4 mb-0">
-	                                  	<c:forEach var="i" begin="1" end="${lastPage }">
-	                                  		<span>
-	                                  			<a href="${path}/student/lectureList/${i}">${i}&nbsp;&nbsp;</a>
-	                                  		</span>
-	                                  	</c:forEach>
-                                  	</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
+    </div>
+        
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -237,6 +208,7 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+  
 </body>
 
 </html>

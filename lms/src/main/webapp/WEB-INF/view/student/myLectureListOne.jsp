@@ -59,9 +59,10 @@
 	                    <a class="btn btn-success font-20 popover-item " href="${path }/student/myLectureList/${studentId}/${currentPage}">
 	                        	목록으로
 	                    </a>
-	                    <a class="btn btn-success font-20 popover-item ml-3" id="reviewBtn" style="color:white">
-	                        	수강후기
-	                   </a>
+	                    <a class="btn btn-success font-20 popover-item ml-3" style="color:white"
+	                    	href="${path }/student/lectureNoticeList/${myLectureListOne.lecture.lectureNo }/${currentPage}">
+	                        	강의 공지사항
+	                    </a>
                     </span>
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
@@ -108,9 +109,13 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">질문 목록</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
+                         <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/reportList/${studentId}"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">4</span></a>
+                                    class="hide-menu">과제목록</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList"
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">공지사항</span></a>
                         </li>
                         <li class="list-divider"></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/logout"
@@ -165,6 +170,9 @@
 		                        <a class="btn btn-warning font-20 popover-item" id="state" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
+		                         <a class="btn btn-success font-20 popover-item" id="reviewBtn" style="color:white">
+	                        		수강후기
+	                  			 </a>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='과락'}">
 		                        <a class="btn btn-danger font-20 popover-item" style="color:white;">
