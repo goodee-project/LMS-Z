@@ -9,6 +9,9 @@ public class ManagerForm {
 	private String managerPw;
 	private String managerEmail;
 	private String managerPhone;
+	private String managerPhone1;
+	private String managerPhone2;
+	private String managerPhone3;
 	private String managerName;
 	private String managerGender;
 	private String managerBirth;

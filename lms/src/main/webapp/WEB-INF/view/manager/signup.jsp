@@ -124,7 +124,10 @@
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">이름</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" id="managerName" name="managerName"></td>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="text" id="managerName" name="managerName">
+	                                    			<div id="textName"></div>
+	                                    		</td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
 	                                   		
@@ -155,8 +158,9 @@
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">성별</th>
 	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="radio" name="managerGender" value="남">남
-	                                    			<input type="radio" name="managerGender" value="여">여
+	                                    			<input type="radio" class="managerGender" name="managerGender" value="남">남
+	                                    			<input type="radio" class="managerGender" name="managerGender" value="여">여
+	                                    			<div id="textGender"></div>
 	                                    		</td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
@@ -174,17 +178,23 @@
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">서브 주소</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="text" name="managerAddressSub"></td>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="text" id="managerAddressSub" name="managerAddressSub">
+	                                    			<div id="textAddressSub"></div>
+	                                    		</td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
 	                                   		
 	                                   		<tr class="border-0">
 	                                    		<th class="border-0 font-14 font-weight-medium">생일</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0"><input type="date" name="managerBirth"></td>
+	                                    		<td class="font-weight-medium text-dark border-top-0">
+	                                    			<input type="date" id="managerBirth" name="managerBirth">
+	                                    			<div id="textBirth"></div>
+	                                    		</td>
 	                                    		<td class="border-0"></td>    
 	                                   		</tr>
 	                                    </table>
-                                    <button type="submit">Sign Up</button>
+                                    <button id="btnSignup" type="button">Sign Up</button>
                                     </form>
                                 </div>
                             </div>
@@ -214,6 +224,27 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
+    	// 로그인이 되었는지 확인하는 변수
+		var successId = '';
+		var successPw = '';
+		var successName = '';
+		var successEmail = '';
+		var successPhone = '';
+		var successGender = '';
+		var successAddressMain = '';
+		var successAddressSub = '';
+		var successBirth = '';
+
+		// 회원가입 시 걸어논 규약을 만족해야만 회원가입 가능
+		$('#btnSignup').click(function(){
+			if(successId == 'success' && successPw == 'success' && successName == 'success' && successEmail == 'success' && successPhone == 'success' && successGender == 'success' && successAddressMain == 'success' && successAddressSub == 'success' && successBirth == 'success'){
+				//alert('success');
+				$('form').submit();
+			} else{
+				alert('입력란을 정상적으로 입력해 주세요');
+			}
+		})		
+
     	// 아이디에 대한 제약 (정규 표현식)
     	// 첫 글자 영문, 영문하고 숫자 조합으로만 조합 가능, 6~14글자
 		var checkId = /^[A-Za-z][A-Z0-9a-z]{5,13}$/;
@@ -221,12 +252,13 @@
 		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
 		$('#managerId').on('propertychange change keyup paste input', function(){
 			if(checkId.test($('#managerId').val())){				
-				$('#textId').text('형식 확인');
+				$('#textId').text('중복 검사를 해주세요');
 				$('#btnId').prop('disabled', false);				
 			}
 			else{
 				$('#textId').text('아이디 형식을 확인해 주세요');
 				$('#btnId').prop('disabled', true);
+				successId = '';
 			}
 		});
 
@@ -243,9 +275,11 @@
 							$('#managerId').prop('readonly', true);
 							$('#btnId').prop("disabled", true);
 							$('#textId').text('');
+							successId = 'success';
 						}
 					} else{
 						alert('중복 된 아이디입니다');
+						successId = '';
 					}
 				}
 			});	
@@ -278,23 +312,38 @@
 		$('#managerPw2').on('ropertychange change keyup paste input', function(){
 			if($('#managerPw').val() == $('#managerPw2').val()){
 				$('#textPw2').text('형식 확인');
+				successPw = 'success';
 			} else if($('#managerPw2').val() == ""){
 				$('#textPw2').text('');
+				successPw = '';
 			} else{
 				$('#textPw2').text('비닐번호가 다릅니다');
+				successPw = '';
 			}
 		});
+
+		// managerName의 값이 들어가있다면 형식 확인 출력 없다면 공백
+		$('#managerName').on('ropertychange change keyup paste input', function(){
+			if($('#managerName').val().length < 1){
+				$('#textName').text('');
+				successName = '';
+			} else{
+				$('#textName').text('형식 확인');
+				successName = 'success';
+			}
+		});	
 
 		// manageEmail 입력란에 @을 포합해야되는 등의 규약
 		// 그것을 실시간으로 입력감지하여 text로 표시
 		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		$('#managerEmail').on('ropertychange change keyup paste input', function(){
 			if(checkEmail.test($('#managerEmail').val())){
-				$('#textEmail').text('형식 확인');
+				$('#textEmail').text('중복 검사를 해주세요');
 				$('#btnEmail').prop('disabled', false);
 			} else{
 				$('#textEmail').text('');
 				$('#btnEmail').prop('disabled', true);
+				successEmail = '';
 			}
 		});
 
@@ -311,12 +360,19 @@
 							$('#managerEmail').prop('readonly', true);
 							$('#btnEmail').prop("disabled", true);
 							$('#textEmail').text('');
+							successEmail = 'success';
 						}
 					} else{
 						alert('중복 된 이메일입니다');
 					}
 				}
 			});	
+		});
+
+		// managerGender의 radio 버튼을 누를경우 선택을 한 것이므로 형식 확인 출력
+		$('.managerGender').on('ropertychange change keyup paste input', function(){
+			$('#textGender').text('형식 확인');
+			successGender = 'success';
 		});
 
 		// managerPhone을 총 3개로 나누고 그 중 2개에 규약 설정
@@ -329,28 +385,35 @@
 		$('#managerPhone1').on('ropertychange change keyup paste input', function(){
 			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
 				$('#textPhone').text('');
+				successPhone = '';
 			} else{
 				$('#textPhone').text('형식확인');
+				successPhone = 'success';
 			}
 		});
 
 		$('#managerPhone2').on('ropertychange change keyup paste input', function(){
 			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
 				$('#textPhone').text('');
+				successPhone = '';
 			} else{
 				$('#textPhone').text('형식확인');
+				successPhone = 'success';
 			}
 		});
 
 		$('#managerPhone3').on('ropertychange change keyup paste input', function(){
 			if(($('#managerPhone1').val() == "") || !checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
 				$('#textPhone').text('');
+				successPhone = '';
 			} else{
 				$('#textPhone').text('형식확인');
+				successPhone = 'success';
 			}
 		});
 
 		// managerAddressMain 옆에 있는 버튼을 누를경우 ajax를 통해 주소 검색란 표시
+		// 테이블을 스크롤의 형태로 출력을 하고 a태그의 oneclick옵션을 이용하여 키 값을 스크립트의 함수로 옮겨준뒤 처리한다
 		$('#btnAddress').click(function(){
 			$('#addressTable').empty();
 			$.ajax({
@@ -367,10 +430,13 @@
 					$('#addressTable').append(strHead);
 					
 					$.each(data.addressList, function(index, address){
+						var dataSet = address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1 + '-' + address.buildno2;
 						
 						var strBody = '<tbody>';
 						strBody += '<tr><td>';
-						strBody += address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1;
+						strBody += '<a href="javascript:click()" onclick="addressClick(\'' + dataSet + '\')">';						
+						strBody += dataSet;						
+						strBody += '</a>';
 						strBody += '</td></tr>';
 						strBody += '</tbody>';
 
@@ -379,7 +445,36 @@
 				}
 			});	
 		});
-		
+
+		// 주소 검색 테이블에서 해당 버튼을 눌렀을 경우 managerAddressMain이 채워진다.
+		function addressClick(dataSet){
+			$('#managerAddressMain').val(dataSet);
+			$('#addressTable').empty();
+			successAddressMain = 'success';
+		}
+
+		// managerAddressSub의 input text 안에 값이 있다면 형식 확인 출력
+		$('#managerAddressSub').on('ropertychange change keyup paste input', function(){
+			if($('#managerAddressSub').val().length < 1){
+				$('#textAddressSub').text('');
+				successAddressSub = ''
+			} else{
+				$('#textAddressSub').text('형식 확인');
+				successAddressSub = 'success';
+			}
+		});
+
+		// managerBirth의 input타입 birth를 선택을 하였다면 형식 확인 출력
+		$('#managerBirth').on('ropertychange change keyup paste input', function(){
+			if($('#managerBirth').val().length < 1){
+				$('#textBirth').text('');
+				successBirth = '';
+			} else{
+				$('#textBirth').text('형식 확인');
+				successBirth = 'success';
+			}
+		});	
+
     </script>
 </body>
 </html>

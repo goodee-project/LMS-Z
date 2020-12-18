@@ -9,10 +9,11 @@
 			sigungu,
 			doro,
 			buildno1,
-			buildno2
+			buildno2,
+			id
 		FROM address
-		WHERE doro like CONCAT('%', #{doro}, '%')
-		ORDER BY doro, buildno1
+		WHERE doro like CONCAT(#{doro}, '%')
+		ORDER BY doro, buildno1, buildno2
 		<!-- LIMIT #{currentPage}, #{limitPage}-->
 	</select>
 
@@ -24,7 +25,7 @@
 	
 	<select id="selectManagerToSignupByOverLapEmail" parameterType="String" resultType="int">
 		SELECT COUNT(*)
-		FROM manager
+		FROM manager_queue
 		WHERE manager_email = #{managerEmail}
 	</select>
 
@@ -42,7 +43,7 @@
 		INSERT INTO account(account_id, account_pw,
 							account_state, account_level,
 							account_createdate, account_updatedate)
-		VALUES(#{managerId}, #{managerPw},
+		VALUES(#{managerId}, PASSWORD(#{managerPw}),
 			   #{accountState}, #{accountLevel},
 			   NOW(), NOW())
 	</insert>
@@ -50,9 +51,11 @@
 	<insert id="insertManagerQueueToSignup" parameterType="gd.fintech.lms.vo.ManagerForm">
 		INSERT INTO manager_queue(manager_id, manager_email,
 								  manager_phone, manager_name,
-								  manager_gender, manager_birth)
+								  manager_gender, manager_birth,
+								  manager_address_main, manager_address_sub)
 		VALUES(#{managerId}, #{managerEmail},
 			   #{managerPhone}, #{managerName},
-			   #{managerGender}, #{managerBirth})
+			   #{managerGender}, #{managerBirth},
+			   #{managerAddressMain}, #{managerAddressSub})
 	</insert>
 </mapper>

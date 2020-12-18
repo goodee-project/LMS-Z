@@ -62,6 +62,8 @@ public class ManagerLoginService {
 	public void addSignup(ManagerForm managerForm) {
 		managerForm.setAccountLevel(2);
 		managerForm.setAccountState("대기");
+		
+		managerForm.setManagerPhone(managerForm.getManagerPhone1()+managerForm.getManagerPhone2()+managerForm.getManagerPhone3());
 			
 		managerLoginMapper.insertManagerQueueToSignup(managerForm);
 		managerLoginMapper.insertAccountToSignup(managerForm);
