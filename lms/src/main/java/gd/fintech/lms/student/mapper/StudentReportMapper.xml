@@ -18,7 +18,7 @@
 	</collection>	
 	</resultMap>
 	
-	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
+	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="String">
 		SELECT
 			r.lecture_no,
 			r.report_title,
@@ -26,11 +26,28 @@
 			r.report_createdate,
 			r.report_updatedate,
 			r.report_startdate,
-			r.report_enddate,
+			r.report_enddate
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
 		WHERE cr.account_id = #{accountId}
 		ORDER BY r.report_createdate DESC
-		LIMIT #{beginRow},#{rowPerPage}
 	</select>
+	
+	<insert id="insertReport" parameterType="gd.fintech.lms.vo.ReportSubmit">
+		INSERT INTO
+			report_submit(
+				report_no,
+				account_id,
+				report_submit_writer,
+				report_submit_updatedate,
+				report_submit_title,
+				report_submit_content
+			)VALUES(
+				#{reportNo},
+				#{accountId},
+				#{reportSubmitWriter},
+				#{reportSubmitUpdatedate},
+				#{reportSubmitContent}
+			)
+	</insert>
 </mapper>

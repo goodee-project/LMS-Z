@@ -5,8 +5,9 @@ import lombok.Data;
 @Data
 public class ReportSubmit {
 	private int reportSubmitNo;
-	private int reportId;
+	private int reportNo;
 	private String accountId;
+	private String reportSubmitWriter;
 	private String reportSubmitCreatedate;
 	private String reportSubmitUpdatedate;
 	private String reportSubmitTitle;

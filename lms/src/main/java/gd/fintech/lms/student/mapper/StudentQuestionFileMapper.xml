@@ -12,7 +12,7 @@
 			question_file_type,
 			question_file_count,
 			question_file_createdate
-		)values(
+		)VALUES(
 			#{questionFileUuid},
 			#{questionFileOriginal},
 			#{questionNo},

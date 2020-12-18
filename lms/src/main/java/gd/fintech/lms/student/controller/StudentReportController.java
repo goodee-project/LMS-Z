@@ -16,22 +16,11 @@ import gd.fintech.lms.vo.Report;
 public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
 	
-	@GetMapping("/student/reportList/{currentPage}")
+	@GetMapping("/student/reportList/{accountId}")
 	public String listReport(Model model,
-			@PathVariable(name="currentPage",required=true)int currentPage,
-			@RequestParam(name="accountId")String accountId) {
-		int rowPerPage = 10;
-		List<Report> reportList = studentReportService.getReportPage(currentPage, rowPerPage, accountId);
-
-		int countReport = 10;
-		int lastPage = countReport / rowPerPage;
-		if(countReport % rowPerPage !=0) {
-			lastPage +=1;
-		}
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("rowPerPage", rowPerPage);
-		model.addAttribute("reportList", reportList);
+			@PathVariable(name="accountId")String accountId) {
+		List<Report> reportList = studentReportService.getReportPage(accountId);
+		model.addAttribute("reportList",reportList);
 		return "/student/reportList";
 	}
 }

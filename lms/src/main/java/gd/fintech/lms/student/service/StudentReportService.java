@@ -13,14 +13,10 @@ import gd.fintech.lms.vo.Report;
 @Service
 public class StudentReportService {
 	@Autowired private StudentReportMapper studentReportMapper;
-	
-	
-	public List<Report> getReportPage(int currentPage, int rowPerPage, String accountId){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("beginRow", (currentPage-1)*rowPerPage);
-		map.put("rowPerPage", rowPerPage);
 		
-		return studentReportMapper.selectReportListPage(map);
+	public List<Report> getReportPage(String accountId){
+		return studentReportMapper.selectReportListPage(accountId);
 	}
+	
 	
 }
