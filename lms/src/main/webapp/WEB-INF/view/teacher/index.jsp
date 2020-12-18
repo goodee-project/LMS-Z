@@ -123,6 +123,12 @@
                                     class="hide-menu">과제
                                 </span></a>
                         </li>
+                        <!-- FAQ -->
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/faqList"
+                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
+                                    class="hide-menu">FAQ
+                                </span></a>
+                        </li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">4</span></a>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherFaqMapper">
+	<!-- 전체 FAQ 목록 출력 -->
+	<select id="selectFaqList" resultType="gd.fintech.lms.vo.Faq">
+		SELECT
+			faq_no faqNo,
+			faq_writer faqWriter,
+			faq_title faqTitle,
+			faq_createdate faqCreatedate,
+			faq_updatedate faqUpdatedate,
+			faq_count faqCount,
+			faq_category faqCategory
+		FROM faq
+	</select>
+	
+	<!-- 카테고리별 FAQ목록 -->
+	<select id="selectFaqListByCategory" parameterType="String" resultType="gd.fintech.lms.vo.Faq">
+		SELECT
+			faq_no faqNo,
+			faq_writer faqWriter,
+			faq_title faqTitle,
+			faq_createdate faqCreatedate,
+			faq_updatedate faqUpdatedate,
+			faq_count faqCount,
+			faq_category faqCategory
+		FROM faq
+		WHERE faq_category = #{faqCategory}
+	</select>
+	
+	<!-- FAQ카테고리 목록 -->
+	<select id="selectFaqCategoryList" resultType="gd.fintech.lms.vo.FaqCategory">
+		SELECT
+			faq_category faqCategory
+		FROM faq_category
+	</select>
+</mapper>
