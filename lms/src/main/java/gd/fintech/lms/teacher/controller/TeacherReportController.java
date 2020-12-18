@@ -60,5 +60,24 @@ public class TeacherReportController {
 		
 		return "teacher/reportOne";
 	}
-
+	
+	//과제수정 폼
+	@GetMapping("/teacher/modifyReport/{reportNo}")
+	public String modifyReport(Model model, @PathVariable(value = "reportNo") int reportNo) {
+		
+		Report reportOne = teacherReportService.getReportOne(reportNo);
+		model.addAttribute("reportOne", reportOne);
+		
+		return "teacher/modifyReport";
+	}
+	
+	//과제수정 액션
+	@PostMapping("/teacher/modifyReport/{reportNo}")
+	public String modifyReport(Report report) {
+		
+		teacherReportService.modifyReport(report);
+		
+		return "redirect:/teacher/reportOne/"+report.getReportNo();
+	}
+	
 }

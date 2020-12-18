@@ -48,5 +48,15 @@
 		FROM report
 		WHERE report_no = #{reportNo}
 	</select>
-
+	<!-- 과제수정 -->
+	<update id="updateReport" parameterType="gd.fintech.lms.vo.Report">
+		UPDATE report
+		SET
+			report_title = #{reportTitle},
+			report_content = #{reportContent},
+			report_updatedate = NOW(),
+			report_startdate = #{reportStartdate},
+			report_enddate = #{reportEnddate}
+		WHERE report_no = #{reportNo}
+	</update>
 </mapper>

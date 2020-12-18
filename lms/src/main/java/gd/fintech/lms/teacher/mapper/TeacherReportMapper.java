@@ -16,5 +16,6 @@ public interface TeacherReportMapper {
 	int deleteReport(int reportNo);
 	//과제 상세보기
 	Report selectReportOne(int reportNo);
-
+	//과제수정
+	int updateReport(Report report);
 }

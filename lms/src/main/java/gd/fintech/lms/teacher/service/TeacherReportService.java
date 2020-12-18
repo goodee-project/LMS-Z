@@ -33,5 +33,9 @@ public class TeacherReportService {
 	public Report getReportOne(int reportNo) {
 		return teacherReportMapper.selectReportOne(reportNo);
 	}
-
+	
+	//과제수정
+	public int modifyReport(Report report) {
+		return teacherReportMapper.updateReport(report);
+	}
 }
