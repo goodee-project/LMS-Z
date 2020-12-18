@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
 
@@ -76,8 +77,16 @@ public class StudentLectureService {
 		return studentLectureMapper.updateLectureReview(classRegistration);
 	}
 	//=== 승인 대기중인 강의 취소 ====
-	public int removeWaitingClassCancle(int classRegistrationNo) {
-		return studentLectureMapper.deleteWaitingClassCancle(classRegistrationNo);
+	public int removeWaitingClassCancel(int classRegistrationNo) {
+		return studentLectureMapper.deleteWaitingClassCancel(classRegistrationNo);
+	}
+	// ==== 수강 중 취소한 학생의 사유 입력 ====
+	public int addReasonForCancellation(ClassRegistrationCancel classRegistrationCancel) {
+		return studentLectureMapper.insertReasonForCancellation(classRegistrationCancel);
+	}
+	//=== 수강 중 취소시 상태 변화 / 수강중 -> 취소
+	public int modifyClassStateChange(int classRegistrationNo) {
+		return studentLectureMapper.updateClassStateChange(classRegistrationNo);
 	}
 }
 

@@ -146,7 +146,7 @@
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
-		                        href="${path }/student/WaitingClassCancle/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
+		                        href="${path }/student/WaitingClassCancel/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
 		                        style="color:white;">
 		                        	수강 취소
 		                        </a>
@@ -156,7 +156,7 @@
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
-		                        href="" 
+		                        id="classCancelBtn"
 		                        style="color:white;">
 		                        	수강 취소
 		                        </a>
@@ -223,7 +223,37 @@
                         </div>
                     </div>
                 </div>
-                
+                <!-- 수강취소 사유 작성란 -->
+				<div class="row" id="classCancelDiv" hidden="hidden">
+                    <div class="col-md-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start">
+                                    <h4 class="card-title mb-0">취소 사유</h4>
+                                    <button class="btn btn-light text-dark rounded-circle btn-circle font-20 ml-auto" 
+                                    type="button" id="classCancelCloseBtn">▲</button>
+                                </div>
+                                <br>
+                                <div class="table-responsive">
+                                <form method="post" action="${path }/student/reasonForCancellation/${studentId}/${myLectureListOne.lecture.lectureNo}/${currentPage}">
+                                	<div><input type="text" name="classRegistrationNo" value="${myLectureListOne.classRegistrationNo}" hidden="hidden"></div>
+	                                <div>
+	                                	<div class="font-14 font-weight-medium text-muted">
+	                                         <textarea style="resize:none" cols="70" rows="6" id="cancelContent"
+	                                         	name="cancelContent" class="font-weight-medium text-dark px-4 py-4"></textarea>
+	                                    </div>
+	                                </div>
+	                                <br>
+	                                <div class="d-flex align-items-start">
+	                                    <button class="btn btn-warning text-white font-20" 
+	                                    type="button" id="classCancelInputBtn">입력</button>
+	                                </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
                     <div class="col-md-5 col-lg-7">
@@ -414,6 +444,21 @@
 						alert("수강후기가 저장되었습니다.")
 					}
 				})
+			$('#classCancelBtn').click(function(){
+				$("#classCancelDiv").removeAttr("hidden");
+				})
+			$('#classCancelCloseBtn').click(function(){
+				$("#classCancelDiv").attr("hidden", "hidden");
+				})
+			$('#classCancelInputBtn').click(function(){
+				if($("#cancelContent").val() == ""){
+					alert("후기를 입력해주세요");
+				}else{
+					$("#classCancelInputBtn").removeAttr('type');
+					$("#classCancelInputBtn").attr('type','submit');
+					alert("수강후기가 저장되었습니다.")
+				}
+			})
     </script>
 </body>
 

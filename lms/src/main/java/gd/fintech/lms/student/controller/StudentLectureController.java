@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
 
@@ -128,12 +129,23 @@ public class StudentLectureController {
 		return "redirect://student/myLectureListOne/"+classRegistration.getAccountId()+"/"+classRegistration.getLectureNo()+"/"+currentPage;
 	}
 	//=== 승인 대기중인 강의 취소 ====
-	@GetMapping("/student/WaitingClassCancle/{classRegistrationNo}/{studentId}/{currentPage}")
-	public String WaitingClassCancle(@PathVariable(name="classRegistrationNo") int classRegistrationNo,
+	@GetMapping("/student/WaitingClassCancel/{classRegistrationNo}/{studentId}/{currentPage}")
+	public String WaitingClassCancel(@PathVariable(name="classRegistrationNo") int classRegistrationNo,
 									@PathVariable(name="studentId") String studentId,
 									@PathVariable(name="currentPage") int currentPage){
-		studentLectureService.removeWaitingClassCancle(classRegistrationNo);
+		studentLectureService.removeWaitingClassCancel(classRegistrationNo);
 		return "redirect:/student/myLectureList/"+studentId+"/"+currentPage;
+	}
+	// ==== 수강 중 취소한 학생의 사유 입력 ====
+	@PostMapping("/student/reasonForCancellation/{studentId}/{lectureNo}/{currentPage}")
+	public String reasonForCancellation(ClassRegistrationCancel classRegistrationCancel,
+										@PathVariable(name="studentId") String studentId,
+										@PathVariable(name="lectureNo") int lectureNo,
+										@PathVariable(name="currentPage") int currentPage) {
+		// 수강 취소 사유 추가
+		studentLectureService.addReasonForCancellation(classRegistrationCancel);
+		studentLectureService.modifyClassStateChange(classRegistrationCancel.getClassRegistrationNo());
+		return "redirect:/student/myLectureListOne/"+studentId+"/"+lectureNo+"/"+currentPage;
 	}
 }
 

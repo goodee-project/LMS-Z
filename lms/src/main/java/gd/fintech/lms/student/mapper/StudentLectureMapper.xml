@@ -282,8 +282,32 @@
 		AND account_id = #{accountId}
 	</update>
 	<!-- === 승인 대기중인 강의 취소 ==== -->
-	<delete id="deleteWaitingClassCancle" parameterType="Integer">
+	<delete id="deleteWaitingClassCancel" parameterType="Integer">
 		DELETE FROM class_registration
 		WHERE class_registration_no=#{classRegistrationNo}
 	</delete>
+	<!-- ==== 수강 중 취소한 사유 저장 ==== -->
+	<insert id="insertReasonForCancellation" parameterType="gd.fintech.lms.vo.ClassRegistrationCancel">
+		INSERT INTO 
+			class_registration_cancel(
+			class_registration_no,
+			cancel_createdate,
+			cancel_content
+			)
+		VALUES(
+			#{classRegistrationNo},
+			NOW(),
+			#{cancelContent}
+			)
+	</insert>
+	<!-- === 수강 중 취소시 상태 변화 / 수강중 -> 취소 -->
+	<update id="updateClassStateChange" parameterType="Integer">
+		UPDATE class_registration
+		SET class_registration_state = '취소'
+		WHERE class_registration_no = #{classRegistrationNo}
+	</update>
 </mapper>
+
+
+
+

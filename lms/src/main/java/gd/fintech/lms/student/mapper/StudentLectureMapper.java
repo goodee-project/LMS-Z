@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.ClassRegistration;
+import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
 
@@ -33,5 +34,9 @@ public interface StudentLectureMapper {
 	//==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 =====
 	public int updateLectureReview(ClassRegistration classRegistration);
 	//=== 승인 대기중인 강의 취소 ====
-	public int deleteWaitingClassCancle(int classRegistrationNo);
+	public int deleteWaitingClassCancel(int classRegistrationNo);
+	//=== 수강 중 취소한 사유 저장 ====
+	public int insertReasonForCancellation(ClassRegistrationCancel classRegistrationCancel);
+	//=== 수강 중 취소시 상태 변화 / 수강중 -> 취소
+	public int updateClassStateChange(int classRegistrationNo);
 }
