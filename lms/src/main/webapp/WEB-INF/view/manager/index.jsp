@@ -107,9 +107,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/lectureList"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">강좌 목록</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-calendar.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/classroomList"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">3</span></a></li>
+                                    class="hide-menu">강의실 관리</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">4</span></a>

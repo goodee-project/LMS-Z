@@ -53,14 +53,18 @@ public class ManagerLectureController {
 	@PostMapping("/manager/insertAction")
 	public String insertAction(Lecture lecture) {
 		logger.debug("lecture"+lecture.toString());
-		
 		managerLectureService.insertLecture(lecture);
+		//강의실을 빈강의실에서 사용중으로 변경하기 위한 변수
+		int classroomNo = lecture.getClassroomNo();
+		managerLectureService.updateClassroomState(classroomNo);
 		return "redirect:/manager/lectureList";
 	}
 	//강좌 삭제버튼 클릭시 해당 강좌를 삭제하기 위한 서비스 호출
-	@GetMapping("/manager/deleteLecture/{lectureNo}")
-	public String deleteLecture(@PathVariable(name="lectureNo") int lectureNo) {
+	@GetMapping("/manager/deleteLecture/{lectureNo}/{classroomNo}")
+	public String deleteLecture(@PathVariable(name="lectureNo") int lectureNo,
+			@PathVariable(name="classroomNo") int classroomNo) {
 		managerLectureService.deleteLecture(lectureNo);
+		managerLectureService.updateClassroomState(classroomNo);
 		return "redirect:/manager/lectureList";
 	}
 }

@@ -55,6 +55,7 @@
 			l.lecture_enddate, 
 			l.lecture_total,
 			sy.syllabus_content,
+			c.classroom_No,
 			c.classroom_number
 		FROM lecture l , account a, teacher t, subject s, syllabus sy, textbook tb, classroom c
 		WHERE l.account_id = a.account_id 
@@ -95,12 +96,13 @@
 			syllabus_content syllabusContent
 		FROM syllabus 
 	</select>
-	<!-- 강의실 목록을 출력하는 쿼리 -->
+	<!-- 빈 강의실 목록을 출력하는 쿼리 -->
 	<select id="selectClassroomList" resultType="gd.fintech.lms.vo.Classroom">
 		SELECT
 			classroom_no classroomNo,
 			classroom_number classroomNumber
 		FROM classroom
+		WHERE classroom_state = '빈강의실'	
 	</select>
 	<!-- 강좌를 추가해주는 쿼리 -->
 	<insert id="insertLecture" parameterType="gd.fintech.lms.vo.Lecture">
@@ -132,6 +134,12 @@
 			NOW()
 		)
 	</insert>
+	<!-- 추가된 강좌에 사용한 강의실을 사용중으로 변경해주는 쿼리 -->
+	<update id="updateClassroomState" parameterType="int">
+		UPDATE classroom
+		SET classroom_state = if(classroom_state = '빈강의실','사용중','빈강의실')
+		WHERE classroom_no = #{classroomNo}
+	</update>
 	<!-- 강좌 추가하기 위해 필요한 선생님 아이디 가져오는 쿼리 -->
 	<select id="selectTeacherId" parameterType="gd.fintech.lms.vo.Teacher" resultType="java.lang.String">
 		SELECT

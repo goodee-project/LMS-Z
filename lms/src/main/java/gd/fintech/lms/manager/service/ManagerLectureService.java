@@ -1,5 +1,6 @@
 package gd.fintech.lms.manager.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
+import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
 import gd.fintech.lms.vo.Classroom;
@@ -22,7 +24,8 @@ public class ManagerLectureService {
 	@Autowired ManagerLectureMapper managerLectureMapper;
 	@Autowired TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	@Autowired StudentQuestionMapper studentQuestionMapper;
-	
+	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
+	private final String PATH = "C:\\Users\\guswn\\OneDrive\\바탕 화면\\git\\maven.1607910829175\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(){
 		return managerLectureMapper.selectLectureList();
@@ -55,11 +58,26 @@ public class ManagerLectureService {
 	public String getTeacherId(Teacher teacher) {
 		return managerLectureMapper.selectTeacherId(teacher);
 	}
+	//강좌를 추가하면 배정된 강의실의 상태를 변경해주는 메퍼 호출
+	public void updateClassroomState(int classroomNo) {
+		managerLectureMapper.updateClassroomState(classroomNo);
+	}
 	//강좌를 삭제하기 위해 필요한 메퍼 호출
 	public void deleteLecture(int lectureNo) {
 		//삭제할 강좌와 연결된 질문 삭제
 		List<Integer> questionNo = studentQuestionMapper.selectLectureNo(lectureNo);
-		
+		for(int q : questionNo) {
+			List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(q);
+			for(String s : questionFileUuid) {
+				File file = new File(PATH+s);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
+			studentQuestionFileMapper.deleteAllQuestionFile(q);
+			studentQuestionMapper.deleteQuestionAllComment(q);
+			studentQuestionMapper.deleteQuestion(q);
+		}
 		//삭제할 강좌와 연결된 공지사항 삭제
 		teacherLectureNoticeMapper.deleteLecture(lectureNo);
 		//삭제할 강좌와 연결된 레포트 삭제
