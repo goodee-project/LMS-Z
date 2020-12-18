@@ -98,7 +98,10 @@
                         <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
-
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/lmsNoticeList"
+                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
+                                    class="hide-menu">공지사항
+                                    </span></a>
                         <li class="sidebar-item"> <a class="sidebar-link" href="${path}/manager/member"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강사/학생 관리

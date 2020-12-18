@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.manager.service.ManagerNoticeService;
 import gd.fintech.lms.vo.LmsNotice;
@@ -19,7 +18,7 @@ public class ManagerNoticeController {
 	@Autowired ManagerNoticeService managerNoticeService;
 	
 	//공지사항 리스트 
-	@GetMapping ("/manager/LmsNoticeList/{lmsNoticeNo}/{currentPage}")
+	@GetMapping ("/manager/lmsNoticeList/{lmsNoticeNo}/{currentPage}")
 	public String LmsNotice(Model model, @PathVariable(value = "lmsNoticeNo") int lmsNoticeNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		//한 페이지 출력 공지사항 개수 
@@ -37,13 +36,13 @@ public class ManagerNoticeController {
 			lastPage = totalCount / rowPerPage +1;
 		}
 		
-		List<LmsNotice> LmsnoticeList = managerNoticeService.getLmsNoticeList(lmsNoticeNo, currentPage, rowPerPage);
+		List<LmsNotice> lmsNoticeList = managerNoticeService.getLmsNoticeList(lmsNoticeNo, currentPage, rowPerPage);
 
 		model.addAttribute("currentpage", currentPage);
 		model.addAttribute("lastpage", lastPage);
-		model.addAttribute("lmsnoticeList", LmsnoticeList);
+		model.addAttribute("lmsNoticeList", lmsNoticeList);
 	
-		return "manager/LmsNoticeList";
+		return "manager/lmsNoticeList";
 	}
 	
 	//공지사항 작성 폼 
@@ -53,7 +52,7 @@ public class ManagerNoticeController {
 	}
 	
 	//공지사항 작성 액션 
-	@PostMapping("/manager/addLmsNotice/accountId{}")
+	@PostMapping("/manager/addLmsNotice/{accountId}")
 	public String addLmsNotice(LmsNotice accountId) {
 		managerNoticeService.addLmsNotice(accountId);
 		return "redirect:/manager/LmsNoticeList/"+accountId.getLmsNoticeNo();
@@ -67,7 +66,7 @@ public class ManagerNoticeController {
 	}
 	//공지사항 수정 폼 
 	@GetMapping("/manager/modifyLmsNotice/{accountId}/{lmsNoticeNo}")
-	public String modifyLmsNotice(Model model, @PathVariable(value="accountId")Integer accountId, @PathVariable(value ="lmsNoticeNo")int lmsNoticeNo) {
+	public String modifyLmsNotice(Model model, @PathVariable(value = "accountId")Integer accountId, @PathVariable(value ="lmsNoticeNo")int lmsNoticeNo) {
 		LmsNotice LmsNoticeOne = managerNoticeService.getLmsNoticeOne(lmsNoticeNo);
 		model.addAttribute("noticeOne", LmsNoticeOne);
 		return "manager/modifyLmsNotice";

@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> LmsNoticeList</title>
+<title>lmsNoticeList</title>
 </head>
 <body>
-	<h1>Lms 공지사항</h1>
+	<h1>LMS 공지사항</h1>
 		<table border="1">
 			<thead>
 				<tr>
@@ -23,7 +23,7 @@
 					<tr>
 						<td>${l.lmsNoticeNo}</td>
 						<td>${l.lmsNoticeWriter}</td>
-						<td><a href="${path}/manager/lmsNoticeOne/${l.lmsNoticeNo}">${l.lmsNoticeTitle}</a></td>
+						<td><a href="${path}/teacher/lmsNoticeOne/${l.lmsNoticeNo}">${l.lmsNoticeTitle}</a></td>
 						<td>${l.lmsNoticeCount}</td>
 					</tr>
 				</c:forEach>
