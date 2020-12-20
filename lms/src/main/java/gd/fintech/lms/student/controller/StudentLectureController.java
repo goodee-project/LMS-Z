@@ -1,6 +1,7 @@
 package gd.fintech.lms.student.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -12,14 +13,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLectureService;
+import gd.fintech.lms.student.service.StudentMsgService;
 import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Msg;
 
 @Controller
 public class StudentLectureController {
 	@Autowired StudentLectureService studentLectureService;
+	@Autowired StudentMsgService studentMsgService;
 	
 	//페이징 처리한 전체 강의 목록 리스트
 	@GetMapping("/student/lectureList/{currentPage}")
@@ -113,6 +117,7 @@ public class StudentLectureController {
 								@PathVariable(name="currentPage") int currentPage) {
 		// 강의실 정보
 		ClassRegistrationForm myLectureListOne = studentLectureService.getMyLectureListOne(studentId, lectureNo);
+		
 		
 		model.addAttribute("myLectureListOne",myLectureListOne);
 		model.addAttribute("currentPage",currentPage);

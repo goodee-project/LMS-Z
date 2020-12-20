@@ -18,4 +18,5 @@ public class ClassRegistrationForm {
 	private Subject subject;
 	private Syllabus syllabus;
 	private Textbook textbook;
+	private Student student;
 }

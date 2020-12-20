@@ -54,12 +54,7 @@
 				<!-- 로고 오른쪽 메뉴 -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<span class="navbar-nav float-left mr-auto ml-3 pl-1">
-	                    <a class="btn btn-success font-20 popover-item " href="${path}/student/index">
-	                        	뒤로가기
-	                    </a>
-	                    <a class="btn btn-success font-20 popover-item ml-3" style="color:white">
-	                        	강의 공지사항
-	                    </a>
+	                    
                     </span>
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">

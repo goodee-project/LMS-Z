@@ -42,7 +42,7 @@
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
-                            </b>
+                           </b>
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
 								GOODEE LMS
@@ -64,6 +64,75 @@
 	                        	강의 공지사항
 	                    </a>
                     </span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!-- 메세지 -->
+                    <div class="dropdown sub-dropdown" id="">
+                    	<span id="alarm">
+                    		<a class="btn btn-danger rounded-circle btn-circle font-1" style="width:1px; height:1px"></a>
+                    	</span>
+                        <button class="btn btn-link text-muted dropdown-toggle" type="button"
+                                id="msgOpen" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                             메세지<i data-feather="more-vertical"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
+	                        <span style="color:black; font-size:x-large;" class="col-md-6">${myLectureListOne.teacher.teacherName }&nbsp;강사님</span>
+	                        <br>
+                        <div class="col-md-6 col-lg-12" style="">
+		                        <div class="card">
+		                            <div class="card-body" style="background-color:;">
+		                                <div class="d-flex align-items-start">
+		                                	
+		                                </div>
+		                                <div class="table-responsive" style="height:30rem">
+			                                <div class="font-14 text-dark px-2 py-2" id="msgListDiv">
+			                                   
+			                               </div>
+		                              </div>
+		                          </div>
+		                      </div>
+		                  </div>
+		                    <!-- 채팅 입력창 -->
+		                    <div class="col-md-6 col-lg-12">
+		                        <div class="card">
+		                            <div class="card-body">
+		                                <div class="table-responsive">
+				                                <div class="">
+				                                	<div class="font-14 font-weight-medium text-muted px-2 py-2">
+				                                         <textarea style="resize:none" cols="80" rows="6" id="toTeacherMsgContent"
+				                                         	name="msgContent" class="font-weight-medium text-dark px-4 py-4"></textarea>
+				                                    </div>
+				                                </div>
+				                                <div class="d-flex align-items-start">
+				                                	<button id="startBtn" type="button">새로고침</button>
+				                                	<button id="stopBtn" type="button">정지</button>
+				                                    <button class="btn btn-warning text-white font-20 ml-auto" 
+				                                    type="button" id="studentMsgBtn">입력</button>
+				                                </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+                        </div>
+                	</div>
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->
@@ -262,7 +331,7 @@
                         </div>
                     </div>
                 </div>
-				<!-- 1번째 라인 카드 -->
+				<!-- 강의 정보  -->
                 <div class="row">
                     <div class="col-md-5 col-lg-7">
                         <div class="card">
@@ -426,6 +495,7 @@
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
 		$(document).ready(function(){
+			let timerId=null;
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
 						$("#reviewDiv").removeAttr('hidden');
@@ -440,7 +510,6 @@
 			$("#reviewCloseBtn").click(function(){
 				$("#reviewDiv").attr("hidden","hidden");
 				})
-			})
 			$("#reviewInputBtn").click(function(){
 					if($("input[name='classRegistrationPoint']:checked").val() == null){
 						alert("평점을 체크해주세요");
@@ -467,7 +536,139 @@
 					alert("수강후기가 저장되었습니다.")
 				}
 			})
+			//메세지 입력했을 때 저장
+			$('#studentMsgBtn').click(function(){
+					// 메세지를 입력하지 않았을 때는 아무 작동 하지 않도록 함
+					if($('#toTeacherMsgContent').val() != ""){
+						$.ajax({
+							url:'${path}/student/toTeacherMsg',
+							type:'post',
+							data:{
+								fromId:"${studentId}",
+								toId:"${myLectureListOne.lecture.accountId}",
+								fromName:"${myLectureListOne.student.studentName}",
+								msgContent:$('#toTeacherMsgContent').val()
+								},
+							success:function(data){
+								//console.log(data);
+								//입력하면 내용 제거
+								document.getElementById("toTeacherMsgContent").value='';
+							}
+						})
+					}
+				})
+			// 메세지를 눌렀을 때 읽음으로 판단
+			$('#msgOpen').click(function(){
+					$.ajax({
+						url:'${path}/student/studentReadMsg',
+						type:'post',
+						data:{
+							toId:"${studentId}",
+							fromId:"${myLectureListOne.lecture.accountId}"
+							},
+						success:function(data){
+							//console.log(data);
+							$('#alarm').attr("hidden","hidden");
+							}
+					})
+				})
+			$('#startBtn').click(function(){//실시간 갱신 다시 실행
+				timerId=setInterval(msgList,5000);//5초
+				})
+			$('#stopBtn').click(function(){//실시간 갱신 정지
+				clearInterval(timerId);
+			})
+				timerId=setInterval(msgList,5000);//5초
+		})
+			//리스트 보기
+			function msgList(){
+				//$('#msgListDiv').empty();
+				let html;
+				$.ajax({
+					url:"${path}/student/msgList",
+					type:"get",
+					data:{
+						studentId:"${studentId}",
+						teacherId:"${myLectureListOne.lecture.accountId}"
+						},
+					success:function(data){
+						$('#msgListDiv').empty();
+						data.forEach(function(msgList,index){
+								//console.log(msgList.msgContent);
+								//console.log(msgList.isConfirm);
+								
+								//보낸 사람이 강사일 경우
+								if(msgList.fromId != "${studentId}"){
+									//읽지 않았다면 1을 출력
+									if(msgList.isConfirm == false){
+									$('#alarm').removeAttr("hidden");
+									html = `
+										 <div class="font-14 font-weight-medium px-2 py-2">
+										<textarea style="resize:none;overflow:visible;" id="\${index}" readonly="readonly" cols="50"
+                                        name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+                                        \${msgList.msgSendDatetime}<span style="color:yellow">1&emsp;</span>
+										</div>
+										`
+										$('#msgListDiv').append(html);
+									if(index==data.length-1){
+										$("#"+index).focus();
+									}
+									//읽었다면 1 제거
+									}else if(msgList.isConfirm == true){
+										html = `
+											 <div class="font-14 font-weight-medium px-2 py-2">
+											<textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+	                                        name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+	                                        \${msgList.msgSendDatetime}
+											</div>
+											`
+										$('#msgListDiv').append(html);
+										if(index==data.length-1){
+											$("#"+index).focus();
+										}
+									}
+								//보낸 사람이 학생인 경우
+								}else if(msgList.fromId == "${studentId}"){
+									if(msgList.isConfirm == false){
+										html = `
+											<div class="font-14 font-weight-medium px-2 py-2 float-right">
+											<span style="color:yellow">1&emsp;</span>\${msgList.msgSendDatetime}
+											 <textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+	                                        name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+	                                        </div>
+											`
+										$('#msgListDiv').append(html);
+										if(index==data.length-1){
+											$("#"+index).focus();
+										}
+									}else if(msgList.isConfirm == true){
+										html = `
+											<div class="font-14 font-weight-medium px-2 py-2 float-right">
+											\${msgList.msgSendDatetime}
+											 <textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+	                                        name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+	                                        </div>
+											`
+										$('#msgListDiv').append(html);
+										if(index==data.length-1){
+											$("#"+index).focus();
+										}
+									}
+								}
+							})
+						}
+					})
+				}
+			
     </script>
 </body>
-
 </html>
+
+
+
+
+
+
+
+
+

@@ -57,11 +57,7 @@
 					
                     <span class="navbar-nav float-left mr-auto ml-3 pl-1">
 	                    <a class="btn btn-success font-20 popover-item " href="${path}/student/lmsNoticeList">
-	                        	목록으로
-	                    </a>
-	                    <a class="btn btn-success font-20 popover-item ml-3" style="color:white"
-	                    	href="${path }/student/lectureNoticeList/${lectureNo}/${currentPage}">
-	                        	강의 공지사항
+	                        	←
 	                    </a>
                     </span>
                     <!-- 메뉴 오른쪽 마이페이지 -->

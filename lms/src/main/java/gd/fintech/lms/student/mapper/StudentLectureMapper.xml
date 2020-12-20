@@ -144,6 +144,7 @@
 		<result property="classRegistrationState" column="class_registration_state"/>
 		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
 			<result property="lectureNo" column="lecture_no"/>
+			<result property="accountId" column="account_id"/>
 			<result property="teacherName" column="teacher_name"/>
 			<result property="lectureName" column="lecture_name"/>
 			<result property="lectureStartdate" column="lecture_startdate"/>
@@ -156,6 +157,7 @@
 			cr.class_registration_no,
 			cr.class_registration_state,
 			l.lecture_no,
+			l.account_id,
 			l.teacher_name,
 			l.lecture_name,
 			l.lecture_startdate,
@@ -195,6 +197,9 @@
 			<result property="classroomNo" column="classroom_no"/>
 			<result property="lectureCreatedate" column="lecture_createdate"/>
 			<result property="lectureUpdatedate" column="lecture_updatedate"/>
+		</association>
+		<association property="student" javaType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name"/>
 		</association>
 		<association property="account" javaType="gd.fintech.lms.vo.Account">
 				<result property="accountId" column="account_id"/>
@@ -236,6 +241,7 @@
 			cr.class_registration_state,
 			cr.class_registration_point,
 			cr.class_registration_review,
+			st.student_name,
 			l.lecture_no,
 			l.account_id,
 			l.subject_no,
@@ -263,6 +269,7 @@
 			c.classroom_total
 		FROM class_registration cr
 		LEFT JOIN lecture l ON cr.lecture_no = l.lecture_no
+		LEFT JOIN student st ON cr.account_id = st.student_id
 		LEFT JOIN `account` a ON l.account_id = a.account_id
 		LEFT JOIN `teacher` t ON l.account_id = t.teacher_id
 		LEFT JOIN subject s ON l.subject_no = s.subject_no
