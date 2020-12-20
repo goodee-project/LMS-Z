@@ -299,7 +299,7 @@
 				} else{
 					$('#textPw').text('특수문자를 포합해주세요');
 					$('#teacherPw2').prop('readonly', true);
-					
+						
 				}
 			} else{
 				$('#textPw').text('비닐번호 형식을 확인해 주세요');

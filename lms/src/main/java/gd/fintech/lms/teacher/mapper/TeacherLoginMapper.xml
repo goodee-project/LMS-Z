@@ -60,7 +60,7 @@
 		FROM account
 		WHERE
 			account_id = #{accountId} and 
-			account_pw = #{accountPw} and
+			account_pw = PASSWORD(#{accountPw}) and
 			account_state = #{accountState} and
 			account_level = #{accountLevel} 
 	</select>
