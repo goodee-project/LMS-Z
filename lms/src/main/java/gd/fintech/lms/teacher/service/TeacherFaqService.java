@@ -48,4 +48,9 @@ public class TeacherFaqService {
 	public List<FaqCategory> getFaqCategoryList(){
 		return teacherFaqMapper.selectFaqCategoryList();
 	}
+	
+	// FAQ 상세보기
+	public Faq getFaqOne(int faqNo) {
+		return teacherFaqMapper.selectFaqOne(faqNo);
+	}
 }

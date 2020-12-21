@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherFaqService;
 import gd.fintech.lms.vo.Faq;
@@ -64,6 +64,16 @@ public class TeacherFaqController {
 		}	
 		
 		return "teacher/faqList";
+	}
+	
+	// FAQ 상세보기
+	@GetMapping("/teacher/faqOne/{faqNo}")
+	public String faqOne(Model model,
+						@PathVariable(value="faqNo") int faqNo) {
+		Faq faqOne = teacherFaqService.getFaqOne(faqNo);
+		model.addAttribute("faqOne", faqOne);
+		
+		return "/teacher/faqOne";
 	}
 	
 }

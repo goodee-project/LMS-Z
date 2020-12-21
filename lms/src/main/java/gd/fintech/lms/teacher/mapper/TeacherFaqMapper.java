@@ -24,4 +24,7 @@ public interface TeacherFaqMapper {
 	
 	// 카테고리별 FAQ 개수
 	int selectFaqCountByCategory(String faqCategory);
+	
+	// FAQ 상세보기
+	Faq selectFaqOne(int faqNo);
 }

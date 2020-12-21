@@ -35,7 +35,7 @@
 				<tr>
 					<td>${f.faqCategory}</td>
 					<td>${f.faqNo}</td>
-					<td>${f.faqTitle}</td>
+					<td><a href="${path}/teacher/faqOne/${f.faqNo}">${f.faqTitle}</a></td>
 					<td>${f.faqWriter}</td>
 					<td>${f.faqCreatedate}</td>
 					<td>${f.faqCount}</td>
