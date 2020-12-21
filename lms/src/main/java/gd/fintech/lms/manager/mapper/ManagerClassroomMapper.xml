@@ -14,7 +14,7 @@
 			classroom_state classroomState
 		FROM classroom
 	</select>
-	<!-- 강의실 추가 -->
+	<!-- 강의실을 추가하기 위한 쿼리 -->
 	<insert id="insertClassroom" parameterType="gd.fintech.lms.vo.Classroom">
 		INSERT INTO classroom(
 			classroom_number,
@@ -22,10 +22,22 @@
 			classroom_total,
 			classroom_state
 		) VALUES (
-			#{classroomNumber}
-			#{classroomSize}
-			#{classroomTotal}
+			#{classroomNumber},
+			#{classroomSize},
+			#{classroomTotal},
 			#{classroomState}
 		)
 	</insert>
+	<!-- 강의실 번호 중복검사를 위한 쿼리 -->
+	<select id="selectClassroomOverlap" parameterType="int" resultType="int">
+		SELECT
+			count(*)
+		FROM classroom
+		WHERE classroom_number = #{classroomNumber}
+	</select>
+	<!-- 강의실을 삭제하기 위한 쿼리 -->
+	<delete id="deleteClassroom" parameterType="int">
+		DELETE FROM classroom
+		WHERE classroom_no = #{classroomNo}
+	</delete>
 </mapper>

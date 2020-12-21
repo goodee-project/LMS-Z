@@ -12,4 +12,8 @@ public interface ManagerClassroomMapper {
 	List<Classroom> selectClassroomList();
 	//강의실을 추가하기 위한 메퍼 호출
 	int insertClassroom(Classroom classroom);
+	// 강의실 중복검사를 위한 메퍼 호출
+	int selectClassroomOverlap(int classroomNumber);
+	//강의실 삭제를 위한 메퍼 호출
+	int deleteClassroom(int classroomNo);
 }

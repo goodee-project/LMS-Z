@@ -17,4 +17,16 @@ public class ManagerClassroomService {
 	public List<Classroom> getClassroomList(){
 		return managerClassroomMapper.selectClassroomList();
 	}
+	//강의실을 추가해주기 위해 메퍼 호출
+	public void insertClassroom(Classroom classroom) {
+		managerClassroomMapper.insertClassroom(classroom);
+	}
+	//강의실 중복검사를 위해 메퍼 호출
+	public int getClassroomNumberOverlap(int classroomNumber) {
+		return managerClassroomMapper.selectClassroomOverlap(classroomNumber);
+	}
+	//강의실을 삭제하기 위해 메퍼 호출
+	public void deleteClassroom(int classroomNo) {
+		managerClassroomMapper.deleteClassroom(classroomNo);
+	}
 }

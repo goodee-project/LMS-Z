@@ -19,6 +19,7 @@
 				<th>classroom_size</th>
 				<th>classroom_total</th>
 				<th>classroom_state</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,9 +30,33 @@
 					<td>${c.classroomSize }</td>
 					<td>${c.classroomTotal }</td>
 					<td>${c.classroomState }</td>
+					<c:if test="${c.classroomState =='빈강의실'}">
+						<td><a href="${path }/manager/deleteClassroom/${c.classroomNo}">삭제</a></td>
+					</c:if>
+					<c:if test="${c.classroomState =='사용중'}">
+						<td>&nbsp;</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${path}/dist/js/app-style-switcher.js"></script>
+    <script src="${path}/dist/js/feather.min.js"></script>
+    <script src="${path}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="${path}/dist/js/sidebarmenu.js"></script>
+    <script src="${path}/dist/js/custom.min.js"></script>
+    <script src="${path}/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="${path}/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="${path}/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+		
+    </script>
 </body>
 </html>
