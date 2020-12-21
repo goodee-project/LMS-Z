@@ -20,8 +20,6 @@
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
 </head>
 <body>
-		
-           
 	            <div>
 	            	 <span style="color:black; font-size:x-large;">${studentName }&nbsp;학생</span>
 	            </div>
@@ -101,7 +99,7 @@
 			$('#stopBtn').click(function(){//실시간 갱신 정지
 				clearInterval(timerId);
 			})
-			timerId=setInterval(msgList,300);//3초
+			timerId=setInterval(msgList,5000);//5초
   	  	})
   	  	
   	  		//리스트 출력

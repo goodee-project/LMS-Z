@@ -73,17 +73,18 @@
                     
                     
                     <!-- 메세지 -->
-                    <div class="dropdown sub-dropdown" id="">
+                    <div class="dropdown sub-dropdown" class="msgDiv">
                     	<span id="alarm">
                     		
                     	</span>
-                        <button class="btn btn-link text-muted dropdown-toggle" type="button"
+                    	메세지
+                        <button class="btn btn-link text-muted dropdown-toggle" class="msgDiv" type="button"
                                 id="msgOpen" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
-                             메세지<i data-feather="more-vertical"></i>
+                             <i data-feather="more-vertical"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-	                        <span style="color:black; font-size:x-large;" class="col-md-6">${myLectureListOne.teacher.teacherName }&nbsp;강사님</span>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1" class="msgDiv">
+	                        <span style="color:black; font-size:x-large;" class="col-md-6" class="msgDiv">${myLectureListOne.teacher.teacherName }&nbsp;강사님</span>
 	                        <br>
                         <div class="col-md-6 col-lg-12" style="">
 		                        <div class="card">
@@ -496,7 +497,10 @@
     <script>
 		$(document).ready(function(){
 			let timerId=null;
+			// 메세지 창이 열려있는지 닫혀있는지 체크
+			var msgOCCk=0;
 			// 수강 후기 입력란 열기
+			
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
 						$("#reviewDiv").removeAttr('hidden');
@@ -565,6 +569,7 @@
 				})
 			// 메세지를 눌렀을 때 읽음으로 판단
 			$('#msgOpen').click(function(){
+				msgOCCk=1;
 					$.ajax({
 						url:'${path}/student/studentReadMsg',
 						type:'post',
@@ -578,13 +583,14 @@
 							}
 					})
 				})
+			
 			$('#startBtn').click(function(){//실시간 갱신 다시 실행
 				timerId=setInterval(msgList,5000);//5초
 				})
 			$('#stopBtn').click(function(){//실시간 갱신 정지
 				clearInterval(timerId);
 			})
-			timerId=setInterval(msgList,5000);//3초
+			timerId=setInterval(msgList,5000);//5초
 		})
 			//리스트 보기
 			function msgList(){
