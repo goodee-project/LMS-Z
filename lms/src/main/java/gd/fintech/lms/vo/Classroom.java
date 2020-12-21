@@ -8,4 +8,5 @@ public class Classroom {
 	private int classroomNumber;
 	private int classroomSize;
 	private int classroomTotal;
+	private String classroomState;
 }

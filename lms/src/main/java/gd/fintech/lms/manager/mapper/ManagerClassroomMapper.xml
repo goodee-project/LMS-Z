@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="gd.fintech.lms.manager.mapper.ManagerClassroomMapper">
+	
+	<!-- 강의실 목록을 보여주는 쿼리 -->
+	<select id="selectClassroomList" resultType="gd.fintech.lms.vo.Classroom">
+		SELECT
+			classroom_no classroomNo,
+			classroom_number classroomNumber,
+			classroom_size classroomSize,
+			classroom_total classroomTotal,
+			classroom_state classroomState
+		FROM classroom
+	</select>
+	<!-- 강의실 추가 -->
+	<insert id="insertClassroom" parameterType="gd.fintech.lms.vo.Classroom">
+		INSERT INTO classroom(
+			classroom_number,
+			classroom_size,
+			classroom_total,
+			classroom_state
+		) VALUES (
+			#{classroomNumber}
+			#{classroomSize}
+			#{classroomTotal}
+			#{classroomState}
+		)
+	</insert>
+</mapper>
