@@ -8,4 +8,6 @@ import gd.fintech.lms.vo.ReportSubmitFile;
 public interface StudentReportSubmitFileMapper {
 	
 	int insertReportSubmitFile(ReportSubmitFile ReportSubmitFile);
+	
+	int deleteReportSubmitFile(String reportSubmitFileUuid);
 }

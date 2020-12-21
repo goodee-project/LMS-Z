@@ -34,6 +34,56 @@
 		ORDER BY r.report_createdate DESC
 	</select>
 	
+	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportSubmitOne">
+		<result property="reportNo" column="report_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="reportTitle" column="report_title"/>
+		<result property="reportContent" column="report_content"/>
+		<result property="reportCreatedate" column="report_createdate"/>
+		<result property="reportUpdatedate" column="report_updatedate"/>
+		<result property="reportStartdate" column="report_startdate"/>
+		<result property="reportEnddate" column="report_enddate"/>
+		
+	<collection property="reportSubmitList" ofType="gd.fintech.lms.vo.ReportSubmit">
+		<result property="reportNo" column="report_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="reportSubmitNo" column="report_submit_no"/>
+		<result property="reportSubmitWriter" column="report_submit_writer"/>
+		<result property="reportSubmitTitle" column="report_submit_title"/>
+		<result property="reportSubmitContent" column="report_submit_content"/>
+		<result property="reportSubmitPoint" column="report_submit_point"/>
+		<result property="reportSubmitFeedback" column="report_submit_feedback"/>
+	</collection>
+	
+	<collection property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+		<result property="reportSubmitFileOriginal" column="report_submit_file_original"/>
+		<result property="reportSubmitNo" column="report_submit_no"/>
+		<result property="reportSubmitFileType" column="report_submit_file_type"/>
+	</collection>	
+	</resultMap>
+	
+	<select id="selectReportSubmitOne" resultMap="selectReportSubmitOne" parameterType="java.util.Map">
+		SELECT
+			r.report_no,
+			r.report_title,
+			r.report_content,
+			r.lecture_no,
+			rs.account_id,
+			rs.report_submit_no,
+			rs.report_submit_content,
+			rs.report_submit_point,
+			rs.report_submit_feedback,
+			rs.report_submit_writer,
+			rs.report_submit_title,
+			rsf.report_submit_file_original,
+			rsf.report_submit_file_type	
+		FROM report r left join report_submit rs
+			 on r.report_no = rs.report_no
+			 left join report_submit_file rsf
+			 on rs.report_submit_no = rsf.report_submit_no
+		WHERE r.report_no = #{reportNo} AND rs.account_id = #{accountId}
+	</select>
+	
 	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">
 	SELECT
 		report_no reportNo,
@@ -44,7 +94,6 @@
 		report_enddate reportEnddate
 	FROM report
 	WHERE report_no = #{reportNo} 	
-	
 	</select>
 	
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.ReportSubmit">
@@ -70,4 +119,14 @@
 				#{reportSubmitContent}
 			)
 	</insert>
+	
+	<update id="updateReportSubmit" parameterType="gd.fintech.lms.vo.ReportSubmit">
+		UPDATE report_submit 
+		SET
+			report_submit_writer = #{reportSubmitWriter},
+			report_submit_updatedate = NOW(),
+			report_submit_title = #{reportSubmitTitle},
+			report_submit_content = #{reportSubmitContent}
+		WHERE report_submit_no = #{reportSubmitNo}	
+	</update>
 </mapper>

@@ -41,4 +41,31 @@ public class StudentReportController {
 		studentReportService.addReportSubmit(reportSubmitAddForm);
 		return "redirect:/student";
 	}
+	
+	@GetMapping("/student/reportSubmitOne/{reportNo}/{accountId}")
+	public String listReportSubmitOne(Model model,
+			@PathVariable(name="reportNo")int reportNo,
+			@PathVariable(name="accountId")String accountId) {
+		Report report = studentReportService.getReportSubmitOne(reportNo, accountId);
+		model.addAttribute("report",report);
+		return "/student/reportSubmitOne"; 
+	}
+	
+	@GetMapping("/student/reportSubmitModify/{reportNo}/{accountId}")
+	public String modifyReportSubmit(Model model,
+			@PathVariable(name="reportNo")int reportNo,
+			@PathVariable(name="accountId")String accountId) {
+		Report report = studentReportService.getReportSubmitOne(reportNo, accountId);
+		model.addAttribute("report",report);
+		return "/student/reportSubmitModify"; 
+	}
+	
+	@PostMapping("/student/reportSubmitModify/{reportSubmitNo}")
+	public String modifyReportSubmit(ReportSubmitAddForm reportSubmitAddForm,
+			@PathVariable(name="reportSubmitNo")int reportSubmitNo) {
+		studentReportService.updateReportSubmit(reportSubmitAddForm);
+		return  "redirect:/student";
+	}
+	
+	
 }

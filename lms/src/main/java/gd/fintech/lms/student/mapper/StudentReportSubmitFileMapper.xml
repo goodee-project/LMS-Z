@@ -22,4 +22,10 @@
 				NOW()
 			)
 	</insert>
+	
+	<delete id="deleteReportSubmitFile" parameterType="String">
+		DELETE 
+		FROM report_submit_file
+		WHERE report_submit_file_uuid = #{reportSubmitFileUuid}
+	</delete>
 </mapper>  

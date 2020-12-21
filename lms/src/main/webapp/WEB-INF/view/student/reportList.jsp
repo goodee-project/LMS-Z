@@ -26,6 +26,7 @@
 					<td>${r.reportStartdate}</td>
 					<td>${r.reportEnddate}</td>
 					<td><a href="${path}/student/reportSubmitAdd/${r.reportNo}">과제 제출</a></td>
+					<td><a href="${path}/student/reportSubmitOne/${r.reportNo}/${studentId}">과제</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

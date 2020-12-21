@@ -22,7 +22,7 @@ import gd.fintech.lms.vo.ReportSubmitFile;
 @Service
 public class StudentReportService {
 	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
-	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
+	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\reportfile\\";
 	
 	@Autowired private StudentReportSubmitMapper studentReportSubmitMapper;
 	@Autowired private StudentReportSubmitFileMapper studentReportSubmitFileMapper;	
@@ -82,4 +82,54 @@ public class StudentReportService {
 		return report;
 	}
 	
+	public Report getReportSubmitOne(int reportNo, String accountId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportNo", reportNo);
+		map.put("accountId", accountId);
+		return studentReportSubmitMapper.selectReportSubmitOne(map);
+	}
+	
+	public void updateReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
+		ReportSubmit reportSubmit = new ReportSubmit();
+		reportSubmit.setReportSubmitNo(reportSubmitAddForm.getReportSubmitNo());
+		reportSubmit.setReportSubmitWriter(reportSubmitAddForm.getReportSubmitWriter());
+		reportSubmit.setReportSubmitUpdatedate(reportSubmitAddForm.getReportSubmitUpdatedate());
+		reportSubmit.setReportSubmitTitle(reportSubmitAddForm.getReportSubmitTitle());
+		reportSubmit.setReportSubmitContent(reportSubmitAddForm.getReportSubmitContent());
+		studentReportSubmitMapper.updateReportSubmit(reportSubmit);
+		
+		List<ReportSubmitFile> reportSubmitFile = null;
+		if(reportSubmitAddForm.getReportSubmitFile() != null) {
+			reportSubmitFile = new ArrayList<ReportSubmitFile>();
+			for(MultipartFile mf : reportSubmitAddForm.getReportSubmitFile()) {
+				ReportSubmitFile rf = new ReportSubmitFile();
+				rf.setReportSubmitNo(reportSubmit.getReportSubmitNo());
+				int count = 0;
+				int p = mf.getOriginalFilename().lastIndexOf(".");
+				
+				String ext = mf.getOriginalFilename().substring(p).toLowerCase();
+				String filename = UUID.randomUUID().toString().replace("-","");
+				
+				rf.setReportSubmitFileUuid(filename+ext);
+				rf.setReportSubmitFileOriginal(mf.getOriginalFilename());
+				rf.setReportSubmitFileSize(mf.getSize());
+				rf.setReportSubmitFileType(mf.getContentType());
+				rf.setReportSubmitFileCount(count);
+				reportSubmitFile.add(rf);
+				
+				try {
+					mf.transferTo(new File(PATH+filename+ext));
+				}catch(Exception e) {
+					e.printStackTrace();
+					throw new RuntimeException();
+				}
+				
+			}
+		}
+		if(reportSubmitFile != null) {
+			for(ReportSubmitFile rf : reportSubmitFile) {
+				studentReportSubmitFileMapper.insertReportSubmitFile(rf);
+			}
+		}
+	}
 }
