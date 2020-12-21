@@ -75,7 +75,7 @@
                     <!-- 메세지 -->
                     <div class="dropdown sub-dropdown" id="">
                     	<span id="alarm">
-                    		<a class="btn btn-danger rounded-circle btn-circle font-1" style="width:1px; height:1px"></a>
+                    		
                     	</span>
                         <button class="btn btn-link text-muted dropdown-toggle" type="button"
                                 id="msgOpen" data-toggle="dropdown" aria-haspopup="true"
@@ -496,6 +496,7 @@
     <script>
 		$(document).ready(function(){
 			let timerId=null;
+			// 수강 후기 입력란 열기
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
 						$("#reviewDiv").removeAttr('hidden');
@@ -507,9 +508,11 @@
 						alert("수료한 학생만 작성할 수 있습니다.");
 					}
 				})
+				//수강 후기 입력란 닫기
 			$("#reviewCloseBtn").click(function(){
 				$("#reviewDiv").attr("hidden","hidden");
 				})
+				// 수강 후기 입력
 			$("#reviewInputBtn").click(function(){
 					if($("input[name='classRegistrationPoint']:checked").val() == null){
 						alert("평점을 체크해주세요");
@@ -521,12 +524,15 @@
 						alert("수강후기가 저장되었습니다.")
 					}
 				})
+				// 수강 취소 사유란 열기
 			$('#classCancelBtn').click(function(){
 				$("#classCancelDiv").removeAttr("hidden");
 				})
+				// 수강 취소 사유란 닫기
 			$('#classCancelCloseBtn').click(function(){
 				$("#classCancelDiv").attr("hidden", "hidden");
 				})
+				// 수강 취소 사유 입력
 			$('#classCancelInputBtn').click(function(){
 				if($("#cancelContent").val() == ""){
 					alert("후기를 입력해주세요");
@@ -578,12 +584,13 @@
 			$('#stopBtn').click(function(){//실시간 갱신 정지
 				clearInterval(timerId);
 			})
-				timerId=setInterval(msgList,5000);//5초
+			timerId=setInterval(msgList,5000);//3초
 		})
 			//리스트 보기
 			function msgList(){
 				//$('#msgListDiv').empty();
 				let html;
+				let alarm;
 				$.ajax({
 					url:"${path}/student/msgList",
 					type:"get",
@@ -601,16 +608,20 @@
 								if(msgList.fromId != "${studentId}"){
 									//읽지 않았다면 1을 출력
 									if(msgList.isConfirm == false){
-									$('#alarm').removeAttr("hidden");
+										$('#alarm').removeAttr("hidden");
 									html = `
 										 <div class="font-14 font-weight-medium px-2 py-2">
 										<textarea style="resize:none;overflow:visible;" id="\${index}" readonly="readonly" cols="50"
                                         name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                         \${msgList.msgSendDatetime}<span style="color:yellow">1&emsp;</span>
 										</div>
+										`;
+									alarm=`
+										<a class="btn btn-danger rounded-circle btn-circle font-1" style="width:1px; height:1px"></a>
 										`
+										$('#alarm').html(alarm);
 										$('#msgListDiv').append(html);
-									if(index==data.length-1){
+										if(index==data.length-1){
 										$("#"+index).focus();
 									}
 									//읽었다면 1 제거
@@ -656,10 +667,15 @@
 									}
 								}
 							})
+							/*
+								setInterval 건 초 안에 입력란에 채팅을 쳐야한다
+								-> 3초라면 3초동안 쓰다가 한번 갱신되어 입력란 포커스가 풀린다
+								**해결방안**
+							*/		
+							document.getElementById("toTeacherMsgContent").focus();
 						}
 					})
 				}
-			
     </script>
 </body>
 </html>

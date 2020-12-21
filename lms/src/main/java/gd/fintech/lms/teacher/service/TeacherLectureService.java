@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherLectureMapper;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Student;
 
 @Service
 @Transactional
@@ -33,7 +34,7 @@ public class TeacherLectureService {
 		return teacherLectureMapper.selectLectureCount(accountId);
 	}
 	
-	// 강의 상세정보, 강의계획서 출력
+	// 강의 상세정보, 강의계획서 출력 + 메세지
 	public Lecture getLectureOne(int lectureNo) {
 		return teacherLectureMapper.selectLectureOne(lectureNo);
 	}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherMsgMapper">
+
+	<!-- 학생 리스트 가져오기 -->
+	<resultMap type="gd.fintech.lms.vo.Student" id="selectLectureInStudentListResult">
+		<result property="studentId" column="student_id"/>
+		<result property="studentName" column="student_name"/>
+		<association property="msg" javaType="gd.fintech.lms.vo.Msg">
+			<result property="isConfirm" column="is_confirm"/>
+		</association>
+	</resultMap>
+	<select id="selectLectureInStudentList" parameterType="java.util.Map" resultMap="selectLectureInStudentListResult">
+		SELECT 
+			s.student_id,
+			s.student_name,
+			m.is_confirm
+		FROM class_registration cr
+		LEFT JOIN student s ON cr.account_id=s.student_id
+		LEFT JOIN msg m ON s.student_id = m.from_id
+		WHERE lecture_no=#{lectureNo}
+		AND from_id = #{teacherId} OR to_id = #{teacherId}
+	</select>
+	
+	<!-- 메세지 기록 리스트 불러오기 -->
+	<select id="selectTeacherMsgList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Msg">
+		SELECT 
+			from_id fromId,
+			to_id toId,
+			from_name fromName,
+			msg_content msgContent,
+			DATE_FORMAT(msg_send_datetime,'%T') msgSendDatetime,
+			is_confirm isConfirm
+		FROM msg
+		WHERE from_id IN (#{studentId},#{teacherId})
+		AND to_id IN (#{studentId},#{teacherId})
+	</select>
+	<!-- 메세지 보내기 -->
+	<insert id="insertToStudentMsg" parameterType="gd.fintech.lms.vo.Msg">
+		INSERT INTO msg(
+			from_id,
+			to_id,
+			from_name,
+			msg_content,
+			msg_send_datetime
+			)
+		VALUES(
+			#{fromId},
+			#{toId},
+			#{fromName},
+			#{msgContent},
+			NOW()
+			)
+	</insert>
+	<!-- 메세지를 읽었을 때 -->
+	<update id="updateTeacherReadMsg" parameterType="gd.fintech.lms.vo.Msg">
+		UPDATE msg
+		SET is_confirm = 'true'
+		WHERE to_id = #{toId} AND from_id=#{fromId}
+	</update>
+</mapper>

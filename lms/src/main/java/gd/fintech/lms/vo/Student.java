@@ -16,4 +16,5 @@ public class Student {
 	private String studentAccessdate;
 	private String studentUpdatedate;
 	private String managerIdAccess;
+	private Msg msg;
 }
