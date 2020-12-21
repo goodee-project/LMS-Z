@@ -11,18 +11,13 @@
 <body>
 	<h1>FAQ</h1>
 	
-	<!-- select문으로 카테고리별로 FAQ 목록 출력 구현 필요
-	<form method="post" action="${path}/teacher/faqList/${faqCategory}">
-		<div>
-			<select name="faqCategory">
-				<option value="blank">전체</option>
-				<c:forEach var="c" items="${category}">
-					<option value="${c.faqCategory}">${c.faqCategory}</option>
-				</c:forEach>
-			</select>
-		</div>
-		<button type="submit">검색</button>
-	</form>-->
+	<!-- 카테고리 출력 -> 클릭한 카테고리에 해당하는 리스트 출력 -->
+	<div>
+		<a href="${path}/teacher/faqList/1/total">전체</a>
+		<c:forEach var="c" items="${category}">
+			<a href="${path}/teacher/faqList/1/${c.faqCategory}">${c.faqCategory}</a>
+		</c:forEach>
+	</div>
 	
 	<table border=1>
 		<thead>
@@ -48,5 +43,28 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<!-- 페이징 -->
+	<!-- c:when : 전체 faq목록 출력 -> faqCategory가 total과 일치했을 때 페이징 
+		 c:otherwise : 카테고리별 faq목록 출력 -> faqCategory가 넘어온 faqCategory값과 같을 때 페이징 -->
+	<div>
+		<c:choose>
+			<c:when test="${faqCategory == 'total'}">
+				<c:if test="${currentPage > 1}">
+					<a href="${path}/teacher/faqList/${currentPage - 1}/total">이전</a>
+				</c:if>
+				<c:if test="${currentPage < lastPage}">
+					<a href="${path}/teacher/faqList/${currentPage + 1}/total"> 다음 </a>
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<c:if test="${currentPage > 1}">
+					<a href="${path}/teacher/faqList/${currentPage - 1}/${faqCategory}">이전</a>
+				</c:if>
+				<c:if test="${currentPage < lastPage}">
+					<a href="${path}/teacher/faqList/${currentPage + 1}/${faqCategory}"> 다음 </a>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>
