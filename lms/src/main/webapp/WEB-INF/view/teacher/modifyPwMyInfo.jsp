@@ -196,10 +196,10 @@
 												<a class="nav-link" href="${path}/teacher/myInfo/${teacherId}">개인정보변경</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfoId/${teacherId}">Id변경</a>
+												<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
+												<a class="nav-link" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>
 											</li>
 										</ul>
                                 	</nav>

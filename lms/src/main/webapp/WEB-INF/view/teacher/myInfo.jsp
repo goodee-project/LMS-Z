@@ -195,10 +195,10 @@
 												<a class="nav-link" href="${path}/teacher/myInfo/${teacherId}">개인정보변경</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfoId/${teacherId}">Id변경</a>
+												<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
+												<a class="nav-link" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>
 											</li>
 										</ul>
                                 	</nav>
@@ -223,7 +223,7 @@
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">Id</th>
 										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherId}</td>
-										<td><button type="button" class="btn btn-dark">Id 변경</button></td>
+										<td></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이름</th>
