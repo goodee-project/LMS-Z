@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherReportSubmitMapper">
+	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitResult">
+		<result property="reportSubmitNo" column="report_submit_no"/>
+		<result property="reportNo" column="report_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="reportSubmitWriter" column="report_submit_writer"/>
+		<result property="reportSubmitCreatedate" column="report_submit_createdate"/>
+		<result property="reportSubmitUpdatedate" column="report_submit_updatedate"/>
+		<result property="reportSubmitTitle" column="report_submit_title"/>
+		<result property="reportSubmitContent" column="report_submit_content"/>
+		<result property="reportSubmitPoint" column="report_submit_point"/>
+		<result property="reportSubmitFeedback" column="report_submit_feedback"/>
+		<collection property="reportSubmitFile" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+			<result property="reportSubmitFileUuid" column="report_submit_file_uuid" />
+			<result property="reportSubmitFileOriginal" column="report_submit_file_original" />
+			<result property="reportSubmitNo" column="report_submit_no" />
+			<result property="reportSubmitFileSize" column="report_submit_file_size" />
+			<result property="reportSubmitFileType" column="report_submit_file_type" />
+			<result property="reportSubmitFileCount" column="report_submit_file_count" />
+			<result property="reportSubmitFileCreatedate" column="report_submit_file_createdate" />
+		</collection>
+	</resultMap>
+	<select id="selectReportSubmit" parameterType="int" resultMap="selectReportSubmitResult">
+		SELECT
+			report_submit_no,
+			report_no,
+			report_submit_writer,
+			report_submit_title,
+			report_submit_content
+		FROM report_submit
+		WHERE report_no = #{reportNo}
+	</select>
+</mapper>

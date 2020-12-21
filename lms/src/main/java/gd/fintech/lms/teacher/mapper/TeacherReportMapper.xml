@@ -36,17 +36,59 @@
 		DELETE FROM report
 		WHERE report_no = #{reportNo}
 	</delete>
+	
+	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportResult">
+		<result property="reportNo" column="report_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="reportTitle" column="report_title"/>
+		<result property="reportContent" column="report_content"/>
+		<result property="reportCreatedate" column="report_createdate"/>
+		<result property="reportUpdatedate" column="report_updatedate"/>
+		<result property="reportStartdate" column="report_startdate"/>
+		<result property="reportEnddate" column="report_enddate"/>
+		<collection property="reportSubmitList" ofType="gd.fintech.lms.vo.ReportSubmit">
+			<result property="reportSubmitNo" column="report_submit_no" />
+			<result property="reportNo" column="report_no" />
+			<result property="accountId" column="account_id" />
+			<result property="reportSubmitWriter" column="report_submit_writer" />
+			<result property="reportSubmitCreatedate" column="report_submit_createdate" />
+			<result property="reportSubmitUpdatedate" column="report_submit_updatedate" />
+			<result property="reportSubmitTitle" column="report_submit_title" />
+			<result property="reportSubmitContent" column="report_submit_content" />
+			<result property="reportSubmitPoint" column="report_submit_point" />
+			<result property="reportSubmitFeedback" column="report_submit_feedback" />
+		</collection>
+		<collection property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+			<result property="reportSubmitFileUuid" column="report_submit_file_uuid" />
+			<result property="reportSubmitFileOriginal" column="report_submit_file_original" />
+			<result property="reportSubmitNo" column="report_submit_no" />
+			<result property="reportSubmitFileSize" column="report_submit_file_size" />
+			<result property="reportSubmitFileType" column="report_submit_file_type" />
+			<result property="reportSubmitFileCount" column="report_submit_file_count" />
+			<result property="reportSubmitFileCreatedate" column="report_submit_file_createdate" />
+		</collection>
+	</resultMap>
+	
 	<!-- 과제 상세보기 -->
-	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">
+	<select id="selectReportOne" parameterType="int" resultMap="selectReportResult">
 		SELECT 
-			report_no reportNo, 
-			lecture_no lectureNo, 
-			report_title reportTitle, 
-			report_content reportContent, 
-			report_startdate reportStartdate, 
-			report_enddate reportEnddate
-		FROM report
-		WHERE report_no = #{reportNo}
+			r.report_no, 
+			r.lecture_no, 
+			r.report_title, 
+			r.report_content, 
+			r.report_startdate, 
+			r.report_enddate,
+			rs.report_submit_no,
+			rs.report_no,
+			rs.report_submit_writer,
+			rs.report_submit_title,
+			rs.report_submit_content,
+			rs.report_submit_point
+		FROM report r LEFT JOIN report_submit rs
+		ON r.report_no = rs.report_no
+		LEFT JOIN report_submit_file rf
+		ON rs.report_submit_no = rf.report_submit_no
+		WHERE r.report_no = #{reportNo}
 	</select>
 	<!-- 과제수정 -->
 	<update id="updateReport" parameterType="gd.fintech.lms.vo.Report">

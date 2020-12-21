@@ -27,6 +27,16 @@
 				<td>${question.questionContent}</td>
 			</tr>
 		</table>
+		<h3>질문게시판 첨부파일</h3>
+		<table border="1">
+			<c:forEach var="qf" items="${question.questionfile}">
+				<tr>
+					<th>question_file</th>
+					<td><a href="${path}/uploadfile/questionfile/questionfile${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
+				</tr>
+			</c:forEach>	
+		</table>
+		
 		
 		<h3>질문댓글게시판</h3>
 		<table border="1">

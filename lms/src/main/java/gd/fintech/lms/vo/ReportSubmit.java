@@ -2,6 +2,8 @@ package gd.fintech.lms.vo;
 
 
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,5 @@ public class ReportSubmit {
 	private String reportSubmitContent;
 	private String reportSubmitPoint;
 	private String reportSubmitFeedback;
+	private List<ReportSubmitFile> reportSubmitFile;
 }

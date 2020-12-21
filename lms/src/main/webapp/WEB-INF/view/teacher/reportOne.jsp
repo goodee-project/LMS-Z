@@ -36,5 +36,27 @@
 				</tr>
 		</table>
 		<a href="${path}/teacher/modifyReport/${reportOne.reportNo}">수정하기</a>
+		
+		<h3>과제제출</h3>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>report_submit_no</th>
+					<th>report_submit_writer</th>
+					<th>report_submit_title</th>
+					<th>report_submit_content</th>
+					<th>report_submit_content</th>
+				</tr>
+			</thead>
+			<c:forEach var="rs" items="${reportOne.reportSubmitList}">
+				<tr>
+					<td>${rs.reportSubmitNo}</td>
+					<td>${rs.reportSubmitWriter}</td>
+					<td>${rs.reportSubmitTitle}</td>
+					<td>${rs.reportSubmitContent}</td>
+					<td>${rs.reportSubmitPoint}점</td>
+				</tr>
+			</c:forEach>
+		</table>
 </body>
 </html>
