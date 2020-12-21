@@ -13,20 +13,39 @@ import gd.fintech.lms.vo.Question;
 
 @Controller
 public class TeacherQuestionController {
-	@Autowired TeacherQuestionService questionTeacherService;
+	@Autowired TeacherQuestionService teacherQuestionService;
 	
 	//질문게시판 목록 출력
-	@GetMapping("/teacher/questionList")
-	public String questionList(Model model) {
-		List<Question> questionList = questionTeacherService.getQuestionList();
+	@GetMapping("/teacher/questionList/{teacherId}/{currentPage}")
+	public String questionList(Model model,
+									@PathVariable(value = "teacherId") String teacherId,
+									@PathVariable(value = "currentPage") int currentPage) {
+		
+		//페이징에 필요한 변수선언
+		int rowPerPage = 5;
+		int beginRow = (currentPage - 1) * rowPerPage;
+		int lastPage = 0;
+		int totalCount = teacherQuestionService.getQuestionCount(teacherId);
+		
+		//마지막 페이지
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		}else {
+			lastPage = totalCount / rowPerPage + 1;
+		}
+		
+		List<Question> questionList = teacherQuestionService.getQuestionList(teacherId, beginRow, rowPerPage);
 		model.addAttribute("questionList", questionList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		
 		return "teacher/questionList";
 	}
 	
 	//질문게시판 상세보기
 	@GetMapping("/teacher/questionOne/{questionNo}")
 	public String questionOne(Model model, @PathVariable(value = "questionNo") int questionNo) {
-		Question question = questionTeacherService.getQuestionOne(questionNo);
+		Question question = teacherQuestionService.getQuestionOne(questionNo);
 		model.addAttribute("question", question);
 		return "teacher/questionOne";
 	}

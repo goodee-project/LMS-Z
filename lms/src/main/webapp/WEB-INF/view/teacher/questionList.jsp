@@ -27,6 +27,12 @@
 						<td>${q.questionCount}</td>
 					</tr>
 				</c:forEach>
+				<c:if test="${1 < currentPage}">
+					<a href="${path}/teacher/questionList/${teacherId}/${currentPage - 1}">이전</a>
+				</c:if>
+				<c:if test="${1 >= currentPage}">
+					<a href="${path}/teacher/questionList/${teacherId}/${currentPage + 1}">다음</a>
+				</c:if>
 			</tbody>
 		</table>
 </body>

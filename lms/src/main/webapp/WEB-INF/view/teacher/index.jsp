@@ -100,13 +100,13 @@
                         <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
                         
                         <!-- 공지사항 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lmsNoticeList"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lmsNoticeList/1"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">공지사항
                                 </span></a>
                         </li>
 						<!-- 질문게시판 목록 -->
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/teacher/questionList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/teacher/questionList/${teacherId}/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">질문게시판
                                 </span></a>

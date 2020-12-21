@@ -200,6 +200,13 @@
 	                                  			<a href="${path}/student/myLectureList/${studentId }/${i}">${i}&nbsp;&nbsp;</a>
 	                                  		</span>
 	                                  	</c:forEach>
+	                                  	<!-- 페이징 버튼 -->
+	                                  	<c:if test="${1 < currentPage}">
+											<a href="${path}/student/lmsNoticeList/${currentPage - 1}">이전</a>
+										</c:if>
+										<c:if test="${1 >= currentPage}">
+											<a href="${path}/student/lmsNoticeList/${currentPage + 1}">다음</a>
+										</c:if>
                                   	</div>
                                 </div>
                             </div>

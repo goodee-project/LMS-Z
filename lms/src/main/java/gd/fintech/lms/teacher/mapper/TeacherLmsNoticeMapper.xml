@@ -2,13 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLmsNoticeMapper">
 	<!-- 공지사항 목록 -->
-	<select id="selectLmsNoticeList" resultType="gd.fintech.lms.vo.LmsNotice">
+	<select id="selectLmsNoticeList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LmsNotice">
 		SELECT
 			lms_notice_no lmsNoticeNo,
 			lms_notice_writer lmsNoticeWriter,
 			lms_notice_title lmsNoticeTitle,
 			lms_notice_content lmsNoticeContent,
 			lms_notice_count lmsNoticeCount
+		FROM lms_notice
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- 공지사항 리스트 총개수 -->
+	<select id="selectLmsNoticeCount" resultType="int">
+		SELECT
+			COUNT(*)
 		FROM lms_notice
 	</select>
 	

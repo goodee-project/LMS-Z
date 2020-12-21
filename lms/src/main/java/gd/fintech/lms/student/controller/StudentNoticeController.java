@@ -21,9 +21,24 @@ public class StudentNoticeController {
 	@Autowired TeacherLectureNoticeService teacherLectureNoticeService;
 	
 	//Lms 공지사항 전체 불러오기
-	@GetMapping("/student/lmsNoticeList")
-	public String lmsNoticeList(Model model) {
-		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList();
+	@GetMapping("/student/lmsNoticeList/{currentPage}")
+	public String lmsNoticeList(Model model,
+										@PathVariable(value = "currentPage") int currentPage) {
+		
+		//페이징에 필요한 변수선언
+		int rowPerPage = 5;
+		int beginRow = (currentPage - 1) * rowPerPage;
+		int lastPage = 0;
+		int totalCount = teacherLmsNoticeService.getLmsNoticeCount();
+		
+		//마지막 페이지
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		}else {
+			lastPage = totalCount / rowPerPage + 1;
+		}
+		
+		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		return "student/lmsNoticeList";
 	}
