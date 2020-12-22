@@ -77,37 +77,37 @@
                             <div class="card-body text-muted font-12">
                                 <h4 class="card-title">주소변경</h4>
                                 <div class="mb-3"></div>
-                            	<form id="modifyPwMyInfo" method="post" action="${path}/teacher/modifyPwMyInfo">
+                            	<form id="modifyAddressForm" method="post" action="${path}/teacher/modifyAddressMyInfo">
 	                                <table class="table no-wrap v-middle mb-0">
 										<tr>
-											<th class=" font-14 font-weight-medium text-dark">현재 비밀번호</th>
+											<th class=" font-14 font-weight-medium text-dark">현재 주소</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherPw">
-												<input type="hidden" id="accountId" name="accountId" value="${teacherId}">
+												${teacher.teacherAddressMain}&nbsp;${teacher.teacherAddressSub}
 											</td>
 										</tr>
 										<tr>
-											<th class=" font-14 font-weight-medium text-dark">새 비밀번호</th>
+											<th class=" font-14 font-weight-medium text-dark">새 주소</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherNewPw" name="accountPw">
-												<div id="textNewPw">
-													영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.
+												<input type="hidden" name="teacherId" value="${teacherId}">
+												<input type="text" id="teacherAddressMain" name="teacherAddressMain">
+												<div style="width:100%; height:200px; overflow:auto">
+													<table id="addressTable"></table>
 												</div>
+											</td>
+											<td>
+												<button class="btn btn-dark" id="btnAddressMainSearch" type="button">찾기</button>
+												<button class="btn btn-dark" id="btnAddressMainReset" type="button" disabled="disabled">초기화</button>
 											</td>
 										</tr>
 										<tr>
-											<th class=" font-14 font-weight-medium text-dark">새 비밀번호 확인</th>
+											<th class=" font-14 font-weight-medium text-dark">새 주소 상세정보</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherNewPw2">
-												<div id="textNewPw2">
-													비밀번호를 다시 한번 입력해주세요.
-												</div>
+												<input type="text" id="teacherAddressSub" name="teacherAddressSub">
 											</td>
 										</tr>
 	                            	</table>
 	                            	<div>
 		                            	<button type="button" class="btn btn-dark" id="btnResult">확인</button>
-		                            	<button type="button" class="btn btn-dark" id="btnReset">새로 입력</button>
 	                            	</div>
                             	</form>
                             </div>
@@ -135,5 +135,75 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+    	// 찾기 버튼을 눌렀을 경우 해당 도로길이 들어간 테이블 생성
+		$('#btnAddressMainSearch').click(function(){
+			$('#addressTable').empty();
+			$.ajax({
+				url:'${path}/teacherAddressSearch',
+				type:'GET',
+				data:{doro: $('#teacherAddressMain').val()},
+				success:function(data){
+					var strHead = '<thead>';
+					strHead += '</tr><td>';
+					strHead += '주소';			
+					strHead += '<td></tr>';
+					strHead += '</thead>';
+	
+					$('#addressTable').append(strHead);
+					
+					$.each(data.addressList, function(index, address){
+						var dataSet = address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1 + '-' + address.buildno2;
+						
+						var strBody = '<tbody>';
+						strBody += '<tr><td>';
+						strBody += '<a href="javascript:click()" onclick="addressClick(\'' + dataSet + '\')">';						
+						strBody += dataSet;						
+						strBody += '</a>';
+						strBody += '</td></tr>';
+						strBody += '</tbody>';
+
+						$('#addressTable').append(strBody);
+					})
+				}
+			});	
+		});
+
+		// 주소 검색 테이블에서 해당 버튼을 눌렀을 경우 teacherAddressMain이 채워진다.
+		function addressClick(dataSet){
+			$('#teacherAddressMain').val(dataSet)
+									.prop('readonly', true);
+			$('#addressTable').empty();
+			$('#btnAddressMainSearch').prop('disabled', true);
+			$('#btnAddressMainReset').prop('disabled', false);
+		}
+
+		// 초기화 버튼을 눌렀을 경우 찾기 버튼 활성화 및 초기화 버튼 비활성화
+		$('#btnAddressMainReset').click(function(){
+			$('#teacherAddressMain').val('')
+									.prop('readonly', false);
+			$('#btnAddressMainSearch').prop('disabled', false);
+			$('#btnAddressMainReset').prop('disabled', true);
+		})
+		
+		$('#btnResult').click(function(){
+			if($('#teacherAddressMain').val() == ''){
+				alert('도로명을 새 주소에 입력하고 찾기를 해주세요.');
+			} else{
+				$('#modifyAddressForm').submit();
+			}
+		});
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@
 		<li class="nav-item">
 			<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/myInfoPw">주소변경</a>
+			<a class="nav-link" href="${path}/teacher/myInfoAddress/${teacherId}">주소변경</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>

@@ -21,6 +21,18 @@ import jdk.internal.org.jline.utils.Log;
 public class TeacherInfoController {
 	@Autowired TeacherInfoService teacherInfoService;
 	
+	// 주소변경 페이지 이동
+	@GetMapping("/teacher/myInfoAddress/{teacherId}")
+	public String myInfoAddress(Model model,
+			@PathVariable(value="teacherId") String teacherId) {
+		Teacher teacher = teacherInfoService.getTeacherByAddress(teacherId);
+		
+		model.addAttribute("teacher", teacher);
+		
+		return "teacher/modifyAddressMyInfo";
+	}
+	
+	// 회원 탈퇴
 	@GetMapping("/teacher/deleteMyInfoById/{teacherId}")
 	public String deleteMyInfoById(
 			@PathVariable(value="teacherId") String teacherId) {
@@ -29,6 +41,7 @@ public class TeacherInfoController {
 		return "redirect:/teacherLogin";
 	}
 	
+	// 회원 탈퇴 페이지 이동
 	@GetMapping("/teacher/deleteMyInfo")
 	public String deleteMyInfo() {
 		return "teacher/deleteMyInfo";
@@ -45,6 +58,15 @@ public class TeacherInfoController {
 		teacherInfoService.modifyTeacherByImage(multipartFile, teacherId);
 		
 		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 핸드폰 번호 수정
+	@PostMapping("/teacher/modifyAddressMyInfo")
+	public String modifyTeacherByPhone(Teacher teacher) {
+		
+		teacherInfoService.modifyTeacherByAddress(teacher);
+		
+		return "redirect:/teacher/myInfo/" + teacher.getTeacherId();
 	}
 	
 	// 마이페이지 핸드폰 번호 수정

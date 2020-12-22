@@ -22,6 +22,7 @@ public interface TeacherInfoMapper {
 	int updateTeacherByBirth(String teacherId, String teacherBirth);
 	int updateTeacherByImage(String teacherId, String teacherImage);
 	int updateTeacherByPhone(String teacherId, String teacherPhone);
+	int updateTeacherByAddress(Teacher teacher);
 	
 	// 마이 페이지 이메일 중복 검사
 	int selectTeacherAndTeacherQueueByOverlapEmail(String teacherEmail);
@@ -32,4 +33,7 @@ public interface TeacherInfoMapper {
 	// 회원탈퇴
 	int updateAccountTodelete(Account account);
 	int deleteTeacher(String teacherId);
+	
+	// 주소변경 사이트 주소 가져오기
+	Teacher selectTeacherByAddress(String teacherId);
 }

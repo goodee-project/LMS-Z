@@ -132,7 +132,7 @@
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">주소</th>
 										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherAddressMain}&nbsp;${teacherOne.teacherAddressSub}</td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td><a href="${path}/teacher/myInfoAddress/${teacherId}" class="btn btn-dark">변경</a></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">사진</th>

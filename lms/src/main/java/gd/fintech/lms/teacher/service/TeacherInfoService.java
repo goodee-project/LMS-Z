@@ -21,6 +21,11 @@ import gd.fintech.lms.vo.Teacher;
 public class TeacherInfoService {
 	@Autowired TeacherInfoMapper teacherInfoMapper;
 	
+	// 주소변경 사이트 주소 가져오기
+	public Teacher getTeacherByAddress(String teacherId) {
+		return teacherInfoMapper.selectTeacherByAddress(teacherId);
+	}
+	
 	// 회원 탈퇴
 	public void deleteTeacher(String teacherId) {
 		Account account = new Account();
@@ -66,6 +71,11 @@ public class TeacherInfoService {
 			e.printStackTrace();
 			throw new RuntimeException();
 		} 
+	}
+	
+	// 마이페이지 주소 수정
+	public void modifyTeacherByAddress(Teacher teacher) {
+		teacherInfoMapper.updateTeacherByAddress(teacher);
 	}
 	
 	// 마이페이지 핸드폰 번호 수정
