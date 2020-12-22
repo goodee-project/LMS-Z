@@ -47,6 +47,9 @@ public class TeacherLoginController {
 		
 		HttpSession session = request.getSession();
 	    session.setAttribute("teacherId", account.getAccountId());
+	    
+	    String teacherImage = teacherLoginService.getTeacherImage(account.getAccountId());
+	    session.setAttribute("teacherImage", teacherImage);
 		
 		return "teacher/index";
 	}

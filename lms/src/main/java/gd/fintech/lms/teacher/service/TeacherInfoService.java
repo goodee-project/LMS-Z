@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,11 @@ public class TeacherInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException();
-		} 
+		}
+		HttpSession session = request.getSession();
+		
+		session.removeAttribute("teacherImage"); 
+	    session.setAttribute("teacherImage", fileName);
 	}
 	
 	// 마이페이지 주소 수정

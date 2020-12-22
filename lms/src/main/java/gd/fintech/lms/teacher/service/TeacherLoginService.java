@@ -18,6 +18,11 @@ import gd.fintech.lms.vo.TeacherForm;
 public class TeacherLoginService {
 	@Autowired TeacherLoginMapper teacherLoginMapper;
 	
+	// 로그인 시 이미지 가져오기
+	public String getTeacherImage(String teacherId) {
+		return teacherLoginMapper.selectTeacherImage(teacherId);
+	}
+	
 	// 회원가입하는 mapper2개를 가져와 manager_queue와 level 순서로 insert실행
 	public void addSignup(TeacherForm teacherForm) {
 		teacherForm.setAccountLevel(3);
