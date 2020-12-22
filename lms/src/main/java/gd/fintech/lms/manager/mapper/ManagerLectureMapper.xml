@@ -43,7 +43,7 @@
 	</resultMap>
 
 	<!-- 강좌 목록을 불러오는 쿼리문 -->
-	<select id="selectLectureList" resultMap="selectLecture">
+	<select id="selectLectureList" parameterType="java.util.Map" resultMap="selectLecture">
 		SELECT 
 			l.lecture_no, 
 			a.account_id, 

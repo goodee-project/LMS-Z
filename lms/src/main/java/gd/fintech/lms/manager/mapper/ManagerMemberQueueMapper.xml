@@ -42,7 +42,7 @@
 		</collection>
 	</resultMap>
 	<!-- 승인 대기상태인 학생리스트를 불러오는 쿼리 -->
-	<select id="selectStudentMemberQueue" resultMap="selectStudentQueueList">
+	<select id="selectStudentMemberQueue" parameterType="java.util.Map" resultMap="selectStudentQueueList">
 		SELECT 
 			s.student_id,
 			s.student_email,
@@ -59,7 +59,7 @@
 		LIMIT #{beginRowS}, #{rowPerPage}
 	</select>
 	<!-- 승인 대기상태인 강사리스트를 불러오는 쿼리 -->
-	<select id="selectTeacherMemberQueue" resultMap="selectTeacherQueueList">
+	<select id="selectTeacherMemberQueue" parameterType="java.util.Map" resultMap="selectTeacherQueueList">
 		SELECT 
 			t.teacher_id,
 			t.teacher_email,

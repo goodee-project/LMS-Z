@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerTextbookMapper">
+	
+	<!-- 교재 리스트를 출력해주는 쿼리  -->
+	<select id="selectTextbookList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Textbook">
+		SELECT 
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle,
+			textbook_writer textbookWriter,
+			textbook_publisher textbookPublisher,
+			textbook_publishdate textbookPublishdate,
+			textbook_info textbookInfo,
+			textbook_price textbookPrice
+		FROM textbook
+		ORDER BY textbook_isbn
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 페이징을 위한 전체 카운트를 구해주는 쿼리 -->
+	<select id="selectTextbookTotalCount" resultType="int">
+		SELECT
+			count(*)
+		FROM textbook
+	</select>
+</mapper>

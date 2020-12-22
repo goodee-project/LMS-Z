@@ -113,10 +113,11 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/classroomList/1"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">강의실 관리</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/textbookList/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">4</span></a>
-                            <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
+                                    class="hide-menu">교재 관리</span></a></li>
+                         <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
+                         <!--  li -> a class = siderbar-link 대신 has-arrow 사용
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
                                             class="hide-menu"> 4-1
@@ -131,7 +132,7 @@
                                         </span></a>
                                 </li>
                             </ul>
-                        </li>
+                        -->
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/logout"

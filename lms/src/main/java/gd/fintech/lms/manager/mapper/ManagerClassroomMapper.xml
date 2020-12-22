@@ -5,7 +5,7 @@
 <mapper  namespace="gd.fintech.lms.manager.mapper.ManagerClassroomMapper">
 	
 	<!-- 강의실 목록을 보여주는 쿼리 -->
-	<select id="selectClassroomList" resultType="gd.fintech.lms.vo.Classroom">
+	<select id="selectClassroomList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Classroom">
 		SELECT
 			classroom_no classroomNo,
 			classroom_number classroomNumber,
