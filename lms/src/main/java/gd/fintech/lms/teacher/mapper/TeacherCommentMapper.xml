@@ -59,6 +59,7 @@
 	<select id="selectQuestionCommentOne" parameterType="int" resultType="gd.fintech.lms.vo.QuestionComment">
 		SELECT
 			question_comment_no questionCommentNo,
+			question_no questionNo,
 			account_id accountId,
 			question_comment_writer questionCommentWriter,
 			question_comment_content questionCommentContent,

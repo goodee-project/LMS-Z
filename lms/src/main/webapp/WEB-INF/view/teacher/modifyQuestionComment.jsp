@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>댓글 수정</h1>
-		<form method="post" action="${path}/teacher/modifyQuestionComment/${questionComment.questionCommentNo}">
+		<form method="post" action="${path}/teacher/modifyQuestionComment/${questionComment.questionNo}/${currentPage}">
 			<table border="1">
 				<tr>
 					<th>question_comment_no</th>

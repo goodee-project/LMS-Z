@@ -60,7 +60,7 @@
 						<td>${qc.questionCommentCreatedate}</td>
 						<td>${qc.questionCommentUpdatedate}</td>
 						<td><a href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}">삭제</a></td>
-						<td><a href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}">수정</a></td>
+						<td><a href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
 					</tr>
 				</c:forEach>
 				<!-- 숫자로 페이징 -->

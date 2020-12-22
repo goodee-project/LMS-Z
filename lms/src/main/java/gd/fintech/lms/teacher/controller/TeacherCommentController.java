@@ -45,7 +45,7 @@ public class TeacherCommentController {
 	@PostMapping("/teacher/addQuestionComment")
 	public String addQuestionComment(QuestionComment questionComment) {
 		teacherCommentService.addQuestionComment(questionComment);
-		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo();
+		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo() + "/1";
 	}
 	
 	//댓글삭제
@@ -56,12 +56,12 @@ public class TeacherCommentController {
 		
 		teacherCommentService.removeQuestionComment(questionCommentNo);
 		
-		return "redirect:/teacher/questionOne/"+questionNo;
+		return "redirect:/teacher/questionOne/"+questionNo + "/1";
 	}
 	
 	//댓글수정 폼
-	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}/1")
-	public String modifyQuestionComment(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo) {
+	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}/{currentPage}")
+	public String modifyQuestionComment(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		QuestionComment questionComment = teacherCommentService.questionCommentOne(questionCommentNo);
 		model.addAttribute(questionComment);
@@ -71,10 +71,10 @@ public class TeacherCommentController {
 	
 	//댓글수정 액션
 	@PostMapping("/teacher/modifyQuestionComment/{questionNo}/{currentPage}")
-	public String modifyQuestionComment(QuestionComment questionComment, @PathVariable(value ="currentPage") int currentPage) {
+	public String modifyQuestionComment(QuestionComment questionComment, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		teacherCommentService.modifyQuestionComment(questionComment);
 		
-		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo() + "/" + currentPage;
+		return "redirect:/teacher/questionOne/"+ questionComment.getQuestionNo() + "/" + currentPage;
 	}
 }

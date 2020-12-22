@@ -17,4 +17,6 @@ public class Report {
 	private List<ReportSubmit> reportSubmitList;
 	private List<ReportSubmitFile> reportSubmitFileList;
 	private List<ClassRegistration> classRegistrationList;
+	private List<Lecture> lectureList;
+	private List<Account> accountList;
 }

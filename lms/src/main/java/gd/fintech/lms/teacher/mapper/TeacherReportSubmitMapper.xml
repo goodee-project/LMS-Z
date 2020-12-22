@@ -22,7 +22,7 @@
 			<result property="reportSubmitFileCreatedate" column="report_submit_file_createdate" />
 		</collection>
 	</resultMap>
-	<select id="selectReportSubmit" parameterType="int" resultMap="selectReportSubmitResult">
+	<select id="selectReportSubmit" parameterType="java.util.Map" resultMap="selectReportSubmitResult">
 		SELECT
 			report_submit_no,
 			report_no,
@@ -31,5 +31,6 @@
 			report_submit_content
 		FROM report_submit
 		WHERE report_no = #{reportNo}
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 </mapper>

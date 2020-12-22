@@ -1,6 +1,8 @@
 package gd.fintech.lms.teacher.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,12 @@ public class TeacherReportService {
 	@Autowired TeacherReportMapper teacherReportMapper;
 	
 	//과제목록
-	public List<Report> getReportList(){
-		return teacherReportMapper.selectReportList();
+	public List<Report> getReportList(String teacherId){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", teacherId);
+		
+		return teacherReportMapper.selectReportList(map);
 	}
 	
 	//과제등록

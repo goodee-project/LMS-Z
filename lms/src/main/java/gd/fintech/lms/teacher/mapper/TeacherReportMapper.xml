@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherReportMapper">
+
+		<resultMap type="gd.fintech.lms.vo.Report" id="selectReportListResult">
+			<result property="reportNo" column="report_no"/>
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="reportTitle" column="report_title"/>
+			<result property="reportContent" column="report_content"/>
+			<result property="reportCreatedate" column="report_createdate"/>
+			<result property="reportUpdatedate" column="report_updatedate"/>
+			<result property="reportStartdate" column="report_startdate"/>
+			<result property="reportEnddate" column="report_enddate"/>
+			<collection property="lectureList" ofType="gd.fintech.lms.vo.Lecture">
+				<result property="lectureNo" column="lecture_no" />
+			</collection>
+			<collection property="accountList" ofType="gd.fintech.lms.vo.Account">
+				<result property="accountId" column="account_id" />
+			</collection>
+		</resultMap>
 	<!-- 과제 목록출력 -->
-	<select id="selectReportList" resultType="gd.fintech.lms.vo.Report">
+	<select id="selectReportList" parameterType="java.util.Map" resultMap="selectReportListResult">
 		SELECT 
-			report_no reportNo, 
-			lecture_no lectureNo, 
-			report_title reportTitle, 
-			report_content reportContent, 
-			report_startdate reportStartdate, 
-			report_enddate reportEnddate
-		FROM report
+			r.report_no, 
+			r.lecture_no, 
+			r.report_title, 
+			r.report_content, 
+			r.report_startdate, 
+			r.report_enddate,
+			l.lecture_no,
+			a.account_id
+		FROM report r LEFT JOIN lecture l
+		ON r.lecture_no = l.lecture_no
+		LEFT JOIN account a
+		ON l.account_id = a.account_id
+		WHERE a.account_id = #{accountId}
 	</select>
 	<!-- 과제 등록 -->
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.Report">

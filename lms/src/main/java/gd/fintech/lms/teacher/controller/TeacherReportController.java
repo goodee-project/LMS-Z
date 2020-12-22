@@ -17,10 +17,10 @@ public class TeacherReportController {
 	@Autowired TeacherReportService teacherReportService;
 	
 	//과제목록
-	@GetMapping("/teacher/reportList")
-	public String reportList(Model model) {
+	@GetMapping("/teacher/reportList/{teacherId}")
+	public String reportList(Model model, @PathVariable(value = "teacherId") String teacherId) {
 		
-		List<Report> reportList = teacherReportService.getReportList();
+		List<Report> reportList = teacherReportService.getReportList(teacherId);
 		model.addAttribute("reportList", reportList);
 		
 		return "teacher/reportList";
