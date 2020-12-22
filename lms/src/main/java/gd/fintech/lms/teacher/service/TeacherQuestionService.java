@@ -33,7 +33,13 @@ public class TeacherQuestionService {
 	}
 	
 	//질문게시판 상세보기
-	public Question getQuestionOne(int questionNo) {
-		return teacherQuestionMapper.selectQuestionOne(questionNo);
+	public Question getQuestionOne(int questionNo, int beginRow, int rowPerPage) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("questionNo", questionNo);
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		
+		return teacherQuestionMapper.selectQuestionOne(map);
 	}
 }

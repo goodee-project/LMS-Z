@@ -11,5 +11,5 @@ import gd.fintech.lms.vo.Question;
 public interface TeacherQuestionMapper {
 	List<Question> selectQuestionList(Map<String, Object> map);
 	int selectQuestionCount(String accountId);
-	Question selectQuestionOne(int questionNo);
+	Question selectQuestionOne(Map<String, Object> map);
 }

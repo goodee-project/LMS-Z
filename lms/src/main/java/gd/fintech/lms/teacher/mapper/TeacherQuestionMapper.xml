@@ -52,7 +52,7 @@
 		 		<result property="questionFileCreatedate" column="question_file_createdate"/>
 		 	</collection>
 	</resultMap>
-	<select id="selectQuestionOne" resultMap="selectQuestionOneResult" parameterType="int">
+	<select id="selectQuestionOne" resultMap="selectQuestionOneResult" parameterType="java.util.Map">
 		SELECT
 			q.question_no,
 			q.account_id,
@@ -75,5 +75,6 @@
 		LEFT JOIN question_file qf
 		ON q.question_no = qf.question_no
 		WHERE q.question_no = #{questionNo}
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 </mapper>

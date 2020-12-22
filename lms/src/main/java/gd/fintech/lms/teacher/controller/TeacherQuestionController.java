@@ -8,12 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import gd.fintech.lms.teacher.service.TeacherCommentService;
 import gd.fintech.lms.teacher.service.TeacherQuestionService;
 import gd.fintech.lms.vo.Question;
 
 @Controller
 public class TeacherQuestionController {
 	@Autowired TeacherQuestionService teacherQuestionService;
+	@Autowired TeacherCommentService teacherCommentService;
 	
 	//질문게시판 목록 출력
 	@GetMapping("/teacher/questionList/{teacherId}/{currentPage}")
@@ -43,10 +45,27 @@ public class TeacherQuestionController {
 	}
 	
 	//질문게시판 상세보기
-	@GetMapping("/teacher/questionOne/{questionNo}")
-	public String questionOne(Model model, @PathVariable(value = "questionNo") int questionNo) {
-		Question question = teacherQuestionService.getQuestionOne(questionNo);
+	@GetMapping("/teacher/questionOne/{questionNo}/{currentPage}")
+	public String questionOne(Model model, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
+		
+		int rowPerPage = 5;
+		int beginRow = (currentPage - 1) * rowPerPage;
+		int lastPage = 0;
+		int totalCount = teacherCommentService.getQuestionCommentCount(questionNo);
+		
+		//마지막 페이지
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		}else {
+			lastPage = totalCount / rowPerPage + 1;
+		}
+		
+		Question question = teacherQuestionService.getQuestionOne(questionNo, beginRow, rowPerPage);
 		model.addAttribute("question", question);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		
+		
 		return "teacher/questionOne";
 	}
 }

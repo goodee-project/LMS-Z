@@ -18,13 +18,27 @@ public class TeacherCommentController {
 	@Autowired TeacherCommentService teacherCommentService;
 	
 	//댓글목록 출력
-	@GetMapping("/teacher/questionCommentList")
-	public String questionCommentList(Model model) {
+	@GetMapping("/teacher/questionCommentList/{questionNo}/{currentPage}")
+	public String questionCommentList(Model model, @PathVariable(value = "currentPage") int currentPage, @PathVariable(value = "questionNo") int questionNo) {
 		
-		List<QuestionComment> questionCommentList = teacherCommentService.getQuestionCommentList();
+		int rowPerPage = 5;
+		int beginRow = (currentPage - 1) * rowPerPage;
+		int lastPage = 0;
+		int totalCount = teacherCommentService.getQuestionCommentCount(questionNo);
+		
+		//마지막 페이지
+		if(totalCount % rowPerPage == 0) {
+			lastPage = totalCount / rowPerPage;
+		}else {
+			lastPage = totalCount / rowPerPage + 1;
+		}
+		
+		List<QuestionComment> questionCommentList = teacherCommentService.getQuestionCommentList(beginRow, rowPerPage);
 		model.addAttribute("questionCommentList", questionCommentList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
 		
-		return "redirect:/teacher/questionCommentList";
+		return "redirect:/teacher/questionCommentList/" + questionNo + "/" + currentPage;
 	}
 	
 	//댓글 입력
@@ -46,7 +60,7 @@ public class TeacherCommentController {
 	}
 	
 	//댓글수정 폼
-	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}")
+	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}/1")
 	public String modifyQuestionComment(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo) {
 		
 		QuestionComment questionComment = teacherCommentService.questionCommentOne(questionCommentNo);
@@ -56,11 +70,11 @@ public class TeacherCommentController {
 	}
 	
 	//댓글수정 액션
-	@PostMapping("/teacher/modifyQuestionComment/{questionNo}")
-	public String modifyQuestionComment(QuestionComment questionComment) {
+	@PostMapping("/teacher/modifyQuestionComment/{questionNo}/{currentPage}")
+	public String modifyQuestionComment(QuestionComment questionComment, @PathVariable(value ="currentPage") int currentPage) {
 		
 		teacherCommentService.modifyQuestionComment(questionComment);
 		
-		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo();
+		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo() + "/" + currentPage;
 	}
 }

@@ -36,6 +36,7 @@ public class TeacherLmsNoticeController {
 		
 		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
+		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("currentPage", currentPage);
 		
 		return "teacher/lmsNoticeList";

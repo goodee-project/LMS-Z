@@ -27,13 +27,12 @@
 						<td>${l.lmsNoticeCount}</td>
 					</tr>
 				</c:forEach>
-				<!-- 페이징 버튼 -->
-				<c:if test="${1 < currentPage}">
-					<a href="${path}/teacher/lmsNoticeList/${currentPage - 1}">이전</a>
-				</c:if>
-				<c:if test="${1 >= currentPage}">
-					<a href="${path}/teacher/lmsNoticeList/${currentPage + 1}">다음</a>
-				</c:if>
+				<!-- 숫자로 페이징 -->
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<span>
+                		<a href="${path}/teacher/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+                	</span>
+                </c:forEach>
 			</tbody>
 		</table>
 </body>

@@ -63,6 +63,12 @@
 						<td><a href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}">수정</a></td>
 					</tr>
 				</c:forEach>
+				<!-- 숫자로 페이징 -->
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<span>
+                		<a href="${path}/teacher/questionOne/${questionNo}/${i}">${i}&nbsp;&nbsp;</a>
+                	</span>
+                </c:forEach>
 			</tbody>
 		</table>
 		<!-- 댓글 추가 -->

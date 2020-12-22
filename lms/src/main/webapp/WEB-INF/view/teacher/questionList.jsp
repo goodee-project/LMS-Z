@@ -23,16 +23,16 @@
 					<tr>
 						<td>${q.questionNo}</td>
 						<td>${q.questionWriter}</td>
-						<td><a href="${path}/teacher/questionOne/${q.questionNo}">${q.questionTitle}</a></td>
+						<td><a href="${path}/teacher/questionOne/${q.questionNo}/1">${q.questionTitle}</a></td>
 						<td>${q.questionCount}</td>
 					</tr>
 				</c:forEach>
-				<c:if test="${1 < currentPage}">
-					<a href="${path}/teacher/questionList/${teacherId}/${currentPage - 1}">이전</a>
-				</c:if>
-				<c:if test="${1 >= currentPage}">
-					<a href="${path}/teacher/questionList/${teacherId}/${currentPage + 1}">다음</a>
-				</c:if>
+				<!-- 숫자로 페이징 -->
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<span>
+                		<a href="${path}/teacher/questionList/${teacherId}/${i}">${i}&nbsp;&nbsp;</a>
+                	</span>
+                </c:forEach>
 			</tbody>
 		</table>
 </body>

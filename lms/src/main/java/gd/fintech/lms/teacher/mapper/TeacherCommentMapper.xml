@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherCommentMapper">
 	<!-- 댓글목록 -->
-	<select id="selectQuestionCommentList" resultType="gd.fintech.lms.vo.QuestionComment">
+	<select id="selectQuestionCommentList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.QuestionComment">
 		SELECT
 			question_comment_no questionCommentNo,
 			account_id accountId,
@@ -11,6 +11,14 @@
 			question_comment_createdate questionCommentCreatedate,
 			question_comment_updatedate questionCommentUpdatedate
 		FROM question_comment
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectQuestionCommentCount" parameterType="int" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM question_comment
+		WHERE question_no = #{questionNo}
 	</select>
 	
 	<!-- 댓글입력 -->
