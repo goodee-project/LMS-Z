@@ -1,7 +1,9 @@
 package gd.fintech.lms.manager.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,11 @@ public class ManagerLectureService {
 	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
 	private final String PATH = "C:\\Users\\guswn\\OneDrive\\바탕 화면\\git\\maven.1607910829175\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
-	public List<Lecture> getLectureList(){
-		return managerLectureMapper.selectLectureList();
+	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		return managerLectureMapper.selectLectureList(map);
 	}
 	//강사목록을 리턴시키기 위한 메퍼 호출
 	public List<Teacher> getTeacherList(){
@@ -86,5 +91,9 @@ public class ManagerLectureService {
 		managerLectureMapper.deleteClassRegistration(lectureNo);
 		//강좌 삭제
 		managerLectureMapper.deleteLecture(lectureNo);
+	}
+	//페이징을 위해 카운트를 구해주는 메퍼 호출
+	public int getLectureTotalPage() {
+		return managerLectureMapper.selectLectureTotalPage();
 	}
 }

@@ -64,6 +64,8 @@
 		AND l.textbook_isbn = tb.textbook_isbn 
 		AND l.syllabus_no = sy.syllabus_no 
 		AND l.classroom_no = c.classroom_no
+		ORDER BY lecture_no DESC
+		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	<!-- 강사 목록을 불러오는 쿼리 -->
 	<select id="selectTeacherList" resultType="gd.fintech.lms.vo.Teacher">
@@ -165,4 +167,10 @@
 		DELETE FROM class_registration
 		WHERE lecture_no = #{lectureNo}
 	</delete>
+	<!-- 페이징에 필요한 전체 갯수를 구하는 메퍼 -->
+	<select id="selectLectureTotalPage" resultType="int">
+		SELECT 
+			count(*)
+		FROM lecture
+	</select>
 </mapper>

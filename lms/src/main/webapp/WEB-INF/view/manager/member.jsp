@@ -38,12 +38,21 @@
 					<td>${s.studentAddressMain }</td>
 					<td>${s.studentAddressSub }</td>
 					<td>${s.account.accountLevel }</td>
-					<td><a href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${managerId}">승인</a></td>
-					<td><a href="${path}/manager/deleteStudentQueue/${s.studentId}/거절">거절</a></td>
+					<td><a href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
+					<td><a href="${path}/manager/deleteStudentQueue/${s.studentId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 		</table>
+		<!-- 페이징 -->
+       	<br>
+       	<div class="list-inline text-center mt-4 mb-0">
+        	<c:forEach var="i" begin="1" end="${lastPageS }">
+        		<span>
+        			<a href="${path}/manager/member/${i}/${currentPageT}">${i}&nbsp;&nbsp;</a>
+        		</span>
+        	</c:forEach>
+       	</div>
 		<table border="1">
 		<thead>
 			<tr>
@@ -72,12 +81,20 @@
 					<td>${t.teacherAddressMain }</td>
 					<td>${t.teacherAddressSub }</td>
 					<td>${t.account.accountLevel }</td>
-					<td><a href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${managerId}">승인</a></td>
-					<td><a href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절">거절</a></td>
+					<td><a href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
+					<td><a href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
-		
 	</table>
+	<!-- 페이징 -->
+   	<br>
+   	<div class="list-inline text-center mt-4 mb-0">
+    	<c:forEach var="i" begin="1" end="${lastPageT }">
+    		<span>
+    			<a href="${path}/manager/member/${currentPageS}/${i}">${i}&nbsp;&nbsp;</a>
+    		</span>
+    	</c:forEach>
+   	</div>
 </body>
 </html>

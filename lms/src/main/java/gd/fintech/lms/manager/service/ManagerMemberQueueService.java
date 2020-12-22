@@ -18,12 +18,18 @@ import gd.fintech.lms.vo.TeacherQueue;
 public class ManagerMemberQueueService {
 	@Autowired private ManagerMemberQueueMapper managerMemberQueueMapper;
 	//학생 대기상태
-	public List<StudentQueue> getStudentMemberQueueList(){
-		return managerMemberQueueMapper.selectStudentMemberQueue();
+	public List<StudentQueue> getStudentMemberQueueList(int beginRowS, int rowPerPage){
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRowS", beginRowS);
+		map.put("rowPerPage", rowPerPage);
+		return managerMemberQueueMapper.selectStudentMemberQueue(map);
 	}
 	//강사 대기상태
-	public List<TeacherQueue> getTeacherMemberQueueList(){
-		return managerMemberQueueMapper.selectTeacherMemberQueue();
+	public List<TeacherQueue> getTeacherMemberQueueList(int beginRowT, int rowPerPage){
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRowT", beginRowT);
+		map.put("rowPerPage", rowPerPage);
+		return managerMemberQueueMapper.selectTeacherMemberQueue(map);
 	}
 	//학생 승인
 	public void insertStudent(String studentId, String accountState, String managerId) {
@@ -72,5 +78,13 @@ public class ManagerMemberQueueService {
 		map.put("memberId", teacherId);
 		map.put("accountState", accountState);
 		managerMemberQueueMapper.updateAccountState(map);
+	}
+	//학생 페이징을 위한 메퍼 호출
+	public int getStudentTotalCount() {
+		return managerMemberQueueMapper.selectStudentQueueTotalCount();
+	}
+	//강사 페이징을 위한 메퍼 호출
+	public int getTeacherTotalCount() {
+		return managerMemberQueueMapper.selectTeacherQueueTotalCount();
 	}
 }

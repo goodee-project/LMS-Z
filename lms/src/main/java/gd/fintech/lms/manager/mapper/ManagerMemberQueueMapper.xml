@@ -56,6 +56,7 @@
 		FROM student_queue s, account a
 		WHERE s.student_id = a.account_id
 		AND a.account_state = '대기'
+		LIMIT #{beginRowS}, #{rowPerPage}
 	</select>
 	<!-- 승인 대기상태인 강사리스트를 불러오는 쿼리 -->
 	<select id="selectTeacherMemberQueue" resultMap="selectTeacherQueueList">
@@ -72,6 +73,7 @@
 		FROM teacher_queue t, account a
 		WHERE t.teacher_id = a.account_id
 		AND a.account_state = '대기'
+		LIMIT #{beginRowT}, #{rowPerPage}
 	</select>
 	<!-- 승인할 학생의 정보를 가져오는 쿼리 -->
 	<select id="selectStudentOne" parameterType="String" resultType="gd.fintech.lms.vo.StudentQueue">
@@ -174,4 +176,16 @@
 			account_updatedate=NOW()
 		WHERE account_id = #{memberId}
 	</update>
+	<!-- 학생 페이징을 위해 전체 갯수를 구하기 위한 쿼리 -->
+	<select id="selectStudentQueueTotalCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM student_queue
+	</select>
+	<!-- 강사 페이징을 위해 전체 갯수를 구하기 위한 쿼리 -->
+	<select id="selectTeacherQueueTotalCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM teacher_queue
+	</select>
 </mapper>

@@ -13,6 +13,8 @@
 			classroom_total classroomTotal,
 			classroom_state classroomState
 		FROM classroom
+		ORDER BY classroom_no DESC
+		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	<!-- 강의실을 추가하기 위한 쿼리 -->
 	<insert id="insertClassroom" parameterType="gd.fintech.lms.vo.Classroom">
@@ -40,4 +42,10 @@
 		DELETE FROM classroom
 		WHERE classroom_no = #{classroomNo}
 	</delete>
+	<!-- 페이징을 위한 전체 갯수를 구하는 쿼리 -->
+	<select id="selectClassroomTotalCount" resultType="int">
+		SELECT 
+			count(*)
+		FROM classroom
+	</select>
 </mapper>

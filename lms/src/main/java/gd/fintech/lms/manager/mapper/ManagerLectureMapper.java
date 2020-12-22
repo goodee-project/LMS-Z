@@ -1,6 +1,7 @@
 package gd.fintech.lms.manager.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +15,7 @@ import gd.fintech.lms.vo.Textbook;
 @Mapper
 public interface ManagerLectureMapper {
 	//강좌 목록을 불러오기 위해 연결해주는 메퍼
-	List<Lecture> selectLectureList();
+	List<Lecture> selectLectureList(Map<String, Object> map);
 	//강사 리스트를 불러오기 위해 연결해주는 메퍼
 	List<Teacher> selectTeacherList();
 	//과목 리스트를 불러오기 위해 연결해주는 메퍼
@@ -37,4 +38,6 @@ public interface ManagerLectureMapper {
 	int deleteReport(int lectureNo);
 	//강좌에 수강하는 학생들을 삭제하기 위해 필요한 메퍼
 	int deleteClassRegistration(int lectureNo);
+	//페이징에 필요한 메퍼
+	int selectLectureTotalPage();
 }

@@ -11,9 +11,9 @@ import gd.fintech.lms.vo.TeacherQueue;
 @Mapper
 public interface ManagerMemberQueueMapper {
 	//승인 대기상태의 학생리스트를 연결하는 메퍼
-	List<StudentQueue> selectStudentMemberQueue(); 
+	List<StudentQueue> selectStudentMemberQueue(Map<String, Object> map); 
 	//승인 대기상태의 강사리스트를 연결하는 메퍼
-	List<TeacherQueue> selectTeacherMemberQueue();
+	List<TeacherQueue> selectTeacherMemberQueue(Map<String, Object> map);
 	//승인 거부한 학생을 대기리스트에서 삭제하기위해 연결하는 메퍼
 	int deleteStudentQueue(String studentId);
 	//승인에 의해 강사,학생의 상태 변경을 위해 연결하는 메퍼
@@ -28,4 +28,8 @@ public interface ManagerMemberQueueMapper {
 	TeacherQueue selectTeacherOne(String teacherId);
 	//승인된 강사을 강사테이블에 추가하기 위해 연결하는 메퍼
 	int insertTeacher(Map<String, Object> map);
+	//학생 페이징을 하기 위해 연결하는 메퍼
+	int selectStudentQueueTotalCount();
+	//강사 페이징을 하기 위해 연결하는 메퍼
+	int selectTeacherQueueTotalCount();
 }

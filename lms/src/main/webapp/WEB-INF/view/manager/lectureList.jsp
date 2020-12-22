@@ -47,5 +47,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
+   	<div>
+    	<c:forEach var="i" begin="1" end="${lastPage }">
+    		<span>
+    			<a href="${path}/manager/lectureList/${i}">${i}&nbsp;&nbsp;</a>
+    		</span>
+    	</c:forEach>
+   	</div>
 </body>
 </html>

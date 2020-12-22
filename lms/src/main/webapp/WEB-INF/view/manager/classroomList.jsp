@@ -31,7 +31,7 @@
 					<td>${c.classroomTotal }</td>
 					<td>${c.classroomState }</td>
 					<c:if test="${c.classroomState =='빈강의실'}">
-						<td><a href="${path }/manager/deleteClassroom/${c.classroomNo}">삭제</a></td>
+						<td><a href="${path }/manager/deleteClassroom/${c.classroomNo}/${currentPage}">삭제</a></td>
 					</c:if>
 					<c:if test="${c.classroomState =='사용중'}">
 						<td>&nbsp;</td>
@@ -40,6 +40,15 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
+   	<div>
+    	<c:forEach var="i" begin="1" end="${lastPage }">
+    		<span>
+    			<a href="${path}/manager/classroomList/${i}">${i}&nbsp;&nbsp;</a>
+    		</span>
+    	</c:forEach>
+   	</div>
+	
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -55,8 +64,5 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-    <script>
-		
-    </script>
 </body>
 </html>

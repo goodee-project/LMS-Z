@@ -20,10 +20,25 @@ public class ManagerClassroomController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//강의실 리스트 출력
-	@GetMapping("/manager/classroomList")
-	public String classroomList(Model model) {
-		List<Classroom> classroomList = managerClassroomService.getClassroomList();
+	@GetMapping("/manager/classroomList/{currentPage}")
+	public String classroomList(Model model,
+				@PathVariable(name="currentPage") int currentPage) {
+		// page당 목록 갯수
+		int rowPerPage = 2;
+		// 시작 목록
+		int beginRow = (currentPage-1)*rowPerPage;
+		List<Classroom> classroomList = managerClassroomService.getClassroomList(beginRow, rowPerPage);
+		int totalPage = managerClassroomService.getClassroomTotalCount();
+		// 마지막 페이지
+		int lastPage = 0;
+		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+			lastPage = (totalPage/rowPerPage)+1;
+		}else { // 나누어 떨어진다면 
+			lastPage = totalPage/rowPerPage;
+		}
 		model.addAttribute("classroomList",classroomList);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
 		return "/manager/classroomList";
 	}
 	//강의실 추가 폼
@@ -36,12 +51,13 @@ public class ManagerClassroomController {
 	public String insertClassroomAction(Classroom classroom) {
 		logger.debug("classroom : "+classroom.toString());
 		managerClassroomService.insertClassroom(classroom);
-		return "redirect:/manager/classroomList";
+		return "redirect:/manager/classroomList/1";
 	}
 	//강의실 삭제
-	@GetMapping("/manager/deleteClassroom/{classroomNo}")
-	public String deleteClassroom(@PathVariable(value="classroomNo") int classroomNo) {
+	@GetMapping("/manager/deleteClassroom/{classroomNo}/{currentPage}")
+	public String deleteClassroom(@PathVariable(value="classroomNo") int classroomNo,
+			@PathVariable(name="currentPage") int currentPage) {
 		managerClassroomService.deleteClassroom(classroomNo);
-		return "redirect:/manager/classroomList";
+		return "redirect:/manager/classroomList/"+currentPage;
 	}
 }

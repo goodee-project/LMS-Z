@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import gd.fintech.lms.manager.service.ManagerLectureService;
@@ -25,11 +24,26 @@ public class ManagerLectureController {
 	@Autowired ManagerLectureService managerLectureService;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	//강좌 리스트
-	@GetMapping("/manager/lectureList")
-	public String LectureList(Model model) {
-		List<Lecture> lectureList = managerLectureService.getLectureList();
+	@GetMapping("/manager/lectureList/{currentPage}")
+	public String LectureList(Model model,
+				@PathVariable(name="currentPage") int currentPage) {
+		// page당 목록 갯수
+		int rowPerPage = 2;
+		// 시작 목록
+		int beginRow = (currentPage-1)*rowPerPage; 
+		List<Lecture> lectureList = managerLectureService.getLectureList(beginRow,rowPerPage);
 		logger.debug("lectureList="+lectureList.toString());
+		int totalPage = managerLectureService.getLectureTotalPage();
+		// 마지막 페이지
+		int lastPage = 0;
+		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+			lastPage = (totalPage/rowPerPage)+1;
+		}else { // 나누어 떨어진다면 
+			lastPage = totalPage/rowPerPage;
+		}
 		model.addAttribute("lectureList",lectureList);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
 		return "/manager/lectureList";
 	}
 	//강좌 등록을 위한 컨트롤러 각각의 리스트를 불러와 선택하기 위한 서비스 호출
@@ -58,14 +72,15 @@ public class ManagerLectureController {
 		//강의실을 빈강의실에서 사용중으로 변경하기 위한 변수
 		int classroomNo = lecture.getClassroomNo();
 		managerLectureService.updateClassroomState(classroomNo);
-		return "redirect:/manager/lectureList";
+		return "redirect:/manager/lectureList/1";
 	}
 	//강좌 삭제버튼 클릭시 해당 강좌를 삭제하기 위한 서비스 호출
-	@GetMapping("/manager/deleteLecture/{lectureNo}/{classroomNo}")
+	@GetMapping("/manager/deleteLecture/{lectureNo}/{classroomNo}/{currentPage}")
 	public String deleteLecture(@PathVariable(name="lectureNo") int lectureNo,
-			@PathVariable(name="classroomNo") int classroomNo) {
+			@PathVariable(name="classroomNo") int classroomNo,
+			@PathVariable(name="classroomNo") int currentPage) {
 		managerLectureService.deleteLecture(lectureNo);
 		managerLectureService.updateClassroomState(classroomNo);
-		return "redirect:/manager/lectureList";
+		return "redirect:/manager/lectureList/"+currentPage;
 	}
 }
