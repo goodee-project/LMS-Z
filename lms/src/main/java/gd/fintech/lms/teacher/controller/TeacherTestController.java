@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherTestService;
+import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.Test;
 
 @Controller
@@ -24,5 +25,15 @@ public class TeacherTestController {
 		model.addAttribute("test", test);
 		
 		return "teacher/testList";
+	}
+	
+	// 시험문제, 답 상세보기
+	@GetMapping("/teacher/testOne/{lectureNo}")
+	public String testOne(Model model,
+							@PathVariable(value="lectureNo") int lectureNo) {
+		List<Multiplechoice> testOne = teacherTestService.getTestOne(lectureNo);
+		model.addAttribute("testOne", testOne);
+		
+		return "teacher/testOne";
 	}
 }

@@ -24,7 +24,7 @@
 			<c:forEach var="t" items="${test}">
 				<tr>
 					<td>${t.testNo}</td>
-					<td>${t.testContent}</td>
+					<td><a href="${path}/teacher/testOne/${t.lectureNo}">${t.testContent}</a></td>
 					<td>${t.testStartdate}</td>
 					<td>${t.testEnddate}</td>
 				</tr>

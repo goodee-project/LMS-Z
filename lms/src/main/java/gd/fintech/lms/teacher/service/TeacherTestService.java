@@ -1,14 +1,13 @@
 package gd.fintech.lms.teacher.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
+import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -19,5 +18,10 @@ public class TeacherTestService {
 	// 시험목록 출력
 	public List<Test> getTestList(int lectureNo){
 		return teacherTestMapper.selectTestList(lectureNo);
+	}
+	
+	// 시험문제, 답 상세보기
+	public List<Multiplechoice> getTestOne(int lectureNo) {
+		return teacherTestMapper.selectTestOne(lectureNo);
 	}
 }

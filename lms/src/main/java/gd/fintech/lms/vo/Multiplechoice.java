@@ -1,5 +1,7 @@
 package gd.fintech.lms.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class Multiplechoice {
 	private String multiplechoiceAnswer;
 	private String multiplechoiceCreatedate;
 	private String multiplechoiceUpdatedate;
+	private List<MultiplechoiceExample> multiplechoiceExampleList;
 }
