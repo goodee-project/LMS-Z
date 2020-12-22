@@ -82,7 +82,7 @@ public class StudentReportService {
 		return report;
 	}
 	
-	public Report getReportSubmitOne(int reportNo, String accountId) {
+	public ReportSubmit getReportSubmitOne(int reportNo, String accountId) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reportNo", reportNo);
 		map.put("accountId", accountId);

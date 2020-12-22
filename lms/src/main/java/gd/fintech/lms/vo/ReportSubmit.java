@@ -19,4 +19,5 @@ public class ReportSubmit {
 	private String reportSubmitPoint;
 	private String reportSubmitFeedback;
 	private List<ReportSubmitFile> reportSubmitFile;
+	private List<Report> reportList;
 }

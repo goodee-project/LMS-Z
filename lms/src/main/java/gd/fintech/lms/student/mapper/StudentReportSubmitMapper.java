@@ -10,11 +10,9 @@ import gd.fintech.lms.vo.ReportSubmit;
 
 @Mapper
 public interface StudentReportSubmitMapper {
-	Report selectReportSubmitOne(Map<String, Object>map);
+	ReportSubmit selectReportSubmitOne(Map<String, Object>map);
 	
 	Report selectReportOne(int reportNo);
-	
-	Report selectReportSubmitAndReportFile(int reportSubmitNo);
 	
 	int insertReport(ReportSubmit reportSubmit);
 	

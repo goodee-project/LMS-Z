@@ -34,17 +34,7 @@
 		ORDER BY r.report_createdate DESC
 	</select>
 	
-	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportSubmitOne">
-		<result property="reportNo" column="report_no"/>
-		<result property="lectureNo" column="lecture_no"/>
-		<result property="reportTitle" column="report_title"/>
-		<result property="reportContent" column="report_content"/>
-		<result property="reportCreatedate" column="report_createdate"/>
-		<result property="reportUpdatedate" column="report_updatedate"/>
-		<result property="reportStartdate" column="report_startdate"/>
-		<result property="reportEnddate" column="report_enddate"/>
-		
-	<collection property="reportSubmitList" ofType="gd.fintech.lms.vo.ReportSubmit">
+	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOne">
 		<result property="reportNo" column="report_no"/>
 		<result property="accountId" column="account_id"/>
 		<result property="reportSubmitNo" column="report_submit_no"/>
@@ -53,9 +43,8 @@
 		<result property="reportSubmitContent" column="report_submit_content"/>
 		<result property="reportSubmitPoint" column="report_submit_point"/>
 		<result property="reportSubmitFeedback" column="report_submit_feedback"/>
-	</collection>
 	
-	<collection property="reportSubmitFileList" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+	<collection property="reportSubmitFile" ofType="gd.fintech.lms.vo.ReportSubmitFile">
 		<result property="reportSubmitFileOriginal" column="report_submit_file_original"/>
 		<result property="reportSubmitNo" column="report_submit_no"/>
 		<result property="reportSubmitFileType" column="report_submit_file_type"/>
@@ -64,10 +53,7 @@
 	
 	<select id="selectReportSubmitOne" resultMap="selectReportSubmitOne" parameterType="java.util.Map">
 		SELECT
-			r.report_no,
-			r.report_title,
-			r.report_content,
-			r.lecture_no,
+			rs.report_no,
 			rs.account_id,
 			rs.report_submit_no,
 			rs.report_submit_content,
@@ -77,11 +63,9 @@
 			rs.report_submit_title,
 			rsf.report_submit_file_original,
 			rsf.report_submit_file_type	
-		FROM report r left join report_submit rs
-			 on r.report_no = rs.report_no
-			 left join report_submit_file rsf
+		FROM report_submit rs left join report_submit_file rsf
 			 on rs.report_submit_no = rsf.report_submit_no
-		WHERE r.report_no = #{reportNo} AND rs.account_id = #{accountId}
+		WHERE rs.report_no = #{reportNo} AND rs.account_id = #{accountId}
 	</select>
 	
 	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">

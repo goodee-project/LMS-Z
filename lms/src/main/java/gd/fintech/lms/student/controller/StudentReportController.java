@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.student.service.StudentReportService;
 import gd.fintech.lms.vo.Report;
+import gd.fintech.lms.vo.ReportSubmit;
 import gd.fintech.lms.vo.ReportSubmitAddForm;
 
 @Controller
@@ -46,8 +47,10 @@ public class StudentReportController {
 	public String listReportSubmitOne(Model model,
 			@PathVariable(name="reportNo")int reportNo,
 			@PathVariable(name="accountId")String accountId) {
-		Report report = studentReportService.getReportSubmitOne(reportNo, accountId);
-		model.addAttribute("report",report);
+		ReportSubmit reportSubmit = studentReportService.getReportSubmitOne(reportNo, accountId);
+		Report report = studentReportService.getReportOne(reportNo);
+		model.addAttribute("report", report);
+		model.addAttribute("reportSubmit",reportSubmit);
 		return "/student/reportSubmitOne"; 
 	}
 	
@@ -55,8 +58,10 @@ public class StudentReportController {
 	public String modifyReportSubmit(Model model,
 			@PathVariable(name="reportNo")int reportNo,
 			@PathVariable(name="accountId")String accountId) {
-		Report report = studentReportService.getReportSubmitOne(reportNo, accountId);
-		model.addAttribute("report",report);
+		ReportSubmit reportSubmit = studentReportService.getReportSubmitOne(reportNo, accountId);
+		Report report = studentReportService.getReportOne(reportNo);
+		model.addAttribute("report", report);
+		model.addAttribute("reportSubmit",reportSubmit);
 		return "/student/reportSubmitModify"; 
 	}
 	
