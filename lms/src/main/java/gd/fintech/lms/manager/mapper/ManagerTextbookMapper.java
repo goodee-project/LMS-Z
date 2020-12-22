@@ -13,4 +13,8 @@ public interface ManagerTextbookMapper {
 	List<Textbook> selectTextbookList(Map<String, Object> map);
 	//페이징을 위한 메퍼 호출
 	int selectTextbookTotalCount();
+	//교재를 등록하기 위한 메퍼 호출
+	int insertTextbook(Textbook textbook);
+	//교재의 상세정보를 보기 위한 메퍼 호출
+	Textbook selectTextbookOne(String textbookIsbn);
 }

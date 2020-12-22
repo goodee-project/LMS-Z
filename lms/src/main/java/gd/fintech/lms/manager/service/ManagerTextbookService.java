@@ -26,4 +26,12 @@ public class ManagerTextbookService {
 	public int getTextbookTotalCount() {
 		return managerTextbookMapper.selectTextbookTotalCount();
 	}
+	//교재 등록을 위한 메퍼 호출
+	public void insertTextbook(Textbook textbook) {
+		managerTextbookMapper.insertTextbook(textbook);
+	}
+	//교재의 상세정보를 보기 위한 메퍼 호출
+	public Textbook getTextbookOne(String textbookIsbn) {
+		return managerTextbookMapper.selectTextbookOne(textbookIsbn);
+	}
 }

@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>교재 목록</h1>
+	<a href="${path }/manager/insertTextbook">교재 등록</a>
 	<table border="1">
 		<thead>
 			<tr>
@@ -17,24 +18,26 @@
 				<td>textbook_title</td>
 				<td>textbook_writer</td>
 				<td>textbook_publisher</td>
-				<td>textbook_info</td>
-				<td>textbook_price</td>
-				<td>textbook_publishdate</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="t" items="${textbookList }">
 				<tr>
 					<td>${t.textbookIsbn }</td>
-					<td>${t.textbookTitle }</td>
+					<td><a href="${path }/manager/textbookOne/${t.textbookIsbn}">${t.textbookTitle }</a></td>
 					<td>${t.textbookWriter }</td>
 					<td>${t.textbookPublisher }</td>
-					<td>${t.textbookInfo }</td>
-					<td>${t.textbookPrice }</td>
-					<td>${t.textbookPublishdate }</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
+   	<div>
+    	<c:forEach var="i" begin="1" end="${lastPage }">
+    		<span>
+    			<a href="${path}/manager/textbookList/${i}">${i}&nbsp;&nbsp;</a>
+    		</span>
+    	</c:forEach>
+   	</div>
 </body>
 </html>

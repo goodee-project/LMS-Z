@@ -10,10 +10,7 @@
 			textbook_isbn textbookIsbn,
 			textbook_title textbookTitle,
 			textbook_writer textbookWriter,
-			textbook_publisher textbookPublisher,
-			textbook_publishdate textbookPublishdate,
-			textbook_info textbookInfo,
-			textbook_price textbookPrice
+			textbook_publisher textbookPublisher
 		FROM textbook
 		ORDER BY textbook_isbn
 		LIMIT #{beginRow}, #{rowPerPage}
@@ -23,5 +20,38 @@
 		SELECT
 			count(*)
 		FROM textbook
+	</select>
+	<!-- 교재를 등록해주기 위한 쿼리 -->
+	<insert id="insertTextbook" parameterType="gd.fintech.lms.vo.Textbook">
+		INSERT INTO textbook (
+			textbook_isbn,
+			textbook_title,
+			textbook_writer,
+			textbook_publisher,
+			textbook_info,
+			textbook_price,
+			textbook_publishdate
+		) VALUES (
+			#{textbookIsbn},
+			#{textbookTitle},
+			#{textbookWriter},
+			#{textbookPublisher},
+			#{textbookInfo},
+			#{textbookPrice},
+			CURDATE()
+		)
+	</insert>
+	<!-- 교재 제목을 클릭시 상세내용을 보여주기 위한 쿼리 -->
+	<select id="selectTextbookOne" parameterType="String" resultType="gd.fintech.lms.vo.Textbook">
+		SELECT 
+			textbook_isbn textbookIsbn,
+			textbook_title textbookTitle,
+			textbook_writer textbookWriter,
+			textbook_publisher textbookPublisher,
+			textbook_publishdate textbookPublishdate,
+			textbook_info textbookInfo,
+			textbook_price textbookPrice
+		FROM textbook
+		WHERE textbook_isbn = #{textbookIsbn}
 	</select>
 </mapper>
