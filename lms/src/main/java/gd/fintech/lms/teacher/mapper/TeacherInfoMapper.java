@@ -14,4 +14,14 @@ public interface TeacherInfoMapper {
 	
 	// 패스워드 변경 시 현재 패스워드 확인
 	int selectAccountByPw(String accountId, String accountPw);
+	
+	// 마이 페이지 정보 수정
+	int updateTeacherByName(String teacherId, String teacherName);
+	int updateTeacherByEmail(String teacherId, String teacherEmail);
+	int updateTeacherByGender(String teacherId, String teacherGender);
+	int updateTeacherByBirth(String teacherId, String teacherBirth);
+	int updateTeacherByImage(String teacherId, String teacherImage);
+	
+	// 마이 페이지 이메일 중복 검사
+	int selectTeacherAndTeacherQueueByOverlapEmail(String teacherEmail);
 }

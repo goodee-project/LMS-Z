@@ -92,7 +92,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Index</span></a></li>
                         <!-- 사용 시 줄 표시 -->
@@ -227,28 +227,37 @@
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이름</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherName}</td>
-										<td><button type="button" class="btn btn-dark">개명</button></td>
+										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="teacherName" value="${teacherOne.teacherName}"></td>
+										<td><button type="button" id="btnName" class="btn btn-dark">개명</button>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherEmail}</td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="teacherEmail" value="${teacherOne.teacherEmail}"></td>
+										<td><button type="button" id="btnEmail" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">핸드폰 번호</th>
 										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherPhone}</td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td><button type="button" id="btnPhone" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">성별</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherGender}</td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark">
+											<c:if test="${teacherOne.teacherGender == '남'}">
+												<input type="radio" id="teacherGender" name="teacherGender" value="남" checked>남
+												<input type="radio" id="teacherGender" name="teacherGender" value="여">여
+											</c:if>
+											<c:if test="${teacherOne.teacherGender == '여'}">
+												<input type="radio" id="teacherGender" name="teacherGender" value="남">남
+												<input type="radio" id="teacherGender2" name="teacherGender" value="여" checked>여
+											</c:if>
+										</td>
+										<td><button type="button" id="btnGender" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">생일</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherBirth}</td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark"><input type="date" id="teacherBirth" value="${teacherOne.teacherBirth}"></td>
+										<td><button type="button" id="btnBirth" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">주소</th>
@@ -257,8 +266,15 @@
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">사진</th>
-										<td class=" font-14 font-weight-medium text-dark"></td>
-										<td><button type="button" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark">
+											<form id="teacherImageForm" method="post" enctype="multipart/form-data" action="${path}/teacher/modifyImageMyInfo">
+												<img src="${path}/images/${teacherOne.teacherImage}" id="preview" style="width:170px; height:200px;"/>
+												
+												<input type="file" name="teacherImage" id="imgSelector"/>
+												<input type="hidden" name="teacherId" value="${teacherId}">
+											</form>
+										</td>
+										<td><button id="btnImage" type="button" class="btn btn-dark">변경</button></td>
 									</tr>
                             	</table>
                             </div>
@@ -266,11 +282,6 @@
                     </div>
                 </div>
                 
-
-
-
-
-
             </div>
 
         </div>
@@ -293,6 +304,135 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-</body>
+    
+    <script>
+    	// 이름에 대한 변경값이 있을 경우에만 crud로 넘어감
+		$('#btnName').click(function(){
+			if($('#teacherName').val() == '${teacherOne.teacherName}'){
+				alert('현재 이름과 동일합니다.');
+			} else if($('#teacherName').val().length < 1){
+				alert('사용하실 이름을 입력해주세요.');
+			} else{
+				if(confirm('입력하신 이름으로 변경합니다.')){
+					location.href = '${path}/teacher/modifyNameMyInfo/${teacherId}/'+$('#teacherName').val();
+				}
+			}
+		});
 
+		// 이메일에 대한 정규 표현식
+		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		// 이메일에 대한 변경 값이 있고, 정규표현식에 만족할 경우에만 crud로 넘어감
+		$('#btnEmail').click(function(){
+			if($('#teacherEmail').val() == '${teacherOne.teacherEmail}'){
+				alert('현재 이메일과 동일합니다.');
+			} else if($('#teacherEmail').val().length < 1){
+				alert('사용하실 이메일을 입력해주세요.');
+			} else if(!checkEmail.test($('#teacherEmail').val())){
+				alert('이메일을 바른 형식으로 입력해주세요.');
+			} else{
+				$.ajax({
+					url:'${path}/teacher/myInfoByOverlapEmail',
+					type:'GET',
+					data:{teacherEmail: $('#teacherEmail').val()},
+					success:function(data){
+						if(data.teacherEmailCheck == 0){
+							if(confirm('입력하신 이메일로 변경합니다')){
+								location.href = '${path}/teacher/modifyEmailMyInfo/${teacherId}/'+$('#teacherEmail').val();
+							}
+						} else{
+							alert('사용하실 이메일이 중복되었습니다.');
+						}
+					}
+				});	
+			}
+		});
+		
+		
+		$('#btnPhone').click(function(){
+
+		});
+
+		// 성별에 대한 변경 값이 있을 경우에만 crud로 넘어감
+		$('#btnGender').click(function(){
+			if($('#teacherGender:checked').val() == '${teacherOne.teacherGender}'){
+				alert('현재 성별과 동일합니다.');
+			} else{
+				if(confirm('입력하신 성별로 변경합니다')){
+					location.href = '${path}/teacher/modifyGenderMyInfo/${teacherId}/'+$('#teacherGender:checked').val();
+				}
+			}
+		});
+
+		// 생일에 대한 변경 값이 있을 경우에만 crud로 넘어감
+		$('#btnBirth').click(function(){
+			if($('#teacherBirth').val() == '${teacherOne.teacherBirth}'){
+				alert('현재 생일과 동일합니다');
+			} else{
+				if(confirm('입력하신 생일로 변경합니다')){
+					location.href = '${path}/teacher/modifyBirthMyInfo/${teacherId}/'+$('#teacherBirth').val();
+				}
+			}
+		});
+
+		// 이미지 변경 값이 있는지 확인하는 변수
+		var imageCheck = '';
+		// 이미지에 대한 제약조건 명시
+		$('#imgSelector').change(function(){
+            ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+            //배열에 추출한 확장자가 존재하는지 체크
+            if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'jfif']) == -1) {
+                alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+                $(this).val('');
+            } else {
+            	 setImageFromFile(this, '#preview');
+            	 imageCheck = 'check';
+            }
+		});
+
+		// 이미지 미리보기에 대한 함수 정의
+		function setImageFromFile(input, expression) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+		            $(expression).attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		// 변경 버튼을 누를경우 submit
+		$('#btnImage').click(function(){
+			if(imageCheck == ''){
+				alert('변경하실 이미지를 선택해주세요.');
+			} else{
+				$('#teacherImageForm').submit();
+			}
+		});
+
+    </script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

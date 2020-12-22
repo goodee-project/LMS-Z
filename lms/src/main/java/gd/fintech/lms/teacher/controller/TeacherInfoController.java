@@ -8,14 +8,73 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.teacher.service.TeacherInfoService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Teacher;
+import jdk.internal.org.jline.utils.Log;
 
 @Controller
 public class TeacherInfoController {
 	@Autowired TeacherInfoService teacherInfoService;
+	
+	// 마이페이지 이미지 수정
+	@PostMapping("/teacher/modifyImageMyInfo")
+	public String modifyTeacherByImage(String teacherId,
+			@RequestPart(value="teacherImage") MultipartFile multipartFile) {
+		
+		//System.out.println(multipartFile.getOriginalFilename());
+		//System.out.println(multipartFile.getSize());
+		
+		teacherInfoService.modifyTeacherByImage(multipartFile, teacherId);
+		
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 생일 수정
+	@GetMapping("/teacher/modifyBirthMyInfo/{teacherId}/{teacherBirth}")
+	public String modifyTeacherByBirth(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherBirth") String teacherBirth) {
+		
+		teacherInfoService.modifyTeacherByBirth(teacherId, teacherBirth);
+			
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 성별 수정
+	@GetMapping("/teacher/modifyGenderMyInfo/{teacherId}/{teacherGender}")
+	public String modifyTeacherByGender(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherGender") String teacherGender) {
+		
+		teacherInfoService.modifyTeacherByGender(teacherId, teacherGender);
+			
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 이메일 수정
+	@GetMapping("/teacher/modifyEmailMyInfo/{teacherId}/{teacherEmail}")
+	public String modifyTeacherByEmail(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherEmail") String teacherEmail) {
+		teacherInfoService.modifyTeacherByEmail(teacherId, teacherEmail);
+		
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 이름 수정
+	@GetMapping("/teacher/modifyNameMyInfo/{teacherId}/{teacherName}")
+	public String modifyTeacherByName(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherName") String teacherName) {
+		teacherInfoService.modifyTeacherByName(teacherId, teacherName);
+		
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
 	
 	// 패스워드 변경사이트 이동
 	@GetMapping("/teacher/myInfoPw")

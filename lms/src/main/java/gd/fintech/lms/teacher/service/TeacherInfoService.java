@@ -1,8 +1,16 @@
 package gd.fintech.lms.teacher.service;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.teacher.mapper.TeacherInfoMapper;
 import gd.fintech.lms.vo.Account;
@@ -12,6 +20,65 @@ import gd.fintech.lms.vo.Teacher;
 @Transactional
 public class TeacherInfoService {
 	@Autowired TeacherInfoMapper teacherInfoMapper;
+	
+	public void modifyTeacherByImage(MultipartFile multipartFile, String teacherId) {
+		
+		// 파일의 점 위치 확인
+		int p = multipartFile.getOriginalFilename().lastIndexOf(".");
+		// 파일의 확장자 확인
+		String ext = multipartFile.getOriginalFilename().substring(p).toLowerCase();
+		// 파일 이름을 uuid를 통해 암호화
+		String fileName = UUID.randomUUID().toString().replace("-", "");
+		
+		teacherInfoMapper.updateTeacherByImage(teacherId, fileName);
+		
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		// 서버의 상대경로
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		// 서버의 중간경로
+		String attachPath = "images\\";
+		
+		File f = new File(rootPath + attachPath + fileName);
+		
+		// 동등한 이름이 들어갈 경우 삭제
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		// 파일 경로로 이미지를 저장
+		try {			
+			multipartFile.transferTo(f);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		} 
+	}
+	
+	// 마이페이지 생일 수정
+	public void modifyTeacherByBirth(String teacherId, String teacherBirth) {
+		teacherInfoMapper.updateTeacherByBirth(teacherId, teacherBirth);
+	}
+	
+	// 마이페이지 성별 수정
+	public void modifyTeacherByGender(String teacherId, String teacherGender) {
+		teacherInfoMapper.updateTeacherByGender(teacherId, teacherGender);
+	}
+	
+	// 마이페이지 이메일 중복검사
+	public int getTeacherAndTeacherQueueByOverlapEmail(String teacherEmail) {
+		return teacherInfoMapper.selectTeacherAndTeacherQueueByOverlapEmail(teacherEmail);
+	}
+	
+	// 마이페이지 이메일 수정
+	public void modifyTeacherByEmail(String teacherId, String teacherEmail) {
+		teacherInfoMapper.updateTeacherByEmail(teacherId, teacherEmail);
+	}
+	
+	// 마이페이지 이름 수정
+	public void modifyTeacherByName(String teacherId, String teacherName) {
+		teacherInfoMapper.updateTeacherByName(teacherId, teacherName);
+	}
 	
 	// 패스워드 변경 시 현재 패스워드 확인
 	public int getAccountByPw(String accountId, String accountPw) {
@@ -28,4 +95,5 @@ public class TeacherInfoService {
 	public void modifyAccountPw(Account account) {
 		teacherInfoMapper.updateAccountPw(account);
 	}
+	
 }
