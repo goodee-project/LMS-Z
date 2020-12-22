@@ -1,25 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gd.fintech.lms.manager.mapper.ManagerNoticeMapper">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerLmsNoticeMapper">
 	<!-- 공지사항 리스트 -->
 	<select id="selectLmsNoticeList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LmsNotice">
 		SELECT 
 			lms_notice_no lmsNoticeNo, 
 			lms_notice_title lmsNoticeTitle, 
-			lms_notice_writer lmsNoticeWriter, 
-			lms_notice_updatedate lmsNoticeUpdateDate
+			lms_notice_writer lmsNoticeWriter,
+			DATE_FORMAT(lms_notice_createdate,'%Y-%m-%d') lmsNoticeCreatedate,
+			DATE_FORMAT(lms_notice_updatedate,'%Y-%m-%d') lmsNoticeUpdatedate,
+			lms_notice_count lmsNoticeCount
 		FROM lms_notice
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- 공지사항 총 갯수 -->
+	<select id="selectLmsNoticeCount" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM lms_notice
+	</select>
+	
+	<!-- 공지사항 클릭시 조회수 +1 -->
+	<select id="updateLmsNoticeCount" parameterType="Integer">
+		UPDATE lms_notice
+		SET lms_notice_count = lms_notice_count+1
+		WHERE lms_notice_no = #{lmsNoticeNo}
+	</select>
+	
 	<!-- 공지사항 상세내용 -->
-	<select id="selectLmsNoticeOne" parameterType="int" resultType="gd.fintech.lms.vo.LmsNotice">
+	<select id="selectLmsNoticeOne" parameterType="Integer" resultType="gd.fintech.lms.vo.LmsNotice">
 		SELECT 
 			lms_notice_no lmsNoticeNo, 
 			lms_notice_title lmsNoticeTitle, 
 			lms_notice_content lmsNoticeContent, 
-			lms_notice_writer lmsNoticeWriter, 
-			lms_notice_updatedate lmsNoticeUpdateDate, 
+			lms_notice_writer lmsNoticeWriter,
+			DATE_FORMAT(lms_notice_createdate,'%Y-%m-%d') lmsNoticeCreatedate,
+			DATE_FORMAT(lms_notice_updatedate,'%Y-%m-%d') lmsNoticeUpdatedate,
 			lms_notice_count lmsNoticeCount
 		FROM lms_notice
 		WHERE lms_notice_no = #{lmsNoticeNo}
@@ -54,7 +71,7 @@
 	</update>
 
 	<!-- 공지사항 삭제 -->
-	<delete id="deleteLmsNotice" parameterType="int">
+	<delete id="deleteLmsNotice" parameterType="Integer">
 		DELETE FROM lms_notice
 		WHERE lms_notice_no = #{lmsNoticeNo}
 	</delete>

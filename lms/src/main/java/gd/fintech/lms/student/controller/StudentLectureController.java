@@ -34,7 +34,7 @@ public class StudentLectureController {
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage;
 		// 다음 이전 페이지로 이동했을 때 출력할 시작 기준 페이지
-		int startPage = ((currentPage/11)*10)+1;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		// 페이징 처리한 전체 강의 리스트
 		List<Lecture> lectureList = studentLectureService.getLectureList(beginRow, rowPerPage); 
 		// 전체 강의 목록 갯수
