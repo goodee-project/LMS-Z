@@ -16,12 +16,18 @@
 		<result property="lectureNo" column="lecture_no"/>
 		<result property="accountId" column="account_id"/>
 	</collection>	
+	
+	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="lectureName" column="lecture_name"/>
+	</collection>
 	</resultMap>
 	
-	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="String">
+	<select id="selectReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
 		SELECT
 			r.report_no,
 			r.lecture_no,
+			l.lecture_name,
 			r.report_title,
 			r.report_content,
 			r.report_createdate,
@@ -30,8 +36,19 @@
 			r.report_enddate
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
+			 left join lecture l 
+			 on r.lecture_no = l.lecture_no
 		WHERE cr.account_id = #{accountId}
 		ORDER BY r.report_createdate DESC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="totalCountReport" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*) count
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId}
 	</select>
 	
 	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOne">
@@ -45,6 +62,7 @@
 		<result property="reportSubmitFeedback" column="report_submit_feedback"/>
 	
 	<collection property="reportSubmitFile" ofType="gd.fintech.lms.vo.ReportSubmitFile">
+		<result property="reportSubmitFileUuid" column="report_submit_file_uuid"/>
 		<result property="reportSubmitFileOriginal" column="report_submit_file_original"/>
 		<result property="reportSubmitNo" column="report_submit_no"/>
 		<result property="reportSubmitFileType" column="report_submit_file_type"/>
@@ -61,6 +79,7 @@
 			rs.report_submit_feedback,
 			rs.report_submit_writer,
 			rs.report_submit_title,
+			rsf.report_submit_file_uuid,
 			rsf.report_submit_file_original,
 			rsf.report_submit_file_type	
 		FROM report_submit rs left join report_submit_file rsf
@@ -68,15 +87,33 @@
 		WHERE rs.report_no = #{reportNo} AND rs.account_id = #{accountId}
 	</select>
 	
-	<select id="selectReportOne" parameterType="int" resultType="gd.fintech.lms.vo.Report">
+	
+	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportOne">
+		<result property="reportNo" column="report_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="reportTitle" column="report_title"/>
+		<result property="reportContent" column="report_content"/>
+		<result property="reportCreatedate" column="report_createdate"/>
+		<result property="reportUpdatedate" column="report_updatedate"/>
+		<result property="reportStartdate" column="report_startdate"/>
+		<result property="reportEnddate" column="report_enddate"/>
+		
+	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="lectureName" column="lecture_name"/>
+	</collection>
+	</resultMap>	
+	<select id="selectReportOne" parameterType="int" resultMap="selectReportOne">
 	SELECT
-		report_no reportNo,
-		lecture_no lectureNo,
-		report_title reportTitle,
-		report_content reportContent,
-		report_startdate reportStartdate,
-		report_enddate reportEnddate
-	FROM report
+		r.report_no,
+		r.lecture_no,
+		l.lecture_name,
+		r.report_title,
+		r.report_content,
+		r.report_startdate,
+		r.report_enddate
+	FROM report r left join lecture l
+		 on r.lecture_no = l.lecture_no
 	WHERE report_no = #{reportNo} 	
 	</select>
 	
@@ -113,4 +150,10 @@
 			report_submit_content = #{reportSubmitContent}
 		WHERE report_submit_no = #{reportSubmitNo}	
 	</update>
+	
+	<delete id="deleteReportSubmit" parameterType="int">
+		DELETE
+		FROM report_submit
+		WHERE report_submit_no = #{reportSubmitNo}
+	</delete>
 </mapper>

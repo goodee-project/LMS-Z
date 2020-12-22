@@ -10,13 +10,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<form method="post" id="updateReportSubmit" action="${path}/student/reportSubmitModify/${reportSubmit.reportSubmitNo}">
+<form method="post" id="updateReportSubmit" action="${path}/student/reportSubmitModify?reportSubmitNo=${reportSubmit.reportSubmitNo}" enctype="multipart/form-data">
 	<table border="1">
 			<tr>
 				<td>report_no: ${report.reportNo}</td>
 				<td>report_title: ${report.reportTitle}</td>
 				<td>report_content: ${report.reportContent}</td>
-				<td>lecture_no: ${report.lectureNo}</td>
+				<td>lecture_no: ${report.lectureNo} (${report.lecture.lectureName})</td>
 			</tr>
 	</table>
 	
@@ -38,7 +38,10 @@
 			<td>
 				<c:forEach var="rsf" items="${reportSubmit.reportSubmitFile}">
 					<div>
-						<span id="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}</span>
+						<span id="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}
+							<a href="${path}/student/reportSubmitOneFileRemove/${rsf.reportSubmitFileUuid}">삭제</a>
+						</span>
+					
 					</div>
 				</c:forEach>
 				<div id="fileinput"></div>

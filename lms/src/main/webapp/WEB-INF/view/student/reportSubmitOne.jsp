@@ -15,7 +15,7 @@
 				<td>report_no: ${report.reportNo}</td>
 				<td>report_title: ${report.reportTitle}</td>
 				<td>report_content: ${report.reportContent}</td>
-				<td>lecture_no: ${report.lectureNo}</td>
+				<td>lecture_no: ${report.lectureNo} (${report.lecture.lectureName})</td>
 			</tr>
 	</table>
 	
@@ -46,12 +46,13 @@
 	$('#reportSubmitContent').each(function(index, item){
 		let htmlAdd='<div><a href="${path}/student/reportSubmitAdd/${report.reportNo}">과제 작성</a></div>'
 		let htmlUpdate='<div><a href="${path}/student/reportSubmitModify/${reportSubmit.reportNo}/${studentId}">과제 수정</a></div>'
-
+		let htmlDelete='<div><a href="${path}/student/reportSubmitAllRemove?reportSubmitNo=${reportSubmit.reportSubmitNo}">과제 삭제</a></div>'
 		if($(item).val()==''){
 			$('#add').append(htmlAdd);
 		}
 		if($(item).val()!=''){
 			$('#add').append(htmlUpdate);
+			$('#add').append(htmlDelete);
 		}
 		});
 </script>

@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>${report.lectureNo}</td>
+				<td>${report.lectureNo} (${report.lecture.lectureName})</td>
 				<td>${report.reportTitle}</td>
 				<td>${report.reportContent}</td>
 				<td>${report.reportStartdate}</td>

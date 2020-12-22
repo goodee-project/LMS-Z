@@ -109,7 +109,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">질문 목록</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/reportList/${studentId}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/reportList/${studentId}/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">과제목록</span></a>
                         </li>

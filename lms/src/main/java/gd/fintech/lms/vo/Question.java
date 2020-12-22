@@ -18,4 +18,5 @@ public class Question {
 	private String questionPassword;
 	private List<QuestionComment> questionCommentList;
 	private List<QuestionFile> questionfile;
+	private Lecture lecture;
 }

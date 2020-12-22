@@ -24,23 +24,23 @@
 		<tbody>
 			<c:forEach var="q" items="${questionList}">
 				<tr>
-					<td><a href="${path}/student/questionOne/${q.questionNo}">${q.questionNo}</a></td>
-					<td>${q.lectureNo}</td>
+					<td><a href="${path}/student/questionOne/${q.questionNo}">${q.questionNo}</a></td>	
+					<td>${q.lectureNo}: (${q.lecture.lectureName})</td>
 					<td>${q.questionWriter}</td>
 					<td>${q.questionTitle}</td>
 					<td>${q.questionCount }</td>
 					<td>${q.questionCreatedate}</td>
 				</tr>
 			</c:forEach>
+			
 		</tbody>
 	</table>
 	<div>
-		<c:if test="${currentPage<lastPage }">
-			<a href="${path}/student/questionList/${currentPage+1}">다음</a>
-		</c:if>
-			<c:if test="${currentPage>=lastPage }">
-			<a href="${path}/student/questionList/${currentPage-1}">이전</a>
-		</c:if>
+		<c:forEach var="i" begin="1" end="${lastPage}">
+			<span>
+				<a href="${path}/student/questionList/${i}">${i}</a>
+			</span>
+		</c:forEach>
 	</div>
 </body>
 </html>

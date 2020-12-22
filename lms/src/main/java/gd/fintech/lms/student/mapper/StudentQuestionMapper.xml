@@ -3,16 +3,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="gd.fintech.lms.student.mapper.StudentQuestionMapper">
   	
+  	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionListPage">
+	 	<result property="questionNo" column="question_no"/>
+	 	<result property="lectureNo" column="lecture_no"/>
+	 	<result property="accountId" column="account_id"/>
+	 	<result property="questionWriter" column="question_writer"/>
+	 	<result property="questionTitle" column="question_title"/>
+	 	<result property="questionContent" column="question_content"/>
+	 	<result property="questionCreatedate" column="question_createdate"/>
+	 	<result property="questionUpdatedate" column="question_updatedate"/>
+	 	
+	 <collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+ 		<result property="lectureNo" column="lecture_no"/>
+ 		<result property="lectureName" column="lecture_name"/>
+ 	</collection>
+	 </resultMap>	
+  	
   	<!-- 질문목록 리스트 페이징 -->
-  	<select id="selectQuestionListPage" resultType="gd.fintech.lms.vo.Question" parameterType="java.util.Map">
+  	<select id="selectQuestionListPage" resultMap="selectQuestionListPage" parameterType="java.util.Map">
 	  	SELECT 
-	  		question_no questionNo,
-	  		lecture_no lectureNo,
-	  		question_writer questionWriter,
-	  		question_title questionTitle,
-	  		question_count questionCount,
-	  		question_createdate questionCreatedate
-	  	FROM question
+	  		q.question_no,
+	  		q.lecture_no,
+	  		l.lecture_name,
+	  		q.question_writer,
+	  		q.question_title,
+	  		q.question_count,
+	  		q.question_createdate
+	  	FROM question q left join lecture l 
+	  		 on q.lecture_no = l.lecture_no
 	  	ORDER BY question_createdate DESC
 	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
@@ -53,6 +71,11 @@
  		<result property="questionCommentCreatedate" column="question_comment_createdate"/>
  		<result property="questionCommentUpdatedate" column="question_comment_updatedate"/>
  	</collection>
+ 	
+ 	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+ 		<result property="lectureNo" column="lecture_no"/>
+ 		<result property="lectureName" column="lecture_name"/>
+ 	</collection>
  	</resultMap>
   	
   	<!-- 질문 자세히 보기 -->
@@ -60,6 +83,7 @@
   		SELECT
   			q.question_no, 
 	  		q.lecture_no,
+	  		l.lecture_name,
 	  		q.account_id,
 	  		q.question_writer,
 	  		q.question_title,
@@ -79,6 +103,8 @@
 	  		on q.question_no = qf.question_no
 	  		left join question_comment c
 	  		on q.question_no = c.question_no
+	  		left join lecture l
+	  		on q.lecture_no = l.lecture_no
 	  	WHERE q.question_no = #{questionNo}
   	</select>
   	
@@ -119,7 +145,8 @@
   	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
   	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
   		SELECT 
-  			lecture_no lectureNo
+  			lecture_no lectureNo,
+  			lecture_name lectureName
   		FROM lecture
   	</select>
   	

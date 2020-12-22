@@ -13,7 +13,7 @@
 		<a href="${path}/student/questionRemove/${question.questionNo}">질문 삭제</a>
 		<a href="${path}/student/questionModify/${question.questionNo}">질문 수정</a>
 	</div>
-	<h1>question</h1>
+	<h1>질문</h1>
 	<table border="1">
 		<tr>
 			<td>questionNo</td>
@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td>lectureNo</td>
-			<td>${question.lectureNo }</td>
+			<td>${question.lectureNo }(${question.lecture.lectureName })</td>
 		</tr>
 		<tr>
 			<td>accountId</td>
@@ -49,7 +49,7 @@
 		</tr>
 	</table>
 	
-	<h1>question_file</h1>
+	<h1>질문 파일</h1>
 	<table border="1">
 		<c:forEach var="qf" items="${question.questionfile}">
 			<tr>
@@ -59,7 +59,7 @@
 		</c:forEach>	
 	</table>
 	
-	<h1>question_comment</h1>
+	<h1>댓글</h1>
 	<table border="1">
 		<c:forEach var="qc" items="${question.questionCommentList}">
 			<tr>

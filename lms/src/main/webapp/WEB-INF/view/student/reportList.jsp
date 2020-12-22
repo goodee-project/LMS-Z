@@ -21,7 +21,7 @@
 		<tbody>
 			<c:forEach var="r" items="${reportList}">
 				<tr>
-					<td>${r.lectureNo}</td>
+					<td>${r.lectureNo}: (${r.lecture.lectureName})</td>
 					<td>${r.reportTitle}</td>
 					<td>${r.reportStartdate}</td>
 					<td>${r.reportEnddate}</td>
@@ -30,5 +30,12 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		<c:forEach var="i" begin="1" end="${lastPage}">
+			<span>
+				<a href="${path}/student/reportList/${studentId}/${i}">${i}</a>
+			</span>
+		</c:forEach>
+	</div>
 </body>
 </html>

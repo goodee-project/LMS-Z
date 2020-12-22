@@ -26,8 +26,18 @@ public class StudentReportService {
 	
 	@Autowired private StudentReportSubmitMapper studentReportSubmitMapper;
 	@Autowired private StudentReportSubmitFileMapper studentReportSubmitFileMapper;	
-	public List<Report> getReportPage(String accountId){
-		return studentReportSubmitMapper.selectReportListPage(accountId);
+	public List<Report> getReportPage(int currentPage, int rowPerPage, String accountId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		return studentReportSubmitMapper.selectReportListPage(map);
+	}
+	
+	public int totalReport(String accountId) {
+		return studentReportSubmitMapper.totalCountReport(accountId);
 	}
 	
 	public void addReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
@@ -74,6 +84,27 @@ public class StudentReportService {
 				studentReportSubmitFileMapper.insertReportSubmitFile(rf);
 			}
 		}
+		
+	}
+	
+	public int deleteReportOneFile(String reportSubmitFileUuid) {
+		File file = new File(PATH+reportSubmitFileUuid);
+		if(file.exists()) {
+			file.delete();
+		}
+		return studentReportSubmitFileMapper.deleteReportSubmitFile(reportSubmitFileUuid);
+	}
+	
+	public void deleteReportAllSubmit(int reportSubmitNo) {
+		List<String> reportSubmitFileUuid = studentReportSubmitFileMapper.selectReportSubmitFileUuid(reportSubmitNo);
+		for(String s : reportSubmitFileUuid) {
+			File file = new File(PATH+reportSubmitFileUuid);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		studentReportSubmitMapper.deleteReportSubmit(reportSubmitNo);
+		studentReportSubmitFileMapper.deleteReportSubmitAllFile(reportSubmitNo);
 		
 	}
 	

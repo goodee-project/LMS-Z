@@ -22,8 +22,8 @@ public class StudentQuestionController {
 	@Autowired StudentQuestionService studentQuestionService;
 	// 질문 목록 리스트
 	@GetMapping("/student/questionList/{currentPage}")
-	public String listQuestion(Model model, @PathVariable(name="currentPage",required=true)int currentPage) {
-		int rowPerPage = 10;
+	public String listQuestion(Model model, @PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage = 5;
 		List<Question> questionList = studentQuestionService.getQuestionPage(currentPage, rowPerPage);
 		int countQuestion = studentQuestionService.totalQuestion();
 		int lastPage = countQuestion / rowPerPage;

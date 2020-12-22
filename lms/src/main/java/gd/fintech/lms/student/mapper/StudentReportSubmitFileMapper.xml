@@ -28,4 +28,17 @@
 		FROM report_submit_file
 		WHERE report_submit_file_uuid = #{reportSubmitFileUuid}
 	</delete>
+	
+	<delete id="deleteReportSubmitAllFile" parameterType="int">
+		DELETE 
+		FROM report_submit_file
+		WHERE report_submit_no = #{reportSubmitNo}
+	</delete>
+	
+	<select id="selectReportSubmitFileUuid" resultType="String" parameterType="int">
+		SELECT
+			report_submit_file_uuid reportSubmitFileUuid
+		FROM report_submit_file
+		WHERE report_submit_no = #{reportSubmitNo}
+	</select>
 </mapper>  

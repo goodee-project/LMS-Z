@@ -19,11 +19,19 @@ import gd.fintech.lms.vo.ReportSubmitAddForm;
 public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
 	
-	@GetMapping("/student/reportList/{accountId}")
+	@GetMapping("/student/reportList/{accountId}/{currentPage}")
 	public String listReport(Model model,
-			@PathVariable(name="accountId")String accountId) {
-		
-		List<Report> reportList = studentReportService.getReportPage(accountId);
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage=5;
+		List<Report> reportList = studentReportService.getReportPage(currentPage,rowPerPage,accountId);
+		int totalReport = studentReportService.totalReport(accountId);
+		int lastPage = totalReport/rowPerPage;
+		if(totalReport % rowPerPage !=0) {
+			lastPage +=1;
+		}
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("reportList",reportList);
 		return "/student/reportList";
 	}
@@ -31,7 +39,6 @@ public class StudentReportController {
 	@GetMapping("/student/reportSubmitAdd/{reportNo}")
 	public String addReportSubmit(Model model,
 			@PathVariable(name="reportNo")int reportNo) {
-		
 		Report report = studentReportService.getReportOne(reportNo);
 		model.addAttribute("report", report);
 		return "/student/reportSubmitAdd";
@@ -65,12 +72,23 @@ public class StudentReportController {
 		return "/student/reportSubmitModify"; 
 	}
 	
-	@PostMapping("/student/reportSubmitModify/{reportSubmitNo}")
+	@PostMapping("/student/reportSubmitModify")
 	public String modifyReportSubmit(ReportSubmitAddForm reportSubmitAddForm,
-			@PathVariable(name="reportSubmitNo")int reportSubmitNo) {
+			@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
 		studentReportService.updateReportSubmit(reportSubmitAddForm);
 		return  "redirect:/student";
 	}
 	
+	@GetMapping("student/reportSubmitOneFileRemove/{reportSubmitFileUuid}")
+	public String removeReportSubmitOneFile(@PathVariable(name="reportSubmitFileUuid")String reportSubmitFileUuid){
+		studentReportService.deleteReportOneFile(reportSubmitFileUuid);
+		return "redirect:/student";
+	}
+	
+	@GetMapping("student/reportSubmitAllRemove")
+	public String removeReportSubmitAll(@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
+		studentReportService.deleteReportAllSubmit(reportSubmitNo);
+		return "redirect:/student";
+	}
 	
 }

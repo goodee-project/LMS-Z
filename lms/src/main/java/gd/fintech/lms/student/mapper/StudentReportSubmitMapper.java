@@ -18,6 +18,10 @@ public interface StudentReportSubmitMapper {
 	
 	int updateReportSubmit(ReportSubmit reportSubmit);
 	
+	int deleteReportSubmit(int reportSubmitNo);
+	
+	int totalCountReport(String accountId);
+	
 	//과제목록 리스트
-	List<Report> selectReportListPage(String accountId);
+	List<Report> selectReportListPage(Map<String, Object>map);
 }
