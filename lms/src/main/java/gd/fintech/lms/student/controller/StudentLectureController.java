@@ -30,18 +30,21 @@ public class StudentLectureController {
 	public String lectureList(Model model,
 							@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 2;
+		int rowPerPage = 10;
 		// 시작 목록
-		int beginRow = (currentPage-1)*rowPerPage; 
+		int beginRow = (currentPage-1)*rowPerPage;
+		// 다음 이전 페이지로 이동했을 때 출력할 시작 기준 페이지
+		int startPage = ((currentPage/11)*10)+1;
 		// 페이징 처리한 전체 강의 리스트
 		List<Lecture> lectureList = studentLectureService.getLectureList(beginRow, rowPerPage); 
 		// 전체 강의 목록 갯수
 		int listTotal = studentLectureService.getLectureListTotal(); 
 		// 마지막 페이지
 		int lastPage = 0;
-		if(listTotal%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+		// 나누어 떨어지지 않는다면 페이지 + 1
+		if(listTotal%rowPerPage!=0) { 
 			lastPage = (listTotal/rowPerPage)+1;
-		}else { // 나누어 떨어진다면 
+		}else{ // 나누어 떨어진다면 
 			lastPage = listTotal/rowPerPage;
 		}
 		// 해당 강의를 신청한 학생 인원
@@ -53,14 +56,16 @@ public class StudentLectureController {
 		model.addAttribute("lectureList",lectureList);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
 		return "student/lectureList";
 	}
 	
 	// 강의목록 상세보기
-	@GetMapping("/student/lectureListOne/{studentId}/{lectureNo}/{currentPage}")
+	@GetMapping("/student/lectureListOne/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}")
 	public String lectureListOne(Model model,
 								@PathVariable(name="studentId") String studentId,
 								@PathVariable(name="lectureNo") int lectureNo,
+								@PathVariable(name="lectureTotal") int lectureTotal,
 								@PathVariable(name="currentPage") int currentPage) {
 		// 강의 정보
 		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
@@ -69,9 +74,15 @@ public class StudentLectureController {
 		if(studentLectureService.getClassRegistrationCk(studentId, lectureNo) != 0) {
 			classRegistrationCk = true;
 		}
+		//=====강의 정원 체크 (값이 있다면 true,없다면 false줄 예정) 중복신청방지  ======
+		boolean classPersonalCheck = false;
+		if(studentLectureService.getCanIApplicant(lectureNo, lectureTotal) != 0) {
+			classPersonalCheck = true;
+		}
 		model.addAttribute("classRegistrationCk",classRegistrationCk);
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("classPersonalCheck",classPersonalCheck);
 		return "student/lectureListOne";
 	}
 	// 수강 신청
@@ -90,16 +101,18 @@ public class StudentLectureController {
 							@PathVariable(name="studentId") String studentId,
 							@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 2;
+		int rowPerPage = 10;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage; 
+		// 다음 이전 페이지로 이동했을 때 출력할 시작 기준 페이지
+		int startPage = ((currentPage/11)*10)+1;
 		// 페이징 처리한 나의 강의 현황 리스트
 		List<ClassRegistration> myLectureList = studentLectureService.getMyLectureList(studentId, beginRow, rowPerPage); 
 		// 전체 나의 강의 목록 갯수
 		int listTotal = studentLectureService.getMyLectureListTotal(studentId); 
 		// 마지막 페이지
 		int lastPage = 0;
-		if(listTotal%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+		if(listTotal%rowPerPage!=0) { // 나누어 떨어지지 않는다면 페이지 + 1
 			lastPage = (listTotal/rowPerPage)+1;
 		}else { // 나누어 떨어진다면 
 			lastPage = listTotal/rowPerPage;
@@ -107,6 +120,7 @@ public class StudentLectureController {
 		model.addAttribute("myLectureList",myLectureList);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
 		return "student/myLectureList";
 	}
 	//==== 나의 수강 현황 상세보기 ====

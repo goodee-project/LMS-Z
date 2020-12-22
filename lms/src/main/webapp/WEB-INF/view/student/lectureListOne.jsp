@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-5 align-self-center text-right">
                     	<div class="col-12 align-self-center">
-                    		<c:if test="${classRegistrationCk == false}">
+                    		<c:if test="${classRegistrationCk == false && classPersonalCheck == true}">
 		                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}/${currentPage}">
 		                        	수강 신청
 		                        </a>
@@ -153,6 +153,12 @@
 		                        	신청함
 		                        </a>
 	                        </c:if>
+	                        <c:if test="${classPersonalCheck == false}">
+	                        	<a class="btn btn-danger font-20 popover-item" style="color:white">
+		                        	정원초과
+		                        </a>
+	                        </c:if>
+	                        
 		                </div>
 		           </div>
 		       </div>

@@ -107,6 +107,19 @@
 		LEFT JOIN classroom c ON l.classroom_no = c.classroom_no
 		WHERE l.lecture_no = #{lectureNo}
 	</select>
+	<!-- =====강의 정원 체크 (값이 있다면 true,없다면 false줄 예정) 중복신청방지 -->
+	<select id="selectCanIApplicant" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM lecture
+		WHERE (
+			SELECT 
+				COUNT(*)
+			FROM class_registration 
+			WHERE lecture_no=#{lectureNo}) &lt; #{lectureTotal}
+		AND lecture_no=#{lectureNo}
+		
+	</select>
 	<!--  ==== 강의 신청 여부 체크 ==== -->
 	<select id="selectClassRegistrationCk" parameterType="java.util.Map" resultType="Integer">
 		SELECT 

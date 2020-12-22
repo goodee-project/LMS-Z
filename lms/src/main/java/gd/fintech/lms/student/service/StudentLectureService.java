@@ -35,6 +35,13 @@ public class StudentLectureService {
 	public Lecture getLectureListOne(int lectureNo) {
 		return studentLectureMapper.selectLectureListOne(lectureNo);
 	}
+	//=====강의 정원 체크 (값이 있다면 true,없다면 false줄 예정) 중복신청방지  ======
+	public int getCanIApplicant(int lectureNo,int lectureTotal) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("lectureNo", lectureNo);
+		map.put("lectureTotal",lectureTotal);
+		return studentLectureMapper.selectCanIApplicant(map);
+	}
 	// ==== 강의 신청 여부 체크 ====
 	public int getClassRegistrationCk(String studentId, int lectureNo) {
 		Map<String, Object> map = new HashMap<>();

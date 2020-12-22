@@ -38,8 +38,9 @@ public class AdminLoginController {
 		if(adminId == null) {
 			return "redirect:/adminLogin";
 		}
-		//session에 adminId 저장
+		//session에 adminId 저장 
 		session.setAttribute("adminId", adminId);
+		// -> listener로 이동
 		return "redirect:/admin/index";
 	}
 	
