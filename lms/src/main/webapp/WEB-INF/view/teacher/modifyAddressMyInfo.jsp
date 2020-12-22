@@ -75,10 +75,8 @@
                     <div class="col-md-6 col-lg-9">
                         <div class="card">
                             <div class="card-body text-muted font-12">
-                                <h4 class="card-title">Pw변경</h4>
-                                <div class="mb-3">
-	                            	비닐번호를 주기적으로 변경해주세요.
-                            	</div>
+                                <h4 class="card-title">주소변경</h4>
+                                <div class="mb-3"></div>
                             	<form id="modifyPwMyInfo" method="post" action="${path}/teacher/modifyPwMyInfo">
 	                                <table class="table no-wrap v-middle mb-0">
 										<tr>
@@ -137,111 +135,5 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-    
-    <script>
-		var teacherPwCheck = '';
-		var teacherNewPwCheck = '';
-		var teacherNewPw2Check = '';
-    
-    	// 새로 입력 버튼 클릭 시 val값 초기화
-		$('#btnReset').click(function(){
-			$('#teacherPw').val('');
-			$('#teacherNewPw').val('');
-			$('#teacherNewPw2').val('');
-			$('#textNewPw').text('영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.')
-  			   			   .attr('class', '');
-			$('#textNewPw2').text('비밀번호를 다시 한번 입력해주세요.')
-  			   			   .attr('class', '');
-			teacherPwCheck = '';
-			teacherNewPwCheck = '';
-			teacherNewPw2Check = '';
-		});
-		
-		// 확인 버튼 클릭 시 각각의 입력 값 체크
-		// 마지막으로 현재 패스워드가 맞는지 확인 후 판단
-		$('#btnResult').click(function(){
-			if(teacherPwCheck == ''){
-				alert('현재 비밀번호를 입력해주세요.');
-			} else if(teacherNewPwCheck == ''){
-				alert('새 비밀번호를 형식에 맞게 입력해주세요.');
-			} else if(teacherNewPw2Check == ''){
-				alert('새 비밀번호 확인을 형식에 맞게 입력해주세요.');
-			} else{
-				$.ajax({
-					url:'${path}/teacher/myInfoPwCheck',
-					type:'GET',
-					// data타입을 accoutId에 세션값을, accountPw에 적은 값을 넘긴다
-					data:{accountId: $('#accountId').val(), accountPw: $('#teacherPw').val()},
-					success:function(data){
-						if(data.accountPwCheck == 0){
-							alert('기존 비밀번호가 일치하지 않습니다.');
-							$('#teacherPw').val('');
-							teacherPwCheck = '';	
-						} else{
-							alert('비밀번호를 변경하셨습니다. 로그인을 다시 해주세요.');
-							$('#modifyPwMyInfo').submit();
-							
-						}
-					}
-				});	
-			}
-		});
-
-		// 현재 비밀번호 입력란에 값이 들어가면 check
-		$('#teacherPw').blur(function(){
-			if($('#teacherPw').val().length > 0){
-				teacherPwCheck = 'check';
-			} else{
-				teacherPwCheck = '';
-			}
-		});
-
-		// checkPw는 입력란에 8~20자를 적을 수 있고 영문자와 숫자, 특수문자를 포함하는 지 확인하기 위한 변수
-		// checkPw2는 특수문자가 비닐번호에 하나라도 포함됬는지 확인하기 위한 변수
-		var checkPw = /^[A-z0-9a-z~!@#$%^&*()_+|<>?:{}]{8,20}$/;
-		var checkPw2 = /[~!@#$%^&*()_+|<>?:{}]/gi;
-		// 새 비밀번호 입력란에 정규표현식이 맞는지 확인
-		$('#teacherNewPw').blur(function(){
-			if(checkPw.test($('#teacherNewPw').val())){
-				if(checkPw2.test($('#teacherNewPw').val())){
-					$('#textNewPw').text('○ 사용 가능한 비밀번호힙니다.')
-		   		      			   .attr('class', 'text-primary');
-	      			teacherNewPwCheck = 'check';
-				} else{
-					$('#textNewPw').text('X 비밀번호에 특수문자를 추가해주세요.')
-		 			   		       .attr('class', 'text-danger');
-					teacherNewPwCheck = '';
-				}
-			} else if($('#teacherNewPw').val().length < 1){
-				$('#textNewPw').text('X 새 비밀번호를 입력해주세요.')
-				 			   .attr('class', 'text-danger');
-				teacherNewPwCheck = '';
-			} else{
-				$('#textNewPw').text('X 비밀번호는 8~20까지 입력 가능합니다.')
-	 			   			   .attr('class', 'text-danger');
-				teacherNewPwCheck = '';
-			}
-		});
-
-		// 새 비밀번호 확인 입력란의 값이 새 비밀번호 입력란의 값과 같은지 확인
-		$('#teacherNewPw2').blur(function(){
-			if($('#teacherNewPw').val().length < 1){
-				$('#textNewPw2').text('X 새 비밀번호를 다시 한번 입력해주세요.')
-	   		      	  	 	    .attr('class', 'text-danger');
-				teacherNewPwCheck = '';
-			} else{
-				if($('#teacherNewPw').val() == $('#teacherNewPw2').val()){
-					$('#textNewPw2').text('○ 입력한 비밀번호가 일치합니다.')
-	      			  			   .attr('class', 'text-primary');
-					teacherNewPw2Check = 'check';
-				} else{
-					$('#textNewPw2').text('X 입력한 비밀번호가 서로 일치하지 않습니다.')
-	      	  	 	    			.attr('class', 'text-danger');
-					teacherNewPwCheck = '';
-				}
-			}
-		});
-		
-    </script>
 </body>
 </html>

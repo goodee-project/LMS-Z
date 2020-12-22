@@ -28,4 +28,8 @@ public interface TeacherInfoMapper {
 	
 	// 프로젝트에서 이미지 삭제
 	String selectTeacherByImageTodelete(String teacherId);
+	
+	// 회원탈퇴
+	int updateAccountTodelete(Account account);
+	int deleteTeacher(String teacherId);
 }

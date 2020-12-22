@@ -21,8 +21,18 @@ import gd.fintech.lms.vo.Teacher;
 public class TeacherInfoService {
 	@Autowired TeacherInfoMapper teacherInfoMapper;
 	
-	public void modifyTeacherByImage(MultipartFile multipartFile, String teacherId) {
+	// 회원 탈퇴
+	public void deleteTeacher(String teacherId) {
+		Account account = new Account();
 		
+		account.setAccountState("탈퇴");
+		account.setAccountId(teacherId);
+		teacherInfoMapper.updateAccountTodelete(account);
+		
+		teacherInfoMapper.deleteTeacher(teacherId);
+	}
+	
+	public void modifyTeacherByImage(MultipartFile multipartFile, String teacherId) {
 		// 파일의 점 위치 확인
 		int p = multipartFile.getOriginalFilename().lastIndexOf(".");
 		// 파일의 확장자 확인

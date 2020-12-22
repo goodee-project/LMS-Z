@@ -21,142 +21,11 @@
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-
-
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md">
-            	<!-- 사이드바 로고 -->
-                <div class="navbar-header" data-logobg="skin6">
-                    <div class="navbar-brand">
-                        <!-- 사이트 이름 -->
-                        <a href="index.html">
-                            <b class="logo-icon">
-                            	<!-- 사이트 이름 옆 로고 -->
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
-                            </b>
-							
-							<!-- 사이트 이름 -->
-                            <span class="logo-text">
-
-                            </span>
-                        </a>
-                    </div>
-                </div>
-
-				<!-- 로고 오른쪽 메뉴 -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
-                    <!-- 메뉴 오른쪽 마이페이지 -->
-                    <ul class="navbar-nav float-right">
-                    	<!-- 눌렀을 때 드롭다운 -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <!-- 마이페이지 사진 -->
-                                <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
-                                    width="40">
-                                <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">${teacherId}</span> <i data-feather="chevron-down"
-                                        class="svg-icon"></i></span>
-                            </a>
-                            <!-- 드롭다운 내용 -->
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="${path}/teacher/myInfo/${teacherId}"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    MY PAGE</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
         
-        <!-- 로고 밑 메뉴 -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                                    class="hide-menu">Index</span></a></li>
-                        <!-- 사용 시 줄 표시 -->
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
-                        
-                        <!-- 공지사항 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lmsNoticeList"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">공지사항
-                                </span></a>
-                        </li>
-						<!-- 질문게시판 목록 -->
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/teacher/questionList"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">질문게시판
-                                </span></a>
-                        </li>
-						<!-- 강의목록 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/lectureList/${teacherId}/1"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">강의목록
-                                </span></a>
-                        </li>
-                        <!-- 과제 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/reportList"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">과제
-                                </span></a>
-                        </li>
-                        <!-- FAQ -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/faqList"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">FAQ
-                                </span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">4</span></a>
-                            <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-1
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-2
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-3
-                                        </span></a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/logout"
-                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
-                                    class="hide-menu">Logout</span></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+        <jsp:include page="/WEB-INF/view/teacher/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
@@ -189,19 +58,7 @@
                                     <h4 class="card-title mb-0">내 정보 관리</h4>
                                 </div>
                                 <div class="pl-1 mb-1">
-                                	<nav class="navbar">
-                                		<ul class="navbar-nav">
-											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfo/${teacherId}">개인정보변경</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>
-											</li>
-										</ul>
-                                	</nav>
+									<jsp:include page="/WEB-INF/view/teacher/inc/myInfoMenu.jsp" flush="false"></jsp:include>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +78,7 @@
                         </div>
                                 <table class="table no-wrap v-middle mb-0">
 									<tr>
-										<th class=" font-14 font-weight-medium text-dark">Id</th>
+										<th class=" font-14 font-weight-medium text-dark">아이디</th>
 										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherId}</td>
 										<td></td>
 									</tr>

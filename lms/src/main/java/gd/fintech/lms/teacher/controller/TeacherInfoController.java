@@ -21,6 +21,19 @@ import jdk.internal.org.jline.utils.Log;
 public class TeacherInfoController {
 	@Autowired TeacherInfoService teacherInfoService;
 	
+	@GetMapping("/teacher/deleteMyInfoById/{teacherId}")
+	public String deleteMyInfoById(
+			@PathVariable(value="teacherId") String teacherId) {
+		teacherInfoService.deleteTeacher(teacherId);
+		
+		return "redirect:/teacherLogin";
+	}
+	
+	@GetMapping("/teacher/deleteMyInfo")
+	public String deleteMyInfo() {
+		return "teacher/deleteMyInfo";
+	}
+	
 	// 마이페이지 이미지 수정
 	@PostMapping("/teacher/modifyImageMyInfo")
 	public String modifyTeacherByImage(String teacherId,
