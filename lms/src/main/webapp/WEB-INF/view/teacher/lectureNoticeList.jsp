@@ -35,12 +35,11 @@
 	</table>
 	<!-- 페이징 -->
 	<div>
-		<c:if test="${currentPage > 1}">
-			<a href="${path}/teacher/lectureNoticeList/${lectureNo}/${currentPage - 1}">이전</a>
-		</c:if>
-		<c:if test="${currentPage < lastPage}">
-			<a href="${path}/teacher/lectureNoticeList/${lectureNo}/${currentPage + 1}">다음</a>
-		</c:if>
+		<c:forEach var="i" begin="1" end="${lastPage}">
+			<span>
+				<a href="${path}/teacher/lectureNoticeList/${lectureNo}/${i}">${i}&nbsp;&nbsp;</a>
+			</span>
+		</c:forEach>
 	</div>
 </body>
 </html>

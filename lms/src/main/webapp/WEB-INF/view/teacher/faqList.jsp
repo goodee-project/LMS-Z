@@ -49,20 +49,18 @@
 	<div>
 		<c:choose>
 			<c:when test="${faqCategory == 'total'}">
-				<c:if test="${currentPage > 1}">
-					<a href="${path}/teacher/faqList/${currentPage - 1}/total">이전</a>
-				</c:if>
-				<c:if test="${currentPage < lastPage}">
-					<a href="${path}/teacher/faqList/${currentPage + 1}/total"> 다음 </a>
-				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<span>
+						<a href="${path}/teacher/faqList/${i}/total">${i}&nbsp;&nbsp;</a>
+					</span>
+				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<c:if test="${currentPage > 1}">
-					<a href="${path}/teacher/faqList/${currentPage - 1}/${faqCategory}">이전</a>
-				</c:if>
-				<c:if test="${currentPage < lastPage}">
-					<a href="${path}/teacher/faqList/${currentPage + 1}/${faqCategory}"> 다음 </a>
-				</c:if>
+				<c:forEach var="i" begin="1" end="${lastPage}">
+					<span>
+						<a href="${path}/teacher/faqList/${i}/${faqCategory}">${i}&nbsp;&nbsp;</a>
+					</span>
+				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 	</div>

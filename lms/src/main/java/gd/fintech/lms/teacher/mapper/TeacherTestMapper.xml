@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherTestMapper">
+	<!-- 시험목록 출력 -->
+	<select id="selectTestList" parameterType="int" resultType="gd.fintech.lms.vo.Test">
+		SELECT
+			test_no testNo,
+			lecture_no lectureNo,
+			test_startdate testStartdate,
+			test_enddate testEnddate,
+			test_content testContent,
+			test_createdate,
+			test_updatedate
+		FROM test
+		WHERE lecture_no = #{lectureNo}
+	</select>
+</mapper>
