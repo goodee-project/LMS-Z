@@ -34,6 +34,17 @@ public class TeacherInfoController {
 		return "redirect:/teacher/myInfo/" + teacherId;
 	}
 	
+	// 마이페이지 핸드폰 번호 수정
+	@GetMapping("/teacher/modifyPhoneMyInfo/{teacherId}/{teacherPhone}")
+	public String modifyTeacherByPhone(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherPhone") String teacherPhone) {
+		
+		teacherInfoService.modifyTeacherByPhone(teacherId, teacherPhone);
+		
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
 	// 마이페이지 생일 수정
 	@GetMapping("/teacher/modifyBirthMyInfo/{teacherId}/{teacherBirth}")
 	public String modifyTeacherByBirth(
@@ -97,7 +108,15 @@ public class TeacherInfoController {
 						@PathVariable(value="teacherId") String teacherId) {
 		// teacher 객체 선언하여 service의 메소드 호출 및 입력
 		Teacher teacherOne = teacherInfoService.getTeacherInfo(teacherId);
+		
+		String teacherPhone1 = teacherOne.getTeacherPhone().substring(0,3);
+		String teacherPhone2 = teacherOne.getTeacherPhone().substring(3,7);
+		String teacherPhone3 = teacherOne.getTeacherPhone().substring(7,11);			
+		
 		model.addAttribute("teacherOne", teacherOne);
+		model.addAttribute("teacherPhone1", teacherPhone1);
+		model.addAttribute("teacherPhone2", teacherPhone2);
+		model.addAttribute("teacherPhone3", teacherPhone3);
 		
 		return "teacher/myInfo";
 	}

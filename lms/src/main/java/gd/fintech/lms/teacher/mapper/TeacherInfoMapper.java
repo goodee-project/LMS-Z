@@ -21,7 +21,11 @@ public interface TeacherInfoMapper {
 	int updateTeacherByGender(String teacherId, String teacherGender);
 	int updateTeacherByBirth(String teacherId, String teacherBirth);
 	int updateTeacherByImage(String teacherId, String teacherImage);
+	int updateTeacherByPhone(String teacherId, String teacherPhone);
 	
 	// 마이 페이지 이메일 중복 검사
 	int selectTeacherAndTeacherQueueByOverlapEmail(String teacherEmail);
+	
+	// 프로젝트에서 이미지 삭제
+	String selectTeacherByImageTodelete(String teacherId);
 }

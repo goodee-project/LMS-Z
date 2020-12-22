@@ -237,7 +237,20 @@
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">핸드폰 번호</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherPhone}</td>
+										<td class=" font-14 font-weight-medium text-dark">
+											<select id="teacherPhone1">
+												<option value="${teacherPhone1}">${teacherPhone1}</option>
+												<c:if test="${teacherPhone1 == '010'}">
+													<option value="011">011</option>
+												</c:if>
+												<c:if test="${teacherPhone1 == '011'}">
+													<option value="010">010</option>
+												</c:if>
+											</select>-
+											<input type="text" id="teacherPhone2" value="${teacherPhone2}">-
+											<input type="text" id="teacherPhone3" value="${teacherPhone3}">
+											<input type="hidden" id="teacherPhone" name="teacherPhone" value="${teacherOne.teacherPhone}">
+										</td>
 										<td><button type="button" id="btnPhone" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
@@ -346,10 +359,25 @@
 				});	
 			}
 		});
-		
-		
+		// 최종 보내는 키 값
+		var teacherPhone = '';
+		// 핸드폰 번호에 대한 정규표현식
+		var checkPhone2 = /^\d{4}$/;
+		var checkPhone3 = /^\d{4}$/;
+		// 핸드폰 번호에 대한 변경 값이 있거나 정규표현식을 만족한 경우에만 crud로 넘어감
 		$('#btnPhone').click(function(){
-
+			teacherPhone = $('#teacherPhone1').val() + $('#teacherPhone2').val() + $('#teacherPhone3').val();
+			if(teacherPhone == $('#teacherPhone').val()){
+				alert('현재 핸드폰 번호와 동일합니다.');
+			} else if($('#teacherPhone2').val() == '' || $('#teacherPhone3').val() == ''){
+				alert('사용하실 핸드폰 번호를 입력해주세요.');
+			} else if(!checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
+				alert('핸드폰 번호를 바른 형식으로 입력해주세요.');
+			} else{
+				if(confirm('입력하신 핸드폰 번호로 변경합니다')){
+					location.href = '${path}/teacher/modifyPhoneMyInfo/${teacherId}/'+ teacherPhone;
+				}
+			}
 		});
 
 		// 성별에 대한 변경 값이 있을 경우에만 crud로 넘어감

@@ -29,6 +29,8 @@ public class TeacherInfoService {
 		String ext = multipartFile.getOriginalFilename().substring(p).toLowerCase();
 		// 파일 이름을 uuid를 통해 암호화
 		String fileName = UUID.randomUUID().toString().replace("-", "");
+		// 예전 파일이름을 가져옴
+		String pastFileName = teacherInfoMapper.selectTeacherByImageTodelete(teacherId);
 		
 		teacherInfoMapper.updateTeacherByImage(teacherId, fileName);
 		
@@ -40,10 +42,11 @@ public class TeacherInfoService {
 		String attachPath = "images\\";
 		
 		File f = new File(rootPath + attachPath + fileName);
+		File pastF = new File(rootPath + attachPath + pastFileName);
 		
-		// 동등한 이름이 들어갈 경우 삭제
-		if(f.exists()) {
-			f.delete();
+		// 이미지 수정 전에 예전 이미지 삭제
+		if(pastF.exists()) {
+			pastF.delete();
 		}
 		
 		// 파일 경로로 이미지를 저장
@@ -53,6 +56,11 @@ public class TeacherInfoService {
 			e.printStackTrace();
 			throw new RuntimeException();
 		} 
+	}
+	
+	// 마이페이지 핸드폰 번호 수정
+	public void modifyTeacherByPhone(String teacherId, String teacherPhone) {
+		teacherInfoMapper.updateTeacherByPhone(teacherId, teacherPhone);
 	}
 	
 	// 마이페이지 생일 수정
