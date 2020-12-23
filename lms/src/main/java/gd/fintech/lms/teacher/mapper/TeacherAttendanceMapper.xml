@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper">
+
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceListResult">
+		<result property="attendanceState" column="attendance_state"/>
+		<result property="attendanceRemark" column="attendance_remark"/>
+			<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+				<result property="studentName" column="student_name" />
+				<result property="studentPhone" column="student_phone" />
+				<result property="studentGender" column="student_gender" />
+			</collection>
+			<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
+				<result property="accountId" column="account_id" />
+			</collection>
+	</resultMap>
+	<!-- 학생 출석부 -->
+	<select id="selectAttendanceList" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
+		SELECT 
+			a.attendance_state,
+			a.attendance_remark,
+			cr.account_id,
+			s.student_name,
+			s.student_gender,
+			s.student_phone
+		FROM class_registration cr LEFT JOIN attendance a
+		ON cr.account_id = a.account_id
+		LEFT JOIN lecture l
+		ON cr.account_id = l.account_id
+		LEFT JOIN student s
+		ON cr.account_id = s.student_id
+		WHERE cr.lecture_no = #{lectureNo}
+	</select>
+</mapper>
