@@ -14,6 +14,12 @@ public interface ManagerFaqMapper {
 	//FAQ 리스트
 	List<Faq> selectFaqList(Map<String, Object> map);
 	
+	//FAQ 검색 기능
+	List<Faq> selectSearchFaqList(Map<String, Object> map);
+	
+	//FAQ 검색 했을 때 일치하는 DB데이터 총 갯수
+	int selectSearchTotal(Map<String,Object> map);
+	
 	//Category 리스트
 	List<FaqCategory> selectFaqCategoryList();
 	

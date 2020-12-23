@@ -25,6 +25,23 @@ public class ManagerFaqService {
 		map.put("faqCategory", faqCategory);
 		return managerFaqMapper.selectFaqList(map);
 	}
+	//FAQ 검색기능
+	public List<Faq> getSearchFaqList(String faqTitle,String faqCategory,int beginRow, int rowPerPage){
+		Map<String,Object> map = new HashMap<>();
+		map.put("faqTitle", faqTitle);
+		map.put("faqCategory", faqCategory);
+		map.put("beginRow",beginRow);
+		map.put("rowPerPage", rowPerPage);
+		return managerFaqMapper.selectSearchFaqList(map);
+	}
+	//FAQ 검색했을 때 일치하는 DB데이터 총 개수
+	public int getSearchTotal(String faqTitle,String faqCategory) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("faqTitle", faqTitle);
+		map.put("faqCategory", faqCategory);
+		return managerFaqMapper.selectSearchTotal(map);
+	}
+	
 	//카테고리 별 FAQ 총 갯수
 	public int getFaqTotal(String faqCategory) {
 		return managerFaqMapper.selectFaqTotal(faqCategory);

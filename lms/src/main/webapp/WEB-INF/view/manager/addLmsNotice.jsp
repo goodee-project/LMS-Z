@@ -14,8 +14,8 @@
 			<tr>
 				<th>작성자</th>
 				<td>
-					<input type="text" name="accountId" value="${managerId }">
-					<input type="text" name="lmsNoticeWriter" value="${managerName}">
+					<input type="text" name="accountId" value="${managerId }" hidden="hidden">
+					<input type="text" name="lmsNoticeWriter" value="${managerName}" readonly="readonly">
 				</td>
 			</tr>
 			<tr>

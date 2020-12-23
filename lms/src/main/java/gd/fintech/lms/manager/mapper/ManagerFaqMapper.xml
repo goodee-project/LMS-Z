@@ -20,7 +20,31 @@
 		 ORDER BY faq_no DESC
 		 LIMIT #{beginRow},#{rowPerPage}
 	</select>
-	
+	<!-- FAQ 검색 기능 -->
+	<select id="selectSearchFaqList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Faq">
+		SELECT 
+			faq_no faqNo,
+			account_id accountId,
+			faq_writer faqWriter, 
+			faq_title faqTitle, 
+			DATE_FORMAT(faq_createdate,'%Y-%m-%d') faqCreatedate,
+		    DATE_FORMAT(faq_updatedate,'%Y-%m-%d') faqUpdatedate,
+		    faq_count faqCount,
+		    `faq_category` faqCategory
+		 FROM faq
+		 WHERE faq_title LIKE CONCAT('%',#{faqTitle},'%')
+		 AND `faq_category`= #{faqCategory}
+		 ORDER BY faq_no DESC
+		 LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	<!-- FAQ검색 했을 때 일치하는 DB 데이터 총 수 -->
+	<select id="selectSearchTotal" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		 FROM faq
+		 WHERE faq_title LIKE CONCAT('%',#{faqTitle},'%')
+		 AND `faq_category`= #{faqCategory}
+	</select>
 	<!-- category List 불러오기 -->
 	<select id="selectFaqCategoryList" resultType="gd.fintech.lms.vo.FaqCategory">
 		SELECT 

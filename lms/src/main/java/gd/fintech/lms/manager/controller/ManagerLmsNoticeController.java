@@ -28,6 +28,7 @@ public class ManagerLmsNoticeController {
 	 * 조회수 +1 메서드를 따로 만들어서 공지사항상세보기에서
 	 * 새로고침을 해도 count+1되지 않도록 함
 	 */
+	
 	//공지사항 리스트 
 	@GetMapping ("/manager/lmsNoticeList/{currentPage}")
 	public String LmsNotice(Model model,
@@ -73,6 +74,12 @@ public class ManagerLmsNoticeController {
 	//공지사항 작성 액션 
 	@PostMapping("/manager/addLmsNotice")
 	public String addLmsNotice(LmsNotice lmsNotice) {
+		//db에 스크립트 문 접근 방지
+		String title = lmsNotice.getLmsNoticeTitle().replaceAll("(?i)<script", "&lt;script");
+		lmsNotice.setLmsNoticeTitle(title);
+		String content = lmsNotice.getLmsNoticeContent().replaceAll("(?i)<script", "&lt;script");
+		lmsNotice.setLmsNoticeContent(content);
+		
 		managerLmsNoticeService.addLmsNotice(lmsNotice);
 		return "redirect:/manager/lmsNoticeList/1";
 	}
@@ -103,6 +110,12 @@ public class ManagerLmsNoticeController {
 	@PostMapping("/manager/modifyLmsNotice/{currentPage}")
 	public String modifyLmsNotice(LmsNotice lmsNotice,
 								@PathVariable(name="currentPage") int currentPage) {
+		//db에 스크립트 문 접근 방지
+		String title = lmsNotice.getLmsNoticeTitle().replaceAll("(?i)<script", "&lt;script");
+		lmsNotice.setLmsNoticeTitle(title);
+		String content = lmsNotice.getLmsNoticeContent().replaceAll("(?i)<script", "&lt;script");
+		lmsNotice.setLmsNoticeContent(content);
+		
 		managerLmsNoticeService.modifyLmsNotice(lmsNotice);
 		return "redirect:/manager/lmsNoticeOne/"+lmsNotice.getLmsNoticeNo()+"/"+currentPage;
 	}
