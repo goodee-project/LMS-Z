@@ -119,6 +119,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/faqList/강의/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">FAQ</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/memberList/1"
+                           		aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                              		class="hide-menu">강사/학생리스트</span></a></li>
                          <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
                          <!--  li -> a class = siderbar-link 대신 has-arrow 사용
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">

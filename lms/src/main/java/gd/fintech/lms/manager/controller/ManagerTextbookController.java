@@ -77,7 +77,7 @@ public class ManagerTextbookController {
 	//교재를 삭제하기 위한 컨트롤러
 	@GetMapping("/manager/deleteTextbookOne/{textbookIsbn}")
 	public String deleteTextbookOne(@PathVariable(name="textbookIsbn") String textbookIsbn) {
-		
+		managerTextbookService.deleteTextbookOne(textbookIsbn);
 		return "redirect:/manager/textbookList/1";
 	}
 }

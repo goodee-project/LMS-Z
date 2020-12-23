@@ -38,4 +38,8 @@ public class ManagerTextbookService {
 	public void updateTextbookOne(Textbook textbook) {
 		managerTextbookMapper.updateTextbookOne(textbook);
 	}
+	//교재 삭제를 위한 메퍼 호출
+	public void deleteTextbookOne(String textbookIsbn) {
+		managerTextbookMapper.deleteTextbookOne(textbookIsbn);
+	}
 }

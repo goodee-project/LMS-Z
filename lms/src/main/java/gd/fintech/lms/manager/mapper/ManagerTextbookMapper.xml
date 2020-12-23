@@ -64,4 +64,9 @@
 			textbook_price = #{textbookPrice}
 		WHERE textbook_isbn = #{textbookIsbn}
 	</update>
+	<!-- 교재를 삭제하기 위한 쿼리 -->
+	<delete id="deleteTextbookOne" parameterType="String">
+		DELETE FROM textbook
+		WHERE textbook_isbn = #{textbookIsbn}
+	</delete>
 </mapper>

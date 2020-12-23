@@ -40,8 +40,8 @@
 			<td>${textbookOne.textbookPublishdate }</td>
 		</tr>
 	</table>
-	<button type="submit"  onclick="location.href=${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}">수정</button>
-	<button id="btnIsbn" type="button" onclick="location.href=${path}/manager/deleteTextbookOne/${textbookOne.textbookIsbn}">삭제</button>
+	<button type="submit"  onclick="location.href='${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}'">수정</button>
+	<button id="deleteIsbn" type="button" onclick="location.href='${path}/manager/deleteTextbookOne/${textbookOne.textbookIsbn}'">삭제</button>
 	
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -59,14 +59,14 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
-		$('#btnIsbn').click(function(){
+		$('#deleteIsbn').click(function(){
 			$.ajax({
 				url:'${path}/manager/textbookCk',
 				type:'GET',
 				data:{textbookIsbn: $('#textbookIsbn').text()},
 				success:function(data){
 					if(data.textbookCount ==0){
-						$('#btnIsbn').submit();
+						$('#deleteIsbn').submit();
 					}else{
 						alert('강좌에서 사용중인 교재입니다.');	
 						}

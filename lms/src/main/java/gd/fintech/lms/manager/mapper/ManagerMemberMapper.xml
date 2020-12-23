@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerMemberMapper">
+	<!-- 강사와 학생의 상태와 상세정보를 보기위한 조인 -->
+	<resultMap type="gd.fintech.lms.vo.Account" id="selectMemberList">
+		<result property="accountId" column="account_id"/>
+		<result property="accountPw" column="account_pw"/>
+		<result property="accountState" column="account_state"/>
+		<result property="accountLevel" column="account_level"/>
+		<result property="accountCreateDate" column="account_createdate"/>
+		<result property="accountUpdateDate" column="account_updatedate"/>
+		<association property="student" javaType="gd.fintech.lms.vo.Student">
+			<result property="studentId" column="student_id"/>
+			<result property="studentEmail" column="student_email"/>
+			<result property="studentName" column="student_name"/>
+			<result property="studentPhone" column="student_phone"/>
+			<result property="studentGender" column="student_gender"/>
+			<result property="studentBirth" column="student_birth"/>
+			<result property="studentAddressMain" column="student_address_main"/>
+			<result property="studentAddressSub" column="student_address_sub"/>
+		</association>
+		<association property="teacher" javaType="gd.fintech.lms.vo.Teacher">
+			<result property="teacherId" column="teacher_id"/>
+			<result property="teacherEmail" column="teacher_email"/>
+			<result property="teacherName" column="teacher_name"/>
+			<result property="teacherPhone" column="teacher_phone"/>
+			<result property="teacherGender" column="teacher_gender"/>
+			<result property="teacherBirth" column="teacher_birth"/>
+			<result property="teacherAddressMain" column="teacher_address_main"/>
+			<result property="teacherAddressSub" column="teacher_address_sub"/>
+		</association>
+	</resultMap>
+	<!-- 강사와 학생의 리스트를 불러오는 쿼리 -->
+	<select id="selectTeacherAndStudent" resultMap="selectMemberList">
+		SELECT 
+			a.account_id, 
+			case when a.account_level='강사' then t.teacher_name END teacher_name,
+			case when a.account_level='학생' then s.student_name END student_name,
+			a.account_level,
+			a.account_state
+		FROM account a, teacher t, student s
+		WHERE account_id = teacher_id OR account_id = student_id
+		AND account_level IN ('학생','강사')
+		GROUP BY account_id
+	</select>
+</mapper>

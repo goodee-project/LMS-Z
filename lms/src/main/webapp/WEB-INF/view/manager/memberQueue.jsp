@@ -49,7 +49,7 @@
        	<div class="list-inline text-center mt-4 mb-0">
         	<c:forEach var="i" begin="1" end="${lastPageS }">
         		<span>
-        			<a href="${path}/manager/member/${i}/${currentPageT}">${i}&nbsp;&nbsp;</a>
+        			<a href="${path}/manager/memberQueue/${i}/${currentPageT}">${i}&nbsp;&nbsp;</a>
         		</span>
         	</c:forEach>
        	</div>
@@ -92,7 +92,7 @@
    	<div class="list-inline text-center mt-4 mb-0">
     	<c:forEach var="i" begin="1" end="${lastPageT }">
     		<span>
-    			<a href="${path}/manager/member/${currentPageS}/${i}">${i}&nbsp;&nbsp;</a>
+    			<a href="${path}/manager/memberQueue/${currentPageS}/${i}">${i}&nbsp;&nbsp;</a>
     		</span>
     	</c:forEach>
    	</div>

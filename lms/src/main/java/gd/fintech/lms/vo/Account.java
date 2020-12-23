@@ -10,4 +10,6 @@ public class Account {
     private String accountLevel;
     private String accountCreateDate;
     private String accountUpdateDate;
+    private Teacher teacher;
+    private Student student;
 }
