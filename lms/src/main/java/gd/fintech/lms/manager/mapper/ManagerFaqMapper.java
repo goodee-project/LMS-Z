@@ -24,13 +24,13 @@ public interface ManagerFaqMapper {
 	Faq selectFaqOne(int faqNo);
 	
 	//FAQ 추가 
-	int insertFaqCategory(Faq faq);
+	int insertFaqList(Faq faq);
 	
 	//FAQ 수정
-	int updateFaqCategory(Faq faq);
+	int updateFaqList(Faq faq);
 	
 	//FAQ 삭제 
-	int deleteFaq (int faqNo);
+	int deleteFaqOne (int faqNo);
 	
 	
 }

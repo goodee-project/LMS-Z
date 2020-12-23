@@ -11,7 +11,8 @@
 			account_id accountId,
 			faq_writer faqWriter, 
 			faq_title faqTitle, 
-		    faq_updatedate fagUpdateDate,
+			DATE_FORMAT(faq_createdate,'%Y-%m-%d') faqCreatedate,
+		    DATE_FORMAT(faq_updatedate,'%Y-%m-%d') faqUpdatedate,
 		    `faq_category` faqCategory
 		 FROM faq
 		 WHERE faq_category=#{faqCategory}
@@ -41,14 +42,14 @@
 			faq_title faqTitle,
 		    faq_writer faqWriter,
 			faq_content faqContent,
-			faq_updatedate faqUpdateDate,
+			faq_updatedate faqUpdatedate,
 			faq_count faqCount,
 		FROM faq
 		WHERE faq_no = #{faqNo}
 	</select>
 	
 	<!-- FAQ 추가 -->
-	<insert id = "insertFaq" parameterType="gd.fintech.lms.vo.Faq">
+	<insert id = "insertFaqList" parameterType="gd.fintech.lms.vo.Faq">
 		INSERT INTO faq(   
 	     	account_id,
 			faq_writer,
@@ -69,7 +70,7 @@
 	</insert>
 	
 	<!-- FAQ 수정 -->
-	<update id = "updateFaq" parameterType = "gd.fintech.lms.vo.Faq">
+	<update id = "updateFaqList" parameterType = "gd.fintech.lms.vo.Faq">
 		UPDATE faq 
 		SET 
 			faq_title = #{FaqTitle} , 
@@ -80,7 +81,7 @@
 	</update>
     
     <!-- 선택한 FAQ 삭제 -->
-    <delete id="deleteFaq" parameterType="int">
+    <delete id="deleteFaqOne" parameterType="int">
 	     DELETE FROM faq
 	     WHERE faq_no = #{faqNo}
     </delete>

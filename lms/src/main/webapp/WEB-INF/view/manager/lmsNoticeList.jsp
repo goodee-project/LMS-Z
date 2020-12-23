@@ -77,6 +77,9 @@
 			</span>
 		</c:if>
 	</div>
+	
+	<a href="${path }/manager/index">메인으로</a>
+	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>

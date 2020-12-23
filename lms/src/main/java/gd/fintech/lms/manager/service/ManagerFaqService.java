@@ -33,4 +33,8 @@ public class ManagerFaqService {
 	public List<FaqCategory> getFaqCategoryList(){
 		return managerFaqMapper.selectFaqCategoryList();
 	}
+	// FAQ 추가
+	public int addFaqList(Faq faq) {
+		return managerFaqMapper.insertFaqList(faq);
+	}
 }
