@@ -23,4 +23,7 @@ public interface StudentLoginMapper {
 	// 회원가입 주소검색
 	List<Address> selectAddressToSearch(String doro);
 	int selectAddressToSearchCount(String doro);
+	
+	// 로그인 시 이미지 가져오기
+	String selectStudentImage(String studentId);
 }

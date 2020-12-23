@@ -19,6 +19,11 @@ import gd.fintech.lms.vo.StudentForm;
 public class StudentLoginService {
 	@Autowired StudentLoginMapper studentLoginMapper;
 	
+	// 로그인 시 이미지 가져오기
+	public String getStudentImage(String studentId) {
+		return studentLoginMapper.selectStudentImage(studentId);
+	}
+	
 	// 회원가입 주소 찾기 service
 	public Map<String, Object> getAddressToSearch(String doro){
 		Map<String, Object> map = new HashMap<String, Object>();

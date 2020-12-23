@@ -31,6 +31,9 @@ public class StudentLoginController {
 		
 		HttpSession session = request.getSession();
 	    session.setAttribute("studentId", account.getAccountId());
+	    
+	    String studentImage = studentLoginService.getStudentImage(account.getAccountId());
+	    session.setAttribute("studentImage", studentImage);
 		
 		return "student/index";
 	}

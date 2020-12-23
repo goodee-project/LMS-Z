@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentLoginMapper">
+	<!-- 로그인 시 이미지 정보 가져오기 -->
+	<select id="selectStudentImage" parameterType="String" resultType="String">
+		SELECT student_image
+		FROM student
+		WHERE student_id = #{studentId}
+	</select>
+	
 	<!-- 도로명을 입력 하였을 경우 주소 리스트 출력 -->
 	<select id="selectAddressToSearch" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Address">
 		SELECT
@@ -31,13 +38,13 @@
 		WHERE student_email = #{studentEmail}
 	</select>
 	
-	
+	<!-- 로그인 액션 -->
 	<select id="selectAccountToStudentLogin" parameterType="gd.fintech.lms.vo.Account" resultType="String">
   		SELECT account_id accountId
 		FROM account
 		WHERE
 			account_id = #{accountId} and 
-			account_pw = #{accountPw} and
+			account_pw = PASSWORD(#{accountPw}) and
 			account_state = #{accountState} and
 			account_level = #{accountLevel} 
 	</select>

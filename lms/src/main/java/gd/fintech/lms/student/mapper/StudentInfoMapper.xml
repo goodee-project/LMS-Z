@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentInfoMapper">
+	<!-- 주소 변경 사이트 주소 가져오기 -->
+	<select id="selectStudentByAddress" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT 
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub
+		FROM student
+		WHERE student_id = #{studentId}
+	</select>
+
+	<!-- 회원 탈퇴 후 account 테이블 탈퇴로 수정 -->
+	<update id="updateAccountTodelete" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE account
+		SET account_state = #{accountState}
+		WHERE account_id = #{accountId}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteStudent" parameterType="String">
+		DELETE FROM student
+		WHERE student_id = #{studentId}
+	</delete>
+	
+	<!-- 마이 페이지 주소 수정 -->
+	<update id="updateStudentByAddress" parameterType="gd.fintech.lms.vo.Student">
+		UPDATE student
+		SET 
+			student_address_main = #{studentAddressMain}, 
+			student_address_sub = #{studentAddressSub}, 
+			student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+	
+	<!-- 마이 페이지 핸드폰 번호 수정 -->
+	<update id="updateStudentByPhone" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_phone = #{studentPhone}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+
+	<!-- 이미지 수정 할 때 현재 이미지를 삭제 -->
+	<select id="selectStudentByImageTodelete" parameterType="String" resultType="String">
+		SELECT student_image
+		FROM student
+		WHERE student_id = #{studentId}
+	</select>
+	<!-- 마이 페이지 사진 수정 -->
+	<update id="updateStudentByImage" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_image = #{studentImage}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+	
+	<!-- 마이 페이지 생일 수정 -->
+	<update id="updateStudentByBirth" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_birth = #{studentBirth}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+	
+	<!-- 마이 페이지 성별 수정 -->
+	<update id="updateStudentByGender" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_gender = #{studentGender}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+	
+	<!-- 마이 패이지 이메일 수정 시 중복체크 -->
+	<select id="selectStudentAndStudentQueueByOverlapEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM student t CROSS join student_queue tq
+		WHERE t.student_email = #{studentEmail} OR tq.student_email = #{studentEmail}
+	</select>
+
+	<!-- 마이 페이지 이메일 수정 -->
+	<update id="updateStudentByEmail" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_Email = #{studentEmail}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+	
+	<!-- 마이 페이지 이름 수정 -->
+	<update id="updateStudentByName" parameterType="java.util.Map">
+		UPDATE student
+		SET 
+			student_name = #{studentName}, student_updatedate = NOW()
+		WHERE student_id = #{studentId}
+	</update>
+
+	<!-- 패스워드 변경 시 현재 비닐번호 체크 -->
+	<select id="selectAccountByPw" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM account
+		WHERE 
+			account_pw = PASSWORD(#{accountPw}) and
+			account_id = #{accountId}
+	</select>
+
+	<!-- 학생 마이페이지 정보 -->
+	<select id="selectStudentInfo" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub,
+			student_image studentImage
+		FROM student
+		WHERE student_id = #{studentId}
+	</select>
+	
+	<!-- 패스워드 변경 -->
+	<update id="updateAccountPw" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE account
+		SET 
+			account_pw = PASSWORD(#{accountPw}),
+			account_updatedate = NOW()
+		WHERE account_id = #{accountId}
+	</update>
+</mapper>
