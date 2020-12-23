@@ -32,6 +32,9 @@ public class ManagerLoginController {
 		
 		HttpSession session = request.getSession();
 	    session.setAttribute("managerId", account.getAccountId());
+	    
+	    String managerImage = managerLoginService.getManagerImage(account.getAccountId());
+	    session.setAttribute("managerImage", managerImage);
 		
 		return "manager/index";
 	}

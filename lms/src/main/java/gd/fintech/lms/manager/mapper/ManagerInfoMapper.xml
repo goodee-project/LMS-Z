@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerInfoMapper">
+	<!-- 주소 변경 사이트 주소 가져오기 -->
+	<select id="selectManagerByAddress" parameterType="String" resultType="gd.fintech.lms.vo.Manager">
+		SELECT 
+			manager_address_main managerAddressMain,
+			manager_address_sub managerAddressSub
+		FROM manager
+		WHERE manager_id = #{managerId}
+	</select>
+
+	<!-- 회원 탈퇴 후 account 테이블 탈퇴로 수정 -->
+	<update id="updateAccountTodelete" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE account
+		SET account_state = #{accountState}
+		WHERE account_id = #{accountId}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteManager" parameterType="String">
+		DELETE FROM manager
+		WHERE manager_id = #{managerId}
+	</delete>
+	
+	<!-- 마이 페이지 주소 수정 -->
+	<update id="updateManagerByAddress" parameterType="gd.fintech.lms.vo.Manager">
+		UPDATE manager
+		SET 
+			manager_address_main = #{managerAddressMain}, 
+			manager_address_sub = #{managerAddressSub}, 
+			manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
+	<!-- 마이 페이지 핸드폰 번호 수정 -->
+	<update id="updateManagerByPhone" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_phone = #{managerPhone}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+
+	<!-- 이미지 수정 할 때 현재 이미지를 삭제 -->
+	<select id="selectManagerByImageTodelete" parameterType="String" resultType="String">
+		SELECT manager_image
+		FROM manager
+		WHERE manager_id = #{managerId}
+	</select>
+	<!-- 마이 페이지 사진 수정 -->
+	<update id="updateManagerByImage" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_image = #{managerImage}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
+	<!-- 마이 페이지 생일 수정 -->
+	<update id="updateManagerByBirth" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_birth = #{managerBirth}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
+	<!-- 마이 페이지 성별 수정 -->
+	<update id="updateManagerByGender" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_gender = #{managerGender}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
+	<!-- 마이 패이지 이메일 수정 시 중복체크 -->
+	<select id="selectManagerAndManagerQueueByOverlapEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM manager t CROSS join manager_queue tq
+		WHERE t.manager_email = #{managerEmail} OR tq.manager_email = #{managerEmail}
+	</select>
+
+	<!-- 마이 페이지 이메일 수정 -->
+	<update id="updateManagerByEmail" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_Email = #{managerEmail}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
+	<!-- 마이 페이지 이름 수정 -->
+	<update id="updateManagerByName" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_name = #{managerName}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+
+	<!-- 패스워드 변경 시 현재 비닐번호 체크 -->
+	<select id="selectAccountByPw" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM account
+		WHERE 
+			account_pw = PASSWORD(#{accountPw}) and
+			account_id = #{accountId}
+	</select>
+
+	<!-- 강사 마이페이지 정보 -->
+	<select id="selectManagerInfo" parameterType="String" resultType="gd.fintech.lms.vo.Manager">
+		SELECT
+			manager_id managerId,
+			manager_email managerEmail,
+			manager_name managerName,
+			manager_phone managerPhone,
+			manager_gender managerGender,
+			manager_birth managerBirth,
+			manager_address_main managerAddressMain,
+			manager_address_sub managerAddressSub,
+			manager_image managerImage
+		FROM manager
+		WHERE manager_id = #{managerId}
+	</select>
+	
+	<!-- 패스워드 변경 -->
+	<update id="updateAccountPw" parameterType="gd.fintech.lms.vo.Account">
+		UPDATE account
+		SET 
+			account_pw = PASSWORD(#{accountPw}),
+			account_updatedate = NOW()
+		WHERE account_id = #{accountId}
+	</update>
+</mapper>

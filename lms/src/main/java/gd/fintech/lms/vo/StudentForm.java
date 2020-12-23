@@ -18,5 +18,5 @@ public class StudentForm {
 	private String studentAddressMain;
 	private String studentAddressSub;
     private String accountState;
-    private int accountLevel;
+    private String accountLevel;
 }

@@ -71,9 +71,9 @@
                             </a>
                             <!-- 드롭다운 내용 -->
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
+                                <a class="dropdown-item" href="${path}/manager/myInfo/${managerId}"><i data-feather="mail"
                                         class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
+                                    My Page</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>

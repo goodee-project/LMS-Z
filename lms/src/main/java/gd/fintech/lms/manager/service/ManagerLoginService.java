@@ -18,6 +18,11 @@ import gd.fintech.lms.vo.ManagerForm;
 public class ManagerLoginService {
 	@Autowired ManagerLoginMapper managerLoginMapper;
 	
+	// 로그인 시 이미지 가져오기
+	public String getManagerImage(String managerId) {
+		return managerLoginMapper.selectManagerImage(managerId);
+	}
+	
 	// 회원가입 주소 찾기 service
 	public Map<String, Object> getAddressToSearch(String doro){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -53,7 +58,7 @@ public class ManagerLoginService {
 	// 로그인 액션
 	public String getAccountToManagerLogin(Account account) {
 		
-		account.setAccountLevel("운용자");
+		account.setAccountLevel("운영자");
 		account.setAccountState("활성화");
 		
 		return managerLoginMapper.selectAccountToManagerLogin(account);
@@ -61,7 +66,7 @@ public class ManagerLoginService {
 	
 	// 회원가입하는 mapper2개를 가져와 manager_queue와 level 순서로 insert실행
 	public void addSignup(ManagerForm managerForm) {
-		managerForm.setAccountLevel(2);
+		managerForm.setAccountLevel("운영자");
 		managerForm.setAccountState("대기");
 		
 		managerForm.setManagerPhone(managerForm.getManagerPhone1()+managerForm.getManagerPhone2()+managerForm.getManagerPhone3());

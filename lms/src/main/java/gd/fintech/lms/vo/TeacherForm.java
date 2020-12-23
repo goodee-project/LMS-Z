@@ -18,5 +18,5 @@ public class TeacherForm {
 	private String teacherAddressMain;
 	private String teacherAddressSub;
     private String accountState;
-    private int accountLevel;
+    private String accountLevel;
 }

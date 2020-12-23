@@ -25,7 +25,7 @@ public class TeacherLoginService {
 	
 	// 회원가입하는 mapper2개를 가져와 manager_queue와 level 순서로 insert실행
 	public void addSignup(TeacherForm teacherForm) {
-		teacherForm.setAccountLevel(3);
+		teacherForm.setAccountLevel("강사");
 		teacherForm.setAccountState("대기");
 		
 		teacherForm.setTeacherPhone(teacherForm.getTeacherPhone1()+teacherForm.getTeacherPhone2()+teacherForm.getTeacherPhone3());

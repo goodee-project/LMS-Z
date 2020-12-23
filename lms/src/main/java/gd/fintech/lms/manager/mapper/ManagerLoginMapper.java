@@ -24,4 +24,7 @@ public interface ManagerLoginMapper {
 	//List<Address> selectAddressToSearch(String doro, int currentPage, int limitPage);
 	List<Address> selectAddressToSearch(String doro);
 	int selectAddressToSearchCount(String doro);
+	
+	// 로그인 시 이미지 가져오기
+	String selectManagerImage(String teacherId);
 }

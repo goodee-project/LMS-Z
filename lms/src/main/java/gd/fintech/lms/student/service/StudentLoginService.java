@@ -54,7 +54,7 @@ public class StudentLoginService {
 	
 	// 회원가입하는 mapper2개를 가져와 manager_queue와 account 순서로 insert실행
 	public void addSignup(StudentForm studentForm) {
-		studentForm.setAccountLevel(4);
+		studentForm.setAccountLevel("학생");
 		studentForm.setAccountState("대기");
 		
 		studentForm.setStudentPhone(studentForm.getStudentPhone1()+studentForm.getStudentPhone2()+studentForm.getStudentPhone3());

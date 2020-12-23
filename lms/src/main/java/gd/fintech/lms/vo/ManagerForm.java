@@ -19,5 +19,5 @@ public class ManagerForm {
 	private String managerAddressMain;
 	private String managerAddressSub;
     private String accountState;
-    private int accountLevel;
+    private String accountLevel;
 }
