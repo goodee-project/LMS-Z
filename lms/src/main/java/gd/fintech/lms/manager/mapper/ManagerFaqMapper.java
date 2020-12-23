@@ -23,6 +23,9 @@ public interface ManagerFaqMapper {
 	//FAQ 상세내용 
 	Faq selectFaqOne(int faqNo);
 	
+	//FAQ 조회수 +1
+	int updateFaqCountUp(int faqNo);
+	
 	//FAQ 추가 
 	int insertFaqList(Faq faq);
 	

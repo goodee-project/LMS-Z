@@ -36,18 +36,27 @@
 					<th>제목</th>
 					<th>게시일</th>
 					<th>수정일</th>
+					<th>조회수</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="f" items="${faqList }">
+				<c:forEach var="f" items="${faqList }" varStatus="status">
 					<tr>
-						<td>${f.faqNo}</td>
+						<td>
+							<!-- 
+								첫페이지 6,5,4,3,2에서 다음페이지 1이 나와야하지만 넘어가면 6 출력
+								*해결 방법 
+							-->
+							<span>${(totalRow-(5*(currentPage-1)))-(status.index)}</span>
+							<span hidden="hidden">${f.faqNo}</span>
+						</td>
 						<td>${f.faqWriter }</td>
 						<td>
-							<a href="${path }/manager/faqOne">${f.faqTitle}</a>
+							<a href="${path }/manager/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
 						</td>
 						<td>${f.faqCreatedate}</td>
 						<td>${f.faqUpdatedate}</td>
+						<td>${f.faqCount }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

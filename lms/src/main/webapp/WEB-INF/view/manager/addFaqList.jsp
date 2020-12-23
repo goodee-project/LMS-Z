@@ -33,9 +33,9 @@
 				<th>카테고리</th>
 				<td>
 					<select name="faqCategory">
-						<option value="강의">강의</option>
-						<option value="비대면">비대면</option>
-						<option value="기타">기타</option>
+						<c:forEach var="c" items="${categoryList}">
+							<option value="${c.faqCategory }">${c.faqCategory }</option>
+						</c:forEach>
 					</select>
 				</td>
 			</tr>

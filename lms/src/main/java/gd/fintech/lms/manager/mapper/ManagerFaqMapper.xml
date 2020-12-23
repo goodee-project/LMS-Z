@@ -13,6 +13,7 @@
 			faq_title faqTitle, 
 			DATE_FORMAT(faq_createdate,'%Y-%m-%d') faqCreatedate,
 		    DATE_FORMAT(faq_updatedate,'%Y-%m-%d') faqUpdatedate,
+		    faq_count faqCount,
 		    `faq_category` faqCategory
 		 FROM faq
 		 WHERE faq_category=#{faqCategory}
@@ -31,19 +32,29 @@
 	<select id="selectFaqTotal" parameterType="java.lang.String" resultType="Integer">
 		SELECT 
 			COUNT(*)
-		FROM faq_category
+		FROM faq
 		WHERE `faq_category`=#{faqCategory}
 	</select>
 	
+	<!-- FAQ 조회수 + 1 -->
+	<update id="updateFaqCountUp" parameterType="Integer">
+		UPDATE faq
+		SET faq_count = faq_count+1
+		WHERE faq_no = #{faqNo}
+	</update>
+	
 	<!-- FAQ 상세정보 -->
-	<select id = "selectFaqOne" parameterType = "int" resultType = "gd.fintech.lms.vo.Faq">
-		 SELECT 
+	<select id = "selectFaqOne" parameterType = "Integer" resultType = "gd.fintech.lms.vo.Faq">
+		SELECT 
 			faq_no faqNo,
-			faq_title faqTitle,
-		    faq_writer faqWriter,
-			faq_content faqContent,
-			faq_updatedate faqUpdatedate,
-			faq_count faqCount,
+			account_id accountId,
+			faq_writer faqWriter, 
+			faq_title faqTitle, 
+			faq_Content faqContent,
+			DATE_FORMAT(faq_createdate,'%Y-%m-%d') faqCreatedate,
+		   	DATE_FORMAT(faq_updatedate,'%Y-%m-%d') faqUpdatedate,
+		   	faq_count faqCount,
+		   	`faq_category` faqCategory
 		FROM faq
 		WHERE faq_no = #{faqNo}
 	</select>
@@ -73,10 +84,10 @@
 	<update id = "updateFaqList" parameterType = "gd.fintech.lms.vo.Faq">
 		UPDATE faq 
 		SET 
-			faq_title = #{FaqTitle} , 
-			faq_content= #{FaqContent},
+			faq_title = #{faqTitle} , 
+			faq_content= #{faqContent},
 			faq_updatedate = NOW(),
-			faq_category = #{FAQCategory}
+			faq_category = #{faqCategory}
 		WHERE faq_no = #{faqNo}
 	</update>
     

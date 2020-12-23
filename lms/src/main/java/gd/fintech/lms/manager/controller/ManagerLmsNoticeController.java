@@ -40,19 +40,20 @@ public class ManagerLmsNoticeController {
 		//last 페이지
 		int lastPage = 0; 
 		//공지사항 total Count
-		int totalCount = managerLmsNoticeService.getLmsNoticeCount();
+		int totalRow = managerLmsNoticeService.getLmsNoticeCount();
 		
 		//나누어 떨어지면 
-		if(totalCount % rowPerPage == 0) {
-			lastPage = totalCount / rowPerPage;
+		if(totalRow % rowPerPage == 0) {
+			lastPage = totalRow / rowPerPage;
 		} else {//나누어 떨어지지 않는다면
-			lastPage = totalCount / rowPerPage +1;
+			lastPage = totalRow / rowPerPage +1;
 		}
 		
 		List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getLmsNoticeList(currentPage, rowPerPage);
 
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("totalRow",totalRow);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		model.addAttribute("startPage",startPage);
 		return "manager/lmsNoticeList";

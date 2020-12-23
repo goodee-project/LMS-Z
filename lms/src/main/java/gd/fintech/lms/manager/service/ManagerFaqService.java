@@ -37,4 +37,20 @@ public class ManagerFaqService {
 	public int addFaqList(Faq faq) {
 		return managerFaqMapper.insertFaqList(faq);
 	}
+	// FAQ 조회수 +1
+	public int modifyFaqCountUp(int faqNo) {
+		return managerFaqMapper.updateFaqCountUp(faqNo);
+	}
+	// FAQ 상세보기
+	public Faq getFaqOne(int faqNo) {
+		return managerFaqMapper.selectFaqOne(faqNo);
+	}
+	// FAQ 수정
+	public int modifyFaqList(Faq faq) {
+		return managerFaqMapper.updateFaqList(faq);
+	}
+	// FAQ 삭제
+	public int removeFaqOne(int faqNo) {
+		return managerFaqMapper.deleteFaqOne(faqNo);
+	}
 }

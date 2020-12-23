@@ -49,6 +49,9 @@ public class ManagerFaqController {
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("lastPage",lastPage);
+		//데이터마다 갖고 있는 no값이 1,2,3처럼 규칙이 없기 때문에 
+		//UI에서는 규칙적인 NO를 보여주기 위해
+		model.addAttribute("totalRow",totalRow);
 		//현재 faq카테고리 페이지에 있는지 구분하기 위해 (페이징 처리에 필요)
 		model.addAttribute("currentFaqCategory", faqCategory);
 		model.addAttribute("faqList",faqList);
@@ -62,8 +65,11 @@ public class ManagerFaqController {
 							@PathVariable(name="currentPage") int currentPage,
 							@PathVariable(name="managerId") String managerId) {
 		String faqWriter = managerLmsNoticeService.getManagerName(managerId);
+		//카테고리 리스트
+		List<FaqCategory> categoryList = managerFaqService.getFaqCategoryList();
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("faqWriter",faqWriter);
+		model.addAttribute("categoryList",categoryList);
 		return "manager/addFaqList";
 	}
 	
@@ -79,6 +85,65 @@ public class ManagerFaqController {
 		 */
 		String category = URLEncoder.encode(faq.getFaqCategory(), "UTF-8");
 		managerFaqService.addFaqList(faq);
+		return "redirect:/manager/faqList/"+category+"/"+currentPage;
+	}
+	
+	// FAQ 조회수
+	@GetMapping("/manager/faqCountUp/{faqNo}/{currentPage}")
+	public String faqCountUp(@PathVariable(name="faqNo") int faqNo,
+							@PathVariable(name="currentPage") int currentPage) {
+		managerFaqService.modifyFaqCountUp(faqNo);
+		return "redirect:/manager/faqOne/"+faqNo+"/"+currentPage;
+	}
+	
+	// FAQ 상세보기
+	@GetMapping("/manager/faqOne/{faqNo}/{currentPage}")
+	public String faqOne(Model model,
+						@PathVariable(name="faqNo") int faqNo,
+						@PathVariable(name="currentPage") int currentPage) {
+		//조회할 FAQ 정보 가져오기
+		Faq faqOne = managerFaqService.getFaqOne(faqNo);
+		
+		model.addAttribute("faqOne",faqOne);
+		model.addAttribute("currentPage",currentPage);
+		return "manager/faqOne";
+	}
+	
+	// FAQ 수정 폼
+	@GetMapping("manager/modifyFaq/{faqNo}/{currentPage}")
+	public String modifyFaq(Model model,
+							@PathVariable(name="faqNo") int faqNo,
+							@PathVariable(name="currentPage") int currentPage) {
+		//수정할 FAQ 정보 가져오기
+		Faq faqOne = managerFaqService.getFaqOne(faqNo);
+		//카테고리 수정 칸에 현재 카테고리를 selected하기 위해
+		String category = faqOne.getFaqCategory();
+		//카테고리 리스트
+		List<FaqCategory> categoryList = managerFaqService.getFaqCategoryList();
+		
+		model.addAttribute("faqOne",faqOne);
+		model.addAttribute("category",category);
+		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("currentPage",currentPage);
+		return "manager/modifyFaq";
+	}
+	
+	// FAQ 수정 액션
+	@PostMapping("manager/modifyFaq/{currentPage}")
+	public String modifyFaq(Faq faq,
+							@PathVariable(name="currentPage") int currentPage) {
+		managerFaqService.modifyFaqList(faq);
+		return "redirect:/manager/faqOne/"+faq.getFaqNo()+"/"+currentPage;
+	}
+	
+	// FAQ 삭제 액션
+	@GetMapping("manager/removeFaq/{faqCategory}/{faqNo}/{currentPage}")
+	public String removeFaq(@PathVariable(name="faqCategory") String faqCategory,
+							@PathVariable(name="faqNo") int faqNo,
+							@PathVariable(name="currentPage") int currentPage) throws UnsupportedEncodingException {
+		// redirect url에 한글 사용하기 위해 ASKII코드로 변경
+		String category = URLEncoder.encode(faqCategory, "UTF-8");
+		managerFaqService.removeFaqOne(faqNo);
 		return "redirect:/manager/faqList/"+category+"/"+currentPage;
 	}
 }

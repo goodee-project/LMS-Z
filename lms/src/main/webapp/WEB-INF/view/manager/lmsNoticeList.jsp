@@ -24,9 +24,16 @@
 		<tbody>
 			<c:forEach var="l" items="${lmsNoticeList}" varStatus="status">
 				<tr>
-					<td id="${status.index }">${l.lmsNoticeNo}</td>
+					<td>
+						<!-- 
+							첫페이지 6,5,4,3,2에서 다음페이지 1이 나와야하지만 넘어가면 6 출력
+							*해결 방법 
+						-->
+						<span>${(totalRow-(5*(currentPage-1)))-(status.index)}</span>
+						<span hidden="hidden">${l.lmsNoticeNo}</span>
+					</td>
 					<td>${l.lmsNoticeWriter}</td>
-					<td><a href="${path}/noticeCountup/${l.lmsNoticeNo}/${currentPage}" id="countUp${status.count-1}">${l.lmsNoticeTitle}</a></td>
+					<td><a href="${path}/noticeCountup/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
 					<td>${l.lmsNoticeCreatedate }</td>
 					<td>${l.lmsNoticeUpdatedate }</td>
 					<td>${l.lmsNoticeCount}</td>
