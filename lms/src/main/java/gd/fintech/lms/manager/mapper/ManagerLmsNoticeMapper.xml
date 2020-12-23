@@ -11,6 +11,7 @@
 			DATE_FORMAT(lms_notice_updatedate,'%Y-%m-%d') lmsNoticeUpdatedate,
 			lms_notice_count lmsNoticeCount
 		FROM lms_notice
+		ORDER BY lms_notice_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -22,11 +23,11 @@
 	</select>
 	
 	<!-- 공지사항 클릭시 조회수 +1 -->
-	<select id="updateLmsNoticeCount" parameterType="Integer">
+	<update id="updateLmsNoticeCount" parameterType="Integer">
 		UPDATE lms_notice
 		SET lms_notice_count = lms_notice_count+1
 		WHERE lms_notice_no = #{lmsNoticeNo}
-	</select>
+	</update>
 	
 	<!-- 공지사항 상세내용 -->
 	<select id="selectLmsNoticeOne" parameterType="Integer" resultType="gd.fintech.lms.vo.LmsNotice">
@@ -60,6 +61,13 @@
 			NOW()
 		)
 	</insert>
+	<!-- 공지사항 추가 시 자동으로 작성자 이름 출력 -->
+	<select id="selectManagerName" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT 
+			manager_name managerName
+		FROM manager
+		WHERE manager_id=#{managerId}
+	</select>
 	<!-- 공지사항 수정 -->
 	<update id="updateLmsNotice" parameterType="gd.fintech.lms.vo.LmsNotice">
 		UPDATE lms_notice 

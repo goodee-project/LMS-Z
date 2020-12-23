@@ -3,12 +3,22 @@ package gd.fintech.lms.manager.mapper;
 import java.util.List;
 import java.util.Map;
 
-import gd.fintech.lms.vo.Faq;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface FaqMapper {
+import gd.fintech.lms.vo.Faq;
+import gd.fintech.lms.vo.FaqCategory;
+
+@Mapper
+public interface ManagerFaqMapper {
 	
 	//FAQ 리스트
-	List<Faq> selectFaqList(Map<String, Integer> map);
+	List<Faq> selectFaqList(Map<String, Object> map);
+	
+	//Category 리스트
+	List<FaqCategory> selectFaqCategoryList();
+	
+	//카테고리 별 faq 총 갯수
+	int selectFaqTotal(String faqCategory);
 	
 	//FAQ 상세내용 
 	Faq selectFaqOne(int faqNo);

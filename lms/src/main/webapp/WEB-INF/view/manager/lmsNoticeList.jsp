@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>LMS 공지사항</h1>
-	<a href="${path}/manager/addLmsNotice/${currentPage}">추가</a>
+	<a href="${path}/manager/addLmsNotice/${managerId }/${currentPage}">추가</a>
 	<table border="1">
 		<thead>
 			<tr>
@@ -26,7 +26,7 @@
 				<tr>
 					<td id="${status.index }">${l.lmsNoticeNo}</td>
 					<td>${l.lmsNoticeWriter}</td>
-					<td><a href="${path}/manager/lmsNoticeOne/${l.lmsNoticeNo}/${currentPage}" id="countUp${status.count-1}">${l.lmsNoticeTitle}</a></td>
+					<td><a href="${path}/noticeCountup/${l.lmsNoticeNo}/${currentPage}" id="countUp${status.count-1}">${l.lmsNoticeTitle}</a></td>
 					<td>${l.lmsNoticeCreatedate }</td>
 					<td>${l.lmsNoticeUpdatedate }</td>
 					<td>${l.lmsNoticeCount}</td>

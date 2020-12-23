@@ -43,6 +43,10 @@ public class ManagerLmsNoticeService {
 	public int addLmsNotice(LmsNotice lmsNotice) {
 		return managerLmsNoticeMapper.insertLmsNotice(lmsNotice);
 	}
+	//공지사항 추가 시 자동으로 작성자 이름 출력
+	public String getManagerName(String managerId) {
+		return managerLmsNoticeMapper.selectManagerName(managerId);
+	}
 	//공지사항 수정
 	public int modifyLmsNotice(LmsNotice lmsNotice) {
 		return managerLmsNoticeMapper.updateLmsNotice(lmsNotice);

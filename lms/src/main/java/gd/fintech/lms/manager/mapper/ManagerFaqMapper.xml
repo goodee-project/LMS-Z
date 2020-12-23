@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerFaqMapper">
+	
+	<!-- FAQ 리스트 -->
+	<select id = "selectFaqList" parameterType = "java.util.Map" resultType="gd.fintech.lms.vo.Faq">
+		SELECT 
+			faq_no faqNo,
+			account_id accountId,
+			faq_writer faqWriter, 
+			faq_title faqTitle, 
+		    faq_updatedate fagUpdateDate,
+		    `faq_category` faqCategory
+		 FROM faq
+		 WHERE faq_category=#{faqCategory}
+		 ORDER BY faq_no DESC
+		 LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<!-- category List 불러오기 -->
+	<select id="selectFaqCategoryList" resultType="gd.fintech.lms.vo.FaqCategory">
+		SELECT 
+		   `faq_category` faqCategory
+		 FROM faq_category
+	</select>
+	
+	<!-- 카테고리별 faq 총 갯수 -->
+	<select id="selectFaqTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM faq_category
+		WHERE `faq_category`=#{faqCategory}
+	</select>
+	
+	<!-- FAQ 상세정보 -->
+	<select id = "selectFaqOne" parameterType = "int" resultType = "gd.fintech.lms.vo.Faq">
+		 SELECT 
+			faq_no faqNo,
+			faq_title faqTitle,
+		    faq_writer faqWriter,
+			faq_content faqContent,
+			faq_updatedate faqUpdateDate,
+			faq_count faqCount,
+		FROM faq
+		WHERE faq_no = #{faqNo}
+	</select>
+	
+	<!-- FAQ 추가 -->
+	<insert id = "insertFaq" parameterType="gd.fintech.lms.vo.Faq">
+		INSERT INTO faq(   
+	     	account_id,
+			faq_writer,
+		    faq_title,
+		    faq_content,
+		    faq_category,
+			faq_createdate,
+			faq_updatedate
+		)VALUE(
+			#{accountId},
+			#{faqWriter},
+			#{faqTitle},
+			#{faqContent},
+			#{faqCategory},
+		    NOW(),
+			NOW()
+	    )
+	</insert>
+	
+	<!-- FAQ 수정 -->
+	<update id = "updateFaq" parameterType = "gd.fintech.lms.vo.Faq">
+		UPDATE faq 
+		SET 
+			faq_title = #{FaqTitle} , 
+			faq_content= #{FaqContent},
+			faq_updatedate = NOW(),
+			faq_category = #{FAQCategory}
+		WHERE faq_no = #{faqNo}
+	</update>
+    
+    <!-- 선택한 FAQ 삭제 -->
+    <delete id="deleteFaq" parameterType="int">
+	     DELETE FROM faq
+	     WHERE faq_no = #{faqNo}
+    </delete>
+</mapper>

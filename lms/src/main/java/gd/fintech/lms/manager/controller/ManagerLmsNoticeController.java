@@ -17,6 +17,17 @@ import gd.fintech.lms.vo.LmsNotice;
 public class ManagerLmsNoticeController {
 	@Autowired ManagerLmsNoticeService managerLmsNoticeService;
 	
+	//공지사항 조회 시 조회수 +1
+	@GetMapping("/noticeCountup/{lmsNoticeNo}/{currentPage}")
+	public String noticeCountUp(@PathVariable(name="lmsNoticeNo") int lmsNoticeNo,
+								@PathVariable(name="currentPage") int currentPage) {
+		managerLmsNoticeService.modifyLmsNoticeCount(lmsNoticeNo);
+		return "redirect:/manager/lmsNoticeOne/"+lmsNoticeNo+"/"+currentPage;
+	}
+	/*
+	 * 조회수 +1 메서드를 따로 만들어서 공지사항상세보기에서
+	 * 새로고침을 해도 count+1되지 않도록 함
+	 */
 	//공지사항 리스트 
 	@GetMapping ("/manager/lmsNoticeList/{currentPage}")
 	public String LmsNotice(Model model,
@@ -48,18 +59,21 @@ public class ManagerLmsNoticeController {
 	}
 	
 	//공지사항 작성 폼 
-	@GetMapping ("/manager/addLmsNotice/{currentPage}")
+	@GetMapping ("/manager/addLmsNotice/{managerId}/{currentPage}")
 	public String addLmsNotice(Model model,
+							@PathVariable(name="managerId") String managerId,
 							@PathVariable(name="currentPage") int currentPage) {
+		String managerName=managerLmsNoticeService.getManagerName(managerId);
 		model.addAttribute("currentPage",currentPage);
-		return "mananger/addLmsNotice";
+		model.addAttribute("managerName",managerName);
+		return "manager/addLmsNotice";
 	}
 	
 	//공지사항 작성 액션 
-	@PostMapping("/manager/addLmsNotice/{accountId}")
-	public String addLmsNotice(LmsNotice accountId) {
-		managerLmsNoticeService.addLmsNotice(accountId);
-		return "redirect:/manager/LmsNoticeList/"+accountId.getLmsNoticeNo();
+	@PostMapping("/manager/addLmsNotice")
+	public String addLmsNotice(LmsNotice lmsNotice) {
+		managerLmsNoticeService.addLmsNotice(lmsNotice);
+		return "redirect:/manager/lmsNoticeList/1";
 	}
 	
 	//공지사항 상세내용 

@@ -25,6 +25,9 @@ public interface ManagerLmsNoticeMapper {
 	//공지사항 추가 
 	int insertLmsNotice(LmsNotice lmsNotice);
 	
+	//공지사항 추가 시 자동으로 작성자 이름 출력
+	String selectManagerName(String managerId);
+	
 	//공지사항 수정 
 	int updateLmsNotice(LmsNotice lmsNotice);
 	
