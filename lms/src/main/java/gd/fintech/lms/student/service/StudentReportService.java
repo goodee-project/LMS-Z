@@ -103,8 +103,8 @@ public class StudentReportService {
 				file.delete();
 			}
 		}
-		studentReportSubmitMapper.deleteReportSubmit(reportSubmitNo);
 		studentReportSubmitFileMapper.deleteReportSubmitAllFile(reportSubmitNo);
+		studentReportSubmitMapper.deleteReportSubmit(reportSubmitNo);
 		
 	}
 	

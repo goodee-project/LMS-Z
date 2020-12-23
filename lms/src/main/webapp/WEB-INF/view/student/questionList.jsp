@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<a href="${path}/student/questionAdd">질문 등록하기</a>
@@ -22,17 +23,19 @@
 			</tr>
 		</thead>
 		<tbody>
+			
 			<c:forEach var="q" items="${questionList}">
 				<tr>
-					<td><a href="${path}/student/questionOne/${q.questionNo}">${q.questionNo}</a></td>	
+					<td><a href="${path}/student/questionCountUp/${q.questionNo}">${q.questionNo}</a></td>	
 					<td>${q.lectureNo}: (${q.lecture.lectureName})</td>
 					<td>${q.questionWriter}</td>
 					<td>${q.questionTitle}</td>
-					<td>${q.questionCount }</td>
-					<td>${q.questionCreatedate}</td>
+					<td>${q.questionCount}</td>
+					<td>${q.questionCreatedate}
+						<input type="hidden" id="questionPassword" value="${q.questionPassword}">
+					</td>
 				</tr>
 			</c:forEach>
-			
 		</tbody>
 	</table>
 	<div>

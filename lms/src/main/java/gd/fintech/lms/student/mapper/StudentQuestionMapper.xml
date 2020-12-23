@@ -10,8 +10,10 @@
 	 	<result property="questionWriter" column="question_writer"/>
 	 	<result property="questionTitle" column="question_title"/>
 	 	<result property="questionContent" column="question_content"/>
+	 	<result property="questionCount" column="question_count"/>
 	 	<result property="questionCreatedate" column="question_createdate"/>
 	 	<result property="questionUpdatedate" column="question_updatedate"/>
+	 	<result property="questionPassword" column="question_password"/>
 	 	
 	 <collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
  		<result property="lectureNo" column="lecture_no"/>
@@ -28,6 +30,7 @@
 	  		q.question_writer,
 	  		q.question_title,
 	  		q.question_count,
+	  		q.question_password,
 	  		q.question_createdate
 	  	FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
@@ -51,6 +54,7 @@
 	 	<result property="questionContent" column="question_content"/>
 	 	<result property="questionCreatedate" column="question_createdate"/>
 	 	<result property="questionUpdatedate" column="question_updatedate"/>
+	 	<result property="questionPassword" column="question_password"/>
  	
  	<collection property="questionfile" ofType="gd.fintech.lms.vo.QuestionFile">
  		<result property="questionFileUuid" column="question_file_uuid"/>
@@ -90,6 +94,7 @@
 	  		q.question_content,
 	  		q.question_createdate,
 	  		q.question_updatedate,
+	  		q.question_password,
 	  		qf.question_file_original,
 	  		qf.question_file_count,
 	  		qf.question_file_createdate,
@@ -156,6 +161,12 @@
   		FROM question_comment
   		WHERE question_no = #{questionNo}
   	</delete>
+  	
+  	<update id="updateQuestionCount" parameterType="int">
+  		UPDATE question
+  		SET question_count = question_count+1
+  		WHERE question_no = #{questionNo}
+  	</update>
   	
   	<!-- 질문 수정 -->
   	<update id="updateQuestion" parameterType="gd.fintech.lms.vo.Question">

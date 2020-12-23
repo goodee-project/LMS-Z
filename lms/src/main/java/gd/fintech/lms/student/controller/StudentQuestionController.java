@@ -36,7 +36,11 @@ public class StudentQuestionController {
 		model.addAttribute("questionList", questionList);
 		return "/student/questionList";
 	}
-	
+	@GetMapping("/student/questionCountUp/{questionNo}")
+	public String CountUpQuestion(@PathVariable(name="questionNo")int questionNo) {
+		studentQuestionService.updateQuestionCount(questionNo);
+		return "redirect:/student/questionOne/{questionNo}";
+	}
 	// 질문 상세히 보기
 	@GetMapping("/student/questionOne/{questionNo}")
 	public String oneQuestion(Model model, @PathVariable(name="questionNo")int questionNo) {

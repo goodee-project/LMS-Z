@@ -23,7 +23,7 @@
 	<table border="1">
 			<tr>
 				<td>account_id: ${reportSubmit.accountId}</td>
-				<td>report_submit_content: <input type="text" id="reportSubmitContent" readonly="readonly" value="${reportSubmit.reportSubmitContent}"></td>
+				<td>report_submit_content: <input type="hidden" id="reportSubmitContent" value="${reportSubmit.reportSubmitContent}">${reportSubmit.reportSubmitContent}</td>
 				<td>report_submit_point: ${reportSubmit.reportSubmitPoint}</td>
 				<td>report_submit_feed_back: ${reportSubmit.reportSubmitFeedback}</td>
 				<td>report_submit_writer: ${reportSubmit.reportSubmitWriter}</td>

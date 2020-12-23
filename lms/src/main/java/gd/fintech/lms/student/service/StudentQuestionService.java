@@ -35,6 +35,11 @@ public class StudentQuestionService {
 		return studentQuestionMapper.selectQuestionListPage(map);
 	}
 	
+	//질문 조회수 증가
+	public int updateQuestionCount(int questionNo) {
+		return studentQuestionMapper.updateQuestionCount(questionNo);
+	}
+	
 	//질문목록 행의 갯수 (페이징에 사용)
 	public int totalQuestion() {
 		return studentQuestionMapper.totalCountQuestion();
