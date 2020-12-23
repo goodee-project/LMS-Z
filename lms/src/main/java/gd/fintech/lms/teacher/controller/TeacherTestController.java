@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherTestService;
 import gd.fintech.lms.vo.Multiplechoice;
@@ -21,7 +22,7 @@ public class TeacherTestController {
 	@GetMapping("/teacher/testList/{lectureNo}")
 	public String testList(Model model,
 							@PathVariable(value="lectureNo") int lectureNo) {
-		List<Test> test = teacherTestService.getTestList(lectureNo);
+		Test test = teacherTestService.getTestList(lectureNo);
 		model.addAttribute("test", test);
 		
 		return "teacher/testList";
@@ -35,5 +36,19 @@ public class TeacherTestController {
 		model.addAttribute("testOne", testOne);
 		
 		return "teacher/testOne";
+	}
+	
+	// 시험정보(일정) 추가 폼
+	@GetMapping("/teacher/addTest/{lectureNo}")
+	public String addTest(@PathVariable(value="lectureNo") int lectureNo) {
+		return "teacher/addTest";
+	}
+	
+	// 시험정보(일정) 추가 액션
+	@PostMapping("/teacher/addTest/{lectureNo}")
+	public String addTest(Test test,
+							@PathVariable(value="lectureNo") int lectureNo) {
+		teacherTestService.addTest(test);
+		return "redirect:/teacher/testList/"+lectureNo;
 	}
 }

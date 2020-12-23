@@ -53,7 +53,7 @@
 	</select>
 	
 	<!-- 시험문제, 답 추가 -->
-	<insert id="insertTest" parameterType="java.util.List">
+	<insert id="insertTestQuestion" parameterType="java.util.List">
 		INSERT INTO multiplechoice(
 			lecture_no,
 			multiplechoice_id,
@@ -61,8 +61,7 @@
 			multiplechoice_answer,
 			multiplechoice_createdate,
 			multiplechoice_updatedate
-		)
-		VALUES
+		)VALUES
 			<foreach collection="list" separator=" , ">
 			( 
 				#{lectureNo}, 
@@ -76,15 +75,14 @@
 	</insert>
 	
 	<!-- 시험문제 보기 추가 -->
-	<insert id="insertTestExample" parameterType="java.util.List">
+	<insert id="insertTestQuestionExample" parameterType="java.util.List">
 		INSERT INTO multiplechoice_example(
 			multiplechoice_no,
 			multiplechoice_example_id,
 			multiplechoice_example_content,
 			multiplechoice_example_createdate,
 			multiplechoice_example_updatedate
-		)
-		VALUES
+		)VALUES
 			<foreach collection="examList" separator=" , ">
 			(
 				#{multiplechoiceNo},
@@ -94,5 +92,23 @@
 				NOW()
 			)
 			</foreach>
+	</insert>
+	
+	<insert id="insertTest" parameterType="gd.fintech.lms.vo.Test">
+		INSERT INTO test(
+			lecture_no,
+			test_startdate,
+			test_enddate,
+			test_content,
+			test_createdate,
+			test_updatedate
+		)VALUES(
+			#{lectureNo},
+			#{testStartdate},
+			#{testEnddate},
+			#{testContent},
+			NOW(),
+			NOW()
+		)
 	</insert>
 </mapper>

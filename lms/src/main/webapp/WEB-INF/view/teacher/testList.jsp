@@ -11,6 +11,16 @@
 <body>
 	<h1>testList</h1>
 	
+	<div>
+		<!-- 시험이 있을 경우 수정만 할 수 있음 -->
+		<c:if test="${test != null}">
+			<a href="${path}/teacher/updateTest/${lectureNo}">시험 수정</a>
+		</c:if>
+		<!-- 시험이 없을 경우 추가만 할 수 있음 -->
+		<c:if test="${test == null}">
+			<a href="${path}/teacher/addTest/${lectureNo}">시험 추가</a>
+		</c:if>
+	</div>
 	<table border="1">
 		<thead>
 			<tr>
@@ -21,14 +31,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="t" items="${test}">
+			<c:if test="${test != null}">
 				<tr>
-					<td>${t.testNo}</td>
-					<td><a href="${path}/teacher/testOne/${t.lectureNo}">${t.testContent}</a></td>
-					<td>${t.testStartdate}</td>
-					<td>${t.testEnddate}</td>
+					<td>${test.testNo}</td>
+					<td><a href="${path}/teacher/testOne/${test.lectureNo}">${test.testContent}</a></td>
+					<td>${test.testStartdate}</td>
+					<td>${test.testEnddate}</td>
 				</tr>
-			</c:forEach>
+			</c:if>
+			<c:if test="${test == null}">
+				<tr>
+					<td colspan="4">시험이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 	</table>
 </body>

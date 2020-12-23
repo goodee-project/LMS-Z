@@ -16,12 +16,17 @@ public class TeacherTestService {
 	@Autowired TeacherTestMapper teacherTestMapper;
 	
 	// 시험목록 출력
-	public List<Test> getTestList(int lectureNo){
+	public Test getTestList(int lectureNo){
 		return teacherTestMapper.selectTestList(lectureNo);
 	}
 	
 	// 시험문제, 답 상세보기
 	public List<Multiplechoice> getTestOne(int lectureNo) {
 		return teacherTestMapper.selectTestOne(lectureNo);
+	}
+	
+	// 해당 강의의 시험정보(일정) 추가
+	public int addTest(Test test) {
+		return teacherTestMapper.insertTest(test);
 	}
 }
