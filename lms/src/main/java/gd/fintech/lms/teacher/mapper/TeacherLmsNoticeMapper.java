@@ -17,4 +17,7 @@ public interface TeacherLmsNoticeMapper {
 	
 	//공지사항 상세보기
 	LmsNotice selectLmsNoticeOne(int lmsNoticeNo);
+	
+	//공지사항 조회수 증가
+	int updateLmsNoticeCount(int lmsNoticeNo);
 }

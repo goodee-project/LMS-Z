@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>질문 상세보기</h1>
+		<a href="${path}/teacher/questionList/${teacherId}/${currentPage}">목록으로</a>
 		<table border="1">
 			<tr>
 				<th>question_no</th>

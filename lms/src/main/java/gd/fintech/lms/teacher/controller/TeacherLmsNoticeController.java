@@ -43,13 +43,22 @@ public class TeacherLmsNoticeController {
 	}
 	
 	//공지사항 상세보기
-	@GetMapping("/teacher/lmsNoticeOne/{lmsNoticeNo}")
-	public String lmsNoticeOne(Model model, @PathVariable(value = "lmsNoticeNo") int lmsNoticeNo) {
+	@GetMapping("/teacher/lmsNoticeOne/{lmsNoticeNo}/{currentPage}")
+	public String lmsNoticeOne(Model model, @PathVariable(value = "lmsNoticeNo") int lmsNoticeNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		LmsNotice lmsNotice = teacherLmsNoticeService.getLmsNoticeOne(lmsNoticeNo);
 		model.addAttribute("lmsNotice", lmsNotice);
 		
 		return "teacher/lmsNoticeOne";
+	}
+	
+	//공지사항 조회수 증가
+	@GetMapping("/teacher/modifyLmsNoticeCount/{lmsNoticeNo}/{currentPage}")
+	public String modifyLmsNoticeCount(@PathVariable(value = "lmsNoticeNo") int lmsNoticeNo, @PathVariable(value = "currentPage") int currentPage) {
+		
+		teacherLmsNoticeService.modifyLmsNoticeCount(lmsNoticeNo);
+		
+		return "redirect:/teacher/lmsNoticeOne/" + lmsNoticeNo + "/" + currentPage;
 	}
 
 }

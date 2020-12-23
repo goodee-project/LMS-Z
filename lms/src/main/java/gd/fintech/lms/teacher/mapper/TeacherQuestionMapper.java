@@ -9,7 +9,12 @@ import gd.fintech.lms.vo.Question;
 
 @Mapper
 public interface TeacherQuestionMapper {
+	//질문목록
 	List<Question> selectQuestionList(Map<String, Object> map);
+	//질문리스트 총개수
 	int selectQuestionCount(String accountId);
+	//질문상세보기
 	Question selectQuestionOne(Map<String, Object> map);
+	//질문상세보기 조회수 증가
+	int updateQuestionOneCount(int questionNo);
 }

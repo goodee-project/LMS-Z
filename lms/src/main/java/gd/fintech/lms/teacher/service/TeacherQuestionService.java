@@ -42,4 +42,9 @@ public class TeacherQuestionService {
 		
 		return teacherQuestionMapper.selectQuestionOne(map);
 	}
+	
+	//질문상세보기 조회수 증가
+	public int modifyQuestionOneCount(int questionNo) {
+		return teacherQuestionMapper.updateQuestionOneCount(questionNo);
+	}
 }

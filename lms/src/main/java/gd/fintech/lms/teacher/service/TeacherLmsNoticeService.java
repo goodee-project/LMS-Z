@@ -35,4 +35,9 @@ public class TeacherLmsNoticeService {
 	public LmsNotice getLmsNoticeOne(int lmsNoticeNo) {
 		return teacherLmsNoticeMapper.selectLmsNoticeOne(lmsNoticeNo);
 	}
+	
+	//공지사항 조회수 증가
+	public int modifyLmsNoticeCount(int lmsNoticeNo) {
+		return teacherLmsNoticeMapper.updateLmsNoticeCount(lmsNoticeNo);
+	}
 }

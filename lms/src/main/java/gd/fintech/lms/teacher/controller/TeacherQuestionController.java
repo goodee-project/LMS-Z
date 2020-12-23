@@ -45,8 +45,8 @@ public class TeacherQuestionController {
 	}
 	
 	//질문게시판 상세보기
-	@GetMapping("/teacher/questionOne/{questionNo}/{currentPage}")
-	public String questionOne(Model model, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
+	@GetMapping("/teacher/questionOne/{teacherId}/{questionNo}/{currentPage}")
+	public String questionOne(Model model, @PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -68,4 +68,14 @@ public class TeacherQuestionController {
 		
 		return "teacher/questionOne";
 	}
+	
+	//질문상세보기 조회수 증가
+	@GetMapping("/teacher/modifyQuestionOneCount/{teacherId}/{questionNo}/{currentPage}")
+	public String modifyQuestionOneCount(@PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
+		
+		teacherQuestionService.modifyQuestionOneCount(questionNo);
+		
+		return "redirect:/teacher/questionOne/" + teacherId + "/" + questionNo + "/" + currentPage;
+	}
+	
 }

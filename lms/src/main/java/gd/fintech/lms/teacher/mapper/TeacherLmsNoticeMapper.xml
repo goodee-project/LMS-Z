@@ -30,4 +30,11 @@
 		FROM lms_notice
 		WHERE lms_notice_no = #{lmsNoticeNo}
 	</select>
+	
+	<!-- 공지사항 조회수 증가 -->
+	<update id="updateLmsNoticeCount" parameterType="int">
+		UPDATE lms_notice
+		SET lms_notice_count = lms_notice_count + 1
+		WHERE lms_notice_no = #{lmsNoticeNo}
+	</update>
 </mapper>

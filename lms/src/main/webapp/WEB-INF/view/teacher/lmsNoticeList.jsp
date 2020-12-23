@@ -24,7 +24,7 @@
 					<tr>
 						<td>${l.lmsNoticeNo}</td>
 						<td>${l.lmsNoticeWriter}</td>
-						<td><a href="${path}/teacher/lmsNoticeOne/${l.lmsNoticeNo}">${l.lmsNoticeTitle}</a></td>
+						<td><a href="${path}/teacher/modifyLmsNoticeCount/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
 						<td>${l.lmsNoticeCount}</td>
 					</tr>
 				</c:forEach>
