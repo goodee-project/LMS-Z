@@ -8,7 +8,7 @@
 		From account
 		WHERE account_id = #{accountId}
 		AND account_pw = #{accountPw}
-		AND account_state="활성화"
-		AND account_level="1"
+		AND account_state= #{accountState}
+		AND account_level= #{accountLevel}
 	</select>
 </mapper>

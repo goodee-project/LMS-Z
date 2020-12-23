@@ -53,7 +53,7 @@ public class ManagerLoginService {
 	// 로그인 액션
 	public String getAccountToManagerLogin(Account account) {
 		
-		account.setAccountLevel(2);
+		account.setAccountLevel("운용자");
 		account.setAccountState("활성화");
 		
 		return managerLoginMapper.selectAccountToManagerLogin(account);

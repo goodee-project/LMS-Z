@@ -13,6 +13,9 @@ public class AdminLoginService {
 	@Autowired AdminLoginMapper adminLoginMapper;
 	
 	public String getAdminAccount(Account account) {
+		account.setAccountLevel("관리자");
+		account.setAccountState("활성화");
+		
 		return adminLoginMapper.selectAdminAccount(account);
 	}
 }

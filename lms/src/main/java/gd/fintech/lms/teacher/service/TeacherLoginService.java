@@ -55,7 +55,7 @@ public class TeacherLoginService {
 	
 	// 로그인 액션
 	public String getAccountToTeacherLogin(Account account) {
-		account.setAccountLevel(3);
+		account.setAccountLevel("강사");
 		account.setAccountState("활성화");
 		
 		return teacherLoginMapper.selectAccountToTeacherLogin(account);

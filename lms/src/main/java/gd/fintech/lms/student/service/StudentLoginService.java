@@ -46,7 +46,7 @@ public class StudentLoginService {
 	// 로그인 액션
 	public String getAccountToStudentLogin(Account account) {
 		
-		account.setAccountLevel(4);
+		account.setAccountLevel("학생");
 		account.setAccountState("활성화");
 		
 		return studentLoginMapper.selectAccountToStudentLogin(account);

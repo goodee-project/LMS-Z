@@ -7,7 +7,7 @@ public class Account {
 	private String accountId;
     private String accountPw;
     private String accountState;
-    private int accountLevel;
+    private String accountLevel;
     private String accountCreateDate;
     private String accountUpdateDate;
 }
