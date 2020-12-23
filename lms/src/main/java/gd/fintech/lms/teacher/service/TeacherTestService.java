@@ -29,4 +29,9 @@ public class TeacherTestService {
 	public int addTest(Test test) {
 		return teacherTestMapper.insertTest(test);
 	}
+	
+	// 해당 강의의 시험정보(일정) 수정
+	public int modifyTest(Test test) {
+		return teacherTestMapper.updateTest(test);
+	}
 }

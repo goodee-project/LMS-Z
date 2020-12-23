@@ -53,4 +53,9 @@ public class TeacherFaqService {
 	public Faq getFaqOne(int faqNo) {
 		return teacherFaqMapper.selectFaqOne(faqNo);
 	}
+	
+	// FAQ 상세보기 조회 시 조회수 증가
+	public int modifyFaqCount(int faqNo) {
+		return teacherFaqMapper.updateFaqCount(faqNo);
+	}
 }

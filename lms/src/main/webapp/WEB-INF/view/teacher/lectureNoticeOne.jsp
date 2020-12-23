@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>공지 상세보기</h1>
+	<div>조회수 : ${noticeOne.lectureNoticeCount}</div>
 	<table border="1">
 		<tr>
 			<td>공지번호</td>

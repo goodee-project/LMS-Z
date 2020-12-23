@@ -76,4 +76,13 @@ public class TeacherFaqController {
 		return "/teacher/faqOne";
 	}
 	
+	// FAQ 조회수 증가
+	@GetMapping("/teacher/modifyFaqCount/{faqNo}")
+	public String faqOne(@PathVariable(value="faqNo") int faqNo) {
+		
+		teacherFaqService.modifyFaqCount(faqNo);
+		
+		return "redirect:/teacher/faqOne/"+faqNo;
+	}
+	
 }

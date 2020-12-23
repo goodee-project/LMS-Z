@@ -25,4 +25,7 @@ public interface TeacherTestMapper {
 	
 	// 시험정보(일정) 추가
 	int insertTest(Test test);
+	
+	// 시험정보(일정) 수정
+	int updateTest(Test test);
 }

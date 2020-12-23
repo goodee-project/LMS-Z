@@ -58,4 +58,9 @@ public class TeacherLectureNoticeService {
 		// mapper 메소드 호출 및 반환
 		return teacherLectureNoticeMapper.deleteLectureNotice(lectureNoticeNo);
 	}
+	
+	// 공지사항 조회수 증가
+	public int modifyLectureNoticeCount(int lectureNoticeNo) {
+		return teacherLectureNoticeMapper.updateLectureNoticeCount(lectureNoticeNo);
+	}
 }

@@ -49,7 +49,8 @@
 			lecture_notice_title lectureNoticeTitle,
 			lecture_notice_content lectureNoticeContent,
 			lecture_notice_createdate lectureNoticeCreatedate,
-			lecture_notice_updatedate lectureNoticeUpdatedate
+			lecture_notice_updatedate lectureNoticeUpdatedate,
+			lecture_notice_count lectureNoticeCount
 		FROM lecture_notice
 		WHERE lecture_notice_no = #{lectureNoticeNo}
 	</select>
@@ -74,4 +75,11 @@
 		DELETE FROM lecture_notice
 		WHERE lecture_no = #{lectureNo}
 	</delete>
+	
+	<!-- 공지사항 조회수 증가 -->
+	<update id="updateLectureNoticeCount" parameterType="int">
+		UPDATE lecture_notice
+		SET lecture_notice_count = lecture_notice_count + 1
+		WHERE lecture_notice_no = #{lectureNoticeNo}
+	</update>
 </mapper>

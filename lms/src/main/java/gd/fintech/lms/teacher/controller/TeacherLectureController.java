@@ -52,7 +52,7 @@ public class TeacherLectureController {
 	}
 	
 	// 강의 상세보기->강의 계획서 출력
-	@GetMapping("/teacher/lecturePlan/{lectureNo}")
+	@GetMapping("/teacher/lectureSyllabus/{lectureNo}")
 	public String lecturePlan(Model model, 
 							@PathVariable(value="lectureNo") int lectureNo) {
 		// Lecture 객체 선언 및 service 메소드 호출해서 객체에 값 입력
@@ -62,6 +62,6 @@ public class TeacherLectureController {
 		// model에 lectureOne값 입력
 		model.addAttribute("plan", plan);
 		
-		return "teacher/lecturePlan";
+		return "teacher/lectureSyllabus";
 	}
 }

@@ -51,4 +51,22 @@ public class TeacherTestController {
 		teacherTestService.addTest(test);
 		return "redirect:/teacher/testList/"+lectureNo;
 	}
+	
+	// 시험정보(일정) 수정 폼
+	@GetMapping("/teacher/modifyTest/{lectureNo}")
+	public String modifyTest(Model model,
+							@PathVariable(value="lectureNo") int lectureNo) {
+		Test test = teacherTestService.getTestList(lectureNo);
+		model.addAttribute("test", test);
+		
+		return "teacher/modifyTest";
+	}
+	
+	// 시험정보(일정) 수정 액션
+	@PostMapping("/teacher/modifyTest/{lectureNo}")
+	public String modifyTest(Test test,
+							@PathVariable(value="lectureNo") int lectureNo) {
+		teacherTestService.modifyTest(test);
+		return "redirect:/teacher/testList/"+lectureNo;
+	}
 }

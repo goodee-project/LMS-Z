@@ -94,6 +94,7 @@
 			</foreach>
 	</insert>
 	
+	<!-- 시험정보(일정) 추가 -->
 	<insert id="insertTest" parameterType="gd.fintech.lms.vo.Test">
 		INSERT INTO test(
 			lecture_no,
@@ -111,4 +112,14 @@
 			NOW()
 		)
 	</insert>
+	
+	<update id="updateTest" parameterType="gd.fintech.lms.vo.Test">
+		UPDATE test
+		SET
+			test_startdate = #{testStartdate},
+			test_enddate = #{testEnddate},
+			test_content = #{testContent},
+			test_updatedate = NOW()
+		WHERE lecture_no = #{lectureNo}
+	</update>
 </mapper>

@@ -27,4 +27,7 @@ public interface TeacherFaqMapper {
 	
 	// FAQ 상세보기
 	Faq selectFaqOne(int faqNo);
+	
+	// FAQ 상세보기 조회 시 조회수 증가
+	int updateFaqCount(int faqNo);
 }

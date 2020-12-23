@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Lecture;
-import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Syllabus;
 
 @Mapper
 public interface TeacherLectureMapper {

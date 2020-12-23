@@ -24,7 +24,7 @@
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td>${faqOne.faqTitle}</td>
+			<td>${faqOne.faqWriter}</td>
 		</tr>
 		<tr>
 			<td>등록날짜</td>

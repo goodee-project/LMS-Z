@@ -14,11 +14,11 @@
 	<div>
 		<!-- 시험이 있을 경우 수정만 할 수 있음 -->
 		<c:if test="${testOne != null}">
-			<a href="${path}/teacher/updateTest/${lectureNo}">시험 수정</a>
+			<a href="${path}/teacher/modifyTest/${lectureNo}">시험문제 / 답 수정</a>
 		</c:if>
 		<!-- 시험이 없을 경우 추가만 할 수 있음 -->
 		<c:if test="${testOne == null}">
-			<a href="${path}/teacher/addTest/${lectureNo}">시험 추가</a>
+			<a href="${path}/teacher/addTest/${lectureNo}">시험문제 / 답 추가</a>
 		</c:if>
 	</div>
 	

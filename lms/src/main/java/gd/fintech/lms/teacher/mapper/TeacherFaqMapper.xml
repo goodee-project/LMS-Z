@@ -12,6 +12,7 @@
 			faq_count faqCount,
 			faq_category faqCategory
 		FROM faq
+		ORDER BY faq_createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -59,11 +60,18 @@
 			faq_writer faqWriter,
 			faq_title faqTitle,
 			faq_content faqContent,
-			faq_createdate faqCreatdate,
+			faq_createdate faqCreatedate,
 			faq_updatedate faqUpdatedate,
 			faq_count faqCount,
 			faq_category faqCategory
 		FROM faq
 		WHERE faq_no = #{faqNo}
 	</select>
+	
+	<!-- FAQ 상세보기 조회 시 조회수 증가 -->
+	<update id="updateFaqCount" parameterType="int">
+		UPDATE faq
+		SET faq_count = faq_count + 1
+		WHERE faq_no = #{faqNo}
+	</update>
 </mapper>

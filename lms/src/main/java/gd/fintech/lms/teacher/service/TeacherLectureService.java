@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherLectureMapper;
 import gd.fintech.lms.vo.Lecture;
-import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Syllabus;
 
 @Service
 @Transactional

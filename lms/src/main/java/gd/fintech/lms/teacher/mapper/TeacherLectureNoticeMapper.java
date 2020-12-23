@@ -28,4 +28,7 @@ public interface TeacherLectureNoticeMapper {
 	int deleteLectureNotice(int lectureNoticeNo);
 	//강좌 삭제시 해당하는 공지 삭제
 	int deleteLecture(int lectureNo);
+	
+	// 공지사항 조회수 증가
+	int updateLectureNoticeCount(int lectureNoticeNo);
 }

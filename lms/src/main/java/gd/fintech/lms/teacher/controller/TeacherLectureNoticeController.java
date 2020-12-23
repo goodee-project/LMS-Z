@@ -82,6 +82,15 @@ public class TeacherLectureNoticeController {
 		return "teacher/lectureNoticeOne";
 	}
 	
+	// 강좌별 공지사항 조회수 증가
+	@GetMapping("/teacher/modifyLectureNoticeCount/{lectureNo}/{lectureNoticeNo}")
+	public String lectureNoticeOne(@PathVariable(value="lectureNo") int lectureNo,
+									@PathVariable(value="lectureNoticeNo") int lectureNoticeNo) {
+		// 강좌별 공지사항 조회 시 조회수 증가 메서드 호출
+		teacherLectureNoticeService.modifyLectureNoticeCount(lectureNoticeNo);
+		return "redirect:/teacher/lectureNoticeOne/"+lectureNo+"/"+lectureNoticeNo;
+	}
+	
 	// 강좌별 공지사항 수정 폼
 	@GetMapping("/teacher/modifyLectureNotice/{lectureNo}/{lectureNoticeNo}")
 	public String modifyLectureNotice(Model model,
