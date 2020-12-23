@@ -167,10 +167,17 @@
 		DELETE FROM class_registration
 		WHERE lecture_no = #{lectureNo}
 	</delete>
-	<!-- 페이징에 필요한 전체 갯수를 구하는 메퍼 -->
+	<!-- 페이징에 필요한 전체 갯수를 구하는 쿼리 -->
 	<select id="selectLectureTotalPage" resultType="int">
 		SELECT 
 			count(*)
 		FROM lecture
+	</select>
+	<!-- 교재를 사용하고 있는 강좌의 수를 구해주는 쿼리 -->
+	<select id="selectTextbookCk" parameterType="String" resultType="int">
+		SELECT
+			count(*)
+		FROM lecture
+		WHERE textbook_isbn = #{textbookIsbn}
 	</select>
 </mapper>

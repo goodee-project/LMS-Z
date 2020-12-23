@@ -34,4 +34,8 @@ public class ManagerTextbookService {
 	public Textbook getTextbookOne(String textbookIsbn) {
 		return managerTextbookMapper.selectTextbookOne(textbookIsbn);
 	}
+	//교재 수정을 위한 메퍼 호출
+	public void updateTextbookOne(Textbook textbook) {
+		managerTextbookMapper.updateTextbookOne(textbook);
+	}
 }

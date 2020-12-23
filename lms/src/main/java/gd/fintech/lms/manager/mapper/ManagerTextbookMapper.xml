@@ -54,4 +54,14 @@
 		FROM textbook
 		WHERE textbook_isbn = #{textbookIsbn}
 	</select>
+	<!-- 교재 내용을 수정하기 위한 쿼리 -->
+	<update id="updateTextbookOne" parameterType="gd.fintech.lms.vo.Textbook">
+		UPDATE textbook
+		SET textbook_title = #{textbookTitle},
+			textbook_writer = #{textbookWriter},
+			textbook_publisher = #{textbookPublisher},
+			textbook_info = #{textbookInfo},
+			textbook_price = #{textbookPrice}
+		WHERE textbook_isbn = #{textbookIsbn}
+	</update>
 </mapper>

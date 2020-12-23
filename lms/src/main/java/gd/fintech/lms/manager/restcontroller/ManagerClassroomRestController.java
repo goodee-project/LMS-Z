@@ -15,7 +15,7 @@ public class ManagerClassroomRestController {
 	@Autowired ManagerClassroomService managerClassroomService;
 	// 강의실 번호 중복값 체크 후 json으로 전달
 		@GetMapping("/manager/classroomCk")
-		public Map<String, Object> getManagerToSignupByOverLapEmail(
+		public Map<String, Object> getClassroomCk(
 				@RequestParam(value="classroomNumber", required=false) int classroomNumber){
 			Map<String, Object> map = new HashMap<String, Object>();
 			

@@ -17,4 +17,7 @@ public interface ManagerTextbookMapper {
 	int insertTextbook(Textbook textbook);
 	//교재의 상세정보를 보기 위한 메퍼 호출
 	Textbook selectTextbookOne(String textbookIsbn);
+	//교재를 수정하기 위한 메퍼 호출
+	int updateTextbookOne(Textbook textbook);
+	
 }

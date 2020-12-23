@@ -96,4 +96,8 @@ public class ManagerLectureService {
 	public int getLectureTotalPage() {
 		return managerLectureMapper.selectLectureTotalPage();
 	}
+	//교재를 사용하고 있는 강좌의 카운트를 구해주는 메퍼 호출
+	public int getTextbookCk(String textbookIsbn) {
+		return managerLectureMapper.selectTextbookCk(textbookIsbn);
+	}
 }

@@ -2,6 +2,8 @@ package gd.fintech.lms.manager.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import gd.fintech.lms.vo.Textbook;
 @Controller
 public class ManagerTextbookController {
 	@Autowired ManagerTextbookService managerTextbookService;
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//교재 리스트를 출력하기 위한 컨트롤러
 	@GetMapping("/manager/textbookList/{currentPage}")
@@ -55,5 +58,26 @@ public class ManagerTextbookController {
 		Textbook textbookOne = managerTextbookService.getTextbookOne(textbookIsbn);
 		model.addAttribute("textbookOne",textbookOne);
 		return "/manager/textbookOne";
+	}
+	//교재 내용을 수정하기 위한 폼을 불러오는 컨트롤러
+	@GetMapping("/manager/modifyTextbookOne/{textbookIsbn}")
+	public String modifyTextbookOne(Model model,
+			@PathVariable(name="textbookIsbn") String textbookIsbn) {
+		Textbook textbookOne = managerTextbookService.getTextbookOne(textbookIsbn);
+		model.addAttribute("textbookOne",textbookOne);
+		return "/manager/modifyTextbookOne";
+	}
+	//교재를 수정하여 적용하기 위한 컨트롤러
+	@PostMapping("/manager/modifyTextbookOneAction")
+	public String modifyTextbookOneAction(Textbook textbook) {
+		logger.debug("textbook ->"+textbook.toString());
+		managerTextbookService.updateTextbookOne(textbook);
+		return "redirect:/manager/textbookOne/"+textbook.getTextbookIsbn();
+	}
+	//교재를 삭제하기 위한 컨트롤러
+	@GetMapping("/manager/deleteTextbookOne/{textbookIsbn}")
+	public String deleteTextbookOne(@PathVariable(name="textbookIsbn") String textbookIsbn) {
+		
+		return "redirect:/manager/textbookList/1";
 	}
 }

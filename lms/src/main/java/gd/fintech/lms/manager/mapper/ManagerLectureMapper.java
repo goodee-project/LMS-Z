@@ -40,4 +40,6 @@ public interface ManagerLectureMapper {
 	int deleteClassRegistration(int lectureNo);
 	//페이징에 필요한 메퍼
 	int selectLectureTotalPage();
+	//교재를 강좌에서 사용하는지 확인하기 위해 필요한 메퍼
+	int selectTextbookCk(String textbookIsbn);
 }
