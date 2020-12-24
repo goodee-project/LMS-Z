@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.teacher.mapper.TeacherLoginMapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Address;
+import gd.fintech.lms.vo.Connect;
 import gd.fintech.lms.vo.TeacherForm;
 
 @Service
@@ -55,9 +56,15 @@ public class TeacherLoginService {
 	
 	// 로그인 액션
 	public String getAccountToTeacherLogin(Account account) {
-		account.setAccountLevel("강사");
-		account.setAccountState("활성화");
-		
-		return teacherLoginMapper.selectAccountToTeacherLogin(account);
+		Connect connect = new Connect();
+		connect.setAccountId(account.getAccountId());
+		connect.setConnectState("접속");
+		if(teacherLoginMapper.selectConnectByOverlapLogin(connect) == 0) {
+			account.setAccountLevel("강사");
+			account.setAccountState("활성화");
+			
+			return teacherLoginMapper.selectAccountToTeacherLogin(account);
+		}
+		return "중복";
 	}
 }

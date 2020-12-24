@@ -35,6 +35,8 @@ public class ManagerLoginController {
 		
 		if(managerLoginService.getAccountToManagerLogin(account) == null) {
 			return "redirect:/managerLogin";
+		} else if(managerLoginService.getAccountToManagerLogin(account).equals("중복")) {
+			return "redirect:/managerLogin";
 		}
 		
 		HttpSession session = request.getSession();
@@ -61,9 +63,8 @@ public class ManagerLoginController {
 	}
 	
 	// 로그아웃 액션
-	@GetMapping("/manager/logout/{managerId}")
-	public String logout(HttpSession session,
-			@PathVariable(value="managerId") String managerId) {
+	@GetMapping("/manager/logout")
+	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/managerLogin";
 	}

@@ -44,7 +44,7 @@
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Page</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="${path}/manager/logout/${managerId}"><i data-feather="power"
+                                <a class="dropdown-item" href="${path}/manager/logout"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                             </div>

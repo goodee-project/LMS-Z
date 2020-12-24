@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.manager.mapper.ManagerLoginMapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Address;
+import gd.fintech.lms.vo.Connect;
 import gd.fintech.lms.vo.ManagerForm;
 
 @Service
@@ -57,11 +58,16 @@ public class ManagerLoginService {
 	
 	// 로그인 액션
 	public String getAccountToManagerLogin(Account account) {
-		
-		account.setAccountLevel("운영자");
-		account.setAccountState("활성화");
-		
-		return managerLoginMapper.selectAccountToManagerLogin(account);
+		Connect connect = new Connect();
+		connect.setAccountId(account.getAccountId());
+		connect.setConnectState("접속");
+		if(managerLoginMapper.selectConnectByOverlapLogin(connect) == 0) {
+			account.setAccountLevel("운영자");
+			account.setAccountState("활성화");
+			
+			return managerLoginMapper.selectAccountToManagerLogin(account);
+		}
+		return "중복";
 	}
 	
 	// 회원가입하는 mapper2개를 가져와 manager_queue와 level 순서로 insert실행

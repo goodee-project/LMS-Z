@@ -58,7 +58,7 @@
                         -->
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/logout/${managerId}"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/logout"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
                     </ul>

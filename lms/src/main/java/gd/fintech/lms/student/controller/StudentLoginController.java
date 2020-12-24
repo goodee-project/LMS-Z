@@ -31,6 +31,8 @@ public class StudentLoginController {
 	public String login(Account account, HttpServletRequest request) {
 		if(studentLoginService.getAccountToStudentLogin(account) == null) {
 			return "redirect:/studentLogin";
+		} else if(studentLoginService.getAccountToStudentLogin(account).equals("중복")) {
+			return "redirect:/studentLogin";
 		}
 		
 		HttpSession session = request.getSession();

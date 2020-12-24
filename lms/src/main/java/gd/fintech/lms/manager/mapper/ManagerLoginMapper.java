@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Address;
+import gd.fintech.lms.vo.Connect;
 import gd.fintech.lms.vo.ManagerForm;
 
 @Mapper
@@ -27,4 +28,7 @@ public interface ManagerLoginMapper {
 	
 	// 로그인 시 이미지 가져오기
 	String selectManagerImage(String teacherId);
+	
+	// 중복 로그인 방지
+	int selectConnectByOverlapLogin(Connect connect);
 }

@@ -47,6 +47,8 @@ public class TeacherLoginController {
 		
 		if(teacherLoginService.getAccountToTeacherLogin(account) == null) {
 			return "redirect:/teacherLogin";
+		} else if(teacherLoginService.getAccountToTeacherLogin(account).equals("중복")) {
+			return "redirect:/teacherLogin";
 		}
 		
 		HttpSession session = request.getSession();

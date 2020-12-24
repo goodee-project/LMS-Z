@@ -42,6 +42,10 @@ public class LmsListener implements HttpSessionAttributeListener {
         	 managerConnectService.modifyConnectIn((String)se.getValue());
         	 return;
          }
+         if(se.getName() == "adminId") {
+        	 managerConnectService.modifyConnectIn((String)se.getValue());
+        	 return;
+         }
     }
 
 	/**
@@ -64,6 +68,10 @@ public class LmsListener implements HttpSessionAttributeListener {
    	 		return;
    	 	}
    	 	if(se.getName() == "studentId") {
+   	 		managerConnectService.modifyConnectOut((String)se.getValue());
+   	 		return;
+   	 	}
+   	 	if(se.getName() == "adminId") {
    	 		managerConnectService.modifyConnectOut((String)se.getValue());
    	 		return;
    	 	}
