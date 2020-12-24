@@ -3,12 +3,15 @@
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper">
 
 	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceListResult">
+		<result property="accountId" column="account_id"/>
 		<result property="attendanceState" column="attendance_state"/>
 		<result property="attendanceRemark" column="attendance_remark"/>
+		<result property="attendanceDay" column="attendance_day"/>
 			<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
 				<result property="studentName" column="student_name" />
 				<result property="studentPhone" column="student_phone" />
 				<result property="studentGender" column="student_gender" />
+				<result property="studentId" column="student_id" />
 			</collection>
 			<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
 				<result property="accountId" column="account_id" />
@@ -19,10 +22,30 @@
 		SELECT 
 			a.attendance_state,
 			a.attendance_remark,
+			a.attendance_day,
 			cr.account_id,
 			s.student_name,
 			s.student_gender,
-			s.student_phone
+			s.student_phone,
+			s.student_id
+		FROM class_registration cr LEFT JOIN attendance a
+		ON cr.account_id = a.account_id
+		LEFT JOIN lecture l
+		ON cr.account_id = l.account_id
+		LEFT JOIN student s
+		ON cr.account_id = s.student_id
+		WHERE a.lecture_no = #{lectureNo}
+	</select>
+	<!-- 학생 출석부 상세보기 -->
+	<select id="selectAttendanceOne" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
+		SELECT 
+			a.attendance_state,
+			a.attendance_remark,
+			a.attendance_day,
+			s.student_name,
+			s.student_gender,
+			s.student_phone,
+			s.student_id
 		FROM class_registration cr LEFT JOIN attendance a
 		ON cr.account_id = a.account_id
 		LEFT JOIN lecture l
@@ -30,5 +53,17 @@
 		LEFT JOIN student s
 		ON cr.account_id = s.student_id
 		WHERE cr.lecture_no = #{lectureNo}
+		AND s.student_id = #{studentId}
 	</select>
+	<!-- 학생 출석상태 변경 -->
+	<update id="updateAttendanceState" parameterType="gd.fintech.lms.vo.Attendance">
+		UPDATE attendance
+		SET 
+			attendance_state = #{attendanceState},
+			attendance_remark = #{attendanceRemark}, 
+			attendance_updatedate = NOW()
+		WHERE account_id = #{accountId}
+		AND lecture_no = #{lectureNo}
+		AND attendance_day = #{attendanceDay}
+	</update>
 </mapper>

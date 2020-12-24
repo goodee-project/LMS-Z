@@ -9,5 +9,10 @@ import gd.fintech.lms.vo.Attendance;
 
 @Mapper
 public interface TeacherAttendanceMapper {
-	Attendance selectAttendanceList(Map<String, Object> map);
+	//학생 출석부 목록
+	List<Attendance> selectAttendanceList(Map<String, Object> map);
+	//학생 출석상태 변경
+	int updateAttendanceState(Attendance attendance);
+	//학생 출석상세보기
+	List<Attendance> selectAttendanceOne(Map<String, Object> map);
 }

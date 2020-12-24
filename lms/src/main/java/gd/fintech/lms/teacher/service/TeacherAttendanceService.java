@@ -17,13 +17,28 @@ public class TeacherAttendanceService {
 
 	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
 	
-	public Attendance getAttendanceList(int lectureNo) {
+	//학생 출석부 목록출력
+	public List<Attendance> getAttendanceList(int lectureNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lectureNo", lectureNo);
 		
-		System.out.print(map);
-		
 		return teacherAttendanceMapper.selectAttendanceList(map);
+	}
+	
+	//학생 출석부 상태변경
+	public int modifyAttendanceState(Attendance attendance) {
+		return teacherAttendanceMapper.updateAttendanceState(attendance);
+	}
+	
+	//학생 출석부 상세보기
+	public List<Attendance> getAttendanceStateOne(int lectureNo, String studentId, String attendanceDay) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("studentId", studentId);
+		map.put("attendanceDay", attendanceDay);
+		
+		return teacherAttendanceMapper.selectAttendanceOne(map);
 	}
 }

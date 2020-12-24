@@ -20,14 +20,16 @@
 			</tr>
 		</thead>
 		<tbody>
-		
-			<c:forEach var="as" items="${attendanceList.studentList}">
+
+			<c:forEach var="a" items="${attendanceList}">
 				<tr>
-					<td>${as.studentName}</td>
+				<c:forEach var="as" items="${a.studentList}">
+					<td><a href="${path}/teacher/modifyAttendanceStateOne/${as.studentId}/${lectureNo}/${a.attendanceDay}">${as.studentName}</a></td>
 					<td>${as.studentGender}</td>
 					<td>${as.studentPhone}</td>
-					<td>${attendanceList.attendanceState}</td>
-					<td>${attendanceList.attendanceRemark}</td>
+				</c:forEach>
+					<td>${a.attendanceState}</td>
+					<td>${a.attendanceRemark}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
