@@ -23,7 +23,7 @@ public class ManagerConnectService {
 		return managerConnectMapper.selectConnect("접속");
 	}
 	
-	// 로그아웃을 했을 경우 connect 데이터배이스의 state 조절
+	// 세션이 없어 질 때 connect 데이터배이스의 state 조절
 	public void modifyConnectOut(String accountId) {
 		Connect connect = new Connect();
 		connect.setAccountId(accountId);
@@ -32,7 +32,7 @@ public class ManagerConnectService {
 		managerConnectMapper.updateConnectToOut(connect);
 	}
 	
-	// 로그인을 했을 경우 만약 id가 있는 데이터라면 업데이트 없으면 추가 하는 service
+	// 세션이 생길 때 만약 id가 있는 데이터라면 업데이트 없으면 추가 하는 service
 	public void modifyConnectIn(String accountId) {
 		int check = managerConnectMapper.selectConnectToCheck(accountId);
 		

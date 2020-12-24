@@ -36,9 +36,6 @@ public class ManagerLoginController {
 		HttpSession session = request.getSession();
 	    session.setAttribute("managerId", account.getAccountId());
 	    
-	    // 로그인 시 connect 테이블 확인하는 매서드 출력
-	    managerConnectService.modifyConnectIn(account.getAccountId());
-	    
 	    String managerImage = managerLoginService.getManagerImage(account.getAccountId());
 	    session.setAttribute("managerImage", managerImage);
 		
@@ -63,8 +60,6 @@ public class ManagerLoginController {
 	@GetMapping("/manager/logout/{managerId}")
 	public String logout(HttpSession session,
 			@PathVariable(value="managerId") String managerId) {
-		// 로그아웃 시 connect 테이블 업데이트하는 매서드 출력
-		managerConnectService.modifyConnectOut(managerId);
 		session.invalidate();
 		return "redirect:/managerLogin#";
 	}
