@@ -33,7 +33,7 @@
 		</association>
 	</resultMap>
 	<!-- 강사와 학생의 리스트를 불러오는 쿼리 -->
-	<select id="selectTeacherAndStudent" resultMap="selectMemberList">
+	<select id="selectTeacherAndStudent" parameterType="java.util.Map" resultMap="selectMemberList">
 		SELECT 
 			a.account_id, 
 			case when a.account_level='강사' then t.teacher_name END teacher_name,
@@ -44,5 +44,14 @@
 		WHERE account_id = teacher_id OR account_id = student_id
 		AND account_level IN ('학생','강사')
 		GROUP BY account_id
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 페이징을 위한 카운트를 불러오는 쿼리 -->
+	<select id="selectTeacherAndStudentCount" resultType="int">
+		SELECT
+			count(*)
+		FROM account
+		WHERE account_level IN ('학생','강사')
+		AND account_state = '활성화'
 	</select>
 </mapper>

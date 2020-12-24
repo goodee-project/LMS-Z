@@ -27,6 +27,7 @@ public class ManagerTextbookController {
 		int rowPerPage = 2;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		List<Textbook> textbookList = managerTextbookService.getTextbookList(beginRow, rowPerPage);
 		int totalPage = managerTextbookService.getTextbookTotalCount();
 		int lastPage = 0;
@@ -37,6 +38,7 @@ public class ManagerTextbookController {
 		}
 		model.addAttribute("textbookList",textbookList);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
 		model.addAttribute("lastPage",lastPage);
 		return "/manager/textbookList";
 	}

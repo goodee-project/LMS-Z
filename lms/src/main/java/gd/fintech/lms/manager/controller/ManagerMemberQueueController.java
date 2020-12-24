@@ -26,6 +26,8 @@ public class ManagerMemberQueueController {
 		// 시작 목록
 		int beginRowS = (currentPageS-1)*rowPerPage; 
 		int beginRowT = (currentPageT-1)*rowPerPage;
+		int startPageS = ((currentPageS/11)*rowPerPage)+1;
+		int startPageT = ((currentPageS/11)*rowPerPage)+1;
 		List<StudentQueue> studentList = managerMemberQueueService.getStudentMemberQueueList(beginRowS,rowPerPage);
 		int totalPageS = managerMemberQueueService.getStudentTotalCount();
 		// 마지막 페이지
@@ -49,6 +51,8 @@ public class ManagerMemberQueueController {
 		model.addAttribute("teacherList",teacherList);
 		model.addAttribute("currentPageS",currentPageS);
 		model.addAttribute("currentPageT",currentPageT);
+		model.addAttribute("startPageS",startPageS);
+		model.addAttribute("startPageT",startPageT);
 		model.addAttribute("lastPageS",lastPageS);
 		model.addAttribute("lastPageT",lastPageT);
 		//System.out.println(studentList);

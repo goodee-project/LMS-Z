@@ -19,8 +19,25 @@ public class ManagerMemberController {
 	@GetMapping("/manager/memberList/{currentPage}")
 	public String memberList(Model model, 
 			@PathVariable(name="currentPage") int currentPage) {
-		List<Account> memberList = managerMemberService.getTeacherAndStudentList();
+		// page당 목록 갯수
+		int rowPerPage = 3;
+		// 시작 목록
+		int beginRow = (currentPage-1)*rowPerPage;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
+		List<Account> memberList = managerMemberService.getTeacherAndStudentList(beginRow, rowPerPage);
+		int totalPage = managerMemberService.getTeacherAndStudentCount();
+		int lastPage = 0;
+		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+			lastPage = (totalPage/rowPerPage)+1;
+		}else { // 나누어 떨어진다면 
+			lastPage = totalPage/rowPerPage;
+		}
 		model.addAttribute("memberList",memberList);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("startPage",startPage);
 		return "/manager/memberList";
 	}
+	//검색 또는 직책 선택시 출력해주는 컨트롤러
+	
 }

@@ -102,7 +102,7 @@
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">공지사항
                                     </span></a>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/manager/member/1/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/manager/memberQueue/1/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">강사/학생 관리
                                 </span></a>

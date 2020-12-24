@@ -31,6 +31,7 @@ public class ManagerLectureController {
 		int rowPerPage = 2;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage; 
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		List<Lecture> lectureList = managerLectureService.getLectureList(beginRow,rowPerPage);
 		logger.debug("lectureList="+lectureList.toString());
 		int totalPage = managerLectureService.getLectureTotalPage();
@@ -43,6 +44,7 @@ public class ManagerLectureController {
 		}
 		model.addAttribute("lectureList",lectureList);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
 		model.addAttribute("lastPage",lastPage);
 		return "/manager/lectureList";
 	}
