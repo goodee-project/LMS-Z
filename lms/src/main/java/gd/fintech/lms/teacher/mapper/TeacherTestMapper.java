@@ -14,14 +14,11 @@ public interface TeacherTestMapper {
 	// 시험목록 출력
 	Test selectTestList(int lectureNo);
 	
-	// 시험 상세보기
-	List<Multiplechoice> selectTestOne(int lectureNo);
+	// 시험문제 상세보기
+	Multiplechoice selectTestQuestionOne(int multiplechocieNo);
 	
-	// 시험문제, 답 추가(여러 문제를 입력하기 위해 list 사용)
-	Multiplechoice insertTestQuestion(List<Multiplechoice> list);
-	
-	// 시험문제 보기 추가(여러 보기를 입력하기 위해 list 사용)
-	MultiplechoiceExample insertTestQuestionExample(List<MultiplechoiceExample> examList);
+	// 시험문제목록 출력
+	List<Multiplechoice> selectTestQuestionList(int lectureNo);
 	
 	// 시험정보(일정) 추가
 	int insertTest(Test test);

@@ -28,14 +28,14 @@ public class TeacherTestController {
 		return "teacher/testList";
 	}
 	
-	// 시험문제, 답 상세보기
-	@GetMapping("/teacher/testOne/{lectureNo}")
-	public String testOne(Model model,
-							@PathVariable(value="lectureNo") int lectureNo) {
-		List<Multiplechoice> testOne = teacherTestService.getTestOne(lectureNo);
-		model.addAttribute("testOne", testOne);
-		
-		return "teacher/testOne";
+	// 시험문제목록 출력
+	@GetMapping("/teacher/testQuestionList/{lectureNo}")
+	public String teacherQuestionList(Model model,
+										@PathVariable(value="lectureNo") int lectureNo) {
+		List<Multiplechoice> multiplechoice = teacherTestService.getTestQuestionList(lectureNo); 
+		// System.out.println(multiplechoice);
+		model.addAttribute("multiplechoice", multiplechoice);
+		return "teacher/testQuestionList";
 	}
 	
 	// 시험정보(일정) 추가 폼

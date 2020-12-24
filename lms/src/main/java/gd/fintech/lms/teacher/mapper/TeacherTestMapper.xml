@@ -16,7 +16,7 @@
 	</select>
 	
 	<!-- 시험문제 / 문제 보기 1:다 -> collection사용 -->
-	<resultMap type="gd.fintech.lms.vo.Multiplechoice" id="selectTestOne">
+	<resultMap type="gd.fintech.lms.vo.Multiplechoice" id="selectTestQuestionOne">
 		<result property="multiplechoiceNo" column="multiplechoice_no"/>
 		<result property="lectureNo" column="lecture_no"/>
 		<result property="multiplechoiceId" column="multiplechoice_id"/>
@@ -34,7 +34,7 @@
 	</resultMap>
 	
 	<!-- 시험문제, 답 상세보기 -->
-	<select id="selectTestOne" parameterType="int" resultMap="selectTestOne">
+	<select id="selectTestQuestionOne" parameterType="int" resultMap="selectTestQuestionOne">
 		SELECT
 			mc.multiplechoice_no,
 			mc.lecture_no,
@@ -48,51 +48,22 @@
 			mce.multiplechoice_example_content
 		FROM multiplechoice mc, multiplechoice_example mce
 		WHERE mc.multiplechoice_no = mce.multiplechoice_no
-		AND mc.lecture_no = #{lectureNo}
-		ORDER BY mc.multiplechoice_id ASC, mce.multiplechoice_example_id ASC
+		AND mc.multiplechoice_no = #{multiplechoiceNo}
+		ORDER BY mce.multiplechoice_example_id ASC
 	</select>
 	
-	<!-- 시험문제, 답 추가 -->
-	<insert id="insertTestQuestion" parameterType="java.util.List">
-		INSERT INTO multiplechoice(
-			lecture_no,
-			multiplechoice_id,
-			multiplechoice_question,
-			multiplechoice_answer,
-			multiplechoice_createdate,
-			multiplechoice_updatedate
-		)VALUES
-			<foreach collection="list" separator=" , ">
-			( 
-				#{lectureNo}, 
-				#{multiplechoiceId},
-				#{multiplechoiceQuestion},
-				#{multiplechoiceAnswer},
-				NOW(),
-				NOW() 
-			)
-			</foreach>
-	</insert>
-	
-	<!-- 시험문제 보기 추가 -->
-	<insert id="insertTestQuestionExample" parameterType="java.util.List">
-		INSERT INTO multiplechoice_example(
-			multiplechoice_no,
-			multiplechoice_example_id,
-			multiplechoice_example_content,
-			multiplechoice_example_createdate,
-			multiplechoice_example_updatedate
-		)VALUES
-			<foreach collection="examList" separator=" , ">
-			(
-				#{multiplechoiceNo},
-				#{multiplechoiceExampleId},
-				#{multiplechoiceExampleContent},
-				NOW(),
-				NOW()
-			)
-			</foreach>
-	</insert>
+	<!-- 시험문제 목록 출력 -->
+	<select id="selectTestQuestionList" parameterType="int" resultType="gd.fintech.lms.vo.Multiplechoice">
+		SELECT
+			multiplechoice_no multiplechoiceNo,
+			lecture_no lectureNo,
+			multiplechoice_id multiplechoiceId,
+			multiplechoice_question multiplechoiceQuestion,
+			multiplechoice_createdate multiplechoiceCreatedate,
+			multiplechoice_updatedate multiplechoiceUpdatedate
+		FROM multiplechoice
+		WHERE lecture_no = #{lectureNo}
+	</select>
 	
 	<!-- 시험정보(일정) 추가 -->
 	<insert id="insertTest" parameterType="gd.fintech.lms.vo.Test">

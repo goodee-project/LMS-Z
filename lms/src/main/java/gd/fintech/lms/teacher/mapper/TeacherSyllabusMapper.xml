@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherSyllabusMapper">
+	<!-- 강의계획서 추가(syllabus_teachersign 수정 예정) -->
+	<insert id="insertSyllabus" parameterType="gd.fintech.lms.vo.Syllabus">
+		INSERT INTO syllabus(
+			syllabus_content,
+			syllabus_teachersign,
+			syllabus_createdate,
+			syllabus_updatedate
+		)VALUES(
+			#{syllabusContent},
+			#{syllabusTeachersign},
+			NOW(),
+			NOW()
+		)
+	</insert>
+</mapper>
