@@ -28,16 +28,6 @@ public class TeacherTestController {
 		return "teacher/testList";
 	}
 	
-	// 시험문제목록 출력
-	@GetMapping("/teacher/testQuestionList/{lectureNo}")
-	public String teacherQuestionList(Model model,
-										@PathVariable(value="lectureNo") int lectureNo) {
-		List<Multiplechoice> multiplechoice = teacherTestService.getTestQuestionList(lectureNo); 
-		// System.out.println(multiplechoice);
-		model.addAttribute("multiplechoice", multiplechoice);
-		return "teacher/testQuestionList";
-	}
-	
 	// 시험정보(일정) 추가 폼
 	@GetMapping("/teacher/addTest/{lectureNo}")
 	public String addTest(@PathVariable(value="lectureNo") int lectureNo) {
@@ -68,5 +58,38 @@ public class TeacherTestController {
 							@PathVariable(value="lectureNo") int lectureNo) {
 		teacherTestService.modifyTest(test);
 		return "redirect:/teacher/testList/"+lectureNo;
+	}
+	
+	// 시험문제목록 출력
+	@GetMapping("/teacher/testQuestionList/{lectureNo}")
+	public String teacherQuestionList(Model model,
+										@PathVariable(value="lectureNo") int lectureNo) {
+		List<Multiplechoice> multiplechoice = teacherTestService.getTestQuestionList(lectureNo); 
+		// System.out.println(multiplechoice);
+		model.addAttribute("multiplechoice", multiplechoice);
+		return "teacher/testQuestionList";
+	}
+	
+	// 시험문제 상세보기
+	@GetMapping("/teacher/testQuestionOne/{multiplechoiceNo}")
+	public String teacherQuestionOne(Model model,
+									@PathVariable(value="multiplechoiceNo") int multiplechoiceNo) {
+		Multiplechoice testOne = teacherTestService.getTestQuestionOne(multiplechoiceNo);
+		model.addAttribute("testOne", testOne);
+		return "teacher/testQuestionOne";
+	}
+	
+	// 시험문제 추가 폼
+	@GetMapping("/teacher/addTestQuestion/{lectureNo}")
+	public String addTestQuestion(@PathVariable(value="lectureNo") int lectureNo) {
+		return "teacher/addTestQuestion";
+	}
+	
+	// 시험문제 추가 액션
+	@PostMapping("/teacher/addTestQuestion/{lectureNo}")
+	public String addTestQuestion(Multiplechoice multiplechoice,
+								@PathVariable(value="lectureNo") int lectureNo) {
+		
+		return "redirect:/teacher/testQuestionList/"+lectureNo;
 	}
 }

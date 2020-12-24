@@ -20,9 +20,14 @@ public class TeacherTestService {
 		return teacherTestMapper.selectTestList(lectureNo);
 	}
 	
-	// 시험문제, 답 상세보기
+	// 시험문제목록 보기
 	public List<Multiplechoice> getTestQuestionList(int lectureNo) {
 		return teacherTestMapper.selectTestQuestionList(lectureNo);
+	}
+	
+	// 시험문제 상세보기
+	public Multiplechoice getTestQuestionOne(int multiplechoiceNo) {
+		return teacherTestMapper.selectTestQuestionOne(multiplechoiceNo);
 	}
 	
 	// 해당 강의의 시험정보(일정) 추가

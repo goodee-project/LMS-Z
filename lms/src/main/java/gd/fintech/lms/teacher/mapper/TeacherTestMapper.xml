@@ -49,7 +49,6 @@
 		FROM multiplechoice mc, multiplechoice_example mce
 		WHERE mc.multiplechoice_no = mce.multiplechoice_no
 		AND mc.multiplechoice_no = #{multiplechoiceNo}
-		ORDER BY mce.multiplechoice_example_id ASC
 	</select>
 	
 	<!-- 시험문제 목록 출력 -->
@@ -84,6 +83,7 @@
 		)
 	</insert>
 	
+	<!-- 시험정보(일정) 수정 -->
 	<update id="updateTest" parameterType="gd.fintech.lms.vo.Test">
 		UPDATE test
 		SET
@@ -93,4 +93,44 @@
 			test_updatedate = NOW()
 		WHERE lecture_no = #{lectureNo}
 	</update>
+	
+	<!-- 시험문제 추가 -->
+	<!-- 시험문제 보기(multiplechoiceExample)과 같이 입력하기 위해 seleteKey 사용 -->
+	<insert id="insertTestQuestion" parameterType="gd.fintech.lms.vo.Multiplechoice">
+		<selectKey resultType="int" keyProperty="multiplechoiceNo" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO multiplechoice(
+			lecture_no,
+			multiplechoice_id,
+			multiplechoice_question,
+			multiplechoice_answer,
+			multiplechoice_createdate,
+			multiplechoice_updatedate
+		)VALUES(
+			#{lectureNo},
+			#{multiplechoiceId},
+			#{multiplechoiceQuestion},
+			#{multiplechoiceAnswer},
+			NOW(),
+			NOW()
+		)
+	</insert>
+	
+	<!-- 시험문제 보기 추가 -->
+	<insert id="insertTestQuestionExample" parameterType="gd.fintech.lms.vo.MultiplechoiceExample">
+		INSERT INTO multiplechoice_example(
+			multiplechoice_no,
+			multiplechoice_example_id,
+			multiplechoice_example_content,
+			multiplechoice_example_createdate,
+			multiplechoice_example_updatedate
+		)VALUES(
+			#{multiplechoiceNo},
+			#{multiplechoiceExampleId},
+			#{multiplechoiceExampleContent},
+			NOW(),
+			NOW()
+		)
+	</insert>
 </mapper>

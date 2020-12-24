@@ -25,14 +25,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="m" items="${multiplechoice}">
+			<c:if test="${multiplechoice != null}">
+				<c:forEach var="m" items="${multiplechoice}">
+					<tr>
+						<td>${m.multiplechoiceNo}</td>
+						<td><a href="${path}/teacher/testQuestionOne/${m.multiplechoiceNo}">평가 ${m.multiplechoiceId}번</a></td>
+						<td>${m.multiplechoiceCreatedate}</td>
+						<td>${m.multiplechoiceUpdatedate}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${multiplechoice == ''}">
 				<tr>
-					<td>${m.multiplechoiceNo}</td>
-					<td>평가 ${m.multiplechoiceId}번</td>
-					<td>${m.multiplechoiceCreatedate}</td>
-					<td>${m.multiplechoiceUpdatedate}</td>
+					<td colspan="4">등록된 시험문제가 없습니다.</td>
 				</tr>
-			</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
 </body>

@@ -25,4 +25,10 @@ public interface TeacherTestMapper {
 	
 	// 시험정보(일정) 수정
 	int updateTest(Test test);
+	
+	// 시험문제 추가
+	int insertTestQuestion(Multiplechoice multiplechoice);
+	
+	// 시험문제 보기 추가
+	int insertTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
 }
