@@ -31,92 +31,9 @@
 
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md">
-            	<!-- 사이드바 로고 -->
-                <div class="navbar-header" data-logobg="skin6">
-                    <div class="navbar-brand">
-                        <a href="${path}/student/index">
-                            <b class="logo-icon">
-                            	<!-- 사이트 이름 옆 로고 -->
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
-                            </b>
-							
-							<!-- 사이트 이름 -->
-	                        <span class="logo-text">
-									GOODEE LMS
-	                        </span>
-                        </a>
-                    </div>
-                </div>
-
-				<!-- 로고 오른쪽 메뉴 -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
-                    <!-- 메뉴 오른쪽 마이페이지 -->
-                    <ul class="navbar-nav float-right">
-                    	<!-- 눌렀을 때 드롭다운 -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <!-- 마이페이지 사진 -->
-                                <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
-                                    width="40">
-                                <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark"><c:out value="${studentId}"/></span> 
-                                        <!-- <c:out value="${sessionScope.studentId}"/> 세션에 저장되어있는 변수 호출 -->
-                                       <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
         
-         <!-- 로고 밑 메뉴 -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/index"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                                    class="hide-menu">Index</span></a></li>
-                        <!-- 사용 시 줄 표시 -->
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">menu</span></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/myLectureList/${studentId}/1"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">강의 목록
-                                </span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/lectureList/1"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">수강신청</span></a></li>
-                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/questionList/1"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">질문 목록</span></a></li>
-                         <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/reportList/${studentId}"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">과제목록</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList/1"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">공지사항</span></a>
-                        </li>
-                        <li class="list-divider"></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/logout"
-                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
-                                    class="hide-menu">Logout</span></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+        <jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">

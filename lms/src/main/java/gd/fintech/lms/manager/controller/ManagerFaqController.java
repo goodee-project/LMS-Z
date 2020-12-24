@@ -47,7 +47,7 @@ public class ManagerFaqController {
 		// UI에서는 규칙적인 NO를 보여주기 위해
 		int ruleNo = (totalRow-(rowPerPage*(currentPage-1)));
 		// 카테고리 별 faq 리스트
-		List<Faq> faqList = managerFaqService.getManagerFaqList(beginRow, rowPerPage, faqCategory);
+		List<Faq> faqList = managerFaqService.getFaqList(beginRow, rowPerPage, faqCategory);
 		// 카테고리 리스트
 		List<FaqCategory> categoryList = managerFaqService.getFaqCategoryList();
 
@@ -116,6 +116,7 @@ public class ManagerFaqController {
 	@GetMapping("/manager/addFaqList/{managerId}/{currentPage}")
 	public String addFaqList(Model model, @PathVariable(name = "currentPage") int currentPage,
 			@PathVariable(name = "managerId") String managerId) {
+		//FAQ 작성하는 매니저 이름 자동 출력
 		String faqWriter = managerLmsNoticeService.getManagerName(managerId);
 		// 카테고리 리스트
 		List<FaqCategory> categoryList = managerFaqService.getFaqCategoryList();

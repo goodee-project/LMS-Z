@@ -18,7 +18,7 @@ public class ManagerFaqService {
 	@Autowired ManagerFaqMapper managerFaqMapper;
 	
 	//FAQ 목록 가져오기
-	public List<Faq> getManagerFaqList(int beginRow, int rowPerPage, String faqCategory){
+	public List<Faq> getFaqList(int beginRow, int rowPerPage, String faqCategory){
 		Map<String,Object> map = new HashMap<>();
 		map.put("beginRow",beginRow);
 		map.put("rowPerPage",rowPerPage);
