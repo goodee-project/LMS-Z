@@ -46,12 +46,50 @@
 		GROUP BY account_id
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
-	<!-- 페이징을 위한 카운트를 불러오는 쿼리 -->
+	<!-- 전체 목록 페이징을 위한 카운트를 불러오는 쿼리 -->
 	<select id="selectTeacherAndStudentCount" resultType="int">
 		SELECT
 			count(*)
 		FROM account
 		WHERE account_level IN ('학생','강사')
 		AND account_state = '활성화'
+	</select>
+	<!-- 강사 또는 학생만 검색해 불러오는 쿼리 -->
+	<select id="selectTeacherOrStudent" parameterType="java.util.Map" resultMap="selectMemberList">
+		SELECT
+			a.account_id, 
+			case when a.account_level='강사' then t.teacher_name END teacher_name,
+			case when a.account_level='학생' then s.student_name END student_name,
+			a.account_level,
+			a.account_state
+		FROM account a, teacher t, student s
+		WHERE (account_id = teacher_id OR account_id = student_id)
+		AND account_level = #{searchLevel}
+		GROUP BY account_id
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 직책에 따른 페이징을 위한 쿼리 -->
+	<select id="selectTeacherOrStudentCount" parameterType="String" resultType="int">
+		SELECT
+			count(*)
+		FROM account
+		WHERE account_level = #{searchLevel}
+		AND account_state = '활성화'
+	</select>
+	<!-- 이름을 검색했을 때 불러오는 쿼리  구현중-->
+	<select id="selectSearchName" parameterType="String" resultMap="selectMemberList">
+		SELECT 
+			a.account_id, 
+			case when a.account_level='강사' then t.teacher_name END teacher_name,
+			case when a.account_level='학생' then s.student_name END student_name,
+			a.account_level,
+			a.account_state
+		FROM account a, teacher t, student s
+		WHERE account_id = teacher_id OR account_id = student_id
+		AND account_level IN ('학생','강사')
+		AND teacher_name = #{searchName}
+		OR student_name = #{searchName}
+		GROUP BY account_id
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 </mapper>
