@@ -18,8 +18,8 @@ public class TeacherCommentController {
 	@Autowired TeacherCommentService teacherCommentService;
 	
 	//댓글목록 출력
-	@GetMapping("/teacher/questionCommentList/{questionNo}/{currentPage}")
-	public String questionCommentList(Model model, @PathVariable(value = "currentPage") int currentPage, @PathVariable(value = "questionNo") int questionNo) {
+	@GetMapping("/teacher/questionCommentList/{teacherId}/{questionNo}/{currentPage}")
+	public String questionCommentList(Model model, @PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "currentPage") int currentPage, @PathVariable(value = "questionNo") int questionNo) {
 		
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
@@ -42,26 +42,27 @@ public class TeacherCommentController {
 	}
 	
 	//댓글 입력
-	@PostMapping("/teacher/addQuestionComment")
-	public String addQuestionComment(QuestionComment questionComment) {
+	@PostMapping("/teacher/addQuestionComment/{teacherId}")
+	public String addQuestionComment(QuestionComment questionComment, @PathVariable(value = "teacherId") String teacherId) {
 		teacherCommentService.addQuestionComment(questionComment);
-		return "redirect:/teacher/questionOne/"+questionComment.getQuestionNo() + "/1";
+		return "redirect:/teacher/questionOne/" + teacherId + "/" +questionComment.getQuestionNo() + "/1";
 	}
 	
 	//댓글삭제
-	@GetMapping("/teacher/removeQuestionComment/{accountId}/{questionNo}/{questionCommentNo}")
+	@GetMapping("/teacher/removeQuestionComment/{accountId}/{questionNo}/{questionCommentNo}/{currentPage}")
 	public String removeQuestionComment(@PathVariable(value = "questionCommentNo") int questionCommentNo,
 										@PathVariable(value = "questionNo") int questionNo,
-										@PathVariable(value = "accountId") String accountId) {
+										@PathVariable(value = "accountId") String accountId,
+										@PathVariable(value = "currentPage") int currentPage) {
 		
 		teacherCommentService.removeQuestionComment(questionCommentNo);
 		
-		return "redirect:/teacher/questionOne/"+questionNo + "/1";
+		return "redirect:/teacher/questionOne/" + accountId + "/" + questionNo + "/" + currentPage;
 	}
 	
 	//댓글수정 폼
-	@GetMapping("/teacher/modifyQuestionComment/{questionCommentNo}/{currentPage}")
-	public String modifyQuestionComment(Model model, @PathVariable(value = "questionCommentNo") int questionCommentNo, @PathVariable(value = "currentPage") int currentPage) {
+	@GetMapping("/teacher/modifyQuestionComment/{teacherId}/{questionCommentNo}/{currentPage}")
+	public String modifyQuestionComment(Model model, @PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "questionCommentNo") int questionCommentNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		QuestionComment questionComment = teacherCommentService.questionCommentOne(questionCommentNo);
 		model.addAttribute(questionComment);
@@ -70,11 +71,11 @@ public class TeacherCommentController {
 	}
 	
 	//댓글수정 액션
-	@PostMapping("/teacher/modifyQuestionComment/{questionNo}/{currentPage}")
-	public String modifyQuestionComment(QuestionComment questionComment, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
+	@PostMapping("/teacher/modifyQuestionComment/{teacherId}/{questionNo}/{currentPage}")
+	public String modifyQuestionComment(QuestionComment questionComment, @PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		teacherCommentService.modifyQuestionComment(questionComment);
 		
-		return "redirect:/teacher/questionOne/"+ questionComment.getQuestionNo() + "/" + currentPage;
+		return "redirect:/teacher/questionOne/" + teacherId + "/" + questionComment.getQuestionNo() + "/" + currentPage;
 	}
 }

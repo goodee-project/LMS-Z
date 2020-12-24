@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>질문 상세보기</h1>
-		<a href="${path}/teacher/questionList/${teacherId}/${currentPage}">목록으로</a>
+		<a href="${path}/teacher/questionList/${teacherId}/1">목록으로</a>
 		<table border="1">
 			<tr>
 				<th>question_no</th>
@@ -60,20 +60,20 @@
 						<td>${qc.questionCommentContent}</td>
 						<td>${qc.questionCommentCreatedate}</td>
 						<td>${qc.questionCommentUpdatedate}</td>
-						<td><a href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}">삭제</a></td>
-						<td><a href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
+						<td><a href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>
+						<td><a href="${path}/teacher/modifyQuestionComment/${teacherId}/${qc.questionCommentNo}/${currentPage}">수정</a></td>
 					</tr>
 				</c:forEach>
 				<!-- 숫자로 페이징 -->
 				<c:forEach var="i" begin="1" end="${lastPage}">
 					<span>
-                		<a href="${path}/teacher/questionOne/${questionNo}/${i}">${i}&nbsp;&nbsp;</a>
+                		<a href="${path}/teacher/questionOne/${teacherId}/${questionNo}/${i}">${i}&nbsp;&nbsp;</a>
                 	</span>
                 </c:forEach>
 			</tbody>
 		</table>
 		<!-- 댓글 추가 -->
-		<form method="post" action="${path}/teacher/addQuestionComment">
+		<form method="post" action="${path}/teacher/addQuestionComment/${teacherId}">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">
 			<input type="hidden" name="accountId" value="${question.accountId}">
 			작성자<br><input type="text" name="questionCommentWriter"><br>
