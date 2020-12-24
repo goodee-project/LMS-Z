@@ -65,18 +65,18 @@
                         <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">관리자 로그인
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/managerLogin#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/managerLogin"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">매니저 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin"
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">강사 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">학생 로그인</span></a>
                     </ul>

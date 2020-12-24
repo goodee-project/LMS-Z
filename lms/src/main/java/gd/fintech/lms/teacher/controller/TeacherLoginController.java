@@ -33,7 +33,11 @@ public class TeacherLoginController {
 	
 	// 로그인 폼으로 이동
 	@GetMapping("/teacherLogin")
-	public String login() {
+	public String login(HttpSession session) {
+		//로그인 상태일 때 로그인 창으로 접근 방지
+		if(session.getAttribute("teacherId") != null) {
+			return "redirect:/teacher/index";
+		}
 		return "teacher/login";
 	}
 	
@@ -51,13 +55,13 @@ public class TeacherLoginController {
 	    String teacherImage = teacherLoginService.getTeacherImage(account.getAccountId());
 	    session.setAttribute("teacherImage", teacherImage);
 		
-		return "teacher/index";
+		return "redirect:/teacher/index";
 	}
 	
 	// 로그아웃 액션
 	@GetMapping("/teacher/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:/teacherLogin#";
+		return "redirect:/teacherLogin";
 	}
 }

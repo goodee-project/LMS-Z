@@ -18,7 +18,11 @@ public class StudentLoginController {
 	
 	// 로그인 폼으로 이동
 	@GetMapping("/studentLogin")
-	public String login() {
+	public String login(HttpSession session) {
+		//로그인 상태일 때 로그인 창으로 접근 방지
+		if(session.getAttribute("studentId") != null) {
+			return "redirect:/student/index";
+		}
 		return "student/login";
 	}
 	
@@ -35,7 +39,7 @@ public class StudentLoginController {
 	    String studentImage = studentLoginService.getStudentImage(account.getAccountId());
 	    session.setAttribute("studentImage", studentImage);
 		
-		return "student/index";
+		return "redirect:/student/index";
 	}
 	
 	// 로그아웃

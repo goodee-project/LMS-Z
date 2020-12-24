@@ -23,7 +23,7 @@ public class TeacherLoginFilter implements Filter {
 		if(session.getAttribute("teacherId") == null) {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/teacherLogin#");
+			((HttpServletResponse)response).sendRedirect(cPath + "/teacherLogin");
 			return;
 		}
 		chain.doFilter(request, response);

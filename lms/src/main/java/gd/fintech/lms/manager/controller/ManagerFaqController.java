@@ -202,7 +202,7 @@ public class ManagerFaqController {
 
 	// FAQ 삭제 액션
 	@GetMapping("manager/removeFaq/{faqCategory}/{faqNo}/{currentPage}")
-	public String removeFaq(@PathVariable(name = "faqCategory") String faqCategory,
+	public String removeFaq(@PathVariable(name = "faqCategory") String faqCategory, // 한글
 			@PathVariable(name = "faqNo") int faqNo, @PathVariable(name = "currentPage") int currentPage)
 			throws UnsupportedEncodingException {
 		// redirect url에 한글 사용하기 위해 ASKII코드로 변경

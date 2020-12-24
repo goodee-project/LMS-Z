@@ -21,7 +21,11 @@ public class ManagerLoginController {
 	@Autowired ManagerConnectService managerConnectService;
 	
 	@GetMapping("/managerLogin")
-	public String login() {
+	public String login(HttpSession session) {
+		//로그인 상태일 때 로그인 창으로 접근 방지
+		if(session.getAttribute("managerId") != null) {
+			return "redirect:/manager/index";
+		}
 		return "manager/login";
 	}
 	
@@ -39,7 +43,7 @@ public class ManagerLoginController {
 	    String managerImage = managerLoginService.getManagerImage(account.getAccountId());
 	    session.setAttribute("managerImage", managerImage);
 		
-		return "manager/index";
+		return "redirect:/manager/index";
 	}
 	
 	// 회원가입 폼으로 이동
@@ -61,6 +65,6 @@ public class ManagerLoginController {
 	public String logout(HttpSession session,
 			@PathVariable(value="managerId") String managerId) {
 		session.invalidate();
-		return "redirect:/managerLogin#";
+		return "redirect:/managerLogin";
 	}
 }

@@ -25,7 +25,7 @@ public class StudentLoginFilter implements Filter {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			System.out.println("아이디 세션에 없음");
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/studentLogin#");
+			((HttpServletResponse)response).sendRedirect(cPath + "/studentLogin");
 			return;
 		}
 		chain.doFilter(request, response);
