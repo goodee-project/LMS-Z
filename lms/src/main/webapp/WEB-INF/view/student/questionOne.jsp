@@ -62,7 +62,9 @@
 		<c:forEach var="qf" items="${question.questionfile}">
 			<tr>
 				<td>questionfile</td>
-				<td>${qf.questionFileOriginal}</td>
+				<td>
+					<a href="${path}/student/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a>
+				</td>
 			</tr>
 		</c:forEach>	
 	</table>
@@ -132,5 +134,6 @@ $('#btn').click(function(){
 			}
 	})	
 });	
+
 </script>
 </html>

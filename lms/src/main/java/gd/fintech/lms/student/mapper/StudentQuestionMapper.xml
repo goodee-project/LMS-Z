@@ -38,6 +38,51 @@
 	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	
+  	
+  	<select id="selectQuestionTitleSearch" resultMap="selectQuestionListPage" parameterType="java.util.Map">
+  		SELECT 
+  			q.question_no,
+  			q.lecture_no,
+  			l.lecture_name,
+  			q.question_writer,
+  			q.question_title,
+  			q.question_count,
+  			q.question_createdate
+  		FROM question q left join lecture l 
+	  		 on q.lecture_no = l.lecture_no
+  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%')
+  		LIMIT #{beginRow},#{rowPerPage}
+  	</select>
+  	
+  	<select id="selectQuestionWriterSearch" resultMap="selectQuestionListPage" parameterType="java.util.Map">
+  		SELECT 
+  			q.question_no,
+  			q.lecture_no,
+  			l.lecture_name,
+  			q.question_writer,
+  			q.question_title,
+  			q.question_count,
+  			q.question_createdate
+  		FROM question q left join lecture l 
+	  		 on q.lecture_no = l.lecture_no
+  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%')
+  		LIMIT #{beginRow},#{rowPerPage}
+  	</select>
+  	
+  	<select id="totalCountQuestionSearchTitle" resultType="int" parameterType="String">
+  		SELECT 
+  			count(*) count
+  		FROM question
+  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%')
+  	</select>
+  	
+  	<select id="totalCountQuestionSearchWriter" resultType="int" parameterType="String">
+  		SELECT 
+  			count(*) count
+  		FROM question
+  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%')
+  	</select>
+  	
   	<!-- 질문목록 리스트 총 행의 갯수 -->
   	<select id="totalCountQuestion" resultType="int">
   		SELECT 

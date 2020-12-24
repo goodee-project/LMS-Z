@@ -1,14 +1,22 @@
 package gd.fintech.lms.student.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
@@ -25,13 +33,27 @@ public class StudentQuestionService {
 	
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
 	@Autowired private StudentQuestionFileMapper studentQuestionFileMapper;
+	
+	public List<Question> getQuestionTitleSearch(String questionTitle,int currentPage, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		map.put("questionTitle", questionTitle);
+		return studentQuestionMapper.selectQuestionTitleSearch(map);
+	}
+	
+	public List<Question> getQuestionWriterSearch(String questionWriter,int currentPage, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		map.put("questionWriter", questionWriter);
+		return studentQuestionMapper.selectQuestionWriterSearch(map);
+	}
 	//질문목록 리스트 페이징
 	public List<Question> getQuestionPage(int currentPage, int rowPerPage){
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		
 		map.put("beginRow", (currentPage-1)*rowPerPage);
 		map.put("rowPerPage", rowPerPage);
-		
 		return studentQuestionMapper.selectQuestionListPage(map);
 	}
 	
@@ -43,6 +65,14 @@ public class StudentQuestionService {
 	//질문목록 행의 갯수 (페이징에 사용)
 	public int totalQuestion() {
 		return studentQuestionMapper.totalCountQuestion();
+	}
+	
+	public int totalSearchWriterQuestion(String questionWriter) {
+		return studentQuestionMapper.totalCountQuestionSearchWriter(questionWriter);
+	}
+	
+	public int totalSearchTitleQuestion(String questionTitle) {
+		return studentQuestionMapper.totalCountQuestionSearchTitle(questionTitle);
 	}
 	
 	//질문 상세히 보기

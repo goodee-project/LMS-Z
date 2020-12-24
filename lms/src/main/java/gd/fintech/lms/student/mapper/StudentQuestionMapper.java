@@ -13,8 +13,19 @@ public interface StudentQuestionMapper {
 	// 질문목록 리스트 (페이징)
 	List<Question> selectQuestionListPage(Map<String, Integer> map); 
 	
+	
+	// 질문목록 검색
+	List<Question> selectQuestionWriterSearch(Map<String, Object>map);
+	
+	// 질문목록 검색
+	List<Question> selectQuestionTitleSearch(Map<String, Object>map);
+	
 	// 질문목록 페이징에 사용되는 총 행의 갯수
 	int totalCountQuestion(); 
+	
+	int totalCountQuestionSearchWriter(String questionWriter);
+	
+	int totalCountQuestionSearchTitle(String questionTitle);
 	
 	// 질문 등록
 	int insertQuestion(Question question); 

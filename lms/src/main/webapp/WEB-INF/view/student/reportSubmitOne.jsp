@@ -35,7 +35,7 @@
 	<table border="1">
 		<c:forEach var="rsf" items="${reportSubmit.reportSubmitFile}">
 			<tr>
-				<td>report_submit_file_original: ${rsf.reportSubmitFileOriginal}</td>
+				<td>report_submit_file_original: <a href="${path}/student/reportSubmitFileDownload/${rsf.reportSubmitFileUuid}">${rsf.reportSubmitFileOriginal}</a></td>
 				<td>report_submit_file_type: ${rsf.reportSubmitFileType}</td>
 			</tr>
 		</c:forEach>
