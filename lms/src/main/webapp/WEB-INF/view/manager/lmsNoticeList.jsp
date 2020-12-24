@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>LMS 공지사항</h1>
-	<a href="${path}/manager/addLmsNotice/${managerId }/${currentPage}">추가</a>
+	
 	<table border="1">
 		<thead>
 			<tr>
@@ -29,7 +29,7 @@
 							첫페이지 6,5,4,3,2에서 다음페이지 1이 나와야하지만 넘어가면 6 출력
 							*해결 방법 
 						-->
-						<span>${(totalRow-(5*(currentPage-1)))-(status.index)}</span>
+						<span>${ruleNo-(status.index)}</span>
 						<span hidden="hidden">${l.lmsNoticeNo}</span>
 					</td>
 					<td>${l.lmsNoticeWriter}</td>
@@ -44,48 +44,102 @@
 	
 	<!-- 페이징 처리 -->
 	<div>
-		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
-		<c:if test="${startPage!=1 && lastPage!=1}">
-			<span> <a href="${path}/manager/lmsNoticeList/${startPage-10}">이전&nbsp;&nbsp;</a>
-			</span>
-		</c:if>
-		<!-- lastPage가 10개를 채울수 없을 때 -->
-		<c:if test="${startPage+9 > lastPage }">
-			<c:forEach var="i" begin="${startPage }" end="${lastPage}">
-				<!-- 현재 페이지일 경우 -->
-				<c:if test="${currentPage == i }">
-					<span> <a>${i}&nbsp;&nbsp;</a>
-					</span>
-				</c:if>
-				<!-- 현재 페이지가 아닐 경우 -->
-				<c:if test="${currentPage != i }">
-					<span> <a href="${path}/manager/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
-					</span>
-				</c:if>
-			</c:forEach>
-		</c:if>
-		<c:if test="${startPage+9<lastPage }">
-			<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
-				<!-- 현재 페이지일 경우 -->
-				<c:if test="${currentPage == i }">
-					<span> <a>${i}&nbsp;&nbsp;</a>
-					</span>
-				</c:if>
-				<!-- 현재 페이지가 아닐 경우 -->
-				<c:if test="${currentPage != i }">
-					<span> <a href="${path}/manager/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
-					</span>
-				</c:if>
-			</c:forEach>
-		</c:if>
-		<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
-		<c:if test="${startPage+9<lastPage && lastPage != startPage}">
-			<span> <a href="${path}/manager/lmsNoticeList/${startPage+10}">다음&nbsp;&nbsp;</a>
-			</span>
+		<!-- 페이징 처리 - 검색하지 않았을 때 때  -->
+		<c:if test="${lmsNoticeTitle == '' }">
+			<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+			<c:if test="${startPage!=1 && lastPage!=1}">
+				<span> <a href="${path}/manager/lmsNoticeList/${startPage-10}">이전&nbsp;&nbsp;</a>
+				</span>
+			</c:if>
+			<!-- lastPage가 10개를 채울수 없을 때 -->
+			<c:if test="${startPage+9 > lastPage }">
+				<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+					<!-- 현재 페이지일 경우 -->
+					<c:if test="${currentPage == i }">
+						<span> <a>${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+					<!-- 현재 페이지가 아닐 경우 -->
+					<c:if test="${currentPage != i }">
+						<span> <a href="${path}/manager/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<c:if test="${startPage+9<lastPage }">
+				<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+					<!-- 현재 페이지일 경우 -->
+					<c:if test="${currentPage == i }">
+						<span> <a>${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+					<!-- 현재 페이지가 아닐 경우 -->
+					<c:if test="${currentPage != i }">
+						<span> <a href="${path}/manager/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+			<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+				<span> <a href="${path}/manager/lmsNoticeList/${startPage+10}">다음&nbsp;&nbsp;</a>
+				</span>
+			</c:if>
 		</c:if>
 	</div>
-	
-	<a href="${path }/manager/index">메인으로</a>
+	<div>
+		<!-- 페이징 처리 - 검색했을 때  -->
+		<c:if test="${lmsNoticeTitle != '' }">
+			<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+			<c:if test="${startPage!=1 && lastPage!=1}">
+				<span> <a href="${path}/manager/lmsNoticeList/${lmsNoticeTitle}/${startPage-10}">이전&nbsp;&nbsp;</a>
+				</span>
+			</c:if>
+			<!-- lastPage가 10개를 채울수 없을 때 -->
+			<c:if test="${startPage+9 > lastPage }">
+				<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+					<!-- 현재 페이지일 경우 -->
+					<c:if test="${currentPage == i }">
+						<span> <a>${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+					<!-- 현재 페이지가 아닐 경우 -->
+					<c:if test="${currentPage != i }">
+						<span> <a href="${path}/manager/lmsNoticeList/${lmsNoticeTitle}/${i}">${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<c:if test="${startPage+9<lastPage }">
+				<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+					<!-- 현재 페이지일 경우 -->
+					<c:if test="${currentPage == i }">
+						<span> <a>${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+					<!-- 현재 페이지가 아닐 경우 -->
+					<c:if test="${currentPage != i }">
+						<span> <a href="${path}/manager/lmsNoticeList/${lmsNoticeTitle}/${i}">${i}&nbsp;&nbsp;</a>
+						</span>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+			<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+				<span> <a href="${path}/manager/lmsNoticeList/${lmsNoticeTitle}/${startPage+10}">다음&nbsp;&nbsp;</a>
+				</span>
+			</c:if>
+		</c:if>
+	</div>
+	<br>
+	<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
+	<div>
+		<input type="text" id="lmsNoticeTitle" value="${lmsNoticeTitle}" style="width:250px">&emsp;
+		<a id="searchBtn" href="">검색</a>
+	</div>
+	<br>
+	<a href="${path }/manager/index">메인으로</a>&emsp;
+	<a href="${path}/manager/addLmsNotice/${managerId }/${currentPage}">추가</a>
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -104,7 +158,12 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
-    	
+	 // 검색창에 입력한 값을 바로 사용하기 위해서 jquery사용
+	    $(document).ready(function(){
+			$('#searchBtn').on('click',function(){
+				$('#searchBtn').prop('href',"${path}/manager/lmsNoticeList/"+$('#lmsNoticeTitle').val()+"/1");
+				})
+		})
     </script>
 </body>
 </html>

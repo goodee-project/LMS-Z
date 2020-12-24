@@ -110,7 +110,7 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">과제목록</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">공지사항</span></a>
                         </li>
@@ -144,7 +144,7 @@
                     <div class="col-5 align-self-center text-right">
                     	<div class="col-12 align-self-center">
                     		<c:if test="${classRegistrationCk == false && classPersonalCheck == true}">
-		                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}/${currentPage}">
+		                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}/${lectureTotal }/${currentPage}">
 		                        	수강 신청
 		                        </a>
 	                        </c:if>

@@ -23,11 +23,13 @@ public class StudentNoticeController {
 	//Lms 공지사항 전체 불러오기
 	@GetMapping("/student/lmsNoticeList/{currentPage}")
 	public String lmsNoticeList(Model model,
-										@PathVariable(value = "currentPage") int currentPage) {
+								@PathVariable(value = "currentPage") int currentPage) {
 		
 		//페이징에 필요한 변수선언
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
+		// 페이징) 1~10 한묶음 중 첫번째 페이지
+		int startPage = ((currentPage / 11) * rowPerPage) + 1;
 		int lastPage = 0;
 		int totalCount = teacherLmsNoticeService.getLmsNoticeCount();
 		
@@ -40,6 +42,8 @@ public class StudentNoticeController {
 		
 		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("startPage",startPage);
 		return "student/lmsNoticeList";
 	}
 	//Lms 공지사항 상세보기
@@ -60,6 +64,8 @@ public class StudentNoticeController {
 		int rowPerPage = 5; 
 		
 		int beginRow = (currentPage - 1) * rowPerPage;
+		// 페이징) 1~10 한묶음 중 첫번째 페이지
+		int startPage = ((currentPage / 11) * rowPerPage) + 1;
 		// 마지막 페이지
 		int lastPage = 0; 
 		// 공지사항 전체 개수
@@ -79,6 +85,8 @@ public class StudentNoticeController {
 		// jsp파일에 필요한 변수값 model에 입력(현재 페이지, 마지막 페이지, 공지사항 목록)
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("lectureNo",lectureNo);
 		model.addAttribute("noticeList", noticeList);
 		
 		return "student/lectureNoticeList";

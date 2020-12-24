@@ -17,10 +17,9 @@ public class ManagerLmsNoticeService {
 	@Autowired ManagerLmsNoticeMapper managerLmsNoticeMapper;
 
 	//공지사항 리스트, 페이징
-	public List<LmsNotice> getLmsNoticeList(int currentPage, int rowPerPage){
-		int beginRow = (currentPage -1) * rowPerPage; 
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		
+	public List<LmsNotice> getLmsNoticeList(int beginRow, int rowPerPage){
+	
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		
@@ -30,6 +29,18 @@ public class ManagerLmsNoticeService {
 	//공지사항 개수
 	public int getLmsNoticeCount() {
 		return managerLmsNoticeMapper.selectLmsNoticeCount();	
+	}
+	//LMS 공지사항 검색 기능
+	public List<LmsNotice> getSearchLmsNotice(String lmsNoticeTitle, int beginRow, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lmsNoticeTitle", lmsNoticeTitle);
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		return managerLmsNoticeMapper.selectSearchLmsNotice(map);
+	}
+	//LMS 공지사항 검색 했을 때 일치하는 DB데이터 수
+	public int getSearchNoticeTotal(String lmsNoticeTitle) {
+		return managerLmsNoticeMapper.selectSearchNoticeTotal(lmsNoticeTitle);
 	}
 	// 공지사항 조회수 +1
 	public int modifyLmsNoticeCount(int lmsNoticeNo) {

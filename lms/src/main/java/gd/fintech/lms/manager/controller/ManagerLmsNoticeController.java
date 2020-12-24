@@ -36,13 +36,16 @@ public class ManagerLmsNoticeController {
 		
 		//한 페이지 출력 공지사항 개수 
 		int rowPerPage = 5;
+		int beginRow = (currentPage -1) * rowPerPage; 
 		int startPage = ((currentPage/11)*rowPerPage)+1;
 		
 		//last 페이지
 		int lastPage = 0; 
 		//공지사항 total Count
 		int totalRow = managerLmsNoticeService.getLmsNoticeCount();
-		
+		// 데이터마다 갖고 있는 no값이 1,2,3처럼 규칙이 없기 때문에
+		// UI에서는 규칙적인 NO를 보여주기 위해
+		int ruleNo = (totalRow-(rowPerPage*(currentPage-1)));
 		//나누어 떨어지면 
 		if(totalRow % rowPerPage == 0) {
 			lastPage = totalRow / rowPerPage;
@@ -50,13 +53,54 @@ public class ManagerLmsNoticeController {
 			lastPage = totalRow / rowPerPage +1;
 		}
 		
-		List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getLmsNoticeList(currentPage, rowPerPage);
+		List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
 
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("totalRow",totalRow);
+		model.addAttribute("ruleNo",ruleNo);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		model.addAttribute("startPage",startPage);
+		return "manager/lmsNoticeList";
+	}
+	
+	//공지사항 검색 리스트
+	@GetMapping ("/manager/lmsNoticeList/{lmsNoticeTitle}/{currentPage}")
+	public String LmsNotice(Model model,
+							@PathVariable(name="lmsNoticeTitle") String lmsNoticeTitle,
+							@PathVariable(name = "currentPage") int currentPage) {
+		
+		//한 페이지 출력 공지사항 개수 
+		int rowPerPage = 5;
+		int beginRow = (currentPage -1) * rowPerPage; 
+		int startPage = ((currentPage/11)*rowPerPage)+1;
+		
+		//last 페이지
+		int lastPage = 0; 
+		//공지사항 total Count
+		int totalRow = managerLmsNoticeService.getSearchNoticeTotal(lmsNoticeTitle);
+		
+		//나누어 떨어지면 
+		if(totalRow % rowPerPage == 0) {
+			lastPage = totalRow / rowPerPage;
+		} else {//나누어 떨어지지 않는다면
+			lastPage = totalRow / rowPerPage +1;
+		}
+		// 데이터마다 갖고 있는 no값이 1,2,3처럼 규칙이 없기 때문에
+		// UI에서는 규칙적인 NO를 보여주기 위해
+		int ruleNo = (totalRow-(rowPerPage*(currentPage-1)));
+		
+		List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getSearchLmsNotice(lmsNoticeTitle, beginRow, rowPerPage);
+
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("lmsNoticeList", lmsNoticeList);
+		model.addAttribute("startPage",startPage);
+		// 데이터마다 갖고 있는 no값이 1,2,3처럼 규칙이 없기 때문에
+		// UI에서는 규칙적인 NO를 보여주기 위해
+		model.addAttribute("ruleNo", ruleNo);
+		// 전체 또는 검색했을 때 페이지 번호에 정해진 url이 달라져야하기 때문에
+		model.addAttribute("lmsNoticeTitle",lmsNoticeTitle);
+
 		return "manager/lmsNoticeList";
 	}
 	

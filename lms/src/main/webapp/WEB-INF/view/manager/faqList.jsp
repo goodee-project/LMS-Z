@@ -47,7 +47,7 @@
 								첫페이지 6,5,4,3,2에서 다음페이지 1이 나와야하지만 넘어가면 6 출력
 								*해결 방법 
 							-->
-							<span>${(totalRow-(5*(currentPage-1)))-(status.index)}</span>
+							<span>${ruleNo-(status.index)}</span>
 							<span hidden="hidden">${f.faqNo}</span>
 						</td>
 						<td>${f.faqCategory}</td>

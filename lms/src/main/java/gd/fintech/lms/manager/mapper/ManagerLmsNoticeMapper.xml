@@ -15,6 +15,28 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
+	<!-- LMS 공지사항 검색 기능 -->
+	<select id="selectSearchLmsNotice" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.LmsNotice">
+		SELECT 
+			lms_notice_no lmsNoticeNo, 
+			lms_notice_title lmsNoticeTitle, 
+			lms_notice_writer lmsNoticeWriter,
+			DATE_FORMAT(lms_notice_createdate,'%Y-%m-%d') lmsNoticeCreatedate,
+			DATE_FORMAT(lms_notice_updatedate,'%Y-%m-%d') lmsNoticeUpdatedate,
+			lms_notice_count lmsNoticeCount
+		FROM lms_notice
+		WHERE lms_notice_title LIKE CONCAT('%',#{lmsNoticeTitle},'%')
+		ORDER BY lms_notice_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<!-- LMS 공지사항 검색 했을 때 일치하는 DB데이터 수 -->
+	<select id="selectSearchNoticeTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM lms_notice
+		WHERE lms_notice_title LIKE CONCAT('%',#{lmsNoticeTitle},'%')
+	</select>
 	<!-- 공지사항 총 갯수 -->
 	<select id="selectLmsNoticeCount" resultType="Integer">
 		SELECT 

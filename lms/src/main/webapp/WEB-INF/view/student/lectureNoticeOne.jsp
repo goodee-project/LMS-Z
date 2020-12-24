@@ -112,7 +112,7 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">과제목록</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/student/lmsNoticeList/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">공지사항</span></a>
                         </li>

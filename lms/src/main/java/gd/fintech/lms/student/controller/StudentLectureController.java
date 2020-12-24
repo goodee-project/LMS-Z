@@ -2,8 +2,8 @@ package gd.fintech.lms.student.controller;
 
 import java.util.ArrayList;
 
-import java.util.List;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,6 @@ import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
-import gd.fintech.lms.vo.Msg;
 
 @Controller
 public class StudentLectureController {
@@ -30,11 +29,11 @@ public class StudentLectureController {
 	public String lectureList(Model model,
 							@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 10;
+		int rowPerPage = 5;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage;
-		// 다음 이전 페이지로 이동했을 때 출력할 시작 기준 페이지
-		int startPage = ((currentPage/(rowPerPage+1))*rowPerPage)+1;
+		// 페이징) 1~10 한묶음 중 첫번째 페이지
+		int startPage = ((currentPage / 11) * rowPerPage) + 1;
 		// 페이징 처리한 전체 강의 리스트
 		List<Lecture> lectureList = studentLectureService.getLectureList(beginRow, rowPerPage); 
 		// 전체 강의 목록 갯수
@@ -83,16 +82,18 @@ public class StudentLectureController {
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("classPersonalCheck",classPersonalCheck);
+		model.addAttribute("lectureTotal",lectureTotal);
 		return "student/lectureListOne";
 	}
 	// 수강 신청
-	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}/{currentPage}")
+	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}")
 	public String classRegistration(@PathVariable(name="studentId") String studentId,
 									@PathVariable(name="lectureNo") int lectureNo,
+									@PathVariable(name="lectureTotal") int lectureTotal,
 									@PathVariable(name="currentPage") int currentPage) {
 		// 나의 강의목록에 추가
 		studentLectureService.addClassRegistration(studentId,lectureNo);
-		return "redirect:/student/lectureListOne/"+studentId+"/"+lectureNo+"/"+currentPage;
+		return "redirect:/student/lectureListOne/"+studentId+"/"+lectureNo+"/"+lectureTotal+"/"+currentPage;
 	}
 	
 	//나의 강의목록 리스트 출력
@@ -101,11 +102,11 @@ public class StudentLectureController {
 							@PathVariable(name="studentId") String studentId,
 							@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 10;
+		int rowPerPage = 1;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage; 
-		// 다음 이전 페이지로 이동했을 때 출력할 시작 기준 페이지
-		int startPage = ((currentPage/11)*10)+1;
+		// 페이징) 1~10 한묶음 중 첫번째 페이지
+		int startPage = ((currentPage / 11) * rowPerPage) + 1;
 		// 페이징 처리한 나의 강의 현황 리스트
 		List<ClassRegistration> myLectureList = studentLectureService.getMyLectureList(studentId, beginRow, rowPerPage); 
 		// 전체 나의 강의 목록 갯수
