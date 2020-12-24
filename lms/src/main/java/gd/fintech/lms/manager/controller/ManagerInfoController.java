@@ -60,6 +60,17 @@ public class ManagerInfoController {
 		return "redirect:/manager/myInfo/" + managerId;
 	}
 	
+	// 마이페이지 직책 수정
+	@GetMapping("/manager/modifyPositionMyInfo/{managerId}/{managerPosition}")
+	public String modifyManagerByPosition(
+			@PathVariable(value="managerId") String managerId,
+			@PathVariable(value="managerPosition") String managerPosition) {
+		
+		managerInfoService.modifyManagerByPosition(managerId, managerPosition);
+		
+		return "redirect:/manager/myInfo/" + managerId;
+	}
+	
 	// 마이페이지 핸드폰 번호 수정
 	@PostMapping("/manager/modifyAddressMyInfo")
 	public String modifyManagerByPhone(Manager manager) {

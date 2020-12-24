@@ -31,123 +31,10 @@
 
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <header class="topbar" data-navbarbg="skin6">
-            <nav class="navbar top-navbar navbar-expand-md">
-            	<!-- 사이드바 로고 -->
-                <div class="navbar-header" data-logobg="skin6">
-                    <div class="navbar-brand">
-                        <!-- 사이트 이름 -->
-                        <a href="index">
-                            <b class="logo-icon">
-                            	<!-- 사이트 이름 옆 로고 -->
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
-                            </b>
-							
-							<!-- 사이트 이름 -->
-                            <span class="logo-text">
-
-                            </span>
-                        </a>
-                    </div>
-                </div>
-
-				<!-- 로고 오른쪽 메뉴 -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
-					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
-                    <!-- 메뉴 오른쪽 마이페이지 -->
-                    <ul class="navbar-nav float-right">
-                    	<!-- 눌렀을 때 드롭다운 -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <!-- 마이페이지 사진 -->
-                                <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
-                                    width="40">
-                                <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">박대표</span> <i data-feather="chevron-down"
-                                        class="svg-icon"></i></span>
-                            </a>
-                            <!-- 드롭다운 내용 -->
-                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                                <a class="dropdown-item" href="${path}/manager/myInfo/${managerId}"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    My Page</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
         
-        <!-- 로고 밑 메뉴 -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
-                                    class="hide-menu">Index</span></a></li>
-                        <!-- 사용 시 줄 표시 -->
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">메뉴 옵션 1</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/lmsNoticeList/1"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">공지사항
-                                    </span></a>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/manager/memberQueue/1/1"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">강사/학생 관리
-                                </span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/lectureList/1"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">강좌 목록</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/classroomList/1"
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">강의실 관리</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/textbookList/1"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">교재 관리</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/faqList/강의/1"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">FAQ</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/memberList/1"
-                           		aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                              		class="hide-menu">강사/학생리스트</span></a></li>
-                         <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
-                         <!--  li -> a class = siderbar-link 대신 has-arrow 사용
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-1
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-2
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-3
-                                        </span></a>
-                                </li>
-                            </ul>
-                        -->
-                        <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/logout"
-                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
-                                    class="hide-menu">Logout</span></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+		<jsp:include page="/WEB-INF/view/manager/inc/logoMenu.jsp" flush="false"></jsp:include>
+        
+        <jsp:include page="/WEB-INF/view/manager/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
@@ -216,7 +103,17 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">1</h4>
+                                <h4 class="card-title">현재 방문자</h4>
+                            
+	                            	<table id="connectTable">
+	                            		<thead>
+	                            			<tr class="border-0">
+	                            				<th class="border-top-0 text-muted px-2 py-4 font-14">정보</th>
+	                            				<th class="border-top-0 text-muted px-2 py-4 font-14">이름</th>
+	                            			</tr>
+	                            		</thead>
+	                            		
+	                            	</table>
                             </div>
                         </div>
                     </div>
@@ -384,6 +281,61 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+    	// 페이지에 들어오면 현재 방문자 수 표시
+    	// ajax를 통해 json형식을 받아옴
+	    $(document).ready(function(){
+	    	$.ajax({
+				url:'${path}/manager/getConnectList',
+				type:'GET',
+				success:function(data){
+					for(var i=0; i<data.connectList.length; i++){
+						if(data.connectList[i].managerName != null){
+							var managerBody = '<tbody>';
+							managerBody += '<tr><td class="border-top-0 text-muted px-2 font-13">';
+							managerBody += '운용자';						
+							managerBody += '</td><td class="border-top-0 text-muted px-2 font-13">';						
+							managerBody += data.connectList[i].managerName;						
+							managerBody += '</td></tr>';
+							managerBody += '</tbody>';
+
+							$('#connectTable').append(managerBody);
+						}
+						if(data.connectList[i].studentName != null){
+							var studentBody = '<tbody>';
+							studentBody += '<tr><td class="border-top-0 text-muted px-2 font-13">';
+							studentBody += '학생';						
+							studentBody += '</td><td class="border-top-0 text-muted px-2 font-13">';						
+							studentBody += data.connectList[i].studentName;						
+							studentBody += '</td></tr>';
+							studentBody += '</tbody>';
+
+							$('#connectTable').append(studentBody);
+						}
+						if(data.connectList[i].teacherName != null){
+							var teacherBody = '<tbody>';
+							teacherBody += '<tr><td class="border-top-0 text-muted px-2 font-13">';
+							teacherBody += '강사';						
+							teacherBody += '</td><td class="border-top-0 text-muted px-2 font-13">';						
+							teacherBody += data.connectList[i].teacherName;						
+							teacherBody += '</td></tr>';
+							teacherBody += '</tbody>';
+
+							$('#connectTable').append(teacherBody);
+						}
+					}
+				}
+			});	
+	    });
+    </script>
 </body>
 
 </html>
+
+
+
+
+
+
+

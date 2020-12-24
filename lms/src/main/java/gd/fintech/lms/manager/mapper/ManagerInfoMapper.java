@@ -22,6 +22,7 @@ public interface ManagerInfoMapper {
 	int updateManagerByBirth(String managerId, String managerBirth);
 	int updateManagerByImage(String managerId, String managerImage);
 	int updateManagerByPhone(String managerId, String managerPhone);
+	int updateManagerByPosition(String managerId, String managerPosition);
 	int updateManagerByAddress(Manager manager);
 	
 	// 마이 페이지 이메일 중복 검사

@@ -33,6 +33,14 @@
 		WHERE manager_id = #{managerId}
 	</update>
 	
+	<!-- 마이 페이지 직책 수정 -->
+	<update id="updateManagerByPosition" parameterType="java.util.Map">
+		UPDATE manager
+		SET 
+			manager_position = #{managerPosition}, manager_updatedate = NOW()
+		WHERE manager_id = #{managerId}
+	</update>
+	
 	<!-- 마이 페이지 핸드폰 번호 수정 -->
 	<update id="updateManagerByPhone" parameterType="java.util.Map">
 		UPDATE manager
@@ -114,7 +122,8 @@
 			manager_birth managerBirth,
 			manager_address_main managerAddressMain,
 			manager_address_sub managerAddressSub,
-			manager_image managerImage
+			manager_image managerImage,
+			manager_position managerPosition
 		FROM manager
 		WHERE manager_id = #{managerId}
 	</select>

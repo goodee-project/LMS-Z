@@ -23,9 +23,9 @@ public class ManagerLoginFilter implements Filter {
 		if(session.getAttribute("managerId") == null) {
 			// ((HttpServletRequest) request).getContextPath() => /LMS-Z 절대 경로 주소 가져오기
 			String cPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse)response).sendRedirect(cPath + "/managerLogin#");
+			((HttpServletResponse)response).sendRedirect(cPath + "/managerLogin");
 			return;
-		}
+		} 
 		chain.doFilter(request, response);
 	}
 }

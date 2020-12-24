@@ -83,6 +83,11 @@ public class ManagerInfoService {
 		managerInfoMapper.updateManagerByAddress(manager);
 	}
 	
+	// 마이페이지 직책 수정
+	public void modifyManagerByPosition(String managerId, String managerPosition) {
+		managerInfoMapper.updateManagerByPosition(managerId, managerPosition);
+	}
+	
 	// 마이페이지 핸드폰 번호 수정
 	public void modifyManagerByPhone(String managerId, String managerPhone) {
 		managerInfoMapper.updateManagerByPhone(managerId, managerPhone);

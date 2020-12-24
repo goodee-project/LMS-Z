@@ -88,6 +88,32 @@
 										<td><button type="button" id="btnName" class="btn btn-dark">개명</button>
 									</tr>
 									<tr>
+										<th class=" font-14 font-weight-medium text-dark">직책</th>
+										<td class=" font-14 font-weight-medium text-dark">
+											<select id="managerPosition" name="managerPosition">
+												<option value="${managerOne.managerPosition}">${managerOne.managerPosition}</option>
+												<c:if test="${managerOne.managerPosition == null}">
+													<option value="대리">대리</option>
+													<option value="대리">사원</option>
+													<option value="대리">팀장</option>
+												</c:if>
+												<c:if test="${managerOne.managerPosition == '대리'}">
+													<option value="대리">사원</option>
+													<option value="대리">팀장</option>
+												</c:if>
+												<c:if test="${managerOne.managerPosition == '사원'}">
+													<option value="대리">대리</option>
+													<option value="대리">팀장</option>
+												</c:if>
+												<c:if test="${managerOne.managerPosition == '팀장'}">
+													<option value="대리">대리</option>
+													<option value="대리">사원</option>
+												</c:if>
+											</select>
+										</td>
+										<td><button type="button" id="btnPosition" class="btn btn-dark">변경</button>
+									</tr>
+									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
 										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="managerEmail" value="${managerOne.managerEmail}"></td>
 										<td><button type="button" id="btnEmail" class="btn btn-dark">변경</button></td>
@@ -185,6 +211,17 @@
 			} else{
 				if(confirm('입력하신 이름으로 변경합니다.')){
 					location.href = '${path}/manager/modifyNameMyInfo/${managerId}/'+$('#managerName').val();
+				}
+			}
+		});
+		
+		// 직책에 대한 변경값이 있을 경우에만 crud로 넘어감
+		$('#btnPosition').click(function(){
+			if($('#managerPosition').val() == '${managerOne.managerPosition}'){
+				alert('현재 직책과 동일합니다');
+			} else{
+				if(confirm('입력하신 직책으로 변경합니다.')){
+					location.href = '${path}/manager/modifyPositionMyInfo/${managerId}/'+$('#managerPosition').val();
 				}
 			}
 		});

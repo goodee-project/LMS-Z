@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.manager.mapper.ManagerConnectMapper">
+	<!-- map형식으로 반환 -->
+	<resultMap type="map" id="selectConnectResult">
+		<result property="managerName" column="manager_name"/>
+		<result property="teacherName" column="teacher_name"/>
+		<result property="studentName" column="student_name"/>
+	</resultMap>
+	<!-- connect테이블과 teacher,account,manager,student를 조인하여 결과 출력 -->
+	<select id="selectConnect" parameterType="String" resultMap="selectConnectResult">
+		SELECT m.manager_name, s.student_name, t.teacher_name
+		FROM connect c
+		INNER JOIN account a
+		ON c.account_id = a.account_Id
+		LEFT JOIN manager m
+		ON a.account_id = m.manager_id
+		LEFT JOIN teacher t
+		ON a.account_id = t.teacher_id
+		LEFT JOIN student s
+		ON a.account_id = s.student_id
+		WHERE c.connect_state = #{connectState}
+	</select>
+
+	<!-- 로그아웃 시 state변경 -->
+	<update id="updateConnectToOut" parameterType="gd.fintech.lms.vo.Connect">
+		UPDATE connect
+		SET connect_state = #{connectState}, connect_updatedate = NOW()
+		WHERE account_id = #{accountId}
+	</update>
+	
+	<!-- 로그인 시 없는 id라면 connect테이블에 추가 -->
+	<insert id="insertConnect" parameterType="gd.fintech.lms.vo.Connect">
+		INSERT INTO connect(account_id, connect_state, connect_updatedate)
+		VALUES(#{accountId}, #{connectState}, NOW())
+	</insert>
+	
+	<!-- 로그인 시 있는 id라면 connect테이블 업데이트 -->
+	<update id="updateConnectToIn" parameterType="gd.fintech.lms.vo.Connect">
+		UPDATE connect
+		SET connect_state = #{connectState}, connect_updatedate = NOW()
+		WHERE account_id = #{accountId}
+	</update>
+	
+	<!-- 로그인 할 시 connect테이블에 데이터가 있는지 확인 -->
+	<select id="selectConnectToCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM connect
+		WHERE account_id = #{accountId}
+	</select>
+</mapper>
