@@ -9,13 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<a href="${path}/student/reportOverdueList/${studentId}/1">마감된 과제</a>
 	<table border="1">
 		<thead>
 			<tr>
-				<th>lectureNo</th>
-				<th>reportTitle</th>
-				<th>reportStartdate</th>
-				<th>reportEnddate</th>
+				<th>강의</th>
+				<th>과제명</th>
+				<th>과제 제출시작일</th>
+				<th>과제 제출마감일</th>
+				<th>과제 남은 마감일</th>
+				<th>과제 제출현황</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,8 +27,24 @@
 					<td>${r.lectureNo}: (${r.lecture.lectureName})</td>
 					<td>${r.reportTitle}</td>
 					<td>${r.reportStartdate}</td>
-					<td>${r.reportEnddate}</td>
-					<td><a href="${path}/student/reportSubmitOne/${r.reportNo}/${studentId}">과제</a></td>
+					<td>${r.reportEnddate}</td>	
+				<c:if test="${r.dateCha >= 0}">
+					<td>${r.dateCha}</td>
+				</c:if>	
+				<c:if test="${r.dateCha < 0}">
+					<td>마감된 과제입니다.</td>
+				</c:if>
+				<c:if test="${r.reportSubmit.reportSubmitContent!=null}">	
+					<td>
+						<a href="${path}/student/reportSubmitOne/${r.reportNo}/${studentId}">제출완료</a>
+					</td>
+				</c:if>
+				
+				<c:if test="${r.reportSubmit.reportSubmitContent==null}">	
+					<td>
+						<a href="${path}/student/reportSubmitOne/${r.reportNo}/${studentId}">미제출</a>
+					</td>
+				</c:if>		
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -34,6 +53,11 @@
 		<c:forEach var="i" begin="1" end="${lastPage}">
 			<span>
 				<a href="${path}/student/reportList/${studentId}/${i}">${i}</a>
+			</span>
+		</c:forEach>
+		<c:forEach var="o" begin="1" end="${lastOverduePage}">
+			<span>
+				<a href="${path}/student/reportOverdueList/${studentId}/${o}">${o}</a>
 			</span>
 		</c:forEach>
 	</div>

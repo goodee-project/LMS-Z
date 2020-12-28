@@ -36,8 +36,22 @@ public class StudentReportService {
 		return studentReportSubmitMapper.selectReportListPage(map);
 	}
 	
+	public List<Report> getOverdueReportPage(int currentPage, int rowPerPage, String accountId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		return studentReportSubmitMapper.selectOverdueReportListPage(map);
+	}
+	
 	public int totalReport(String accountId) {
 		return studentReportSubmitMapper.totalCountReport(accountId);
+	}
+	
+	public int totalOverdueReport(String accountId) {
+		return studentReportSubmitMapper.totalCountOverdueReport(accountId);
 	}
 	
 	public void addReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
@@ -76,7 +90,6 @@ public class StudentReportService {
 					e.printStackTrace();
 					throw new RuntimeException();
 				}
-				
 			}
 		}
 		if(reportSubmitFile != null) {
@@ -105,7 +118,6 @@ public class StudentReportService {
 		}
 		studentReportSubmitFileMapper.deleteReportSubmitAllFile(reportSubmitNo);
 		studentReportSubmitMapper.deleteReportSubmit(reportSubmitNo);
-		
 	}
 	
 	public Report getReportOne(int reportNo) {

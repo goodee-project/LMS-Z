@@ -37,9 +37,24 @@
 		</tbody>
 	</table>
 	<div>
+	
 		<c:forEach var="i" begin="1" end="${lastPage}">
 			<span>
-				<a id="page" href="${path}/student/questionList/${i}">${i}</a>
+				<a href="${path}/student/questionList/${i}">${i}</a>
+			</span>
+		</c:forEach>
+	</div>
+	<div>
+		<c:forEach var="t" begin="1" end="${lastTitlePage}">
+			<span>
+				<a href="${path}/student/questionTitleSearch/${questionTitle}/${t}">${t}</a>
+			</span>
+		</c:forEach>
+	</div>
+	<div>
+		<c:forEach var="w" begin="1" end="${lastWriterPage}">
+			<span>
+				<a href="${path}/student/questionWriterSearch/${questionWriter}/${w}">${w}</a>
 			</span>
 		</c:forEach>
 	</div>
@@ -51,10 +66,9 @@
 </body>
 <script>
 	$('#btn').on('click',function(){
+		
 		if($('#sub').val()=='제목' && $('#question').val()!=''){
 			$('#btn').prop('href',"${path}/student/questionTitleSearch/"+$('#question').val()+"/1");
-			$('#page').empty();
-			$('#page').append(htmlAdd);
 		} else if($('#sub').val()=='작성자' && $('#question').val()!=''){
 			$('#btn').prop('href',"${path}/student/questionWriterSearch/"+$('#question').val()+"/1");
 			} 

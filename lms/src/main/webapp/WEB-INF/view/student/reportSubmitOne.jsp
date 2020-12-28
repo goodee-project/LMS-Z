@@ -10,12 +10,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+	<div id="up"></div>
 	<table border="1">
 			<tr>
 				<td>report_no: ${report.reportNo}</td>
 				<td>report_title: ${report.reportTitle}</td>
 				<td>report_content: ${report.reportContent}</td>
 				<td>lecture_no: ${report.lectureNo} (${report.lecture.lectureName})</td>
+				<c:if test="${report.dateCha>0}">	
+					<td>제출기한: ${report.dateCha}</td>
+				</c:if>
+				<c:if test="${report.dateCha<0}">	
+					<td>
+						제출기한: 과제가 마감되었습니다.
+					</td>
+				</c:if>
 			</tr>
 	</table>
 	
@@ -40,6 +49,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<input type="hidden" id="reportDateCha" value="${report.dateCha}">
 	<div id="add"></div>
 </body>
 <script>
@@ -47,13 +57,20 @@
 		let htmlAdd='<div><a href="${path}/student/reportSubmitAdd/${report.reportNo}">과제 작성</a></div>'
 		let htmlUpdate='<div><a href="${path}/student/reportSubmitModify/${reportSubmit.reportNo}/${studentId}">과제 수정</a></div>'
 		let htmlDelete='<div><a href="${path}/student/reportSubmitAllRemove?reportSubmitNo=${reportSubmit.reportSubmitNo}">과제 삭제</a></div>'
-		if($(item).val()==''){
+		if($(item).val()=='' && $('#reportDateCha').val()>0){
 			$('#add').append(htmlAdd);
 		}
-		if($(item).val()!=''){
+		if($(item).val()!='' && $('#reportDateCha').val()>0){
 			$('#add').append(htmlUpdate);
 			$('#add').append(htmlDelete);
 		}
 		});
+
+	$('#reportDateCha').each(function(index, item){
+		let htmlUp='<h1>마감된 과제는 작성및 수정/삭제 할 수 없습니다.</h1>'	
+		if($(item).val()<=0){
+			$('#up').append(htmlUp);
+		}
+	});
 </script>
 </html>

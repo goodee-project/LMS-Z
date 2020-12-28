@@ -11,15 +11,22 @@
 		<result property="reportUpdatedate" column="report_updatedate"/>
 		<result property="reportStartdate" column="report_startdate"/>
 		<result property="reportEnddate" column="report_enddate"/>
+		<result property="dateCha" column="DATEDIFF(r.report_enddate,NOW())"/>
 		
 	<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
 		<result property="lectureNo" column="lecture_no"/>
 		<result property="accountId" column="account_id"/>
+		<result property="classRegistrationState" column="class_registration_state"/>
 	</collection>	
 	
 	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
 		<result property="lectureNo" column="lecture_no"/>
 		<result property="lectureName" column="lecture_name"/>
+	</collection>
+	
+	<collection property="reportSubmit" ofType="gd.fintech.lms.vo.ReportSubmit">
+		<result property="reportNo" column="report_no"/>
+		<result property="reportSubmitContent" column="report_submit_content"/>
 	</collection>
 	</resultMap>
 	
@@ -33,12 +40,40 @@
 			r.report_createdate,
 			r.report_updatedate,
 			r.report_startdate,
-			r.report_enddate
+			r.report_enddate,
+			rs.report_submit_content,
+			DATEDIFF(r.report_enddate,NOW())
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
 			 left join lecture l 
 			 on r.lecture_no = l.lecture_no
-		WHERE cr.account_id = #{accountId}
+			 left join report_submit rs
+			 on r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND class_registration_state = '대기'
+		ORDER BY r.report_createdate DESC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="selectOverdueReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
+		SELECT
+			r.report_no,
+			r.lecture_no,
+			l.lecture_name,
+			r.report_title,
+			r.report_content,
+			r.report_createdate,
+			r.report_updatedate,
+			r.report_startdate,
+			r.report_enddate,
+			rs.report_submit_content,
+			DATEDIFF(r.report_enddate,NOW())
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+			 left join lecture l 
+			 on r.lecture_no = l.lecture_no
+			 left join report_submit rs
+			 on r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND class_registration_state = '대기'
 		ORDER BY r.report_createdate DESC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
@@ -48,7 +83,15 @@
 			COUNT(*) count
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
-		WHERE cr.account_id = #{accountId}
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0
+	</select>
+	
+	<select id="totalCountOverdueReport" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*) count
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]>
 	</select>
 	
 	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOne">
@@ -97,6 +140,7 @@
 		<result property="reportUpdatedate" column="report_updatedate"/>
 		<result property="reportStartdate" column="report_startdate"/>
 		<result property="reportEnddate" column="report_enddate"/>
+		<result property="dateCha" column="DATEDIFF(r.report_enddate,NOW())"/>
 		
 	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
 		<result property="lectureNo" column="lecture_no"/>
@@ -111,7 +155,8 @@
 		r.report_title,
 		r.report_content,
 		r.report_startdate,
-		r.report_enddate
+		r.report_enddate,
+		DATEDIFF(r.report_enddate,NOW()) 
 	FROM report r left join lecture l
 		 on r.lecture_no = l.lecture_no
 	WHERE report_no = #{reportNo} 	

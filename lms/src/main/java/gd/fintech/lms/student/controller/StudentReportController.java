@@ -32,12 +32,30 @@ public class StudentReportController {
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getReportPage(currentPage,rowPerPage,accountId);
+		
 		int totalReport = studentReportService.totalReport(accountId);
 		int lastPage = totalReport/rowPerPage;
 		if(totalReport % rowPerPage !=0) {
 			lastPage +=1;
 		}
 		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("reportList",reportList);
+		return "/student/reportList";
+	}
+	
+	@GetMapping("/student/reportOverdueList/{accountId}/{currentPage}")
+	public String listOverdueReport(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage=5;
+		List<Report> reportList = studentReportService.getOverdueReportPage(currentPage, rowPerPage, accountId);
+		int totalOverdueReport = studentReportService.totalOverdueReport(accountId);
+		int lastOverduePage = totalOverdueReport/rowPerPage;
+		if(totalOverdueReport % rowPerPage !=0) {
+			lastOverduePage +=1;
+		}
+		model.addAttribute("lastOverduePage",lastOverduePage);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("reportList",reportList);
 		return "/student/reportList";

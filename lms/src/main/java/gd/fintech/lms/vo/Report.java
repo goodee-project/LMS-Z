@@ -15,6 +15,8 @@ public class Report {
 	private String reportStartdate;
 	private String reportEnddate;
 	private Lecture lecture;
+	private ReportSubmit reportSubmit;
+	private int dateCha;
 	private List<ReportSubmit> reportSubmitList;
 	private List<ReportSubmitFile> reportSubmitFileList;
 	private List<ClassRegistration> classRegistrationList;

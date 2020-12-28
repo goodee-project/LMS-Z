@@ -32,7 +32,7 @@ public class StudentQuestionController {
 	// 질문 목록 리스트
 	@GetMapping("/student/questionList/{currentPage}")
 	public String listQuestion(Model model, @PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 5;
+		int rowPerPage = 3;
 		List<Question> questionList = studentQuestionService.getQuestionPage(currentPage, rowPerPage);
 		int countQuestion = studentQuestionService.totalQuestion();
 		int lastPage = countQuestion / rowPerPage;
@@ -49,14 +49,16 @@ public class StudentQuestionController {
 	public String searchTitleQuestion(Model model, 
 			@PathVariable(name="questionTitle")String questionTitle, 
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 1;
+		int rowPerPage = 10;
 		List<Question> questionList = studentQuestionService.getQuestionTitleSearch(questionTitle,currentPage, rowPerPage);
 		int countQuestionTitle = studentQuestionService.totalSearchTitleQuestion(questionTitle);
-		int lastPage = countQuestionTitle / rowPerPage;
+		int lastTitlePage = countQuestionTitle / rowPerPage;
 		if(countQuestionTitle % rowPerPage !=0) {
-			lastPage +=1;
+			lastTitlePage +=1;
 		}
+		model.addAttribute("questionTitle", questionTitle);
 		model.addAttribute("questionList",questionList);
+		model.addAttribute("lastTitlePage",lastTitlePage);
 		return "/student/questionList";
 	}
 	
@@ -64,13 +66,15 @@ public class StudentQuestionController {
 	public String searchWriterQuestion(Model model, 
 			@PathVariable(name="questionWriter")String questionWriter,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 1;
+		int rowPerPage = 10;
 		List<Question> questionList = studentQuestionService.getQuestionWriterSearch(questionWriter,currentPage, rowPerPage);
 		int countQuestionWriter = studentQuestionService.totalSearchWriterQuestion(questionWriter);
-		int lastPage = countQuestionWriter / rowPerPage;
+		int lastWriterPage = countQuestionWriter / rowPerPage;
 		if(countQuestionWriter % rowPerPage !=0) {
-			lastPage +=1;
+			lastWriterPage +=1;
 		}
+		model.addAttribute("questionWriter", questionWriter);
+		model.addAttribute("lastWriterPage", lastWriterPage);
 		model.addAttribute("questionList",questionList);
 		return "/student/questionList";
 	}
