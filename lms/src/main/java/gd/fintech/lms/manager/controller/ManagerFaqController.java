@@ -18,10 +18,8 @@ import gd.fintech.lms.vo.FaqCategory;
 
 @Controller
 public class ManagerFaqController {
-	@Autowired
-	ManagerFaqService managerFaqService;
-	@Autowired
-	ManagerLmsNoticeService managerLmsNoticeService;
+	@Autowired ManagerFaqService managerFaqService;
+	@Autowired ManagerLmsNoticeService managerLmsNoticeService;
 
 	// 카테고리 별 FAQ 리스트 출력
 	@GetMapping("/manager/faqList/{faqCategory}/{currentPage}")

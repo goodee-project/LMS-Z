@@ -24,7 +24,9 @@
 				<!-- 로고 오른쪽 메뉴 -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
 					<!-- 뛰어쓰기 용 ul -->
-                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1"></ul>
+                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
+                    
+                    </ul>   
                     <!-- 메뉴 오른쪽 마이페이지 -->
                     <ul class="navbar-nav float-right">
                     	<!-- 눌렀을 때 드롭다운 -->

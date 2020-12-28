@@ -429,7 +429,7 @@
 			$('#stopBtn').click(function(){//실시간 갱신 정지
 				clearInterval(timerId);
 			})
-			timerId=setInterval(msgList,5000);//5초
+			//timerId=setInterval(msgList,5000);//5초
 		})
 			//리스트 보기
 			function msgList(){
