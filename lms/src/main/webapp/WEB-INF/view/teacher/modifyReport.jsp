@@ -29,14 +29,15 @@
 				</tr>
 				<tr>
 					<th>report_startdate</th>
-					<td><input type="text" name="reportStartdate" value="${reportOne.reportStartdate}"></td>
+					<td><input type="datetime-local" name="reportStartdate" value="${reportOne.reportStartdate}"></td>
 				</tr>
 				<tr>
 					<th>report_enddate</th>
-					<td><input type="text" name="reportEnddate" value="${reportOne.reportEnddate}"></td>
+					<td><input type="datetime-local" name="reportEnddate" value="${reportOne.reportEnddate}"></td>
 				</tr>
 			</table>
 			<button type="submit">수정하기</button>
 		</form>
+		<a href="${path}/teacher/reportOne/${reportOne.reportNo}">뒤로가기</a>
 </body>
 </html>

@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>LMS 공지사항</h1>
+	<a href="${path}/teacher/index">메인페이지</a>
 		<table border="1">
 			<thead>
 				<tr>
@@ -28,13 +29,13 @@
 						<td>${l.lmsNoticeCount}</td>
 					</tr>
 				</c:forEach>
-				<!-- 숫자로 페이징 -->
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<span>
-                		<a href="${path}/teacher/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
-                	</span>
-                </c:forEach>
 			</tbody>
 		</table>
+		<!-- 숫자로 페이징 -->
+		<c:forEach var="i" begin="1" end="${lastPage}">
+			<span>
+				<a href="${path}/teacher/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+			</span>
+		</c:forEach>
 </body>
 </html>

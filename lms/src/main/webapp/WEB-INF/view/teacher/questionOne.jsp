@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h1>질문 상세보기</h1>
-		<a href="${path}/teacher/questionList/${teacherId}/1">목록으로</a>
 		<table border="1">
 			<tr>
 				<th>question_no</th>
@@ -80,5 +79,6 @@
 			댓글<br><textarea name="questionCommentContent" rows="3" cols="50"></textarea>
 			<button type="submit">댓글입력</button>
 		</form>
+		<a href="${path}/teacher/questionList/${teacherId}/1">뒤로가기</a>
 </body>
 </html>

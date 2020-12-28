@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>과제등록</h1>
-		<form method="post" action="${path}/teacher/addReport">
+		<form method="post" action="${path}/teacher/addReport/${teacherId}">
 			<table>
 				<tr>
 					<th>report_no</th>
@@ -30,15 +30,16 @@
 				<!-- 과제 시작일 -->
 				<tr>
 					<th>report_startdate</th>
-					<td><input type="text" name="reportStartdate"></td>
+					<td><input type="datetime-local" name="reportStartdate"></td>
 				</tr>
 				<!-- 과제 마감일 -->
 				<tr>
 					<th>report_enddate</th>
-					<td><input type="text" name="reportEnddate"></td>
+					<td><input type="datetime-local" name="reportEnddate"></td>
 				</tr>
 			</table>
 			<button type="submit">과제등록</button>
 		</form>
+		<a href="${path}/teacher/reportList/${teacherId}">뒤로가기</a>
 </body>
 </html>

@@ -34,5 +34,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
 </body>
 </html>

@@ -58,5 +58,6 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<a href="${path}/teacher/reportList/${teacherId}">뒤로가기</a>
 </body>
 </html>

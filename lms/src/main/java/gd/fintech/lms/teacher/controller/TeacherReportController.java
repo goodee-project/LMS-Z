@@ -34,21 +34,21 @@ public class TeacherReportController {
 	}
 	
 	//과제등록 액션
-	@PostMapping("/teacher/addReport")
-	public String addReport(Report report) {
+	@PostMapping("/teacher/addReport/{teacherId}")
+	public String addReport(Report report, @PathVariable(value = "teacherId") String teacherId) {
 		
 		teacherReportService.addReport(report);
 		
-		return "redirect:/teacher/reportList";
+		return "redirect:/teacher/reportList/" + teacherId;
 	}
 	
 	//과제삭제
-	@GetMapping("/teacher/removeReport/{reportNo}")
-	public String removeReport(@PathVariable(value = "reportNo") int reportNo) {
+	@GetMapping("/teacher/removeReport/{reportNo}/{teacherId}")
+	public String removeReport(@PathVariable(value = "reportNo") int reportNo, @PathVariable(value = "teacherId") String teacherId) {
 		
 		teacherReportService.removeReport(reportNo);
 		
-		return "redirect:/teacher/reportList";
+		return "redirect:/teacher/reportList/" + teacherId;
 	}
 	
 	//과제 상세보기

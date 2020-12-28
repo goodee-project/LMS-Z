@@ -78,5 +78,6 @@
 		</table>
 		<button type="submit">수정하기</button>
 	</form>
+	<a href="${path}/teacher/attendanceList/${lectureNo}">뒤로가기</a>
 </body>
 </html>

@@ -31,7 +31,7 @@
 							<td>${r.reportContent}</td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
-							<td><a href="${path}/teacher/removeReport/${r.reportNo}">삭제</a></td>
+							<td><a href="${path}/teacher/removeReport/${r.reportNo}/${teacherId}">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

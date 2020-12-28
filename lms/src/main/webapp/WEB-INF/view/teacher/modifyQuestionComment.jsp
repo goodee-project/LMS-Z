@@ -30,5 +30,6 @@
 			</table>
 			<button type="submit">수정하기</button>
 		</form>
+		<a href="${path}/teacher/questionOne/${teacherId}/${questionComment.questionNo}/${currentPage}">뒤로가기</a>
 </body>
 </html>
