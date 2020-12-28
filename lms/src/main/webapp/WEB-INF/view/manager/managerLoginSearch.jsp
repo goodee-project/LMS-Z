@@ -94,7 +94,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">운영자
+                                    <li class="breadcrumb-item">운영자 - 아이디/비밀번호 찾기
                                     </li>
                                 </ol>
                             </nav>
@@ -109,22 +109,20 @@
 	               <div class="row">
 	                    <div class="col-md-10 col-lg-10">
 	                        <div class="card">
-	                        	<form method="post" action="${path}/managerLogin">
+	                        	<form method="post" action="${path}/managerLoginSearch">
 		                            <div class="card-body">
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId" value="manager1">
+		                                    	이름 : <input type="text" name="managerName">
 		                                    </span>
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
 		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw" value="qwer1234!">
+		                                    	이메일 : <input type="text" name="managerEmail">
 		                                    </span>
 		                                </div>
 		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                	<a href="${path}/managerSignup" class="btn btn-success font-3">회원가입</a>
-		                                	<a href="${path}/managerLoginSearch" class="btn btn-success font-3">찾기</a>
+		                                	<button type="submit" class="btn btn-success font-3">찾기</button>
 		                                </div>
 		                            </div>
 	                            </form>

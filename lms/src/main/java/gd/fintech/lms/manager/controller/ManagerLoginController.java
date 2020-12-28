@@ -13,12 +13,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import gd.fintech.lms.manager.service.ManagerConnectService;
 import gd.fintech.lms.manager.service.ManagerLoginService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Manager;
 import gd.fintech.lms.vo.ManagerForm;
 
 @Controller
 public class ManagerLoginController {
 	@Autowired ManagerLoginService managerLoginService;
 	@Autowired ManagerConnectService managerConnectService;
+	
+	@GetMapping("/managerLoginSearch")
+	public String managerLoginSearch() {
+		return "manager/managerLoginSearch";
+	}
+	
+	@PostMapping("/managerLoginSearch")
+	public String managerLoginSearch(Manager manager) {
+		managerLoginService.modifyAccountToPw(manager);
+		return "redirect:/managerLogin";
+	}
 	
 	@GetMapping("/managerLogin")
 	public String login(HttpSession session) {
