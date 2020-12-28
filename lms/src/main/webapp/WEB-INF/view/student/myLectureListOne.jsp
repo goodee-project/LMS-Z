@@ -52,6 +52,10 @@
                                 </ol>
                             </nav>
                         </div>
+                        <br>
+                        <span>
+                        	<a href="${path }/student/attendance/${studentId}/${myLectureListOne.lecture.lectureNo }/${currentPage}">
+                        	출석</a></span>
                     </div>
                     <div class="col-5 align-self-center text-right">
                     	<div class="align-self-center">

@@ -2,4 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentAttendanceMapper">
+
+	<!-- 출석한 횟수 -->
+	<select id="selectAttendanceTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_state='출석'
+		AND account_id=#{studentId}
+	</select>
+	
+	<!-- 지각한 횟수 -->
+	<select id="selectComLateTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_state='지각'
+		AND account_id=#{studentId}
+	</select>
+	
+	<!-- 조퇴한 횟수 -->
+	<select id="selectEarlyLeaveTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_state='조퇴'
+		AND account_id=#{studentId}
+	</select>
+	
+	<!-- 외출한 횟수 -->
+	<select id="selectOutingTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_state='외출'
+		AND account_id=#{studentId}
+	</select>
+	
+	<!-- 결석한 횟수 -->
+	<select id="selectAbsentTotal" parameterType="java.lang.String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_state='결석'
+		AND account_id=#{studentId}
+	</select>
+	
+	<!-- 수강 중인 강의기간 총 일수(주말제외)  -->
+	<select id="selectTotalLectureDays" parameterType="java.util.Map" resultType="Integer">
+		SELECT
+			F_TOTAL_WEEKDAYS(#{lectureStartdate},#{lectureEnddate})
+		FROM lecture
+		WHERE lecture_no=#{lectureNo}
+	</select>
+	<!-- 진행되었어야 할 출석일수 -->
+	<select id="selectCommonLectureDays" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			F_TOTAL_WEEKDAYS(#{lectureStartdate},CURDATE())
+		FROM lecture
+		WHERE lecture_no=#{lectureNo}
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
