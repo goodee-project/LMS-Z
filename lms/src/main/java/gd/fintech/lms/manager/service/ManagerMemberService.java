@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.manager.mapper.ManagerMemberMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.Teacher;
 
 @Service
@@ -43,5 +44,9 @@ public class ManagerMemberService {
 	//강사 이름 선택시 해당 강사의 상세정보를 보기 위한 메퍼 호출
 	public Teacher getTeacherOne(String teacherId) {
 		return managerMemberMapper.selectTeacherOne(teacherId);
+	}
+	//학생 이름 선택시 해당 학생의 상세정보를 보기 위한 메퍼 호출
+	public Student getStudentOne(String studentId) {
+		return managerMemberMapper.selectStudentOne(studentId);
 	}
 }

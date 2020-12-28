@@ -32,16 +32,6 @@
 				<option value="학생">학생</option>
 				</c:if>
 			</select>
-			<!--  미구현
-			이름 :
-			<c:if test="${searchName =='noSearch' }">
-			<input type="text" name="searchName">
-			</c:if>
-			<c:if test="${searchName !='noSearch' }">
-			<input type="text" name="searchName" value="${searchName }">
-			</c:if>
-			
-			-->
 			<button type="submit">검색</button>
 		</div>
 	</form>
@@ -59,10 +49,10 @@
 				<tr>
 					<td>${m.accountId }</td>
 					<c:if test="${m.student.studentName !=null }">
-					<td><a href="${path }/manager/studentOne/${m.accountId}">${m.student.studentName }</a></td>
+					<td><a href="${path }/manager/studentOne/${m.accountId}/${searchLevel}">${m.student.studentName }</a></td>
 					</c:if>
 					<c:if test="${m.teacher.teacherName !=null }">
-					<td><a href="${path }/manager/teacherOne/${m.accountId}">${m.teacher.teacherName }</a></td>
+					<td><a href="${path }/manager/teacherOne/${m.accountId}/${searchLevel}">${m.teacher.teacherName }</a></td>
 					</c:if>
 					<td>${m.accountLevel }</td>
 					<td>${m.accountState }</td>
@@ -75,7 +65,7 @@
    		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
    		<c:if test="${startPage!=1 && lastPage!=1}">
     		<span>
-    			<a href="${path}/manager/memberList/${startPage-10}/${searchLevel}/${searchName }">이전&nbsp;&nbsp;</a>
+    			<a href="${path}/manager/memberList/${startPage-10}/${searchLevel}">이전&nbsp;&nbsp;</a>
     		</span>
    		</c:if>
    		<!-- lastPage가 10개를 채울수 없을 때 -->
@@ -90,7 +80,7 @@
      		<!-- 현재 페이지가 아닐 경우 -->
      		<c:if test="${currentPage != i }">
 	      		<span>
-	      			<a href="${path}/manager/memberList/${i}/${searchLevel}/${searchName }">${i}&nbsp;&nbsp;</a>
+	      			<a href="${path}/manager/memberList/${i}/${searchLevel}">${i}&nbsp;&nbsp;</a>
 	      		</span>
      		</c:if>
      	</c:forEach>
@@ -106,7 +96,7 @@
 	     		<!-- 현재 페이지가 아닐 경우 -->
 	     		<c:if test="${currentPage != i }">
 		      		<span>
-		      			<a href="${path}/manager/memberList/${i}/${searchLevel}/${searchName }">${i}&nbsp;&nbsp;</a>
+		      			<a href="${path}/manager/memberList/${i}/${searchLevel}">${i}&nbsp;&nbsp;</a>
 		      		</span>
 	     		</c:if>
      		</c:forEach>
@@ -114,7 +104,7 @@
     	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
     	<c:if test="${startPage+9<lastPage && lastPage != startPage}">
 	     	<span>
-	     		<a href="${path}/manager/memberList/${startPage+10}/${searchLevel}/${searchName }">다음&nbsp;&nbsp;</a>
+	     		<a href="${path}/manager/memberList/${startPage+10}/${searchLevel}">다음&nbsp;&nbsp;</a>
 	     	</span>
     	</c:if>
    	</div>

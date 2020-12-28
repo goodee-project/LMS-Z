@@ -95,4 +95,22 @@
 		FROM teacher
 		WHERE teacher_id = #{teacherId}
 	</select>
+	<!-- 학생 이름 선택시 상세정보를 보여주기 위한 쿼리 -->
+	<select id="selectStudentOne" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_id studentId,
+			student_email studentEmail,
+			student_name studentName,
+			student_phone studentPhone,
+			student_gender studentGender,
+			student_birth studentBirth,
+			student_address_main studentAddressMain,
+			student_address_sub studentAddressSub,
+			student_image studentImage,
+			student_accessdate studentAccessdate,
+			student_updatedate studentUpdatedate,
+			manager_id_access managerIdAccess
+		FROM student
+		WHERE student_id = #{studentId}
+	</select>
 </mapper>

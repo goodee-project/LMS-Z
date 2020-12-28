@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.manager.service.ManagerMemberService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.Teacher;
 
 @Controller
@@ -59,11 +60,24 @@ public class ManagerMemberController {
 		return "redirect:/manager/memberList/1/"+Level;
 	}
 	//강사 이름 클릭시 해당하는 강사의 정보를 상세보기
-	@GetMapping("/manager/teacherOne/{teacherId}")
+	@GetMapping("/manager/teacherOne/{teacherId}/{searchLevel}")
 	public String teacherOne(Model model,
-				@PathVariable(name="teacherId") String teacherId) {
+				@PathVariable(name="teacherId") String teacherId,
+				@PathVariable(name="searchLevel") String searchLevel) {
 		Teacher teacherOne = managerMemberService.getTeacherOne(teacherId);
 		model.addAttribute("teacherOne",teacherOne);
+		model.addAttribute("searchLevel",searchLevel);
 		return "/manager/teacherOne";
 	}
+	//학생 이름 클릭시 해당하는 학생의 정보 상세보기
+	@GetMapping("/manager/studentOne/{studentId}/{searchLevel}")
+	public String studentOne(Model model,
+				@PathVariable(name="studentId") String studentId,
+				@PathVariable(name="searchLevel") String searchLevel) {
+		Student studentOne = managerMemberService.getStudentOne(studentId);
+		model.addAttribute("studentOne", studentOne);
+		model.addAttribute("searchLevel",searchLevel);
+		return "/manager/studentOne";
+	}
+	
 }

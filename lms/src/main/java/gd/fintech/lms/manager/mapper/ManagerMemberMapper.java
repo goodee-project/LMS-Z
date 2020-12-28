@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.Teacher;
 
 @Mapper
@@ -18,5 +19,8 @@ public interface ManagerMemberMapper {
 	List<Account> selectTeacherOrStudent(Map<String, Object> map);
 	//직책별 검색을 통한 페이징을 위한 count 출력
 	int selectTeacherOrStudentCount(String searchLevel);
+	//강사 상세정보를 보기 위한 메퍼 호출
 	Teacher selectTeacherOne(String teacherId);
+	//학생 상세정보를 보기 위한 메퍼 호출
+	Student selectStudentOne(String studentId);
 }

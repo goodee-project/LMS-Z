@@ -9,58 +9,54 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>teacherOne</h1>
+	<h1>studentOne</h1>
 	<table border="1">
 		<tr>
 			<td>이름 :</td>
-			<td>${teacherOne.teacherName }</td>
+			<td>${studentOne.studentName }</td>
 		</tr>
 		<tr>
 			<td>아이디 :</td>
-			<td>${teacherOne.teacherId }</td>
+			<td>${studentOne.studentId }</td>
 		</tr>
 		<tr>
 			<td>이메일 :</td>
-			<td>${teacherOne.teacherEmail }</td>
+			<td>${studentOne.studentEmail }</td>
 		</tr>
 		<tr>
 			<td>핸드폰 :</td>
-			<td>${teacherOne.teacherPhone }</td>
+			<td>${studentOne.studentPhone }</td>
 		</tr>
 		<tr>
 			<td>생일 :</td>
-			<td>${teacherOne.teacherBirth }</td>
+			<td>${studentOne.studentBirth }</td>
 		</tr>
 		<tr>
 			<td>성별 :</td>
-			<td>${teacherOne.teacherGender }</td>
+			<td>${studentOne.studentGender }</td>
 		</tr>
 		<tr>
 			<td>주소 :</td>
-			<td>${teacherOne.teacherAddressMain }</td>
+			<td>${studentOne.studentAddressMain }</td>
 		</tr>
 		<tr>
-			<td colspan="2">${teacherOne.teacherAddressSub }</td>
+			<td colspan="2">${studentOne.studentAddressSub }</td>
 		</tr>
 		<tr>
 			<td>사진 :</td>
-			<td><img src="/${path }/images/${teacherOne.teacherImage }" style="width:170px; height:200px;"></td>
+			<td><img src="/${path }/images/${studentOne.studentImage }" style="width:170px; height:200px;"></td>
 		</tr>
 		<tr>
 			<td>승인날짜 :</td>
-			<td>${teacherOne.teacherAccessdate }</td>
+			<td>${studentOne.studentAccessdate }</td>
 		</tr>
 		<tr>
 			<td>수정날짜 :</td>
-			<td>${teacherOne.teacherUpdatedate }</td>
-		</tr>
-		<tr>
-			<td>정보 :</td>
-			<td>${teacherOne.teacherInfo }</td>
+			<td>${studentOne.studentUpdatedate }</td>
 		</tr>
 		<tr>
 			<td>승인한운영자 :</td>
-			<td>${teacherOne.managerIdAccess }</td>
+			<td>${studentOne.managerIdAccess }</td>
 		</tr>
 	</table>
 	<a href="${path }/manager/memberList/1/${searchLevel}">돌아가기</a>
