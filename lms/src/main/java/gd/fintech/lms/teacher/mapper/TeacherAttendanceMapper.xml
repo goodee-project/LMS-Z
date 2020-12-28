@@ -17,7 +17,7 @@
 				<result property="accountId" column="account_id" />
 			</collection>
 	</resultMap>
-	<!-- 학생 출석부 -->
+	<!-- 학생 출석부 일별 -->
 	<select id="selectAttendanceList" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
 		SELECT 
 			a.attendance_state,
@@ -30,11 +30,17 @@
 			s.student_id
 		FROM class_registration cr LEFT JOIN attendance a
 		ON cr.account_id = a.account_id
+		AND YEAR(a.attendance_day) = #{currentYear}
+		AND MONTH(a.attendance_day) = #{currentMonth}
+		AND DAY(a.attendance_day) = #{currentDay}
 		LEFT JOIN lecture l
 		ON cr.account_id = l.account_id
 		LEFT JOIN student s
 		ON cr.account_id = s.student_id
 		WHERE a.lecture_no = #{lectureNo}
+		AND cr.class_registration_state = "수강중"
+		OR cr.class_registration_state = "수료"
+
 	</select>
 	<!-- 학생 출석부 상세보기 -->
 	<select id="selectAttendanceOne" parameterType="java.util.Map" resultMap="selectAttendanceListResult">

@@ -9,11 +9,11 @@
 </head>
 <body>
 	<h1>출석부 수정</h1>
-	<form method="post" action="${path}/teacher/modifyAttendanceStateOne/${studentId}/${lectureNo}/${attendanceDay}">
+	<form method="post" action="${path}/teacher/modifyAttendanceStateOne/${studentId}/${lectureNo}/${attendanceDay}/${currentYear}/${currentMonth}/${currentDay}">
 		<table border="1">
 			<input type="hidden" value="${studentId}" name="accountId">
 			<input type="hidden" value="${lectureNo}" name="lectureNo">
-			<c:forEach var="a" items="${attendanceStateList}">	
+			<c:forEach var="a" items="${attendanceList}">
 			<c:forEach var="as" items="${a.studentList}">
 				<tr>
 					<th>student_name</th>
@@ -78,6 +78,6 @@
 		</table>
 		<button type="submit">수정하기</button>
 	</form>
-	<a href="${path}/teacher/attendanceList/${lectureNo}">뒤로가기</a>
+	<a href="${path}/teacher/attendanceList/${lectureNo}/target/${currentYear}/${currentMonth}/${currentDay}">뒤로가기</a>
 </body>
 </html>

@@ -24,7 +24,7 @@
 			<c:forEach var="a" items="${attendanceList}">
 				<tr>
 				<c:forEach var="as" items="${a.studentList}">
-					<td><a href="${path}/teacher/modifyAttendanceStateOne/${as.studentId}/${lectureNo}/${a.attendanceDay}">${as.studentName}</a></td>
+					<td><a href="${path}/teacher/modifyAttendanceStateOne/${as.studentId}/${lectureNo}/${a.attendanceDay}/${currentYear}/${currentMonth}/${currentDay}">${as.studentName}</a></td>
 					<td>${as.studentGender}</td>
 					<td>${as.studentPhone}</td>
 				</c:forEach>
@@ -34,6 +34,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
+	<a href="${path}/teacher/attendanceMonth/${lectureNo}/-1/-1">뒤로가기</a>
 </body>
 </html>

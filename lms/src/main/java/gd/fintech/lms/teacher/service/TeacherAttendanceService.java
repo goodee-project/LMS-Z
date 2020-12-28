@@ -18,10 +18,13 @@ public class TeacherAttendanceService {
 	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
 	
 	//학생 출석부 목록출력
-	public List<Attendance> getAttendanceList(int lectureNo) {
+	public List<Attendance> getAttendanceList(int lectureNo, int currentYear, int currentMonth, int currentDay) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lectureNo", lectureNo);
+		map.put("currentYear", currentYear);
+		map.put("currentMonth", currentMonth);
+		map.put("currentDay", currentDay);
 		
 		return teacherAttendanceMapper.selectAttendanceList(map);
 	}
