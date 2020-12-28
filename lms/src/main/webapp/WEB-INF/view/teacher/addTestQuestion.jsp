@@ -28,8 +28,8 @@
 			</tr>
 		</table>
 		<c:forEach var="i" begin="1" end="5">
-			<div>보기 번호 : <input type="text" name="multiplechoiceExampleId" value="${i}" readonly="readonly"></div>
-			<div>보기 문항 : <input type="text" name="multiplechoiceExampleContent"></div>
+			<div>보기 번호 : <input type="text" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleId" value="${i}" readonly="readonly"></div>
+			<div>보기 문항 : <input type="text" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleContent"></div>
 			&nbsp;
 		</c:forEach>	
 		<button type="submit">등록</button>

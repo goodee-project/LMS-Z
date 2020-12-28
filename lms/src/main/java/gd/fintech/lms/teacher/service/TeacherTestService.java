@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
-import gd.fintech.lms.vo.MultiplechoiceForm;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -44,28 +43,35 @@ public class TeacherTestService {
 	}
 	
 	// 시험문제 / 보기 추가
-	public void addTestQuestion(MultiplechoiceForm multiplechoiceForm) {
-		/*Multiplechoice addMultiplechoice = new Multiplechoice();
-		addMultiplechoice.setLectureNo(multiplechoiceForm.getLectureNo());
-		addMultiplechoice.setMultiplechoiceId(multiplechoiceForm.getMultiplechoiceId());
-		addMultiplechoice.setMultiplechoiceQuestion(multiplechoiceForm.getMultiplechoiceQuestion());
-		addMultiplechoice.setMultiplechoiceAnswer(multiplechoiceForm.getMultiplechoiceAnswer());
+	public void addTestQuestion(Multiplechoice multiplechoice) {
+		// multiplechoice 값 vo에 입력(시험문제)
+		Multiplechoice addMultiplechoice = new Multiplechoice();
+		addMultiplechoice.setLectureNo(multiplechoice.getLectureNo());
+		addMultiplechoice.setMultiplechoiceId(multiplechoice.getMultiplechoiceId());
+		addMultiplechoice.setMultiplechoiceQuestion(multiplechoice.getMultiplechoiceQuestion());
+		addMultiplechoice.setMultiplechoiceAnswer(multiplechoice.getMultiplechoiceAnswer());
 		
 		teacherTestMapper.insertTestQuestion(addMultiplechoice);
 		
-		List<MultiplechoiceExample> example = new ArrayList<MultiplechoiceExample>();
-		for(MultiplechoiceExample ex : multiplechoiceForm.getMultiplechoiceExampleList()) {
-			ex.setMultiplechoiceNo(addMultiplechoice.getMultiplechoiceNo());
-			ex.setMultiplechoiceExampleId(multiplechoiceForm.getMultiplechoiceExampleId());
-			ex.setMultiplechoiceExampleContent(multiplechoiceForm.getMultiplechoiceExampleContent());
-			example.add(ex);
-			System.out.println(example);
-		}
-		
-		if(example != null) {
-			for(MultiplechoiceExample multiplechoiceExample : example) {
-				teacherTestMapper.insertTestQuestionExample(multiplechoiceExample);
+		// multiplechoice.vo에 있는 multiplechoiceExample 리스트에 값 넣기
+		List<MultiplechoiceExample> multiplechoiceExample = null;
+		if(multiplechoice.getMultiplechoiceExampleList() != null) {
+			multiplechoiceExample = new ArrayList<MultiplechoiceExample>();
+			for(MultiplechoiceExample ex : multiplechoice.getMultiplechoiceExampleList()) {
+				MultiplechoiceExample example = new MultiplechoiceExample();
+				// addMultiplechoice에 넣은 multiplechoiceNo 값 가져와서 넣기
+				example.setMultiplechoiceNo(addMultiplechoice.getMultiplechoiceNo());
+				example.setMultiplechoiceExampleId(ex.getMultiplechoiceExampleId());
+				example.setMultiplechoiceExampleContent(ex.getMultiplechoiceExampleContent());
+				
+				multiplechoiceExample.add(example);
 			}
-		}*/
+		}
+		if(multiplechoiceExample != null) {
+			for(MultiplechoiceExample ex : multiplechoiceExample) {
+				System.out.println(ex);
+				teacherTestMapper.insertTestQuestionExample(ex);
+			}
+		}
 	}
 }
