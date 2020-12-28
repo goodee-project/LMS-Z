@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.manager.service.ManagerConnectService;
 import gd.fintech.lms.manager.service.ManagerInfoService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Manager;
@@ -20,6 +21,7 @@ import jdk.internal.org.jline.utils.Log;
 @Controller
 public class ManagerInfoController {
 	@Autowired ManagerInfoService managerInfoService;
+	@Autowired ManagerConnectService managerConnectService;
 	
 	// 주소변경 페이지 이동
 	@GetMapping("/manager/myInfoAddress/{managerId}")
@@ -172,8 +174,10 @@ public class ManagerInfoController {
 	public String myInfo(Model model,
 			@PathVariable(value="managerId") String managerId) {
 		
-		Manager managerOne = managerInfoService.getManagerInfo(managerId);		
+		Manager managerOne = managerInfoService.getManagerInfo(managerId);
+		int connectCount = managerConnectService.getConnectCountToNo(managerId);
 		model.addAttribute("managerOne", managerOne);
+		model.addAttribute("connectCount", connectCount);
 		
 		return "manager/myInfo";
 	}

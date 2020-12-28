@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.manager.mapper.ManagerConnectMapper">
+	<!-- 해당 아이디의 오늘 방문자 수 출력 -->
+	<select id="selectConnectCountToNo" parameterType="String" resultType="int">
+		SELECT cc.connect_count connectCount
+		FROM connect c INNER JOIN connect_count cc
+		ON c.connect_no = cc.connect_no
+		WHERE c.account_id = #{managerId} AND cc.connect_date = DATE_FORMAT(NOW(), "%Y-%m-%d")
+	</select>
+	
 	<!-- map형식으로 반환 -->
 	<resultMap type="map" id="selectConnectResult">
 		<result property="managerName" column="manager_name"/>
@@ -43,9 +51,30 @@
 	</update>
 	
 	<!-- 로그인 할 시 connect테이블에 데이터가 있는지 확인 -->
-	<select id="selectConnectToCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*)
+	<select id="selectConnectToCheck" parameterType="String" resultType="gd.fintech.lms.vo.Connect">
+		SELECT connect_no connectNo, account_id accountId
 		FROM connect
 		WHERE account_id = #{accountId}
 	</select>
+	
+	<!-- 오늘 날짜가 없는 id라면 connect_count 테이블에 추가 -->
+	<insert id="insertConnectCount" parameterType="gd.fintech.lms.vo.ConnectCount">
+		INSERT INTO connect_count(connect_no, connect_date, connect_count)
+		VALUES(#{connectNo}, #{connectDate}, #{connectCount})
+	</insert>
+	
+	<!-- 오늘 날짜가 없는 id라면 connect_count 테이블 업데이트 -->
+	<update id="updateConnectCount" parameterType="gd.fintech.lms.vo.ConnectCount">
+		UPDATE connect_count
+		SET connect_count = connect_count + 1
+		WHERE connect_no = #{connectNo} and connect_date = #{connectDate}
+	</update>
+	
+	<!-- 오늘 날짜에 해당하는 no가 있는지 확인하기 위한 select -->
+	<select id="selectConnectCountToCheck" parameterType="gd.fintech.lms.vo.ConnectCount" resultType="int">
+		SELECT COUNT(*)
+		FROM connect_count
+		WHERE connect_no = #{connectNo} and connect_date = #{connectDate}
+	</select>
+	
 </mapper>

@@ -39,19 +39,6 @@
     		
     	}
     	
-    	a { 
-    		color: #BDBDBD; 
-    		
-    	}
-    	
-    	a:visited { 
-    		color: #BDBDBD; 
-    	}
-    	
-    	a:hover {
-    		color: #8C8C8C; 
-    	}
-    	
     </style>
 </head>
 
@@ -194,7 +181,7 @@
 					                            	<table class="table table" id="myInfoTable">
 					                            		<tr>
 					                            			<td>접속</td>
-					                            			<td>1번</td>
+					                            			<td>${connectCount}번</td>
 					                            		</tr>
 					                            		<tr>
 					                            			<td colspan="2">${managerOne.managerUpdatedate}</td>
