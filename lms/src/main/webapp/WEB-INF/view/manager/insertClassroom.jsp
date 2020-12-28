@@ -36,6 +36,7 @@
 				</td>
 			</tr>
 		</table>
+	 	<a href="${path }/manager/classroomList/1">돌아가기</a>
 		<button id="btn" type="button">강의실 추가</button>
 	</form>
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>

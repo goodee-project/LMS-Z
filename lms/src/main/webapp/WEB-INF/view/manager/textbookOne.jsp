@@ -40,8 +40,9 @@
 			<td>${textbookOne.textbookPublishdate }</td>
 		</tr>
 	</table>
+	<a href="${path }/manager/textbookList/1">돌아가기</a>
 	<button type="submit"  onclick="location.href='${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}'">수정</button>
-	<button id="deleteIsbn" type="button" onclick="location.href='${path}/manager/deleteTextbookOne/${textbookOne.textbookIsbn}'">삭제</button>
+	<button id="deleteIsbn" type="button" >삭제</button>
 	
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -66,9 +67,10 @@
 				data:{textbookIsbn: $('#textbookIsbn').text()},
 				success:function(data){
 					if(data.textbookCount ==0){
-						$('#deleteIsbn').submit();
+						location.href='${path}/manager/deleteTextbookOne/'+${textbookOne.textbookIsbn};
 					}else{
 						alert('강좌에서 사용중인 교재입니다.');	
+						return;
 						}
 					}
 			});

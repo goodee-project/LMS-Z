@@ -76,20 +76,23 @@
 		WHERE account_level = #{searchLevel}
 		AND account_state = '활성화'
 	</select>
-	<!-- 이름을 검색했을 때 불러오는 쿼리  구현중-->
-	<select id="selectSearchName" parameterType="String" resultMap="selectMemberList">
-		SELECT 
-			a.account_id, 
-			case when a.account_level='강사' then t.teacher_name END teacher_name,
-			case when a.account_level='학생' then s.student_name END student_name,
-			a.account_level,
-			a.account_state
-		FROM account a, teacher t, student s
-		WHERE account_id = teacher_id OR account_id = student_id
-		AND account_level IN ('학생','강사')
-		AND teacher_name = #{searchName}
-		OR student_name = #{searchName}
-		GROUP BY account_id
-		LIMIT #{beginRow}, #{rowPerPage}
+	<!-- 강사 이름 선택시 상세정보를 보여주기 위한 쿼리 -->
+	<select id="selectTeacherOne" parameterType="String" resultType="gd.fintech.lms.vo.Teacher">
+		SELECT
+			teacher_id teacherId,
+			teacher_email teacherEmail,
+			teacher_name teacherName,
+			teacher_phone teacherPhone,
+			teacher_gender teacherGender,
+			teacher_birth teacherBirth,
+			teacher_address_main teacherAddressMain,
+			teacher_address_sub teacherAddressSub,
+			teacher_image teacherImage,
+			teacher_info teacherInfo,
+			teacher_accessdate teacherAccessdate,
+			teacher_updatedate teacherUpdatedate,
+			manager_id_access managerIdAccess
+		FROM teacher
+		WHERE teacher_id = #{teacherId}
 	</select>
 </mapper>

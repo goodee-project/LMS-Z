@@ -41,6 +41,7 @@
 				<td><input type="text" name="textbookPublishdate" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
 			</tr>
 		</table>
+		<a href="${path }/manager/textbookOne/${textbookOne.textbookIsbn }">돌아가기</a>
 		<button type="submit">수정 완료</button>
 	</form>
 </body>

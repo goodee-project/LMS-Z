@@ -59,10 +59,10 @@
 				<tr>
 					<td>${m.accountId }</td>
 					<c:if test="${m.student.studentName !=null }">
-					<td>${m.student.studentName }</td>
+					<td><a href="${path }/manager/studentOne/${m.accountId}">${m.student.studentName }</a></td>
 					</c:if>
 					<c:if test="${m.teacher.teacherName !=null }">
-					<td>${m.teacher.teacherName }</td>
+					<td><a href="${path }/manager/teacherOne/${m.accountId}">${m.teacher.teacherName }</a></td>
 					</c:if>
 					<td>${m.accountLevel }</td>
 					<td>${m.accountState }</td>

@@ -100,7 +100,20 @@
 				</select>
 			</td>
 		</tr>
+		<tr>
+			<td>start_date</td>
+			<td>
+				<input type="date" name="lectureStartdate">
+			</td>
+		</tr>
+		<tr>
+			<td>end_date</td>
+			<td>
+				<input type="date" name="lectureEnddate">
+			</td>
+		</tr>
 	</table>
+	<a href="${path }/manager/lectureList/1">돌아가기</a>
 	<button id="btn" type="submit">등록</button>
 </form>
 	<form>

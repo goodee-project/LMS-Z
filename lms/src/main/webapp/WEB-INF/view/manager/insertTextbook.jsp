@@ -43,6 +43,7 @@
 				</td>
 			</tr>
 		</table>
+		<a href="${path }/manager/textbookList/1">돌아가기</a>
 		<button type="submit">교재 등록</button>
 	</form>
 </body>

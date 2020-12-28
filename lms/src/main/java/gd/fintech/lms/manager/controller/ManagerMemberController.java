@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 
 import gd.fintech.lms.manager.service.ManagerMemberService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Teacher;
 
 @Controller
 public class ManagerMemberController {
@@ -57,5 +57,13 @@ public class ManagerMemberController {
 	public String searchMemberList(@RequestParam(value="searchLevel") String searchLevel) throws UnsupportedEncodingException{
 		 String Level = URLEncoder.encode(searchLevel, "UTF-8");
 		return "redirect:/manager/memberList/1/"+Level;
+	}
+	//강사 이름 클릭시 해당하는 강사의 정보를 상세보기
+	@GetMapping("/manager/teacherOne/{teacherId}")
+	public String teacherOne(Model model,
+				@PathVariable(name="teacherId") String teacherId) {
+		Teacher teacherOne = managerMemberService.getTeacherOne(teacherId);
+		model.addAttribute("teacherOne",teacherOne);
+		return "/manager/teacherOne";
 	}
 }
