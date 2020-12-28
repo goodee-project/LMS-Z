@@ -11,7 +11,7 @@
 <body>
 	<h1>새 문제 등록</h1>
 	
-	<form action="${path}/teacher/addTestQuestion/${lectureNo}">
+	<form method="post" action="${path}/teacher/addTestQuestion/${lectureNo}">
 		<input type="hidden" name="lectureNo" value="${lectureNo}">
 		<table>
 			<tr>
@@ -28,7 +28,7 @@
 			</tr>
 		</table>
 		<c:forEach var="i" begin="1" end="5">
-			<div>보기 번호 : <input type="text" name="multiplechoiceExampleId" value="${i}"></div>
+			<div>보기 번호 : <input type="text" name="multiplechoiceExampleId" value="${i}" readonly="readonly"></div>
 			<div>보기 문항 : <input type="text" name="multiplechoiceExampleContent"></div>
 			&nbsp;
 		</c:forEach>	

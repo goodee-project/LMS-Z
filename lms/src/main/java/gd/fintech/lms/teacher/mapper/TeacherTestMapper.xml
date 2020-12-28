@@ -133,4 +133,24 @@
 			NOW()
 		)
 	</insert>
+	 
+	 <!-- 시험문제 보기 추가(리스트 테스트) -->
+	 <!--<insert id="insertTestQuestionExample" parameterType="java.util.List">
+	 	INSERT INTO multiplechoice_example(
+	 		multiplechoice_no,
+			multiplechoice_example_id,
+			multiplechoice_example_content,
+			multiplechoice_example_createdate,
+			multiplechoice_example_updatedate
+	 	)VALUES
+	 	<foreach collection="example" separator=" , ">
+	 		(
+	 			#{multiplechoiceNo},
+				#{multiplechoiceExampleId},
+				#{multiplechoiceExampleContent},
+				NOW(),
+				NOW()
+	 		)
+	 	</foreach>
+	 </insert>  -->
 </mapper>

@@ -1,5 +1,6 @@
 package gd.fintech.lms.teacher.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.MultiplechoiceForm;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -38,5 +41,31 @@ public class TeacherTestService {
 	// 해당 강의의 시험정보(일정) 수정
 	public int modifyTest(Test test) {
 		return teacherTestMapper.updateTest(test);
+	}
+	
+	// 시험문제 / 보기 추가
+	public void addTestQuestion(MultiplechoiceForm multiplechoiceForm) {
+		/*Multiplechoice addMultiplechoice = new Multiplechoice();
+		addMultiplechoice.setLectureNo(multiplechoiceForm.getLectureNo());
+		addMultiplechoice.setMultiplechoiceId(multiplechoiceForm.getMultiplechoiceId());
+		addMultiplechoice.setMultiplechoiceQuestion(multiplechoiceForm.getMultiplechoiceQuestion());
+		addMultiplechoice.setMultiplechoiceAnswer(multiplechoiceForm.getMultiplechoiceAnswer());
+		
+		teacherTestMapper.insertTestQuestion(addMultiplechoice);
+		
+		List<MultiplechoiceExample> example = new ArrayList<MultiplechoiceExample>();
+		for(MultiplechoiceExample ex : multiplechoiceForm.getMultiplechoiceExampleList()) {
+			ex.setMultiplechoiceNo(addMultiplechoice.getMultiplechoiceNo());
+			ex.setMultiplechoiceExampleId(multiplechoiceForm.getMultiplechoiceExampleId());
+			ex.setMultiplechoiceExampleContent(multiplechoiceForm.getMultiplechoiceExampleContent());
+			example.add(ex);
+			System.out.println(example);
+		}
+		
+		if(example != null) {
+			for(MultiplechoiceExample multiplechoiceExample : example) {
+				teacherTestMapper.insertTestQuestionExample(multiplechoiceExample);
+			}
+		}*/
 	}
 }

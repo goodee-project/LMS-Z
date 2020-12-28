@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
 import gd.fintech.lms.vo.Test;
@@ -27,8 +26,8 @@ public interface TeacherTestMapper {
 	int updateTest(Test test);
 	
 	// 시험문제 추가
-	int insertTestQuestion(Multiplechoice multiplechoice);
+	void insertTestQuestion(Multiplechoice multiplechoice);
 	
 	// 시험문제 보기 추가
-	int insertTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
+	void insertTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
 }

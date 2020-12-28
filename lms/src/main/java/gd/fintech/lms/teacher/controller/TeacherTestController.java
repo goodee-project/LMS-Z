@@ -1,5 +1,6 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherTestService;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.MultiplechoiceForm;
 import gd.fintech.lms.vo.Test;
 
 @Controller
@@ -85,11 +88,23 @@ public class TeacherTestController {
 		return "teacher/addTestQuestion";
 	}
 	
+	
 	// 시험문제 추가 액션
 	@PostMapping("/teacher/addTestQuestion/{lectureNo}")
-	public String addTestQuestion(Multiplechoice multiplechoice,
+	public String addTestQuestion(MultiplechoiceForm multiplechoiceForm,
 								@PathVariable(value="lectureNo") int lectureNo) {
-		
+		/*System.out.println(multiplechoiceForm);
+		String[] exampleId = multiplechoiceForm.getMultiplechoiceExampleId().split(",");
+		String[] exampleContent = multiplechoiceForm.getMultiplechoiceExampleContent().split(",");
+		List<MultiplechoiceExample> list = new ArrayList<MultiplechoiceExample>();
+		for(int i=1; i<exampleId.length; i++) {
+			MultiplechoiceExample ex = new MultiplechoiceExample();
+			ex.setMultiplechoiceExampleId(exampleId.toString());
+			ex.setMultiplechoiceExampleContent(exampleContent.toString());
+			list.add(ex);
+		}
+		multiplechoiceForm.setMultiplechoiceExampleList(list);*/
+		teacherTestService.addTestQuestion(multiplechoiceForm);
 		return "redirect:/teacher/testQuestionList/"+lectureNo;
 	}
 }
