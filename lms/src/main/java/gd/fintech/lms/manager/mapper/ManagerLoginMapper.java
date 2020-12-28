@@ -34,6 +34,6 @@ public interface ManagerLoginMapper {
 	int selectConnectByOverlapLogin(Connect connect);
 	
 	// 아이디 패스워드 찾기
-	int updateAccountToPw(String accountId, StringBuffer accountPw);
+	int updateAccountToPw(String accountId, String accountPw);
 	Manager selectManagerToNameAndEmail(Manager manager);
 }

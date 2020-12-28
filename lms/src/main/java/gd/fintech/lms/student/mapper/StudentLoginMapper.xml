@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.mapper.StudentLoginMapper">
+	<!-- 해당 아이디의 pw를 랜덤한 13글자로 변경 -->
+	<update id="updateAccountToPw" parameterType="java.util.Map">
+		UPDATE account
+		SET account_pw = PASSWORD(#{accountPw})
+		WHERE account_id = #{accountId}
+	</update>
+
+	<!-- 이름과 이메일을 이용해서 해당 정보 찾기 -->
+	<select id="selectStudentToNameAndEmail" parameterType="gd.fintech.lms.vo.Student" resultType="gd.fintech.lms.vo.Student">
+		SELECT s.student_id studentId, s.student_name studentName, s.student_email studentEmail
+		FROM student s INNER JOIN account a
+		ON a.account_id = s.student_id
+		WHERE s.student_name = #{studentName} and s.student_email = #{studentEmail}
+	</select>
+	
 	<!-- 로그인 중복 방지 -->
 	<select id="selectConnectByOverlapLogin" parameterType="gd.fintech.lms.vo.Connect" resultType="int">
 		SELECT COUNT(*)

@@ -11,11 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import gd.fintech.lms.teacher.service.TeacherLoginService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.ManagerForm;
+import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherForm;
 
 @Controller
 public class TeacherLoginController {
 	@Autowired TeacherLoginService teacherLoginService;
+	
+	// 아이디/비밀번호 찾기 페이지로 이동
+	@GetMapping("/teacherLoginSearch")
+	public String teacherLoginSearch() {
+		return "teacher/loginSearch";
+	}
+	
+	// 아이디/비밀번호 찾기 액션
+	@PostMapping("/teacherLoginSearch")
+	public String teacherLoginSearch(Teacher teacher) {
+		teacherLoginService.modifyAccountToPw(teacher);
+		return "redirect:/teacherLogin";
+	}	
 	
 	// 회원가입 폼으로 이동
 	@GetMapping("/teacherSignup")

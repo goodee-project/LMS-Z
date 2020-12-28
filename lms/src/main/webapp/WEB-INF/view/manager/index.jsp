@@ -294,7 +294,7 @@
 						if(data.connectList[i].managerName != null){
 							var managerBody = '<tbody>';
 							managerBody += '<tr><td class="border-top-0 text-muted px-2 font-13">';
-							managerBody += '운용자';						
+							managerBody += '운영자';						
 							managerBody += '</td><td class="border-top-0 text-muted px-2 font-13">';						
 							managerBody += data.connectList[i].managerName;						
 							managerBody += '</td></tr>';

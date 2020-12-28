@@ -31,32 +31,38 @@ public class ManagerLoginService {
 	// 아이디 패스워드 찾기
 	public void modifyAccountToPw(Manager manager) {
 		Manager returnManager = managerLoginMapper.selectManagerToNameAndEmail(manager);
-		StringBuffer accountPw = new StringBuffer();
+		if(returnManager == null) {
+			return;
+		}
+		
+		StringBuffer accountPwBuffer = new StringBuffer();
 		Random rnd = new Random();
 	     for (int i = 0; i < 13; i++) {
 	         int rIndex = rnd.nextInt(3);
 	         switch (rIndex) {
 	         case 0:
 	             // a-z
-	        	 accountPw.append((char) ((int) (rnd.nextInt(26)) + 97));
+	        	 accountPwBuffer.append((char) ((int) (rnd.nextInt(26)) + 97));
 	             break;
 	         case 1:
 	             // A-Z
-	        	 accountPw.append((char) ((int) (rnd.nextInt(26)) + 65));
+	        	 accountPwBuffer.append((char) ((int) (rnd.nextInt(26)) + 65));
 	             break;
 	         case 2:
 	             // 0-9
-	        	 accountPw.append((rnd.nextInt(10)));
+	        	 accountPwBuffer.append((rnd.nextInt(10)));
 	             break;
 	         }
 	     }
+	     
+	     String accountPw = accountPwBuffer.toString();
 	     
 	     try {
 		     MimeMessage msg = mailSender.createMimeMessage();
 		     MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
 		             
 		     messageHelper.setSubject("LMS - " + returnManager.getManagerName() + "님 비밀번호 찾기 메일입니다.");
-		     messageHelper.setText("비밀번호는 "+accountPw+" 입니다.");
+		     messageHelper.setText("아이디는 "+returnManager.getManagerId()+" 입니다. \n 비밀번호는 "+accountPw+" 입니다.");
 		     messageHelper.setTo(returnManager.getManagerEmail());
 		     msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(returnManager.getManagerEmail()));
 		     mailSender.send(msg);

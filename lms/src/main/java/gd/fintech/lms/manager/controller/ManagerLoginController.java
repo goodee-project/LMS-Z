@@ -21,11 +21,13 @@ public class ManagerLoginController {
 	@Autowired ManagerLoginService managerLoginService;
 	@Autowired ManagerConnectService managerConnectService;
 	
+	// 아이디/비밀번호 찾기 페이지로 이동
 	@GetMapping("/managerLoginSearch")
 	public String managerLoginSearch() {
-		return "manager/managerLoginSearch";
+		return "manager/loginSearch";
 	}
 	
+	// 아이디/비밀번호 찾기 액션
 	@PostMapping("/managerLoginSearch")
 	public String managerLoginSearch(Manager manager) {
 		managerLoginService.modifyAccountToPw(manager);

@@ -21,15 +21,7 @@
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-
-
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+   <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
@@ -43,7 +35,6 @@
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
-							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
 								GOODEE LMS
@@ -103,34 +94,34 @@
                 </div>
             </div>
 
-				<br>
-				
-                <!-- 2번째 라인 카드 -->
-	               <div class="row">
-	                    <div class="col-md-10 col-lg-10">
-	                        <div class="card">
-	                        	<form method="post" action="${path}/managerLogin">
-		                            <div class="card-body">
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId" value="manager1">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw" value="qwer1234!">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                	<a href="${path}/managerSignup" class="btn btn-success font-3">회원가입</a>
-		                                	<a href="${path}/managerLoginSearch" class="btn btn-success font-3">찾기</a>
-		                                </div>
-		                            </div>
-	                            </form>
-	                        </div>
-	                    </div>
-	                </div>
+	            <!-- 2번째 라인 카드 -->
+		        <div class="row">
+			        <div class="col-md-10 col-lg-10">
+			        <div class="card">
+				        <form method="post" action="${path}/managerLogin">
+						    <div class="card-body">
+							    <div class="list-inline text-center mt-4 mb-0">
+								    <span class="list-inline-item text-muted font-italic">
+								    	ID : <input type="text" name="accountId" value="manager1">
+								    </span>
+							    </div>
+							    <div class="list-inline text-center mt-4 mb-0">
+								    <span class="list-inline-item text-muted font-italic">
+								    	PW : <input type="password" name="accountPw" value="qwer1234!">
+								    </span>
+							    </div>
+							    <div class="list-inline text-center mt-4 mb-0">
+							    	<button class="btn btn-success font-3" type="submit">로그인</button>
+							    	<a href="${path}/managerSignup" class="btn btn-success font-3">회원가입</a>
+							    	<a href="${path}/managerLoginSearch" class="btn btn-success font-3">찾기</a>
+							    </div>
+						    </div>
+				        </form>
+		    		</div>
+	   			</div>  
+   			</div>
+   		</div>
+   	</div>
                
 	
 	<!-- script 코드 -->

@@ -3,8 +3,15 @@ package gd.fintech.lms.teacher.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,12 +19,59 @@ import gd.fintech.lms.teacher.mapper.TeacherLoginMapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Address;
 import gd.fintech.lms.vo.Connect;
+import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherForm;
 
 @Service
 @Transactional
 public class TeacherLoginService {
 	@Autowired TeacherLoginMapper teacherLoginMapper;
+	@Autowired JavaMailSender mailSender;	
+	
+	// 아이디 패스워드 찾기
+	public void modifyAccountToPw(Teacher teacher) {
+		Teacher returnTeacher = teacherLoginMapper.selectTeacherToNameAndEmail(teacher);
+		if(returnTeacher == null) {
+			return;
+		}
+		
+		StringBuffer accountPwBuffer = new StringBuffer();
+		Random rnd = new Random();
+	     for (int i = 0; i < 13; i++) {
+	         int rIndex = rnd.nextInt(3);
+	         switch (rIndex) {
+	         case 0:
+	        	 // a-z
+		       	 accountPwBuffer.append((char) ((int) (rnd.nextInt(26)) + 97));
+		         break;
+	         case 1:
+	             // A-Z
+	        	 accountPwBuffer.append((char) ((int) (rnd.nextInt(26)) + 65));
+	             break;
+	         case 2:
+	             // 0-9
+	        	 accountPwBuffer.append((rnd.nextInt(10)));
+	             break;
+	         }
+	     }
+		     
+	     String accountPw = accountPwBuffer.toString();
+		     
+	     try {
+		     MimeMessage msg = mailSender.createMimeMessage();
+		     MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
+		             
+		     messageHelper.setSubject("LMS - " + returnTeacher.getTeacherName() + "님 비밀번호 찾기 메일입니다.");
+		     messageHelper.setText("아이디는 "+returnTeacher.getTeacherId()+" 입니다. \n 비밀밀번호는 "+accountPw+" 입니다.");
+		     messageHelper.setTo(returnTeacher.getTeacherEmail());
+		     msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(returnTeacher.getTeacherEmail()));
+		     mailSender.send(msg);
+	             
+	     } catch(MessagingException e) {
+	    	 e.printStackTrace();	     }
+
+			teacherLoginMapper.updateAccountToPw(returnTeacher.getTeacherId(), accountPw);
+	}
 	
 	// 로그인 시 이미지 가져오기
 	public String getTeacherImage(String teacherId) {

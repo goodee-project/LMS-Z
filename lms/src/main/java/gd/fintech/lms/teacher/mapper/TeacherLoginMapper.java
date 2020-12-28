@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Address;
 import gd.fintech.lms.vo.Connect;
+import gd.fintech.lms.vo.Teacher;
 import gd.fintech.lms.vo.TeacherForm;
 
 @Mapper
@@ -30,4 +31,8 @@ public interface TeacherLoginMapper {
 	
 	// 중복 로그인 방지
 	int selectConnectByOverlapLogin(Connect connect);
+	
+	// 아이디 패스워드 찾기
+	int updateAccountToPw(String accountId, String accountPw);
+	Teacher selectTeacherToNameAndEmail(Teacher teacher);
 }

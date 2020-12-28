@@ -21,15 +21,7 @@
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-
-
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+   <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
@@ -43,7 +35,6 @@
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
-							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
 								GOODEE LMS
@@ -70,10 +61,10 @@
                                     class="hide-menu">관리자 로그인
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/managerLogin"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">매니저 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
                                 aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
                                     class="hide-menu">강사 로그인</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin"
@@ -94,7 +85,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">운영자 - 아이디/비밀번호 찾기
+                                    <li class="breadcrumb-item">학생
                                     </li>
                                 </ol>
                             </nav>
@@ -103,32 +94,32 @@
                 </div>
             </div>
 
-				<br>
-				
-                <!-- 2번째 라인 카드 -->
-	               <div class="row">
-	                    <div class="col-md-10 col-lg-10">
-	                        <div class="card">
-	                        	<form method="post" action="${path}/managerLoginSearch">
-		                            <div class="card-body">
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	이름 : <input type="text" name="managerName">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	이메일 : <input type="text" name="managerEmail">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button type="submit" class="btn btn-success font-3">찾기</button>
-		                                </div>
-		                            </div>
-	                            </form>
-	                        </div>
-	                    </div>
-	                </div>
+	            <!-- 2번째 라인 카드 -->
+		        <div class="row">
+			        <div class="col-md-10 col-lg-10">
+			        <div class="card">
+				        <form method="post" action="${path}/teacherLoginSearch">
+						    <div class="card-body">
+							    <div class="list-inline text-center mt-4 mb-0">
+								    <span class="list-inline-item text-muted font-italic">
+								    	이름 : <input type="text" name="teacherName">
+								    </span>
+							    </div>
+							    <div class="list-inline text-center mt-4 mb-0">
+								    <span class="list-inline-item text-muted font-italic">
+								    	이메일 : <input type="text" name="teacherEmail">
+								    </span>
+							    </div>
+							    <div class="list-inline text-center mt-4 mb-0">
+							    	<button type="submit" class="btn btn-success font-3">찾기</button>
+							    </div>
+						    </div>
+				        </form>
+		    		</div>
+	   			</div>  
+   			</div>
+   		</div>
+   	</div>
                
 	
 	<!-- script 코드 -->
