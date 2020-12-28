@@ -57,7 +57,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByImage(multipartFile, managerId);
 		
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 직책 수정
@@ -68,7 +68,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByPosition(managerId, managerPosition);
 		
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 핸드폰 번호 수정
@@ -77,7 +77,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByAddress(manager);
 		
-		return "redirect:/manager/myInfo/" + manager.getManagerId();
+		return "redirect:/manager/modifyMyInfo/" + manager.getManagerId();
 	}
 	
 	// 마이페이지 핸드폰 번호 수정
@@ -88,7 +88,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByPhone(managerId, managerPhone);
 		
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 생일 수정
@@ -99,7 +99,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByBirth(managerId, managerBirth);
 			
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 성별 수정
@@ -110,7 +110,7 @@ public class ManagerInfoController {
 		
 		managerInfoService.modifyManagerByGender(managerId, managerGender);
 			
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 이메일 수정
@@ -120,7 +120,7 @@ public class ManagerInfoController {
 			@PathVariable(value="managerEmail") String managerEmail) {
 		managerInfoService.modifyManagerByEmail(managerId, managerEmail);
 		
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 마이페이지 이름 수정
@@ -130,7 +130,7 @@ public class ManagerInfoController {
 			@PathVariable(value="managerName") String managerName) {
 		managerInfoService.modifyManagerByName(managerId, managerName);
 		
-		return "redirect:/manager/myInfo/" + managerId;
+		return "redirect:/manager/modifyMyInfo/" + managerId;
 	}
 	
 	// 패스워드 변경사이트 이동
@@ -149,8 +149,8 @@ public class ManagerInfoController {
 	}
 	
 	// 운용자 마이페이지 출력(강사 정보를 가져오기 위해 managerId를 받아옴)
-	@GetMapping("/manager/myInfo/{managerId}")
-	public String myInfo(Model model,
+	@GetMapping("/manager/modifyMyInfo/{managerId}")
+	public String modifyMyInfo(Model model,
 						@PathVariable(value="managerId") String managerId) {
 		// manager 객체 선언하여 service의 메소드 호출 및 입력
 		Manager managerOne = managerInfoService.getManagerInfo(managerId);
@@ -163,6 +163,17 @@ public class ManagerInfoController {
 		model.addAttribute("managerPhone1", managerPhone1);
 		model.addAttribute("managerPhone2", managerPhone2);
 		model.addAttribute("managerPhone3", managerPhone3);
+		
+		return "manager/modifyMyInfo";
+	}
+	
+	// 운용자 마이페이지 출력(강사 정보를 가져오기 위해 managerId를 받아옴)
+	@GetMapping("/manager/myInfo/{managerId}")
+	public String myInfo(Model model,
+			@PathVariable(value="managerId") String managerId) {
+		
+		Manager managerOne = managerInfoService.getManagerInfo(managerId);		
+		model.addAttribute("managerOne", managerOne);
 		
 		return "manager/myInfo";
 	}

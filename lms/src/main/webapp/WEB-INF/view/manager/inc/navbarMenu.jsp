@@ -9,7 +9,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Index</span></a></li>
                         <!-- 사용 시 줄 표시 -->

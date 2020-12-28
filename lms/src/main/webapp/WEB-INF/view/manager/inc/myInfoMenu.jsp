@@ -4,7 +4,10 @@
 <nav class="navbar">
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/manager/myInfo/${managerId}">개인정보변경</a>
+			<a class="nav-link" href="${path}/manager/myInfo/${managerId}">개인정보</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="${path}/manager/modifyMyInfo/${managerId}">개인정보변경</a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="${path}/manager/myInfoPw">Pw변경</a>
