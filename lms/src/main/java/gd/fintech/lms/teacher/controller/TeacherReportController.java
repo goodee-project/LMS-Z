@@ -17,11 +17,28 @@ public class TeacherReportController {
 	@Autowired TeacherReportService teacherReportService;
 	
 	//과제목록
-	@GetMapping("/teacher/reportList/{teacherId}")
-	public String reportList(Model model, @PathVariable(value = "teacherId") String teacherId) {
-		
-		List<Report> reportList = teacherReportService.getReportList(teacherId);
+	@GetMapping("/teacher/reportList/{teacherId}/{currentPage}")
+	public String reportList(Model model, 
+			@PathVariable(value = "teacherId") String teacherId,
+			@PathVariable(value = "currentPage") int currentPage) {
+		// page당 목록 갯수
+		int rowPerPage = 5;
+		// 시작 목록
+		int beginRow = (currentPage-1)*rowPerPage;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
+		List<Report> reportList = teacherReportService.getReportList(teacherId,beginRow,rowPerPage);
+		int totalPage = teacherReportService.getReportCount(teacherId);
+		// 마지막 페이지
+		int lastPage = 0;
+		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
+			lastPage = (totalPage/rowPerPage)+1;
+		}else { // 나누어 떨어진다면 
+			lastPage = totalPage/rowPerPage;
+		}
 		model.addAttribute("reportList", reportList);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("lastPage", lastPage);
 		
 		return "teacher/reportList";
 	}

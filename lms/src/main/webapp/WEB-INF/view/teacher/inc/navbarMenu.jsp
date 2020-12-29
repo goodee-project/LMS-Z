@@ -35,7 +35,7 @@
                                 </span></a>
                         </li>
                         <!-- 과제 -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/reportList/${teacherId}"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/reportList/${teacherId}/1"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">과제
                                 </span></a>

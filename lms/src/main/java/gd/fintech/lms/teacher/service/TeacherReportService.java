@@ -17,10 +17,12 @@ public class TeacherReportService {
 	@Autowired TeacherReportMapper teacherReportMapper;
 	
 	//과제목록
-	public List<Report> getReportList(String teacherId){
+	public List<Report> getReportList(String teacherId, int beginRow, int rowPerPage){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("accountId", teacherId);
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
 		
 		return teacherReportMapper.selectReportList(map);
 	}
@@ -29,7 +31,6 @@ public class TeacherReportService {
 	public int addReport(Report report) {
 		return teacherReportMapper.insertReport(report);
 	}
-	
 	//과제삭제
 	public int removeReport(int reportNo) {
 		return teacherReportMapper.deleteReport(reportNo);
@@ -43,5 +44,9 @@ public class TeacherReportService {
 	//과제수정
 	public int modifyReport(Report report) {
 		return teacherReportMapper.updateReport(report);
+	}
+	//페이징을 위한 카운트
+	public int getReportCount(String teacherId) {
+		return teacherReportMapper.selectReoprtCount(teacherId);
 	}
 }

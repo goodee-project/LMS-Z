@@ -23,13 +23,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div>
-		<c:forEach var="i" begin="1" end="${lastPage }">
-			<span>
-				<a href="${path}/teacher/lectureList/${teacherId}/${i}">${i}&nbsp;&nbsp;</a>
-			</span>
-		</c:forEach>
-	</div>
 	<br>
    	<div>
    		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->

@@ -34,6 +34,7 @@
 		LEFT JOIN account a
 		ON l.account_id = a.account_id
 		WHERE a.account_id = #{accountId}
+		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 과제 등록 -->
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.Report">
@@ -124,4 +125,13 @@
 			report_enddate = #{reportEnddate}
 		WHERE report_no = #{reportNo}
 	</update>
+	<!-- 과제목록 페이징 -->
+	<select id="selectReoprtCount" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM report r , lecture l, account a
+		WHERE r.lecture_no = l.lecture_no
+		AND l.account_id = a.account_id
+		AND a.account_id = #{teacherId}
+	</select>
 </mapper>
