@@ -19,6 +19,7 @@
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -72,13 +73,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-9">
+                    <div class="col-md-6 col-lg-8">
                         <div class="card">
                             <div class="card-body text-muted font-12">
                                 <h4 class="card-title">주소변경</h4>
                                 <div class="mb-3"></div>
                             	<form id="modifyAddressForm" method="post" action="${path}/manager/modifyAddressMyInfo">
-	                                <table class="table no-wrap v-middle mb-0">
+	                                <table id="myInfoTable2" class="table table">
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">현재 주소</th>
 											<td class=" font-14 font-weight-medium text-dark">
@@ -89,25 +90,25 @@
 											<th class=" font-14 font-weight-medium text-dark">새 주소</th>
 											<td class=" font-14 font-weight-medium text-dark">
 												<input type="hidden" name="managerId" value="${managerId}">
-												<input type="text" id="managerAddressMain" name="managerAddressMain">
-												<div style="width:100%; height:200px; overflow:auto">
+												<input type="text" placeholder="도로명을 입력해 주세요" class="form-control-plaintext form-control bg-light" id="managerAddressMain" name="managerAddressMain">
+												<div id="addDiv" style="width:100%; height:200px; overflow:auto">
 													<table id="addressTable"></table>
 												</div>
-											</td>
-											<td>
-												<button class="btn btn-dark" id="btnAddressMainSearch" type="button">찾기</button>
-												<button class="btn btn-dark" id="btnAddressMainReset" type="button" disabled="disabled">초기화</button>
+												<div id="btnStyle">
+													<button class="btn btn-outline-secondary text-dark" id="btnAddressMainSearch" type="button">찾기</button>
+													<button class="btn btn-outline-secondary text-dark" id="btnAddressMainReset" type="button" disabled="disabled" style="margin-right: -12px;">초기화</button>
+												</div>
 											</td>
 										</tr>
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">새 주소 상세정보</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="text" id="managerAddressSub" name="managerAddressSub">
+												<input type="text" class="form-control-plaintext form-control bg-light" id="managerAddressSub" name="managerAddressSub">
 											</td>
 										</tr>
 	                            	</table>
-	                            	<div>
-		                            	<button type="button" class="btn btn-dark" id="btnResult">확인</button>
+	                            	<div id="btnStyle">
+		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnResult">주소변경</button>
 	                            	</div>
                             	</form>
                             </div>
@@ -152,6 +153,7 @@
 					strHead += '</thead>';
 	
 					$('#addressTable').append(strHead);
+
 					
 					$.each(data.addressList, function(index, address){
 						var dataSet = address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1 + '-' + address.buildno2;

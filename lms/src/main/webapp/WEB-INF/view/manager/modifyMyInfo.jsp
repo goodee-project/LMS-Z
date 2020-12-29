@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -63,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-9">
+                    <div class="col-md-6 col-lg-8">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">개인정보변경</h4>
@@ -76,21 +77,22 @@
                                 </ol>
                             </nav>
                        		 </div>
-                                <table class="table no-wrap v-middle mb-0">
+                                <table id="myInfoTable3" class="table table">
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">아이디</th>
 										<td class=" font-14 font-weight-medium text-dark">${managerOne.managerId}</td>
-										<td></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이름</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="managerName" value="${managerOne.managerName}"></td>
-										<td><button type="button" id="btnName" class="btn btn-dark">개명</button>
+										<td class=" font-14 font-weight-medium text-dark">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="managerName" value="${managerOne.managerName}">
+											<button type="button" id="btnName" class="btn btn-outline-secondary text-dark">개명</button>										
+										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">직책</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<select id="managerPosition" name="managerPosition">
+											<select class="form-control-plaintext form-control bg-light" id="managerPosition" name="managerPosition">
 												<option value="${managerOne.managerPosition}">${managerOne.managerPosition}</option>
 												<c:if test="${managerOne.managerPosition == null}">
 													<option value="대리">대리</option>
@@ -110,18 +112,20 @@
 													<option value="대리">사원</option>
 												</c:if>
 											</select>
+											<button type="button" id="btnPosition" class="btn btn-outline-secondary text-dark">개명</button>										
 										</td>
-										<td><button type="button" id="btnPosition" class="btn btn-dark">변경</button>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="managerEmail" value="${managerOne.managerEmail}"></td>
-										<td><button type="button" id="btnEmail" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="managerEmail" value="${managerOne.managerEmail}">
+											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">개명</button>										
+										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">핸드폰 번호</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<select id="managerPhone1">
+											<select class="form-control-plaintext form-control bg-light" id="managerPhone1">
 												<option value="${managerPhone1}">${managerPhone1}</option>
 												<c:if test="${managerPhone1 == '010'}">
 													<option value="011">011</option>
@@ -129,12 +133,12 @@
 												<c:if test="${managerPhone1 == '011'}">
 													<option value="010">010</option>
 												</c:if>
-											</select>-
-											<input type="text" id="managerPhone2" value="${managerPhone2}">-
-											<input type="text" id="managerPhone3" value="${managerPhone3}">
+											</select>
+											<input type="text" class="form-control-plaintext form-control bg-light" id="managerPhone2" value="${managerPhone2}">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="managerPhone3" value="${managerPhone3}">
 											<input type="hidden" id="managerPhone" name="managerPhone" value="${managerOne.managerPhone}">
+											<button type="button" id="btnPhone" class="btn btn-outline-secondary text-dark">변경</button>
 										</td>
-										<td><button type="button" id="btnPhone" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">성별</th>
@@ -144,33 +148,35 @@
 												<input type="radio" id="managerGender" name="managerGender" value="여">여
 											</c:if>
 											<c:if test="${managerOne.managerGender == '여'}">
-												<input type="radio" id="managerGender" name="managerGender" value="남">남
-												<input type="radio" id="managerGender2" name="managerGender" value="여" checked>여
+												<input type="radio" class="form-check-input" id="managerGender" name="managerGender" value="남">남
+												<input type="radio" class="form-check-input" id="managerGender2" name="managerGender" value="여" checked>여
 											</c:if>
+											<button type="button" id="btnGender" class="btn btn-outline-secondary text-dark" style="margin-left:10px;">변경</button>
 										</td>
-										<td><button type="button" id="btnGender" class="btn btn-dark">변경</button></td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">생일</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="date" id="managerBirth" value="${managerOne.managerBirth}"></td>
-										<td><button type="button" id="btnBirth" class="btn btn-dark">변경</button></td>
+										<td class=" font-14 font-weight-medium text-dark">
+											<input type="date" class="form-control-plaintext form-control bg-light" id="managerBirth" value="${managerOne.managerBirth}">
+											<button type="button" id="btnBirth" class="btn btn-outline-secondary text-dark">변경</button>
+										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">주소</th>
-										<td class=" font-14 font-weight-medium text-dark">${managerOne.managerAddressMain}&nbsp;${managerOne.managerAddressSub}</td>
-										<td><a href="${path}/manager/myInfoAddress/${managerId}" class="btn btn-dark">변경</a></td>
+										<td class=" font-14 font-weight-medium text-dark">
+											${managerOne.managerAddressMain}&nbsp;${managerOne.managerAddressSub}
+										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">사진</th>
 										<td class=" font-14 font-weight-medium text-dark">
 											<form id="managerImageForm" method="post" enctype="multipart/form-data" action="${path}/manager/modifyImageMyInfo">
 												<img src="${path}/images/${managerOne.managerImage}" id="preview" style="width:170px; height:200px;"/>
-												
+												<button id="btnImage" type="button" class="btn btn-outline-secondary text-dark" style="margin-left:10px;">변경</button>
 												<input type="file" name="managerImage" id="imgSelector"/>
 												<input type="hidden" name="managerId" value="${managerId}">
 											</form>
 										</td>
-										<td><button id="btnImage" type="button" class="btn btn-dark">변경</button></td>
 									</tr>
                             	</table>
                             </div>

@@ -18,28 +18,8 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
-    <style>
-		body {
-			width: 100%;
-			height: 100%;
-		    margin: 0;
-		    padding: 0;
-		}
-		
-		#myInfoTable{
-    		width:100%;
-    		table-layout:fixed;
-    		white-space: nowrap;
-    	}
-		
-    	#myInfoTable td{
-    		text-align: center;
-    		vertical-align: middle;
-    		word-break: break-all;
-    		
-    	}
-    	
-    </style>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -198,6 +178,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 	
 	<!-- script 코드 -->

@@ -23,10 +23,10 @@
 			<a class="nav-link" href="${path}/manager/modifyMyInfo/${managerId}">개인정보변경</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/manager/myInfoPw">Pw변경</a>
-		<li class="nav-item">
 			<a class="nav-link" href="${path}/manager/myInfoAddress/${managerId}">주소변경</a>
 		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="${path}/manager/myInfoPw">Pw변경</a>
 		<li class="nav-item">
 			<a class="nav-link" href="${path}/manager/deleteMyInfo">회원탈퇴</a>
 		</li>
