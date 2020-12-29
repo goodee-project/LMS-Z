@@ -82,7 +82,7 @@
 							data:{
 								fromId:"${teacherId}",
 								toId:"${student_Id}",
-								fromName:"${studentName}",
+								fromName:"${teacherName}",
 								msgContent:$('#toStudentMsgContent').val()
 								},
 							success:function(data){

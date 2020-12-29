@@ -15,6 +15,14 @@
 		WHERE from_id IN (#{studentId},#{teacherId})
 		AND to_id IN (#{studentId},#{teacherId})
 	</select>
+	<!-- 메세지 읽음표시 -->
+	<select id="selectMsgReadCheck" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT
+			is_confirm isConfirm
+		FROM msg
+		WHERE from_id = #{teacherId}
+		AND to_id = #{studentId}
+	</select>
 	<!-- 메세지 보내기 -->
 	<insert id="insertToTeacherMsg" parameterType="gd.fintech.lms.vo.Msg">
 		INSERT INTO msg(

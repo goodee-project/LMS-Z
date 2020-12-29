@@ -7,15 +7,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StudentAttendanceMapper {
 	//출석한 횟수
-	public int selectAttendanceTotal(String studentId);
+	public int selectAttendanceTotal(Map<String, Object> map);
 	//지각한 횟수
-	public int selectComLateTotal(String studentId);
+	public int selectComLateTotal(Map<String, Object> map);
 	//조퇴한 횟수
-	public int selectEarlyLeaveTotal(String studentId);
+	public int selectEarlyLeaveTotal(Map<String, Object> map);
 	//외출한 횟수
-	public int selectOutingTotal(String studentId);
+	public int selectOutingTotal(Map<String, Object> map);
 	//결석한 횟수
-	public int selectAbsentTotal(String studentId);
+	public int selectAbsentTotal(Map<String, Object> map);
 	//수강중인 강의의 총 일수
 	public int selectTotalLectureDays(Map<String, Object> map);
 	//진행되었어야 할 출석 일수

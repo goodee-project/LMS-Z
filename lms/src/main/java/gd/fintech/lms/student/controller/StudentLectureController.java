@@ -78,6 +78,8 @@ public class StudentLectureController {
 		if(studentLectureService.getCanIApplicant(lectureNo, lectureTotal) != 0) {
 			classPersonalCheck = true;
 		}
+		
+		
 		model.addAttribute("classRegistrationCk",classRegistrationCk);
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
@@ -102,7 +104,7 @@ public class StudentLectureController {
 							@PathVariable(name="studentId") String studentId,
 							@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 1;
+		int rowPerPage = 5;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage; 
 		// 페이징) 1~10 한묶음 중 첫번째 페이지
@@ -133,9 +135,19 @@ public class StudentLectureController {
 		// 강의실 정보
 		ClassRegistrationForm myLectureListOne = studentLectureService.getMyLectureListOne(studentId, lectureNo);
 		
+		// 읽을 메세지가 있는지 없는지 체크하기 위해
+		boolean isConfirm = false;
+		List<String> isConfirmList = studentMsgService.getMsgReadCheck(myLectureListOne.getLecture().getAccountId(), studentId);
+		for(String s : isConfirmList) {
+			System.out.println("------------------"+s);
+			if(s.equals("true")) {
+				isConfirm = true;
+			}
+		}
 		
 		model.addAttribute("myLectureListOne",myLectureListOne);
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("isConfirm",isConfirm);
 		return "student/myLectureListOne";
 	}
 	//==== 수료한 수강생들만 사용할 수 있는 수강 후기 작성 =====

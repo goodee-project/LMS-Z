@@ -1,7 +1,7 @@
 package gd.fintech.lms.student.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,15 +25,15 @@ public class StudentAttendanceController {
 							@PathVariable(name="currentPage") int currentPage) {
 		//오늘 날짜 출력
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String today = format.format(date);
+		Calendar date = Calendar.getInstance();
+		String today = format.format(date.getTime());
 		
 		//출석,지각,조퇴,외출,결석 빈도를 체크하기 위해 service에서 불러오기
-		int attendance = studentAttendanceService.getAttendanceTotal(studentId);
-		int comLate = studentAttendanceService.getComLateTotal(studentId);
-		int earlyLeave = studentAttendanceService.getEarlyLeaveTotal(studentId);
-		int outing = studentAttendanceService.getOutingTotal(studentId);
-		int absent = studentAttendanceService.getAbsentTotal(studentId);
+		int attendance = studentAttendanceService.getAttendanceTotal(studentId,lectureNo);
+		int comLate = studentAttendanceService.getComLateTotal(studentId,lectureNo);
+		int earlyLeave = studentAttendanceService.getEarlyLeaveTotal(studentId,lectureNo);
+		int outing = studentAttendanceService.getOutingTotal(studentId,lectureNo);
+		int absent = studentAttendanceService.getAbsentTotal(studentId,lectureNo);
 		
 		// 지각/조퇴/외출 3회는 결석 1회로 산정 (accumulate:누적)
 		int accumulateAbsent = 0;
@@ -58,9 +58,14 @@ public class StudentAttendanceController {
 			attendancePer=0;
 		}
 		
-		//과정 진행률
-		int lectureProgress = studentAttendanceService.getCommonLectureDays(
+		//과정 진행상황
+		int lectureProgress=0;
+		// 수업진행되었다면 진행상황 출력
+		if(attendance!=0||comLate!=0||earlyLeave!=0||outing!=0||absent!=0) {
+			lectureProgress = studentAttendanceService.getCommonLectureDays(
 								myLectureListOne.getLecture().getLectureStartdate(), lectureNo);
+		}
+		
 		//과정 진행률 %
 		float progressPer = 0;
 		progressPer = ((float)lectureProgress/(float)totalLectureDays)*(float)100.0;

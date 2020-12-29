@@ -13,7 +13,7 @@
 		<div>
 			<input type="text" id="studentId${status.index }" value="${s.studentId }">
 			<input type="text" id="studentName${status.index }" value="${s.studentName }">
-			<a href="${path}/teacher/msgToFrom/${s.studentId}/${s.studentName}/${teacherId}/${lectureNo}">메세지 보기</a>
+			<a href="${path}/teacher/msgToFrom/${s.studentId}/${s.studentName }/${teacherName}/${teacherId}/${lectureNo}">메세지 보기</a>
 			<c:if test="${s.msg.isConfirm == false }">
 				<span id="${status.index }">■</span>
 			</c:if>

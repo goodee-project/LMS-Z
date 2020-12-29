@@ -4,43 +4,48 @@
 <mapper namespace="gd.fintech.lms.student.mapper.StudentAttendanceMapper">
 
 	<!-- 출석한 횟수 -->
-	<select id="selectAttendanceTotal" parameterType="java.lang.String" resultType="Integer">
+	<select id="selectAttendanceTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM attendance
 		WHERE attendance_state='출석'
 		AND account_id=#{studentId}
+		AND lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 지각한 횟수 -->
-	<select id="selectComLateTotal" parameterType="java.lang.String" resultType="Integer">
+	<select id="selectComLateTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM attendance
 		WHERE attendance_state='지각'
 		AND account_id=#{studentId}
+		AND lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 조퇴한 횟수 -->
-	<select id="selectEarlyLeaveTotal" parameterType="java.lang.String" resultType="Integer">
+	<select id="selectEarlyLeaveTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM attendance
 		WHERE attendance_state='조퇴'
 		AND account_id=#{studentId}
+		AND lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 외출한 횟수 -->
-	<select id="selectOutingTotal" parameterType="java.lang.String" resultType="Integer">
+	<select id="selectOutingTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM attendance
 		WHERE attendance_state='외출'
 		AND account_id=#{studentId}
+		AND lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 결석한 횟수 -->
-	<select id="selectAbsentTotal" parameterType="java.lang.String" resultType="Integer">
+	<select id="selectAbsentTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM attendance
 		WHERE attendance_state='결석'
 		AND account_id=#{studentId}
+		AND lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 수강 중인 강의기간 총 일수(주말제외)  -->
@@ -50,7 +55,8 @@
 		FROM lecture
 		WHERE lecture_no=#{lectureNo}
 	</select>
-	<!-- 진행되었어야 할 출석일수 -->
+	
+	<!-- 과정 진행률 -->
 	<select id="selectCommonLectureDays" parameterType="java.util.Map" resultType="Integer">
 		SELECT 
 			F_TOTAL_WEEKDAYS(#{lectureStartdate},CURDATE())
