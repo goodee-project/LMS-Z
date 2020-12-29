@@ -23,10 +23,12 @@ import gd.fintech.lms.vo.Textbook;
 @Service
 @Transactional
 public class ManagerLectureService {
+	// 강좌 삭제를 위한 외래키로 연결되어있는 테이블들 연결
 	@Autowired ManagerLectureMapper managerLectureMapper;
 	@Autowired TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	@Autowired StudentQuestionMapper studentQuestionMapper;
 	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
+	//파일 위치의 경로를 지정해주는 코드
 	private final String PATH = "C:\\Users\\guswn\\OneDrive\\바탕 화면\\git\\maven.1607910829175\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){

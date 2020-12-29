@@ -26,6 +26,7 @@ public class TeacherFaqController {
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		// faqCategory값을 받아와 total이면 전체 faq목록을, 
 		// 다른 카테고리명이라면 해당 카테고리의 faq목록을 출력하도록 if문 사용
 		if(faqCategory.equals("total")) {
@@ -44,6 +45,7 @@ public class TeacherFaqController {
 			model.addAttribute("faqList", faqList);
 			model.addAttribute("category", category);
 			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
 			model.addAttribute("lastPage", lastPage);
 		}else {
 			// 카테고리별 faq목록 개수
@@ -60,6 +62,7 @@ public class TeacherFaqController {
 			model.addAttribute("faqList", faqList);
 			model.addAttribute("category", category);
 			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("startPage", startPage);
 			model.addAttribute("lastPage", lastPage);
 		}	
 		

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherLectureService;
 import gd.fintech.lms.vo.Lecture;
-import gd.fintech.lms.vo.Student;
 
 @Controller
 public class TeacherLectureController {
@@ -28,6 +27,7 @@ public class TeacherLectureController {
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		int totalCount = teacherLectureService.getLectureCount(teacherId);
 		// 마지막 페이지 구하기
 		if(totalCount % rowPerPage == 0) {
@@ -40,6 +40,7 @@ public class TeacherLectureController {
 		List<Lecture> list = teacherLectureService.getLectureList(teacherId, beginRow, rowPerPage);
 		// model에 페이징값, list값 입력
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
 		return "teacher/lectureList";

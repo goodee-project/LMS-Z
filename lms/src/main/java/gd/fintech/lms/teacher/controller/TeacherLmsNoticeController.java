@@ -25,6 +25,7 @@ public class TeacherLmsNoticeController {
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		int totalCount = teacherLmsNoticeService.getLmsNoticeCount();
 		
 		//마지막 페이지
@@ -37,6 +38,7 @@ public class TeacherLmsNoticeController {
 		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPage", startPage);
 		model.addAttribute("currentPage", currentPage);
 		
 		return "teacher/lmsNoticeList";
