@@ -1,7 +1,9 @@
 package gd.fintech.lms.teacher.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +75,14 @@ public class TeacherTestService {
 				teacherTestMapper.insertTestQuestionExample(ex);
 			}
 		}
+	}
+	
+	// 시험문제번호 중복 검사
+	public int getMultiplechoiceIdOverlap(int lectureNo, int multiplechoiceId) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("lectureNo", lectureNo);
+		map.put("multiplechoiceId", multiplechoiceId);
+		
+		return teacherTestMapper.selectMultiplechoiceIdOverlap(map);
 	}
 }

@@ -134,4 +134,14 @@
 			NOW()
 		)
 	</insert>
+	
+	<!-- 시험문제번호 중복검사 -->
+	<!-- 해당 강의의 입력하려는 시험번호가 있다면 count 출력해서 중복검사 -->
+	<select id="selectMultiplechoiceIdOverlap" parameterType="java.util.Map" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM multiplechoice
+		WHERE lecture_no = #{lectureNo}
+		AND multiplechoice_id = #{multiplechoiceId}
+	</select>
 </mapper>

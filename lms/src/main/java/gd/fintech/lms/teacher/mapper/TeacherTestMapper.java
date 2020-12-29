@@ -1,6 +1,7 @@
 package gd.fintech.lms.teacher.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,4 +31,7 @@ public interface TeacherTestMapper {
 	
 	// 시험문제 보기 추가
 	void insertTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
+	
+	// 시험번호 중복검사
+	int selectMultiplechoiceIdOverlap(Map<String, Integer> map);
 }

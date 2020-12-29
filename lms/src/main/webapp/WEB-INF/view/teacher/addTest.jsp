@@ -16,11 +16,11 @@
 		<table>
 			<tr>
 				<td>시험 시작시간</td>
-				<td><input type="datetime" name="testStartdate"></td>
+				<td><input type="datetime-local" name="testStartdate"></td>
 			</tr>
 			<tr>
 				<td>시험 종료시간</td>
-				<td><input type="datetime" name="testEnddate"></td>
+				<td><input type="datetime-local" name="testEnddate"></td>
 			</tr>
 			<tr>
 				<td>시험내용</td>
