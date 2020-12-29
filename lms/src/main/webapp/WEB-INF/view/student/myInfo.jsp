@@ -136,6 +136,11 @@
 					                            			<th>주소</th>
 					                            			<td colspan="3">${studentOne.studentAddressMain} ${studentOne.studentAddressSub}</td>
 					                            		</tr>
+					                            		<tr>
+					                            			<th>최종 학력</th>
+					                            			<td>${studentOne.career.careerContent}</td>
+					                            			<td colspan="2">${studentOne.career.careerStartdate}~${studentOne.career.careerEnddate}</td>
+					                            		</tr>
 					                            	</table>
 				                            	</div>
 				                            </div>

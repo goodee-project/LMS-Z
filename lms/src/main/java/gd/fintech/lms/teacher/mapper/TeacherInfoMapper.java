@@ -22,6 +22,7 @@ public interface TeacherInfoMapper {
 	int updateTeacherByBirth(String teacherId, String teacherBirth);
 	int updateTeacherByImage(String teacherId, String teacherImage);
 	int updateTeacherByPhone(String teacherId, String teacherPhone);
+	int updateTeacherByInfo(String teacherId, String teacherInfo);
 	int updateTeacherByAddress(Teacher teacher);
 	
 	// 마이 페이지 이메일 중복 검사

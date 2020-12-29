@@ -14,12 +14,20 @@ import org.springframework.web.multipart.MultipartFile;
 import gd.fintech.lms.manager.service.ManagerConnectService;
 import gd.fintech.lms.student.service.StudentInfoService;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.Student;
 
 @Controller
 public class StudentInfoController {
 	@Autowired StudentInfoService studentInfoService;
 	@Autowired ManagerConnectService managerConnectService;
+	
+	// 마이페이지 최종 학력 수정
+	@PostMapping("/student/modifyCareer")
+	public String modifyCareer(Career career) {
+		studentInfoService.modifyCareer(career);
+		return "redirect:/student/myInfo/" + career.getAccountId();
+	}
 	
 	// 주소변경 페이지 이동
 	@GetMapping("/student/myInfoAddress/{studentId}")

@@ -33,6 +33,14 @@
 		WHERE teacher_id = #{teacherId}
 	</update>
 	
+	<!-- 마이 페이지 한줄 소개 수정 -->
+	<update id="updateTeacherByInfo" parameterType="java.util.Map">
+		UPDATE teacher
+		SET 
+			teacher_info = #{teacherInfo}, teacher_updatedate = NOW()
+		WHERE teacher_id = #{teacherId}
+	</update>
+	
 	<!-- 마이 페이지 핸드폰 번호 수정 -->
 	<update id="updateTeacherByPhone" parameterType="java.util.Map">
 		UPDATE teacher

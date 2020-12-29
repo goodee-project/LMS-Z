@@ -17,4 +17,5 @@ public class Student {
 	private String studentUpdatedate;
 	private String managerIdAccess;
 	private Msg msg;
+	private Career career;
 }

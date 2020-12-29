@@ -56,6 +56,27 @@
 		WHERE student_id = #{studentId}
 	</update>
 	
+	<!-- 마이 페이지의 최종학력의 정보가 데이터베이스에 있는지 확인 -->
+	<select id="selectCareerToCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM career
+		WHERE account_id = #{accoutId}
+	</select>
+	
+	<!-- 마이 페이지 최종학력 수정 -->
+	<update id="updateCareer" parameterType="gd.fintech.lms.vo.Career">
+		UPDATE career
+		SET 
+			career_content = #{careerContent}, career_startdate = #{careerStartdate}, career_enddate = #{careerEnddate}
+		WHERE account_id = #{accountId}
+	</update>
+	
+	<!-- 마이 페이지 최종학력 추가 -->
+	<insert id="insertCareer" parameterType="gd.fintech.lms.vo.Career">
+		INSERT INTO career(career_content, career_startdate, career_enddate)
+		VALUES(#{careerContent}, #{careerStartdate}, #{careerEnddate})
+	</insert>
+	
 	<!-- 마이 페이지 생일 수정 -->
 	<update id="updateStudentByBirth" parameterType="java.util.Map">
 		UPDATE student
@@ -103,22 +124,44 @@
 			account_pw = PASSWORD(#{accountPw}) and
 			account_id = #{accountId}
 	</select>
+	
+	<resultMap type="gd.fintech.lms.vo.Student" id="selectStudentInfoResult">
+		<result property="studentId" column="student_id"/>
+		<result property="studentEmail" column="student_email"/>
+		<result property="studentName" column="student_name"/>
+		<result property="studentPhone" column="student_phone"/>
+		<result property="studentGender" column="student_gender"/>
+		<result property="studentBirth" column="student_birth"/>
+		<result property="studentAddressMain" column="student_address_main"/>
+		<result property="studentAddressSub" column="student_address_sub"/>
+		<result property="studentImage" column="student_image"/>
+		<result property="studentUpdatedate" column="student_updatedate"/>
+		<association property="career" javaType="gd.fintech.lms.vo.Career">
+			<result property="careerContent" column="career_content"/>
+			<result property="careerStartdate" column="career_startdate"/>
+			<result property="careerEnddate" column="career_enddate"/>
+		</association>
+	</resultMap>
 
 	<!-- 학생 마이페이지 정보 -->
-	<select id="selectStudentInfo" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+	<select id="selectStudentInfo" parameterType="String" resultMap="selectStudentInfoResult">
 		SELECT
-			student_id studentId,
-			student_email studentEmail,
-			student_name studentName,
-			student_phone studentPhone,
-			student_gender studentGender,
-			student_birth studentBirth,
-			student_address_main studentAddressMain,
-			student_address_sub studentAddressSub,
-			student_image studentImage,
-			student_updatedate studentUpdatedate
-		FROM student
-		WHERE student_id = #{studentId}
+			s.student_id,
+			s.student_email,
+			s.student_name,
+			s.student_phone,
+			s.student_gender,
+			s.student_birth,
+			s.student_address_main,
+			s.student_address_sub,
+			s.student_image,
+			s.student_updatedate,
+			c.career_content,
+			c.career_startdate,
+			c.career_enddate
+		FROM student s LEFT JOIN career c
+		ON s.student_id = c.account_id
+		WHERE s.student_id = #{studentId}
 	</select>
 	
 	<!-- 패스워드 변경 -->

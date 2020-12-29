@@ -136,6 +136,11 @@
 					                            			<th>주소</th>
 					                            			<td colspan="3">${teacherOne.teacherAddressMain} ${teacherOne.teacherAddressSub}</td>
 					                            		</tr>
+					                            		<tr>
+					                            			<th>한줄 소개</th>
+					                            			<td></td>
+					                            			<td>${teacherOne.teacherInfo}</td>
+					                            		</tr>
 					                            	</table>
 				                            	</div>
 				                            </div>

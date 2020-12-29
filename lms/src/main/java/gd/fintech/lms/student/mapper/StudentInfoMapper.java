@@ -3,6 +3,7 @@ package gd.fintech.lms.student.mapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.Student;
 
 @Mapper
@@ -36,4 +37,9 @@ public interface StudentInfoMapper {
 	
 	// 주소변경 사이트 주소 가져오기
 	Student selectStudentByAddress(String studentId);
+	
+	// 마이 마이페이지 경력 추가/수정
+	int selectCareerToCheck(String accountId);
+	int updateCareer(Career career);
+	int insertCareer(Career career);
 }

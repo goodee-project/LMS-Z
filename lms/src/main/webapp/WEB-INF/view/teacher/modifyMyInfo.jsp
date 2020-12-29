@@ -90,10 +90,17 @@
 										</td>
 									</tr>
 									<tr>
+										<th class=" font-14 font-weight-medium text-dark">한줄 소개</th>
+										<td class=" font-14 font-weight-medium text-dark">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="teacherInfo" value="${teacherOne.teacherInfo}">
+											<button type="button" id="btnInfo" class="btn btn-outline-secondary text-dark">변경</button>										
+										</td>
+									</tr>
+									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
 										<td class=" font-14 font-weight-medium text-dark">
 											<input type="text" class="form-control-plaintext form-control bg-light" id="teacherEmail" value="${teacherOne.teacherEmail}">
-											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">개명</button>										
+											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">변경</button>										
 										</td>
 									</tr>
 									<tr>
@@ -222,6 +229,18 @@
 				});	
 			}
 		});
+
+		// 한줄 소개에 대한 변경값이 있을 경우에만 crud로 넘어감
+		$('#btnInfo').click(function(){
+			if($('#teacherInfo').val() == '${teacherOne.teacherInfo}'){
+				alert('현재 한줄 소개와 동일합니다.');
+			} else{
+				if(confirm('입력하신 한줄 소개로 변경합니다.')){
+					location.href = '${path}/teacher/modifyInfoMyInfo/${teacherId}/'+$('#teacherInfo').val();
+				}
+			}
+		});
+		
 		// 최종 보내는 키 값
 		var teacherPhone = '';
 		// 핸드폰 번호에 대한 정규표현식

@@ -89,12 +89,25 @@
 											<button type="button" id="btnName" class="btn btn-outline-secondary text-dark">개명</button>										
 										</td>
 									</tr>
+									
+									<tr>
+										<th class=" font-14 font-weight-medium text-dark">최종 학력</th>
+										<td class=" font-14 font-weight-medium text-dark">
+											<form id="formCareer" method="post" action="${path}/student/modifyCareer">
+												<input type="text" class="form-control-plaintext form-control bg-light" id="careerContent" name="careerContent" value="${studentOne.career.careerContent}">
+												<input type="date" class="form-control-plaintext form-control bg-light" id="careerStartdate" name="careerStartdate" value="${studentOne.career.careerStartdate}">
+												<input type="date" class="form-control-plaintext form-control bg-light" id="careerEnddate" name="careerEnddate" value="${studentOne.career.careerEnddate}">
+												<input type="hidden" name="accountId" value="${studentOne.studentId}">
+												<button type="button" id="btnCareer" class="btn btn-outline-secondary text-dark">변경</button>	
+											</form>									
+										</td>
+									</tr>
 
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
 										<td class=" font-14 font-weight-medium text-dark">
 											<input type="text" class="form-control-plaintext form-control bg-light" id="studentEmail" value="${studentOne.studentEmail}">
-											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">개명</button>										
+											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">변경</button>										
 										</td>
 									</tr>
 									<tr>
@@ -192,6 +205,21 @@
 			} else{
 				if(confirm('입력하신 이름으로 변경합니다.')){
 					location.href = '${path}/student/modifyNameMyInfo/${studentId}/'+$('#studentName').val();
+				}
+			}
+		});
+
+		// 최종 학력에 대한 변경값이 있을 경우에만 crud로 넘어감
+		var checkCareer = '${studentOne.career.careerContent}'+'${studentOne.career.careerStartdate}'+'${studentOne.career.careerEnddate}';
+    	// 이름에 대한 변경값이 있을 경우에만 crud로 넘어감
+		$('#btnCareer').click(function(){
+			if($('#careerContent').val() + $('#careerStartdate').val() + $('#careerEnddate').val() === checkCareer){
+				alert('현재 최종 학력과 동일합니다.');
+			} else if($('#careerContent').val().length < 1){
+				alert('사용하실 최종 학력을 입력해주세요.');
+			} else{
+				if(confirm('입력하신 최종 학력으로 변경합니다.')){
+					$('#formCareer').submit();
 				}
 			}
 		});

@@ -84,6 +84,11 @@ public class TeacherInfoService {
 	}
 	
 	// 마이페이지 핸드폰 번호 수정
+	public void modifyTeacherByInfo(String teacherId, String teacherInfo) {
+		teacherInfoMapper.updateTeacherByInfo(teacherId, teacherInfo);
+	}
+	
+	// 마이페이지 핸드폰 번호 수정
 	public void modifyTeacherByPhone(String teacherId, String teacherPhone) {
 		teacherInfoMapper.updateTeacherByPhone(teacherId, teacherPhone);
 	}

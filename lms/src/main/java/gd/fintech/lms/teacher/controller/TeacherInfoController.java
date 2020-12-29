@@ -70,6 +70,17 @@ public class TeacherInfoController {
 	}
 	
 	// 마이페이지 핸드폰 번호 수정
+	@GetMapping("/teacher/modifyInfoMyInfo/{teacherId}/{teacherInfo}")
+	public String modifyTeacherByInfo(
+			@PathVariable(value="teacherId") String teacherId,
+			@PathVariable(value="teacherInfo") String teacherInfo) {
+		
+		teacherInfoService.modifyTeacherByInfo(teacherId, teacherInfo);
+		
+		return "redirect:/teacher/myInfo/" + teacherId;
+	}
+	
+	// 마이페이지 핸드폰 번호 수정
 	@GetMapping("/teacher/modifyPhoneMyInfo/{teacherId}/{teacherPhone}")
 	public String modifyTeacherByPhone(
 			@PathVariable(value="teacherId") String teacherId,

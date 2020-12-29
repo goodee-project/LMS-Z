@@ -15,12 +15,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.student.mapper.StudentInfoMapper;
 import gd.fintech.lms.vo.Account;
+import gd.fintech.lms.vo.Career;
 import gd.fintech.lms.vo.Student;
 
 @Service
 @Transactional
 public class StudentInfoService {
 	@Autowired StudentInfoMapper studentInfoMapper;
+	
+	// 마이 페이지 최종 학력 수정
+	public void modifyCareer(Career career) {
+		int check = studentInfoMapper.selectCareerToCheck(career.getAccountId());
+		
+		if(check == 0) {
+			studentInfoMapper.insertCareer(career);
+		} else {
+			studentInfoMapper.updateCareer(career);
+		}	
+	}
 	
 	// 주소변경 사이트 주소 가져오기
 	public Student getstudentByAddress(String studentId) {
