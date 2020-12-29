@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherLectureNoticeService;
 import gd.fintech.lms.vo.LectureNotice;
@@ -28,6 +27,7 @@ public class TeacherLectureNoticeController {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		// 마지막 페이지
 		int lastPage = 0; 
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		// 공지사항 전체 개수
 		int totalCount = teacherLectureNoticeService.getLectureNoticeCount(lectureNo);
 		
@@ -44,6 +44,7 @@ public class TeacherLectureNoticeController {
 		
 		// jsp파일에 필요한 변수값 model에 입력(현재 페이지, 마지막 페이지, 공지사항 목록)
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("noticeList", noticeList);
 		

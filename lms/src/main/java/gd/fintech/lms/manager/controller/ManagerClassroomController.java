@@ -27,7 +27,7 @@ public class ManagerClassroomController {
 		int rowPerPage = 2;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage;
-		int startPage = ((currentPage/(rowPerPage+1))*rowPerPage)+1;
+		int startPage = ((currentPage/11)*rowPerPage)+1;
 		List<Classroom> classroomList = managerClassroomService.getClassroomList(beginRow, rowPerPage);
 		int totalPage = managerClassroomService.getClassroomTotalCount();
 		// 마지막 페이지
