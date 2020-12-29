@@ -136,9 +136,10 @@ public class ManagerFaqController {
 		String category = URLEncoder.encode(faq.getFaqCategory(), "UTF-8");
 
 		// 스크립트가 db접근 하는 것을 방지
-		String title = faq.getFaqTitle().replaceAll("(?i)<script", "&lt;script");
+		String title = faq.getFaqTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqTitle(title);
-		String content = faq.getFaqContent().replaceAll("(?i)<script", "&lt;script");
+		// 입력값 유효성검사 => 모든 html태그 제거
+		String content = faq.getFaqContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqContent(content);
 
 		managerFaqService.addFaqList(faq);
@@ -188,9 +189,9 @@ public class ManagerFaqController {
 	@PostMapping("manager/modifyFaq/{currentPage}")
 	public String modifyFaq(Faq faq, @PathVariable(name = "currentPage") int currentPage) {
 		// db에 스크립트 접근 방지
-		String title = faq.getFaqTitle().replaceAll("(?i)<script", "&lt;script");
+		String title = faq.getFaqTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqTitle(title);
-		String content = faq.getFaqContent().replaceAll("(?i)<script", "&lt;script");
+		String content = faq.getFaqContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqContent(content);
 
 		managerFaqService.modifyFaqList(faq);
