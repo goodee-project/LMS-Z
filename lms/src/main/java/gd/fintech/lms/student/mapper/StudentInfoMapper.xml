@@ -73,8 +73,8 @@
 	
 	<!-- 마이 페이지 최종학력 추가 -->
 	<insert id="insertCareer" parameterType="gd.fintech.lms.vo.Career">
-		INSERT INTO career(career_content, career_startdate, career_enddate)
-		VALUES(#{careerContent}, #{careerStartdate}, #{careerEnddate})
+		INSERT INTO career(account_id, career_content, career_startdate, career_enddate)
+		VALUES(#{accountId}, #{careerContent}, #{careerStartdate}, #{careerEnddate})
 	</insert>
 	
 	<!-- 마이 페이지 생일 수정 -->

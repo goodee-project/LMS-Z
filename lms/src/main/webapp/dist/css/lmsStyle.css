@@ -127,3 +127,52 @@ body {
 #myInfoTable3 #teacherPhone3 {
 	width:25%;
 }
+
+#loginTable {
+	margin-top: 30px;
+	width:100%;
+	text-align: center;
+}
+
+.card {
+      	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+	height:370px; 
+	border-radius: 15px;
+}
+
+.border-black {
+	border:1px solid #BDBDBD;
+	margin-bottom: 5px;
+}
+
+.input-pad {
+	padding: 8px;
+}
+
+.border-rad{
+	margin-top: 10px;
+	border-radius: 7px;
+}
+
+#loginStyle{
+	text-align: center;
+	color: #000000;
+}
+
+#loginStyle a{
+	color: #000000;
+}
+
+#loginStyle a:hover{
+	color: #BDBDBD;
+}
+
+#loginTitle a{
+	font-size: 23px;
+	font-weight:600;
+}
+
+#loginTable input:focus {
+	outline:2px solid #86E57F;
+	transition: outline 0.2s;
+}

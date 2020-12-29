@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {"/","/teacherLogin", "/teacherSignup", "/studentLogin", "/studentSignup", "/managerLogin", "/managerSignup", "/adminLogin", "/adminSignup"})
+@WebFilter(urlPatterns = {"/","/teacherLogin", "/teacherSignup", "/studentLogin", "/studentSignup", "/managerLogin", "/managerSignup", "/adminLogin", "/adminSignup", "/managerLoginSearch","/teacherLoginSearch", "/studentLoginSearch"})
 public class LmsIndexFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

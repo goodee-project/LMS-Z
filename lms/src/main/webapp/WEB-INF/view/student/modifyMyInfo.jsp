@@ -217,6 +217,10 @@
 				alert('현재 최종 학력과 동일합니다.');
 			} else if($('#careerContent').val().length < 1){
 				alert('사용하실 최종 학력을 입력해주세요.');
+			} else if($('#careerStartdate').val().length < 1){
+				alert('사용하실 시작 날짜를 입력해주세요.');
+			} else if($('#careerEnddate').val().length < 1){
+				alert('사용하실 끝난 날짜을 입력해주세요.');
 			} else{
 				if(confirm('입력하신 최종 학력으로 변경합니다.')){
 					$('#formCareer').submit();
