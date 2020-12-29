@@ -115,7 +115,8 @@
 			teacher_address_main teacherAddressMain,
 			teacher_address_sub teacherAddressSub,
 			teacher_image teacherImage,
-			teacher_info teacherInfo
+			teacher_info teacherInfo,
+			teacher_updatedate teacherUpdatedate
 		FROM teacher
 		WHERE teacher_id = #{teacherId}
 	</select>

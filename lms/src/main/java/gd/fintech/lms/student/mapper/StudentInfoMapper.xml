@@ -115,7 +115,8 @@
 			student_birth studentBirth,
 			student_address_main studentAddressMain,
 			student_address_sub studentAddressSub,
-			student_image studentImage
+			student_image studentImage,
+			student_updatedate studentUpdatedate
 		FROM student
 		WHERE student_id = #{studentId}
 	</select>

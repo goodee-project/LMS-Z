@@ -19,6 +19,7 @@
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -72,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-9">
+                    <div class="col-md-6 col-lg-8">
                         <div class="card">
                             <div class="card-body text-muted font-12">
                                 <h4 class="card-title">Pw변경</h4>
@@ -80,18 +81,18 @@
 	                            	비닐번호를 주기적으로 변경해주세요.
                             	</div>
                             	<form id="modifyPwMyInfo" method="post" action="${path}/teacher/modifyPwMyInfo">
-	                                <table class="table no-wrap v-middle mb-0">
+	                                <table id="myInfoTable2" class="table table">
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">현재 비밀번호</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherPw">
+												<input type="password" id="teacherPw" class="form-control-plaintext form-control-lg bg-light">
 												<input type="hidden" id="accountId" name="accountId" value="${teacherId}">
 											</td>
 										</tr>
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">새 비밀번호</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherNewPw" name="accountPw">
+												<input type="password" id="teacherNewPw" class="form-control-plaintext form-control-lg bg-light" name="accountPw">
 												<div id="textNewPw">
 													영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.
 												</div>
@@ -100,16 +101,16 @@
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">새 비밀번호 확인</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="teacherNewPw2">
+												<input type="password" class="form-control-plaintext form-control-lg bg-light" id="teacherNewPw2">
 												<div id="textNewPw2">
 													비밀번호를 다시 한번 입력해주세요.
 												</div>
 											</td>
 										</tr>
 	                            	</table>
-	                            	<div>
-		                            	<button type="button" class="btn btn-dark" id="btnResult">확인</button>
-		                            	<button type="button" class="btn btn-dark" id="btnReset">새로 입력</button>
+	                            	<div id="btnStyle">
+		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnReset">새로 입력</button>
+		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnResult">확인</button>
 	                            	</div>
                             	</form>
                             </div>
@@ -155,6 +156,7 @@
 			teacherPwCheck = '';
 			teacherNewPwCheck = '';
 			teacherNewPw2Check = '';
+			alert('초기화 하였습니다.');
 		});
 		
 		// 확인 버튼 클릭 시 각각의 입력 값 체크
@@ -178,8 +180,10 @@
 							$('#teacherPw').val('');
 							teacherPwCheck = '';	
 						} else{
-							alert('비밀번호를 변경하셨습니다. 로그인을 다시 해주세요.');
-							$('#modifyPwMyInfo').submit();
+							if(confirm('비밀번호를 변경하겠습니다')){
+								alert('비밀번호를 변경하셨습니다. 로그인을 다시 해주세요.');
+								$('#modifyPwMyInfo').submit();
+							}
 							
 						}
 					}

@@ -6,7 +6,7 @@
 		SELECT cc.connect_count connectCount
 		FROM connect c INNER JOIN connect_count cc
 		ON c.connect_no = cc.connect_no
-		WHERE c.account_id = #{managerId} AND cc.connect_date = DATE_FORMAT(NOW(), "%Y-%m-%d")
+		WHERE c.account_id = #{accountId} AND cc.connect_date = DATE_FORMAT(NOW(), "%Y-%m-%d")
 	</select>
 	
 	<!-- map형식으로 반환 -->

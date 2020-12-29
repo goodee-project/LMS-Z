@@ -193,7 +193,9 @@
 			if($('#managerAddressMain').val() == ''){
 				alert('도로명을 새 주소에 입력하고 찾기를 해주세요.');
 			} else{
-				$('#modifyAddressForm').submit();
+				if(confirm('선택하신 주소로 변경합니다.')){
+					$('#modifyAddressForm').submit();
+				}
 			}
 		});
     </script>

@@ -8,18 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.manager.service.ManagerConnectService;
 import gd.fintech.lms.teacher.service.TeacherInfoService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Teacher;
-import jdk.internal.org.jline.utils.Log;
 
 @Controller
 public class TeacherInfoController {
 	@Autowired TeacherInfoService teacherInfoService;
+	@Autowired ManagerConnectService managerConnectService;
 	
 	// 주소변경 페이지 이동
 	@GetMapping("/teacher/myInfoAddress/{teacherId}")
@@ -138,8 +138,8 @@ public class TeacherInfoController {
 	}
 	
 	// 강사 마이페이지 출력(강사 정보를 가져오기 위해 teacherId를 받아옴)
-	@GetMapping("/teacher/myInfo/{teacherId}")
-	public String myInfo(Model model,
+	@GetMapping("/teacher/modifyMyInfo/{teacherId}")
+	public String modifyMyInfo(Model model,
 						@PathVariable(value="teacherId") String teacherId) {
 		// teacher 객체 선언하여 service의 메소드 호출 및 입력
 		Teacher teacherOne = teacherInfoService.getTeacherInfo(teacherId);
@@ -152,6 +152,19 @@ public class TeacherInfoController {
 		model.addAttribute("teacherPhone1", teacherPhone1);
 		model.addAttribute("teacherPhone2", teacherPhone2);
 		model.addAttribute("teacherPhone3", teacherPhone3);
+		
+		return "teacher/modifyMyInfo";
+	}
+	
+	// 강사 마이페이지 출력(강사 정보를 가져오기 위해 teacherId를 받아옴)
+	@GetMapping("/teacher/myInfo/{teacherId}")
+	public String myInfo(Model model,
+			@PathVariable(value="teacherId") String teacherId) {
+		
+		Teacher teacherOne = teacherInfoService.getTeacherInfo(teacherId);
+		int connectCount = managerConnectService.getConnectCountToNo(teacherId);
+		model.addAttribute("teacherOne", teacherOne);
+		model.addAttribute("connectCount", connectCount);
 		
 		return "teacher/myInfo";
 	}

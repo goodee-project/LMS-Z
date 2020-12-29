@@ -19,6 +19,7 @@
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-9">
+                    <div class="col-md-6 col-lg-7	">
                         <div class="card">
                             <div class="card-body text-muted font-12">
                                 <h4 class="card-title">회원탈퇴</h4>
@@ -79,7 +80,7 @@
                                 	한번 탈퇴한 아이디는 복구하실 수 없습니다.
                                 </div>
                             	<form id="modifyPwMyInfo" method="post" action="${path}/student/modifyPwMyInfo">
-	                                <table class="table no-wrap v-middle mb-0">
+	                                <table id="myInfoTable2" class="table table">
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">아이디</th>
 											<td class=" font-14 font-weight-medium text-dark">${studentId}</td>
@@ -87,12 +88,12 @@
 										<tr>
 											<th class=" font-14 font-weight-medium text-dark">비밀번호</th>
 											<td class=" font-14 font-weight-medium text-dark">
-												<input type="password" id="studentPw">
+												<input type="password" id="studentPw" class="form-control-plaintext form-control-lg bg-light">
 											</td>
 										</tr>
 	                            	</table>
-	                            	<div>
-		                            	<button type="button" class="btn btn-dark" id="btnResult">탈퇴</button>
+	                            	<div id="btnStyle">
+		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnResult">탈퇴</button>
 	                            	</div>
                             	</form>
                             </div>

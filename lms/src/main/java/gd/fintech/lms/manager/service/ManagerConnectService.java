@@ -19,8 +19,8 @@ public class ManagerConnectService {
 	@Autowired ManagerConnectMapper managerConnectMapper;
 	
 	// 해당 아이디의 오늘 방문자 수 출력
-	public int getConnectCountToNo(String managerId) {
-		return managerConnectMapper.selectConnectCountToNo(managerId);
+	public int getConnectCountToNo(String accountId) {
+		return managerConnectMapper.selectConnectCountToNo(accountId);
 	}
 	
 	// List안에 map형식으로 connect테이블의 값들을 controller에 전달

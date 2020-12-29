@@ -18,6 +18,8 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +53,7 @@
                 
                 <!-- 2번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-3 col-lg-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
@@ -63,99 +65,115 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">개인정보변경</h4>
-                                                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item">
-                                    	
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-                                <table class="table no-wrap v-middle mb-0">
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">아이디</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherId}</td>
-										<td></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">이름</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="teacherName" value="${teacherOne.teacherName}"></td>
-										<td><button type="button" id="btnName" class="btn btn-dark">개명</button>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">이메일</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="text" id="teacherEmail" value="${teacherOne.teacherEmail}"></td>
-										<td><button type="button" id="btnEmail" class="btn btn-dark">변경</button></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">핸드폰 번호</th>
-										<td class=" font-14 font-weight-medium text-dark">
-											<select id="teacherPhone1">
-												<option value="${teacherPhone1}">${teacherPhone1}</option>
-												<c:if test="${teacherPhone1 == '010'}">
-													<option value="011">011</option>
-												</c:if>
-												<c:if test="${teacherPhone1 == '011'}">
-													<option value="010">010</option>
-												</c:if>
-											</select>-
-											<input type="text" id="teacherPhone2" value="${teacherPhone2}">-
-											<input type="text" id="teacherPhone3" value="${teacherPhone3}">
-											<input type="hidden" id="teacherPhone" name="teacherPhone" value="${teacherOne.teacherPhone}">
-										</td>
-										<td><button type="button" id="btnPhone" class="btn btn-dark">변경</button></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">성별</th>
-										<td class=" font-14 font-weight-medium text-dark">
-											<c:if test="${teacherOne.teacherGender == '남'}">
-												<input type="radio" id="teacherGender" name="teacherGender" value="남" checked>남
-												<input type="radio" id="teacherGender" name="teacherGender" value="여">여
-											</c:if>
-											<c:if test="${teacherOne.teacherGender == '여'}">
-												<input type="radio" id="teacherGender" name="teacherGender" value="남">남
-												<input type="radio" id="teacherGender2" name="teacherGender" value="여" checked>여
-											</c:if>
-										</td>
-										<td><button type="button" id="btnGender" class="btn btn-dark">변경</button></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">생일</th>
-										<td class=" font-14 font-weight-medium text-dark"><input type="date" id="teacherBirth" value="${teacherOne.teacherBirth}"></td>
-										<td><button type="button" id="btnBirth" class="btn btn-dark">변경</button></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">주소</th>
-										<td class=" font-14 font-weight-medium text-dark">${teacherOne.teacherAddressMain}&nbsp;${teacherOne.teacherAddressSub}</td>
-										<td><a href="${path}/teacher/myInfoAddress/${teacherId}" class="btn btn-dark">변경</a></td>
-									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">사진</th>
-										<td class=" font-14 font-weight-medium text-dark">
-											<form id="teacherImageForm" method="post" enctype="multipart/form-data" action="${path}/teacher/modifyImageMyInfo">
-												<img src="${path}/images/${teacherOne.teacherImage}" id="preview" style="width:170px; height:200px;"/>
-												
-												<input type="file" name="teacherImage" id="imgSelector"/>
-												<input type="hidden" name="teacherId" value="${teacherId}">
-											</form>
-										</td>
-										<td><button id="btnImage" type="button" class="btn btn-dark">변경</button></td>
-									</tr>
-                            	</table>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <div class="col-md-9 col-lg-9">
+	                    <div class="row">
+		                    <div class="col-md-6 col-lg-6"> 
+		                        <div class="card" style="height:270px">
+		                            <div class="card-body">
+		                            	<div class="d-flex align-items-center">
+				                            <div class="col-md-6 col-lg-12">
+				                            	<h4 class="card-title">프로필</h4>
+				                            	<div class="mb-3"></div>
+				                            	<div class="card-text">
+					                            	<table class="table table" id="myInfoTable">
+					                            		<tr>
+					                            			<th rowspan="2"><img src="${path}/images/${teacherOne.teacherImage}" style="width:150px;height:170px"></th>
+					                            			<td>${teacherOne.teacherName}</td>
+					                            		</tr>
+					                            		<tr>
+					                            			<td>${teacherOne.teacherGender}</td>
+					                            		</tr>
+					                            	</table>
+				                            	</div>
+				                            </div>
+		
+		                       			</div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-md-6 col-lg-6"> 
+		                        <div class="card" style="height:270px">
+		                            <div class="card-body">
+		                            	<div class="d-flex align-items-center">
+				                            <div class="col-md-6 col-lg-12">
+				                            	<h4 class="card-title">연락처/생일</h4>
+				                            	<div class="mb-3"></div>
+				                            	<div class="card-text">
+					                            	<table class="table table" id="myInfoTable">
+					                            		<tr>
+					                            			<th>이메일</th>
+					                            			<td>${teacherOne.teacherEmail}</td>
+					                            		</tr>
+					                            		<tr>
+					                            			<th>핸드폰 번호</th>
+					                            			<td>${teacherOne.teacherPhone}</td>
+					                            		</tr>
+					                            		<tr>
+					                            			<th>생일</th>
+					                            			<td>
+					                            				${teacherOne.teacherBirth}
+					                            			</td>
+					                            		</tr>
+					                            	</table>
+				                            	</div>
+		                       				</div>
+		                          	  </div>
+		                       	 </div>
+		                 	   </div>
+	                  	  </div>
+	                  	  
+	                  	  <div class="col-md-6 col-lg-8"> 
+		                        <div class="card" style="height:200px">
+		                            <div class="card-body">
+		                            	<div class="d-flex align-items-center">
+				                            <div class="col-md-6 col-lg-12">
+				                            	<h4 class="card-title">기타</h4>
+				                            	<div class="mb-3"></div>
+				                            	<div class="card-text">
+					                            	<table class="table table" id="myInfoTable">
+					                            		<tr>
+					                            			<th>주소</th>
+					                            			<td colspan="3">${teacherOne.teacherAddressMain} ${teacherOne.teacherAddressSub}</td>
+					                            		</tr>
+					                            	</table>
+				                            	</div>
+				                            </div>
+		
+		                       			</div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    
+		                    <div class="col-md-6 col-lg-4"> 
+		                        <div class="card" style="height:200px">
+		                            <div class="card-body">
+		                            	<div class="d-flex align-items-center">
+				                            <div class="col-md-6 col-lg-12">
+				                            	<h4 class="card-title">방문현황</h4>
+				                            	<div class="mb-3"></div>
+				                            	<div class="card-text">
+					                            	<table class="table table" id="myInfoTable">
+					                            		<tr>
+					                            			<td>접속</td>
+					                            			<td>${connectCount}번</td>
+					                            		</tr>
+					                            		<tr>
+					                            			<td colspan="2">${teacherOne.teacherUpdatedate}</td>
+					                            		</tr>
+					                            	</table>
+				                            	</div>
+				                            </div>
+		
+		                       			</div>
+		                            </div>
+		                        </div>
+		                    </div>
+                    </div>  
                 </div>
-                
             </div>
-
         </div>
-
+    </div>
     </div>
 	
 	<!-- script 코드 -->
@@ -174,127 +192,7 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-    
-    <script>
-    	// 이름에 대한 변경값이 있을 경우에만 crud로 넘어감
-		$('#btnName').click(function(){
-			if($('#teacherName').val() == '${teacherOne.teacherName}'){
-				alert('현재 이름과 동일합니다.');
-			} else if($('#teacherName').val().length < 1){
-				alert('사용하실 이름을 입력해주세요.');
-			} else{
-				if(confirm('입력하신 이름으로 변경합니다.')){
-					location.href = '${path}/teacher/modifyNameMyInfo/${teacherId}/'+$('#teacherName').val();
-				}
-			}
-		});
-
-		// 이메일에 대한 정규 표현식
-		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		// 이메일에 대한 변경 값이 있고, 정규표현식에 만족할 경우에만 crud로 넘어감
-		$('#btnEmail').click(function(){
-			if($('#teacherEmail').val() == '${teacherOne.teacherEmail}'){
-				alert('현재 이메일과 동일합니다.');
-			} else if($('#teacherEmail').val().length < 1){
-				alert('사용하실 이메일을 입력해주세요.');
-			} else if(!checkEmail.test($('#teacherEmail').val())){
-				alert('이메일을 바른 형식으로 입력해주세요.');
-			} else{
-				$.ajax({
-					url:'${path}/teacher/myInfoByOverlapEmail',
-					type:'GET',
-					data:{teacherEmail: $('#teacherEmail').val()},
-					success:function(data){
-						if(data.teacherEmailCheck == 0){
-							if(confirm('입력하신 이메일로 변경합니다')){
-								location.href = '${path}/teacher/modifyEmailMyInfo/${teacherId}/'+$('#teacherEmail').val();
-							}
-						} else{
-							alert('사용하실 이메일이 중복되었습니다.');
-						}
-					}
-				});	
-			}
-		});
-		// 최종 보내는 키 값
-		var teacherPhone = '';
-		// 핸드폰 번호에 대한 정규표현식
-		var checkPhone2 = /^\d{4}$/;
-		var checkPhone3 = /^\d{4}$/;
-		// 핸드폰 번호에 대한 변경 값이 있거나 정규표현식을 만족한 경우에만 crud로 넘어감
-		$('#btnPhone').click(function(){
-			teacherPhone = $('#teacherPhone1').val() + $('#teacherPhone2').val() + $('#teacherPhone3').val();
-			if(teacherPhone == $('#teacherPhone').val()){
-				alert('현재 핸드폰 번호와 동일합니다.');
-			} else if($('#teacherPhone2').val() == '' || $('#teacherPhone3').val() == ''){
-				alert('사용하실 핸드폰 번호를 입력해주세요.');
-			} else if(!checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
-				alert('핸드폰 번호를 바른 형식으로 입력해주세요.');
-			} else{
-				if(confirm('입력하신 핸드폰 번호로 변경합니다')){
-					location.href = '${path}/teacher/modifyPhoneMyInfo/${teacherId}/'+ teacherPhone;
-				}
-			}
-		});
-
-		// 성별에 대한 변경 값이 있을 경우에만 crud로 넘어감
-		$('#btnGender').click(function(){
-			if($('#teacherGender:checked').val() == '${teacherOne.teacherGender}'){
-				alert('현재 성별과 동일합니다.');
-			} else{
-				if(confirm('입력하신 성별로 변경합니다')){
-					location.href = '${path}/teacher/modifyGenderMyInfo/${teacherId}/'+$('#teacherGender:checked').val();
-				}
-			}
-		});
-
-		// 생일에 대한 변경 값이 있을 경우에만 crud로 넘어감
-		$('#btnBirth').click(function(){
-			if($('#teacherBirth').val() == '${teacherOne.teacherBirth}'){
-				alert('현재 생일과 동일합니다');
-			} else{
-				if(confirm('입력하신 생일로 변경합니다')){
-					location.href = '${path}/teacher/modifyBirthMyInfo/${teacherId}/'+$('#teacherBirth').val();
-				}
-			}
-		});
-
-		// 이미지 변경 값이 있는지 확인하는 변수
-		var imageCheck = '';
-		// 이미지에 대한 제약조건 명시
-		$('#imgSelector').change(function(){
-            ext = $(this).val().split('.').pop().toLowerCase(); //확장자
-            //배열에 추출한 확장자가 존재하는지 체크
-            if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'jfif']) == -1) {
-                alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
-                $(this).val('');
-            } else {
-            	 setImageFromFile(this, '#preview');
-            	 imageCheck = 'check';
-            }
-		});
-
-		// 이미지 미리보기에 대한 함수 정의
-		function setImageFromFile(input, expression) {
-		    if (input.files && input.files[0]) {
-		        var reader = new FileReader();
-		        reader.onload = function (e) {
-		            $(expression).attr('src', e.target.result);
-		        }
-		        reader.readAsDataURL(input.files[0]);
-		    }
-		}
-
-		// 변경 버튼을 누를경우 submit
-		$('#btnImage').click(function(){
-			if(imageCheck == ''){
-				alert('변경하실 이미지를 선택해주세요.');
-			} else{
-				$('#teacherImageForm').submit();
-			}
-		});
-
-    </script>
+  
 </body>
 </html>
 

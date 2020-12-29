@@ -25,5 +25,5 @@ public interface ManagerConnectMapper {
 	List<Map<String, Object>> selectConnect(String connectState);
 	
 	// 해당 아이디의 오늘 방문자 수 출력
-	int selectConnectCountToNo(String managerId);
+	int selectConnectCountToNo(String accountId);
 }

@@ -8,18 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.manager.service.ManagerConnectService;
 import gd.fintech.lms.student.service.StudentInfoService;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Student;
-import jdk.internal.org.jline.utils.Log;
 
 @Controller
 public class StudentInfoController {
 	@Autowired StudentInfoService studentInfoService;
+	@Autowired ManagerConnectService managerConnectService;
 	
 	// 주소변경 페이지 이동
 	@GetMapping("/student/myInfoAddress/{studentId}")
@@ -138,8 +138,8 @@ public class StudentInfoController {
 	}
 	
 	// 강사 마이페이지 출력(강사 정보를 가져오기 위해 studentId를 받아옴)
-	@GetMapping("/student/myInfo/{studentId}")
-	public String myInfo(Model model,
+	@GetMapping("/student/modifyMyInfo/{studentId}")
+	public String modifyMyInfo(Model model,
 						@PathVariable(value="studentId") String studentId) {
 		// student 객체 선언하여 service의 메소드 호출 및 입력
 		Student studentOne = studentInfoService.getStudentInfo(studentId);
@@ -152,6 +152,19 @@ public class StudentInfoController {
 		model.addAttribute("studentPhone1", studentPhone1);
 		model.addAttribute("studentPhone2", studentPhone2);
 		model.addAttribute("studentPhone3", studentPhone3);
+		
+		return "student/modifyMyInfo";
+	}
+	
+	// 학생 마이페이지 출력(강사 정보를 가져오기 위해 studentId를 받아옴)
+	@GetMapping("/student/myInfo/{studentId}")
+	public String myInfo(Model model,
+			@PathVariable(value="studentId") String studentId) {
+		
+		Student studentOne = studentInfoService.getStudentInfo(studentId);
+		int connectCount = managerConnectService.getConnectCountToNo(studentId);
+		model.addAttribute("studentOne", studentOne);
+		model.addAttribute("connectCount", connectCount);
 		
 		return "student/myInfo";
 	}

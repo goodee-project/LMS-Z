@@ -24,9 +24,9 @@
 <body>
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <jsp:include page="/WEB-INF/view/manager/inc/logoMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
         
-        <jsp:include page="/WEB-INF/view/manager/inc/navbarMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
@@ -59,7 +59,7 @@
                                     <h4 class="card-title mb-0">내 정보 관리</h4>
                                 </div>
                                 <div class="pl-1 mb-1">
-									<jsp:include page="/WEB-INF/view/manager/inc/myInfoMenu.jsp" flush="false"></jsp:include>
+									<jsp:include page="/WEB-INF/view/student/inc/myInfoMenu.jsp" flush="false"></jsp:include>
                                 </div>
                             </div>
                         </div>
@@ -80,76 +80,51 @@
                                 <table id="myInfoTable3" class="table table">
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">아이디</th>
-										<td class=" font-14 font-weight-medium text-dark">${managerOne.managerId}</td>
+										<td class=" font-14 font-weight-medium text-dark">${studentOne.studentId}</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이름</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<input type="text" class="form-control-plaintext form-control bg-light" id="managerName" value="${managerOne.managerName}">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="studentName" value="${studentOne.studentName}">
 											<button type="button" id="btnName" class="btn btn-outline-secondary text-dark">개명</button>										
 										</td>
 									</tr>
-									<tr>
-										<th class=" font-14 font-weight-medium text-dark">직책</th>
-										<td class=" font-14 font-weight-medium text-dark">
-											<select class="form-control-plaintext form-control bg-light" id="managerPosition" name="managerPosition">
-												<option value="${managerOne.managerPosition}">${managerOne.managerPosition}</option>
-												<c:if test="${managerOne.managerPosition == null}">
-													<option value="대리">대리</option>
-													<option value="대리">사원</option>
-													<option value="대리">팀장</option>
-												</c:if>
-												<c:if test="${managerOne.managerPosition == '대리'}">
-													<option value="대리">사원</option>
-													<option value="대리">팀장</option>
-												</c:if>
-												<c:if test="${managerOne.managerPosition == '사원'}">
-													<option value="대리">대리</option>
-													<option value="대리">팀장</option>
-												</c:if>
-												<c:if test="${managerOne.managerPosition == '팀장'}">
-													<option value="대리">대리</option>
-													<option value="대리">사원</option>
-												</c:if>
-											</select>
-											<button type="button" id="btnPosition" class="btn btn-outline-secondary text-dark">개명</button>										
-										</td>
-									</tr>
+
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">이메일</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<input type="text" class="form-control-plaintext form-control bg-light" id="managerEmail" value="${managerOne.managerEmail}">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="studentEmail" value="${studentOne.studentEmail}">
 											<button type="button" id="btnEmail" class="btn btn-outline-secondary text-dark">개명</button>										
 										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">핸드폰 번호</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<select class="form-control-plaintext form-control bg-light" id="managerPhone1">
-												<option value="${managerPhone1}">${managerPhone1}</option>
-												<c:if test="${managerPhone1 == '010'}">
+											<select class="form-control-plaintext form-control bg-light" id="studentPhone1">
+												<option value="${studentPhone1}">${studentPhone1}</option>
+												<c:if test="${studentPhone1 == '010'}">
 													<option value="011">011</option>
 												</c:if>
-												<c:if test="${managerPhone1 == '011'}">
+												<c:if test="${studentPhone1 == '011'}">
 													<option value="010">010</option>
 												</c:if>
 											</select>
-											<input type="text" class="form-control-plaintext form-control bg-light" id="managerPhone2" value="${managerPhone2}">
-											<input type="text" class="form-control-plaintext form-control bg-light" id="managerPhone3" value="${managerPhone3}">
-											<input type="hidden" id="managerPhone" name="managerPhone" value="${managerOne.managerPhone}">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="studentPhone2" value="${studentPhone2}">
+											<input type="text" class="form-control-plaintext form-control bg-light" id="studentPhone3" value="${studentPhone3}">
+											<input type="hidden" id="studentPhone" name="studentPhone" value="${studentOne.studentPhone}">
 											<button type="button" id="btnPhone" class="btn btn-outline-secondary text-dark">변경</button>
 										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">성별</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<c:if test="${managerOne.managerGender == '남'}">
-												<input type="radio" id="managerGender" name="managerGender" value="남" checked>남
-												<input type="radio" id="managerGender" name="managerGender" value="여">여
+											<c:if test="${studentOne.studentGender == '남'}">
+												<input type="radio" id="studentGender" name="studentGender" value="남" checked>남
+												<input type="radio" id="studentGender" name="studentGender" value="여">여
 											</c:if>
-											<c:if test="${managerOne.managerGender == '여'}">
-												<input type="radio" id="managerGender" name="managerGender" value="남">남
-												<input type="radio" id="managerGender2" name="managerGender" value="여" checked>여
+											<c:if test="${studentOne.studentGender == '여'}">
+												<input type="radio" id="studentGender" name="studentGender" value="남">남
+												<input type="radio" id="studentGender2" name="studentGender" value="여" checked>여
 											</c:if>
 											<button type="button" id="btnGender" class="btn btn-outline-secondary text-dark" style="margin-left:10px;">변경</button>
 										</td>
@@ -157,24 +132,24 @@
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">생일</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<input type="date" class="form-control-plaintext form-control bg-light" id="managerBirth" value="${managerOne.managerBirth}">
+											<input type="date" class="form-control-plaintext form-control bg-light" id="studentBirth" value="${studentOne.studentBirth}">
 											<button type="button" id="btnBirth" class="btn btn-outline-secondary text-dark">변경</button>
 										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">주소</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											${managerOne.managerAddressMain}&nbsp;${managerOne.managerAddressSub}
+											${studentOne.studentAddressMain}&nbsp;${studentOne.studentAddressSub}
 										</td>
 									</tr>
 									<tr>
 										<th class=" font-14 font-weight-medium text-dark">사진</th>
 										<td class=" font-14 font-weight-medium text-dark">
-											<form id="managerImageForm" method="post" enctype="multipart/form-data" action="${path}/manager/modifyImageMyInfo">
-												<img src="${path}/images/${managerOne.managerImage}" id="preview" style="width:170px; height:200px;"/>
+											<form id="studentImageForm" method="post" enctype="multipart/form-data" action="${path}/student/modifyImageMyInfo">
+												<img src="${path}/images/${studentOne.studentImage}" id="preview" style="width:170px; height:200px;"/>
 												<button id="btnImage" type="button" class="btn btn-outline-secondary text-dark" style="margin-left:10px;">변경</button>
-												<input type="file" name="managerImage" id="imgSelector"/>
-												<input type="hidden" name="managerId" value="${managerId}">
+												<input type="file" name="studentImage" id="imgSelector"/>
+												<input type="hidden" name="studentId" value="${studentId}">
 											</form>
 										</td>
 									</tr>
@@ -210,24 +185,13 @@
     <script>
     	// 이름에 대한 변경값이 있을 경우에만 crud로 넘어감
 		$('#btnName').click(function(){
-			if($('#managerName').val() == '${managerOne.managerName}'){
+			if($('#studentName').val() == '${studentOne.studentName}'){
 				alert('현재 이름과 동일합니다.');
-			} else if($('#managerName').val().length < 1){
+			} else if($('#studentName').val().length < 1){
 				alert('사용하실 이름을 입력해주세요.');
 			} else{
 				if(confirm('입력하신 이름으로 변경합니다.')){
-					location.href = '${path}/manager/modifyNameMyInfo/${managerId}/'+$('#managerName').val();
-				}
-			}
-		});
-		
-		// 직책에 대한 변경값이 있을 경우에만 crud로 넘어감
-		$('#btnPosition').click(function(){
-			if($('#managerPosition').val() == '${managerOne.managerPosition}'){
-				alert('현재 직책과 동일합니다');
-			} else{
-				if(confirm('입력하신 직책으로 변경합니다.')){
-					location.href = '${path}/manager/modifyPositionMyInfo/${managerId}/'+$('#managerPosition').val();
+					location.href = '${path}/student/modifyNameMyInfo/${studentId}/'+$('#studentName').val();
 				}
 			}
 		});
@@ -236,21 +200,21 @@
 		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 이메일에 대한 변경 값이 있고, 정규표현식에 만족할 경우에만 crud로 넘어감
 		$('#btnEmail').click(function(){
-			if($('#managerEmail').val() == '${managerOne.managerEmail}'){
+			if($('#studentEmail').val() == '${studentOne.studentEmail}'){
 				alert('현재 이메일과 동일합니다.');
-			} else if($('#managerEmail').val().length < 1){
+			} else if($('#studentEmail').val().length < 1){
 				alert('사용하실 이메일을 입력해주세요.');
-			} else if(!checkEmail.test($('#managerEmail').val())){
+			} else if(!checkEmail.test($('#studentEmail').val())){
 				alert('이메일을 바른 형식으로 입력해주세요.');
 			} else{
 				$.ajax({
-					url:'${path}/manager/myInfoByOverlapEmail',
+					url:'${path}/student/myInfoByOverlapEmail',
 					type:'GET',
-					data:{managerEmail: $('#managerEmail').val()},
+					data:{studentEmail: $('#studentEmail').val()},
 					success:function(data){
-						if(data.managerEmailCheck == 0){
+						if(data.studentEmailCheck == 0){
 							if(confirm('입력하신 이메일로 변경합니다')){
-								location.href = '${path}/manager/modifyEmailMyInfo/${managerId}/'+$('#managerEmail').val();
+								location.href = '${path}/student/modifyEmailMyInfo/${studentId}/'+$('#studentEmail').val();
 							}
 						} else{
 							alert('사용하실 이메일이 중복되었습니다.');
@@ -260,44 +224,44 @@
 			}
 		});
 		// 최종 보내는 키 값
-		var managerPhone = '';
+		var studentPhone = '';
 		// 핸드폰 번호에 대한 정규표현식
 		var checkPhone2 = /^\d{4}$/;
 		var checkPhone3 = /^\d{4}$/;
 		// 핸드폰 번호에 대한 변경 값이 있거나 정규표현식을 만족한 경우에만 crud로 넘어감
 		$('#btnPhone').click(function(){
-			managerPhone = $('#managerPhone1').val() + $('#managerPhone2').val() + $('#managerPhone3').val();
-			if(managerPhone == $('#managerPhone').val()){
+			studentPhone = $('#studentPhone1').val() + $('#studentPhone2').val() + $('#studentPhone3').val();
+			if(studentPhone == $('#studentPhone').val()){
 				alert('현재 핸드폰 번호와 동일합니다.');
-			} else if($('#managerPhone2').val() == '' || $('#managerPhone3').val() == ''){
+			} else if($('#studentPhone2').val() == '' || $('#studentPhone3').val() == ''){
 				alert('사용하실 핸드폰 번호를 입력해주세요.');
-			} else if(!checkPhone2.test($('#managerPhone2').val()) || !checkPhone3.test($('#managerPhone3').val())){
+			} else if(!checkPhone2.test($('#studentPhone2').val()) || !checkPhone3.test($('#studentPhone3').val())){
 				alert('핸드폰 번호를 바른 형식으로 입력해주세요.');
 			} else{
 				if(confirm('입력하신 핸드폰 번호로 변경합니다')){
-					location.href = '${path}/manager/modifyPhoneMyInfo/${managerId}/'+ managerPhone;
+					location.href = '${path}/student/modifyPhoneMyInfo/${studentId}/'+ studentPhone;
 				}
 			}
 		});
 
 		// 성별에 대한 변경 값이 있을 경우에만 crud로 넘어감
 		$('#btnGender').click(function(){
-			if($('#managerGender:checked').val() == '${managerOne.managerGender}'){
+			if($('#studentGender:checked').val() == '${studentOne.studentGender}'){
 				alert('현재 성별과 동일합니다.');
 			} else{
 				if(confirm('입력하신 성별로 변경합니다')){
-					location.href = '${path}/manager/modifyGenderMyInfo/${managerId}/'+$('#managerGender:checked').val();
+					location.href = '${path}/student/modifyGenderMyInfo/${studentId}/'+$('#studentGender:checked').val();
 				}
 			}
 		});
 
 		// 생일에 대한 변경 값이 있을 경우에만 crud로 넘어감
 		$('#btnBirth').click(function(){
-			if($('#managerBirth').val() == '${managerOne.managerBirth}'){
+			if($('#studentBirth').val() == '${studentOne.studentBirth}'){
 				alert('현재 생일과 동일합니다');
 			} else{
 				if(confirm('입력하신 생일로 변경합니다')){
-					location.href = '${path}/manager/modifyBirthMyInfo/${managerId}/'+$('#managerBirth').val();
+					location.href = '${path}/student/modifyBirthMyInfo/${studentId}/'+$('#studentBirth').val();
 				}
 			}
 		});
@@ -334,7 +298,7 @@
 				alert('변경하실 이미지를 선택해주세요.');
 			} else{
 				if(confirm('선택하신 이미지로 변경합니다')){
-					$('#managerImageForm').submit();
+					$('#studentImageForm').submit();
 				}
 			}
 		});
