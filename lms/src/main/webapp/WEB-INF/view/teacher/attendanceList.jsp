@@ -9,6 +9,9 @@
 </head>
 <body>
 	<h1>출석부</h1>
+	<a href="${path}/teacher/attendanceList/${lectureNo}/pre/${currentYear}/${currentMonth}/${currentDay}">이전</a>
+	<h2>${currentYear}년 ${currentMonth}월 ${currentDay}일</h2>
+	<a href="${path}/teacher/attendanceList/${lectureNo}/next/${currentYear}/${currentMonth}/${currentDay}">다음</a>
 	<table border="1">
 		<thead>
 			<tr>

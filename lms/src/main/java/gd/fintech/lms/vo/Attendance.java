@@ -13,7 +13,7 @@ public class Attendance {
 	private String attendanceUpdatedate;
 	private String attendanceState;
 	private String attendanceRemark;
-	List<Student> studentList;
-	List<Lecture> lectureList;
-	List<ClassRegistration> classRegistrationList;
+	private List<Student> studentList;
+	private List<Lecture> lectureList;
+	private List<ClassRegistration> classRegistrationList;
 }

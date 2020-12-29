@@ -101,8 +101,10 @@ public class TeacherAttendanceController {
 														@PathVariable(value = "currentMonth") int currentMonth, 
 														@PathVariable(value = "currentDay") int currentDay) {
 		
-		List<Attendance> attendanceStateList = teacherAttendanceService.getAttendanceStateOne(lectureNo, studentId, attendanceDay);
+		Attendance attendanceStateList = teacherAttendanceService.getAttendanceStateOne(lectureNo, studentId, attendanceDay);
 		List<Attendance> attendanceList = teacherAttendanceService.getAttendanceList(lectureNo, currentYear, currentMonth, currentDay);
+
+		
 		model.addAttribute("attendanceStateList", attendanceStateList);
 		model.addAttribute("attendanceList", attendanceList);
 		

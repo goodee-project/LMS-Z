@@ -13,8 +13,8 @@
 		<table border="1">
 			<input type="hidden" value="${studentId}" name="accountId">
 			<input type="hidden" value="${lectureNo}" name="lectureNo">
-			<c:forEach var="a" items="${attendanceList}">
-			<c:forEach var="as" items="${a.studentList}">
+
+			<c:forEach var="as" items="${attendanceStateList.studentList}">
 				<tr>
 					<th>student_name</th>
 					<td><input name="studentName" value="${as.studentName}" readonly></td>
@@ -32,32 +32,32 @@
 					<th>attendance_state</th>
 					<td>
 						<select id="attendanceState" name="attendanceState">
-							<option value="${a.attendanceState}">${a.attendanceState}</option>
-								<c:if test="${a.attendanceState == '출석'}">
+							<option value="${attendanceStateList.attendanceState}">${attendanceStateList.attendanceState}</option>
+								<c:if test="${attendanceStateList.attendanceState == '출석'}">
 										<option value="결석">결석</option>
 										<option value="외출">외출</option>
 										<option value="조퇴">조퇴</option>
 										<option value="지각">지각</option>
 								</c:if>
-								<c:if test="${a.attendanceState == '결석'}">
+								<c:if test="${attendanceStateList.attendanceState == '결석'}">
 										<option value="출석">출석</option>
 										<option value="외출">외출</option>
 										<option value="조퇴">조퇴</option>
 										<option value="지각">지각</option>
 								</c:if>
-								<c:if test="${a.attendanceState == '외출'}">
+								<c:if test="${attendanceStateList.attendanceState == '외출'}">
 										<option value="출석">출석</option>
 										<option value="결석">결석</option>
 										<option value="조퇴">조퇴</option>
 										<option value="지각">지각</option>
 								</c:if>
-								<c:if test="${a.attendanceState == '조퇴'}">
+								<c:if test="${attendanceStateList.attendanceState == '조퇴'}">
 										<option value="출석">출석</option>
 										<option value="결석">결석</option>
 										<option value="외출">외출</option>
 										<option value="지각">지각</option>
 								</c:if>
-								<c:if test="${a.attendanceState == '지각'}">
+								<c:if test="${attendanceStateList.attendanceState == '지각'}">
 										<option value="출석">출석</option>
 										<option value="결석">결석</option>
 										<option value="외출">외출</option>
@@ -68,13 +68,12 @@
 				</tr>
 				<tr>
 					<th>attendance_remark</th>
-					<td><textarea rows="3" cols="50" name="attendanceRemark">${a.attendanceRemark}</textarea></td>
+					<td><textarea rows="3" cols="50" name="attendanceRemark">${attendanceStateList.attendanceRemark}</textarea></td>
 				</tr>
 				<tr>
 					<th>attendance_day</th>
-					<td><input name="attendanceDay" value="${a.attendanceDay}" readonly></td>
+					<td><input name="attendanceDay" value="${attendanceDay}" readonly></td>
 				</tr>
-			</c:forEach>
 		</table>
 		<button type="submit">수정하기</button>
 	</form>

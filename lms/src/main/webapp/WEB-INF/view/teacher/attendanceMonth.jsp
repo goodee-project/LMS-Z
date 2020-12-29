@@ -9,7 +9,10 @@
 </head>
 <body>
 	<h1>출석부</h1>
-	<div>
+	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth - 1}">이전</a>
+	<h2>${currentYear}년 ${currentMonth}월</h2>
+	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth + 1}">다음</a>
+
 	<table border="1">
 		<thead>
 			<tr>
@@ -63,7 +66,7 @@
 							<td>&nbsp;</td>   
 						</c:forEach>   
 					</c:if>
-				</tr>
+
 	</tbody>
 	</table>
 	<a href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>

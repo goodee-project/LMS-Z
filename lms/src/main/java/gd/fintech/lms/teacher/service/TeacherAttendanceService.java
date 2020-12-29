@@ -35,7 +35,7 @@ public class TeacherAttendanceService {
 	}
 	
 	//학생 출석부 상세보기
-	public List<Attendance> getAttendanceStateOne(int lectureNo, String studentId, String attendanceDay) {
+	public Attendance getAttendanceStateOne(int lectureNo, String studentId, String attendanceDay) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lectureNo", lectureNo);
