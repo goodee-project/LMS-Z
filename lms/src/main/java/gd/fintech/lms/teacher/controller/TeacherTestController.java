@@ -101,7 +101,7 @@ public class TeacherTestController {
 	public String modifyTestQuestion(Model model,
 									@PathVariable(value="multiplechoiceNo") int multiplechoiceNo) {
 		Multiplechoice testOne = teacherTestService.getTestQuestionOne(multiplechoiceNo);
-		System.out.println(testOne);
+		// System.out.println(testOne);
 		model.addAttribute("testOne", testOne);
 		return "teacher/modifyTestQuestion";
 	}
@@ -110,8 +110,17 @@ public class TeacherTestController {
 	@PostMapping("/teacher/modifyTestQuestion/{multiplechoiceNo}")
 	public String modifyTestQuestion(Multiplechoice multiplechoice,
 									@PathVariable(value="multiplechoiceNo") int multiplechoiceNo) {
-		System.out.println(multiplechoice);
+		System.out.println("multiplechocie : " + multiplechoice);
 		teacherTestService.modifyTestQuestion(multiplechoice);
 		return "redirect:/teacher/testQuestionOne/"+multiplechoiceNo;
+	}
+	
+	// 시험문제 / 보기 삭제
+	@GetMapping("/teacher/removeTestQuestion/{lectureNo}/{multiplechoiceNo}")
+	public String removeTestQuestion(@PathVariable(value="multiplechoiceNo") int multiplechoiceNo,
+									@PathVariable(value="lectureNo") int lectureNo) {
+		// 목록으로 redirect 해주기위해 lectureNo을 받아옴
+		teacherTestService.removeTestQuestion(multiplechoiceNo);
+		return "redirect:/teacher/testQuestionList/"+lectureNo;
 	}
 }

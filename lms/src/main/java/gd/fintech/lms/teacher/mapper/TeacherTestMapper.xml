@@ -152,7 +152,7 @@
 			multiplechoice_question = #{multiplechoiceQuestion},
 			multiplechoice_answer = #{multiplechoiceAnswer},
 			multiplechoice_updatedate = NOW()
-		WHERE multiplechoice_id = #{multiplechoiceNo}
+		WHERE multiplechoice_no = #{multiplechoiceNo}
 	</update>
 	
 	<!-- 시험문제보기 수정 -->
@@ -164,4 +164,16 @@
 		WHERE multiplechoice_example_id = #{multiplechoiceExampleId}
 		AND multiplechoice_no = #{multiplechoiceNo}
 	</update>
+	
+	<!-- 시험문제 삭제 -->
+	<delete id="deleteTestQuestion" parameterType="int">
+		DELETE FROM multiplechoice
+		WHERE multiplechoice_no = #{multiplechoiceNo}
+	</delete>
+	
+	<!-- 시험문제 보기 삭제 -->
+	<delete id="deleteTestQuestionExample" parameterType="int">
+		DELETE FROM multiplechoice_example
+		WHERE multiplechoice_no = #{multiplechoiceNo}
+	</delete>
 </mapper>

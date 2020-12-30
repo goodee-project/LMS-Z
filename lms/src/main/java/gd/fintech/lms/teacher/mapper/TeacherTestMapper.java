@@ -40,4 +40,10 @@ public interface TeacherTestMapper {
 	
 	// 시험문제 보기 수정
 	void updateTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
+	
+	// 시험문제 삭제
+	int deleteTestQuestion(int multiplechoiceNo);
+	
+	// 시험문제 보기 삭제
+	int deleteTestQuestionExample(int multiplechoiceNo);
 }

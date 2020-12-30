@@ -69,6 +69,7 @@ public class TeacherTestService {
 				multiplechoiceExample.add(example);
 			}
 		}
+		// example에 값이 들어있다면 데이터베이스에 insert해줌
 		if(multiplechoiceExample != null) {
 			for(MultiplechoiceExample ex : multiplechoiceExample) {
 				System.out.println(ex);
@@ -110,11 +111,20 @@ public class TeacherTestService {
 				multiplechoiceExample.add(example);
 			}
 		}
+		// example에 값이 있다면 수정해줌
 		if(multiplechoiceExample != null) {
 			for(MultiplechoiceExample ex : multiplechoiceExample) {
 				System.out.println(ex);
 				teacherTestMapper.updateTestQuestionExample(ex);
 			}
 		}
+	}
+	
+	// 시험문제/보기 삭제
+	public void removeTestQuestion(int multiplechoiceNo) {
+		// 해당 시험문제의 보기 삭제(외래키로 연결되어있어 먼저 삭제해줌)
+		teacherTestMapper.deleteTestQuestionExample(multiplechoiceNo);
+		// 해당 시험문제 삭제
+		teacherTestMapper.deleteTestQuestion(multiplechoiceNo);
 	}
 }

@@ -71,7 +71,7 @@
 	var content4 = '';
 	var content5 = '';
 	var checkId = /^[0-9]{1,2}$/;
-	var checkIdByAnswer = /^[0-9]{1}$/;
+	var checkIdByAnswer = /^[1-5]{1}$/;
 	// 시험문제번호 공백 검사
 	$('#multiplechoiceId').on('propertychange change keyup paste input', function(){
 		if(!checkId.test($('#multiplechoiceId').val())){				
@@ -95,7 +95,7 @@
 	// 시험문제 답 공백 검사
 	$('#multiplechoiceAnswer').on('propertychange change keyup paste input', function(){
 		if(!checkIdByAnswer.test($('#multiplechoiceAnswer').val())){				
-			$('#choiceAnswer').text('답을 입력해주세요');
+			$('#choiceAnswer').text('올바른 답을 입력해주세요');
 			answer = '';	
 		}else{
 			$('#choiceAnswer').text('');
