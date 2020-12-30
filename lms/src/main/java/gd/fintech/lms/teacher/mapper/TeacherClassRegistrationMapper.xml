@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherClassRegistrationMapper">
+
+
+	<resultMap type="gd.fintech.lms.vo.ClassRegistration" id="selectClassRegistrationListResult">
+		<result property="classRegistrationNo" column="class_registration_no"/>
+		<result property="classRegistrationState" column="class_registration_state"/>
+		<result property="classRegistrationPoint" column="class_registration_point"/>
+		<result property="classRegistrationReview" column="class_registration_review"/>
+			<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+				<result property="studentName" column="student_name" />
+				<result property="studentId" column="student_id" />
+			</collection>
+			<collection property="lectureList" ofType="gd.fintech.lms.vo.Lecture">
+				<result property="lectureStartdate" column="lecture_startdate" />
+				<result property="lectureEnddate" column="lecture_enddate" />
+			</collection>
+			<collection property="attendanceList" ofType="gd.fintech.lms.vo.Attendance">
+				<result property="attendanceDay" column="attendance_day" />
+			</collection>
+	</resultMap>
+	<!-- 수강중, 수료중인 학생 목록 -->
+	<select id="selectClassRegistrationList" parameterType="java.util.Map" resultMap="selectClassRegistrationListResult">
+		SELECT 
+			cr.class_registration_no,
+			cr.class_registration_state,
+			cr.class_registration_point,
+			cr.class_registration_review,
+			s.student_name
+		FROM class_registration cr LEFT JOIN student s
+		ON cr.account_id = s.student_id
+		LEFT JOIN lecture l
+		ON cr.lecture_no = l.lecture_no
+		LEFT JOIN attendance a
+		ON l.lecture_no = a.lecture_no
+		WHERE cr.class_registration_state = '수강중'
+		AND cr.lecture_no = #{lectureNo}
+		AND l.lecture_startdate = #{lectureStartdate}
+		AND l.lecture_enddate = #{lectureEnddate}
+	</select>
+</mapper>

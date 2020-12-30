@@ -72,4 +72,19 @@
 		AND lecture_no = #{lectureNo}
 		AND attendance_day = #{attendanceDay}
 	</update>
+	
+	<insert id="insertAttendanceState" parameterType="gd.fintech.lms.vo.Attendance">
+		INSERT INTO attendance (lecture_no, 
+								account_id, 
+								attendance_day, 
+								attendance_createdate, 
+								attendance_updatedate, 
+								attendance_state)
+		VALUES(	#{lectureNo}, 
+				#{accountId}, 
+				#{attendanceDay}, 
+				NOW(), 
+				NOW(), 
+				${attendanceState})
+	</insert>
 </mapper>

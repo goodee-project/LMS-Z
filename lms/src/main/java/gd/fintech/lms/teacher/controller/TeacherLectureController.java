@@ -47,8 +47,11 @@ public class TeacherLectureController {
 	}
 	
 	// 강의 상세보기
-	@GetMapping("/teacher/lectureOne/{lectureNo}")
-	public String lectureOne(@PathVariable(value="lectureNo") int lectureNo) {
+	@GetMapping("/teacher/lectureOne/{lectureNo}/{lectureStartdate}/{lectureEnddate}")
+	public String lectureOne(@PathVariable(value="lectureNo") int lectureNo,
+								@PathVariable(value="lectureStartdate") String lectureStartdate,
+								@PathVariable(value="lectureEnddate") String lectureEnddate) {
+
 		return "teacher/lectureOne";
 	}
 	

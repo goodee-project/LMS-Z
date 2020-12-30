@@ -16,7 +16,7 @@
 		<tbody>
 			<c:forEach var="l" items="${list}">
 				<tr>
-					<td><a href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></td>
+					<td><a href="${path}/teacher/lectureOne/${l.lectureNo}/${l.lectureStartdate}/${l.lectureEnddate}">${l.lectureName}</a></td>
 					<td>${l.lectureStartdate} ~ ${l.lectureEnddate}</td>
 					<td>${l.lectureTotal}</td>
 				</tr>

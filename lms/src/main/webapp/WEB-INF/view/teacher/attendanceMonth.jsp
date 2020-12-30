@@ -9,9 +9,9 @@
 </head>
 <body>
 	<h1>출석부</h1>
-	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth - 1}">이전</a>
+	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth - 1}/${lectureStartdate}/${lectureEnddate}">이전</a>
 	<h2>${currentYear}년 ${currentMonth}월</h2>
-	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth + 1}">다음</a>
+	<a href="${path}/teacher/attendanceMonth/${lectureNo}/${currentYear}/${currentMonth + 1}/${lectureStartdate}/${lectureEnddate}">다음</a>
 
 	<table border="1">
 		<thead>
@@ -36,24 +36,23 @@
 							<td>
 								<c:if test="${i % 7 == 1}">
 									<div>
-										<a href="${path}/teacher/attendanceList/${lectureNo}/target/${currentYear}/${currentMonth}/${i - (firstDay - 1)}">${i - (firstDay - 1)}</a>
+										<a href="${path}/teacher/attendanceList/${lectureNo}/${currentYear}/${currentMonth}/${i - (firstDay - 1)}/${lectureStartdate}/${lectureEnddate}">${i - (firstDay - 1)}</a>
 									</div>
 								</c:if>
                                 
 								<c:if test="${i % 7 == 0}">
 									<div>
-										<a href="${path}/teacher/attendanceList/${lectureNo}/target/${currentYear}/${currentMonth}/${i - (firstDay - 1)}">${i - (firstDay - 1)}</a>
+										<a href="${path}/teacher/attendanceList/${lectureNo}/${currentYear}/${currentMonth}/${i - (firstDay - 1)}/${lectureStartdate}/${lectureEnddate}">${i - (firstDay - 1)}</a>
 									</div>
 								</c:if>
                                 
 								<c:if test="${i % 7 != 1 && i % 7 != 0}">
 									<div>
-										<a href="${path}/teacher/attendanceList/${lectureNo}/target/${currentYear}/${currentMonth}/${i - (firstDay - 1)}">${i - (firstDay - 1)}</a>
+										<a href="${path}/teacher/attendanceList/${lectureNo}/${currentYear}/${currentMonth}/${i - (firstDay - 1)}/${lectureStartdate}/${lectureEnddate}">${i - (firstDay - 1)}</a>
 									</div>
 								</c:if>
 							</td>
 						</c:if>
-                          
 						<c:if test="${i != (lastDay + (firstDay - 1))}">
 							<c:if test="${i % 7 == 0}">
 								</tr><tr>
@@ -69,6 +68,6 @@
 
 	</tbody>
 	</table>
-	<a href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
+	<a href="${path}/teacher/lectureOne/${lectureNo}/${lectureStartdate}/${lectureEnddate}">뒤로가기</a>
 </body>
 </html>
