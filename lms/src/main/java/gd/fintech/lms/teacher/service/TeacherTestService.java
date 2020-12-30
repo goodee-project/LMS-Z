@@ -85,4 +85,36 @@ public class TeacherTestService {
 		
 		return teacherTestMapper.selectMultiplechoiceIdOverlap(map);
 	}
+	
+	// 시험문제 수정
+	public void modifyTestQuestion(Multiplechoice multiplechoice) {
+		// multiplechoice 값 vo에 입력(시험문제)
+		Multiplechoice modifyMultiplechoice = new Multiplechoice();
+		modifyMultiplechoice.setMultiplechoiceNo(multiplechoice.getMultiplechoiceNo());
+		modifyMultiplechoice.setMultiplechoiceQuestion(multiplechoice.getMultiplechoiceQuestion());
+		modifyMultiplechoice.setMultiplechoiceAnswer(multiplechoice.getMultiplechoiceAnswer());
+		
+		teacherTestMapper.updateTestQuestion(modifyMultiplechoice);
+		
+		// multiplechoice.vo에 있는 multiplechoiceExample 리스트에 값 넣기
+		List<MultiplechoiceExample> multiplechoiceExample = null;
+		if(multiplechoice.getMultiplechoiceExampleList() != null) {
+			multiplechoiceExample = new ArrayList<MultiplechoiceExample>();
+			for(MultiplechoiceExample ex : multiplechoice.getMultiplechoiceExampleList()) {
+				MultiplechoiceExample example = new MultiplechoiceExample();
+				// addMultiplechoice에 넣은 multiplechoiceNo 값 가져와서 넣기
+				example.setMultiplechoiceNo(modifyMultiplechoice.getMultiplechoiceNo());
+				example.setMultiplechoiceExampleId(ex.getMultiplechoiceExampleId());
+				example.setMultiplechoiceExampleContent(ex.getMultiplechoiceExampleContent());
+				
+				multiplechoiceExample.add(example);
+			}
+		}
+		if(multiplechoiceExample != null) {
+			for(MultiplechoiceExample ex : multiplechoiceExample) {
+				System.out.println(ex);
+				teacherTestMapper.updateTestQuestionExample(ex);
+			}
+		}
+	}
 }

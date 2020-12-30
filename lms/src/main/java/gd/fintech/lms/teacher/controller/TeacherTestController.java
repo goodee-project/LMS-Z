@@ -95,4 +95,23 @@ public class TeacherTestController {
 		teacherTestService.addTestQuestion(multiplechoice);
 		return "redirect:/teacher/testQuestionList/"+lectureNo;
 	}
+	
+	// 시험문제 수정 폼
+	@GetMapping("/teacher/modifyTestQuestion/{multiplechoiceNo}")
+	public String modifyTestQuestion(Model model,
+									@PathVariable(value="multiplechoiceNo") int multiplechoiceNo) {
+		Multiplechoice testOne = teacherTestService.getTestQuestionOne(multiplechoiceNo);
+		System.out.println(testOne);
+		model.addAttribute("testOne", testOne);
+		return "teacher/modifyTestQuestion";
+	}
+	
+	// 시험문제 수정 액션
+	@PostMapping("/teacher/modifyTestQuestion/{multiplechoiceNo}")
+	public String modifyTestQuestion(Multiplechoice multiplechoice,
+									@PathVariable(value="multiplechoiceNo") int multiplechoiceNo) {
+		System.out.println(multiplechoice);
+		teacherTestService.modifyTestQuestion(multiplechoice);
+		return "redirect:/teacher/testQuestionOne/"+multiplechoiceNo;
+	}
 }

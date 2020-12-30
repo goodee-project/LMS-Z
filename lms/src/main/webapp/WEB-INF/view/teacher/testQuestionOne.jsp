@@ -13,6 +13,7 @@
 	
 	<div>
 		<a href="${path}/teacher/testQuestionList/${testOne.lectureNo}">목록</a>
+		<a href="${path}/teacher/modifyTestQuestion/${multiplechoiceNo}">수정</a>
 	</div>
 	
 	<h3>평가 ${testOne.multiplechoiceId}번</h3>

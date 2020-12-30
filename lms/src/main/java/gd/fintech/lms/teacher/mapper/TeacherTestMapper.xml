@@ -144,4 +144,24 @@
 		WHERE lecture_no = #{lectureNo}
 		AND multiplechoice_id = #{multiplechoiceId}
 	</select>
+	
+	<!-- 시험문제 수정 -->
+	<update id="updateTestQuestion" parameterType="gd.fintech.lms.vo.Multiplechoice">
+		UPDATE multiplechoice
+		SET
+			multiplechoice_question = #{multiplechoiceQuestion},
+			multiplechoice_answer = #{multiplechoiceAnswer},
+			multiplechoice_updatedate = NOW()
+		WHERE multiplechoice_id = #{multiplechoiceNo}
+	</update>
+	
+	<!-- 시험문제보기 수정 -->
+	<update id="updateTestQuestionExample" parameterType="gd.fintech.lms.vo.MultiplechoiceExample">
+		UPDATE multiplechoice_example
+		SET
+			multiplechoice_example_content = #{multiplechoiceExampleContent},
+			multiplechoice_example_updatedate = NOW()
+		WHERE multiplechoice_example_id = #{multiplechoiceExampleId}
+		AND multiplechoice_no = #{multiplechoiceNo}
+	</update>
 </mapper>

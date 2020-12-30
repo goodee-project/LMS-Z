@@ -34,4 +34,10 @@ public interface TeacherTestMapper {
 	
 	// 시험번호 중복검사
 	int selectMultiplechoiceIdOverlap(Map<String, Integer> map);
+	
+	// 시험문제 수정
+	void updateTestQuestion(Multiplechoice multiplechoice);
+	
+	// 시험문제 보기 수정
+	void updateTestQuestionExample(MultiplechoiceExample multiplechoiceExample);
 }
