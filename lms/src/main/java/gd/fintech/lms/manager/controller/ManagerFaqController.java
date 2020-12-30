@@ -135,7 +135,7 @@ public class ManagerFaqController {
 		 */
 		String category = URLEncoder.encode(faq.getFaqCategory(), "UTF-8");
 
-		// 스크립트가 db접근 하는 것을 방지
+		// 모든 html태그가 db접근 하는 것을 방지
 		String title = faq.getFaqTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqTitle(title);
 		// 입력값 유효성검사 => 모든 html태그 제거
@@ -188,7 +188,7 @@ public class ManagerFaqController {
 	// FAQ 수정 액션
 	@PostMapping("manager/modifyFaq/{currentPage}")
 	public String modifyFaq(Faq faq, @PathVariable(name = "currentPage") int currentPage) {
-		// db에 스크립트 접근 방지
+		// db에 모든 html태그 접근 방지
 		String title = faq.getFaqTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		faq.setFaqTitle(title);
 		String content = faq.getFaqContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");

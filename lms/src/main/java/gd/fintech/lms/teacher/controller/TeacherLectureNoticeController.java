@@ -63,6 +63,11 @@ public class TeacherLectureNoticeController {
 	public String addLectureNotice(LectureNotice lectureNotice) {
 		// 추가할 내용 값이 넘어왔는지 확인
 		System.out.println(lectureNotice);
+		// db에 모는 html태그 접근 제한
+		String title = lectureNotice.getLectureNoticeTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		lectureNotice.setLectureNoticeTitle(title);
+		String content = lectureNotice.getLectureNoticeContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		lectureNotice.setLectureNoticeContent(content);
 		// 넘어온 내용 값 추가하기 위해 service의 add메소드 호출
 		teacherLectureNoticeService.addLectureNotice(lectureNotice);
 		// action 작동 후 공지사항 목록페이지로 return
@@ -111,6 +116,11 @@ public class TeacherLectureNoticeController {
 	public String modifyLectureNotice(LectureNotice lectureNotice) {
 		// 수정한 값 정상적으로 받아왔는지 확인
 		System.out.println(lectureNotice);
+		// db에 모든 html태그 접근 제한
+		String title = lectureNotice.getLectureNoticeTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		lectureNotice.setLectureNoticeTitle(title);
+		String content = lectureNotice.getLectureNoticeContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		lectureNotice.setLectureNoticeContent(content);
 		// 받아온 값으로 수정하기 위해 service의 modify메소드 호출
 		teacherLectureNoticeService.modifyLectureNotice(lectureNotice);
 		// action 작동 후 수정된 값 확인을 위해 공지사항 상세보기(lectureNoticeOne)으로 return

@@ -118,10 +118,10 @@ public class ManagerLmsNoticeController {
 	//공지사항 작성 액션 
 	@PostMapping("/manager/addLmsNotice")
 	public String addLmsNotice(LmsNotice lmsNotice) {
-		//db에 스크립트 문 접근 방지
-		String title = lmsNotice.getLmsNoticeTitle().replaceAll("(?i)<script", "&lt;script");
+		//db에 모든 html 태그 접근 방지
+		String title = lmsNotice.getLmsNoticeTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lmsNotice.setLmsNoticeTitle(title);
-		String content = lmsNotice.getLmsNoticeContent().replaceAll("(?i)<script", "&lt;script");
+		String content = lmsNotice.getLmsNoticeContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lmsNotice.setLmsNoticeContent(content);
 		
 		managerLmsNoticeService.addLmsNotice(lmsNotice);

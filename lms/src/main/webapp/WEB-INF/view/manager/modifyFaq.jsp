@@ -78,7 +78,7 @@
 				if($('#faqTitle').val() ==""){
 					alert('제목을 입력해주세요.');
 					}
-				else if($('#faqContent').val() == '<p>&nbsp;</p>'){
+				else if($('#faqContent').val() == '<p>&nbsp;</p>'||$('#faqContent').val() == ''){
 					alert('내용을 입력해주세요.');
 					}
 				else{

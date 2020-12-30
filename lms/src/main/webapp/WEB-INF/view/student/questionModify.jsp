@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- SmartEditor 텍스트편집기 -->
+<script src="${path }/smarteditor2/js/HuskyEZCreator.js"></script>
 </head>
 <body>
 <form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
@@ -33,10 +35,13 @@
 			<td>question_writer: <input type="text" name="questionWriter" value="${question.questionWriter}"></td>
 		</tr>
 		<tr>
-			<td>question_title: <input type="text" name="questionTitle" value="${question.questionTitle}"></td>
+			<td>question_title: <input type="text" name="questionTitle" id="questionTitle" value="${question.questionTitle}" style="width:460px"></td>
 		</tr>
 		<tr>
-			<td>question_content: <input type="text" name="questionContent" value="${question.questionContent}"></td>
+			<td>
+				<div>question_content</div>
+				<textarea class="form-control" name="questionContent" id="questionContent">${question.questionContent}</textarea>
+			</td>
 		</tr>
 		<tr>
 			<td>question_password: <input type="text" name="questionPassword" value="${question.questionPassword}"></td>
@@ -68,6 +73,15 @@
 	<a href="${path}/student/questionOne/${question.questionNo}">이전 페이지</a>
 </body>
 <script>
+	$(document).ready(function() {
+		// SmartEditor2 스크립트 추가
+		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : 'questionContent',
+			sSkinURI : '${path}/smarteditor2/SmartEditor2Skin.html',
+			fCreator : 'createSEditor2'
+		})
 	$('#addBtn').click(function(){
 		let html='<div><input type="file" name="questionFile" class="questionFile"></div>';
 		$('#fileinput').append(html);
@@ -79,6 +93,7 @@
 
 	$('#submitBtn').click(function(){
 		let ck=true;
+		oEditors.getById["questionContent"].exec("UPDATE_CONTENTS_FIELD", []);
 		$('.questionFile').each(function(index, item){
 			if($(item).val()==''){
 				ck=false;
@@ -86,9 +101,17 @@
 			})
 			if(ck == false){
 				alert('파일을 선택해 주세요');
-				}else{
+				}
+			else if($('#questionTitle').val() ==""){
+				alert('제목을 입력해주세요.');
+				}
+			else if($('#questionContent').val() == '<p>&nbsp;</p>' ||$('#questionContent').val() == ''){
+				alert('내용을 입력해주세요.');
+				}
+			else{
 					$('#updateQuesitonForm').submit();
 				}
-		});
+		})
+	})
 </script>
 </html>

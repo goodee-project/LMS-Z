@@ -44,28 +44,37 @@ public class TeacherReportController {
 	}
 	
 	//과제등록 폼
-	@GetMapping("/teacher/addReport")
-	public String addReport() {
-		
+	@GetMapping("/teacher/addReport/{currentPage}")
+	public String addReport(Model model,
+						@PathVariable(name="currentPage") int currentPage) {
+		model.addAttribute("currentPage",currentPage);
 		return "teacher/addReport";
 	}
 	
 	//과제등록 액션
-	@PostMapping("/teacher/addReport/{teacherId}")
-	public String addReport(Report report, @PathVariable(value = "teacherId") String teacherId) {
-		
+	@PostMapping("/teacher/addReport/{teacherId}/{currentPage}")
+	public String addReport(Report report,
+							@PathVariable(value = "teacherId") String teacherId,
+							@PathVariable(value = "currentPage") int currentPage) {
+		// db에 모든 html태그 접근 제한
+		String title = report.getReportTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		report.setReportTitle(title);
+		String content = report.getReportContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		report.setReportContent(content);
 		teacherReportService.addReport(report);
 		
-		return "redirect:/teacher/reportList/" + teacherId;
+		return "redirect:/teacher/reportList/" + teacherId + "/" + currentPage;
 	}
 	
 	//과제삭제
-	@GetMapping("/teacher/removeReport/{reportNo}/{teacherId}")
-	public String removeReport(@PathVariable(value = "reportNo") int reportNo, @PathVariable(value = "teacherId") String teacherId) {
+	@GetMapping("/teacher/removeReport/{reportNo}/{teacherId}/{currentPage}")
+	public String removeReport(@PathVariable(value = "reportNo") int reportNo,
+							@PathVariable(value = "teacherId") String teacherId,
+							@PathVariable(value = "currentPage") int currentPage) {
 		
 		teacherReportService.removeReport(reportNo);
 		
-		return "redirect:/teacher/reportList/" + teacherId;
+		return "redirect:/teacher/reportList/" + teacherId + "/" + currentPage;
 	}
 	
 	//과제 상세보기

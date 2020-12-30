@@ -73,6 +73,12 @@ public class StudentReportController {
 	
 	@PostMapping("/student/reportSubmitAdd")
 	public String addReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
+		// db에 모든 html태그 접근 제한
+		String title = reportSubmitAddForm.getReportSubmitTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		reportSubmitAddForm.setReportSubmitTitle(title);
+		String content = reportSubmitAddForm.getReportSubmitContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		reportSubmitAddForm.setReportSubmitContent(content);
+		
 		studentReportService.addReportSubmit(reportSubmitAddForm);
 		return "redirect:/student";
 	}

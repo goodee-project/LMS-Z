@@ -82,7 +82,7 @@
 		</c:forEach>
 	</table>
 </div>	
-		<a href="${path}/student/questionList/1">이전 페이지</a>
+		<a href="${path}/student/questionList/${studentId }/1">이전 페이지</a>
 </body>
 <script>
 

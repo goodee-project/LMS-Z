@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>과제목록</h1>
-		<a href="${path}/teacher/addReport">과제등록</a>
+		<a href="${path}/teacher/addReport/${currentPage}">과제등록</a>
 		<table border="1">
 				<thead>
 					<tr>
@@ -31,7 +31,7 @@
 							<td>${r.reportContent}</td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
-							<td><a href="${path}/teacher/removeReport/${r.reportNo}/${teacherId}">삭제</a></td>
+							<td><a href="${path}/teacher/removeReport/${r.reportNo}/${teacherId}/${currentPage}">삭제</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

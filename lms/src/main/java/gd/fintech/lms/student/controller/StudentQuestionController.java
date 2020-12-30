@@ -153,6 +153,13 @@ public class StudentQuestionController {
 	@PostMapping("/student/questionAdd")
 	public String addQuestion(QuestionAddForm questionAddForm,
 			@RequestParam(value="studentId")String studentId) {
+		
+		// db에 모든 html태그 접근 제한
+		String title = questionAddForm.getQuestionTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		questionAddForm.setQuestionTitle(title);
+		String content = questionAddForm.getQuestionContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		questionAddForm.setQuestionContent(content);
+		
 		studentQuestionService.addQuestion(questionAddForm);
 		return "redirect:/student/questionList/"+studentId+"/1";
 	}
@@ -172,6 +179,13 @@ public class StudentQuestionController {
 	//질문 수정 액션
 	@PostMapping("student/questionModify")
 	public String modifyQuestion(QuestionAddForm questionAddForm,@RequestParam(value="questionNo")int questionNo) {
+		
+		// db에 모든 html태그 접근 제한
+		String title = questionAddForm.getQuestionTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		questionAddForm.setQuestionTitle(title);
+		String content = questionAddForm.getQuestionContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		questionAddForm.setQuestionContent(content);
+		
 		studentQuestionService.updateQuestion(questionAddForm);
 		return "redirect:/student/questionOne/"+questionNo;
 	}
