@@ -11,7 +11,7 @@ import gd.fintech.lms.vo.Question;
 @Mapper
 public interface StudentQuestionMapper {
 	// 질문목록 리스트 (페이징)
-	List<Question> selectQuestionListPage(Map<String, Integer> map); 
+	List<Question> selectQuestionListPage(Map<String, Object> map); 
 	
 	
 	// 질문목록 검색
@@ -21,11 +21,11 @@ public interface StudentQuestionMapper {
 	List<Question> selectQuestionTitleSearch(Map<String, Object>map);
 	
 	// 질문목록 페이징에 사용되는 총 행의 갯수
-	int totalCountQuestion(); 
+	int totalCountQuestion(String accountId); 
 	
-	int totalCountQuestionSearchWriter(String questionWriter);
+	int totalCountQuestionSearchWriter(String questionWriter, String accountId);
 	
-	int totalCountQuestionSearchTitle(String questionTitle);
+	int totalCountQuestionSearchTitle(String questionTitle, String accountId);
 	
 	// 질문 등록
 	int insertQuestion(Question question); 
@@ -46,7 +46,7 @@ public interface StudentQuestionMapper {
 	int updateQuestionCount(int questionNo);
 	
 	// 질문 등록에서 강의번호를 선택하기위해 사용(강의 번호 리스트를 가져오기 위해)
-	List<Lecture> selectLectureList();  
+	List<Lecture> selectLectureList(String accountId);  
 	
 	//강좌 삭제를 위한 questionNO를 구하기 위한 메퍼
 	List<Integer> selectLectureNo(int lectureNo);

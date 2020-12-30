@@ -19,4 +19,5 @@ public class Question {
 	private List<QuestionComment> questionCommentList;
 	private List<QuestionFile> questionfile;
 	private Lecture lecture;
+	private List<ClassRegistration> classRegistrationList;
 }

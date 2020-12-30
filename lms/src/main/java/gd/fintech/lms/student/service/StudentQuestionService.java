@@ -29,29 +29,32 @@ import gd.fintech.lms.vo.QuestionFile;
 @Service
 public class StudentQuestionService {
 	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
-	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
+	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile\\";
 	
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
 	@Autowired private StudentQuestionFileMapper studentQuestionFileMapper;
 	
-	public List<Question> getQuestionTitleSearch(String questionTitle,int currentPage, int rowPerPage){
+	public List<Question> getQuestionTitleSearch(String accountId,String questionTitle,int currentPage, int rowPerPage){
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", accountId);
 		map.put("beginRow", (currentPage-1)*rowPerPage);
 		map.put("rowPerPage", rowPerPage);
 		map.put("questionTitle", questionTitle);
 		return studentQuestionMapper.selectQuestionTitleSearch(map);
 	}
 	
-	public List<Question> getQuestionWriterSearch(String questionWriter,int currentPage, int rowPerPage){
+	public List<Question> getQuestionWriterSearch(String accountId,String questionWriter,int currentPage, int rowPerPage){
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", accountId);
 		map.put("beginRow", (currentPage-1)*rowPerPage);
 		map.put("rowPerPage", rowPerPage);
 		map.put("questionWriter", questionWriter);
 		return studentQuestionMapper.selectQuestionWriterSearch(map);
 	}
 	//질문목록 리스트 페이징
-	public List<Question> getQuestionPage(int currentPage, int rowPerPage){
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public List<Question> getQuestionPage(String accountId,int currentPage, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", accountId);
 		map.put("beginRow", (currentPage-1)*rowPerPage);
 		map.put("rowPerPage", rowPerPage);
 		return studentQuestionMapper.selectQuestionListPage(map);
@@ -63,16 +66,16 @@ public class StudentQuestionService {
 	}
 	
 	//질문목록 행의 갯수 (페이징에 사용)
-	public int totalQuestion() {
-		return studentQuestionMapper.totalCountQuestion();
+	public int totalQuestion(String accountId) {
+		return studentQuestionMapper.totalCountQuestion(accountId);
 	}
 	
-	public int totalSearchWriterQuestion(String questionWriter) {
-		return studentQuestionMapper.totalCountQuestionSearchWriter(questionWriter);
+	public int totalSearchWriterQuestion(String questionWriter,String accountId) {
+		return studentQuestionMapper.totalCountQuestionSearchWriter(questionWriter, accountId);
 	}
 	
-	public int totalSearchTitleQuestion(String questionTitle) {
-		return studentQuestionMapper.totalCountQuestionSearchTitle(questionTitle);
+	public int totalSearchTitleQuestion(String questionTitle,String accountId) {
+		return studentQuestionMapper.totalCountQuestionSearchTitle(questionTitle, accountId);
 	}
 	
 	//질문 상세히 보기
@@ -131,8 +134,8 @@ public class StudentQuestionService {
 	}
 	
 	// 질문 생성시 강의 목록중 질문 강의를 선택하기 위해 사용
-	public List<Lecture> getLectureList(){
-		return studentQuestionMapper.selectLectureList();
+	public List<Lecture> getLectureList(String accountId){
+		return studentQuestionMapper.selectLectureList(accountId);
 	}
 	
 	// 작성 질문 수정

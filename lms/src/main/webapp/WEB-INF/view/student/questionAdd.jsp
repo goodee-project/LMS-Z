@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" id="questionAdd" action="${path}/student/questionAdd" enctype="multipart/form-data">
+<form method="post" id="questionAdd" action="${path}/student/questionAdd?studentId=${studentId}" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<td>lecture_no

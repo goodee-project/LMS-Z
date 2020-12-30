@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentLectureArchiveMapper"> 
+	<resultMap type="gd.fintech.lms.vo.LectureArchive" id="selectLectureArchiveOne">
+		<result property="lectureArchiveNo" column="lecture_archive_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="lectureArchiveWriter" column="lecture_archive_writer"/>
+		<result property="lectureArchiveTitle" column="lecture_archive_title"/>
+		<result property="lectureArchiveContent" column="lecture_archive_content"/>
+		<result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate"/>
+		<result property="lectureArchiveCreatedate" column="lecture_archive_createdate"/>
+		<result property="lectureArchiveCount" column="lecture_archive_count"/>
+		
+		<collection property="lectureArchiveFileList" ofType="gd.fintech.lms.vo.LectureArchiveFile">
+			<result property="lectureArchiveNo" column="lecture_archive_no"/>
+			<result property="lectureArchiveFileOriginal" column="lecture_archive_file_original"/>
+			<result property="lectureArchiveFileCount" column="lecture_archive_file_count"/>
+			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid"/>
+		</collection>
+	</resultMap>
+
+	<select id="selectLectureArchiveOne" resultMap="selectLectureArchiveOne" parameterType="int">
+		SELECT
+			la.lecture_no,
+			la.account_id,
+			la.lecture_archive_writer,
+			la.lecture_archive_title,
+			la.lecture_archive_content,
+			la.lecture_archive_updatedate,
+			la.lecture_archive_count,
+			laf.lecture_archive_file_original,
+			laf.lecture_archive_file_count
+		FROM lecture_archive la left join lecture_archive_file laf
+			 on la.lecture_archive_no = laf.lecture_archive_no
+		WHERE la.lecture_archive_no = #{lectureArchiveNo}
+	</select>
+	 
+	 <resultMap type="gd.fintech.lms.vo.LectureArchive" id="selectLectureArchiveList">
+		<result property="lectureArchiveNo" column="lecture_archive_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="lectureArchiveWriter" column="lecture_archive_writer"/>
+		<result property="lectureArchiveTitle" column="lecture_archive_title"/>
+		<result property="lectureArchiveContent" column="lecture_archive_content"/>
+		<result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate"/>
+		<result property="lectureArchiveCreatedate" column="lecture_archive_createdate"/>
+		<result property="lectureArchiveCount" column="lecture_archive_count"/>
+	
+		<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="classRegistrationState" column="class_registration_state"/>
+		</collection>
+	</resultMap>
+	<select id="selectLectureArchiveList" parameterType="java.util.Map" resultMap="selectLectureArchiveList">
+		SELECT
+			la.lecture_archive_no,
+			la.lecture_no,
+			la.account_id,
+			la.lecture_archive_writer,
+			la.lecture_archive_title,
+			la.lecture_archive_content,
+			la.lecture_archive_updatedate,
+			la.lecture_archive_count 
+		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
+	</select>
+</mapper>

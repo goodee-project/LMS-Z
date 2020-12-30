@@ -19,6 +19,12 @@
  		<result property="lectureNo" column="lecture_no"/>
  		<result property="lectureName" column="lecture_name"/>
  	</collection>
+ 	
+ 	<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="accountId" column="account_id"/>
+			<result property="classRegistrationState" column="class_registration_state"/>
+		</collection>
 	 </resultMap>	
   	
   	<!-- 질문목록 리스트 페이징 -->
@@ -34,6 +40,9 @@
 	  		q.question_createdate
 	  	FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
+	  		 left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId}	 
 	  	ORDER BY question_createdate DESC
 	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
@@ -50,7 +59,9 @@
   			q.question_createdate
   		FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
-  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%')
+	  		 left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId}
   		LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	
@@ -65,29 +76,36 @@
   			q.question_createdate
   		FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
-  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%')
+	  		 left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%') AND cr.account_id = #{accountId}
   		LIMIT #{beginRow},#{rowPerPage}
   	</select>
+  	
   	
   	<select id="totalCountQuestionSearchTitle" resultType="int" parameterType="String">
   		SELECT 
   			count(*) count
-  		FROM question
-  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%')
+  		FROM question q left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId}
   	</select>
   	
   	<select id="totalCountQuestionSearchWriter" resultType="int" parameterType="String">
   		SELECT 
   			count(*) count
-  		FROM question
-  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%')
+  		FROM question q left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%') AND cr.account_id = #{accountId}
   	</select>
   	
   	<!-- 질문목록 리스트 총 행의 갯수 -->
   	<select id="totalCountQuestion" resultType="int">
   		SELECT 
   			count(*) count
-  		FROM question
+  		FROM question q left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} 	 
   	</select>
   	
   	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOne">
@@ -195,9 +213,11 @@
   	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
   	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
   		SELECT 
-  			lecture_no lectureNo,
-  			lecture_name lectureName
-  		FROM lecture
+  			l.lecture_no lectureNo,
+  			l.lecture_name lectureName
+  		FROM lecture l left join class_registration cr
+	  		 on l.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} 	 
   	</select>
   	
   	<!-- 질문에 대한 댓글 모두 삭제 -->

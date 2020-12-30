@@ -97,7 +97,7 @@ function view(str) {
 	
 	$('#accountId').each(function(index, item){
 		let htmlDelete = '<div><a href="${path}/student/questionRemove/${question.questionNo}">질문 삭제</a></div>'
-		let htmlUpdate = '<div><a href="${path}/student/questionModify/${question.questionNo}">질문 수정</a></div>'
+		let htmlUpdate = '<div><a href="${path}/student/questionModify/${studentId}/${question.questionNo}">질문 수정</a></div>'
 		let html = '<span>게시글의 수정과 삭제는 작성자만 할 수 있습니다.</span>'
 		if($(item).val()==$('#studentId').val()){
 				$('#delUp').append(htmlUpdate);

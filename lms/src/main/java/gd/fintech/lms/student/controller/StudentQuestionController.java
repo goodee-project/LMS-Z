@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,49 +32,96 @@ import gd.fintech.lms.vo.QuestionAddForm;
 public class StudentQuestionController {
 	@Autowired StudentQuestionService studentQuestionService;
 	// 질문 목록 리스트
-	@GetMapping("/student/questionList/{currentPage}")
-	public String listQuestion(Model model, @PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 3;
-		List<Question> questionList = studentQuestionService.getQuestionPage(currentPage, rowPerPage);
-		int countQuestion = studentQuestionService.totalQuestion();
+	@GetMapping("/student/questionList/{accountId}/{currentPage}")
+	public String listQuestion(Model model, 
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage = 10;
+	
+		List<Question> questionList = studentQuestionService.getQuestionPage(accountId,currentPage, rowPerPage);
+		int countQuestion = studentQuestionService.totalQuestion(accountId);
 		int lastPage = countQuestion / rowPerPage;
+		
+		int listUnderPerPage = 10;	
+		int listUnderFirstPage = currentPage - (currentPage % listUnderPerPage) + 1;
+		int listUnderLastPage = listUnderFirstPage + listUnderPerPage - 1;
+		
+		if (currentPage % listUnderPerPage == 0 && currentPage != 0) {
+			listUnderFirstPage = listUnderFirstPage - listUnderPerPage;
+			listUnderLastPage = listUnderLastPage - listUnderPerPage;
+		}
+		
 		if(countQuestion % rowPerPage !=0) {
 			lastPage +=1;
 		}
-		model.addAttribute("currentPage",currentPage);
+		System.out.println(questionList);
+		model.addAttribute("listUnderPerPage",listUnderPerPage);
+		model.addAttribute("listUnderFirstPage",listUnderFirstPage);
+		model.addAttribute("listUnderLastPage",listUnderLastPage);
+		model.addAttribute("listCurrentPage",currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("rowPerPage", rowPerPage);
 		model.addAttribute("questionList", questionList);
 		return "/student/questionList";
 	}
-	@GetMapping("/student/questionTitleSearch/{questionTitle}/{currentPage}")
+	@GetMapping("/student/questionTitleSearch/{accountId}/{questionTitle}/{currentPage}")
 	public String searchTitleQuestion(Model model, 
+			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="questionTitle")String questionTitle, 
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage = 10;
-		List<Question> questionList = studentQuestionService.getQuestionTitleSearch(questionTitle,currentPage, rowPerPage);
-		int countQuestionTitle = studentQuestionService.totalSearchTitleQuestion(questionTitle);
+		List<Question> questionList = studentQuestionService.getQuestionTitleSearch(accountId,questionTitle,currentPage, rowPerPage);
+		int countQuestionTitle = studentQuestionService.totalSearchTitleQuestion(questionTitle, accountId);
 		int lastTitlePage = countQuestionTitle / rowPerPage;
+		
+		int titleUnderPerPage = 10;	
+		int titleUnderFirstPage = currentPage - (currentPage % titleUnderPerPage) + 1;
+		int titleUnderLastPage = titleUnderFirstPage + titleUnderPerPage - 1;
+		
+		if (currentPage % titleUnderPerPage == 0 && currentPage != 0) {
+			titleUnderFirstPage = titleUnderFirstPage - titleUnderPerPage;
+			titleUnderLastPage = titleUnderLastPage - titleUnderPerPage;
+		}
+		
 		if(countQuestionTitle % rowPerPage !=0) {
 			lastTitlePage +=1;
 		}
-		model.addAttribute("questionTitle", questionTitle);
+		model.addAttribute("titleUnderPerPage",titleUnderPerPage);
+		model.addAttribute("titleUnderFirstPage",titleUnderFirstPage);
+		model.addAttribute("titleUnderLastPage",titleUnderLastPage);
+		model.addAttribute("titleCurrentPage",currentPage);
+		model.addAttribute("questionTitle",questionTitle);
 		model.addAttribute("questionList",questionList);
 		model.addAttribute("lastTitlePage",lastTitlePage);
 		return "/student/questionList";
 	}
 	
-	@GetMapping("/student/questionWriterSearch/{questionWriter}/{currentPage}")
-	public String searchWriterQuestion(Model model, 
+	@GetMapping("/student/questionWriterSearch/{accountId}/{questionWriter}/{currentPage}")
+	public String searchWriterQuestion(Model model,
+			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="questionWriter")String questionWriter,
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage = 10;
-		List<Question> questionList = studentQuestionService.getQuestionWriterSearch(questionWriter,currentPage, rowPerPage);
-		int countQuestionWriter = studentQuestionService.totalSearchWriterQuestion(questionWriter);
+		List<Question> questionList = studentQuestionService.getQuestionWriterSearch(accountId,questionWriter,currentPage, rowPerPage);
+		int countQuestionWriter = studentQuestionService.totalSearchWriterQuestion(questionWriter, accountId);
 		int lastWriterPage = countQuestionWriter / rowPerPage;
+		
+		int writerUnderPerPage = 10;	
+		int writerUnderFirstPage = currentPage - (currentPage % writerUnderPerPage) + 1;
+		int writerUnderLastPage = writerUnderFirstPage + writerUnderPerPage - 1;
+		
+		if (currentPage % writerUnderPerPage == 0 && currentPage != 0) {
+			writerUnderFirstPage = writerUnderFirstPage - writerUnderPerPage;
+			writerUnderLastPage = writerUnderLastPage - writerUnderPerPage;
+		}
+		
 		if(countQuestionWriter % rowPerPage !=0) {
 			lastWriterPage +=1;
 		}
+		model.addAttribute("writerUnderPerPage",writerUnderPerPage);
+		model.addAttribute("writerUnderFirstPage",writerUnderFirstPage);
+		model.addAttribute("writerUnderLastPage",writerUnderLastPage);
+		model.addAttribute("writerCurrentPage",currentPage);
 		model.addAttribute("questionWriter", questionWriter);
 		model.addAttribute("lastWriterPage", lastWriterPage);
 		model.addAttribute("questionList",questionList);
@@ -93,25 +142,28 @@ public class StudentQuestionController {
 	}
 	
 	// 질문 등록 폼
-	@GetMapping("/student/questionAdd")
-	public String addQuestion(Model model) {
-		List<Lecture> lectureList = studentQuestionService.getLectureList();
+	@GetMapping("/student/questionAdd/{accountId}")
+	public String addQuestion(Model model,@PathVariable(name="accountId")String accountId) {
+		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
 		model.addAttribute("lectureList", lectureList);
 		return "/student/questionAdd";
 	}
 	
 	// 질문 등록 액션
 	@PostMapping("/student/questionAdd")
-	public String addQuestion(QuestionAddForm questionAddForm) {
+	public String addQuestion(QuestionAddForm questionAddForm,
+			@RequestParam(value="studentId")String studentId) {
 		studentQuestionService.addQuestion(questionAddForm);
-		return "redirect:/student/questionList/1";
+		return "redirect:/student/questionList/"+studentId+"/1";
 	}
 	
 	//질문 수정 폼
-	@GetMapping("/student/questionModify/{questionNo}")
-	public String modifyQuestion(Model model,@PathVariable(name="questionNo")int questionNo) {
+	@GetMapping("/student/questionModify/{accountId}/{questionNo}")
+	public String modifyQuestion(Model model,
+			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
 		Question question = studentQuestionService.getQuestionOne(questionNo);
-		List<Lecture> lectureList = studentQuestionService.getLectureList();
+		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
 		model.addAttribute("lectureList", lectureList);
 		model.addAttribute("question",question);
 		return "/student/questionModify";
@@ -138,8 +190,8 @@ public class StudentQuestionController {
 	}
 	
 	@GetMapping("/student/questionFileDownload/{questionFileUuid}")
-	public ResponseEntity<byte[]> displayFile(@PathVariable(name="questionFileUuid")String fileName)throws Exception{
-		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
+	public ResponseEntity<byte[]> displayFile(@PathVariable(name="questionFileUuid")String fileName,HttpServletResponse response)throws Exception{
+		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile\\";
 		// 파일을 다운로드 받기 위한 스트림
 		InputStream in = null;
 		ResponseEntity<byte[]> entity= null;
@@ -147,9 +199,13 @@ public class StudentQuestionController {
 		try {
 			HttpHeaders headers = new HttpHeaders();
 			in = new FileInputStream(PATH + fileName);
-					
+							
+			
 			// 다운로드 파일 컨텐트 타입
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+
+		
 					
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.OK);
 		} catch (Exception e) {

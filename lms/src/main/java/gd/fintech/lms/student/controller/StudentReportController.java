@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -117,7 +119,7 @@ public class StudentReportController {
 	}
 	
 	@GetMapping("/student/reportSubmitFileDownload/{reportSubmitFileUuid}")
-	public ResponseEntity<byte[]> displayFile(@PathVariable(name="reportSubmitFileUuid")String fileName)throws Exception{
+	public ResponseEntity<byte[]> displayFile(@PathVariable(name="reportSubmitFileUuid")String fileName,HttpServletResponse response)throws Exception{
 		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\reportfile\\";
 		// 파일을 다운로드 받기 위한 스트림
 		InputStream in = null;
@@ -129,6 +131,7 @@ public class StudentReportController {
 					
 			// 다운로드 파일 컨텐트 타입
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
 					
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.OK);
 		} catch (Exception e) {

@@ -49,7 +49,7 @@
 			 on r.lecture_no = l.lecture_no
 			 left join report_submit rs
 			 on r.report_no = rs.report_no
-		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND class_registration_state = '대기'
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND cr.class_registration_state = '수강중'
 		ORDER BY r.report_createdate DESC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
