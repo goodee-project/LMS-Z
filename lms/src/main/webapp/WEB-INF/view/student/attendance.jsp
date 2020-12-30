@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -60,7 +61,7 @@
 				<!-- 강의 정보  -->
                 <div class="row">
                     <div class="col-md-5 col-lg-9">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<h4 class="card-title">
                             		● 나의 출결 및 진도 현황 

@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -60,11 +61,13 @@
 		                        	수강 신청
 		                        </a>
 	                        </c:if>
+	                        &emsp;
 	                        <c:if test="${classRegistrationCk == true}">
 		                        <a class="btn btn-danger font-20 popover-item" style="color:white">
 		                        	신청함
 		                        </a>
 	                        </c:if>
+	                        &emsp;
 	                        <c:if test="${classPersonalCheck == false}">
 	                        	<a class="btn btn-danger font-20 popover-item" style="color:white">
 		                        	정원초과
@@ -79,10 +82,10 @@
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
                     <div class="col-md-5 col-lg-7">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<h4 class="card-title">● 강의정보</h4>
-                                <div class="table-responsive">
+                                <div class="">
                                     <table class="table no-wrap v-middle mb-0">
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">과목</th>
@@ -153,7 +156,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-13">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">● 교재정보</h4>
                                 <div class="table-responsive">

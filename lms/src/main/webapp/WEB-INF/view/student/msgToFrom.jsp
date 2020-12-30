@@ -12,17 +12,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 위의 사이트 아이콘 -->
-<link rel="icon" type="image/png" sizes="16x16"
-	href="${path}/assets/images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
 <title>lms</title>
 <!-- css -->
 <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-<link href="${path}/assets/libs/chartist/dist/chartist.min.css"
-	rel="stylesheet">
-<link
-	href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css"
-	rel="stylesheet" />
+<link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+<link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+<link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -76,24 +73,33 @@
 					</div>
 				</div>
 			</div>
-			<div>
-				<span style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
-			</div>
-			<div id="msgListDiv" style="width: 50rem"></div>
-			<div>
 				<div>
-					<div>
-						<textarea style="resize: none" cols="80" rows="6"
-							id="toTeacherMsgContent" name="msgContent"
-							class="font-weight-medium text-dark px-4 py-4"></textarea>
-					</div>
+					<span  class="col-md-5 col-lg-7" style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
 				</div>
-				<div>
-					<a href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
-						type="button">뒤로가기</a>
-					<button id="startBtn" type="button">채팅시작</button>
-					<button id="stopBtn" type="button">정지</button>
-					<button type="button" id="studentMsgBtn">입력</button>
+				<br>
+				<div class="row">
+                    <div class="col-md-5 col-lg-7">
+                        <div class="card" id="cardStyle">
+                            <div class="card-body">
+							<div id="msgListDiv" style="width: 50rem"></div>
+							<div>
+								<div>
+									<div>
+										<textarea style="resize: none" cols="80" rows="6"
+											id="toTeacherMsgContent" name="msgContent"
+											class="font-weight-medium text-dark px-4 py-4"></textarea>
+									</div>
+								</div>
+								<div>
+									<a href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
+										type="button">뒤로가기</a>
+									<button id="startBtn" type="button">채팅시작</button>
+									<button id="stopBtn" type="button">정지</button>
+									<button type="button" id="studentMsgBtn">입력</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

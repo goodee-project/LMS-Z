@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -71,9 +72,10 @@
                     <div class="col-5 align-self-center text-right">
                     	<div class="align-self-center">
                     		<c:if test="${myLectureListOne.classRegistrationState=='대기'}">
-		                        <a class="col-2 btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="col-1 btn btn-success font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
+		                        &emsp;
 		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
 		                        href="${path }/student/WaitingClassCancel/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
 		                        style="color:white;">
@@ -84,6 +86,7 @@
 		                        <a class="col-2 btn btn-primary font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
+		                        &emsp;
 		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
 		                        id="classCancelBtn"
 		                        style="color:white;">
@@ -94,9 +97,10 @@
 		                        <a class="btn btn-warning font-20 popover-item" id="state" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
-		                         <a class="btn btn-success font-20 popover-item" id="reviewBtn" style="color:white">
+		                        &emsp;
+		                         <button class="btn btn-success font-20 popover-item" id="reviewBtn" style="color:white;">
 	                        		수강후기
-	                  			 </a>
+	                  			 </button>
 	                        </c:if>
 	                        <c:if test="${myLectureListOne.classRegistrationState=='과락'}">
 		                        <a class="btn btn-danger font-20 popover-item" style="color:white;">
@@ -115,7 +119,7 @@
 				<!-- 수강평 작성란 -->
 				<div class="row" hidden="hidden" id="reviewDiv">
                     <div class="col-md-6 col-lg-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
                                     <h4 class="card-title mb-0">수강 후기</h4>
@@ -158,7 +162,7 @@
                 <!-- 수강취소 사유 작성란 -->
 				<div class="row" id="classCancelDiv" hidden="hidden">
                     <div class="col-md-6 col-lg-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
                                     <h4 class="card-title mb-0">취소 사유</h4>
@@ -189,7 +193,7 @@
 				<!-- 강의 정보  -->
                 <div class="row">
                     <div class="col-md-5 col-lg-7">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<h4 class="card-title">● 강의정보</h4>
                                 <div class="table-responsive">
@@ -267,7 +271,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-13">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">● 교재정보</h4>
                                 <div class="table-responsive">
@@ -354,7 +358,6 @@
 			// 메세지 창이 열려있는지 닫혀있는지 체크
 			var msgOCCk=0;
 			// 수강 후기 입력란 열기
-			
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
 						$("#reviewDiv").removeAttr('hidden');

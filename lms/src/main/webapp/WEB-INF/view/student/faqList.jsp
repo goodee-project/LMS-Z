@@ -14,15 +14,13 @@
 <!-- 위의 사이트 아이콘 -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="${path}/assets/images/favicon.png">
-<title>lms</title>
+<title>faq</title>
 <!-- css -->
 <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
-<link href="${path}/assets/libs/chartist/dist/chartist.min.css"
-	rel="stylesheet">
-<link
-	href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css"
-	rel="stylesheet" />
+<link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+<link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+<link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -73,8 +71,8 @@
 			<br>
 			<!-- 테이블 -->
 			<div class="row">
-				<div class="col-12">
-					<div class="card">
+				<div class="col-mb-3 col-12">
+					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table no-wrap v-middle mb-0">
@@ -95,8 +93,8 @@
 													<div class="d-flex no-block align-items-center">
 														<!-- 굵은 글씨 -->
 														<h5 class="text-dark mb-0 font-16 font-weight-medium">
-															<span>${ruleNo-(status.index)}</span> <span
-																hidden="hidden">${f.faqNo}</span>
+															<span>${ruleNo-(status.index)}</span> 
+															<span hidden="hidden">${f.faqNo}</span>
 														</h5>
 													</div>
 												</td>
@@ -114,8 +112,7 @@
 													</div>
 												</td>
 
-												<td
-													class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
+												<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 													<div class="d-flex no-block align-self-center">
 														<!-- 굵은 글씨 -->
 														<h5

@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -61,14 +62,14 @@
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">1</h4>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">2</h4>
                                 <!-- pl이 가로로 여백 mb가 세로로 여백 -->
@@ -79,7 +80,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">3</h4>
                             </div>
@@ -90,7 +91,7 @@
                 <!-- 2번째 라인 카드 -->
                 <div class="row">
                     <div class="col-md-6 col-lg-8">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
                                     <h4 class="card-title mb-0">4</h4>
@@ -119,7 +120,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title">5</h4>
                             </div>
@@ -130,7 +131,7 @@
                 <!-- 3번째 라인 카드 -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-4">
                                     <h4 class="card-title">6</h4>
