@@ -6,22 +6,45 @@
 	<!-- 강사 활성화수/ 탈퇴수를 보여주기 위한 쿼리 -->
 	<select id="selectTeacherInOutCount" parameterType="int" resultType="java.util.Map">
 		SELECT 
-		account_state,
-		nvl(COUNT(case when MONTH(account_createdate) = 1 then account_id END),0) january,
-		nvl(COUNT(case when MONTH(account_createdate) = 2 then account_id END),0) february,
-		nvl(COUNT(case when MONTH(account_createdate) = 3 then account_id END),0) march,
-		nvl(COUNT(case when MONTH(account_createdate) = 4 then account_id END),0) april,
-		nvl(COUNT(case when MONTH(account_createdate) = 5 then account_id END),0) may,
-		nvl(COUNT(case when MONTH(account_createdate) = 6 then account_id END),0) june,
-		nvl(COUNT(case when MONTH(account_createdate) = 7 then account_id END),0) july,
-		nvl(COUNT(case when MONTH(account_createdate) = 8 then account_id END),0) august,
-		nvl(COUNT(case when MONTH(account_createdate) = 9 then account_id END),0) september,
-		nvl(COUNT(case when MONTH(account_createdate) = 10 then account_id END),0) october,
-		nvl(COUNT(case when MONTH(account_createdate) = 11 then account_id END),0) november,
-		nvl(COUNT(case when MONTH(account_createdate) = 12 then account_id END),0) december
-	FROM account 
-	WHERE YEAR(account_createdate) = 2020
-	and account_level = "강사"
-	GROUP BY account_state 
+			account_state,
+			nvl(COUNT(case when MONTH(account_createdate) = 1 then account_id END),0) january,
+			nvl(COUNT(case when MONTH(account_createdate) = 2 then account_id END),0) february,
+			nvl(COUNT(case when MONTH(account_createdate) = 3 then account_id END),0) march,
+			nvl(COUNT(case when MONTH(account_createdate) = 4 then account_id END),0) april,
+			nvl(COUNT(case when MONTH(account_createdate) = 5 then account_id END),0) may,
+			nvl(COUNT(case when MONTH(account_createdate) = 6 then account_id END),0) june,
+			nvl(COUNT(case when MONTH(account_createdate) = 7 then account_id END),0) july,
+			nvl(COUNT(case when MONTH(account_createdate) = 8 then account_id END),0) august,
+			nvl(COUNT(case when MONTH(account_createdate) = 9 then account_id END),0) september,
+			nvl(COUNT(case when MONTH(account_createdate) = 10 then account_id END),0) october,
+			nvl(COUNT(case when MONTH(account_createdate) = 11 then account_id END),0) november,
+			nvl(COUNT(case when MONTH(account_createdate) = 12 then account_id END),0) december
+		FROM account 
+		WHERE YEAR(account_createdate) = #{year}
+		AND account_level = "강사"
+		AND account_state IN ('활성화','탈퇴')
+		GROUP BY account_state 
+	</select>
+	<!-- 학생 활성화 수 / 탈퇴 수를 보여주기 위한 쿼리 -->
+	<select id="selectStudentInOutCount" parameterType="int" resultType="java.util.Map">
+		SELECT 
+			account_state,
+			nvl(COUNT(case when MONTH(account_createdate) = 1 then account_id END),0) january,
+			nvl(COUNT(case when MONTH(account_createdate) = 2 then account_id END),0) february,
+			nvl(COUNT(case when MONTH(account_createdate) = 3 then account_id END),0) march,
+			nvl(COUNT(case when MONTH(account_createdate) = 4 then account_id END),0) april,
+			nvl(COUNT(case when MONTH(account_createdate) = 5 then account_id END),0) may,
+			nvl(COUNT(case when MONTH(account_createdate) = 6 then account_id END),0) june,
+			nvl(COUNT(case when MONTH(account_createdate) = 7 then account_id END),0) july,
+			nvl(COUNT(case when MONTH(account_createdate) = 8 then account_id END),0) august,
+			nvl(COUNT(case when MONTH(account_createdate) = 9 then account_id END),0) september,
+			nvl(COUNT(case when MONTH(account_createdate) = 10 then account_id END),0) october,
+			nvl(COUNT(case when MONTH(account_createdate) = 11 then account_id END),0) november,
+			nvl(COUNT(case when MONTH(account_createdate) = 12 then account_id END),0) december
+		FROM account 
+		WHERE YEAR(account_createdate) = #{year}
+		AND account_level = "학생"
+		AND account_state IN ('활성화','탈퇴')
+		GROUP BY account_state 
 	</select>
 </mapper>

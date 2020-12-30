@@ -99,7 +99,7 @@
 		$('#classroomSize').on('propertychange change keyup paste input', function(){
 			if(checkId.test($('#classroomSize').val())){				
 				$('#size').text('');
-				size='success';			
+				size='success';		
 			}else{
 				$('#size').text('1~3자리 숫자를 입력해주세요');
 				size = '';	

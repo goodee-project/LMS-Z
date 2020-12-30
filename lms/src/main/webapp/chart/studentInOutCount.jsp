@@ -9,31 +9,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>강사 가입수/탈퇴수</h1>
+	<h1>학생 가입수/탈퇴수</h1>
 	<div id="chartTable">
 		<span> 연도를 입력하세요 : </span>
 		<input type="text" id="year">
-		<button id="teacherInOutCountByYearClick" type="button">Chart보기</button>
+		<button id="studentInOutCountByYearClick" type="button">Chart보기</button>
 	</div>
 	<br>
 	<div>
-		<span id="teacherInOutCountByYear"></span>
+		<span id="studentInOutCountByYear"></span>
 	</div>
 	<div id="chartContainer">
-		<canvas id="teacherInOutCountByYearChart"></canvas>
+		<canvas id="studentInOutCountByYearChart"></canvas>
 	</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-$('#teacherInOutCountByYearClick').click(function(){
-	$('#teacherInOutCountByYearChart').remove();
-	$("#chartContainer").append('<canvas id="teacherInOutCountByYearChart"></canvas>');
+$('#studentInOutCountByYearClick').click(function(){
+	$('#studentInOutCountByYearChart').remove();
+	$("#chartContainer").append('<canvas id="studentInOutCountByYearChart"></canvas>');
 	$.ajax({
-		url:'${path }/chart/teacherInOutCount/'+$('#year').val(),
+		url:'${path }/chart/studentInOutCount/'+$('#year').val(),
 		type:'get',
 		success:function(data){
-			let ctx = document.getElementById('teacherInOutCountByYearChart').getContext('2d');
+			let ctx = document.getElementById('studentInOutCountByYearChart').getContext('2d');
 			let chart = new Chart(ctx,{
 				type:'line',
 				data:{
@@ -59,10 +59,10 @@ $('#teacherInOutCountByYearClick').click(function(){
 				});
 			}
 	});
-	$('#teacherInOutCountByYear').html('teacherInOutCountByYear');
+	$('#studentInOutCountByYear').html('studentInOutCountByYear');
 	$.ajax({
 		
-		url:'${path }/chart/teacherInOutCount/'+$('#year').val(),
+		url:'${path }/chart/studentInOutCount/'+$('#year').val(),
 		type:'get',
 		dataType: 'json',
 		success:function(data){
@@ -135,7 +135,7 @@ $('#teacherInOutCountByYearClick').click(function(){
 					</tbody>
 				</table>
 				`;
-			$('#teacherInOutCountByYear').html(html);
+			$('#studentInOutCountByYear').html(html);
 			}
 	});
 });
