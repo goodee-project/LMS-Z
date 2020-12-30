@@ -134,9 +134,8 @@ body {
 	text-align: center;
 }
 
-.card {
+#cardStyle {
       	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-	height:370px; 
 	border-radius: 15px;
 }
 
@@ -175,4 +174,48 @@ body {
 #loginTable input:focus {
 	outline:2px solid #86E57F;
 	transition: outline 0.2s;
+}
+
+#signupTable{
+	margin-top: 13px;
+	padding:10px;
+	width:100%;
+
+}
+
+#signupTable th{
+	width:30%;
+	vertical-align: middle;
+	text-align:center;
+}
+
+#signupTable td{
+	width:70%;
+	table-layout:fixed;
+}
+
+#signupTable button{
+    border-radius: 6px;
+
+}
+
+#signupTable input:focus {
+	outline:1px solid #86E57F;
+	transition: outline 0.1s;
+}
+
+#signupTable #studentPhone1 {
+	max-width: 20%;
+	float:left;
+	margin-right:12px;
+}
+
+#signupTable #studentPhone2 {
+	float:left;
+	max-width:34%;
+	margin-right:12px;
+}
+
+#signupTable #studentPhone3 {;
+	max-width:34%;
 }
