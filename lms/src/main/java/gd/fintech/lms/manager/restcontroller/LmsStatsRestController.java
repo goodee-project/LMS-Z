@@ -23,4 +23,9 @@ public class LmsStatsRestController {
 	public List<Map<String, Object>> studentInOutCount(@PathVariable(name="year") int year){
 		return lmsStateRestService.getStudentInOutCount(year);
 	}
+	//전체 강사와 학생의 lms이용자 수
+	@GetMapping("/chart/teacherAndStudentCount")
+	public Map<String, Object> teacherAndStudentCount(){
+		return lmsStateRestService.getTeacherAndStudentCount();
+	}
 }

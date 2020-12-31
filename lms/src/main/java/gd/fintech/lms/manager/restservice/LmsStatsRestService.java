@@ -21,4 +21,8 @@ public class LmsStatsRestService {
 	public List<Map<String, Object>> getStudentInOutCount(int year){
 		return lmsStatsRestMapper.selectStudentInOutCount(year);
 	}
+	//전체 강사와 학생의 수를 구하기 위한 메퍼 호출
+	public Map<String, Object> getTeacherAndStudentCount(){
+		return lmsStatsRestMapper.selectTeacherAndStudentCount();
+	}
 }

@@ -47,4 +47,12 @@
 		AND account_state IN ('활성화','탈퇴')
 		GROUP BY account_state 
 	</select>
+	<!-- 현재 lms를 이용하고있는 회원 수 -->
+	<select id="selectTeacherAndStudentCount" resultType="java.util.Map">
+		SELECT 
+			nvl(COUNT(case when account_level='강사' then account_id END),0) teacher,
+			nvl(COUNT(case when account_level='학생' then account_id END),0) student
+		FROM account
+		WHERE account_state='활성화'
+	</select>
 </mapper>
