@@ -20,6 +20,7 @@
 			<tr>
 				<th>No</th>
 				<th>문항번호</th>
+				<th>점수</th>
 				<th>작성일시</th>
 				<th>최종수정일시</th>
 			</tr>
@@ -30,6 +31,7 @@
 					<tr>
 						<td>${m.multiplechoiceNo}</td>
 						<td><a href="${path}/teacher/testQuestionOne/${m.multiplechoiceNo}">평가 ${m.multiplechoiceId}번</a></td>
+						<td>${m.multiplechoiceScore}</td>
 						<td>${m.multiplechoiceCreatedate}</td>
 						<td>${m.multiplechoiceUpdatedate}</td>
 					</tr>

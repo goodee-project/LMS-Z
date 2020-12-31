@@ -27,6 +27,10 @@
 			<td>답 : </td>
 			<td>${testOne.multiplechoiceAnswer}</td>
 		</tr>
+		<tr>
+			<td>점수 : </td>
+			<td>${testOne.multiplechoiceScore}</td>
+		</tr>
 	</table>
 	<div>
 		<c:forEach var="me" items="${testOne.multiplechoiceExampleList}">

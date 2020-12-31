@@ -32,6 +32,13 @@
 					<div id="choiceAnswer"></div>
 				</td>
 			</tr>
+			<tr>
+				<td>점수</td>
+				<td>
+					<input type="text" id="multiplechoiceScore" name="multiplechoiceScore" value="${testOne.multiplechoiceScore}">
+					<div id="choiceScore"></div>
+				</td>
+			</tr>
 		</table>
 		<c:forEach var="i" items="${testOne.multiplechoiceExampleList}" varStatus="status">
 			<div>보기 번호 : <input type="text" name="multiplechoiceExampleList[${status.count-1}].multiplechoiceExampleId" value="${i.multiplechoiceExampleId}" readonly="readonly"></div>
@@ -61,6 +68,7 @@
     <script>
 		var question = 'success';
 		var answer = 'success';
+		var score = 'success';
 		var content1 = 'success';
 		var content2 = 'success';
 		var content3 = 'success';
@@ -68,8 +76,8 @@
 		var content5 = 'success';
 
 		$('#btn').click(function(){
-			if(question == 'success' && answer == 'success' && content1 == 'success' && content2 == 'success'
-				&& content3 == 'success' && content4 == 'success' && content5 == 'success'){
+			if(question == 'success' && answer == 'success' && score == 'success' && content1 == 'success' 
+				&& content2 == 'success' && content3 == 'success' && content4 == 'success' && content5 == 'success'){
 				$('#test').submit();
 			}else{
 				alert('빈칸을 입력해주세요.');
@@ -98,6 +106,17 @@
 				console.log('answer성공');
 			}
 		});
+		var checkIdByScore = /^[0-9]{1,2}$/;
+		// 시험문제 점수 공백 검사
+		$('#multiplechoiceScore').on('propertychange change keyup paste input', function(){
+		if(!checkIdByScore.test($('#multiplechoiceScore').val())){				
+			$('#choiceScore').text('점수를 입력해주세요');
+			score = '';	
+		}else{
+			$('#choiceScore').text('');
+			score = 'success';
+		}
+	});
 		// 시험문제 보기 공백 검사(5개이기 때문에 각각 번호를 줘서 유효성 검사)
 		$('#multiplechoiceExampleContent1').on('propertychange change keyup paste input', function(){
 			if($('#multiplechoiceExampleContent1').val() == ""){				

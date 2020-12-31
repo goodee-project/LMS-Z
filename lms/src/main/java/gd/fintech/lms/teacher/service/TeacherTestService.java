@@ -52,6 +52,7 @@ public class TeacherTestService {
 		addMultiplechoice.setMultiplechoiceId(multiplechoice.getMultiplechoiceId());
 		addMultiplechoice.setMultiplechoiceQuestion(multiplechoice.getMultiplechoiceQuestion());
 		addMultiplechoice.setMultiplechoiceAnswer(multiplechoice.getMultiplechoiceAnswer());
+		addMultiplechoice.setMultiplechoiceScore(multiplechoice.getMultiplechoiceScore());
 		
 		teacherTestMapper.insertTestQuestion(addMultiplechoice);
 		
@@ -94,6 +95,7 @@ public class TeacherTestService {
 		modifyMultiplechoice.setMultiplechoiceNo(multiplechoice.getMultiplechoiceNo());
 		modifyMultiplechoice.setMultiplechoiceQuestion(multiplechoice.getMultiplechoiceQuestion());
 		modifyMultiplechoice.setMultiplechoiceAnswer(multiplechoice.getMultiplechoiceAnswer());
+		modifyMultiplechoice.setMultiplechoiceScore(multiplechoice.getMultiplechoiceScore());
 		
 		teacherTestMapper.updateTestQuestion(modifyMultiplechoice);
 		

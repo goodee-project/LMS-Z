@@ -22,6 +22,7 @@
 		<result property="multiplechoiceId" column="multiplechoice_id"/>
 		<result property="multiplechoiceQuestion" column="multiplechoice_question"/>
 		<result property="multiplechoiceAnswer" column="multiplechoice_answer"/>
+		<result property="multiplechoiceScore" column="multiplechoice_score"/>
 		<result property="multiplechoiceCreatedate" column="multiplechoice_createdate"/>
 		<result property="multiplechoiceUpdatedate" column="multiplechoice_updatedate"/>
 		<!-- 문제 보기 -->
@@ -41,6 +42,7 @@
 			mc.multiplechoice_id,
 			mc.multiplechoice_question,
 			mc.multiplechoice_answer,
+			mc.multiplechoice_score,
 			mc.multiplechoice_createdate,
 			mc.multiplechoice_updatedate,
 			mce.multiplechoice_example_no,
@@ -58,6 +60,7 @@
 			lecture_no lectureNo,
 			multiplechoice_id multiplechoiceId,
 			multiplechoice_question multiplechoiceQuestion,
+			multiplechoice_score multiplechoiceScore,
 			multiplechoice_createdate multiplechoiceCreatedate,
 			multiplechoice_updatedate multiplechoiceUpdatedate
 		FROM multiplechoice
@@ -106,6 +109,7 @@
 			multiplechoice_id,
 			multiplechoice_question,
 			multiplechoice_answer,
+			multiplechoice_score,
 			multiplechoice_createdate,
 			multiplechoice_updatedate
 		)VALUES(
@@ -113,6 +117,7 @@
 			#{multiplechoiceId},
 			#{multiplechoiceQuestion},
 			#{multiplechoiceAnswer},
+			#{multiplechoiceScore},
 			NOW(),
 			NOW()
 		)
@@ -151,6 +156,7 @@
 		SET
 			multiplechoice_question = #{multiplechoiceQuestion},
 			multiplechoice_answer = #{multiplechoiceAnswer},
+			multiplechoice_score = #{multiplechoiceScore},
 			multiplechoice_updatedate = NOW()
 		WHERE multiplechoice_no = #{multiplechoiceNo}
 	</update>

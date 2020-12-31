@@ -11,6 +11,7 @@ public class Multiplechoice {
 	private int multiplechoiceId;
 	private String multiplechoiceQuestion;
 	private String multiplechoiceAnswer;
+	private int multiplechoiceScore;
 	private String multiplechoiceCreatedate;
 	private String multiplechoiceUpdatedate;
 	private List<MultiplechoiceExample> multiplechoiceExampleList;

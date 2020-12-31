@@ -35,6 +35,13 @@
 					<div id="choiceAnswer"></div>
 				</td>
 			</tr>
+			<tr>
+				<td>점수</td>
+				<td>
+					<input type="text" id="multiplechoiceScore" name="multiplechoiceScore">
+					<div id="choiceScore"></div>
+				</td>
+			</tr>
 		</table>
 		<c:forEach var="i" begin="1" end="5">
 			<div>보기 번호 : <input type="text" id="multiplechoiceExampleId" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleId" value="${i}" readonly="readonly"></div>
@@ -65,6 +72,7 @@
     var id = '';
 	var question = '';
 	var answer = '';
+	var score = '';
 	var content1 = '';
 	var content2 = '';
 	var content3 = '';
@@ -72,6 +80,7 @@
 	var content5 = '';
 	var checkId = /^[0-9]{1,2}$/;
 	var checkIdByAnswer = /^[1-5]{1}$/;
+	var checkIdByScore = /^[0-9]{1,2}$/;
 	// 시험문제번호 공백 검사
 	$('#multiplechoiceId').on('propertychange change keyup paste input', function(){
 		if(!checkId.test($('#multiplechoiceId').val())){				
@@ -100,6 +109,16 @@
 		}else{
 			$('#choiceAnswer').text('');
 			answer = 'success';
+		}
+	});
+	// 시험문제 점수 공백 검사
+	$('#multiplechoiceScore').on('propertychange change keyup paste input', function(){
+		if(!checkIdByScore.test($('#multiplechoiceScore').val())){				
+			$('#choiceScore').text('점수를 입력해주세요');
+			score = '';	
+		}else{
+			$('#choiceScore').text('');
+			score = 'success';
 		}
 	});
 	// 시험문제 보기 공백 검사(5개이기 때문에 각각 번호를 줘서 유효성 검사)
@@ -158,7 +177,7 @@
 			success:function(data){
 				if(data.questionId == 0){
 					$('#choiceId').text('');
-					if(id == 'success' && question == 'success' && answer == 'success' && content1 == 'success' &&
+					if(id == 'success' && question == 'success' && answer == 'success' && score == 'success' && content1 == 'success' &&
 					content2 == 'success' && content3 == 'success' && content4 == 'success' && content5 == 'success'){
 						$('#test').submit();
 					}
