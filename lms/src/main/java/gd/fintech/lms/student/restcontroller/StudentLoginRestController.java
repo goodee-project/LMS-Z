@@ -14,6 +14,20 @@ import gd.fintech.lms.student.service.StudentLoginService;
 public class StudentLoginRestController {
 	@Autowired StudentLoginService studentLoginService;
 	
+	// 아이디/ 비밀번호 찾기
+	@GetMapping("/studentSearchToNameAndEmail")
+	public Map<String, Object> getStudentToNameAndEmailByCheck(
+			@RequestParam(value="studentName", required = false) String studentName,
+			@RequestParam(value="studentEmail", required = false) String studentEmail){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = studentLoginService.getStudentToNameAndEmailByCheck(studentName, studentEmail);
+		
+		map.put("check", check);
+		
+		return map;
+	}
+	
 	// 주소의 리스트를 json으로 출력
 	@GetMapping("/studentAddressSearch")
 	public Map<String, Object> getAddressToSearch(

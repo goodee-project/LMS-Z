@@ -28,6 +28,16 @@ public class ManagerLoginService {
 	@Autowired ManagerLoginMapper managerLoginMapper;
 	@Autowired JavaMailSender mailSender;
 	
+	// 아이디, 패스워드 체크
+	public int getManagerToNameAndEmailByCheck(String managerName, String managerEmail) {
+		Manager manager = new Manager();
+		
+		manager.setManagerEmail(managerEmail);
+		manager.setManagerName(managerName);
+		
+		return managerLoginMapper.selectManagerToNameAndEmailByCheck(manager);
+	}
+	
 	// 아이디 패스워드 찾기
 	public void modifyAccountToPw(Manager manager) {
 		Manager returnManager = managerLoginMapper.selectManagerToNameAndEmail(manager);

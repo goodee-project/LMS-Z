@@ -18,10 +18,19 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
-   <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
@@ -35,6 +44,7 @@
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
+							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
 								GOODEE LMS
@@ -45,31 +55,16 @@
             </nav>
         </header>
         
-        <!-- 로고 밑 메뉴 -->
+<!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
-                <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        
-                        <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/adminLogin"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">관리자 로그인
-                                </span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/managerLogin"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
-                                    class="hide-menu">매니저 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href=""
-                                aria-expanded="false"><i data-feather="calendar" class="feather-icon"></i><span
-                                    class="hide-menu">강사 로그인</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/studentLogin"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">학생 로그인</span></a>
+                        <li class="nav-small-cap"><span class="hide-menu"></span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin"
+                                aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
+                                    class="hide-menu">돌아가기</span></a></li>
                     </ul>
                 </nav>
             </div>
@@ -80,13 +75,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">로그인</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">학생
-                                    </li>
+                                    <li class="breadcrumb-item"></li>
                                 </ol>
                             </nav>
                         </div>
@@ -94,34 +88,41 @@
                 </div>
             </div>
 
-	            <!-- 2번째 라인 카드 -->
-		        <div class="row">
-			        <div class="col-md-10 col-lg-10">
-			        <div class="card">
-				        <form method="post" action="${path}/teacherLoginSearch">
-						    <div class="card-body">
-							    <div class="list-inline text-center mt-4 mb-0">
-								    <span class="list-inline-item text-muted font-italic">
-								    	이름 : <input type="text" name="teacherName">
-								    </span>
-							    </div>
-							    <div class="list-inline text-center mt-4 mb-0">
-								    <span class="list-inline-item text-muted font-italic">
-								    	이메일 : <input type="text" name="teacherEmail">
-								    </span>
-							    </div>
-							    <div class="list-inline text-center mt-4 mb-0">
-							    	<button type="submit" class="btn btn-success font-3">찾기</button>
-							    </div>
-						    </div>
-				        </form>
-		    		</div>
-	   			</div>  
-   			</div>
-   		</div>
-   	</div>
-               
-	
+                <!-- 2번째 라인 카드 -->
+	               <div class="row">
+	               		<div class="col-md-3 col-lg-3"></div>
+	                    <div class="col-md-5 col-lg-4">
+	                        <div class="card" id="cardStyle" style="height:370px;">
+	                        	<form id="searchForm" method="post" action="${path}/teacherLoginSearch">
+		                            <div class="card-body">
+		                            <div id="loginTitle" class="text-center font-7">
+		                            	<a>아이디/비밀번호 찾기</a>
+		                            </div>
+		                            <div id="loginSubTitle" class="text-center">
+	                            		<a>강사</a>
+                            		</div>
+		                                <table id="loginTable">
+		                                	<tr>
+		                                		<td>
+		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px; margin-top:-5px;" id="teacherName" name="teacherName" placeholder="이름을 입력해 주세요">
+		                                		</td>
+		                                	</tr>
+		                                	<tr>
+		                                		<td>
+		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px;" id="teacherEmail" name="teacherEmail" placeholder="이메일을 입력해 주세요">
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                                
+		                                <button class="btn btn-success font-3 btn-block btn-lg border-rad" type="button" id="btnSearch">찾기</button>
+		                            </div>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
+
+          </div>     
+	</div>
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -138,6 +139,25 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+		$('#btnSearch').click(function(){
+			$.ajax({
+				url:'${path}/teacherSearchToNameAndEmail',
+				type:'GET',
+				data:{teacherName: $('#teacherName').val(), teacherEmail: $('#teacherEmail').val()},
+				success:function(data){
+					if(data.check == 0){
+						alert('존재 하지 않는 이름,이메일입니다.');
+					} else{
+						if(confirm('해당 이메일로 현재 아이디와 새로운 비밀번호를 보냅니다.')){
+							$('#searchForm').submit();
+						}
+					}
+				}
+			});
+		});
+    </script>
 </body>
 
 </html>

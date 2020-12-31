@@ -9,6 +9,13 @@
 		WHERE account_id = #{accountId}
 	</update>
 
+	<!-- 이름과 이메일을 이용해서 해당 정보 체크 -->
+	<select id="selectStudentToNameAndEmailByCheck" parameterType="gd.fintech.lms.vo.Student" resultType="int">
+		SELECT COUNT(*)
+		FROM student
+		WHERE student_name = #{studentName} and student_email = #{studentEmail}
+	</select>
+	
 	<!-- 이름과 이메일을 이용해서 해당 정보 찾기 -->
 	<select id="selectStudentToNameAndEmail" parameterType="gd.fintech.lms.vo.Student" resultType="gd.fintech.lms.vo.Student">
 		SELECT s.student_id studentId, s.student_name studentName, s.student_email studentEmail

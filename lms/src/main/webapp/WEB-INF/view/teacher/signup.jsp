@@ -18,18 +18,12 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-
-
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
@@ -46,7 +40,7 @@
 							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
-								
+								GOODEE LMS
                             </span>
                         </a>
                     </div>
@@ -60,7 +54,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="list-divider"></li>
-                        <li class="nav-small-cap"><span class="hide-menu">옵션</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu"></span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacherLogin"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">돌아가기</span></a></li>
@@ -74,12 +68,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">SIGN UP</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="index.html">teacher</a>
+                                    <li class="breadcrumb-item">
                                     </li>
                                 </ol>
                             </nav>
@@ -89,123 +83,152 @@
             </div>
 
 
-            <div class="container-fluid text-center">
-                <!-- 회원가입 란-->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                	<form method="post" action="${path}/teacherSignup">
-	                                    <table class="table no-wrap v-middle mb-0">
-	                                    	<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">아이디</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="teacherId" name="teacherId">
-	                                    			<div id="textId"></div>
-	                                    		</td>
-	                                    		<td class="border-0"><button id="btnId" class="btn btn-light" type="button" disabled="disabled">중복검사</button></td>    
-	                                   		</tr>
-	                                   		
-	                                    	<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">비닐번호</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<div>
-	                                    				<input type="password" id="teacherPw" name="teacherPw">
-	                                    				<div id="textPw"></div>                                    			
-	                                    			</div>
-	                                    			<div>
-	                                    				<input type="password" id="teacherPw2" readonly>
-	                                    				<div id="textPw2"></div>                                    			
-	                                    			</div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">이름</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="teacherName" name="teacherName">
-	                                    			<div id="textName"></div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">이메일</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="teacherEmail" name="teacherEmail">
-	                                    			<div id="textEmail"></div>
-	                                    		</td>
-	                                    		<td class="border-0"><button class="btn btn-light" id="btnEmail" type="button" disabled="disabled">중복검사</button></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">핸드폰 번호</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<select id="teacherPhone1" name="teacherPhone1">
-	                                    				<option value="">선택</option>
-	                                    				<option value="010">010</option>
-	                                    				<option value="011">011</option>
-	                                    			</select>-
-	                                    			<input type="text" id="teacherPhone2" name="teacherPhone2">-
-	                                    			<input type="text" id="teacherPhone3" name="teacherPhone3">
-	                                    			<div id="textPhone"></div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">성별</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="radio" class="teacherGender" name="teacherGender" value="남">남
-	                                    			<input type="radio" class="teacherGender" name="teacherGender" value="여">여
-	                                    			<div id="textGender"></div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">메인 주소</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="teacherAddressMain" name="teacherAddressMain">
-	                                    			<div style="width:100%; height:200px; overflow:auto">
-		                                    			<table id="addressTable"></table>
-	                                    			</div>
-	                                    		</td>
-	                                    		<td class="border-0"><button class="btn btn-light" id="btnAddress" type="button">찾기</button></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">서브 주소</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="text" id="teacherAddressSub" name="teacherAddressSub">
-	                                    			<div id="textAddressSub"></div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                   		
-	                                   		<tr class="border-0">
-	                                    		<th class="border-0 font-14 font-weight-medium">생일</th>
-	                                    		<td class="font-weight-medium text-dark border-top-0">
-	                                    			<input type="date" id="teacherBirth" name="teacherBirth">
-	                                    			<div id="textBirth"></div>
-	                                    		</td>
-	                                    		<td class="border-0"></td>    
-	                                   		</tr>
-	                                    </table>
-                                    <button id="btnSignup" type="button">Sign Up</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
+	<!-- 회원가입 란-->
+	<div class="row">
+		<div class="col-md-2 col-lg-2"></div>
+		<div class="col-md-7 col-lg-7">
+				<div class="card" id="cardStyle">
+					<div class="card-body">
+						<div id="loginTitle" class="text-center font-7">
+							<a>회원가입</a>
+						</div>
+								                        
+						<div id="loginSubTitle" class="text-center">
+							<a>강사</a>
+						</div>
+						                            	
+						
+						<form id="signupForm" method="post" action="${path}/teacherSignup">
+							<table class="table table" id="signupTable">
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">아이디</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherId" name="teacherId">
+										<div id="textId">
+											첫 글자 영문, 영문/숫자을 조합하여 6~14글자로 입력해주세요.
+										</div>
+										<div style="text-align:right; margin-top:7px">
+											<button id="btnIdReset" class="btn btn-outline-secondary text-dark" type="button" disabled>재입력</button>
+											<button id="btnId" class="btn btn-outline-secondary text-dark" type="button">중복검사</button>
+										</div>
+									</td> 
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">비밀번호</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<div>
+											<input type="password" class="form-control-plaintext form-control border-black" id="teacherPw" name="teacherPw">
+											<div id="textPw">
+												영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.
+											</div>                                    			
+										</div>
+										<div>
+											<input type="password" class="form-control-plaintext form-control border-black" id="teacherPw2" style="margin-top:15px">
+											<div id="textPw2">
+												비밀번호를 다시 한번 입력해주세요.
+											</div>                                    			
+										</div>
+									</td> 
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">이름</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherName" name="teacherName">
+										<div id="textName">
+											이름을 입력해주세요.
+										</div>
+									</td>
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">이메일</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherEmail" name="teacherEmail">
+										<div id="textEmail">
+											이메일을 문자 @을 붙인 형식으로 입력해주세요.
+										</div>
+										<div style="text-align:right; margin-top:7px">
+											<button id="btnEmailReset" class="btn btn-outline-secondary text-dark" type="button" disabled>재입력</button>
+											<button class="btn btn-outline-secondary text-dark" id="btnEmail" type="button">중복검사</button>
+										</div>
+									</td>
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">핸드폰 번호</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<select class="form-control-plaintext form-control border-black" id="teacherPhone1" name="teacherPhone1">
+											<option value="">선택</option>
+											<option value="010">010</option>
+											<option value="011">011</option>
+										</select>
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherPhone2" name="teacherPhone2">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherPhone3" name="teacherPhone3">
+										<div id="textPhone">
+											핸드폰 번호를 입력해주세요.
+										</div>
+									</td>
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">성별</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="radio" class="teacherGender" name="teacherGender" value="남">남
+										<input type="radio" class="teacherGender" name="teacherGender" value="여" style="margin-left:15px;">여
+										<div id="textGender">
+											성별을 선택해주세요
+										</div>
+									</td>
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">메인 주소</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherAddressMain" name="teacherAddressMain" placeholder="도로명을 입력해 주세요">
+										<div style="width:100%; height:140px; overflow:auto">
+											<table id="addressTable"></table>
+										</div>
+										<div style="text-align:right; margin-top:7px">
+											<button id="btnAddressReset" class="btn btn-outline-secondary text-dark" type="button" disabled>재입력</button>
+											<button class="btn btn-outline-secondary text-dark" id="btnAddress" type="button">찾기</button>
+										</div>
+									</td>
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">서브 주소</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="text" class="form-control-plaintext form-control border-black" id="teacherAddressSub" name="teacherAddressSub">
+										<div id="textAddressSub">
+											서브 주소를 입력해주세요. (선택)
+										</div>
+									</td>  
+								</tr>
+								                                   		
+								<tr>
+									<th class="font-14 font-weight-medium text-dark">생일</th>
+									<td class="font-14 font-weight-medium text-dark">
+										<input type="date" class="form-control-plaintext form-control border-black" id="teacherBirth" name="teacherBirth">
+										<div id="textBirth">
+											생일을 입력해주세요.
+										</div>
+									</td>
+								</tr>
+							</table>
+							<div style="text-align:right; margin-top:7px">
+								<button class="btn btn-outline-secondary text-dark" id="btnSignup" type="button">Sign Up</button>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    </div>
 	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
@@ -227,122 +250,233 @@
     	// 로그인이 되었는지 확인하는 변수
 		var successId = '';
 		var successPw = '';
+		var successPw2 = '';
 		var successName = '';
 		var successEmail = '';
-		var successPhone = '';
+		var successPhone1 = '';
+		var successPhone2 = '';
+		var successPhone3 = '';
 		var successGender = '';
 		var successAddressMain = '';
-		var successAddressSub = '';
 		var successBirth = '';
 
-		// 회원가입 시 걸어논 규약을 만족해야만 회원가입 가능
 		$('#btnSignup').click(function(){
-			if(successId == 'success' && successPw == 'success' && successName == 'success' && successEmail == 'success' && successPhone == 'success' && successGender == 'success' && successAddressMain == 'success' && successAddressSub == 'success' && successBirth == 'success'){
-				//alert('success');
-				$('form').submit();
+			if(successId != '' && successPw != '' && successPw2 != '' && successName != '' && successEmail != '' && successPhone1 != '' && successPhone2 != '' && successPhone3 != '' && successGender != '' && successAddressMain != '' && successBirth != ''){
+				if(confirm('입력하신 것으로 회원가입합니다.')){
+					$('#signupForm').submit();
+				}
 			} else{
-				alert('입력란을 정상적으로 입력해 주세요');
+				alert('회원가입 입력란을 확인해주세요.');
 			}
-		})		
+			
+			if(successId == ''){
+				$('#textId').text('X 첫 글자 영문, 영문/숫자을 조합하여 6~14글자로 입력해주세요.')
+							.attr('class', 'text-danger');	
+				$('#teacherId').css('outline', '2px solid #FF0000');
+			}
+
+			if(successPw == ''){
+				$('#textPw').text('X 영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.')
+							.attr('class', 'text-danger');
+				$('#teacherPw').css('outline', '2px solid #FF0000');
+			}
+
+			if(successPw2 == ''){
+				$('#textPw2').text('X 비밀번호를 다시 한번 입력해주세요.')
+							 .attr('class', 'text-danger');
+				$('#teacherPw2').css('outline', '2px solid #FF0000');
+			}
+
+			if(successName == ''){
+				$('#textName').text('X 이름을 입력해주세요.')
+				  			  .attr('class', 'text-danger');
+				$('#teacherName').css('outline', '2px solid #FF0000');
+			}
+
+			if(successEmail == ''){
+				$('#textEmail').text('X 이메일을 문자 @을 붙인 형식으로 입력해주세요.')
+	   			   			   .attr('class', 'text-danger');
+				$('#teacherEmail').css('outline', '2px solid #FF0000');
+			}
+
+			if(successPhone1 == ''){
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+				  			   .attr('class', 'text-danger');
+				$('#teacherPhone1').css('outline', '2px solid #FF0000');
+			}
+			
+			if(successPhone2 == ''){
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+				  			   .attr('class', 'text-danger');
+				$('#teacherPhone2').css('outline', '2px solid #FF0000');
+			}
+			
+			if(successPhone3 == ''){
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+				  			   .attr('class', 'text-danger');
+				$('#teacherPhone3').css('outline', '2px solid #FF0000');
+			}
+
+			if(successGender == ''){
+				$('#textGender').text('X 성별을 선택해주세요.')
+	  			  			    .attr('class', 'text-danger');
+			}
+
+			if(successAddressMain == ''){
+				$('#teacherAddressMain').css('outline', '2px solid #FF0000');
+			}
+
+			if(successBirth == ''){
+				$('#textBirth').text('X 생일을 입력해주세요.')
+							   .attr('class', 'text-danger');	
+				$('#teacherBirth').css('outline', '2px solid #FF0000');
+			}
+		});
 
     	// 아이디에 대한 제약 (정규 표현식)
     	// 첫 글자 영문, 영문하고 숫자 조합으로만 조합 가능, 6~14글자
 		var checkId = /^[A-Za-z][A-Z0-9a-z]{5,13}$/;
-		// 아이디 입력란의 input 실시간 감지
+		// 아이디 입력란의 input blur 감지
 		// 제약이 맞으면 "형식확인", 아니면 "아이디 형식을 확인해 주세요" 출력
-		$('#teacherId').on('propertychange change keyup paste input', function(){
-			if(checkId.test($('#teacherId').val())){				
-				$('#textId').text('중복 검사를 해주세요');
-				$('#btnId').prop('disabled', false);				
-			}
-			else{
-				$('#textId').text('아이디 형식을 확인해 주세요');
-				$('#btnId').prop('disabled', true);
-				successId = '';
+		$('#teacherId').blur(function(){
+			if(successId == 'success'){
+			
+			} else{
+				if(checkId.test($('#teacherId').val())){				
+					$('#textId').text('X 중복 검사를 해주세요')
+								.attr('class', 'text-danger');	
+					$(this).css('outline', '2px solid #FF0000');		
+					successId = '';
+				} else{
+					$('#textId').text('X 첫 글자 영문, 영문/숫자을 조합하여 6~14글자로 입력해주세요.')
+								.attr('class', 'text-danger');	
+					$(this).css('outline', '2px solid #FF0000');
+				}
 			}
 		});
 
 		// 아이디에 대한 규약이 맞을 때만 중복검사 버튼 활성화
 		// ajax를 통해 아이디값을 비교 후 값이 있다면 confirm창, 없다면 바로 alert창 실행
 		$('#btnId').click(function(){
-			$.ajax({
-				url:'${path}/teacherOverlapId',
-				type:'GET',
-				data:{accountId: $('#teacherId').val()},
-				success:function(data){
-					if(data.overlapId == 0){
-						if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
-							$('#teacherId').prop('readonly', true);
-							$('#btnId').prop("disabled", true);
-							$('#textId').text('');
-							successId = 'success';
+			if(!checkId.test($('#teacherId').val())){
+				$('#teacherId').css('outline', '2px solid #FF0000');
+				alert('아이디 형식을 확인해 주세요.');
+			} else{
+				$.ajax({
+					url:'${path}/teacherOverlapId',
+					type:'GET',
+					data:{accountId: $('#teacherId').val()},
+					success:function(data){
+						if(data.overlapId == 0){
+							if(confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')){
+								$('#teacherId').prop('readonly', true)
+											   .css('outline', '2px solid #5CD1E5');
+								$('#btnId').prop('disabled', true);
+								$('#btnIdReset').prop('disabled', false);	
+								$('#textId').text('');
+								successId = 'success';
+							}
+						} else{
+							alert('입력하신 아이디는 중복 된 아이디입니다');
+							successId = '';
 						}
-					} else{
-						alert('중복 된 아이디입니다');
-						successId = '';
 					}
-				}
-			});	
+				});	
+			}
+		});
+
+		// id와 관련된 옵션 초기값으로 초기화
+		$('#btnIdReset').click(function(){
+			$('#teacherId').removeAttr('style')
+						   .prop('readonly', false)
+						   .val('');
+			$('#textId').removeAttr('class', 'text-danger')
+						.text('첫 글자 영문, 영문/숫자을 조합하여 6~14글자로 입력해주세요.');
+			$('#btnId').prop('disabled', false);
+			$('#btnIdReset').prop('disabled', true);
+			successId = '';
 		});
 
 		// checkPw는 입력란에 8~20자를 적을 수 있고 영문자와 숫자, 특수문자를 포함하는 지 확인하기 위한 변수
 		// checkPw2는 특수문자가 비닐번호에 하나라도 포함됬는지 확인하기 위한 변수
 		var checkPw = /^[A-z0-9a-z~!@#$%^&*()_+|<>?:{}]{8,20}$/;
 		var checkPw2 = /[~!@#$%^&*()_+|<>?:{}]/;
-		// teacherPw에 대해서 실시간으로 입력감지를 하게 하고 teacherPw2는 비활성화
+		// teacherPw에 대해서 blur로 감지
 		// 만약 비닐번호가 특수문자를 포함하고 규약에 맞다면 Pw 활성화
-		$('#teacherPw').on('ropertychange change keyup paste input', function(){
+		$('#teacherPw, #teacherPw2').blur(function(){
 			if(checkPw.test($('#teacherPw').val())){
 				if(checkPw2.test($('#teacherPw').val())){
-					$('#textPw').text('형식 확인');
-					$('#teacherPw2').prop('readonly', false);
+					$('#textPw').text('');
+					$(this).css('outline', '2px solid #5CD1E5');
+					successPw = 'success';
 				} else{
-					$('#textPw').text('특수문자를 포합해주세요');
-					$('#teacherPw2').prop('readonly', true);
-						
+					$('#textPw').text('X 특수문자를 포합해주세요')
+								.attr('class', 'text-danger');
+					$(this).css('outline', '2px solid #FF0000');
+					successPw = '';
 				}
 			} else{
-				$('#textPw').text('비닐번호 형식을 확인해 주세요');
-				$('#teacherPw2').prop('readonly', true);
+				$('#textPw').text('X 영문/숫자/특수문자를 조합하여 8~20자로 입력해주세요.')
+							.attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
+				successPw = '';
+			}
+
+			if(successPw2 == 'success' && $('#teacherPw').val() != $('#teacherPw2').val()){
+				$('#textPw2').text('X 비닐번호가 서로 다릅니다')
+				   			 .attr('class', 'text-danger');
+				$('#teacherPw2').css('outline', '2px solid #FF0000');
+				successPw2 = '';
 			}
 		});
 
 		// teacherPw2에 대한 체크 규약
 		// teacherPw2는 비닐번호를 제대로 입력하였는지 확인 하는 수단으로 teacherPw와 teacherPw2가 같을 경우 textPw2를 통해 출력
-		$('#teacherPw2').on('ropertychange change keyup paste input', function(){
-			if($('#teacherPw').val() == $('#teacherPw2').val()){
-				$('#textPw2').text('형식 확인');
-				successPw = 'success';
-			} else if($('#teacherPw2').val() == ""){
+		$('#teacherPw2').blur(function(){
+			if(successPw == ''){
+				$('#textPw2').text('X 비밀번호를 먼저 입력해주세요.')
+							 .attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
+				successPw2 = '';
+			} else if($('#teacherPw').val() == $('#teacherPw2').val()){
 				$('#textPw2').text('');
-				successPw = '';
+				$(this).css('outline', '2px solid #5CD1E5');
+				successPw2 = 'success';
 			} else{
-				$('#textPw2').text('비닐번호가 다릅니다');
-				successPw = '';
+				$('#textPw2').text('X 비닐번호가 서로 다릅니다')
+						     .attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
+				successPw2 = '';
 			}
 		});
 
 		// teacherName의 값이 들어가있다면 형식 확인 출력 없다면 공백
-		$('#teacherName').on('ropertychange change keyup paste input', function(){
-			if($('#teacherName').val().length < 1){
-				$('#textName').text('');
+		$('#teacherName').blur(function(){
+			if($(this).val().length < 1){
+				$('#textName').text('X 이름을 입력해주세요.')
+							  .attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
 				successName = '';
 			} else{
-				$('#textName').text('형식 확인');
+				$('#textName').text('');
+				$(this).css('outline', '2px solid #5CD1E5');
 				successName = 'success';
 			}
 		});	
 
 		// manageEmail 입력란에 @을 포합해야되는 등의 규약
-		// 그것을 실시간으로 입력감지하여 text로 표시
+		// 그것을 bur로 감지하여 text로 표시
 		var checkEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		$('#teacherEmail').on('ropertychange change keyup paste input', function(){
-			if(checkEmail.test($('#teacherEmail').val())){
-				$('#textEmail').text('중복 검사를 해주세요');
-				$('#btnEmail').prop('disabled', false);
+		$('#teacherEmail').blur(function(){
+			if(checkEmail.test($(this).val())){
+				$('#textEmail').text('X 중복 검사를 해주세요')
+				 			   .attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
+				successEmail = 'success';
 			} else{
-				$('#textEmail').text('');
-				$('#btnEmail').prop('disabled', true);
+				$('#textEmail').text('X 이메일을 문자 @을 붙인 형식으로 입력해주세요.')
+	 			   			   .attr('class', 'text-danger');
+				$(this).css('outline', '2px solid #FF0000');
 				successEmail = '';
 			}
 		});
@@ -350,28 +484,46 @@
 		// teacherEmail옆에 중복검사 버튼을 눌렀을 경우 ajax를 통해 중복검사
 		// 중복되었을 경우 alert로 사용 가능 할 경우 confirm으로 알림창 표시
 		$('#btnEmail').click(function(){
-			$.ajax({
-				url:'${path}/teacherOverlapEmail',
-				type:'GET',
-				data:{teacherEmail: $('#teacherEmail').val()},
-				success:function(data){
-					if(data.overlapEmail == 0){
-						if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
-							$('#teacherEmail').prop('readonly', true);
-							$('#btnEmail').prop("disabled", true);
-							$('#textEmail').text('');
-							successEmail = 'success';
+			if(successEmail == ''){
+				alert('이메일 형식을 확인해 주세요.');
+			} else{
+				$.ajax({
+					url:'${path}/teacherOverlapEmail',
+					type:'GET',
+					data:{teacherEmail: $('#teacherEmail').val()},
+					success:function(data){
+						if(data.overlapEmail == 0){
+							if(confirm('사용 가능한 이메일입니다. 사용하시겠습니까?')){
+								$('#teacherEmail').prop('readonly', true)
+												  .css('outline', '2px solid #5CD1E5');
+								$('#btnEmail').prop("disabled", true);
+								$('#btnEmailReset').prop('disabled', false);
+								$('#textEmail').text('');
+								successEmail = 'success';
+							}
+						} else{
+							alert('중복 된 이메일입니다');
 						}
-					} else{
-						alert('중복 된 이메일입니다');
 					}
-				}
-			});	
+				});	
+			}
+		});
+
+		// email과 관련된 옵션 초기값으로 초기화
+		$('#btnEmailReset').click(function(){
+			$('#teacherEmail').removeAttr('style')
+						   .prop('readonly', false)
+						   .val('');
+			$('#textEmail').removeAttr('class', 'text-danger')
+						.text('첫 글자 영문, 영문/숫자을 조합하여 6~14글자로 입력해주세요.');
+			$('#btnEmail').prop('disabled', false);
+			$('#btnEmailReset').prop('disabled', true);
+			successEmail = '';
 		});
 
 		// teacherGender의 radio 버튼을 누를경우 선택을 한 것이므로 형식 확인 출력
 		$('.teacherGender').on('ropertychange change keyup paste input', function(){
-			$('#textGender').text('형식 확인');
+			$('#textGender').text('');
 			successGender = 'success';
 		});
 
@@ -380,35 +532,56 @@
 		var checkPhone2 = /^\d{4}$/;
 		var checkPhone3 = /^\d{4}$/;
 
-		// teacherPhone을 3개를 실시간 입력감지하여 text로 표시
+		// teacherPhone을 첫번째를 실시간 입력감지하고 가운데랑 마지막 번호는 blur로 감지
 		// 3개 다 규약에 맞는 값이 들어가야 완료
 		$('#teacherPhone1').on('ropertychange change keyup paste input', function(){
-			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
-				$('#textPhone').text('');
-				successPhone = '';
+			if(!$(this).val() == ''){
+				$(this).css('outline', '2px solid #5CD1E5');
+				successPhone1 = 'success';
 			} else{
-				$('#textPhone').text('형식확인');
-				successPhone = 'success';
+				$(this).css('outline', '2px solid #FF0000');
+				successPhone1 = '';
+			}
+			
+			if(successPhone1 != '' && successPhone2 != '' && successPhone3 != ''){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+	   			   			   .attr('class', 'text-danger');
 			}
 		});
 
-		$('#teacherPhone2').on('ropertychange change keyup paste input', function(){
-			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
-				$('#textPhone').text('');
-				successPhone = '';
+		$('#teacherPhone2').blur(function(){
+			if(checkPhone2.test($(this).val())){
+				$(this).css('outline', '2px solid #5CD1E5');
+				successPhone2 = 'success';
 			} else{
-				$('#textPhone').text('형식확인');
-				successPhone = 'success';
+				$(this).css('outline', '2px solid #FF0000');
+				successPhone2 = '';
+			}
+			
+			if(successPhone1 != '' && successPhone2 != '' && successPhone3 != ''){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+	   			   			   .attr('class', 'text-danger');
 			}
 		});
 
-		$('#teacherPhone3').on('ropertychange change keyup paste input', function(){
-			if(($('#teacherPhone1').val() == "") || !checkPhone2.test($('#teacherPhone2').val()) || !checkPhone3.test($('#teacherPhone3').val())){
-				$('#textPhone').text('');
-				successPhone = '';
+		$('#teacherPhone3').blur(function(){
+			if(checkPhone3.test($(this).val())){
+				$(this).css('outline', '2px solid #5CD1E5');
+				successPhone3 = 'success';
 			} else{
-				$('#textPhone').text('형식확인');
-				successPhone = 'success';
+				$(this).css('outline', '2px solid #FF0000');
+				successPhone3 = '';
+			}
+			
+			if(successPhone1 != '' && successPhone2 != '' && successPhone3 != ''){
+				$('#textPhone').text('');
+			} else{
+				$('#textPhone').text('X 핸드폰 번호를 입력해주세요.')
+				   			   .attr('class', 'text-danger');
 			}
 		});
 
@@ -421,27 +594,30 @@
 				type:'GET',
 				data:{doro: $('#teacherAddressMain').val()},
 				success:function(data){
-					var strHead = '<thead>';
-					strHead += '</tr><td>';
-					strHead += '주소';			
-					strHead += '<td></tr>';
-					strHead += '</thead>';
-	
-					$('#addressTable').append(strHead);
-					
-					$.each(data.addressList, function(index, address){
-						var dataSet = address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1 + '-' + address.buildno2;
+					if(data.addressList.length == 0){
+						var strHeadSet = '<thead>';
+						strHeadSet += '</tr><td>';
+						strHeadSet += '검색 결과가 없습니다.';			
+						strHeadSet += '<td></tr>';
+						strHeadSet += '</thead>';
+						$('#addressTable').append(strHeadSet);
 						
-						var strBody = '<tbody>';
-						strBody += '<tr><td>';
-						strBody += '<a href="javascript:click()" onclick="addressClick(\'' + dataSet + '\')">';						
-						strBody += dataSet;						
-						strBody += '</a>';
-						strBody += '</td></tr>';
-						strBody += '</tbody>';
-
-						$('#addressTable').append(strBody);
-					})
+						$('#teacherAddressMain').css('outline', '2px solid #FF0000');
+					} else{
+						$.each(data.addressList, function(index, address){
+							var dataSet = address.sido + ' ' + address.sigungu + ' ' + address.doro + ' ' + address.buildno1 + '-' + address.buildno2;
+							
+							var strBody = '<tbody>';
+							strBody += '<tr><td>';
+							strBody += '<a href="javascript:click()" onclick="addressClick(\'' + dataSet + '\')">';						
+							strBody += dataSet;						
+							strBody += '</a>';
+							strBody += '</td></tr>';
+							strBody += '</tbody>';
+	
+							$('#addressTable').append(strBody);
+						})
+					}
 				}
 			});	
 		});
@@ -450,29 +626,28 @@
 		function addressClick(dataSet){
 			$('#teacherAddressMain').val(dataSet);
 			$('#addressTable').empty();
+			$('#teacherAddressMain').css('outline', '2px solid #5CD1E5')
+									.prop('readonly', 'true');
+			$('#btnAddress').prop('disabled', true);
+			$('#btnAddressReset').prop('disabled', false);
 			successAddressMain = 'success';
 		}
 
-		// teacherAddressSub의 input text 안에 값이 있다면 형식 확인 출력
-		$('#teacherAddressSub').on('ropertychange change keyup paste input', function(){
-			if($('#teacherAddressSub').val().length < 1){
-				$('#textAddressSub').text('');
-				successAddressSub = ''
-			} else{
-				$('#textAddressSub').text('형식 확인');
-				successAddressSub = 'success';
-			}
+		// addressMain과 관련된 옵션 초기값으로 초기화
+		$('#btnAddressReset').click(function(){
+			$('#teacherAddressMain').removeAttr('style')
+						   .prop('readonly', false)
+						   .val('');
+			$('#btnAddress').prop('disabled', false);
+			$('#btnAddressReset').prop('disabled', true);
+			successAddressMain = '';
 		});
 
 		// teacherBirth의 input타입 birth를 선택을 하였다면 형식 확인 출력
 		$('#teacherBirth').on('ropertychange change keyup paste input', function(){
-			if($('#teacherBirth').val().length < 1){
-				$('#textBirth').text('');
-				successBirth = '';
-			} else{
-				$('#textBirth').text('형식 확인');
-				successBirth = 'success';
-			}
+			$('#textBirth').text('');
+			$(this).css('outline', '2px solid #5CD1E5');
+			successBirth = 'success';
 		});	
 
     </script>

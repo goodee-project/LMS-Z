@@ -26,7 +26,16 @@ import gd.fintech.lms.vo.TeacherForm;
 @Transactional
 public class TeacherLoginService {
 	@Autowired TeacherLoginMapper teacherLoginMapper;
-	@Autowired JavaMailSender mailSender;	
+	@Autowired JavaMailSender mailSender;
+	
+	// 아이디, 비밀번호 찾기
+	public int getTeacherToNameAndEmailByCheck(String teacherName, String teacherEmail) {
+		Teacher teacher = new Teacher();
+		teacher.setTeacherEmail(teacherEmail);
+		teacher.setTeacherName(teacherName);
+		
+		return teacherLoginMapper.selectTeacherToNameAndEmailByCheck(teacher);
+	}
 	
 	// 아이디 패스워드 찾기
 	public void modifyAccountToPw(Teacher teacher) {

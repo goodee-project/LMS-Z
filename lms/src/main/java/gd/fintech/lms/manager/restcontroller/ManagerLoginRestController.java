@@ -14,6 +14,20 @@ import gd.fintech.lms.manager.service.ManagerLoginService;
 public class ManagerLoginRestController {
 	@Autowired ManagerLoginService managerLoginService;
 	
+	// 아이디, 패스워드 체크
+	@GetMapping("/managerSearchToNameAndEmail")
+	public Map<String, Object> getManagerToNameAndEmailByCheck(
+			@RequestParam(value="managerName", required = false) String managerName,
+			@RequestParam(value="managerEmail", required = false) String managerEmail){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = managerLoginService.getManagerToNameAndEmailByCheck(managerName, managerEmail);
+		
+		map.put("check", check);
+		
+		return map;
+	}
+	
 	// 주소의 리스트를 json으로 출력
 	@GetMapping("/managerAddressSearch")
 	public Map<String, Object> getAddressToSearch(

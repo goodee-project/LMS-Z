@@ -14,6 +14,20 @@ import gd.fintech.lms.teacher.service.TeacherLoginService;
 public class TeacherLoginRestController {
 	@Autowired TeacherLoginService teacherLoginService;
 	
+	// 아이디, 비밀번호 찾기
+	@GetMapping("/teacherSearchToNameAndEmail")
+	public Map<String, Object> getTeacherToNameAndEmailByCheck(
+			@RequestParam(value="teacherName", required = false) String teacherName,
+			@RequestParam(value="teacherEmail", required = false) String teacherEmail){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int check = teacherLoginService.getTeacherToNameAndEmailByCheck(teacherName, teacherEmail);
+		
+		map.put("check", check);
+		
+		return map;
+	}
+	
 	// 주소의 리스트를 json으로 출력
 	@GetMapping("/teacherAddressSearch")
 	public Map<String, Object> getAddressToSearch(

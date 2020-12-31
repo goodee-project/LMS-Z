@@ -9,6 +9,13 @@
 		SET account_pw = PASSWORD(#{accountPw})
 		WHERE account_id = #{accountId}
 	</update>
+	
+	<!-- 이름과 이메일을 이용해서 해당 정보 찾기 -->
+	<select id="selectTeacherToNameAndEmailByCheck" parameterType="gd.fintech.lms.vo.Teacher" resultType="int">
+		SELECT COUNT(*)
+		FROM teacher
+		WHERE teacher_name = #{teacherName} and teacher_email = #{teacherEmail}
+	</select>
 
 	<!-- 이름과 이메일을 이용해서 해당 정보 찾기 -->
 	<select id="selectTeacherToNameAndEmail" parameterType="gd.fintech.lms.vo.Teacher" resultType="gd.fintech.lms.vo.Teacher">

@@ -35,4 +35,5 @@ public interface StudentLoginMapper {
 	// 아이디 패스워드 찾기
 	int updateAccountToPw(String accountId, String accountPw);
 	Student selectStudentToNameAndEmail(Student student);
+	int selectStudentToNameAndEmailByCheck(Student student);
 }

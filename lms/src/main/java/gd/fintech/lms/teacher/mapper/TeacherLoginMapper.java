@@ -35,4 +35,5 @@ public interface TeacherLoginMapper {
 	// 아이디 패스워드 찾기
 	int updateAccountToPw(String accountId, String accountPw);
 	Teacher selectTeacherToNameAndEmail(Teacher teacher);
+	int selectTeacherToNameAndEmailByCheck(Teacher teacher);
 }

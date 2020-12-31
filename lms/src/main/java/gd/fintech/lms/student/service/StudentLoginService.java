@@ -30,6 +30,15 @@ public class StudentLoginService {
 	@Autowired StudentLoginMapper studentLoginMapper;
 	@Autowired JavaMailSender mailSender;
 	
+	public int getStudentToNameAndEmailByCheck(String studentName, String studentEmail) {
+		Student student = new Student();
+		
+		student.setStudentEmail(studentEmail);
+		student.setStudentName(studentName);
+		
+		return studentLoginMapper.selectStudentToNameAndEmailByCheck(student);
+	}
+	
 	// 아이디 패스워드 찾기
 	public void modifyAccountToPw(Student student) {
 		Student returnStudent = studentLoginMapper.selectStudentToNameAndEmail(student);

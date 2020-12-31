@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -89,13 +90,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">로그인</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">강사
-                                    </li>
+                                    <li class="breadcrumb-item"></li>
                                 </ol>
                             </nav>
                         </div>
@@ -103,36 +103,45 @@
                 </div>
             </div>
 
-				<br>
-				
                 <!-- 2번째 라인 카드 -->
 	               <div class="row">
-	                    <div class="col-md-10 col-lg-10">
-	                        <div class="card">
+	               		<div class="col-md-3 col-lg-3"></div>
+	                    <div class="col-md-5 col-lg-4">
+	                        <div class="card" id="cardStyle" style="height:370px;">
 	                        	<form method="post" action="${path}/teacherLogin">
 		                            <div class="card-body">
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId" value="teacher1">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw" value="asdfg12345!">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                	<a href="${path}/teacherSignup" class="btn btn-success font-3">회원가입</a>
-		                                	<a href="${path}/teacherLoginSearch" class="btn btn-success font-3">찾기</a>
-		                                </div>
+		                            <div id="loginTitle" class="text-center font-7">
+		                            	<a>로그인</a>
+		                            </div>
+		                            <div id="loginSubTitle" class="text-center">
+	                            		<a>강사</a>
+                            		</div>
+		                                <table id="loginTable">
+		                                	<tr>
+		                                		<td>
+		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px; margin-top:-5px;" name="accountId" value="teacher1">
+		                                		</td>
+		                                	</tr>
+		                                	<tr>
+		                                		<td>
+		                                			<input type="password" class="form-control-plaintext form-control-lg border-black" style="padding: 10px;" name="accountPw" value="qwer1234!">
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                                
+		                                <button class="btn btn-success font-3 btn-block btn-lg border-rad" type="submit">로그인</button>
 		                            </div>
 	                            </form>
+	                            <div id="loginStyle">
+			                        <a href="${path}/teacherSignup">회원가입</a>&nbsp;&nbsp;|&nbsp; 
+			                        <a href="${path}/teacherLoginSearch">아이디/패스워드 찾기</a>
+		                        </div>
 	                        </div>
 	                    </div>
 	                </div>
-               
-	
+
+          </div>     
+	</div>
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
