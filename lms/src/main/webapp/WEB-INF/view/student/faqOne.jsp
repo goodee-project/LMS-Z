@@ -56,9 +56,9 @@
 									<table class="table no-wrap v-middle mb-0">
 										<tr class="border-top-0 px-2 py-4">
 											<td class="font-14 font-weight-medium text-muted px-2">
-												<span
-												class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													작성자 : ${faqOne.faqWriter } [${faqOne.accountId }] </span>
+												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+													작성자 : ${faqOne.faqWriter } [${faqOne.accountId }] 
+												</span>
 											</td>
 											<td class=""></td>
 										</tr>
@@ -78,13 +78,12 @@
 											</td>
 										</tr>
 										<tr class="border-top-0 px-2 py-4">
-											<td class="font-14 font-weight-medium text-muted px-2"
-												colspan="2"><span
-												class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													<textarea
-														style="resize: none; overflow: visible; border: none;"
+											<td class="font-14 font-weight-medium text-muted px-2" colspan="2">
+												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+													<textarea style="resize: none; overflow: visible; border: none;"
 														readonly="readonly" cols="150">${faqOne.faqContent}</textarea>
-											</span></td>
+												</span>
+											</td>
 											<td class="border-0"></td>
 										</tr>
 									</table>

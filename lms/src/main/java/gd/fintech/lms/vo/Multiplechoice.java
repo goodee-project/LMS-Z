@@ -15,4 +15,5 @@ public class Multiplechoice {
 	private String multiplechoiceCreatedate;
 	private String multiplechoiceUpdatedate;
 	private List<MultiplechoiceExample> multiplechoiceExampleList;
+	private List<AnswerSheet> answerSheetList;
 }

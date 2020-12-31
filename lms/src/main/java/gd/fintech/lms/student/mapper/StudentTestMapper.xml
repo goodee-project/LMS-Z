@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="gd.fintech.lms.student.mapper.StudentTestMapper">
+ 	<!-- 객관식 문제 제출 -->
+ 	<insert id="insertAnswerMultiplechoice" parameterType="gd.fintech.lms.vo.AnswerSheet">
+ 		INSERT INTO 
+ 			answer_sheet(
+ 				multiplechoice_no,
+ 				account_id,
+ 				answer_select,
+ 				score
+ 				)
+			VALUES(
+				#{multiplechoiceNo},
+				#{accountId},
+				#{answerSelect},
+				#{score}
+				)
+ 	</insert>
+ 	<!-- 채점점수 -->
+ 	<select id="selectTestScore" parameterType="java.util.Map" resultType="java.lang.String">
+ 		SELECT SUM(score)
+		FROM answer_sheet `as`
+		LEFT JOIN multiplechoice mc 
+		ON `as`.multiplechoice_no = mc.multiplechoice_no
+		WHERE mc.lecture_no = #{lectureNo}
+		AND `as`.account_id = #{accountId}
+ 	</select>
+ 	
+ 	<!-- 시험 제출 유무 확인 -->
+ 	<select id="selectTestAnswer" parameterType="java.lang.String" resultType="gd.fintech.lms.vo.AnswerSheet">
+ 		SELECT multiplechoice_no multiplechoiceNo
+		FROM answer_sheet
+		WHERE account_id = #{accountId}
+ 	</select>
+ 	
+ 	<!-- 시험 전부 제출했는지 않했는지 체크 -->
+ 	<select id="selectAllTestAnswer" parameterType="java.util.Map" resultType="Integer">
+ 		SELECT COUNT(*)
+		FROM answer_sheet `as`
+		LEFT JOIN multiplechoice mc 
+		ON `as`.multiplechoice_no = mc.multiplechoice_no
+		WHERE mc.lecture_no = #{lectureNo}
+		AND `as`.account_id = #{accountId}
+ 	</select>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

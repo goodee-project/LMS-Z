@@ -62,10 +62,15 @@
 	                        &emsp;
 	                        <span>
 	                        	<a href="${path }/student/msgToFrom/${studentId}/${myLectureListOne.student.studentName}/${myLectureListOne.lecture.accountId}/${myLectureListOne.lecture.lectureNo }/${currentPage}">
-	                        	메세지</a>
+	                        		메세지</a>
 	                        	<c:if test="${isConfirm == false }">
 									<span>■</span>
 								</c:if>
+	                        </span>
+	                        &emsp;
+	                        <span>
+	                        	<a href="${path }/student/testList/${myLectureListOne.lecture.lectureNo }">
+	                        	시험</a>
 	                        </span>
                         </c:if>
                     </div>
