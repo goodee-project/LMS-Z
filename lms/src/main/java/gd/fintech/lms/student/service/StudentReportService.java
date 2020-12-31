@@ -46,8 +46,22 @@ public class StudentReportService {
 		return studentReportSubmitMapper.selectOverdueReportListPage(map);
 	}
 	
+	public List<Report> getOverdueReportSearch(int currentPage, int rowPerPage, String accountId, String reportTitle){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportTitle", reportTitle);
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		return studentReportSubmitMapper.selectOverdueReportSearch(map);
+	}
+	
 	public int totalReport(String accountId) {
 		return studentReportSubmitMapper.totalCountReport(accountId);
+	}
+	
+	public int totalOverdueSearch(String accountId, String reportTitle) {
+		return studentReportSubmitMapper.totalCountOverdueSearch(accountId, reportTitle);
 	}
 	
 	public int totalOverdueReport(String accountId) {

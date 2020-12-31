@@ -7,7 +7,7 @@ public class LectureArchiveFile {
 	private String lectureArchiveFileUuid;
 	private String lectureArchiveFileOriginal;
 	private int lectureArchiveNo;
-	private int lectureArchiveFileSize;
+	private long lectureArchiveFileSize;
 	private String lectureArchiveFileType;
 	private int lectureArchiveFileCount;
 	private String lectureArchiveFileCreatedate;

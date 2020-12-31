@@ -32,16 +32,29 @@ public class StudentReportController {
 	public String listReport(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=5;
+		int rowPerPage=1;
 		List<Report> reportList = studentReportService.getReportPage(currentPage,rowPerPage,accountId);
+		
+		int listUnderPerPage = 10;	
+		int listUnderFirstPage = currentPage - (currentPage % listUnderPerPage) + 1;
+		int listUnderLastPage = listUnderFirstPage + listUnderPerPage - 1;
+		
+		if (currentPage % listUnderPerPage == 0 && currentPage != 0) {
+			listUnderFirstPage = listUnderFirstPage - listUnderPerPage;
+			listUnderLastPage = listUnderLastPage - listUnderPerPage;
+		}
 		
 		int totalReport = studentReportService.totalReport(accountId);
 		int lastPage = totalReport/rowPerPage;
 		if(totalReport % rowPerPage !=0) {
 			lastPage +=1;
 		}
+		System.out.println(reportList);
+		model.addAttribute("listUnderPerPage",listUnderPerPage);
+		model.addAttribute("listUnderFirstPage",listUnderFirstPage);
+		model.addAttribute("listUnderLastPage",listUnderLastPage);
 		model.addAttribute("lastPage",lastPage);
-		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("listCurrentPage",currentPage);
 		model.addAttribute("reportList",reportList);
 		return "/student/reportList";
 	}
@@ -50,17 +63,64 @@ public class StudentReportController {
 	public String listOverdueReport(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=5;
+		int rowPerPage=1;
 		List<Report> reportList = studentReportService.getOverdueReportPage(currentPage, rowPerPage, accountId);
+		
+		int overdueListUnderPerPage = 10;	
+		int overdueListUnderFirstPage = currentPage - (currentPage % overdueListUnderPerPage) + 1;
+		int overdueListUnderLastPage =  overdueListUnderFirstPage + overdueListUnderPerPage - 1;
+		
+		if (currentPage % overdueListUnderPerPage == 0 && currentPage != 0) {
+			 overdueListUnderFirstPage = overdueListUnderFirstPage - overdueListUnderPerPage;
+			 overdueListUnderLastPage = overdueListUnderLastPage - overdueListUnderPerPage;
+		}
+		
 		int totalOverdueReport = studentReportService.totalOverdueReport(accountId);
 		int lastOverduePage = totalOverdueReport/rowPerPage;
 		if(totalOverdueReport % rowPerPage !=0) {
 			lastOverduePage +=1;
 		}
+		System.out.println(reportList);
+		model.addAttribute("overdueListUnderPerPage",overdueListUnderPerPage);
+		model.addAttribute("overdueListUnderFirstPage",overdueListUnderFirstPage);
+		model.addAttribute("overdueListUnderLastPage",overdueListUnderLastPage);
 		model.addAttribute("lastOverduePage",lastOverduePage);
-		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("OverdueListCurrentPage",currentPage);
 		model.addAttribute("reportList",reportList);
-		return "/student/reportList";
+		return "/student/reportOverdue";
+	}
+	
+	@GetMapping("/student/reportOverdueSearch/{accountId}/{reportTitle}/{currentPage}")
+	public String listOverdueReportSearch(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="reportTitle")String reportTitle,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage=1;
+		List<Report> reportList = studentReportService.getOverdueReportSearch(currentPage, rowPerPage, accountId, reportTitle);
+		
+		int searchUnderPerPage = 10;	
+		int searchUnderFirstPage = currentPage - (currentPage % searchUnderPerPage) + 1;
+		int searchUnderLastPage = searchUnderFirstPage + searchUnderPerPage - 1;
+		
+		if (currentPage % searchUnderPerPage == 0 && currentPage != 0) {
+			searchUnderFirstPage = searchUnderFirstPage - searchUnderPerPage;
+			searchUnderLastPage = searchUnderLastPage - searchUnderPerPage;
+		}
+		
+		int totalOverdueSearchReport = studentReportService.totalOverdueSearch(accountId, reportTitle);
+		int lastOverdueSearchPage = totalOverdueSearchReport/rowPerPage;
+		if(totalOverdueSearchReport % rowPerPage !=0) {
+			lastOverdueSearchPage +=1;
+		}
+		System.out.println(reportList);
+		model.addAttribute("searchUnderPerPage",searchUnderPerPage);
+		model.addAttribute("searchUnderFirstPage",searchUnderFirstPage);
+		model.addAttribute("searchUnderLastPage",searchUnderLastPage);
+		model.addAttribute("lastOverdueSearchPage",lastOverdueSearchPage);
+		model.addAttribute("OverdueSearchCurrentPage",currentPage);
+		model.addAttribute("reportTitle",reportTitle);
+		model.addAttribute("reportList",reportList);
+		return "/student/reportOverdue";
 	}
 	
 	@GetMapping("/student/reportSubmitAdd/{reportNo}")
@@ -108,6 +168,10 @@ public class StudentReportController {
 	@PostMapping("/student/reportSubmitModify")
 	public String modifyReportSubmit(ReportSubmitAddForm reportSubmitAddForm,
 			@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
+		String title = reportSubmitAddForm.getReportSubmitTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		reportSubmitAddForm.setReportSubmitTitle(title);
+		String content = reportSubmitAddForm.getReportSubmitContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
+		reportSubmitAddForm.setReportSubmitContent(content);
 		studentReportService.updateReportSubmit(reportSubmitAddForm);
 		return  "redirect:/student";
 	}

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper">
+  	<resultMap type="gd.fintech.lms.vo.LectureArchive" id="selectLectureArchive">
+  		<result property="lectureArchiveNo" column="lecture_archive_no"/>
+  		<result property="lectureNo" column="lecture_no"/>
+  		<result property="accountId" column="account_id"/>
+  		<result property="lectureArchiveWriter" column="lecture_archive_writer"/>
+  		<result property="lectureArchiveTitle" column="lecture_archive_title"/>
+  		<result property="lectureArchiveContent" column="lecture_archive_content"/>
+  		<result property="lectureArchiveCreatedate" column="lecture_archive_createdate"/>
+  		<result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate"/>
+  		<result property="lectureArchiveCount" column="lecture_archive_count"/>
+  	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+ 		<result property="accountId" column="account_id"/>
+ 		<result property="subjectNo" column="subject_no"/>
+ 		<result property="teacherName" column="teacher_name"/>
+ 		<result property="lectureName" column="lecture_name"/>
+ 		<result property="textbookIsbn" column="textbook_isbn"/>
+ 	</collection>
+ 	<collection property="subject" ofType="gd.fintech.lms.vo.Subject">
+ 		<result property="subjectNo" column="subject_no"/>
+ 		<result property="subjectName" column="subject_name"/>
+ 	</collection>
+  	</resultMap>
+  	
+  	<select id="selectLectureArchive" parameterType="java.util.Map" resultMap="selectLectureArchive">
+  		SELECT
+  			la.lecture_archive_no,
+  			la.lecture_no,
+  			la.account_id,
+  			la.lecture_archive_writer,
+  			la.lecture_archive_title,
+  			la.lecture_archive_createdate,
+  			la.lecture_archive_updatedate,
+  			la.lecture_archive_count,
+  			l.teacher_name,
+  			l.lecture_name,
+  			s.subject_no,
+  			s.subject_name
+  		FROM lecture_archive la left join lecture l
+  			 on la.lecture_no = l.lecture_no
+  			 left join subject s 
+  			 on l.subject_no = s.subject_no
+  		WHERE la.account_id = #{accountId}
+  		LIMIT #{beginRow},#{rowPerPage}
+  	</select>
+  	<select id="totalLectureArchive" parameterType="String" resultType="int">
+  		SELECT
+  			count(*) count
+  		FROM lecture_archive la left join lecture l
+  			 on la.lecture_no = l.lecture_no
+  			 left join subject s 
+  			 on l.subject_no = s.subject_no
+  		WHERE la.account_id = #{accountId}
+  	</select>
+  	
+  	<insert id="insertLectureArchive" parameterType="gd.fintech.lms.vo.LectureArchive">
+  		<selectKey resultType="int" keyProperty="lectureArchiveNo" order="AFTER">
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>
+  		INSERT INTO
+  			lecture_archive(
+  				lecture_no,
+	  			account_id,
+	  			lecture_archive_writer,
+	  			lecture_archive_title,
+	  			lecture_archive_content,
+	  			lecture_archive_createdate,
+	  			lecture_archive_updatedate,
+	  			lecture_archive_count
+  			)VALUES(
+  				#{lectureNo},
+  				#{accountId},
+  				#{lectureArchiveWriter},
+  				#{lectureArchiveTitle},
+  				#{lectureArchiveContent},
+  				Now(),
+  				Now(),
+  				'0'
+  			)
+  	</insert>
+  	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
+  		SELECT 
+  			lecture_no lectureNo,
+  			lecture_name lectureName
+  		FROM lecture 
+	  	WHERE account_id = #{accountId} 	 
+  	</select>
+  	
+  	<resultMap type="gd.fintech.lms.vo.LectureArchive" id="selectLectureArchiveOne">
+		<result property="lectureArchiveNo" column="lecture_archive_no"/>
+		<result property="lectureNo" column="lecture_no"/>
+		<result property="accountId" column="account_id"/>
+		<result property="lectureArchiveWriter" column="lecture_archive_writer"/>
+		<result property="lectureArchiveTitle" column="lecture_archive_title"/>
+		<result property="lectureArchiveContent" column="lecture_archive_content"/>
+		<result property="lectureArchiveUpdatedate" column="lecture_archive_updatedate"/>
+		<result property="lectureArchiveCreatedate" column="lecture_archive_createdate"/>
+		<result property="lectureArchiveCount" column="lecture_archive_count"/>
+		
+		<collection property="lectureArchiveFileList" ofType="gd.fintech.lms.vo.LectureArchiveFile">
+			<result property="lectureArchiveNo" column="lecture_archive_no"/>
+			<result property="lectureArchiveFileOriginal" column="lecture_archive_file_original"/>
+			<result property="lectureArchiveFileCount" column="lecture_archive_file_count"/>
+			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid"/>
+		</collection>
+	</resultMap>
+  	
+  	<select id="selectLectureArchiveOne" parameterType="int" resultMap="selectLectureArchiveOne">
+  		SELECT
+  			la.lecture_archive_no,
+			la.lecture_no,
+			la.account_id,
+			la.lecture_archive_writer,
+			la.lecture_archive_title,
+			la.lecture_archive_content,
+			la.lecture_archive_updatedate,
+			la.lecture_archive_count,
+			laf.lecture_archive_file_original,
+			laf.lecture_archive_file_uuid,
+			laf.lecture_archive_file_count
+		FROM lecture_archive la left join lecture_archive_file laf
+			 on la.lecture_archive_no = laf.lecture_archive_no
+		WHERE la.lecture_archive_no = #{lectureArchiveNo}
+  	</select>
+  	
+  	<update id="updateLectureArchive" parameterType="gd.fintech.lms.vo.LectureArchive">
+  		UPDATE lecture_archive 
+		SET
+			lecture_no = #{lectureNo},
+			lecture_archive_writer = #{lectureArchiveWriter},
+			lecture_archive_title = #{lectureArchiveTitle},
+			lecture_archive_content = #{lectureArchiveContent},
+			lecture_archive_updatedate = NOW()
+		WHERE lecture_archive_no = #{lectureArchiveNo}	
+  	</update>
+  </mapper>

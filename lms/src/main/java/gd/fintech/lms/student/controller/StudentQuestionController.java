@@ -54,7 +54,7 @@ public class StudentQuestionController {
 		if(countQuestion % rowPerPage !=0) {
 			lastPage +=1;
 		}
-		System.out.println(questionList);
+	
 		model.addAttribute("listUnderPerPage",listUnderPerPage);
 		model.addAttribute("listUnderFirstPage",listUnderFirstPage);
 		model.addAttribute("listUnderLastPage",listUnderLastPage);

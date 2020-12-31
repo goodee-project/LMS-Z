@@ -6,8 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>Insert title here</title>
+<!-- SmartEditor 텍스트편집기 -->
+<script src="${path }/smarteditor2/js/HuskyEZCreator.js"></script>
 </head>
 <body>
 <form method="post" id="updateReportSubmit" action="${path}/student/reportSubmitModify?reportSubmitNo=${reportSubmit.reportSubmitNo}" enctype="multipart/form-data">
@@ -25,11 +27,22 @@
 		
 			<tr>
 				<td>account_id: ${reportSubmit.accountId}</td>
-				<td>report_submit_content: <input type="text" name="reportSubmitContent" value="${reportSubmit.reportSubmitContent}"></td>
+			</tr>
+			<tr>	
+				<td>report_submit_content: 
+					<textarea class="form-control" name="reportSubmitContent" id="reportSubmitContent">${reportSubmit.reportSubmitContent}</textarea>
+				</td>
+			</tr>
+			<tr>	
 				<td>report_submit_writer: <input type="text" name="reportSubmitWriter" value="${reportSubmit.reportSubmitWriter}"></td>
-				<td>report_submit_title: <input type="text" name="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}"></td>
+			</tr>
+			<tr>	
+				<td>report_submit_title: <input type="text" name="reportSubmitTitle" id="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}"></td>
+			</tr>
+			<tr>	
 				<td>report_submit_no: ${reportSubmit.reportSubmitNo}</td>
 			</tr>
+			
 	</table>
 	
 	<table border="1">
@@ -59,17 +72,28 @@
 </form>	
 </body>
 <script>
+	$(document).ready(function() {
+	// SmartEditor2 스크립트 추가
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef : oEditors,
+		elPlaceHolder : 'reportSubmitContent',
+		sSkinURI : '${path}/smarteditor2/SmartEditor2Skin.html',
+		fCreator : 'createSEditor2'
+	})
 	$('#addBtn').click(function(){
 		let html='<div><input type="file" name="reportSubmitFile" class="reportSubmitFile"></div>';
 		$('#fileinput').append(html);
-		});
+		})
 
 	$('#delBtn').click(function(){
 		$('#fileinput').children().last().remove();
-		});
+		})
 
 	$('#submitBtn').click(function(){
+		var str_space = /\s/;
 		let ck=true;
+		oEditors.getById["reportSubmitContent"].exec("UPDATE_CONTENTS_FIELD", []);
 		$('.reportSubmitFile').each(function(index, item){
 			if($(item).val()==''){
 				ck=false;
@@ -77,9 +101,14 @@
 			})
 			if(ck == false){
 				alert('파일을 선택해 주세요');
-				}else{
+				}
+			else if(str_space.exec($('#reportSubmitContent'))){
+				alert('내용을 입력해 주세요');
+				}
+			else{
 					$('#updateReportSubmit').submit();
 				}
-		});
+		})
+	})	
 </script>
 </html>

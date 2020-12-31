@@ -30,9 +30,15 @@ public interface StudentReportSubmitMapper {
 	//제출기한이 지난 수강중인 강의 과제목록 행의 갯수
 	int totalCountOverdueReport(String accountId);
 	
+	//제출기한이 지난 수강중인 강의 과제를 검색한 목록의 행의 갯수
+	int totalCountOverdueSearch(String accountId, String reportTitle);
+	
 	//제출기한이 남아있는 수강중인 강의 과제목록 리스트
 	List<Report> selectReportListPage(Map<String, Object>map);
 	
 	//제출기한이 지난 수강중인 강의 과제목록 리스트
 	List<Report> selectOverdueReportListPage(Map<String, Object>map);
+	
+	//제출기한이 지난 수강중인 강의 과제목록 제목으로 검색
+	List<Report> selectOverdueReportSearch(Map<String, Object>map);
 }

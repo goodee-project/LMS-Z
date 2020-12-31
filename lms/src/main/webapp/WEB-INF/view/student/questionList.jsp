@@ -41,9 +41,6 @@
 	<div>
 		<c:if test="${listCurrentPage>1}">
 			<a href="${path}/student/questionList/${studentId}/1">처음으로</a>
-		</c:if>
-		
-		<c:if test="${listCurrentPage>1}">
 			<a href="${path}/student/questionList/${studentId}/${listCurrentPage-1}">이전</a>
 		</c:if>
 		
@@ -54,20 +51,16 @@
 		</c:forEach>
 		
 		<c:if test="${listCurrentPage<lastPage}">
-			<a href="${path}/student/questionList/${studentId}/${currentPage+1}">다음</a>
-		</c:if>
-		
-		<c:if test="${listCurrentPage<lastPage}">
+			<a href="${path}/student/questionList/${studentId}/${listCurrentPage+1}">다음</a>
 			<a href="${path}/student/questionList/${studentId}/${lastPage}">마지막으로</a>
 		</c:if>
+
 	</div>
 	<!-- 제목 검색에 대한 페이징 -->
 	<c:if test="${questionTitle != null}">	
 		<div>
 			<c:if test="${titleCurrentPage>1}">
 				<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/1">처음으로</a>
-			</c:if>
-			<c:if test="${titleCurrentPage>1}">
 				<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage-1}">이전</a>
 			</c:if>
 			
@@ -79,9 +72,6 @@
 			
 			<c:if test="${titleCurrentPage<lastTitlePage}">
 				<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage+1}">다음</a>
-			</c:if>
-			
-			<c:if test="${titleCurrentPage<lastTitlePage}">
 				<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${lastTitlePage}">마지막으로</a>
 			</c:if>
 		</div>
@@ -92,8 +82,6 @@
 			<div>
 				<c:if test="${writerCurrentPage>1}">
 					<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/1">처음으로</a>
-				</c:if>
-				<c:if test="${writerCurrentPage>1}">
 					<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${writerCurrentPage-1}">이전</a>
 				</c:if>
 			
@@ -105,9 +93,6 @@
 				
 				<c:if test="${writerCurrentPage<lastWriterPage}">
 					<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${writerCurrentPage+1}">다음</a>
-				</c:if>
-			
-				<c:if test="${writerCurrentPage<lastWriterPage}">
 					<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${lastWriterPage}">마지막으로</a>
 				</c:if>
 			

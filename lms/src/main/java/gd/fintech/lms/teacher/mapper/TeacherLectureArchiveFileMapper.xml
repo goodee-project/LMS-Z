@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper">
+	<insert id="insertLectureArchiveFile" parameterType="gd.fintech.lms.vo.LectureArchiveFile">
+		INSERT INTO 
+			lecture_archive_file(
+				lecture_archive_file_uuid,
+				lecture_archive_file_original,
+				lecture_archive_no,
+				lecture_archive_file_size,
+				lecture_archive_file_type,
+				lecture_archive_file_count,
+				lecture_archive_file_createdate
+			)VALUES(
+				#{lectureArchiveFileUuid},
+				#{lectureArchiveFileOriginal},
+				#{lectureArchiveNo},
+				#{lectureArchiveFileSize},
+				#{lectureArchiveFileType},
+				#{lectureArchiveFileCount},
+				NOW()		
+			)
+	</insert>
+	
+	<delete id="deleteLectureArchiveOneFile" parameterType="String">
+		DELETE 
+		FROM lecture_archive_file
+		WHERE lecture_archive_file_uuid = #{lectureArchiveFileUuid}
+	</delete>
+</mapper>  

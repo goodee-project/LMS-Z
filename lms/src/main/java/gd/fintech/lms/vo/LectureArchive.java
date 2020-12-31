@@ -15,6 +15,8 @@ public class LectureArchive {
 	private String lectureArchiveCreatedate;
 	private String lectureArchiveUpdatedate;
 	private int lectureArchiveCount;
+	private Lecture lecture;
+	private Subject subject;
 	private List<ClassRegistration> classRegistrationList;
 	private List<LectureArchiveFile> lectureArchiveFileList;
 }

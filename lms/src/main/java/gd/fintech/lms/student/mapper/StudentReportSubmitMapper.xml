@@ -50,7 +50,7 @@
 			 left join report_submit rs
 			 on r.report_no = rs.report_no
 		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND cr.class_registration_state = '수강중'
-		ORDER BY r.report_createdate DESC
+		ORDER BY r.report_createdate ASC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	
@@ -73,7 +73,34 @@
 			 on r.lecture_no = l.lecture_no
 			 left join report_submit rs
 			 on r.report_no = rs.report_no
-		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND class_registration_state = '대기'
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND class_registration_state = '수강중'
+		ORDER BY r.report_createdate DESC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="selectOverdueReportSearch" resultMap="selectReportListPage" parameterType="java.util.Map">
+		SELECT
+			r.report_no,
+			r.lecture_no,
+			l.lecture_name,
+			r.report_title,
+			r.report_content,
+			r.report_createdate,
+			r.report_updatedate,
+			r.report_startdate,
+			r.report_enddate,
+			rs.report_submit_content,
+			DATEDIFF(r.report_enddate,NOW())
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+			 left join lecture l 
+			 on r.lecture_no = l.lecture_no
+			 left join report_submit rs
+			 on r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} 
+			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> 
+			 AND class_registration_state = '수강중'
+			 AND r.report_title LIKE CONCAT('%',#{reportTitle},'%')
 		ORDER BY r.report_createdate DESC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
@@ -92,6 +119,16 @@
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
 		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]>
+	</select>
+	
+	<select id="totalCountOverdueSearch" resultType="int" parameterType="String">
+		SELECT
+			COUNT(*) count
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} 
+			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]>
+			 AND r.report_title = #{reportTitle}
 	</select>
 	
 	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOne">

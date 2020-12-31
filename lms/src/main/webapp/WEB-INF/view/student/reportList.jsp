@@ -50,16 +50,23 @@
 		</tbody>
 	</table>
 	<div>
-		<c:forEach var="i" begin="1" end="${lastPage}">
-			<span>
-				<a href="${path}/student/reportList/${studentId}/${i}">${i}</a>
-			</span>
+		<c:if test="${listCurrentPage>1}">
+			<a href="${path}/student/reportList/${studentId}/1">처음으로</a>
+			<a href="${path}/student/reportList/${studentId}/${listCurrentPage-1}">이전</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${listUnderFirstPage}" end="${listUnderLastPage}">
+			<c:if test="${i<=lastPage}">
+				<span>
+					<a href="${path}/student/reportList/${studentId}/${i}">${i}</a>
+				</span>
+			</c:if>
 		</c:forEach>
-		<c:forEach var="o" begin="1" end="${lastOverduePage}">
-			<span>
-				<a href="${path}/student/reportOverdueList/${studentId}/${o}">${o}</a>
-			</span>
-		</c:forEach>
+		
+		<c:if test="${listCurrentPage<lastPage}">
+			<a href="${path}/student/reportList/${studentId}/${listCurrentPage+1}">다음</a>
+			<a href="${path}/student/reportList/${studentId}/${lastPage}">마지막으로</a>
+		</c:if>
 	</div>
 </body>
 </html>

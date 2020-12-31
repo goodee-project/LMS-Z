@@ -5,6 +5,7 @@
 <html>
 <body>
    <h1>강의목록</h1>
+   <a href="${path}/teacher/lectureArchiveList/${teacherId}/1">자료실</a>
 	<table border="1">
 		<thead>
 			<tr>
