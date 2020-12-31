@@ -41,12 +41,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">소제목</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Index</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item"><a href="">index</a>
+                                    <li class="breadcrumb-item"><a href="">학생</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -57,159 +57,108 @@
 
 
             <div class="container-fluid">
-               
-
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-4 col-md-12">
+                    <div class="col-lg-7 col-md-7">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                                <h4 class="card-title">1</h4>
+                                <h4 class="card-title">LMS 공지사항</h4>
+	                            <div>
+	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
+	                            		<thead>
+		                            		<tr>
+		                            			<th>제목</th>
+		                            			<td>작성자</td>
+		                            			<td>수정일</td>
+		                            		</tr>
+	                            		</thead>
+	                            		<tbody>
+	                            			<c:forEach var="l" items="${lmsNoticeList}">
+		                            			<tr>
+		                            				<td>${l.lmsNoticeTitle}</td>
+		                            				<td>${l.lmsNoticeWriter}</td>
+		                            				<td>${l.lmsNoticeUpdatedate}</td>
+		                            			</tr>
+	                            			</c:forEach>
+	                            		</tbody>
+	                            	</table>
+	                            </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    
+                    <div class="col-lg-5 col-md-5">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                                <h4 class="card-title">2</h4>
-                                <!-- pl이 가로로 여백 mb가 세로로 여백 -->
-                                <div class="pl-4 mb-3">
-                                	내용 내용 내용
-                                </div>
+                                <h4 class="card-title">나의 강의 목록</h4>
+                                <table id="lectureTable" class="table table" style="margin-top: 20px; text-align: center;">
+                                	<thead>
+                                		<tr>
+                                			<th>강좌명</th>
+                                			<th>강사</th>
+                                			<th>강의실</th>
+                                		</tr>
+                                	</thead>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card" id="cardStyle">
-                            <div class="card-body">
-                                <h4 class="card-title">3</h4>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 
-                <!-- 2번째 라인 카드 -->
+				<!-- 2번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-md-6 col-lg-8">
+                    <div class="col-lg-7 col-md-7">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">4</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pl-4 mb-5">
-                                	내용 내용 내용
-                                </div>
-                                <ul class="list-inline text-center mt-4 mb-0">
-                                    <li class="list-inline-item text-muted font-italic">test</li>
-                                </ul>
+                                <h4 class="card-title">과제 마감</h4>
+                                <table id="reportTable" class="table table" style="margin-top: 20px; text-align: center;">
+                                	<thead>
+                                		<tr>
+                                			<th>강좌명</th>
+                                			<th>과제 이름</th>
+                                			<th>남은 날짜</th>
+                                		</tr>
+                                	</thead>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-lg-5 col-md-5">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                                <h4 class="card-title">5</h4>
+                                <h4 class="card-title">현재 접속자</h4>
+	                            <div>
+	                            	<table id="connectTable" class="table table" style="margin-top: 20px; text-align: center;">
+	                            		<thead>
+		                            		<tr>
+												<th>운영자</th>
+												<th>강사</th>
+												<th>학생</th>
+		                            		</tr>
+	                            		</thead>
+	                            		<tbody>
+	                            			<tr>
+	                            				<td>
+	                            					<div id="managerConnect"></div>
+	                            				</td>
+	                            				<td>
+	                            					<div id="teacherConnect"></div>
+	                            				</td>
+	                            				<td>
+	                            					<div id="studentConnect"></div>
+	                            				</td>
+	                            			</tr>
+	                            		</tbody>
+	                            	</table>
+	                            </div>
                             </div>
                         </div>
                     </div>
+                 
+
                 </div>
                 
-                <!-- 3번째 라인 카드 -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card" id="cardStyle">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <h4 class="card-title">6</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-                                                <a class="dropdown-item" href="#">Insert</a>
-                                                <a class="dropdown-item" href="#">Update</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table no-wrap v-middle mb-0">
-                                        <thead>
-                                            <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용1</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">내용2</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용3</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">내용4</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted text-center">내용5</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted">내용6</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="border-top-0 px-2 py-4">
-                                                    <div class="d-flex no-block align-items-center">
-                                                    	<!-- 굵은 글씨 -->
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">내용1 굵은</h5>
-                                                        <!-- 앏은 글씨 -->
-                                                        <span class="text-muted font-14">내용1 앏은</span>
-                                                    </div>
-                                                </td>
-                                                <td class="border-top-0 text-muted px-2 py-4 font-14">내용2</td>
-                                                
-                                                <!-- 아이콘 활용한 부트스트랩 -->
-                                                <td class="border-top-0 px-2 py-4">
-                                                    <div class="popover-icon">
-                                                        <a class="btn btn-primary rounded-circle btn-circle font-12"
-                                                            href="javascript:void(0)">DS</a>
-                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item"
-                                                            href="javascript:void(0)">SS</a>
-                                                        <a class="btn btn-cyan rounded-circle btn-circle font-12 popover-item"
-                                                            href="javascript:void(0)">RP</a>
-                                                        <a class="btn btn-success text-white rounded-circle btn-circle font-20"
-                                                            href="javascript:void(0)">+</a>
-                                                    </div>
-                                                </td>
-                                                
-                                                <!-- 눌렀을때 추가 옵션 -->
-                                                <td class="border-top-0 text-center px-2 py-4"><i
-                                                        class="fa fa-circle text-primary font-12" data-toggle="tooltip"
-                                                        data-placement="top" title="In Testing"></i></td>
-                                                
-                                                <!-- 살짝 굵은 글씨 -->
-                                                <td
-                                                    class="bord	er-top-0 text-center font-weight-medium text-muted px-2 py-4">
-                                                    살짝 굵은 글씨
-                                                </td>
-                                                
-                                                <!-- 일반적인 글씨 -->
-                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">일반적인 글씨
-                                                </td>
-                                            </tr>   
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -232,6 +181,113 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+		$(document).ready(function(){
+			// 현재 듣고 있는 강좌를 출력
+			$.ajax({
+				url:'${path}/student/getLecture',
+				type:'GET',
+				data:{studentId: '${studentId}'},
+				success:function(data){
+					$.each(data.lectureList, function(index, lecture){				
+						var strBody = '<tbody>';
+						strBody += '<tr>';
+						strBody += '<td>' + lecture.lectureName + '</td>';
+						strBody += '<td>' + lecture.teacherName + '</td>';
+						strBody += '<td>' + lecture.classroom.classroomNumber + '</td>';
+						strBody += '</tr>';
+						strBody += '</tbody>';
+
+						$('#lectureTable').append(strBody);
+					})
+				}
+			});	
+
+			// 현재 방문자 수를 출력
+		    $.ajax({
+				url:'${path}/student/getConnectList',
+				type:'GET',
+				success:function(data){
+					for(var i=0; i<data.connectList.length; i++){
+						if(data.connectList[i].managerName != null){
+							var managerBody = '<div style="margin-top:7px">';					
+							managerBody += data.connectList[i].managerName;														managerBody += '</td></tr>';
+							managerBody += '</div>';
+
+							$('#managerConnect').append(managerBody);
+						}
+						if(data.connectList[i].studentName != null){
+							var studentBody = '<div style="margin-top:7px">';				
+							studentBody += data.connectList[i].studentName;						
+							studentBody += '</div>';
+
+							$('#studentConnect').append(studentBody);
+						}
+						if(data.connectList[i].teacherName != null){
+							var teacherBody = '<div style="margin-top:7px">';					
+							teacherBody += data.connectList[i].teacherName;						
+							teacherBody += '</div>';
+
+							$('#teacherConnect').append(teacherBody);
+						}
+					}
+				}
+			});	
+
+			// 듣고 있는 강좌의 남은 과제를 출력
+			$.ajax({
+				url:'${path}/student/getReport',
+				type:'GET',
+				data:{studentId: '${studentId}'},
+				success:function(data){
+					if(data.reportList.length == 0){
+						var strBody = '<tbody>';
+						strBody += '<tr>';
+						strBody += '<td colspan="3">' + '남은 과제가 없습니다.' + '</td>';
+						strBody += '</tr>';
+						strBody += '</tbody>';
+
+						$('#reportTable').append(strBody);
+					} else{
+						$.each(data.reportList, function(index, report){				
+							var strBody = '<tbody>';
+							strBody += '<tr>';
+							strBody += '<td>' + report.lecture.lectureName + '</td>';
+							strBody += '<td>' + report.reportTitle + '</td>';
+							strBody += '<td>' + report.reportEnddate + '일 미만' + '</td>';
+							strBody += '</tr>';
+							strBody += '</tbody>';
+	
+							$('#reportTable').append(strBody);
+						})
+					}
+				}
+			});	
+		});
+    </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

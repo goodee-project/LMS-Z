@@ -219,3 +219,50 @@ body {
 #signupTable #studentPhone3 {;
 	max-width:34%;
 }
+
+#signupTable #teacherPhone1 {
+	max-width: 20%;
+	float:left;
+	margin-right:12px;
+}
+
+#signupTable #teacherPhone2 {
+	float:left;
+	max-width:34%;
+	margin-right:12px;
+}
+
+#signupTable #teacherPhone3 {;
+	max-width:34%;
+}
+
+#signupTable #managerPhone1 {
+	max-width: 20%;
+	float:left;
+	margin-right:12px;
+}
+
+#signupTable #managerPhone2 {
+	float:left;
+	max-width:34%;
+	margin-right:12px;
+}
+
+#signupTable #managerPhone3 {;
+	max-width:34%;
+}
+
+#lmsTable{
+    	table-layout:fixed;
+    	word-break:break-all;
+}
+
+#lmsTable th{
+    	width:50%;
+    	vertical-align: middle;
+}
+
+#lmsTable td{
+    	width:25%;
+    	vertical-align: middle;
+}
