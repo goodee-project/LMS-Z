@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
@@ -28,8 +32,7 @@ public class ManagerLectureService {
 	@Autowired TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	@Autowired StudentQuestionMapper studentQuestionMapper;
 	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
-	//파일 위치의 경로를 지정해주는 코드
-	private final String PATH = "C:\\Users\\guswn\\OneDrive\\바탕 화면\\git\\maven.1607910829175\\lms\\src\\main\\webapp\\uploadfile\\questionfile";
+	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
 		Map<String, Object> map = new HashMap<>();
@@ -71,12 +74,16 @@ public class ManagerLectureService {
 	}
 	//강좌를 삭제하기 위해 필요한 메퍼 호출
 	public void deleteLecture(int lectureNo) {
+		//파일 위치의 경로를 지정해주는 코드
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String attachPath = "uploadfile\\questionfile\\";
 		//삭제할 강좌와 연결된 질문 삭제
 		List<Integer> questionNo = studentQuestionMapper.selectLectureNo(lectureNo);
 		for(int q : questionNo) {
 			List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(q);
 			for(String s : questionFileUuid) {
-				File file = new File(PATH+s);
+				File file = new File(rootPath+attachPath+s);
 				if(file.exists()) {
 					file.delete();
 				}

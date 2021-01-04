@@ -46,7 +46,6 @@ public class ManagerMemberQueueController {
 		}else { // 나누어 떨어진다면 
 			lastPageT = totalPageT/rowPerPage;
 		}
-
 		model.addAttribute("studentList",studentList);
 		model.addAttribute("teacherList",teacherList);
 		model.addAttribute("currentPageS",currentPageS);
