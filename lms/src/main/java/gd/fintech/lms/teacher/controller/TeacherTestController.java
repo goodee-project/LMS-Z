@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherTestService;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.StudentAnswerSheet;
 import gd.fintech.lms.vo.Test;
 
 @Controller
@@ -59,6 +59,12 @@ public class TeacherTestController {
 							@PathVariable(value="lectureNo") int lectureNo) {
 		teacherTestService.modifyTest(test);
 		return "redirect:/teacher/testList/"+lectureNo;
+	}
+	
+	// 시험상세보기(학생답안지, 시험문제목록 들어가있는 페이지)
+	@GetMapping("/teacher/testOne/{lectureNo}")
+	public String testOne(@PathVariable(value="lectureNo") int lectureNo) {
+		return "teacher/testOne";
 	}
 	
 	// 시험문제목록 출력
@@ -122,5 +128,15 @@ public class TeacherTestController {
 		// 목록으로 redirect 해주기위해 lectureNo을 받아옴
 		teacherTestService.removeTestQuestion(multiplechoiceNo);
 		return "redirect:/teacher/testQuestionList/"+lectureNo;
+	}
+	
+	// 수강중인 학생 목록 조회(답안지 제출 여부 확인)
+	@GetMapping("/teacher/studentListByTest/{lectureNo}")
+	public String studentListByTest(Model model,
+										@PathVariable(value="lectureNo") int lectureNo) {
+		List<StudentAnswerSheet> list = teacherTestService.getStudentByLecture(lectureNo);
+		// System.out.println(list);
+		model.addAttribute("list", list);
+		return "teacher/studentListByTest";
 	}
 }

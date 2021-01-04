@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.StudentAnswerSheet;
 import gd.fintech.lms.vo.Test;
 
 @Service
@@ -128,5 +129,10 @@ public class TeacherTestService {
 		teacherTestMapper.deleteTestQuestionExample(multiplechoiceNo);
 		// 해당 시험문제 삭제
 		teacherTestMapper.deleteTestQuestion(multiplechoiceNo);
+	}
+	
+	// 수강중인 학생 목록 조회
+	public List<StudentAnswerSheet> getStudentByLecture(int lectureNo) {
+		return teacherTestMapper.selectStudentByLecture(lectureNo);
 	}
 }

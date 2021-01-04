@@ -34,7 +34,7 @@
 			<c:if test="${test != null}">
 				<tr>
 					<td>${test.testNo}</td>
-					<td><a href="${path}/teacher/testQuestionList/${test.lectureNo}">${test.testContent}</a></td>
+					<td><a href="${path}/teacher/testOne/${test.lectureNo}">${test.testContent}</a></td>
 					<td>${test.testStartdate}</td>
 					<td>${test.testEnddate}</td>
 				</tr>
