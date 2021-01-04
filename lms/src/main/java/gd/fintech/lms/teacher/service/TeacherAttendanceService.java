@@ -44,8 +44,5 @@ public class TeacherAttendanceService {
 		
 		return teacherAttendanceMapper.selectAttendanceOne(map);
 	}
-	
-	public int addAttendanceState(Attendance attendance) {
-		return teacherAttendanceMapper.insertAttendanceState(attendance);
-	}
+
 }

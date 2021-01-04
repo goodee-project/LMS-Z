@@ -15,6 +15,4 @@ public interface TeacherAttendanceMapper {
 	int updateAttendanceState(Attendance attendance);
 	//학생 출석상세보기
 	Attendance selectAttendanceOne(Map<String, Object> map);
-	
-	int insertAttendanceState(Attendance attendance);
 }

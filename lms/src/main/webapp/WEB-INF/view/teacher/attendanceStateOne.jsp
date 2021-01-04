@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>출석부 수정</h1>
-	<form method="post" action="${path}/teacher/modifyAttendanceStateOne/${studentId}/${lectureNo}/${attendanceDay}/${currentYear}/${currentMonth}/${currentDay}/${lectureStartdate}/${lectureEnddate}">
+	<form method="post" action="${path}/teacher/modifyAttendanceStateOne/${studentId}/${lectureNo}/${attendanceDay}/${currentYear}/${currentMonth}/${currentDay}">
 		<table border="1">
 			<input type="hidden" value="${studentId}" name="accountId">
 			<input type="hidden" value="${lectureNo}" name="lectureNo">
@@ -77,6 +77,6 @@
 		</table>
 		<button type="submit">수정하기</button>
 	</form>
-	<a href="${path}/teacher/attendanceList/${lectureNo}/${currentYear}/${currentMonth}/${currentDay}/${lectureStartdate}/${lectureEnddate}">뒤로가기</a>
+	<a href="${path}/teacher/attendanceList/${lectureNo}/${currentYear}/${currentMonth}/${currentDay}">뒤로가기</a>
 </body>
 </html>
