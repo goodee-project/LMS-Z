@@ -42,6 +42,9 @@
 		<div>
 			내용 : ${plan.syllabus.syllabusContent}
 		</div>
+		<div>
+			사인 : <img src="${plan.syllabus.syllabusTeachersign}" width="100" height="50">
+		</div>
 	</fieldset>
 	<a href="${path}/teacher/lectureOne/${lectureNo}">목록</a>
 </body>

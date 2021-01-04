@@ -96,20 +96,20 @@
 												<option value="${managerOne.managerPosition}">${managerOne.managerPosition}</option>
 												<c:if test="${managerOne.managerPosition == null}">
 													<option value="대리">대리</option>
-													<option value="대리">사원</option>
-													<option value="대리">팀장</option>
+													<option value="사원">사원</option>
+													<option value="팀장">팀장</option>
 												</c:if>
 												<c:if test="${managerOne.managerPosition == '대리'}">
-													<option value="대리">사원</option>
-													<option value="대리">팀장</option>
+													<option value="사원">사원</option>
+													<option value="팀장">팀장</option>
 												</c:if>
 												<c:if test="${managerOne.managerPosition == '사원'}">
 													<option value="대리">대리</option>
-													<option value="대리">팀장</option>
+													<option value="팀장">팀장</option>
 												</c:if>
 												<c:if test="${managerOne.managerPosition == '팀장'}">
 													<option value="대리">대리</option>
-													<option value="대리">사원</option>
+													<option value="사원">사원</option>
 												</c:if>
 											</select>
 											<button type="button" id="btnPosition" class="btn btn-outline-secondary text-dark">개명</button>										

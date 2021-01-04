@@ -64,6 +64,7 @@
 		<association property="syllabus" javaType="gd.fintech.lms.vo.Syllabus">
 			<result property="syllabusNo" column="syllabus_no"/>
 			<result property="syllabusContent" column="syllabus_content"/>
+			<result property="syllabusTeachersign" column="syllabus_teachersign"/>
 		</association>
 		<association property="classroom" javaType="gd.fintech.lms.vo.Classroom">
 			<result property="classroomNo" column="classroom_no"/>
@@ -91,6 +92,7 @@
 			l.lecture_enddate, 
 			l.lecture_total,
 			sy.syllabus_content,
+			sy.syllabus_teachersign,
 			c.classroom_number
 		FROM lecture l , account a, teacher t, subject s, syllabus sy, textbook tb, classroom c
 		WHERE l.account_id = a.account_id 
