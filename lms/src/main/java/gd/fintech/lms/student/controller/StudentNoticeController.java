@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import gd.fintech.lms.manager.service.ManagerLmsNoticeService;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
 import gd.fintech.lms.teacher.service.TeacherLectureNoticeService;
 import gd.fintech.lms.teacher.service.TeacherLmsNoticeService;
@@ -19,6 +20,7 @@ import gd.fintech.lms.vo.LmsNotice;
 public class StudentNoticeController {
 	@Autowired TeacherLmsNoticeService teacherLmsNoticeService;
 	@Autowired TeacherLectureNoticeService teacherLectureNoticeService;
+	@Autowired ManagerLmsNoticeService managerLmsNoticeService;
 	
 	//Lms 공지사항 전체 불러오기
 	@GetMapping("/student/lmsNoticeList/{currentPage}")
@@ -46,12 +48,27 @@ public class StudentNoticeController {
 		model.addAttribute("startPage",startPage);
 		return "student/lmsNoticeList";
 	}
+	
+	//공지사항 조회 시 조회수 +1
+	@GetMapping("/student/noticeCountup/{lmsNoticeNo}/{currentPage}")
+	public String noticeCountUp(@PathVariable(name="lmsNoticeNo") int lmsNoticeNo,
+								@PathVariable(name="currentPage") int currentPage) {
+		managerLmsNoticeService.modifyLmsNoticeCount(lmsNoticeNo);
+		return "redirect:/student/lmsNoticeOne/"+lmsNoticeNo+"/"+currentPage;
+	}
+	/*
+	 * 조회수 +1 메서드를 따로 만들어서 공지사항상세보기에서
+	 * 새로고침을 해도 count+1되지 않도록 함
+	 */
+	
 	//Lms 공지사항 상세보기
-	@GetMapping("/student/lmsNoticeOne/{lmsNoticeNo}")
+	@GetMapping("/student/lmsNoticeOne/{lmsNoticeNo}/{currentPage}")
 	public String lmsNoticeOne(Model model,
-							@PathVariable(name="lmsNoticeNo") int lmsNoticeNo) {
+							@PathVariable(name="lmsNoticeNo") int lmsNoticeNo,
+							@PathVariable(name="currentPage") int currentPage) {
 		LmsNotice lmsNotice = teacherLmsNoticeService.getLmsNoticeOne(lmsNoticeNo);
 		model.addAttribute("lmsNotice", lmsNotice);
+		model.addAttribute("currentPage",currentPage);
 		
 		return "student/lmsNoticeOne";
 	}

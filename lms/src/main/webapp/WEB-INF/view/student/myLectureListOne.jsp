@@ -47,7 +47,7 @@
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
                                     <li class="breadcrumb-item">
-                                    	<a href="">${myLectureListOne.teacher.teacherName }(${myLectureListOne.lecture.accountId})</a>
+                                    	<span>${myLectureListOne.teacher.teacherName }(${myLectureListOne.lecture.accountId})</span>
                                     	<span class="text-center mt-4 mb-0"> ${myLectureListOne.lecture.lectureCreatedate}</span>
                                     </li>
                                 </ol>
@@ -69,7 +69,7 @@
 	                        </span>
 	                        &emsp;
 	                        <span>
-	                        	<a href="${path }/student/testList/${myLectureListOne.lecture.lectureNo }">
+	                        	<a href="${path }/student/testList/${myLectureListOne.lecture.lectureNo }/${currentPage}">
 	                        	시험</a>
 	                        </span>
                         </c:if>

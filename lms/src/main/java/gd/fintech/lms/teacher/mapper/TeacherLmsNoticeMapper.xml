@@ -10,6 +10,7 @@
 			lms_notice_content lmsNoticeContent,
 			lms_notice_count lmsNoticeCount
 		FROM lms_notice
+		ORDER BY lms_notice_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	

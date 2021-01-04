@@ -35,6 +35,6 @@
 			</c:if>
 		</tbody>
 	</table>
-	<a href="${path }/student/myLectureListOne/${studentId }/${test.lectureNo }">뒤로가기</a>
+	<a href="${path }/student/myLectureListOne/${studentId }/${lectureNo }/${currentPage}">뒤로가기</a>
 </body>
 </html>

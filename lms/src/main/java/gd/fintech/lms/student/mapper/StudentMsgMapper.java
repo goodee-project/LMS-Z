@@ -16,5 +16,5 @@ public interface StudentMsgMapper {
 	//메세지 읽음 표시
 	public int updateStudentReadMsg(Msg msg);
 	//메세지 읽음 체크
-	public List<String> selectMsgReadCheck(Map<String,Object> map);
+	public List<Msg> selectMsgReadCheck(Map<String,Object> map);
 }

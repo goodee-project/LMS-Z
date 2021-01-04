@@ -90,6 +90,9 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                	<a href="${path }/student/lmsNoticeList/${currentPage}">이전</a>
+                </div>
             </div>
         </div>
     </div>

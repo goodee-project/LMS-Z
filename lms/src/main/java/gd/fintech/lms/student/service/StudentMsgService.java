@@ -32,7 +32,7 @@ public class StudentMsgService {
 		return studentMsgMapper.updateStudentReadMsg(msg);
 	}
 	// 메세지 읽음 표시
-	public List<String> getMsgReadCheck(String teacherId, String studentId) {
+	public List<Msg> getMsgReadCheck(String teacherId, String studentId) {
 		Map<String,Object> map = new HashMap<>();
 		map.put("teacherId", teacherId);
 		map.put("studentId", studentId);

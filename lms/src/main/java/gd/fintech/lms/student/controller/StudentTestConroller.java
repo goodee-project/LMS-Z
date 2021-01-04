@@ -23,11 +23,14 @@ public class StudentTestConroller {
 	
 	// 시험목록 출력
 	// 각 강의당 시험이 하나이므로 페이징은 추가안함
-	@GetMapping("/student/testList/{lectureNo}")
+	@GetMapping("/student/testList/{lectureNo}/{currentPage}")
 	public String testList(Model model,
-							@PathVariable(name="lectureNo") int lectureNo) {
+							@PathVariable(name="lectureNo") int lectureNo,
+							@PathVariable(name="currentPage") int currentPage) {
 		Test test = teacherTestService.getTestList(lectureNo);
 		model.addAttribute("test", test);
+		model.addAttribute("lectureNo",lectureNo);
+		model.addAttribute("currentPage",currentPage);
 		
 		return "student/testList";
 	}
@@ -54,8 +57,16 @@ public class StudentTestConroller {
 			allTestAnswerCk=false;
 		}
 		
-		// 시험 문제 제출 유무 체크 => true 시험제출 , false 시험 미제출
+		// 시험 문제 제출 유무 체크 => 키를 가지고 있지 않은 컬럼을 변경시켜
+		// 제출한 문제가 있을 경우 setMultiplechoiceId을 0으로 변경하여 if 조건문에 사용할 수 있도록 만들었음
 		List<AnswerSheet> testAnswer = studentTestService.getTestAnswer(studentId);
+		for(Multiplechoice m : multiplechoice) {
+			for(AnswerSheet a : testAnswer) {
+				if(m.getMultiplechoiceNo() == a.getMultiplechoiceNo()) {
+					m.setMultiplechoiceId(0);
+				}
+			}
+		}
 		
 		//System.out.println(testScore);
 		model.addAttribute("multiplechoice", multiplechoice);

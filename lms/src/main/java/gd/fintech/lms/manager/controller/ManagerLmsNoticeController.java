@@ -18,7 +18,7 @@ public class ManagerLmsNoticeController {
 	@Autowired ManagerLmsNoticeService managerLmsNoticeService;
 	
 	//공지사항 조회 시 조회수 +1
-	@GetMapping("/noticeCountup/{lmsNoticeNo}/{currentPage}")
+	@GetMapping("/manager/noticeCountup/{lmsNoticeNo}/{currentPage}")
 	public String noticeCountUp(@PathVariable(name="lmsNoticeNo") int lmsNoticeNo,
 								@PathVariable(name="currentPage") int currentPage) {
 		managerLmsNoticeService.modifyLmsNoticeCount(lmsNoticeNo);
@@ -31,7 +31,7 @@ public class ManagerLmsNoticeController {
 	
 	//공지사항 리스트 
 	@GetMapping ("/manager/lmsNoticeList/{currentPage}")
-	public String LmsNotice(Model model,
+	public String lmsNoticeList(Model model,
 							@PathVariable(value = "currentPage") int currentPage) {
 		
 		//한 페이지 출력 공지사항 개수 
@@ -65,7 +65,7 @@ public class ManagerLmsNoticeController {
 	
 	//공지사항 검색 리스트
 	@GetMapping ("/manager/lmsNoticeList/{lmsNoticeTitle}/{currentPage}")
-	public String LmsNotice(Model model,
+	public String searchLmsNoticeList(Model model,
 							@PathVariable(name="lmsNoticeTitle") String lmsNoticeTitle,
 							@PathVariable(name = "currentPage") int currentPage) {
 		

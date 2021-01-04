@@ -18,6 +18,7 @@ import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.Msg;
 
 @Controller
 public class StudentLectureController {
@@ -79,7 +80,6 @@ public class StudentLectureController {
 			classPersonalCheck = true;
 		}
 		
-		
 		model.addAttribute("classRegistrationCk",classRegistrationCk);
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
@@ -136,15 +136,17 @@ public class StudentLectureController {
 		ClassRegistrationForm myLectureListOne = studentLectureService.getMyLectureListOne(studentId, lectureNo);
 		
 		// 읽을 메세지가 있는지 없는지 체크하기 위해
-		boolean isConfirm = false;
-		List<String> isConfirmList = studentMsgService.getMsgReadCheck(myLectureListOne.getLecture().getAccountId(), studentId);
-		for(String s : isConfirmList) {
-			System.out.println("------------------"+s);
-			if(s.equals("true")) {
-				isConfirm = true;
+		// 리스트 형식으로 가져왔기 때문에 forEach로 jsp에서 불러오면 ㅁ표시가 여러개 출력
+		// controller에서 않읽은 메세지가 있는지 없는지 판별 후 jsp에 뿌려주도록 함 
+		boolean isConfirm = true;
+		List<Msg> isConfirmList = studentMsgService.getMsgReadCheck(myLectureListOne.getLecture().getAccountId(), studentId);
+		
+		for(Msg s : isConfirmList) {
+			if(s.getIsConfirm()==false) {
+				isConfirm = false;
 			}
 		}
-		
+		System.out.println("-------------"+isConfirm);
 		model.addAttribute("myLectureListOne",myLectureListOne);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("isConfirm",isConfirm);

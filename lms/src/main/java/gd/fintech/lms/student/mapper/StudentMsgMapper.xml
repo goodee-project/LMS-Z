@@ -16,7 +16,7 @@
 		AND to_id IN (#{studentId},#{teacherId})
 	</select>
 	<!-- 메세지 읽음표시 -->
-	<select id="selectMsgReadCheck" parameterType="java.util.Map" resultType="java.lang.String">
+	<select id="selectMsgReadCheck" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Msg">
 		SELECT
 			is_confirm isConfirm
 		FROM msg

@@ -23,10 +23,17 @@
 		</thead>
 		<tbody>
 			<c:if test="${multiplechoice != null}">
-				<c:forEach var="m" items="${multiplechoice}">
+				<c:forEach var="m" items="${multiplechoice}" varStatus="status">
 						<tr>
 							<td>${m.multiplechoiceNo}</td>
-							<td><a href="${path}/student/testQuestionOne/${m.multiplechoiceNo}/${lectureNo }/1">평가 ${m.multiplechoiceId}번</a></td>
+							<td>
+								<c:if test="${m.multiplechoiceId == 0 }">
+									제출완료
+								</c:if>
+								<c:if test="${m.multiplechoiceId != 0 }">
+									<a href="${path}/student/testQuestionOne/${m.multiplechoiceNo}/${lectureNo }/1">평가 ${m.multiplechoiceId}번</a>
+								</c:if>
+							</td>
 							<td>${m.multiplechoiceScore}</td>
 							<td>${m.multiplechoiceCreatedate}</td>
 							<td>${m.multiplechoiceUpdatedate}</td>
@@ -42,9 +49,10 @@
 	</table>
 	<br>
 	<div>
+		<!-- 문제 전부 제출했다면 채점점수 -->
 		<c:if test="${allTestAnswerCk == true }">
-		채점 점수 :
-		<span>${testScore }</span>
+			채점 점수 :
+			<span>${testScore }</span>
 		</c:if>
 	</div>
 	<br>
