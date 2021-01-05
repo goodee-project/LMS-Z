@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- 위의 사이트 아이콘 -->
     <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
-    <title>classroom</title>
+    <title>textbookOne</title>
     <!-- css -->
     <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Classroom</a></h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Textbook</a></h3>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                               <h4 class="card-title">강의실 목록</h4>
+                               <h4 class="card-title">교재 상세보기</h4>
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
@@ -82,8 +82,8 @@
 										</tr>
 									</table>
 									<a class="btn btn-success" style="border-radius: 4px;" href="${path }/manager/textbookList/1">돌아가기</a>
-									<button class="btn btn-outline-danger" style="border-radius: 4px; float:right;" id="deleteIsbn" type="button" >삭제</button>
-									<button class="btn btn-info" style="border-radius: 4px; float:right;" type="submit"  onclick="location.href='${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}'">수정</button>	
+									<button class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left: 8px;" id="deleteIsbn" type="button" >삭제</button>
+									<button class="btn btn-outline-info" style="border-radius: 4px; float:right;" type="submit"  onclick="location.href='${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}'">수정</button>	
 								</div>
 							</div>
 						</div>
@@ -92,42 +92,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<h1>교재 상세보기</h1>
-	<table border="1">
-		<tr>
-			<td>textbook_isbn :</td>
-			<td><span id="textbookIsbn">${textbookOne.textbookIsbn }</span></td>
-		</tr>
-		<tr>
-			<td>textbook_title :</td>
-			<td>${textbookOne.textbookTitle }</td>
-		</tr>
-		<tr>
-			<td>textbook_writer :</td>
-			<td>${textbookOne.textbookWriter }</td>
-		</tr>
-		<tr>
-			<td>textbook_publisher :</td>
-			<td>${textbookOne.textbookPublisher }</td>
-		</tr>
-		<tr>
-			<td>textbook_info :</td>
-			<td>${textbookOne.textbookInfo }</td>
-		</tr>
-		<tr>
-			<td>textbook_price :</td>
-			<td>${textbookOne.textbookPrice }</td>
-		</tr>
-		<tr>
-			<td>textbook_publishdate :</td>
-			<td>${textbookOne.textbookPublishdate }</td>
-		</tr>
-	</table>
-	<a href="${path }/manager/textbookList/1">돌아가기</a>
-	<button type="submit"  onclick="location.href='${path}/manager/modifyTextbookOne/${textbookOne.textbookIsbn}'">수정</button>
-	<button id="deleteIsbn" type="button" >삭제</button>
-	
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>

@@ -54,15 +54,15 @@
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
 											<tr>
-												<th>student_id</th>
-												<th>student_email</th>
-												<th>student_name</th>
-												<th>student_phone</th>
-												<th>student_gender</th>
-												<th>student_birth</th>
-												<th>student_address_main</th>
-												<th>student_address_sub</th>
-												<th>account_level</th>
+												<th>아이디</th>
+												<th>이메일</th>
+												<th>이름</th>
+												<th>전화번호</th>
+												<th>성별</th>
+												<th>생일</th>
+												<th>메인주소</th>
+												<th>상세주소</th>
+												<th>직책</th>
 												<th>승인</th>
 												<th>거절</th>
 											</tr>

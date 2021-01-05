@@ -54,17 +54,17 @@
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
 		                            		<tr>
-												<th>no</th>
-												<th>account_id</th>
-												<th>sub_name</th>
-												<th>teacher_name</th>
-												<th>lecture_name</th>
-												<th>textbook_title</th>
-												<th>startdate</th>
-												<th>enddate</th>
-												<th>total</th>
-												<th>syllabus</th>
-												<th>classroom</th>
+												<th>번호</th>
+												<th>아이디</th>
+												<th>과목</th>
+												<th>강사이름</th>
+												<th>강좌명</th>
+												<th>교재</th>
+												<th>시작일</th>
+												<th>종료일</th>
+												<th>일수</th>
+												<th>강의계획서</th>
+												<th>강의실</th>
 												<th>삭제</th>
 											</tr>
 										</thead>

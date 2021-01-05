@@ -53,7 +53,6 @@
 	                            <div>
 	                            	<form method="post" action="${path }/manager/insertAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
-		                            		<thead>
 		                            		<tr hidden="hidden">
 												<td><input type="text" name="accountId" id="accountId"></td>
 											<tr>

@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- 위의 사이트 아이콘 -->
     <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
-    <title>classroom</title>
+    <title>textbook</title>
     <!-- css -->
     <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Classroom</a></h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Textbook</a></h3>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                               <h4 class="card-title">강의실 목록</h4>
+                               <h4 class="card-title">교재 목록</h4>
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
