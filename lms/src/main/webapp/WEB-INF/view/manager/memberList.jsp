@@ -102,11 +102,11 @@
 										</tbody>
 									</table>
 									<br>
-								   	<div>
+								   	<div id="paging" style="text-align: center; padding: 7px;">
 								   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 								   		<c:if test="${startPage!=1 && lastPage!=1}">
 								    		<span>
-								    			<a href="${path}/manager/memberList/${startPage-10}/${searchLevel}">이전&nbsp;&nbsp;</a>
+								    			<a href="${path}/manager/memberList/${startPage-10}/${searchLevel}">이전</a>
 								    		</span>
 								   		</c:if>
 								   		<!-- lastPage가 10개를 채울수 없을 때 -->
@@ -115,13 +115,13 @@
 								     		<!-- 현재 페이지일 경우 -->
 								     		<c:if test="${currentPage == i }">
 									      		<span>
-									      			<a>${i}&nbsp;&nbsp;</a>
+									      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 									      		</span>
 								     		</c:if>
 								     		<!-- 현재 페이지가 아닐 경우 -->
 								     		<c:if test="${currentPage != i }">
 									      		<span>
-									      			<a href="${path}/manager/memberList/${i}/${searchLevel}">${i}&nbsp;&nbsp;</a>
+									      			<a class="font-18" href="${path}/manager/memberList/${i}/${searchLevel}">${i}</a>
 									      		</span>
 								     		</c:if>
 								     	</c:forEach>
@@ -131,13 +131,13 @@
 									     		<!-- 현재 페이지일 경우 -->
 									     		<c:if test="${currentPage == i }">
 										      		<span>
-										      			<a>${i}&nbsp;&nbsp;</a>
+										      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 										      		</span>
 									     		</c:if>
 									     		<!-- 현재 페이지가 아닐 경우 -->
 									     		<c:if test="${currentPage != i }">
 										      		<span>
-										      			<a href="${path}/manager/memberList/${i}/${searchLevel}">${i}&nbsp;&nbsp;</a>
+										      			<a class="font-18" href="${path}/manager/memberList/${i}/${searchLevel}">${i}</a>
 										      		</span>
 									     		</c:if>
 								     		</c:forEach>
@@ -145,7 +145,7 @@
 								    	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
 								    	<c:if test="${startPage+9<lastPage && lastPage != startPage}">
 									     	<span>
-									     		<a href="${path}/manager/memberList/${startPage+10}/${searchLevel}">다음&nbsp;&nbsp;</a>
+									     		<a href="${path}/manager/memberList/${startPage+10}/${searchLevel}">다음</a>
 									     	</span>
 								    	</c:if>
 								   	</div>

@@ -82,7 +82,7 @@
 	                            	</table>
 	                            	<a class="btn btn-success" style="border-radius: 3px; float: right;" href="${path }/manager/insertClassroom">강의실 추가</a>
 	                            	<br>
-								   	<div>
+								   	<div id="paging" style="text-align: center; padding: 7px;">
 								   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 								   		<c:if test="${startPage!=1 && lastPage!=1}">
 								    		<span>
@@ -95,13 +95,13 @@
 								     		<!-- 현재 페이지일 경우 -->
 								     		<c:if test="${currentPage == i }">
 									      		<span>
-									      			<a>${i}&nbsp;&nbsp;</a>
+									      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 									      		</span>
 								     		</c:if>
 								     		<!-- 현재 페이지가 아닐 경우 -->
 								     		<c:if test="${currentPage != i }">
 									      		<span>
-									      			<a href="${path}/manager/classroomList/${i}">${i}&nbsp;&nbsp;</a>
+									      			<a class="font-18" href="${path}/manager/classroomList/${i}">${i}</a>
 									      		</span>
 								     		</c:if>
 								     	</c:forEach>
@@ -111,13 +111,13 @@
 									     		<!-- 현재 페이지일 경우 -->
 									     		<c:if test="${currentPage == i }">
 										      		<span>
-										      			<a>${i}&nbsp;&nbsp;</a>
+										      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 										      		</span>
 									     		</c:if>
 									     		<!-- 현재 페이지가 아닐 경우 -->
 									     		<c:if test="${currentPage != i }">
 										      		<span>
-										      			<a href="${path}/manager/classroomList/${i}">${i}&nbsp;&nbsp;</a>
+										      			<a class="font-18" href="${path}/manager/classroomList/${i}">${i}</a>
 										      		</span>
 									     		</c:if>
 								     		</c:forEach>
@@ -125,7 +125,7 @@
 								    	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
 								    	<c:if test="${startPage+9<lastPage && lastPage != startPage}">
 									     	<span>
-									     		<a href="${path}/manager/classroomList/${startPage+10}">다음&nbsp;&nbsp;</a>
+									     		<a href="${path}/manager/classroomList/${startPage+10}">다음</a>
 									     	</span>
 								    	</c:if>
 								   	</div>

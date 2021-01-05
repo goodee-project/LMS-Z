@@ -86,11 +86,11 @@
 										</tbody>
 	                            	</table>
 	                            	<br>
-							       	<div>
+							       	<div id="paging" style="text-align: center; padding: 7px;">
 							       		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 							       		<c:if test="${startPageS!=1 && lastPageS!=1}">
 							        		<span>
-							        			<a href="${path}/manager/memberQueue/${startPageS-10}/${currentPageT}">이전&nbsp;&nbsp;</a>
+							        			<a href="${path}/manager/memberQueue/${startPageS-10}/${currentPageT}">이전</a>
 							        		</span>
 							       		</c:if>
 							       		<!-- lastPage가 10개를 채울수 없을 때 -->
@@ -99,13 +99,13 @@
 							         		<!-- 현재 페이지일 경우 -->
 							         		<c:if test="${currentPageS == i }">
 								          		<span>
-								          			<a>${i}&nbsp;&nbsp;</a>
+								          			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 								          		</span>
 							         		</c:if>
 							         		<!-- 현재 페이지가 아닐 경우 -->
 							         		<c:if test="${currentPageS != i }">
 								          		<span>
-								          			<a href="${path}/manager/memberQueue/${i}/${currentPageT}">${i}&nbsp;&nbsp;</a>
+								          			<a class="font-18" href="${path}/manager/memberQueue/${i}/${currentPageT}">${i}</a>
 								          		</span>
 							         		</c:if>
 							         	</c:forEach>
@@ -115,13 +115,13 @@
 							         		<!-- 현재 페이지일 경우 -->
 							         		<c:if test="${currentPageS == i }">
 								          		<span>
-								          			<a>${i}&nbsp;&nbsp;</a>
+								          			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 								          		</span>
 							         		</c:if>
 							         		<!-- 현재 페이지가 아닐 경우 -->
 							         		<c:if test="${currentPageS != i }">
 								          		<span>
-								          			<a href="${path}/manager/memberQueue/${i}/${currentPageT}">${i}&nbsp;&nbsp;</a>
+								          			<a class="font-18" href="${path}/manager/memberQueue/${i}/${currentPageT}">${i}</a>
 								          		</span>
 							         		</c:if>
 							         	</c:forEach>
@@ -129,7 +129,7 @@
 							        	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
 							        	<c:if test="${startPageS+9<lastPageS && lastPageS != startPageS}">
 								         	<span>
-								         		<a href="${path}/manager/memberQueue/${startPageS+10}/${currentPageT}">다음&nbsp;&nbsp;</a>
+								         		<a href="${path}/manager/memberQueue/${startPageS+10}/${currentPageT}">다음</a>
 								         	</span>
 							        	</c:if>
 							       	</div>
@@ -181,11 +181,11 @@
 										</table>
 										<!-- 페이징 -->
 									    <br>
-								       	<div>
+								       	<div id="paging" style="text-align: center; padding: 7px;">
 								       		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 								       		<c:if test="${startPageT!=1 && lastPageT!=1}">
 								        		<span>
-								        			<a href="${path}/manager/memberQueue/${currentPageS}/${startPageT-10}">이전&nbsp;&nbsp;</a>
+								        			<a href="${path}/manager/memberQueue/${currentPageS}/${startPageT-10}">이전</a>
 								        		</span>
 								       		</c:if>
 								       		<!-- lastPage가 10개를 채울수 없을 때 -->
@@ -194,13 +194,13 @@
 								         		<!-- 현재 페이지일 경우 -->
 								         		<c:if test="${currentPageT == i }">
 									          		<span>
-									          			<a>${i}&nbsp;&nbsp;</a>
+									          			<a id="pagingStyle" class="bg-secondary font-18" >${i}</a>
 									          		</span>
 								         		</c:if>
 								         		<!-- 현재 페이지가 아닐 경우 -->
 								         		<c:if test="${currentPageT != i }">
 									          		<span>
-									          			<a href="${path}/manager/memberQueue/${currentPageS}/${i}">${i}&nbsp;&nbsp;</a>
+									          			<a class="font-18" href="${path}/manager/memberQueue/${currentPageS}/${i}">${i}</a>
 									          		</span>
 								         		</c:if>
 								         	</c:forEach>
@@ -210,13 +210,13 @@
 								         		<!-- 현재 페이지일 경우 -->
 								         		<c:if test="${currentPageT == i }">
 									          		<span>
-									          			<a>${i}&nbsp;&nbsp;</a>
+									          			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
 									          		</span>
 								         		</c:if>
 								         		<!-- 현재 페이지가 아닐 경우 -->
 								         		<c:if test="${currentPageT != i }">
 									          		<span>
-									          			<a href="${path}/manager/memberQueue/${currentPageS}/${i}">${i}&nbsp;&nbsp;</a>
+									          			<a class="font-18" href="${path}/manager/memberQueue/${currentPageS}/${i}">${i}</a>
 									          		</span>
 								         		</c:if>
 								         	</c:forEach>
@@ -224,7 +224,7 @@
 								        	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
 								        	<c:if test="${startPageT+9<lastPageT && lastPageT != startPageT}">
 									         	<span>
-									         		<a href="${path}/manager/memberQueue/${currentPageS}/${startPageT+10}">다음&nbsp;&nbsp;</a>
+									         		<a href="${path}/manager/memberQueue/${currentPageS}/${startPageT+10}">다음</a>
 									         	</span>
 								        	</c:if>
 								       	</div>
