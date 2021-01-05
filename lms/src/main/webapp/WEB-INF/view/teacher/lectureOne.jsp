@@ -13,6 +13,7 @@
 	
 	<a href="${path}/teacher/lectureNoticeList/${lectureNo}/1">강의 공지사항</a>
 	<a href="${path}/teacher/lectureSyllabus/${lectureNo}">강의계획서</a>
+	<a href="${path}/teacher/questionList/${lectureNo}/1">질문게시판</a>
 	<a href="${path}/teacher/attendanceMonth/${lectureNo}/-1/-1">출석부</a>
 	<a href="${path}/teacher/testList/${lectureNo}">시험목록</a>
 	<a href="${path}/teacher/studentList/${teacherId}/${lectureNo}">메세지</a>
