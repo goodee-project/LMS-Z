@@ -71,12 +71,24 @@ public class TeacherAttendanceController {
 		targetDay.set(Calendar.YEAR, currentYear);
 		targetDay.set(Calendar.MONTH, currentMonth - 1);
 		targetDay.set(Calendar.DATE, currentDay);
+		
+		String attendanceDay = Integer.toString(targetDay.get(Calendar.YEAR));
+		attendanceDay += "-";
+		if(targetDay.get(Calendar.MONTH) + 1 < 10) {
+			attendanceDay += "0";
+			attendanceDay += Integer.toString(targetDay.get(Calendar.MONTH) + 1);
+		} else {
+			attendanceDay += Integer.toString(targetDay.get(Calendar.MONTH) + 1);
+		}
+		attendanceDay += "-";
+		if(targetDay.get(Calendar.DATE) < 10) {
+			attendanceDay += "0";
+			attendanceDay += Integer.toString(targetDay.get(Calendar.DATE));
+		} else {
+			attendanceDay += Integer.toString(targetDay.get(Calendar.DATE));
+		}
 
-
-		List<Attendance> attendanceList = teacherAttendanceService.getAttendanceList(lectureNo,
-																						targetDay.get(Calendar.YEAR), 
-																						targetDay.get(Calendar.MONTH) + 1, 
-																						targetDay.get(Calendar.DATE));
+		List<Attendance> attendanceList = teacherAttendanceService.getAttendanceList(lectureNo, attendanceDay);
 		
 
 		model.addAttribute("attendanceList", attendanceList);
@@ -87,7 +99,7 @@ public class TeacherAttendanceController {
 		return "teacher/attendanceList";
 	}
 	
-	//출석부 학생 출석상태 수정 폼
+	/*//출석부 학생 출석상태 수정 폼
 	@GetMapping("/teacher/modifyAttendanceStateOne/{studentId}/{lectureNo}/{attendanceDay}/{currentYear}/{currentMonth}/{currentDay}")
 	public String modifyAttendanceStateOne(Model model, @PathVariable(value = "studentId") String studentId, 
 														@PathVariable(value = "lectureNo") int lectureNo, 
@@ -118,7 +130,7 @@ public class TeacherAttendanceController {
 		teacherAttendanceService.modifyAttendanceState(attendance);
 				
 		return "redirect:/teacher/attendanceList/" + attendance.getLectureNo() + "/" + currentYear + "/" + currentMonth + "/" + currentDay;
-	}
+	}*/
 	
 
 }

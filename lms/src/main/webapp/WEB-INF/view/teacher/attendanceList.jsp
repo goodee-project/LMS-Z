@@ -24,23 +24,19 @@
 		<thead>
 			<tr>
 				<th>student_name</th>
-				<th>student_gender</th>
-				<th>student_phone</th>
-				<th>attendance_state</th>
-				<th>attendance_remark</th>
+				<th>student_image</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 
 			<c:forEach var="a" items="${attendanceList}">
 				<tr>
-				<c:forEach var="as" items="${a.studentList}">
-					<td><a href="${path}/teacher/modifyAttendanceStateOne/${as.studentId}/${lectureNo}/${a.attendanceDay}/${currentYear}/${currentMonth}/${currentDay}">${as.studentName}</a></td>
-					<td>${as.studentGender}</td>
-					<td>${as.studentPhone}</td>
-				</c:forEach>
-					<td>${a.attendanceState}</td>
-					<td>${a.attendanceRemark}</td>
+					<c:forEach var="as" items="${a.studentList}">
+						<td><a href="${path}/teacher/modifyAttendanceStateOne/${as.studentId}/${lectureNo}/${a.attendanceDay}/${currentYear}/${currentMonth}/${currentDay}">${as.studentName}</a></td>
+						<td><img src="${path}/images/${as.studentImage}"></td>
+						<td>출석</td>
+					</c:forEach>
 				</tr>
 			</c:forEach>
 		</tbody>

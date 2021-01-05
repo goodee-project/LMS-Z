@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper">
+	<select id="selectAttendanceByDay" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE attendance_day = #{attendanceDay} and class_registration_no = #{classRegistrationNo}
+	</select>
+
+	<!-- 날짜 초기 학생 테이블에 아이디가 있는지를 조사 -->
+	<select id="selectClassRegistrationByNo" parameterType="java.util.Map" resultType="Integer">
+		select cr.class_registration_no
+		from class_registration cr INNER JOIN lecture l
+			ON cr.lecture_no = l.lecture_no
+		WHERE cr.lecture_no = #{lectureNo} AND 
+			  cr.class_registration_state = "수강중" AND 
+			  #{attendanceDay} BETWEEN l.lecture_startdate and l.lecture_enddate
+	</select>	
+
+	<!-- 날짜 초기 학생 attendance테이블에 추가 -->
+	<insert id="insertAttendanceByDay" parameterType="gd.fintech.lms.vo.Attendance">
+		INSERT INTO attendance(
+						attendance_day, 
+						class_registration_no, 
+						attendance_createdate,
+						attendance_updatedate,
+						attendance_state)
+					VALUES(
+						#{attendanceDay},
+						#{classRegistrationNo},
+						NOW(),
+						NOW(),
+						"비출석")
+	</insert>
 
 	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceListResult">
-		<result property="accountId" column="account_id"/>
-		<result property="attendanceState" column="attendance_state"/>
-		<result property="attendanceRemark" column="attendance_remark"/>
-		<result property="attendanceDay" column="attendance_day"/>
-			<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
-				<result property="studentName" column="student_name" />
-				<result property="studentPhone" column="student_phone" />
-				<result property="studentGender" column="student_gender" />
-				<result property="studentId" column="student_id" />
-			</collection>
-			<collection property="classRegistrationList" ofType="gd.fintech.lms.vo.ClassRegistration">
-				<result property="accountId" column="account_id" />
-			</collection>
+		<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentImage" column="student_image" />
+			<result property="studentId" column="student_id" />
+		</collection>
 	</resultMap>
 	<!-- 학생 출석부 일별 -->
 	<select id="selectAttendanceList" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
-		SELECT 
-		         a.attendance_state,
-		         a.attendance_remark,
-		         a.attendance_day,
-		         cr.account_id,
-		         s.student_name,
-		         s.student_gender,
-		         s.student_phone,
-		         s.student_id
-		      FROM class_registration cr LEFT JOIN attendance a
-		      ON cr.account_id = a.account_id
-		      LEFT JOIN lecture l
-		      ON cr.account_id = l.account_id
-		      LEFT JOIN student s
-		      ON cr.account_id = s.student_id
-		      WHERE a.lecture_no = #{lectureNo}
-		      AND cr.class_registration_state IN ('수강중','수료')
-		      AND YEAR(a.attendance_day) = #{currentYear}
-		      AND MONTH(a.attendance_day) = #{currentMonth}
-		      AND DAY(a.attendance_day) = #{currentDay}
+		SELECT s.student_id,s.student_name, s.student_image
+		FROM attendance a RIGHT JOIN class_registration cr
+			ON a.class_registration_no = cr.class_registration_no
+		INNER JOIN student s
+			ON cr.account_id = s.student_id
+		WHERE cr.lecture_no = #{lectureNo} AND a.attendance_day = #{attendanceDay}
 	</select>
+	
 	<!-- 학생 출석부 상세보기 -->
 	<select id="selectAttendanceOne" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
 		SELECT 

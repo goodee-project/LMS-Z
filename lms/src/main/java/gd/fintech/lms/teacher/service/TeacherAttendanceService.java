@@ -18,13 +18,20 @@ public class TeacherAttendanceService {
 	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
 	
 	//학생 출석부 목록출력
-	public List<Attendance> getAttendanceList(int lectureNo, int currentYear, int currentMonth, int currentDay) {
+	public List<Attendance> getAttendanceList(int lectureNo, String attendanceDay) {
+		List<Integer> attendanceCheckList = teacherAttendanceMapper.selectClassRegistrationByNo(attendanceDay, lectureNo);
+		for(int i=0; i<attendanceCheckList.size(); i++) {
+			if(teacherAttendanceMapper.selectAttendanceByDay(attendanceDay, attendanceCheckList.get(i)) == 0) {
+				Attendance attendance = new Attendance();
+				attendance.setAttendanceDay(attendanceDay);
+				attendance.setClassRegistrationNo(attendanceCheckList.get(i));
+				teacherAttendanceMapper.insertAttendanceByDay(attendance);
+			}
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("lectureNo", lectureNo);
-		map.put("currentYear", currentYear);
-		map.put("currentMonth", currentMonth);
-		map.put("currentDay", currentDay);
+		map.put("attendanceDay", attendanceDay);
 		
 		return teacherAttendanceMapper.selectAttendanceList(map);
 	}

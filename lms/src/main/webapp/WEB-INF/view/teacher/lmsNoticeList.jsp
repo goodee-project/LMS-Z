@@ -74,10 +74,10 @@
 									<table id="lmsNoticeTable" class="table table">
 										<thead>
 											<tr>
-												<th>no</th>
-												<th>writer</th>
-												<td>title</td>
-												<th>count</th>
+												<th>번호	</th>
+												<th>작성자</th>
+												<td>제목</td>
+												<th>방문자 수</th>
 											</tr>
 										</thead>
 										<tbody>
