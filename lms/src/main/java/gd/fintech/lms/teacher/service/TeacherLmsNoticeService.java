@@ -17,18 +17,18 @@ public class TeacherLmsNoticeService {
 	@Autowired TeacherLmsNoticeMapper teacherLmsNoticeMapper;
 	
 	//공지사항 목록
-	public List<LmsNotice> getLmsNoticeList(int beginRow, int rowPerPage){
-		
+	public List<LmsNotice> getLmsNoticeList(int beginRow, int rowPerPage, String searchTitle){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
+		map.put("searchTitle", searchTitle);
 		
 		return teacherLmsNoticeMapper.selectLmsNoticeList(map);
 	}
 	
 	//공지사항 리스트 총개수
-	public int getLmsNoticeCount() {
-		return teacherLmsNoticeMapper.selectLmsNoticeCount();
+	public int getLmsNoticeCount(String searchTitle) {
+		return teacherLmsNoticeMapper.selectLmsNoticeCount(searchTitle);
 	}
 	
 	//공지사항 상세보기

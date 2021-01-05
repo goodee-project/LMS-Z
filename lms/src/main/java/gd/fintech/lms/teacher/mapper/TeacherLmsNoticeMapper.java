@@ -13,7 +13,7 @@ public interface TeacherLmsNoticeMapper {
 	List<LmsNotice> selectLmsNoticeList(Map<String, Object> map);
 	
 	//공지사항 리스트 총개수
-	int selectLmsNoticeCount();
+	int selectLmsNoticeCount(String searchTitle);
 	
 	//공지사항 상세보기
 	LmsNotice selectLmsNoticeOne(int lmsNoticeNo);

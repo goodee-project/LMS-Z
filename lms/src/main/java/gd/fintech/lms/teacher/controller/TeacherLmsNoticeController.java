@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherLmsNoticeService;
 import gd.fintech.lms.vo.LmsNotice;
@@ -19,14 +20,14 @@ public class TeacherLmsNoticeController {
 	//공지사항 목록
 	@GetMapping("/teacher/lmsNoticeList/{currentPage}")
 	public String lmsNoticeList(Model model,
-										@PathVariable(value = "currentPage") int currentPage) {
+										@PathVariable(value = "currentPage") int currentPage,
+										@RequestParam(value="searchTitle", required = false) String searchTitle) {
 		
 		//페이징에 필요한 변수선언
 		int rowPerPage = 5;
-		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
 		int startPage = ((currentPage/11)*rowPerPage)+1;
-		int totalCount = teacherLmsNoticeService.getLmsNoticeCount();
+		int totalCount = teacherLmsNoticeService.getLmsNoticeCount(searchTitle);
 		
 		//마지막 페이지
 		if(totalCount % rowPerPage == 0) {
@@ -35,7 +36,8 @@ public class TeacherLmsNoticeController {
 			lastPage = totalCount / rowPerPage + 1;
 		}
 		
-		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList(beginRow, rowPerPage);
+		
+		List<LmsNotice> lmsNoticeList = teacherLmsNoticeService.getLmsNoticeList((currentPage - 1) * rowPerPage, rowPerPage, searchTitle);
 		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("startPage", startPage);

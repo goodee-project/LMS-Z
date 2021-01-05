@@ -266,3 +266,44 @@ body {
     	width:25%;
     	vertical-align: middle;
 }
+
+#lmsNoticeTable{
+    	table-layout:fixed;
+    	word-break:break-all;
+}
+
+#lmsNoticeTable th{
+    	vertical-align: middle;
+    	text-align:center;
+    	width:15%;
+}
+
+#lmsNoticeTable td{
+    	vertical-align: middle;
+    	text-align:center;
+    	width:55%;
+}
+
+#paging a{
+    margin-right:5px;
+    Color: #747474;
+}
+
+#paging a:hover{
+	Color: #D5D5D5;
+}
+
+#paging #pagingStyle{
+    border-radius: 5px;
+	padding:1px 7px 1px 7px;
+	Color: #FFFFFF;
+}
+
+#searchStyle{
+	text-align:right;
+}
+
+#searchStyle input{
+	float: left;
+	width: 80%;
+}

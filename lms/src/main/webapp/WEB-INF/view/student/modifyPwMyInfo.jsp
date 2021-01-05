@@ -109,8 +109,8 @@
 										</tr>
 	                            	</table>
 	                            	<div id="btnStyle">
-		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnReset">새로 입력</button>
-		                            	<button type="button" class="btn btn-outline-secondary text-dark" id="btnResult">확인</button>
+		                            	<button type="button" class="btn btn-outline-secondary" id="btnReset">새로 입력</button>
+		                            	<button type="button" class="btn btn btn-success" id="btnResult">확인</button>
 	                            	</div>
                             	</form>
                             </div>
