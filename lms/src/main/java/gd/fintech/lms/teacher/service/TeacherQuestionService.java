@@ -17,10 +17,10 @@ public class TeacherQuestionService {
 	@Autowired TeacherQuestionMapper teacherQuestionMapper;
 	
 	//질문게시판 목록 출력
-	public List<Question> getQuestionList(String teacherId, int beginRow, int rowPerPage){
+	public List<Question> getQuestionList(int lectureNo, int beginRow, int rowPerPage){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("accountId", teacherId);
+		map.put("lectureNo", lectureNo);
 		map.put("beginRow", beginRow);
 		map.put("rowPerPage", rowPerPage);
 		
@@ -28,8 +28,8 @@ public class TeacherQuestionService {
 	}
 	
 	//질문게시판 총개수
-	public int getQuestionCount(String accountId) {
-		return teacherQuestionMapper.selectQuestionCount(accountId);
+	public int getQuestionCount(int lectureNo) {
+		return teacherQuestionMapper.selectQuestionCount(lectureNo);
 	}
 	
 	//질문게시판 상세보기

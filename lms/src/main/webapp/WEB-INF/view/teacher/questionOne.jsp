@@ -32,9 +32,9 @@
 			<c:forEach var="qf" items="${question.questionfile}">
 				<tr>
 					<th>question_file</th>
-					<td><a href="${path}/uploadfile/questionfile/questionfile${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
+					<td><a href="${path}/teacher/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
 				</tr>
-			</c:forEach>	
+			</c:forEach>
 		</table>
 		
 		
@@ -51,8 +51,10 @@
 					<th>수정</th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<c:forEach var="qc" items="${question.questionCommentList}">
+				<c:if test="${qc.questionCommentNo != 0}">
 					<tr>
 						<td>${qc.questionCommentNo}</td>
 						<td>${qc.questionCommentWriter}</td>
@@ -62,6 +64,7 @@
 						<td><a href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>
 						<td><a href="${path}/teacher/modifyQuestionComment/${teacherId}/${qc.questionCommentNo}/${currentPage}">수정</a></td>
 					</tr>
+				</c:if>
 				</c:forEach>
 				<!-- 숫자로 페이징 -->
 				<c:forEach var="i" begin="1" end="${lastPage}">
@@ -71,6 +74,11 @@
                 </c:forEach>
 			</tbody>
 		</table>
+		<c:forEach var="qc" items="${question.questionCommentList}">
+			<c:if test="${qc.questionCommentNo == 0}">
+					댓글이 없습니다.
+			</c:if>
+		</c:forEach>
 		<!-- 댓글 추가 -->
 		<form method="post" action="${path}/teacher/addQuestionComment/${teacherId}">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">

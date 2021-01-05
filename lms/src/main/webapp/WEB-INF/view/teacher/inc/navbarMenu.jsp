@@ -23,7 +23,7 @@
                                 </span></a>
                         </li>
 						<!-- 질문게시판 목록 -->
-                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/teacher/questionList/${teacherId}/1"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/teacher/questionList/${lectureNo}/1"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">질문게시판
                                 </span></a>
