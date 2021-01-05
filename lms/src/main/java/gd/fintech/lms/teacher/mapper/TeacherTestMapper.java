@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentAnswerSheet;
 import gd.fintech.lms.vo.Test;
 
@@ -50,4 +51,10 @@ public interface TeacherTestMapper {
 	
 	// 수강중인 학생 목록 조회
 	List<StudentAnswerSheet> selectStudentByLecture(int lectureNo);
+	
+	// 학생의 답안지 조회
+	List<StudentAnswerSheet> selectAnswerSheetByStudent(Map<String, Object> map);
+	
+	// 해당 학생의 이름
+	Student selectStudentName(String studentId);
 }

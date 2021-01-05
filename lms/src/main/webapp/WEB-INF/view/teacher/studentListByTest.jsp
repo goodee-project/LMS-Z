@@ -27,15 +27,18 @@
 					<td>${s.submissionStatus}</td>
 					<td>
 						<c:if test="${s.submissionStatus == '제출'}">
-							<a href="">조회(버튼으로 수정)</a>
+							<a href="${path}/teacher/answerSheet/${lectureNo}/${s.studentId}">조회</a>
 						</c:if>
 						<c:if test="${s.submissionStatus == '미제출'}">
-							<a href="">조회불가(버튼으로 수정)</a>
+							<a href="">조회불가</a>
 						</c:if>
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		<a href="${path}/teacher/testOne/${lectureNo}">뒤로</a>
+	</div>
 </body>
 </html>

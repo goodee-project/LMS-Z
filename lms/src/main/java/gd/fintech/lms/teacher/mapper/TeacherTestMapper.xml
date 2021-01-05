@@ -186,6 +186,7 @@
 	<!-- 수강중인 학생 목록 조회(답안지 제출 여부 확인) -->
 	<select id="selectStudentByLecture" parameterType="int" resultType="gd.fintech.lms.vo.StudentAnswerSheet">
 		SELECT
+			s.student_id studentId,
 			s.student_name studentName,
 			s.student_gender studentGender,
 			(SELECT if((SELECT
@@ -200,5 +201,32 @@
 		ON s.student_id = c.account_id
 		WHERE c.lecture_no = #{lectureNo}
 		AND c.class_registration_state = '수강중';
+	</select>
+	
+	<!-- 각 학생의 답안지 조회 -->
+	<select id="selectAnswerSheetByStudent" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.StudentAnswerSheet">
+		SELECT
+			s.student_name studentName,
+			m.multiplechoice_id multiplechoiceId,
+			m.multiplechoice_question multiplechoiceQuestion,
+			m.multiplechoice_answer multiplechoiceAnswer,
+			an.answer_select answerSelect,
+			an.score score
+		FROM answer_sheet an INNER JOIN multiplechoice m
+		ON an.multiplechoice_no = m.multiplechoice_no
+		INNER JOIN lecture l
+		ON m.lecture_no = l.lecture_no
+		INNER JOIN student s
+		ON an.account_id = s.student_id
+		WHERE an.account_id = #{studentId}
+		AND l.lecture_no = #{lectureNo}
+	</select>
+	
+	<!-- 학생 이름 출력 -->
+	<select id="selectStudentName" parameterType="String" resultType="gd.fintech.lms.vo.Student">
+		SELECT
+			student_name studentName
+		FROM student
+		WHERE student_id = #{studentId}
 	</select>
 </mapper>

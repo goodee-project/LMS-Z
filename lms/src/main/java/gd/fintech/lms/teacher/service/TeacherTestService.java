@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Multiplechoice;
 import gd.fintech.lms.vo.MultiplechoiceExample;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentAnswerSheet;
 import gd.fintech.lms.vo.Test;
 
@@ -134,5 +135,18 @@ public class TeacherTestService {
 	// 수강중인 학생 목록 조회
 	public List<StudentAnswerSheet> getStudentByLecture(int lectureNo) {
 		return teacherTestMapper.selectStudentByLecture(lectureNo);
+	}
+	
+	// 해당 강의를 수강하는 학생의 답안지 조회
+	public List<StudentAnswerSheet> getAnswerSheetByStudent(int lectureNo, String studentId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("studentId", studentId);
+		return teacherTestMapper.selectAnswerSheetByStudent(map);
+	}
+	
+	// 학생 이름 출력
+	public Student getStudentName(String studentId) {
+		return teacherTestMapper.selectStudentName(studentId);
 	}
 }

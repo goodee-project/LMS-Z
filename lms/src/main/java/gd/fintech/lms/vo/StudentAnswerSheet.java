@@ -8,5 +8,9 @@ public class StudentAnswerSheet {
 	private String studentName;
 	private String studentGender;
 	private String submissionStatus;
-	
+	private int multiplechoiceId;
+	private String multiplechoiceQuestion;
+	private int multiplechoiceAnswer;
+	private int answerSelect;
+	private int score;
 }

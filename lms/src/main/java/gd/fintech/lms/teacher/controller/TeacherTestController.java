@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherTestService;
 import gd.fintech.lms.vo.Multiplechoice;
+import gd.fintech.lms.vo.Student;
 import gd.fintech.lms.vo.StudentAnswerSheet;
 import gd.fintech.lms.vo.Test;
 
@@ -138,5 +139,19 @@ public class TeacherTestController {
 		// System.out.println(list);
 		model.addAttribute("list", list);
 		return "teacher/studentListByTest";
+	}
+	
+	// 해당 강의를 수강중인 학생의 답안지 조회
+	@GetMapping("/teacher/answerSheet/{lectureNo}/{studentId}")
+	public String answerSheetByStudent(Model model,
+										@PathVariable(value="lectureNo") int lectureNo,
+										@PathVariable(value="studentId") String studentId) {
+		// 학생 이름 출력
+		Student name = teacherTestService.getStudentName(studentId);
+		// 학생 아이디에 해당하는 답안지와 점수 출력
+		List<StudentAnswerSheet> answerSheet = teacherTestService.getAnswerSheetByStudent(lectureNo, studentId);
+		model.addAttribute("name", name);
+		model.addAttribute("answerSheet", answerSheet);
+		return "teacher/answerSheet";
 	}
 }
