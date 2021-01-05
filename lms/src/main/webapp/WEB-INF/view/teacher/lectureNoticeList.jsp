@@ -22,15 +22,22 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="n" items="${noticeList}">
+			<c:if test="${!empty noticeList}">
+				<c:forEach var="n" items="${noticeList}">
+					<tr>
+						<td>${n.lectureNoticeNo}</td>
+						<td><a href="${path}/teacher/modifyLectureNoticeCount/${lectureNo}/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
+						<td>${n.lectureNoticeCreatedate}</td>
+						<td>${n.lectureNoticeUpdatedate}</td>
+						<td>${n.lectureNoticeCount}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty noticeList}">
 				<tr>
-					<td>${n.lectureNoticeNo}</td>
-					<td><a href="${path}/teacher/modifyLectureNoticeCount/${lectureNo}/${n.lectureNoticeNo}">${n.lectureNoticeTitle}</a></td>
-					<td>${n.lectureNoticeCreatedate}</td>
-					<td>${n.lectureNoticeUpdatedate}</td>
-					<td>${n.lectureNoticeCount}</td>
+					<td colspan="5">등록된 공지가 없습니다.</td>
 				</tr>
-			</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
 	<!-- 페이징 -->

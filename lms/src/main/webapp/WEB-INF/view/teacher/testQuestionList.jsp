@@ -26,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:if test="${multiplechoice != null}">
+			<c:if test="${!empty multiplechoice}">
 				<c:forEach var="m" items="${multiplechoice}">
 					<tr>
 						<td>${m.multiplechoiceNo}</td>
@@ -37,9 +37,9 @@
 					</tr>
 				</c:forEach>
 			</c:if>
-			<c:if test="${multiplechoice == ''}">
+			<c:if test="${empty multiplechoice}">
 				<tr>
-					<td colspan="4">등록된 시험문제가 없습니다.</td>
+					<td colspan="5">등록된 시험문제가 없습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>

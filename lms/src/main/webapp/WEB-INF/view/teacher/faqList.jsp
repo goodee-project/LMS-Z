@@ -31,16 +31,23 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="f" items="${faqList}">
+			<c:if test="${!empty faqList}">
+				<c:forEach var="f" items="${faqList}">
+					<tr>
+						<td>${f.faqCategory}</td>
+						<td>${f.faqNo}</td>
+						<td><a href="${path}/teacher/modifyFaqCount/${f.faqNo}">${f.faqTitle}</a></td>
+						<td>${f.faqWriter}</td>
+						<td>${f.faqCreatedate}</td>
+						<td>${f.faqCount}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty faqList}">
 				<tr>
-					<td>${f.faqCategory}</td>
-					<td>${f.faqNo}</td>
-					<td><a href="${path}/teacher/modifyFaqCount/${f.faqNo}">${f.faqTitle}</a></td>
-					<td>${f.faqWriter}</td>
-					<td>${f.faqCreatedate}</td>
-					<td>${f.faqCount}</td>
+					<td colspan="6">등록된 FAQ가 없습니다.</td>
 				</tr>
-			</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
 	<!-- 페이징 -->

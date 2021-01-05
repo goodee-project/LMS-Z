@@ -25,18 +25,25 @@
 		</thead>
 		
 		<tbody>
-			<c:forEach var="la" items="${lectureArchiveList}">
-				<tr>	
-					<td><a href="${path}/teacher/lectureArchiveOne/${la.lectureArchiveNo}">${la.lectureNo}: ${la.lecture.lectureName}</a></td>
-					<td>${la.accountId}: ${la.lecture.teacherName}</td>
-					<td>${la.subject.subjectNo}: ${la.subject.subjectName}</td>
-					<td>${la.lectureArchiveWriter}</td>
-					<td>${la.lectureArchiveTitle}</td>
-					<td>${la.lectureArchiveCreatedate}</td>
-					<td>${la.lectureArchiveUpdatedate}</td>
-					<td>${la.lectureArchiveCount}</td>
-				</tr>	
-			</c:forEach>
+			<c:if test="${!empty lectureArchiveList}">
+				<c:forEach var="la" items="${lectureArchiveList}">
+					<tr>	
+						<td><a href="${path}/teacher/lectureArchiveOne/${la.lectureArchiveNo}">${la.lectureNo}: ${la.lecture.lectureName}</a></td>
+						<td>${la.accountId}: ${la.lecture.teacherName}</td>
+						<td>${la.subject.subjectNo}: ${la.subject.subjectName}</td>
+						<td>${la.lectureArchiveWriter}</td>
+						<td>${la.lectureArchiveTitle}</td>
+						<td>${la.lectureArchiveCreatedate}</td>
+						<td>${la.lectureArchiveUpdatedate}</td>
+						<td>${la.lectureArchiveCount}</td>
+					</tr>	
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty lectureArchiveList}">
+				<tr>
+					<td colspan="8">등록된 게시물이 없습니다.</td>
+				</tr>
+			</c:if>
 		</tbody>
 	</table>
 

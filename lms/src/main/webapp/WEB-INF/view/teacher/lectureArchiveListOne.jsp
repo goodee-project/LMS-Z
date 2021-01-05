@@ -26,11 +26,18 @@
 	</table>
 	
 	<table border="1">
-		<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">	
-			<tr>
-				<td>fileName:<a href="${path}/teacher/lectureArchiveFileDownload/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
-				<td>count:${laf.lectureArchiveFileCount}</td>
-			</tr>
+		<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">
+			<c:if test="${laf.lectureArchiveFileUuid != null}">
+				<tr>
+					<td>fileName:<a href="${path}/teacher/lectureArchiveFileDownload/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
+					<td>count:${laf.lectureArchiveFileCount}</td>
+				</tr>
+			</c:if>
+			<c:if test="${laf.lectureArchiveFileUuid == null}">
+				<tr>
+					<td>첨부파일이 없습니다.</td>
+				</tr>
+			</c:if>
 		</c:forEach>	
 	</table>
 </body>
