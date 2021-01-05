@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.student.mapper.StudentReportSubmitFileMapper;
@@ -22,7 +26,6 @@ import gd.fintech.lms.vo.ReportSubmitFile;
 @Service
 public class StudentReportService {
 	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
-	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\reportfile\\";
 	
 	@Autowired private StudentReportSubmitMapper studentReportSubmitMapper;
 	@Autowired private StudentReportSubmitFileMapper studentReportSubmitFileMapper;	
@@ -98,8 +101,17 @@ public class StudentReportService {
 				rf.setReportSubmitFileCount(count);
 				reportSubmitFile.add(rf);
 				
+
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\reportfile\\";
+				
+				File f = new File(rootPath + attachPath + filename + ext);
+				
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(f);
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -115,7 +127,13 @@ public class StudentReportService {
 	}
 	
 	public int deleteReportOneFile(String reportSubmitFileUuid) {
-		File file = new File(PATH+reportSubmitFileUuid);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\reportfile\\";
+		
+		File file = new File(rootPath+attachPath+reportSubmitFileUuid);
 		if(file.exists()) {
 			file.delete();
 		}
@@ -124,8 +142,14 @@ public class StudentReportService {
 	
 	public void deleteReportAllSubmit(int reportSubmitNo) {
 		List<String> reportSubmitFileUuid = studentReportSubmitFileMapper.selectReportSubmitFileUuid(reportSubmitNo);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\reportfile\\";
+		
 		for(String s : reportSubmitFileUuid) {
-			File file = new File(PATH+reportSubmitFileUuid);
+			File file = new File(rootPath+attachPath+reportSubmitFileUuid);
 			if(file.exists()) {
 				file.delete();
 			}
@@ -174,8 +198,14 @@ public class StudentReportService {
 				rf.setReportSubmitFileCount(count);
 				reportSubmitFile.add(rf);
 				
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\reportfile\\";
+				
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(new File(rootPath+attachPath+filename+ext));
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();

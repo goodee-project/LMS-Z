@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
@@ -29,8 +33,7 @@ import gd.fintech.lms.vo.QuestionFile;
 @Service
 public class StudentQuestionService {
 	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
-	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile\\";
-	
+
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
 	@Autowired private StudentQuestionFileMapper studentQuestionFileMapper;
 	
@@ -118,8 +121,15 @@ public class StudentQuestionService {
 				qf.setQuestionFileCount(count);
 				questionFile.add(qf);
 				
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\questionfile\\";
+				
+				File f = new File(rootPath + attachPath + filename + ext);
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(f);
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -169,8 +179,15 @@ public class StudentQuestionService {
 				qf.setQuestionFileCount(count);
 				questionFile.add(qf);
 				
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\questionfile\\";
+				
+				File f = new File(rootPath + attachPath + filename + ext);
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(f);
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -187,8 +204,14 @@ public class StudentQuestionService {
 	// 작성 질문 전체 삭제 (삭제는 작성자만 할 수 있게 스크립트 코드를 사용합니다)
 	public void deleteQuestion(int questionNo) {
 		List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(questionNo);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\questionfile\\";
+		
 		for(String s : questionFileUuid) {
-			File file = new File(PATH+s);
+			File file = new File(rootPath + attachPath+s);
 			if(file.exists()) {
 				file.delete();
 			}
@@ -199,7 +222,13 @@ public class StudentQuestionService {
 	}
 	
 	public int deleteQuestionOneFile(String questionFileUuid) {
-		File file = new File(PATH+questionFileUuid);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\questionfile\\";
+		
+		File file = new File(rootPath+attachPath+questionFileUuid);
 		if(file.exists()) {
 			file.delete();
 		}

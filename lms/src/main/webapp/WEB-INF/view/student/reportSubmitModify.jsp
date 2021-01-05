@@ -102,7 +102,7 @@
 			if(ck == false){
 				alert('파일을 선택해 주세요');
 				}
-			else if(str_space.exec($('#reportSubmitContent'))){
+			else if(Trim($('#reportSubmitContent'))==""){
 				alert('내용을 입력해 주세요');
 				}
 			else{

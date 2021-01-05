@@ -1,9 +1,11 @@
 package gd.fintech.lms.student.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.student.service.StudentReportService;
 import gd.fintech.lms.vo.Report;
@@ -190,14 +194,20 @@ public class StudentReportController {
 	
 	@GetMapping("/student/reportSubmitFileDownload/{reportSubmitFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="reportSubmitFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\reportfile\\";
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\reportfile\\";
+		
+		File f = new File(rootPath + attachPath + fileName);
 		// 파일을 다운로드 받기 위한 스트림
 		InputStream in = null;
 		ResponseEntity<byte[]> entity= null;
 				
 		try {
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(PATH + fileName);
+			in = new FileInputStream(f);
 					
 			// 다운로드 파일 컨텐트 타입
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

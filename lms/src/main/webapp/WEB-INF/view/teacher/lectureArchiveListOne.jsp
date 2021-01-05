@@ -10,17 +10,18 @@
 </head>
 <body>
 	<a href="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureArchiveNo}">수정</a>
+	<a href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}">삭제</a>
 	<table border="1">
 		<tr>
 			<td>lecture_no: ${lectureArchive.lectureNo }</td>
 			<td>account_id: ${lectureArchive.accountId }</td>
 		</tr>
 		<tr>	
-			<td>lecture_archive_writer: ${lectureArchive.lectureArchiveWriter }</td>
-			<td>lecture_archive_title: ${lectureArchive.lectureArchiveTitle }</td>
-			<td>lecture_archive_content: ${lectureArchive.lectureArchiveContent }</td>
-			<td>lecture_archive_updatedate: ${lectureArchive.lectureArchiveUpdatedate }</td>
-			<td>lecture_archive_count: ${lectureArchive.lectureArchiveCount }</td>
+			<td>lecture_archive_writer: ${lectureArchive.lectureArchiveWriter}</td>
+			<td>lecture_archive_title: ${lectureArchive.lectureArchiveTitle}</td>
+			<td>lecture_archive_content: ${lectureArchive.lectureArchiveContent}</td>
+			<td>lecture_archive_updatedate: ${lectureArchive.lectureArchiveUpdatedate}</td>
+			<td>lecture_archive_count: ${lectureArchive.lectureArchiveCount}</td>
 		</tr>
 	</table>
 	

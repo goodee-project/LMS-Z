@@ -39,5 +39,23 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
+	<div>
+		<c:if test="${listCurrentPage>1}">
+			<a href="${path}/teacher/lectureArchiveList/${teacherId}/1">처음으로</a>
+			<a href="${path}/teacher/lectureArchiveList/${teacherId}/${listCurrentPage-1}">이전</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${listUnderFirstPage}" end="${listUnderLastPage}">
+			<c:if test="${i<=lastPage}">
+				<a href="${path}/teacher/lectureArchiveList/${teacherId}/${i}">${i}</a>
+			</c:if>
+		</c:forEach>
+		
+		<c:if test="${listCurrentPage<lastPage}">
+			<a href="${path}/teacher/lectureArchiveList/${teacherId}/${listCurrentPage+1}">다음</a>
+			<a href="${path}/teacher/lectureArchiveList/${teacherId}/${lastPage}">마지막으로</a>
+		</c:if>
+	</div>
 </body>
 </html>

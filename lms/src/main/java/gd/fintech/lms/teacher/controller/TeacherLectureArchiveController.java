@@ -1,9 +1,11 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.teacher.service.TeacherLectureArchiveService;
 import gd.fintech.lms.vo.Lecture;
@@ -33,7 +37,7 @@ public class TeacherLectureArchiveController {
 	public String listLectureArchive(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=5;
+		int rowPerPage=10;
 		List<LectureArchive> lectureArchiveList = teacherLectureArchiveService.getLectureArchiveList(currentPage, rowPerPage, accountId);
 		
 		int listUnderPerPage = 10;	
@@ -50,7 +54,6 @@ public class TeacherLectureArchiveController {
 		if(totalReport % rowPerPage !=0) {
 			lastPage +=1;
 		}
-		System.out.println(lectureArchiveList);
 		model.addAttribute("listUnderPerPage",listUnderPerPage);
 		model.addAttribute("listUnderFirstPage",listUnderFirstPage);
 		model.addAttribute("listUnderLastPage",listUnderLastPage);
@@ -98,10 +101,11 @@ public class TeacherLectureArchiveController {
 		return "/teacher/lectureArchiveModify";
 	}
 	
-	@PostMapping("/teacher/lectureArchiveModify")
-	public String modifylectureArchive(LectureArchiveAddForm lectureArchiveAddForm) {
+	@PostMapping("/teacher/lectureArchiveModify/{lectureArchiveNo}")
+	public String modifylectureArchive(LectureArchiveAddForm lectureArchiveAddForm,
+			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
 		teacherLectureArchiveService.updateLectureArchive(lectureArchiveAddForm);
-		return "redirect:/teacher/";
+		return "redirect:/teacher/lectureArchiveOne/"+lectureArchiveNo;
 	}
 	
 	
@@ -110,18 +114,31 @@ public class TeacherLectureArchiveController {
 		teacherLectureArchiveService.deleteLectureArchiveOneFile(lectureArchiveFileUuid);
 		return "redirect:/teacher/";
 	}
+	@GetMapping("/teacher/lectureArchiveRemove/{lectureArchiveNo}")
+	public String removeLectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
+		teacherLectureArchiveService.deleteLectureArchive(lectureArchiveNo);
+		System.out.println(lectureArchiveNo);
+		return "redirect:/teacher/";
+	}
 	
 	
 	@GetMapping("/teacher/lectureArchiveFileDownload/{lectureArchiveFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="lectureArchiveFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\lectureArchivefile\\";
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\lectureArchivefile\\";
+		
+		File f = new File(rootPath + attachPath + fileName);
+		
 		// 파일을 다운로드 받기 위한 스트림
 		InputStream in = null;
 		ResponseEntity<byte[]> entity= null;
 				
 		try {
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(PATH + fileName);
+			in = new FileInputStream(f);
 							
 			// 다운로드 파일 컨텐트 타입
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);

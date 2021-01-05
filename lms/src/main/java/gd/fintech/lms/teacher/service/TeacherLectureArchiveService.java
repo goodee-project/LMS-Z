@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
@@ -22,7 +26,6 @@ import gd.fintech.lms.vo.QuestionFile;
 
 @Service
 public class TeacherLectureArchiveService {
-	private final String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\lectureArchivefile\\";
 	
 	@Autowired TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
@@ -73,8 +76,16 @@ public class TeacherLectureArchiveService {
 				lf.setLectureArchiveFileCount(count);
 				lectureArchiveFile.add(lf);
 				
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\lectureArchivefile\\";
+				
+				File f = new File(rootPath + attachPath + filename + ext);
+				
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(f);
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();
@@ -91,20 +102,43 @@ public class TeacherLectureArchiveService {
 		return teacherLectureArchiveMapper.selectLectureList(accountId);
 	}
 	public LectureArchive getLectureArchiveOne(int lectureArchiveNo) {
-		return teacherLectureArchiveMapper.selectLectureArchiveOne(lectureArchiveNo);
+		LectureArchive lectureArchive = teacherLectureArchiveMapper.selectLectureArchiveOne(lectureArchiveNo);
+		return lectureArchive;
 	}
 	public int deleteLectureArchiveOneFile(String lectureArchiveFileUuid) {
-		File file = new File(PATH+lectureArchiveFileUuid);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\lectureArchivefile\\";
+		File file = new File(rootPath+attachPath+lectureArchiveFileUuid);
 		if(file.exists()) {
 			file.delete();
 		}
 		return teacherLectureArchiveFileMapper.deleteLectureArchiveOneFile(lectureArchiveFileUuid);
 	}
 	
-	
+	public void deleteLectureArchive(int lectureArchiveNo) {
+		List<String> lectureArchiveFileUuid = teacherLectureArchiveFileMapper.selectLectureArchiveFileUuid(lectureArchiveNo);
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\lectureArchivefile\\";
+		
+		for(String s : lectureArchiveFileUuid) {
+			File file = new File(rootPath + attachPath+s);
+			if(file.exists()) {
+				file.delete();
+			}
+		}
+		teacherLectureArchiveFileMapper.deleteLectureArchiveAllFile(lectureArchiveNo);
+		teacherLectureArchiveMapper.deleteLectureArchive(lectureArchiveNo);
+	}
 	public void updateLectureArchive(LectureArchiveAddForm lectureArchiveAddForm) {
 		LectureArchive lectureArchive = new LectureArchive();
 		lectureArchive.setLectureArchiveNo(lectureArchiveAddForm.getLectureArchiveNo());
+		lectureArchive.setAccountId(lectureArchiveAddForm.getAccountId());
 		lectureArchive.setLectureNo(lectureArchiveAddForm.getLectureNo());
 		lectureArchive.setLectureArchiveWriter(lectureArchiveAddForm.getLectureArchiveWriter());
 		lectureArchive.setLectureArchiveTitle(lectureArchiveAddForm.getLectureArchiveTitle());
@@ -131,8 +165,16 @@ public class TeacherLectureArchiveService {
 				lf.setLectureArchiveFileCount(count);
 				lectureArchiveFile.add(lf);
 				
+				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				
+				String attachPath = "uploadfile\\lectureArchivefile\\";
+				
+				File f = new File(rootPath + attachPath + filename + ext);
+				
 				try {
-					mf.transferTo(new File(PATH+filename+ext));
+					mf.transferTo(f);
 				}catch(Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException();

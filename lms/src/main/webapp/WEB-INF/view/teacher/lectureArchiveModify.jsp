@@ -12,7 +12,7 @@
 <script src="${path }/smarteditor2/js/HuskyEZCreator.js"></script>
 </head>
 <body>
-<form method="post" id="lectureArchiveModify" action="${path}/teacher/lectureArchiveModify" enctype="multipart/form-data">
+<form method="post" id="lectureArchiveModify" action="${path}/teacher/lectureArchiveModify/${lectureArchive.lectureArchiveNo}" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<td>강의:
@@ -22,13 +22,13 @@
 					</c:forEach>
 				</select>
 			</td>
-			
+			<td>자료 번호 ${lectureArchive.lectureArchiveNo}</td>
 			<td>작성자 아이디: <input type="text" name="accountId" readonly="readonly" value="${teacherId}"></td>
-			<td>작성자: <input type="text" name="lectureArchiveWriter">${lectureArchive.lectureArchiveWriter }</td>
+			<td>작성자: <input type="text" name="lectureArchiveWriter"  value="${lectureArchive.lectureArchiveWriter}"></td>
 		</tr>
 		
 		<tr>
-			<td>제목: <input type="text" name="lectureArchiveTitle" id="lectureArchiveTitle">${lectureArchive.lectureArchiveTitle}</td>
+			<td>제목: <input type="text" name="lectureArchiveTitle" id="lectureArchiveTitle"  value="${lectureArchive.lectureArchiveTitle}"></td>
 			
 			<td>내용: <textarea class="form-control" name="lectureArchiveContent" id="lectureArchiveContent" rows="6">${lectureArchive.lectureArchiveContent }</textarea></td>
 		</tr>

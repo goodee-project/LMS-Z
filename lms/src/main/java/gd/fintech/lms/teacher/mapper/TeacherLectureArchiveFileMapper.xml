@@ -23,9 +23,23 @@
 			)
 	</insert>
 	
+	
 	<delete id="deleteLectureArchiveOneFile" parameterType="String">
 		DELETE 
 		FROM lecture_archive_file
 		WHERE lecture_archive_file_uuid = #{lectureArchiveFileUuid}
 	</delete>
+	
+	<delete id="deleteLectureArchiveAllFile" parameterType="int">
+		DELETE 
+		FROM lecture_archive_file
+		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</delete>
+	
+	<select id="selectLectureArchiveFileUuid" resultType="String" parameterType="int">
+		SELECT 
+			lecture_archive_file_uuid lectureArchiveFileUuid
+		FROM lecture_archive_file
+		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</select>
 </mapper>  

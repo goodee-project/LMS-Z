@@ -1,11 +1,13 @@
 package gd.fintech.lms.student.controller;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.student.service.StudentLoginService;
 import gd.fintech.lms.student.service.StudentQuestionService;
@@ -190,10 +194,12 @@ public class StudentQuestionController {
 		return "redirect:/student/questionOne/"+questionNo;
 	}
 	// 질문 삭제 
-	@GetMapping("/student/questionRemove/{questionNo}")
-	public String removeQuestion(@PathVariable(name="questionNo")int questionNo) {
+	@GetMapping("/student/questionRemove/{accountId}/{questionNo}")
+	public String removeQuestion(
+			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
 		studentQuestionService.deleteQuestion(questionNo);
-		return "redirect:/student/questionList/1";
+		return "redirect:/student/questionList/"+accountId+"/1";
 	}
 	
 	@GetMapping("/student/questionFileRemove")
@@ -205,22 +211,26 @@ public class StudentQuestionController {
 	
 	@GetMapping("/student/questionFileDownload/{questionFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="questionFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		String PATH ="C:\\Users\\git\\LMS-Z\\lms\\src\\main\\webapp\\uploadfile\\questionfile\\";
 		// 파일을 다운로드 받기 위한 스트림
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\questionfile\\";
+		
+		File f = new File(rootPath + attachPath + fileName);
+		
 		InputStream in = null;
 		ResponseEntity<byte[]> entity= null;
 				
 		try {
 			HttpHeaders headers = new HttpHeaders();
-			in = new FileInputStream(PATH + fileName);
+			in = new FileInputStream(f);
 							
-			
 			// 다운로드 파일 컨텐트 타입
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
 
-		
-					
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

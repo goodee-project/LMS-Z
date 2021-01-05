@@ -101,10 +101,10 @@
 		<result property="lectureArchiveCount" column="lecture_archive_count"/>
 		
 		<collection property="lectureArchiveFileList" ofType="gd.fintech.lms.vo.LectureArchiveFile">
+			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid"/>
 			<result property="lectureArchiveNo" column="lecture_archive_no"/>
 			<result property="lectureArchiveFileOriginal" column="lecture_archive_file_original"/>
 			<result property="lectureArchiveFileCount" column="lecture_archive_file_count"/>
-			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid"/>
 		</collection>
 	</resultMap>
   	
@@ -116,10 +116,11 @@
 			la.lecture_archive_writer,
 			la.lecture_archive_title,
 			la.lecture_archive_content,
+			lecture_archive_createdate,
 			la.lecture_archive_updatedate,
 			la.lecture_archive_count,
-			laf.lecture_archive_file_original,
 			laf.lecture_archive_file_uuid,
+			laf.lecture_archive_file_original,
 			laf.lecture_archive_file_count
 		FROM lecture_archive la left join lecture_archive_file laf
 			 on la.lecture_archive_no = laf.lecture_archive_no
@@ -136,4 +137,11 @@
 			lecture_archive_updatedate = NOW()
 		WHERE lecture_archive_no = #{lectureArchiveNo}	
   	</update>
+  	
+  	<delete id="deleteLectureArchive" parameterType="int">
+		DELETE 
+		FROM lecture_archive
+		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</delete>
+  	
   </mapper>

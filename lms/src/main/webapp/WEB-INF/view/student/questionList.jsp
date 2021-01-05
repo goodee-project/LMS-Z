@@ -54,7 +54,6 @@
 			<a href="${path}/student/questionList/${studentId}/${listCurrentPage+1}">다음</a>
 			<a href="${path}/student/questionList/${studentId}/${lastPage}">마지막으로</a>
 		</c:if>
-
 	</div>
 	<!-- 제목 검색에 대한 페이징 -->
 	<c:if test="${questionTitle != null}">	
