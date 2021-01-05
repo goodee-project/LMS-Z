@@ -42,6 +42,7 @@ public class TeacherLmsNoticeController {
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("searchTitle", searchTitle);
 		
 		return "teacher/lmsNoticeList";
 	}

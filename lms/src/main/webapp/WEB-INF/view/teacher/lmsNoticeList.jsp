@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -63,9 +64,12 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<div class="row">
-                            		<div class="col-lg-6 col-md-6"></div>
+                            		<div class="col-lg-2 col-md-2" style="text-align: left">
+                            			<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path}/teacher/lmsNoticeList/1">전체</a>
+                            		</div>
+                            		<div class="col-lg-4 col-md-4"></div>
                             		<div id="searchStyle" class="col-lg-6 col-md-6">
-                            			<input type="text" class="form-control-plaintext form-control border-black form-sm" name="searchTitle" id="searchTitle" placeholder="title">
+                            			<input type="text" class="form-control-plaintext form-control border-black form-sm" name="searchTitle" id="searchTitle" value="${searchTitle}" placeholder="title">
                             			<button class="btn btn btn-outline-secondary" style="border-radius: 4px;" type="button" id="btnSearch">찾기</button>
                             		</div>
                             	</div>
@@ -74,22 +78,31 @@
 									<table id="lmsNoticeTable" class="table table">
 										<thead>
 											<tr>
-												<th>번호	</th>
-												<th>작성자</th>
-												<td>제목</td>
-												<th>방문자 수</th>
+												<th class="font-weight-bold">번호	</th>
+												<th class="font-weight-bold">작성자</th>
+												<td class="font-weight-bold">제목</td>
+												<th class="font-weight-bold">방문자 수</th>
 											</tr>
 										</thead>
-										<tbody>
-											<c:forEach var="l" items="${lmsNoticeList}">
+										<c:if test="${fn:length(lmsNoticeList) != 0}">
+											<tbody>
+												<c:forEach var="l" items="${lmsNoticeList}">
+													<tr>
+														<td>${l.lmsNoticeNo}</td>
+														<td>${l.lmsNoticeWriter}</td>
+														<td><a class="btn btn-outline-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/modifyLmsNoticeCount/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
+														<td>${l.lmsNoticeCount}</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</c:if>
+										<c:if test="${fn:length(lmsNoticeList) == 0}">
+											<tbody>
 												<tr>
-													<td>${l.lmsNoticeNo}</td>
-													<td>${l.lmsNoticeWriter}</td>
-													<td><a href="${path}/teacher/modifyLmsNoticeCount/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
-													<td>${l.lmsNoticeCount}</td>
+													<td colspan="4">해당 제목의 LMS공지사항이 없습니다.</td>
 												</tr>
-											</c:forEach>
-										</tbody>
+											</tbody>
+										</c:if>
 									</table>
 								   	<div id="paging" style="text-align: center; padding: 7px;">
 								   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
@@ -171,6 +184,8 @@
 		$('#btnSearch').click(function(){
 			location.href = '${path}/teacher/lmsNoticeList/${currentPage}?searchTitle=' + $('#searchTitle').val();
 		});
+
+		
     </script>
    
 </body>
