@@ -43,6 +43,26 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">FAQ</span></a>
                         </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow"
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">chart</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item">
+                            	<a href="${path }/chart/studentCourseGrades.jsp" class="sidebar-link">
+                            		<span class="hide-menu">강의별 성적 chart</span>
+                            	</a>
+                           	</li>
+                           	<li class="sidebar-item">
+                           		<a href="#" class="sidebar-link">
+                           			<span class="hide-menu"> 4-2</span>
+                           		</a>
+                          	</li>
+                            <li class="sidebar-item">
+                            	<a href="#" class="sidebar-link">
+                            		<span class="hide-menu"> 4-3</span>
+                            	</a>
+                           	</li>
+                        </ul>
                         <li class="list-divider"></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/logout"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span

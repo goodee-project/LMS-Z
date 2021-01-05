@@ -56,6 +56,6 @@
 		</c:if>
 	</div>
 	<br>
-	<a href="${path }/student/testList/${lectureNo }">뒤로가기</a>
+	<a href="${path }/student/testList/${lectureNo }/${currentPage}">뒤로가기</a>
 </body>
 </html>
