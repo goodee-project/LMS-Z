@@ -31,6 +31,7 @@ import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
 import gd.fintech.lms.vo.QuestionAddForm;
+import gd.fintech.lms.vo.Student;
 
 @Controller
 public class StudentQuestionController {
@@ -149,6 +150,8 @@ public class StudentQuestionController {
 	@GetMapping("/student/questionAdd/{accountId}")
 	public String addQuestion(Model model,@PathVariable(name="accountId")String accountId) {
 		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
+		Student student = studentQuestionService.getStudentName(accountId);
+		model.addAttribute("student", student);
 		model.addAttribute("lectureList", lectureList);
 		return "/student/questionAdd";
 	}
@@ -175,6 +178,8 @@ public class StudentQuestionController {
 			@PathVariable(name="accountId")String accountId) {
 		Question question = studentQuestionService.getQuestionOne(questionNo);
 		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
+		Student student = studentQuestionService.getStudentName(accountId);
+		model.addAttribute("student", student);
 		model.addAttribute("lectureList", lectureList);
 		model.addAttribute("question",question);
 		return "/student/questionModify";

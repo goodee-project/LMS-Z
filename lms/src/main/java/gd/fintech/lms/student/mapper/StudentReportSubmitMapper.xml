@@ -47,12 +47,13 @@
 			 on r.lecture_no = cr.lecture_no
 			 left join lecture l 
 			 on r.lecture_no = l.lecture_no
-			 left join report_submit rs
-			 on r.report_no = rs.report_no
+			 left join report_submit rs 
+			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
 		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND cr.class_registration_state = '수강중'
 		ORDER BY r.report_createdate ASC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
+	
 	
 	<select id="selectOverdueReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
 		SELECT
@@ -71,9 +72,9 @@
 			 on r.lecture_no = cr.lecture_no
 			 left join lecture l 
 			 on r.lecture_no = l.lecture_no
-			 left join report_submit rs
-			 on r.report_no = rs.report_no
-		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND class_registration_state = '수강중'
+			 left join report_submit rs 
+			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND cr.class_registration_state = '수강중'
 		ORDER BY r.report_createdate DESC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
@@ -95,8 +96,8 @@
 			 on r.lecture_no = cr.lecture_no
 			 left join lecture l 
 			 on r.lecture_no = l.lecture_no
-			 left join report_submit rs
-			 on r.report_no = rs.report_no
+			 left join report_submit rs 
+			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
 		WHERE cr.account_id = #{accountId} 
 			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> 
 			 AND class_registration_state = '수강중'
@@ -110,7 +111,7 @@
 			COUNT(*) count
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
-		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND cr.class_registration_state = '수강중'
 	</select>
 	
 	<select id="totalCountOverdueReport" resultType="int" parameterType="String">
@@ -196,7 +197,7 @@
 		DATEDIFF(r.report_enddate,NOW()) 
 	FROM report r left join lecture l
 		 on r.lecture_no = l.lecture_no
-	WHERE report_no = #{reportNo} 	
+	WHERE r.report_no = #{reportNo} 	
 	</select>
 	
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.ReportSubmit">

@@ -42,4 +42,10 @@
 		FROM lecture_archive_file
 		WHERE lecture_archive_no = #{lectureArchiveNo}
 	</select>
+	
+	<update id="upLectureArchiveFileCount" parameterType="String">
+		UPDATE lecture_archive_file
+  		SET lecture_archive_file_count = lecture_archive_file_count+1
+  		WHERE lecture_archive_file_uuid = #{lectureArchiveFileUuid}
+	</update>
 </mapper>  

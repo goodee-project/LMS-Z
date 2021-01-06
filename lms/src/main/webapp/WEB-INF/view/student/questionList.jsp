@@ -26,7 +26,12 @@
 			
 			<c:forEach var="q" items="${questionList}">
 				<tr>
-					<td><a href="${path}/student/questionCountUp/${q.questionNo}">${q.questionNo}</a></td>	
+					<td>
+						<a href="${path}/student/questionCountUp/${q.questionNo}">${q.questionNo}</a>
+						<c:if test="${!empty q.questionPassword}">
+							비밀글
+						</c:if>
+					</td>	
 					<td>${q.lectureNo}: (${q.lecture.lectureName})</td>
 					<td>${q.questionWriter}</td>
 					<td>${q.questionTitle}</td>

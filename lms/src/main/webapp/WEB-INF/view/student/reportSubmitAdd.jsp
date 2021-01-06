@@ -104,7 +104,7 @@
 			else if($('#reportSubmitTitle').val().replace(blank_patten,"")==""){
 				alert('제목을 입력해 주세요');
 				}
-			else if( reportSubmitContent == ""  || reportSubmitContent == null || reportSubmitContent == '&nbsp;' || reportSubmitContent == '<p>&nbsp;</p>'){
+			else if($('#reportSubmitContent').val() == '<p>&nbsp;</p>' ||$('#reportSubmitContent').val() == ''){
 				alert('내용을 입력해 주세요');
 				}
 			else{

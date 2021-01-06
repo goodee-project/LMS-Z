@@ -7,12 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
+import gd.fintech.lms.vo.Student;
 
 @Mapper
 public interface StudentQuestionMapper {
 	// 질문목록 리스트 (페이징)
 	List<Question> selectQuestionListPage(Map<String, Object> map); 
-	
 	
 	// 질문목록 검색
 	List<Question> selectQuestionWriterSearch(Map<String, Object>map);
@@ -50,5 +50,7 @@ public interface StudentQuestionMapper {
 	
 	//강좌 삭제를 위한 questionNO를 구하기 위한 메퍼
 	List<Integer> selectLectureNo(int lectureNo);
+	
+	Student selectStudentName(String accountId);
 	
 }

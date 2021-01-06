@@ -10,6 +10,7 @@ import gd.fintech.lms.vo.ReportSubmit;
 
 @Mapper
 public interface StudentReportSubmitMapper {
+	
 	ReportSubmit selectReportSubmitOne(Map<String, Object>map);
 	
 	//제출과제 자세히 보기

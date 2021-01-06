@@ -31,6 +31,7 @@
 			la.lecture_archive_updatedate,
 			la.lecture_archive_count,
 			laf.lecture_archive_file_original,
+			laf.lecture_archive_file_uuid,
 			laf.lecture_archive_file_count
 		FROM lecture_archive la left join lecture_archive_file laf
 			 on la.lecture_archive_no = laf.lecture_archive_no
@@ -70,6 +71,30 @@
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	
+	<select id="selectLectureArchiveSearchTitle" resultMap="selectLectureArchiveList" parameterType="java.util.Map">
+		SELECT
+			la.lecture_archive_no,
+			la.lecture_no,
+			la.account_id,
+			la.lecture_archive_writer,
+			la.lecture_archive_title,
+			la.lecture_archive_content,
+			la.lecture_archive_createdate,
+			la.lecture_archive_count 
+		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND la.lecture_archive_title LIKE CONCAT('%',#{lectureArchiveTitle},'%')
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="totalSearchLectureArchive" parameterType="String" resultType="int">
+  		SELECT
+  			count(*) count
+  		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+  		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND la.lecture_archive_title LIKE CONCAT('%',#{lectureArchiveTitle},'%')
+  	</select>
+	
 	<select id="totalLectureArchive" resultType="int" parameterType="String">
 		SELECT
   			count(*) count
@@ -82,5 +107,11 @@
 		UPDATE lecture_archive
   		SET lecture_archive_count = lecture_archive_count+1
   		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</update>
+	
+	<update id="upLectureArchiveFileCount" parameterType="String">
+		UPDATE lecture_archive_file
+  		SET lecture_archive_file_count = lecture_archive_file_count+1
+  		WHERE lecture_archive_file_uuid = #{lectureArchiveFileUuid}
 	</update>
 </mapper>

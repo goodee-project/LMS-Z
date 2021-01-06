@@ -217,7 +217,7 @@
   			l.lecture_name lectureName
   		FROM lecture l left join class_registration cr
 	  		 on l.lecture_no = cr.lecture_no
-	  	WHERE cr.account_id = #{accountId} 	 
+	  	WHERE cr.account_id = #{accountId} and cr.class_registration_state='수강중' 	 
   	</select>
   	
   	<!-- 질문에 대한 댓글 모두 삭제 -->
@@ -238,19 +238,26 @@
   		UPDATE question
   		SET
   			lecture_no = #{lectureNo},
-	  		question_writer = #{questionWriter},
 	  		question_title = #{questionTitle},
 	 		question_content = #{questionContent},
 	  		question_updatedate = NOW(),
 	 		question_password = #{questionPassword}
   		WHERE question_no = #{questionNo}
   	</update>
+  	
   	<!-- 강좌 번호에 대한 questionNo를 반환하는 쿼리 -->
   	<select id="selectLectureNo" parameterType="int" resultType="int">
   		SELECT 
   			question_no
   		FROM question
   		WHERE lecture_no = #{lectureNo}
+  	</select>
+  	
+  	<select id="selectStudentName" resultType="gd.fintech.lms.vo.Student" parameterType="String">
+  		SELECT
+  			student_name StudentName
+  		FROM student
+  		WHERE student_id = #{accountId}
   	</select>
   </mapper>
   

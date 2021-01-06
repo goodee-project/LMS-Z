@@ -15,8 +15,8 @@
 <form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
 	<table border="1">
 		<tr>
-			<td>질문 번호: ${question.questionNo},</td>
-			<td>작성자 ID: ${question.accountId},</td>
+			<td>질문 번호: ${question.questionNo}</td>
+			<td>작성자: ${student.studentName}(${question.accountId})</td>
 			<td>작성일: ${question.questionCreatedate}</td>
 		</tr>
 	</table>	

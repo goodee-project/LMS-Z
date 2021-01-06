@@ -161,6 +161,11 @@ public class TeacherLectureArchiveController {
 		return "redirect:/teacher/lectureArchiveList/{accountId}/1";
 	}
 	
+	@GetMapping("/teacher/lectureArchiveFileCountUp/{lectureArchiveFileUuid}")
+	public String CountUplectureArchiveFile(@PathVariable(name="lectureArchiveFileUuid")String lectureArchiveFileUuid) {
+		teacherLectureArchiveService.upCountLectureArchiveFile(lectureArchiveFileUuid);
+		return "redirect:/teacher/lectureArchiveFileDownload/{lectureArchiveFileUuid}";
+	}
 	
 	@GetMapping("/teacher/lectureArchiveFileDownload/{lectureArchiveFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="lectureArchiveFileUuid")String fileName,HttpServletResponse response)throws Exception{

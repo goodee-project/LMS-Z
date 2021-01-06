@@ -12,9 +12,15 @@ public interface StudentLectureArchiveMapper {
 
 	List<LectureArchive> selectLectureArchiveList(Map<String, Object>map);
 	
+	List<LectureArchive> selectLectureArchiveSearchTitle(Map<String, Object>map);
+	
 	LectureArchive selectLectureArchiveOne(int lectureArchiveNo);
 	
 	int upLectureArchiveCount(int lectureArchiveNo);
 	
+	int upLectureArchiveFileCount(String lectureArchiveFileUuid);
+	
 	int totalLectureArchive(String accountId);
+	
+	int totalSearchLectureArchive(String accountId,String lectureArchiveTitle);
 }

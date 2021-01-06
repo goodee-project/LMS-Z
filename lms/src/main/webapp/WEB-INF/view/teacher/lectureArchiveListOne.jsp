@@ -29,7 +29,7 @@
 		<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">
 			<c:if test="${laf.lectureArchiveFileUuid != null}">
 				<tr>
-					<td>fileName:<a href="${path}/teacher/lectureArchiveFileDownload/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
+					<td>fileName:<a href="${path}/teacher/lectureArchiveFileCountUp/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
 					<td>count:${laf.lectureArchiveFileCount}</td>
 				</tr>
 			</c:if>

@@ -15,4 +15,6 @@ public interface TeacherLectureArchiveFileMapper {
 	int deleteLectureArchiveAllFile(int lectureArchiveNo);
 	
 	List<String> selectLectureArchiveFileUuid(int lectureArchiveNo);
+	
+	int upLectureArchiveFileCount(String lectureArchiveFileUuid);
 }

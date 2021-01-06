@@ -24,10 +24,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td>account_id: <input type="text" name="accountId" readonly="readonly" value="${studentId}"></td>
-		</tr>
-		<tr>
-			<td>question_writer: <input type="text" name="questionWriter"></td>
+			<td>
+				account_id: <input type="text" name="accountId" readonly="readonly" value="${studentId}">
+				question_writer: <input type="text" name="questionWriter" readonly="readonly" value="${student.studentName}">
+			</td>
 		</tr>
 		<tr>
 			<td>question_title: <input type="text" name="questionTitle" id="questionTitle" style="width:460px"></td>
@@ -57,7 +57,7 @@
 	</table>
 	<button type="button" id="submitBtn">등록완료</button>
 </form>		
-	<a href="${path}/student/questionList/1">이전 페이지</a>
+	<a href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
 </body>
 <script>
 	$(document).ready(function() {

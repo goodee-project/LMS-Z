@@ -24,7 +24,7 @@
 	<table border="1">
 		<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">	
 			<tr>
-				<td>fileName:<a href="${path}/student/lectureArchiveFileDownload/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
+				<td>fileName:<a href="${path}/student/lectureArchiveFileCountUp/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
 				<td>count:${laf.lectureArchiveFileCount}</td>
 			</tr>
 		</c:forEach>	

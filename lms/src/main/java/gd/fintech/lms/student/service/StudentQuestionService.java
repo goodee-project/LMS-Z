@@ -29,6 +29,7 @@ import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
 import gd.fintech.lms.vo.QuestionAddForm;
 import gd.fintech.lms.vo.QuestionFile;
+import gd.fintech.lms.vo.Student;
 
 @Service
 public class StudentQuestionService {
@@ -85,6 +86,10 @@ public class StudentQuestionService {
 	public Question getQuestionOne(int questionNo) {
 		Question question = studentQuestionMapper.selectQuestionOne(questionNo);
 		return question;
+	}
+	
+	public Student getStudentName(String accountId) {
+		return studentQuestionMapper.selectStudentName(accountId);
 	}
 	
 	//질문 등록 +(질문 파일)

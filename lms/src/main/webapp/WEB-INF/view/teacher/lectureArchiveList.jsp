@@ -87,7 +87,7 @@
 		</div>
 	</c:if>
 	<input type="hidden" id="teacherId" value="${teacherId}">
-	<input type="text" id="title"> <a id="btn" href="">검색</a>
+	<input type="text" id="title" placeholder="제목으로 검색됩니다"> <a id="btn" href="">검색</a>
 </body>
 <script>
 	$('#btn').on('click',function(){

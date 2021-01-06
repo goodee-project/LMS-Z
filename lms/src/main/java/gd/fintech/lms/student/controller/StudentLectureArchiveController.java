@@ -57,10 +57,49 @@ public class StudentLectureArchiveController {
 		return "/student/lectureArchiveList";
 	}
 	
+	
+	@GetMapping("/student/lectureArchiveSearch/{accountId}/{lectureArchiveTitle}/{currentPage}")
+	public String searchLectureArchive(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureArchiveTitle")String lectureArchiveTitle,
+			@PathVariable(name="currentPage")int currentPage) {
+		
+		int rowPerPage=1;
+		List<LectureArchive> lectureArchive = studentLectureArchiveService.getLectureArchiveSearchList(currentPage, rowPerPage, accountId, lectureArchiveTitle);
+		int searchCount = studentLectureArchiveService.searchCountLectureArchive(accountId, lectureArchiveTitle);
+		int searchUnderPerPage = 10;	
+		int searchUnderFirstPage = currentPage - (currentPage % searchUnderPerPage) + 1;
+		int searchUnderLastPage = searchUnderFirstPage + searchUnderPerPage - 1;
+		
+		if (currentPage % searchUnderPerPage == 0 && currentPage != 0) {
+			searchUnderFirstPage = searchUnderFirstPage - searchUnderPerPage;
+			searchUnderLastPage = searchUnderLastPage - searchUnderPerPage;
+		}
+		
+		int lastPage = searchCount/rowPerPage;
+		if(searchCount % rowPerPage !=0) {
+			lastPage +=1;
+		}
+		model.addAttribute("searchUnderPerPage",searchUnderPerPage);
+		model.addAttribute("searchUnderFirstPage",searchUnderFirstPage);
+		model.addAttribute("searchUnderLastPage",searchUnderLastPage);
+		model.addAttribute("searchLastPage",lastPage);
+		model.addAttribute("searchCurrentPage",currentPage);
+		model.addAttribute("lectureArchiveTitle",lectureArchiveTitle);
+		model.addAttribute("lectureArchive",lectureArchive);
+		return "/student/lectureArchiveList";
+	}
+	
 	@GetMapping("/student/lectureArchiveCountUp/{lectureArchiveNo}")
 	public String CountUplectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
 		studentLectureArchiveService.upCountLectureArchive(lectureArchiveNo);
 		return "redirect:/student/lectureArchiveOne/{lectureArchiveNo}";
+	}
+	
+	@GetMapping("/student/lectureArchiveFileCountUp/{lectureArchiveFileUuid}")
+	public String CountUplectureArchiveFile(@PathVariable(name="lectureArchiveFileUuid")String lectureArchiveFileUuid) {
+		studentLectureArchiveService.upCountLectureArchiveFile(lectureArchiveFileUuid);
+		return "redirect:/student/lectureArchiveFileDownload/{lectureArchiveFileUuid}";
 	}
 	
 	@GetMapping("/student/lectureArchiveOne/{lectureArchiveNo}")

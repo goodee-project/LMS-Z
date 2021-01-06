@@ -205,4 +205,8 @@ public class TeacherLectureArchiveService {
 	public int upCountLectureArchive(int lectureArchiveNo) {
 		return teacherLectureArchiveMapper.upLectureArchiveCount(lectureArchiveNo);
 	}
+	
+	public int upCountLectureArchiveFile(String lectureArchiveFileUuid) {
+		return teacherLectureArchiveFileMapper.upLectureArchiveFileCount(lectureArchiveFileUuid);
+	}
 }
