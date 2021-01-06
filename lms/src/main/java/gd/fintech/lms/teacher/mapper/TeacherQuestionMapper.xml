@@ -55,6 +55,7 @@
 	<select id="selectQuestionOne" resultMap="selectQuestionOneResult" parameterType="java.util.Map">
 		SELECT
 			q.question_no,
+			q.lecture_no,
 			q.account_id,
 			q.question_writer,
 			q.question_title,
