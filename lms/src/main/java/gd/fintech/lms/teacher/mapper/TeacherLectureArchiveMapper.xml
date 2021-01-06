@@ -44,8 +44,40 @@
   			 left join subject s 
   			 on l.subject_no = s.subject_no
   		WHERE la.account_id = #{accountId}
+  		ORDER BY la.lecture_archive_createdate DESC
   		LIMIT #{beginRow},#{rowPerPage}
   	</select>
+  	
+  	<select id="selectLectureArchiveSearchTitle" resultMap="selectLectureArchive" parameterType="java.util.Map">
+  		SELECT
+  			la.lecture_archive_no,
+  			la.lecture_no,
+  			la.account_id,
+  			la.lecture_archive_writer,
+  			la.lecture_archive_title,
+  			la.lecture_archive_createdate,
+  			la.lecture_archive_updatedate,
+  			la.lecture_archive_count,
+  			l.teacher_name,
+  			l.lecture_name,
+  			s.subject_no,
+  			s.subject_name
+  		FROM lecture_archive la left join lecture l
+  			 on la.lecture_no = l.lecture_no
+  			 left join subject s 
+  			 on l.subject_no = s.subject_no
+  		WHERE la.account_id = #{accountId} AND la.lecture_archive_title LIKE CONCAT('%',#{lectureArchiveTitle},'%')
+  		ORDER BY la.lecture_archive_createdate DESC
+  		LIMIT #{beginRow},#{rowPerPage}
+  	</select>
+  	
+  	<select id="totalSearchLectureArchive" parameterType="String" resultType="int">
+  		SELECT
+  			count(*) count
+  		FROM lecture_archive 
+  		WHERE account_id = #{accountId} AND lecture_archive_title LIKE CONCAT('%',#{lectureArchiveTitle},'%')
+  	</select>
+  	
   	<select id="totalLectureArchive" parameterType="String" resultType="int">
   		SELECT
   			count(*) count
@@ -144,4 +176,9 @@
 		WHERE lecture_archive_no = #{lectureArchiveNo}
 	</delete>
   	
+  	<update id="upLectureArchiveCount" parameterType="int">
+		UPDATE lecture_archive
+  		SET lecture_archive_count = lecture_archive_count+1
+  		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</update>
   </mapper>

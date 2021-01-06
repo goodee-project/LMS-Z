@@ -10,7 +10,7 @@
 </head>
 <body>
 	<a href="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureArchiveNo}">수정</a>
-	<a href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}">삭제</a>
+	<a href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}/${teacherId}">삭제</a>
 	<table border="1">
 		<tr>
 			<td>lecture_no: ${lectureArchive.lectureNo }</td>

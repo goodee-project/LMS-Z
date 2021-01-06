@@ -39,10 +39,24 @@ public class TeacherLectureArchiveService {
 		return teacherLectureArchiveMapper.selectLectureArchive(map);
 	}
 	
+	public List<LectureArchive> getLectureArchiveSearchList(int currentPage, int rowPerPage, String accountId, String lectureArchiveTitle){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("accountId", accountId);
+		map.put("lectureArchiveTitle", lectureArchiveTitle);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		System.out.println(lectureArchiveTitle);
+		return teacherLectureArchiveMapper.selectLectureArchiveSearchTitle(map);
+	}
+	
 	public int listCountLectureArchive(String accountId) {
 		return teacherLectureArchiveMapper.totalLectureArchive(accountId);
 	}
 	
+	public int searchCountLectureArchive(String accountId, String lectureArchiveTitle) {
+		return teacherLectureArchiveMapper.totalSearchLectureArchive(accountId, lectureArchiveTitle);
+	}
 	public void addLectureArchive(LectureArchiveAddForm lectureArchiveAddForm) {
 		LectureArchive lectureArchive = new LectureArchive();
 		
@@ -186,5 +200,9 @@ public class TeacherLectureArchiveService {
 				teacherLectureArchiveFileMapper.insertLectureArchiveFile(lf);
 			}
 		}
+	}
+	
+	public int upCountLectureArchive(int lectureArchiveNo) {
+		return teacherLectureArchiveMapper.upLectureArchiveCount(lectureArchiveNo);
 	}
 }

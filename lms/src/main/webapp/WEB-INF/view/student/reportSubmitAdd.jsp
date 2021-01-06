@@ -89,7 +89,8 @@
 		});
 	
 		$('#submitBtn').click(function(){
-			var str_space = /\s/;
+			var blank_patten = /\s|　/gi;
+			var reportSubmitContent = $('#reportSubmitContent').val();
 			let ck = true;
 			oEditors.getById["reportSubmitContent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$('.reportSubmitFile').each(function(index, item){
@@ -100,11 +101,11 @@
 			if(ck == false){
 				alert('파일을 선택해 주세요');
 			}
-			else if(str_space.exec($('#reportSubmitTitle'))){
-				alert('제목을 입력해주세요.');
+			else if($('#reportSubmitTitle').val().replace(blank_patten,"")==""){
+				alert('제목을 입력해 주세요');
 				}
-			else if(str_space.exec($('#reportSubmitContent'))){
-				alert('내용을 입력해주세요.');
+			else if( reportSubmitContent == ""  || reportSubmitContent == null || reportSubmitContent == '&nbsp;' || reportSubmitContent == '<p>&nbsp;</p>'){
+				alert('내용을 입력해 주세요');
 				}
 			else{
 				$('#reportSubmitAdd').submit();

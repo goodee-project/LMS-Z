@@ -23,19 +23,43 @@
 			</tr>
 		</thead>	
 		<tbody>
-			<c:forEach var="la" items="${lectureArchive}">
-				<tr>
-					<td><a href="${path}/student/lectureArchiveOne/${la.lectureArchiveNo}">${la.lectureArchiveNo}</a></td>
-					<td>${la.lectureNo}</td>
-					<td>${la.accountId}</td>
-					<td>${la.lectureArchiveWriter}</td>
-					<td>${la.lectureArchiveTitle}</td>
-					<td>${la.lectureArchiveContent}</td>
-					<td>${la.lectureArchiveUpdatedate}</td>
-					<td>${la.lectureArchiveCount}</td>
-				</tr>
-			</c:forEach>
+			<c:if test="${!empty lectureArchive}">
+				<c:forEach var="la" items="${lectureArchive}">
+					<tr>
+						<td><a href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureArchiveNo}</a></td>
+						<td>${la.lectureNo}</td>
+						<td>${la.accountId}</td>
+						<td>${la.lectureArchiveWriter}</td>
+						<td>${la.lectureArchiveTitle}</td>
+						<td>${la.lectureArchiveContent}</td>
+						<td>${la.lectureArchiveUpdatedate}</td>
+						<td>${la.lectureArchiveCount}</td>
+					</tr>
+				</c:forEach>
+			</c:if>	
+			<c:if test="${empty lectureArchive}">
+					<tr>
+						<td colspan="8">등록된 게시물이 없습니다.</td>
+					</tr>
+			</c:if>
 		</tbody>
 	</table>
+	<div>
+		<c:if test="${listCurrentPage>1}">
+			<a href="${path}/student/lectureArchiveList/${studentId}/1">처음으로</a>
+			<a href="${path}/student/lectureArchiveList/${studentId}/${listCurrentPage-1}">이전</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${listUnderFirstPage}" end="${listUnderLastPage}">
+			<c:if test="${i<=lastPage}">
+				<a href="${path}/student/lectureArchiveList/${studentId}/${i}">${i}</a>
+			</c:if>
+		</c:forEach>
+		
+		<c:if test="${listCurrentPage<lastPage}">
+			<a href="${path}/student/lectureArchiveList/${studentId}/${listCurrentPage+1}">다음</a>
+			<a href="${path}/student/lectureArchiveList/${studentId}/${lastPage}">마지막으로</a>
+		</c:if>
+	</div>
 </body>
 </html>

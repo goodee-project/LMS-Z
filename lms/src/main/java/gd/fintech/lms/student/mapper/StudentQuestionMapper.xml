@@ -61,7 +61,7 @@
 	  		 on q.lecture_no = l.lecture_no
 	  		 left join class_registration cr
 	  		 on q.lecture_no = cr.lecture_no
-  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId}
+  		WHERE q.question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId}
   		LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	

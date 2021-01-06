@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<a href="${path}/teacher/lectureArchiveAdd/${teacherId}">자료 추가</a>
@@ -28,7 +29,7 @@
 			<c:if test="${!empty lectureArchiveList}">
 				<c:forEach var="la" items="${lectureArchiveList}">
 					<tr>	
-						<td><a href="${path}/teacher/lectureArchiveOne/${la.lectureArchiveNo}">${la.lectureNo}: ${la.lecture.lectureName}</a></td>
+						<td><a href="${path}/teacher/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureNo}: ${la.lecture.lectureName}</a></td>
 						<td>${la.accountId}: ${la.lecture.teacherName}</td>
 						<td>${la.subject.subjectNo}: ${la.subject.subjectName}</td>
 						<td>${la.lectureArchiveWriter}</td>
@@ -64,5 +65,38 @@
 			<a href="${path}/teacher/lectureArchiveList/${teacherId}/${lastPage}">마지막으로</a>
 		</c:if>
 	</div>
+	
+	<!-- 검색 페이징 -->
+	<c:if test="${lectureArchiveTitle != null}">
+		<div>
+			<c:if test="${searchCurrentPage>1}">
+				<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/1">처음으로</a>
+				<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/${searchCurrentPage-1}">이전</a>
+			</c:if>
+			
+			<c:forEach var="s" begin="${searchUnderFirstPage}" end="${searchUnderLastPage}">
+				<c:if test="${s<=searchLastPage}">
+					<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/${s}">${s}</a>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${searchCurrentPage<searchLastPage}">
+				<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/${searchCurrentPage+1}">다음</a>
+				<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/${searchLastPage}">마지막으로</a>
+			</c:if>
+		</div>
+	</c:if>
+	<input type="hidden" id="teacherId" value="${teacherId}">
+	<input type="text" id="title"> <a id="btn" href="">검색</a>
 </body>
+<script>
+	$('#btn').on('click',function(){
+		if($('#title').val()!=''){
+			$('#btn').prop('href',"${path}/teacher/lectureArchiveSearch/"+$('#teacherId').val()+"/"+$('#title').val()+"/1");
+		} 
+		if($('#title').val()==''){
+		$('#btn').prop('href',"${path}/teacher/lectureArchiveList/"+$('#teacherId').val()+"/1");
+		}
+	});		
+</script>
 </html>

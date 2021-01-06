@@ -14,9 +14,11 @@ import gd.fintech.lms.vo.LectureArchive;
 public class StudentLectureArchiveService {
 	@Autowired StudentLectureArchiveMapper studentLectureArchiveMapper;
 	
-	public List<LectureArchive> getLectureArchiveList(String accountId){
+	public List<LectureArchive> getLectureArchiveList(int currentPage, int rowPerPage, String accountId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
 		return studentLectureArchiveMapper.selectLectureArchiveList(map);
 	}
 	
@@ -24,4 +26,11 @@ public class StudentLectureArchiveService {
 		return studentLectureArchiveMapper.selectLectureArchiveOne(lectureArchiveNo);
 	}
 	
+	public int upCountLectureArchive(int lectureArchiveNo) {
+		return studentLectureArchiveMapper.upLectureArchiveCount(lectureArchiveNo);
+	}
+	
+	public int listCountLectureArchive(String accountId) {
+		return studentLectureArchiveMapper.totalLectureArchive(accountId);
+	}
 }

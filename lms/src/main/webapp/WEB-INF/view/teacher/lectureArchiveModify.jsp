@@ -41,7 +41,7 @@
 				<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">
 					<div>
 						<span id="${laf.lectureArchiveFileOriginal}">${laf.lectureArchiveFileOriginal}
-							<a href="${path}/teacher/lectureArchiveOneFileRemove/${laf.lectureArchiveFileUuid}">삭제</a>
+							<a href="${path}/teacher/lectureArchiveOneFileRemove/${laf.lectureArchiveFileUuid}/${lectureArchive.lectureArchiveNo}/${teacherId}">삭제</a>
 						</span>
 					
 					</div>

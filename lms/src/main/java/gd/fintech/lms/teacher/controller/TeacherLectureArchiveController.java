@@ -49,9 +49,9 @@ public class TeacherLectureArchiveController {
 			listUnderLastPage = listUnderLastPage - listUnderPerPage;
 		}
 		
-		int totalReport = teacherLectureArchiveService.listCountLectureArchive(accountId);
-		int lastPage = totalReport/rowPerPage;
-		if(totalReport % rowPerPage !=0) {
+		int totalArchive = teacherLectureArchiveService.listCountLectureArchive(accountId);
+		int lastPage = totalArchive/rowPerPage;
+		if(totalArchive % rowPerPage !=0) {
 			lastPage +=1;
 		}
 		model.addAttribute("listUnderPerPage",listUnderPerPage);
@@ -59,6 +59,38 @@ public class TeacherLectureArchiveController {
 		model.addAttribute("listUnderLastPage",listUnderLastPage);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("listCurrentPage",currentPage);
+		model.addAttribute("lectureArchiveList",lectureArchiveList);
+		return "/teacher/lectureArchiveList";
+	}
+	
+	@GetMapping("/teacher/lectureArchiveSearch/{accountId}/{lectureArchiveTitle}/{currentPage}")
+	public String searchLectureArchive(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureArchiveTitle")String lectureArchiveTitle,
+			@PathVariable(name="currentPage")int currentPage) {
+		
+		int rowPerPage=1;
+		List<LectureArchive> lectureArchiveList = teacherLectureArchiveService.getLectureArchiveSearchList(currentPage, rowPerPage, accountId, lectureArchiveTitle);
+		int searchCount = teacherLectureArchiveService.searchCountLectureArchive(accountId, lectureArchiveTitle);
+		int searchUnderPerPage = 10;	
+		int searchUnderFirstPage = currentPage - (currentPage % searchUnderPerPage) + 1;
+		int searchUnderLastPage = searchUnderFirstPage + searchUnderPerPage - 1;
+		
+		if (currentPage % searchUnderPerPage == 0 && currentPage != 0) {
+			searchUnderFirstPage = searchUnderFirstPage - searchUnderPerPage;
+			searchUnderLastPage = searchUnderLastPage - searchUnderPerPage;
+		}
+		
+		int lastPage = searchCount/rowPerPage;
+		if(searchCount % rowPerPage !=0) {
+			lastPage +=1;
+		}
+		model.addAttribute("searchUnderPerPage",searchUnderPerPage);
+		model.addAttribute("searchUnderFirstPage",searchUnderFirstPage);
+		model.addAttribute("searchUnderLastPage",searchUnderLastPage);
+		model.addAttribute("searchLastPage",lastPage);
+		model.addAttribute("searchCurrentPage",currentPage);
+		model.addAttribute("lectureArchiveTitle",lectureArchiveTitle);
 		model.addAttribute("lectureArchiveList",lectureArchiveList);
 		return "/teacher/lectureArchiveList";
 	}
@@ -80,6 +112,12 @@ public class TeacherLectureArchiveController {
 		String content = lectureArchiveAddForm.getLectureArchiveContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lectureArchiveAddForm.setLectureArchiveContent(content);
 		return "redirect:/teacher/lectureArchiveList/"+teacherId+"/1";
+	}
+	
+	@GetMapping("/teacher/lectureArchiveCountUp/{lectureArchiveNo}")
+	public String CountUplectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
+		teacherLectureArchiveService.upCountLectureArchive(lectureArchiveNo);
+		return "redirect:/teacher/lectureArchiveOne/{lectureArchiveNo}";
 	}
 	
 	@GetMapping("/teacher/lectureArchiveOne/{lectureArchiveNo}")
@@ -109,16 +147,18 @@ public class TeacherLectureArchiveController {
 	}
 	
 	
-	@GetMapping("/teacher/lectureArchiveOneFileRemove/{lectureArchiveFileUuid}")
-	public String removeLectureArchiveOneFile(@PathVariable(name="lectureArchiveFileUuid")String lectureArchiveFileUuid) {
+	@GetMapping("/teacher/lectureArchiveOneFileRemove/{lectureArchiveFileUuid}/{lectureArchiveNo}/{accountId}")
+	public String removeLectureArchiveOneFile(@PathVariable(name="lectureArchiveFileUuid")String lectureArchiveFileUuid,
+			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
+			@PathVariable(name="accountId")String accountId) {
 		teacherLectureArchiveService.deleteLectureArchiveOneFile(lectureArchiveFileUuid);
-		return "redirect:/teacher/";
+		return "redirect:/teacher/lectureArchiveModify/{accountId}/{lectureArchiveNo}";
 	}
-	@GetMapping("/teacher/lectureArchiveRemove/{lectureArchiveNo}")
-	public String removeLectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
+	@GetMapping("/teacher/lectureArchiveRemove/{lectureArchiveNo}/{accountId}")
+	public String removeLectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
+			@PathVariable(name="accountId")String accountId) {
 		teacherLectureArchiveService.deleteLectureArchive(lectureArchiveNo);
-		System.out.println(lectureArchiveNo);
-		return "redirect:/teacher/";
+		return "redirect:/teacher/lectureArchiveList/{accountId}/1";
 	}
 	
 	

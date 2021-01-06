@@ -14,7 +14,11 @@ public interface TeacherLectureArchiveMapper {
 	// 자료실 리스트
 	List<LectureArchive> selectLectureArchive(Map<String, Object>map);
 	
+	List<LectureArchive> selectLectureArchiveSearchTitle(Map<String, Object>map);
+	
 	int totalLectureArchive(String accountId);
+	
+	int totalSearchLectureArchive(String accountId,String lectureArchiveTitle);
 	
 	int insertLectureArchive(LectureArchive lectureArchive);
 	
@@ -25,4 +29,6 @@ public interface TeacherLectureArchiveMapper {
 	LectureArchive selectLectureArchiveOne(int lectureArchiveNo);
 	
 	int updateLectureArchive(LectureArchive lectureArchive);
+	
+	int upLectureArchiveCount(int lectureArchiveNo);
 }

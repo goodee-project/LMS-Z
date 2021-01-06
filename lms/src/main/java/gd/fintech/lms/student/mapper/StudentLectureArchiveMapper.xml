@@ -62,10 +62,25 @@
 			la.lecture_archive_writer,
 			la.lecture_archive_title,
 			la.lecture_archive_content,
-			la.lecture_archive_updatedate,
+			la.lecture_archive_createdate,
 			la.lecture_archive_count 
 		FROM lecture_archive la LEFT JOIN class_registration cr
 			 ON la.lecture_no = cr.lecture_no
 		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
+		LIMIT #{beginRow},#{rowPerPage}
 	</select>
+	
+	<select id="totalLectureArchive" resultType="int" parameterType="String">
+		SELECT
+  			count(*) count
+  		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+  		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
+	</select>
+	
+	<update id="upLectureArchiveCount" parameterType="int">
+		UPDATE lecture_archive
+  		SET lecture_archive_count = lecture_archive_count+1
+  		WHERE lecture_archive_no = #{lectureArchiveNo}
+	</update>
 </mapper>
