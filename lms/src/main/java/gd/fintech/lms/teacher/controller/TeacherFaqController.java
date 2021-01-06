@@ -44,6 +44,7 @@ public class TeacherFaqController {
 			List<FaqCategory> category = teacherFaqService.getFaqCategoryList();
 			model.addAttribute("faqList", faqList);
 			model.addAttribute("category", category);
+			model.addAttribute("currentCategory", faqCategory);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("lastPage", lastPage);
@@ -60,6 +61,7 @@ public class TeacherFaqController {
 			List<Faq> faqList = teacherFaqService.getFaqListByCategory(faqCategory, beginRow, rowPerPage);
 			List<FaqCategory> category = teacherFaqService.getFaqCategoryList();
 			model.addAttribute("faqList", faqList);
+			model.addAttribute("currentCategory", faqCategory);
 			model.addAttribute("category", category);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("startPage", startPage);

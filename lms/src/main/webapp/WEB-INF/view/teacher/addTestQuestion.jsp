@@ -24,7 +24,7 @@
 			<tr>
 				<td>문제 내용</td>
 				<td>
-					<textarea rows="5" cols="50" id="multiplechoiceQuestion" name="multiplechoiceQuestion"></textarea>
+					<input type="text" id="multiplechoiceQuestion" name="multiplechoiceQuestion">
 					<div id="choiceQuestion"></div>
 				</td>
 			</tr>

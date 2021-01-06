@@ -16,7 +16,7 @@
 							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
-
+								GOODEE LMS
                             </span>
                         </a>
                     </div>

@@ -196,7 +196,8 @@
 			INNER JOIN multiplechoice m
 			ON an.multiplechoice_no = m.multiplechoice_no
 			WHERE s.student_id = an.account_id
-			AND an.multiplechoice_no = m.multiplechoice_no) > 0, '제출', '미제출')) AS submissionStatus
+			AND an.multiplechoice_no = m.multiplechoice_no
+			AND m.lecture_no = #{lectureNo}) > 0, '제출', '미제출')) AS submissionStatus
 		FROM student s INNER JOIN class_registration c
 		ON s.student_id = c.account_id
 		WHERE c.lecture_no = #{lectureNo}

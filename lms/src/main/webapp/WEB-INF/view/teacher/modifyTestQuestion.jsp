@@ -21,7 +21,7 @@
 			<tr>
 				<td>문제 내용</td>
 				<td>
-					<textarea rows="5" cols="50" id="multiplechoiceQuestion" name="multiplechoiceQuestion">${testOne.multiplechoiceQuestion}</textarea>
+					<input type="text" id="multiplechoiceQuestion" name="multiplechoiceQuestion" value="${testOne.multiplechoiceQuestion}">
 					<div id="choiceQuestion"></div>
 				</td>
 			</tr>
