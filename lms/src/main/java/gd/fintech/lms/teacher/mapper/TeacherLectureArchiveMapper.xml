@@ -181,4 +181,11 @@
   		SET lecture_archive_count = lecture_archive_count+1
   		WHERE lecture_archive_no = #{lectureArchiveNo}
 	</update>
+	<!-- 강좌와 연결되어있는 자료번호 출력 -->
+	<select id="selectArchiveAndLecture" parameterType="int" resultType="int">
+		SELECT
+			lecture_archive_no
+		FROM lecture_archive
+		WHERE lecture_no = #{lectureNo}
+	</select>
   </mapper>

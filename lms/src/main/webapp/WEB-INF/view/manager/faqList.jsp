@@ -71,65 +71,73 @@
 			<br>
 			<!-- 테이블 -->
 			<div class="row">
-				<div class="col-mb-3 col-12">
+				<div class="col-mb-12 col-12">
 					<div class="card" id="cardStyle">
 						<div class="card-body">
+							<div class="row">
+								<div class="col-lg-5 col-md-5"></div>
+								<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
+								<div class="col-lg-5 col-md-5">
+									<input type="text" id="faqTitle" value="${faqTitle}" class="form-control-plaintext form-control border-black form-sm">
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn" href="">검색</a>
+								</div>
+							</div>
 							<div class="table-responsive">
-								<table class="table no-wrap v-middle mb-0">
+								<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 									<thead>
-										<tr class="border-0">
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">NO</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">카테고리</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">제목</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">게시일</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">조회수</th>
+										<tr>
+											<th>NO</th>
+											<th>카테고리</th>
+											<th>작성자</th>
+											<th>제목</th>
+											<th>게시일</th>
+											<th>조회수</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="f" items="${faqList}" varStatus="status">
 											<tr>
-												<td class="border-top-0 text-muted px-2 py-4 font-14">
-													<div class="d-flex no-block align-items-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium">
+														<h5>
 															<span>${ruleNo-(status.index)}</span> 
 															<span hidden="hidden">${f.faqNo}</span>
 														</h5>
 													</div>
 												</td>
 
-												<td class="border-top-0 px-2 py-4">
-													<div class="d-flex no-block align-items-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium">${f.faqCategory}</h5>
+														<h5>${f.faqCategory}</h5>
 													</div>
 												</td>
-												<td class="border-top-0 text-center px-2 py-4">
-													<div class="d-flex no-block align-items-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium">${f.faqWriter }</h5>
+														<h5>${f.faqWriter }</h5>
 													</div>
 												</td>
 
-												<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-													<div class="d-flex no-block align-self-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
-														<h5
-															class="text-dark mb-0 font-16 font-weight-medium align-self-center">
-															<a
-																href="${path }/manager/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
+														<h5>
+															<a href="${path }/manager/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
 														</h5>
 													</div>
 												</td>
-												<td class="border-top-0 text-center px-2 py-4">
-													<div class="d-flex no-block align-items-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
 														<h5 class="text-dark mb-0 font-16 font-weight-medium">${f.faqCreatedate}</h5>
 													</div>
 												</td>
-												<td class="border-top-0 text-center px-2 py-4">
-													<div class="d-flex no-block align-items-center">
+												<td>
+													<div>
 														<!-- 굵은 글씨 -->
 														<h5 class="text-dark mb-0 font-16 font-weight-medium">${f.faqCount }</h5>
 													</div>
@@ -141,111 +149,107 @@
 								<!-- 페이징 -->
 								<br>
 								<!-- 페이징 처리 - 검색하지 않았을 때-->
-								<c:if test="${faqTitle == '' }">
-									<div class="list-inline text-center mt-4 mb-0">
-										<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
-										<c:if test="${startPage!=1 && lastPage!=1}">
-											<span> <a
-												href="${path}/manager/faqList/${currentFaqCategory }/${startPage-10}">이전&nbsp;&nbsp;</a>
-											</span>
-										</c:if>
-										<!-- lastPage가 10개를 채울수 없을 때 -->
-										<c:if test="${startPage+9 > lastPage }">
-											<c:forEach var="i" begin="${startPage }" end="${lastPage}">
-												<!-- 현재 페이지일 경우 -->
-												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-												<!-- 현재 페이지가 아닐 경우 -->
-												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/manager/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-											</c:forEach>
-										</c:if>
-										<c:if test="${startPage+9<lastPage }">
-											<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
-												<!-- 현재 페이지일 경우 -->
-												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-												<!-- 현재 페이지가 아닐 경우 -->
-												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/manager/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-											</c:forEach>
-										</c:if>
-										<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
-										<c:if test="${startPage+9<lastPage && lastPage != startPage}">
-											<span> <a
-												href="${path}/manager/faqList/${currentFaqCategory }/${startPage+10}">다음&nbsp;&nbsp;</a>
-											</span>
-										</c:if>
-									</div>
-								</c:if>
-
-								<!-- 페이징 처리 - 검색했을 때  -->
-								<c:if test="${faqTitle != '' }">
-									<div class="list-inline text-center mt-4 mb-0">
-										<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
-										<c:if test="${startPage!=1 && lastPage!=1}">
-											<span> <a
-												href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${startPage-10}">이전&nbsp;&nbsp;</a>
-											</span>
-										</c:if>
-										<!-- lastPage가 10개를 채울수 없을 때 -->
-										<c:if test="${startPage+9 > lastPage }">
-											<c:forEach var="i" begin="${startPage }" end="${lastPage}">
-												<!-- 현재 페이지일 경우 -->
-												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-												<!-- 현재 페이지가 아닐 경우 -->
-												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-											</c:forEach>
-										</c:if>
-										<c:if test="${startPage+9<lastPage }">
-											<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
-												<!-- 현재 페이지일 경우 -->
-												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-												<!-- 현재 페이지가 아닐 경우 -->
-												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
-													</span>
-												</c:if>
-											</c:forEach>
-										</c:if>
-										<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
-										<c:if test="${startPage+9<lastPage && lastPage != startPage}">
-											<span> <a
-												href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${startPage+10}">다음&nbsp;&nbsp;</a>
-											</span>
-										</c:if>
-									</div>
-								</c:if>
-								<br>
-								<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
-								<div class="list-inline text-center mt-4 mb-0">
-									<input type="text" id="faqTitle" value="${faqTitle}" style="width:250px">&emsp;
-									<a id="searchBtn" href="">검색</a>
+								<div id="paging" style="text-align: center; padding: 7px;">
+									<c:if test="${faqTitle == '' }">
+										<div class="list-inline text-center mt-4 mb-0">
+											<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+											<c:if test="${startPage!=1 && lastPage!=1}">
+												<span> <a
+													href="${path}/manager/faqList/${currentFaqCategory }/${startPage-10}">이전</a>
+												</span>
+											</c:if>
+											<!-- lastPage가 10개를 채울수 없을 때 -->
+											<c:if test="${startPage+9 > lastPage }">
+												<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+													<!-- 현재 페이지일 경우 -->
+													<c:if test="${currentPage == i }">
+														<span> <a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+														</span>
+													</c:if>
+													<!-- 현재 페이지가 아닐 경우 -->
+													<c:if test="${currentPage != i }">
+														<span> <a class="font-18"
+															href="${path}/manager/faqList/${currentFaqCategory }/${i}"></a>
+														</span>
+													</c:if>
+												</c:forEach>
+											</c:if>
+											<c:if test="${startPage+9<lastPage }">
+												<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+													<!-- 현재 페이지일 경우 -->
+													<c:if test="${currentPage == i }">
+														<span> <a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+														</span>
+													</c:if>
+													<!-- 현재 페이지가 아닐 경우 -->
+													<c:if test="${currentPage != i }">
+														<span> <a class="font-18"
+															href="${path}/manager/faqList/${currentFaqCategory }/${i}">${i}</a>
+														</span>
+													</c:if>
+												</c:forEach>
+											</c:if>
+											<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+											<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+												<span> <a
+													href="${path}/manager/faqList/${currentFaqCategory }/${startPage+10}">다음</a>
+												</span>
+											</c:if>
+										</div>
+									</c:if>
 								</div>
-								<br> 
-								<span><a href="${path }/manager/index">메인으로</a></span>&emsp;
-								<span><a href="${path }/manager/addFaqList/${managerId }/${currentPage}">FAQ작성</a></span>
+									<div id="paging" style="text-align: center; padding: 7px;">
+									<!-- 페이징 처리 - 검색했을 때  -->
+									<c:if test="${faqTitle != '' }">
+										<div>
+											<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+											<c:if test="${startPage!=1 && lastPage!=1}">
+												<span> <a
+													href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${startPage-10}">이전</a>
+												</span>
+											</c:if>
+											<!-- lastPage가 10개를 채울수 없을 때 -->
+											<c:if test="${startPage+9 > lastPage }">
+												<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+													<!-- 현재 페이지일 경우 -->
+													<c:if test="${currentPage == i }">
+														<span> <a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+														</span>
+													</c:if>
+													<!-- 현재 페이지가 아닐 경우 -->
+													<c:if test="${currentPage != i }">
+														<span> <a class="font-18"
+															href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}</a>
+														</span>
+													</c:if>
+												</c:forEach>
+											</c:if>
+											<c:if test="${startPage+9<lastPage }">
+												<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+													<!-- 현재 페이지일 경우 -->
+													<c:if test="${currentPage == i }">
+														<span> <a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+														</span>
+													</c:if>
+													<!-- 현재 페이지가 아닐 경우 -->
+													<c:if test="${currentPage != i }">
+														<span> <a class="font-18"
+															href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}</a>
+														</span>
+													</c:if>
+												</c:forEach>
+											</c:if>
+											<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+											<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+												<span> <a
+													href="${path}/manager/faqList/${faqTitle }/${currentFaqCategory }/${startPage+10}">다음</a>
+												</span>
+											</c:if>
+										</div>
+									</c:if>
+								</div>
+								<span><a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/index">메인으로</a></span>
+								<span><a class="btn btn-success" style="border-radius: 4px; float:right;" href="${path }/manager/addFaqList/${managerId }/${currentPage}">FAQ작성</a></span>
 							</div>
 						</div>
 					</div>

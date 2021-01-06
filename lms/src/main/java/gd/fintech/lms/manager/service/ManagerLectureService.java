@@ -16,6 +16,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
+import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
+import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Classroom;
@@ -34,6 +36,8 @@ public class ManagerLectureService {
 	@Autowired StudentQuestionMapper studentQuestionMapper;
 	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
 	@Autowired TeacherTestMapper teacherTestMapper;
+	@Autowired TeacherLectureArchiveMapper teacherLectureArchiveMapper;
+	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -79,12 +83,13 @@ public class ManagerLectureService {
 		//파일 위치의 경로를 지정해주는 코드
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		String attachPath = "uploadfile\\questionfile\\";
+		String attachPath = null;
 		//삭제할 강좌와 연결된 질문 삭제
 		List<Integer> questionNo = studentQuestionMapper.selectLectureNo(lectureNo);
 		for(int q : questionNo) {
 			List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(q);
 			for(String s : questionFileUuid) {
+				attachPath = "uploadfile\\questionfile\\";
 				File file = new File(rootPath+attachPath+s);
 				if(file.exists()) {
 					file.delete();
@@ -100,6 +105,7 @@ public class ManagerLectureService {
 		//삭제할 강좌와 연결된 시험 삭제
 		List<Integer> multiplechoiceNo = teacherTestMapper.selectTestAndLecture(lectureNo);
 		for(int m : multiplechoiceNo) {
+			//학생들의 해당 답안지 삭제
 			// 해당 시험문제의 보기 삭제(외래키로 연결되어있어 먼저 삭제해줌)
 			teacherTestMapper.deleteTestQuestionExample(m);
 			// 해당 시험문제 삭제
@@ -107,6 +113,21 @@ public class ManagerLectureService {
 		}
 		//시험 삭제
 		teacherTestMapper.deleteTest(lectureNo);
+		
+		//삭제할 강좌와 연결된 자료실 삭제
+		List<Integer> lectureArchiveNo = teacherLectureArchiveMapper.selectArchiveAndLecture(lectureNo);
+		for(int l : lectureArchiveNo) {
+			List<String> lectureArchiveFileUuid = teacherLectureArchiveFileMapper.selectLectureArchiveFileUuid(l);
+			attachPath = "uploadfile\\lectureArchivefile\\";
+			for(String lf : lectureArchiveFileUuid) {
+				File file = new File(rootPath + attachPath+lf);
+				if(file.exists()) {
+					file.delete();
+				}
+				teacherLectureArchiveFileMapper.deleteLectureArchiveAllFile(l);
+				teacherLectureArchiveMapper.deleteLectureArchive(l);
+			}
+		}
 		//삭제할 강좌와 연결된 공지사항 삭제
 		teacherLectureNoticeMapper.deleteLecture(lectureNo);
 		//삭제할 강좌와 연결된 레포트 삭제

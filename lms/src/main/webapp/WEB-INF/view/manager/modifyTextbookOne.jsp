@@ -54,31 +54,31 @@
 	                            	<form method="post" action="${path }/manager/modifyTextbookOneAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 		                            		<tr>
-												<td>textbook_isbn :</td>
+												<th style="width:20%;">textbook_isbn :</th>
 												<td><input type="text" class="form-control"name="textbookIsbn" value="${textbookOne.textbookIsbn }" readonly="readonly"></td>
 											</tr>
 											<tr>
-												<td>textbook_title :</td>
+												<th>textbook_title :</th>
 												<td><input type="text" class="form-control"name="textbookTitle" value="${textbookOne.textbookTitle }"></td>
 											</tr>
 											<tr>
-												<td>textbook_writer :</td>
+												<th>textbook_writer :</th>
 												<td><input type="text" class="form-control"name="textbookWriter" value="${textbookOne.textbookWriter }"></td>
 											</tr>
 											<tr>
-												<td>textbook_publisher :</td>
+												<th>textbook_publisher :</th>
 												<td><input type="text" class="form-control"name="textbookPublisher" value="${textbookOne.textbookPublisher }"></td>
 											</tr>
 											<tr>
-												<td>textbook_info :</td>
+												<th>textbook_info :</th>
 												<td><input type="text" class="form-control"name="textbookInfo" value="${textbookOne.textbookInfo }"></td>
 											</tr>
 											<tr>
-												<td>textbook_price :</td>
+												<th>textbook_price :</th>
 												<td><input type="text" class="form-control"name="textbookPrice" value="${textbookOne.textbookPrice }"></td>
 											</tr>
 											<tr>
-												<td>textbook_publishdate :</td>
+												<th>textbook_publishdate :</th>
 												<td><input type="text" class="form-control"name="textbookPublishdate" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
 											</tr>
 										</table>

@@ -54,37 +54,37 @@
 	                            		<tr>
 											<th style="width:10%;">NO</th>
 											<td>
-												<input type="text" class="form-control" value="${lmsNotice.lmsNoticeNo }" readonly="readonly">
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeNo }" readonly="readonly">
 											</td>
 										</tr>
 										<tr>
 											<th>게시일</th>
 											<td>
-												<input type="text" class="form-control"value="${lmsNotice.lmsNoticeCreatedate }" readonly="readonly">
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeCreatedate }" readonly="readonly">
 											</td>
 										</tr>
 										<tr>
 											<th>수정일</th>
 											<td>
-												<input type="text" class="form-control"value="${lmsNotice.lmsNoticeUpdatedate }" readonly="readonly">
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeUpdatedate }" readonly="readonly">
 											</td>
 										</tr>
 										<tr>
 											<th>작성자</th>
 											<td>
-												<input type="text" class="form-control"value="${lmsNotice.lmsNoticeWriter }" readonly="readonly">
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeWriter }" readonly="readonly">
 											</td>
 										</tr>
 										<tr>
 											<th>제목</th>
 											<td>
-												<input type="text" class="form-control"value="${lmsNotice.lmsNoticeTitle }" readonly="readonly">
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeTitle }" readonly="readonly">
 											</td>
 										</tr>
 										<tr>
 											<th>내용</th>
 											<td>
-												<textarea class="form-control" style="resize:none;overflow:visible;" cols="50" readonly="readonly">${lmsNotice.lmsNoticeContent }</textarea>
+												<textarea class="form-control" style="resize:none;overflow:visible; width:100%;" cols="50" readonly="readonly">${lmsNotice.lmsNoticeContent }</textarea>
 											</td>
 										</tr>
 									</table>

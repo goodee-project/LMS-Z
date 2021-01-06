@@ -38,7 +38,7 @@
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
-                    <div class="col-7 align-self-center">
+                    <div class="col-md-8 col-lg-8">
 						<jsp:include page="/WEB-INF/view/manager/inc/chartMenu.jsp" flush="false"></jsp:include>
                     </div>
                 </div>
@@ -46,22 +46,16 @@
             <div class="container-fluid">
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-10 col-md-10">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div>
 	                            <div class="card-body">
-	                           		<h4 class="card-title">강사 가입/탈퇴수</h4>      
-		                           	<div id="chartTable">
-										<span> 연도를 입력하세요 : </span>
-										<input type="text" id="year">
-										<button class="btn btn-outline-secondary" style="border-radius: 4px;" id="teacherInOutCountByYearClick" type="button">Chart보기</button>
-									</div>
-									<br>
-									<div>
-										<span id="teacherInOutCountByYear"></span>
-									</div>
+	                           		<h4 class="card-title">● 강사 가입/탈퇴수</h4>   
 									<div id="chartContainer">
 										<canvas id="teacherInOutCountByYearChart"></canvas>
+									</div>
+									<div>
+										<span id="teacherInOutCountByYear"></span>
 									</div>
 								</div>
 							</div>
@@ -93,11 +87,10 @@
    
 
 <script>
-$('#teacherInOutCountByYearClick').click(function(){
 	$('#teacherInOutCountByYearChart').remove();
 	$("#chartContainer").append('<canvas id="teacherInOutCountByYearChart"></canvas>');
 	$.ajax({
-		url:'${path }/chart/teacherInOutCount/'+$('#year').val(),
+		url:'${path }/chart/teacherInOutCount/',
 		type:'get',
 		success:function(data){
 			let ctx = document.getElementById('teacherInOutCountByYearChart').getContext('2d');
@@ -129,13 +122,13 @@ $('#teacherInOutCountByYearClick').click(function(){
 	$('#teacherInOutCountByYear').html('teacherInOutCountByYear');
 	$.ajax({
 		
-		url:'${path }/chart/teacherInOutCount/'+$('#year').val(),
+		url:'${path }/chart/teacherInOutCount/',
 		type:'get',
 		dataType: 'json',
 		success:function(data){
 			console.log(data);
 			let html=`
-				<table id="chartTable">
+				<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 					<thead>
 						<tr>
 							<th>계정상태</th>
@@ -168,7 +161,7 @@ $('#teacherInOutCountByYearClick').click(function(){
 						</tr>
 					</tbody>
 				</table>
-				<table id="chartTable">
+				<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 					<thead>
 						<tr>
 							<th>계정상태</th>
@@ -205,6 +198,5 @@ $('#teacherInOutCountByYearClick').click(function(){
 			$('#teacherInOutCountByYear').html(html);
 			}
 	});
-});
 </script>
 </html>

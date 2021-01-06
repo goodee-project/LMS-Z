@@ -48,7 +48,7 @@
 				<br>
 				<!-- 1번째 라인 카드 -->
 				<div class="row">
-					<div class="col-md-8 col-lg-8">
+					<div class="col-md-12 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<h4 class="card-title"></h4>
@@ -56,22 +56,22 @@
 									<form method="post" action="${path }/manager/addLmsNotice">
 										<table class="table no-wrap v-middle mb-0">
 											<tr class="border-top-0 px-2 py-4">
-												<th>작성자</th>
+												<th style="width:10%;">작성자</th>
 												<td>
-													<input class="form-control" type="text" name="accountId" value="${managerId }" hidden="hidden">
+													<input class="form-control" style="width:100%;" type="text" name="accountId" value="${managerId }" hidden="hidden">
 													<input class="form-control" type="text" name="lmsNoticeWriter" value="${managerName}" readonly="readonly">
 												</td>
 											</tr>
 											<tr>
 												<th>제목</th>
 												<td>
-													<input class="form-control" type="text" name="lmsNoticeTitle" id="lmsNoticeTitle" style="width:560px">
+													<input class="form-control" style="width:100%;" type="text" name="lmsNoticeTitle" id="lmsNoticeTitle" style="width:560px">
 												</td>
 											</tr>
 											<tr>
 												<th>내용</th>
 												<td>
-													<textarea class="form-control" name="lmsNoticeContent" id="lmsNoticeContent" style="resize:none;overflow:visible;" rows="6"></textarea>
+													<textarea class="form-control" style="width:100%;" name="lmsNoticeContent" id="lmsNoticeContent" style="resize:none;overflow:visible;" rows="6"></textarea>
 												</td>
 											</tr>
 										</table>

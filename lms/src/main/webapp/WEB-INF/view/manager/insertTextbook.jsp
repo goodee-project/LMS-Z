@@ -54,33 +54,39 @@
 	                            	<form method="post" action="${path }/manager/insertTextbookAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 		                            		<tr>
-												<td>textbookIsbn :
-													<input type="text" name="textbookIsbn">
+												<th style="width:20%;">textbookIsbn :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type="text" name="textbookIsbn">
 												</td>
 											</tr>
 											<tr>
-												<td> textbookTitle :
-													<input type = "text" name="textbookTitle">
+												<th> textbookTitle :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type = "text" name="textbookTitle">
 												</td>
 											</tr>
 											<tr>
-												<td> textbookInfo :
-													<input type = "text" name="textbookInfo">
+												<th> textbookInfo :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type = "text" name="textbookInfo">
 												</td>
 											</tr>
 											<tr>
-												<td> textbookPublisher :
-													<input type = "text" name="textbookPublisher">
+												<th> textbookPublisher :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type = "text" name="textbookPublisher">
 												</td>
 											</tr>
 											<tr>
-												<td> textbookPrice :
-													<input type = "text" name="textbookPrice">
+												<th> textbookPrice :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type = "text" name="textbookPrice">
 												</td>
 											</tr>
 											<tr>
-												<td> textbookWriter :
-													<input type = "text" name="textbookWriter">
+												<th> textbookWriter :</th>
+												<td>
+													<input class="form-control" style="width:100%;" type = "text" name="textbookWriter">
 												</td>
 											</tr>
 										</table>

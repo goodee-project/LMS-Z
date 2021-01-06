@@ -49,7 +49,17 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                                <h4 class="card-title">lms 공지사항</h4>
-	                            <div>
+	                            <div class="row">
+	                            	<div class="col-lg-5 col-md-5"></div>
+	                            	<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
+									<div class="col-lg-5 col-md-5">
+										<input type="text" id="lmsNoticeTitle" value="${lmsNoticeTitle}" class="form-control-plaintext form-control border-black form-sm">
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn" href="">검색</a>
+									</div>
+								</div>
+								<div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
 	                            			<tr>
@@ -169,12 +179,6 @@
 												</span>
 											</c:if>
 										</c:if>
-									</div>
-									<br>
-									<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
-									<div class="list-inline text-center mt-4 mb-0">
-										<input type="text" id="lmsNoticeTitle" value="${lmsNoticeTitle}" style="width:250px">&emsp;
-										<a id="searchBtn" href="">검색</a>
 									</div>
 									<br>
 									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/index">메인으로</a>&emsp;

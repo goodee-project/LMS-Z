@@ -31,4 +31,6 @@ public interface TeacherLectureArchiveMapper {
 	int updateLectureArchive(LectureArchive lectureArchive);
 	
 	int upLectureArchiveCount(int lectureArchiveNo);
+	//강좌와 연결된 자료실 목록 출력
+	List<Integer> selectArchiveAndLecture(int lectureNo);
 }

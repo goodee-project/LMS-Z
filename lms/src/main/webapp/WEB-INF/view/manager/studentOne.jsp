@@ -53,48 +53,48 @@
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
-											<td>이름 :</td>
-											<td>${studentOne.studentName }</td>
+											<th style="width:15%;">이름 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentName }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>아이디 :</td>
-											<td>${studentOne.studentId }</td>
+											<th>아이디 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentId }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>이메일 :</td>
-											<td>${studentOne.studentEmail }</td>
+											<th>이메일 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentEmail }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>핸드폰 :</td>
-											<td>${studentOne.studentPhone }</td>
+											<th>핸드폰 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentPhone }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>생일 :</td>
-											<td>${studentOne.studentBirth }</td>
+											<th>생일 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentBirth }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>성별 :</td>
-											<td>${studentOne.studentGender }</td>
+											<th>성별 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentGender }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>주소 :</td>
-											<td>${studentOne.studentAddressMain } , ${studentOne.studentAddressSub }</td>
+											<th>주소 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentAddressMain },${studentOne.studentAddressSub }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>사진 :</td>
+											<th>사진 :</th>
 											<td><img src="/${path }/images/${studentOne.studentImage }" style="width:170px; height:200px;"></td>
 										</tr>
 										<tr>
-											<td>승인날짜 :</td>
-											<td>${studentOne.studentAccessdate }</td>
+											<th>승인날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentAccessdate }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>수정날짜 :</td>
-											<td>${studentOne.studentUpdatedate }</td>
+											<th>수정날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.studentUpdatedate }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>승인한운영자 :</td>
-											<td>${studentOne.managerIdAccess }</td>
+											<th>승인한운영자 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${studentOne.managerIdAccess }" readonly="readonly"></td>
 										</tr>
 									</table>
 									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path}/manager/memberList/1/${searchLevel}">돌아가기</a>

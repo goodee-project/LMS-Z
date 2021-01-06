@@ -14,12 +14,12 @@ import gd.fintech.lms.manager.restmapper.LmsStatsRestMapper;
 public class LmsStatsRestService {
 	@Autowired LmsStatsRestMapper lmsStatsRestMapper;
 	//연도별 강사 가입 수 / 탈퇴 수를 구하기 위한 메퍼 호출
-	public List<Map<String, Object>> getTeacherInOutCount(int year){
-		return lmsStatsRestMapper.selectTeacherInOutCount(year);
+	public List<Map<String, Object>> getTeacherInOutCount(){
+		return lmsStatsRestMapper.selectTeacherInOutCount();
 	}
 	//연도별 강사 가입 수 / 탈퇴 수를 구하기 위한 메퍼 호출
-	public List<Map<String, Object>> getStudentInOutCount(int year){
-		return lmsStatsRestMapper.selectStudentInOutCount(year);
+	public List<Map<String, Object>> getStudentInOutCount(){
+		return lmsStatsRestMapper.selectStudentInOutCount();
 	}
 	//전체 강사와 학생의 수를 구하기 위한 메퍼 호출
 	public Map<String, Object> getTeacherAndStudentCount(){

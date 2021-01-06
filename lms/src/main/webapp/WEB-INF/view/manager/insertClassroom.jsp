@@ -54,24 +54,24 @@
 		                            	<input type="hidden" name="classroomState" value="빈강의실">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 											<tr>
-												<td>강의실 번호</td>
+												<th style="width:20%">강의실 번호</th>
 												<td>
-													<input type="text" id="classroomNumber" name="classroomNumber" >
+													<input class="form-control" style="width:120%;"type="text" id="classroomNumber" name="classroomNumber" >
 													<div id="number"></div>
 												</td>
 												<td><button class="btn btn-outline-secondary" style="border-radius: 4px;"id="btnNumber" type="button" disabled="disabled">중복검사</button></td>
 											</tr>
 											<tr>
-												<td>강의실 크기</td>
+												<th>강의실 크기</th>
 												<td>
-													<input type="text" id="classroomSize" name="classroomSize">
+													<input class="form-control" style="width:120%;" type="text" id="classroomSize" name="classroomSize">
 													<div id="size"></div>
 												</td>
 											</tr>
 											<tr>
-												<td>강의실 인원</td>
+												<th>강의실 인원</th>
 												<td>
-													<input type="text" id="classroomTotal" name="classroomTotal">
+													<input class="form-control" style="width:120%;" type="text" id="classroomTotal" name="classroomTotal">
 													<div id="total"></div>
 												</td>
 											</tr>

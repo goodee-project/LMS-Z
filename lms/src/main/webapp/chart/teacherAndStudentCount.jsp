@@ -49,14 +49,12 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-	                            <h4 class="card-title">lms이용자</h4>
-								<div id="chartTable"></div>
-								<br>
-								<div>
-									<span id="teacherAndStudentTotal"></span>
-								</div>
+	                            <h4 class="card-title">● lms이용자</h4>
 								<div id="chartContainer">
 									<canvas id="teacherAndStudentCountChart"></canvas>
+								</div>
+								<div>
+									<span id="teacherAndStudentTotal"></span>
 								</div>
 							</div>
 						</div>
@@ -114,7 +112,7 @@
 		type:'get',
 		success:function(data){
 			let html=`
-				<table id="chartTable">
+				<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 					<tr>
 						<th>teacher</th>
 						<th>student</th>

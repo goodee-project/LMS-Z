@@ -56,9 +56,9 @@
 		                            		<tr hidden="hidden">
 												<td><input type="text" name="accountId" id="accountId"></td>
 											<tr>
-												<td>subject_name</td>
+												<th style="width:15%;">subject_name</th>
 												<td>
-													<select name="subjectNo">
+													<select class="form-control" style="width:100%;" name="subjectNo">
 														<c:forEach var="s" items="${subjectList }">
 															<option value="${s.subjectNo }">${s.subjectName }</option>
 														</c:forEach>
@@ -92,28 +92,28 @@
 											</tr>
 											 -->
 											 <tr>
-												<td>Name</td>
+												<th>Name</th>
 												<td>
-													<input type="text" name="teacherName" id="teacherNameSelect" readonly>
+													<input class="form-control" style="width:100%;" type="text" name="teacherName" id="teacherNameSelect" readonly>
 													<button class="btn btn-outline-secondary" style="border-radius: 4px;" type="button" id="searchBtn">강사 검색</button>
 												</td>
 											</tr>
 											<tr>
-												<td>lecture_name</td>
+												<th>lecture_name</th>
 												<td>
-													<input type="text" name="lectureName">
+													<input class="form-control" style="width:100%;" type="text" name="lectureName">
 												</td>
 											</tr>
 											<tr>
-												<td>total_date</td>
+												<th>total_date</th>
 												<td>
-													<input type="text" name="lectureTotal">
+													<input class="form-control" style="width:100%;" type="text" name="lectureTotal">
 												</td>
 											</tr>
 											<tr>
-												<td>textbook</td>
+												<th>textbook</th>
 												<td>
-													<select name="textbookIsbn">
+													<select class="form-control" style="width:100%;" name="textbookIsbn">
 														<c:forEach var="t" items="${textbookList }">
 															<option value="${t.textbookIsbn}">${t.textbookTitle }</option>
 														</c:forEach>
@@ -121,9 +121,9 @@
 												</td>
 											</tr>
 											<tr>
-												<td>syllabus</td>
+												<th>syllabus</th>
 												<td>
-													<select name="syllabusNo">
+													<select class="form-control" style="width:100%;" name="syllabusNo">
 														<c:forEach var="s" items="${syllabusList }">
 															<option value="${s.syllabusNo }">${s.syllabusContent }</option>
 														</c:forEach>
@@ -131,9 +131,9 @@
 												</td>
 											</tr>
 											<tr>
-												<td>classroom</td>
+												<th>classroom</th>
 												<td>
-													<select name="classroomNo">
+													<select class="form-control" style="width:100%;" name="classroomNo">
 														<c:forEach var="c" items="${classroomList }">
 															<option value="${c.classroomNo }">${c.classroomNumber }</option>
 														</c:forEach>
@@ -141,15 +141,15 @@
 												</td>
 											</tr>
 											<tr>
-												<td>start_date</td>
+												<th>start_date</th>
 												<td>
-													<input type="date" name="lectureStartdate">
+													<input class="form-control" style="width:100%;" type="date" name="lectureStartdate">
 												</td>
 											</tr>
 											<tr>
-												<td>end_date</td>
+												<th>end_date</th>
 												<td>
-													<input type="date" name="lectureEnddate">
+													<input class="form-control" style="width:100%;" type="date" name="lectureEnddate">
 												</td>
 											</tr>
 										</table>

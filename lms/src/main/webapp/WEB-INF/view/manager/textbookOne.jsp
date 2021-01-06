@@ -53,32 +53,32 @@
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
-											<td>textbook_isbn :</td>
-											<td><span id="textbookIsbn">${textbookOne.textbookIsbn }</span></td>
+											<th style="width:20%;">textbook_isbn :</th>
+											<td><span id="textbookIsbn"><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookIsbn }" readonly="readonly"></span></td>
 										</tr>
 										<tr>
-											<td>textbook_title :</td>
-											<td>${textbookOne.textbookTitle }</td>
+											<th>textbook_title :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookTitle }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>textbook_writer :</td>
-											<td>${textbookOne.textbookWriter }</td>
+											<th>textbook_writer :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookWriter }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>textbook_publisher :</td>
-											<td>${textbookOne.textbookPublisher }</td>
+											<th>textbook_publisher :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPublisher }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>textbook_info :</td>
-											<td>${textbookOne.textbookInfo }</td>
+											<th>textbook_info :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookInfo }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>textbook_price :</td>
-											<td>${textbookOne.textbookPrice }</td>
+											<th>textbook_price :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPrice }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>textbook_publishdate :</td>
-											<td>${textbookOne.textbookPublishdate }</td>
+											<th>textbook_publishdate :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
 										</tr>
 									</table>
 									<a class="btn btn-success" style="border-radius: 4px;" href="${path }/manager/textbookList/1">돌아가기</a>

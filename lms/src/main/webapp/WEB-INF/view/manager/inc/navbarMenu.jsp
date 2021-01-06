@@ -39,26 +39,26 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/memberList/1/선택안함"
                            		aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                               		class="hide-menu">강사/학생리스트</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/chart/teacherInOutCount.jsp"
-                           		aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                              		class="hide-menu">차트</span></a></li>
-                         <!-- 메뉴안에 리스트 넣고 싶으면 사용 -->
-                         <!--  li -> a class = siderbar-link 대신 has-arrow 사용
-                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-1
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-input-grid.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-2
-                                        </span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="form-checkbox-radio.html" class="sidebar-link"><span
-                                            class="hide-menu"> 4-3
-                                        </span></a>
-                                </li>
-                            </ul>
-                        -->
+                         <li class="sidebar-item"> <a class="sidebar-link has-arrow"
+                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
+                                    class="hide-menu">chart</span></a>
+                        <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                            <li class="sidebar-item">
+                            	<a href="${path }/chart/studentInOutCount.jsp" class="sidebar-link">
+                            		<span class="hide-menu">학생 가입/탈퇴 수</span>
+                            	</a>
+                           	</li>
+                           	<li class="sidebar-item">
+                           		<a href="${path }/chart/teacherInOutCount.jsp" class="sidebar-link">
+                           			<span class="hide-menu">강사 가입/탈퇴 수</span>
+                           		</a>
+                          	</li>
+                           	<li class="sidebar-item">
+                           		<a href="${path }/chart/teacherAndStudentCount.jsp" class="sidebar-link">
+                           			<span class="hide-menu">lms이용자 수</span>
+                           		</a>
+                          	</li>
+                        </ul>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/manager/logout"

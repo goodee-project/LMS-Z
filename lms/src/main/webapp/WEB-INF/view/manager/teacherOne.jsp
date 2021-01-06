@@ -53,52 +53,52 @@
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
-											<td>이름 :</td>
-											<td>${teacherOne.teacherName }</td>
+											<th style="width:15%;">이름 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherName }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>아이디 :</td>
-											<td>${teacherOne.teacherId }</td>
+											<th>아이디 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherId }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>이메일 :</td>
-											<td>${teacherOne.teacherEmail }</td>
+											<th>이메일 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherEmail }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>핸드폰 :</td>
-											<td>${teacherOne.teacherPhone }</td>
+											<th>핸드폰 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherPhone }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>생일 :</td>
-											<td>${teacherOne.teacherBirth }</td>
+											<th>생일 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherBirth }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>성별 :</td>
-											<td>${teacherOne.teacherGender }</td>
+											<th>성별 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherGender }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>주소 :</td>
-											<td>${teacherOne.teacherAddressMain } , ${teacherOne.teacherAddressSub }</td>
+											<th>주소 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherAddressMain },${teacherOne.teacherAddressSub }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>사진 :</td>
+											<th>사진 :</th>
 											<td><img src="/${path }/images/${teacherOne.teacherImage }" style="width:170px; height:200px;"></td>
 										</tr>
 										<tr>
-											<td>승인날짜 :</td>
-											<td>${teacherOne.teacherAccessdate }</td>
+											<th>승인날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherAccessdate }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>수정날짜 :</td>
-											<td>${teacherOne.teacherUpdatedate }</td>
+											<th>수정날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherUpdatedate }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>정보 :</td>
-											<td>${teacherOne.teacherInfo }</td>
+											<th>정보 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherInfo }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<td>승인한운영자 :</td>
-											<td>${teacherOne.managerIdAccess }</td>
+											<th>승인한운영자 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.managerIdAccess }" readonly="readonly"></td>
 										</tr>
 									</table>
 									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/memberList/1/${searchLevel}">돌아가기</a>
