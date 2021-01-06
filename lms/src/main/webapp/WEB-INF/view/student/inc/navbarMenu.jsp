@@ -53,15 +53,10 @@
                             	</a>
                            	</li>
                            	<li class="sidebar-item">
-                           		<a href="#" class="sidebar-link">
-                           			<span class="hide-menu"> 4-2</span>
+                           		<a href="${path }/chart/studentReportSubmit.jsp" class="sidebar-link">
+                           			<span class="hide-menu">과제 제출 빈도 chart</span>
                            		</a>
                           	</li>
-                            <li class="sidebar-item">
-                            	<a href="#" class="sidebar-link">
-                            		<span class="hide-menu"> 4-3</span>
-                            	</a>
-                           	</li>
                         </ul>
                         <li class="list-divider"></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/student/logout"

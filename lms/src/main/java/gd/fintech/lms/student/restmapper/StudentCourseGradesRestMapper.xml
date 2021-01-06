@@ -5,8 +5,6 @@
 <mapper namespace="gd.fintech.lms.student.restmapper.StudentCourseGradesRestMapper">
 	<select id="selectCourseGreads" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT
-			nvl(SUM(case when l.lecture_no = 2 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'JAVA123',
-			ROUND(nvl(AVG(case when l.lecture_no = 2 then `as`.score END), 0),1) 'JAVA123Avg',
 			nvl(SUM(case when l.lecture_no = 4 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'fintech',
 			ROUND(nvl(AVG(case when l.lecture_no = 4 then `as`.score END), 0),1) 'fintechAvg',
 			nvl(SUM(case when l.lecture_no = 5 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'JAVAcc',

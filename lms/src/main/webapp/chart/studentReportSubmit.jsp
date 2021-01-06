@@ -31,7 +31,7 @@
             <div class="page-breadcrumb">
             	<div class="row">
 					<div class="col-md-8 col-lg-8">
-						<canvas id="barChart">
+						<canvas id="horizontalBarChart">
 						</canvas>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 					<div class="col-md-5 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
-								<h4 class="card-title">● 성적 및 평균 점수</h4>
+								<h4 class="card-title">● 과제 제출 빈도</h4>
 								<div class="table-responsive">
 									<table class="table no-wrap v-middle mb-0">
 										<thead>
@@ -111,7 +111,7 @@
 			//script에서 session 값 받기
 			let studentId = '<%=(String)session.getAttribute("studentId")%>'
 			$.ajax({
-				url:'${path}/chart/studentCourseGrades/'+studentId,
+				url:'${path}/chart/reportSubmit/'+studentId,
 				type:"get",
 				success:function(data){
 						let html=
@@ -119,7 +119,7 @@
 							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										성적
+										제출한 과제
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
@@ -151,44 +151,44 @@
 							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										강의 평균 성적
+										강의별 과제
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.fintechAvg}
+										\${data.fintechAll}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.JAVAccAvg}
+										\${data.JAVAccAll}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DoraemonAvg}
+										\${data.DoraemonAll}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DigitalEngineeringAvg}
+										\${data.DigitalEngineeringAll}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.CshopAvg}
+										\${data.CshopAll}
 									</span>
 								</td>
 							</tr>
 							`
 						$('#tableBody').html(html)
-					var ctx = document.getElementById('barChart');
+					var ctx = document.getElementById('horizontalBarChart');
 					var chart = new Chart(ctx,{
-						type:'bar',
+						type:'horizontalBar',
 						data:{
-							labels:['JAVA123','fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
+							labels:['fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
 							datasets:[{
-								label:'강의별 성적',
+								label:'과제 제출 빈도',
 								backgroundColor:'rgba(255, 99, 132, 0.5)',
 					            borderColor: 'rgba(255, 99, 132, 1)',
 						        data:[
@@ -199,15 +199,15 @@
 									data.Cshop
 							        ]
 								}, {
-								label:'강의별 평균 성적',
+								label:'강의별 총 과제',
 								backgroundColor:'rgba(54, 162, 235, 0.5)',
 						        borderColor:'rgba(54, 162, 235, 1)',
 							    data:[
-									data.fintechAvg,
-									data.JAVAccAvg,
-									data.DoraemonAvg,
-									data.DigitalEngineeringAvg,
-									data.CshopAvg
+									data.fintechAll,
+									data.JAVAccAll,
+									data.DoraemonAll,
+									data.DigitalEngineeringAll,
+									data.CshopAll
 								    ]
 								}]
 							}
