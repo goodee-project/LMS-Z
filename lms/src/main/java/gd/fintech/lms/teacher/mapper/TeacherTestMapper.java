@@ -57,4 +57,10 @@ public interface TeacherTestMapper {
 	
 	// 해당 학생의 이름
 	Student selectStudentName(String studentId);
+	
+	// 시험 삭제
+	int deleteTest(int lectureNo);
+	
+	// 강좌와 연결된 시험번호 조회
+	List<Integer> selectTestAndLecture(int lectureNo);
 }

@@ -80,7 +80,7 @@ public class ManagerLectureController {
 	@GetMapping("/manager/deleteLecture/{lectureNo}/{classroomNo}/{currentPage}")
 	public String deleteLecture(@PathVariable(name="lectureNo") int lectureNo,
 			@PathVariable(name="classroomNo") int classroomNo,
-			@PathVariable(name="classroomNo") int currentPage) {
+			@PathVariable(name="currentPage") int currentPage) {
 		managerLectureService.deleteLecture(lectureNo);
 		managerLectureService.updateClassroomState(classroomNo);
 		return "redirect:/manager/lectureList/"+currentPage;

@@ -17,6 +17,7 @@ import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
+import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Subject;
@@ -32,6 +33,7 @@ public class ManagerLectureService {
 	@Autowired TeacherLectureNoticeMapper teacherLectureNoticeMapper;
 	@Autowired StudentQuestionMapper studentQuestionMapper;
 	@Autowired StudentQuestionFileMapper studentQuestionFileMapper;
+	@Autowired TeacherTestMapper teacherTestMapper;
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -88,10 +90,23 @@ public class ManagerLectureService {
 					file.delete();
 				}
 			}
+			//해당 질문과 연결된 파일 삭제
 			studentQuestionFileMapper.deleteAllQuestionFile(q);
+			//해당 질문과 연결된 댓글 삭제
 			studentQuestionMapper.deleteQuestionAllComment(q);
+			//질문 삭제
 			studentQuestionMapper.deleteQuestion(q);
 		}
+		//삭제할 강좌와 연결된 시험 삭제
+		List<Integer> multiplechoiceNo = teacherTestMapper.selectTestAndLecture(lectureNo);
+		for(int m : multiplechoiceNo) {
+			// 해당 시험문제의 보기 삭제(외래키로 연결되어있어 먼저 삭제해줌)
+			teacherTestMapper.deleteTestQuestionExample(m);
+			// 해당 시험문제 삭제
+			teacherTestMapper.deleteTestQuestion(m);
+		}
+		//시험 삭제
+		teacherTestMapper.deleteTest(lectureNo);
 		//삭제할 강좌와 연결된 공지사항 삭제
 		teacherLectureNoticeMapper.deleteLecture(lectureNo);
 		//삭제할 강좌와 연결된 레포트 삭제

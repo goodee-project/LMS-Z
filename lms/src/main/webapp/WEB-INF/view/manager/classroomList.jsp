@@ -86,7 +86,7 @@
 								   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 								   		<c:if test="${startPage!=1 && lastPage!=1}">
 								    		<span>
-								    			<a href="${path}/manager/classroomList/${startPage-10}">이전&nbsp;&nbsp;</a>
+								    			<a href="${path}/manager/classroomList/${startPage-10}">이전</a>
 								    		</span>
 								   		</c:if>
 								   		<!-- lastPage가 10개를 채울수 없을 때 -->

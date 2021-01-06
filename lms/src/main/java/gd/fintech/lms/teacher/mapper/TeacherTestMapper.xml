@@ -229,4 +229,16 @@
 		FROM student
 		WHERE student_id = #{studentId}
 	</select>
+	<!-- 시험 삭제를 위한 메퍼 -->
+	<delete id="deleteTest" parameterType="int">
+		DELETE FROM test
+		WHERE lecture_no = #{lectureNo}
+	</delete>
+	<!-- 강좌와 연결된 시험번호 출력 -->
+	<select id="selectTestAndLecture" parameterType="int" resultType="int">
+		SELECT
+			multiplechoice_no
+		FROM multiplechoice
+		WHERE lecture_no = #{lectureNo}
+	</select>
 </mapper>
