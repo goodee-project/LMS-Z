@@ -53,14 +53,14 @@
                     </div>
                 </div>
             </div>
-
+			<div class="container-fluid">
                 <!-- 테이블 -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table no-wrap v-middle mb-0">
+                                    <table id="lmsTable" class="table table" style="margin-top: 20px;">
                                         <thead>
                                             <tr class="border-0">
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">NO.</th>
@@ -110,7 +110,7 @@
                                     </table>
                                   	<!-- 페이징 -->
                                   	<br>
-                                  	<div class="list-inline text-center mt-4 mb-0">
+                                  	<div id="paging" style="text-align: center; padding: 7px;">
 	                                  <c:if test="${startPage!=1 && lastPage!=1}">
 												<span> <a
 													href="${path}/student/lmsNoticeList/${startPage-10}">이전&nbsp;&nbsp;</a>
@@ -121,13 +121,14 @@
 												<c:forEach var="i" begin="${startPage }" end="${lastPage}">
 													<!-- 현재 페이지일 경우 -->
 													<c:if test="${currentPage == i }">
-														<span> <a>${i}&nbsp;&nbsp;</a>
+														<span> 
+															<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 														</span>
 													</c:if>
 													<!-- 현재 페이지가 아닐 경우 -->
 													<c:if test="${currentPage != i }">
-														<span> <a
-															href="${path}/student/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+														<span>
+															<a class="font-18" href="${path}/student/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
 														</span>
 													</c:if>
 												</c:forEach>
@@ -136,13 +137,14 @@
 												<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
 													<!-- 현재 페이지일 경우 -->
 													<c:if test="${currentPage == i }">
-														<span> <a>${i}&nbsp;&nbsp;</a>
+														<span> 
+															<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 														</span>
 													</c:if>
 													<!-- 현재 페이지가 아닐 경우 -->
 													<c:if test="${currentPage != i }">
-														<span> <a
-															href="${path}/student/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
+														<span> 
+															<a class="font-18" href="${path}/student/lmsNoticeList/${i}">${i}&nbsp;&nbsp;</a>
 														</span>
 													</c:if>
 												</c:forEach>
@@ -153,6 +155,7 @@
 													href="${path}/student/student/lmsNoticeList/${startPage+10}">다음&nbsp;&nbsp;</a>
 												</span>
 											</c:if>
+										</div>
                                   	</div>
                                 </div>
                             </div>

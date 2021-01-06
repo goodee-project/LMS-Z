@@ -197,11 +197,11 @@
                 </div>
 				<!-- 강의 정보  -->
                 <div class="row">
-                    <div class="col-md-5 col-lg-7">
+                    <div class="col-md-7 col-lg-7">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<h4 class="card-title">● 강의정보</h4>
-                                <div class="table-responsive">
+                                <div class="">
                                     <table class="table no-wrap v-middle mb-0">
                                         <tr class="border-top-0 px-2 py-4">
                                             <th class="font-14 font-weight-medium text-muted">과목</th>

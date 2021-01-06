@@ -32,15 +32,11 @@
 	</div>
 
 
-	<div id="main-wrapper" data-theme="light" data-layout="vertical"
-		data-navbarbg="skin6" data-sidebartype="full"
-		data-sidebar-position="fixed" data-header-position="fixed"
-		data-boxed-layout="full">
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
-		<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp"
-			flush="false"></jsp:include>
-		<jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp"
-			flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 
 		<!-- 소제목 -->
 		<div class="page-wrapper">
@@ -69,13 +65,14 @@
 				</div>
 			</div>
 			<br>
+			<div class="container-fluid">
 			<!-- 테이블 -->
 			<div class="row">
-				<div class="col-mb-3 col-12">
+				<div class="col-lg-12 col-md-12">
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table no-wrap v-middle mb-0">
+								<table id="lmsTable" class="table table" style="margin-top: 20px;">
 									<thead>
 										<tr class="border-0">
 											<th class="border-0 font-14 font-weight-medium text-muted px-2">NO</th>
@@ -115,10 +112,8 @@
 												<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 													<div class="d-flex no-block align-self-center">
 														<!-- 굵은 글씨 -->
-														<h5
-															class="text-dark mb-0 font-16 font-weight-medium align-self-center">
-															<a
-																href="${path }/student/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
+														<h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
+															<a href="${path }/student/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
 														</h5>
 													</div>
 												</td>
@@ -141,8 +136,8 @@
 								<!-- 페이징 -->
 								<br>
 								<!-- 페이징 처리 - 검색하지 않았을 때-->
-								<c:if test="${faqTitle == '' }">
-									<div class="list-inline text-center mt-4 mb-0">
+								<div id="paging" style="text-align: center; padding: 7px;">
+									<c:if test="${faqTitle == '' }">
 										<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 										<c:if test="${startPage!=1 && lastPage!=1}">
 											<span> <a
@@ -154,13 +149,14 @@
 											<c:forEach var="i" begin="${startPage }" end="${lastPage}">
 												<!-- 현재 페이지일 경우 -->
 												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 												<!-- 현재 페이지가 아닐 경우 -->
 												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/student/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a class="font-18" href="${path}/student/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 											</c:forEach>
@@ -169,13 +165,14 @@
 											<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
 												<!-- 현재 페이지일 경우 -->
 												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 												<!-- 현재 페이지가 아닐 경우 -->
 												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/student/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a class="font-18" href="${path}/student/faqList/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 											</c:forEach>
@@ -186,12 +183,9 @@
 												href="${path}/student/faqList/${currentFaqCategory }/${startPage+10}">다음&nbsp;&nbsp;</a>
 											</span>
 										</c:if>
-									</div>
-								</c:if>
-
+									</c:if>
 								<!-- 페이징 처리 - 검색했을 때  -->
-								<c:if test="${faqTitle != '' }">
-									<div class="list-inline text-center mt-4 mb-0">
+									<c:if test="${faqTitle != '' }">
 										<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
 										<c:if test="${startPage!=1 && lastPage!=1}">
 											<span> <a
@@ -203,13 +197,14 @@
 											<c:forEach var="i" begin="${startPage }" end="${lastPage}">
 												<!-- 현재 페이지일 경우 -->
 												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 												<!-- 현재 페이지가 아닐 경우 -->
 												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/student/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a class="font-18" href="${path}/student/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 											</c:forEach>
@@ -218,13 +213,14 @@
 											<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
 												<!-- 현재 페이지일 경우 -->
 												<c:if test="${currentPage == i }">
-													<span> <a>${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a id="pagingStyle" class="bg-secondary font-18">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 												<!-- 현재 페이지가 아닐 경우 -->
 												<c:if test="${currentPage != i }">
-													<span> <a
-														href="${path}/student/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
+													<span> 
+														<a class="font-18" href="${path}/student/faqList/${faqTitle }/${currentFaqCategory }/${i}">${i}&nbsp;&nbsp;</a>
 													</span>
 												</c:if>
 											</c:forEach>
@@ -235,13 +231,14 @@
 												href="${path}/student/faqList/${faqTitle }/${currentFaqCategory }/${startPage+10}">다음&nbsp;&nbsp;</a>
 											</span>
 										</c:if>
-									</div>
-								</c:if>
+									</c:if>
+								</div>
 								<br>
 								<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
 								<div class="list-inline text-center mt-4 mb-0">
 									<input type="text" id="faqTitle" value="${faqTitle}" style="width:250px">&emsp;
 									<a id="searchBtn" href="">검색</a>
+								</div>
 								</div>
 							</div>
 						</div>

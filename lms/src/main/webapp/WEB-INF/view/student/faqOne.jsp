@@ -92,6 +92,9 @@
 						</div>
 					</div>
 				</div>
+				<div>
+                	<a href="${path }/student/faqList/${faqOne.faqCategory}/${currentPage}">이전</a>
+                </div>
 			</div>
         </div>
     </div>

@@ -31,23 +31,18 @@
 	</div>
 
 
-	<div id="main-wrapper" data-theme="light" data-layout="vertical"
-		data-navbarbg="skin6" data-sidebartype="full"
-		data-sidebar-position="fixed" data-header-position="fixed"
-		data-boxed-layout="full">
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
-		<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp"
-			flush="false"></jsp:include>
-		<jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp"
-			flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 
 		<!-- 소제목 -->
 		<div class="page-wrapper">
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-7 align-self-center">
-						<h3
-							class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
+						<h3 class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
 						<div class="d-flex align-items-center">
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb m-0 p-0">
@@ -59,51 +54,43 @@
 							</nav>
 						</div>
 						<br>
-						<c:if test="${myLectureListOne.classRegistrationState=='수강중'}">
-							<span>
-							<a href="${path }/student/attendance/${studentId}/${lectureNo }/${currentPage}">
-									출석</a>
-							</span>
-							&emsp;
-							<span> <a
-								href="${path }/student/attendance/${studentId}/${lectureNo }/${currentPage}">
-									메세지</a>
-							</span>
-						</c:if>
 					</div>
 				</div>
 			</div>
-				<div>
-					<span  class="col-md-5 col-lg-7" style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
-				</div>
-				<br>
-				<div class="row">
-                    <div class="col-md-5 col-lg-7">
-                        <div class="card" id="cardStyle">
-                            <div class="card-body">
-							<div id="msgListDiv" style="width: 50rem"></div>
+			<div>
+				<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
+			</div>
+			<br>
+			<div class="container-fluid">
+			<div class="row">
+                <div class="col-md-7 col-lg-7">
+                    <div class="card" id="cardStyle">
+                        <div class="card-body" style="margin-top: 20px;">
+						<div id="msgListDiv" style="width: 50rem"></div>
+						<div>
 							<div>
 								<div>
-									<div>
-										<textarea style="resize: none" cols="80" rows="6"
-											id="toTeacherMsgContent" name="msgContent"
-											class="font-weight-medium text-dark px-4 py-4"></textarea>
-									</div>
-								</div>
-								<div>
-									<a href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
-										type="button">뒤로가기</a>
-									<button id="startBtn" type="button">채팅시작</button>
-									<button id="stopBtn" type="button">정지</button>
-									<button type="button" id="studentMsgBtn">입력</button>
+									<textarea style="resize: none;" cols="80" rows="6"
+										id="toTeacherMsgContent" name="msgContent"
+										class="font-weight-medium text-dark px-4 py-4"></textarea>
 								</div>
 							</div>
+							<div>
+								<a class="btn btn-outline-primary" style="border-radius: 4px;"
+									href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
+									type="button">뒤로가기</a>
+								<button class="btn btn-outline-primary" style="border-radius: 4px;" id="startBtn" type="button">채팅시작</button>
+								<button class="btn btn-outline-danger" style="border-radius: 4px;" id="stopBtn" type="button">정지</button>
+								<button class="btn btn-outline-success" style="border-radius: 4px;" type="button" id="studentMsgBtn">입력</button>
+							</div>
 						</div>
+					</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 
 	<!-- script 코드 -->
@@ -189,7 +176,7 @@
 							if(msgList.isConfirm == false){
 							html = `
 								 <div class="font-14 font-weight-medium px-2 py-2">
-								<textarea style="resize:none;overflow:visible;" id="\${index}" readonly="readonly" cols="50"
+								<textarea style="resize:none;overflow:visible;background-color:#FFFFC6" id="\${index}" readonly="readonly" cols="50"
                                 name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                 \${msgList.msgSendDatetime}<span style="color:yellow">1&emsp;</span>
 								</div>
@@ -202,7 +189,7 @@
 							}else if(msgList.isConfirm == true){
 								html = `
 									 <div class="font-14 font-weight-medium px-2 py-2">
-									<textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+									<textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
                                     name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                     \${msgList.msgSendDatetime}
 									</div>
@@ -219,7 +206,7 @@
 								html = `
 									<div class="font-14 font-weight-medium px-2 py-2 float-right">
 									<span style="color:yellow">1&emsp;</span>\${msgList.msgSendDatetime}
-									 <textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+									 <textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
                                     name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                     </div>
 									`
@@ -232,7 +219,7 @@
 								html = `
 									<div class="font-14 font-weight-medium px-2 py-2 float-right">
 									\${msgList.msgSendDatetime}
-									 <textarea style="resize:none;overflow:visible;" id=\${index} readonly="readonly" cols="50"
+									 <textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
                                     name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                     </div>
 									`

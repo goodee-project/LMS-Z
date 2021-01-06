@@ -116,11 +116,11 @@ public class StudentFaqController {
 		
 		// FAQ 상세보기
 		@GetMapping("/student/faqOne/{faqNo}/{currentPage}")
-		public String faqOne(Model model, @PathVariable(name = "faqNo") int faqNo,
-				@PathVariable(name = "currentPage") int currentPage) {
+		public String faqOne(Model model, 
+					@PathVariable(name = "faqNo") int faqNo,
+					@PathVariable(name = "currentPage") int currentPage) {
 			// 조회할 FAQ 정보 가져오기
 			Faq faqOne = managerFaqService.getFaqOne(faqNo);
-
 			model.addAttribute("faqOne", faqOne);
 			model.addAttribute("currentPage", currentPage);
 			return "student/faqOne";
