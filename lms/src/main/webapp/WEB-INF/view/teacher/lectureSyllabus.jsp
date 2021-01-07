@@ -59,43 +59,43 @@
 										<td>${plan.lectureName}(정원 : ${plan.lectureTotal})</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">담당강사</td>
+										<td>담당강사</td>
 										<td>${plan.teacherName}</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">연락처</td>
+										<td>연락처</td>
 										<td>${plan.teacher.teacherEmail} / ${plan.teacher.teacherPhone}</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">강의실</td>
+										<td>강의실</td>
 										<td>${plan.classroom.classroomNumber}호</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">과목</td>
+										<td>과목</td>
 										<td>${plan.lectureName}(정원 : ${plan.lectureTotal})</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">강의시간</td>
+										<td>강의시간</td>
 										<td>${plan.lectureStartdate} ~ ${plan.lectureEnddate}(교육이수 필수 이수시간 : ${plan.subject.subjectTotalday})</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">교재</td>
+										<td>교재</td>
 										<td>${plan.textbook.textbookTitle}(${plan.textbook.textbookPublishdate})</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">저자</td>
+										<td>저자</td>
 										<td>${plan.textbook.textbookWriter}</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">출판사</td>
+										<td>출판사</td>
 										<td>${plan.textbook.textbookPublisher}</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">강의 계획</td>
+										<td>강의 계획</td>
 										<td>${plan.syllabus.syllabusContent}</td>
 									</tr>
 									<tr>
-										<td style="width:10%;">사인</td>
+										<td>사인</td>
 										<td>
 											<img src="${plan.syllabus.syllabusTeachersign}" width="100" height="50">
 										</td>

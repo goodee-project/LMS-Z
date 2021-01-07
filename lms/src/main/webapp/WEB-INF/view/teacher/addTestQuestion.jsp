@@ -3,54 +3,117 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>addTestQuestion</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- 위의 사이트 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
+    <title>addTestQuestion</title>
+    <!-- css -->
+    <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 <body>
-	<h1>새 문제 등록</h1>
+	<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        
+		<jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
+		        
+		<jsp:include page="/WEB-INF/view/teacher/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
-	<form id="test" method="post" action="${path}/teacher/addTestQuestion/${lectureNo}">
-		<input type="hidden" id="lectureNo" name="lectureNo" value="${lectureNo}">
-		<table>
-			<tr>
-				<td>문제 번호</td>
-				<td>
-					<input type="text" id="multiplechoiceId" name="multiplechoiceId">
-					<div id="choiceId"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>문제 내용</td>
-				<td>
-					<input type="text" id="multiplechoiceQuestion" name="multiplechoiceQuestion">
-					<div id="choiceQuestion"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>정답</td>
-				<td>
-					<input type="text" id="multiplechoiceAnswer" name="multiplechoiceAnswer">
-					<div id="choiceAnswer"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>점수</td>
-				<td>
-					<input type="text" id="multiplechoiceScore" name="multiplechoiceScore">
-					<div id="choiceScore"></div>
-				</td>
-			</tr>
-		</table>
-		<c:forEach var="i" begin="1" end="5">
-			<div>보기 번호 : <input type="text" id="multiplechoiceExampleId" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleId" value="${i}" readonly="readonly"></div>
-			<div>보기 문항 : <input type="text" id="multiplechoiceExampleContent${i}" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleContent"></div>
-			<div id="exampleContent${i}"></div>
-			&nbsp;
-		</c:forEach>
-		<button id="btn" type="button">등록</button>
-	</form>
+		<!-- 소제목 -->
+		<div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">TestQuestion</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- 내용 -->
+            <div class="container-fluid">
+            	<div class="row">
+            		<div class="col-lg-12 col-md-12">
+            			<div class="card" id="card-style">
+            				<div class="card-body">
+            					<h4 class="card-title">새 문제 등록</h4>
+            					
+            					<form action="${path}/teacher/addTestQuestion/${lectureNo}" method="post" id="test">
+            						<input type="hidden" id="lectureNo" name="lectureNo" value="${lectureNo}">
+            						<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
+            							<tr>
+											<td style="width:10%;">문제 번호</td>
+											<td>
+												<input class="form-control" type="text" id="multiplechoiceId" name="multiplechoiceId">
+												<div id="choiceId"></div>
+											</td>
+										</tr>
+										<tr>
+											<td>문제 내용</td>
+											<td>
+												<input class="form-control" type="text" id="multiplechoiceQuestion" name="multiplechoiceQuestion">
+												<div id="choiceQuestion"></div>
+											</td>
+										</tr>
+										<tr>
+											<td>정답</td>
+											<td>
+												<input class="form-control" type="text" id="multiplechoiceAnswer" name="multiplechoiceAnswer">
+												<div id="choiceAnswer"></div>
+											</td>
+										</tr>
+										<tr>
+											<td>점수</td>
+											<td>
+												<input class="form-control" type="text" id="multiplechoiceScore" name="multiplechoiceScore">
+												<div id="choiceScore"></div>
+											</td>
+										</tr>
+            						</table>
+            						
+            						<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
+            							<thead>
+            								<tr>
+            									<th style="width:20%;">보기번호</th>
+            									<th>보기문항</th>
+            								</tr>
+            							</thead>
+            							<tbody>
+            								<c:forEach var="i" begin="1" end="5">
+            									<tr>
+            										<td><input class="form-control text-center" type="text" id="multiplechoiceExampleId" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleId" value="${i}" readonly="readonly"></td>
+            										<td>
+            											<input class="form-control" type="text" id="multiplechoiceExampleContent${i}" name="multiplechoiceExampleList[${i-1}].multiplechoiceExampleContent">
+            											<div id="exampleContent${i}"></div>
+            										</td>
+            									</tr>
+            								</c:forEach>
+            							</tbody>
+            						</table>
+            						<button class="btn btn-outline-secondary" style="border-radius:4px; float:right;" id="btn" type="button">등록</button>
+            					</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>

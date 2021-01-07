@@ -56,10 +56,10 @@
             					<table id="lmsTable" class="table" style="margin-top: 20px; text-align: center;">
             						<thead>
 										<tr>
-											<th>lecture_notice_no</th>
-											<th>lecture_notice_title</th>
-											<th>lecture_notice_createdate</th>
-											<th>lecture_notice_updatedate</th>
+											<th>공지번호</th>
+											<th>제목</th>
+											<th>게시일</th>
+											<th>수정일</th>
 											<th>조회수</th>
 										</tr>
 									</thead>
