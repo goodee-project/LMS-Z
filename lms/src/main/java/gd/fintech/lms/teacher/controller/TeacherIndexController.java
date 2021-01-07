@@ -11,25 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import gd.fintech.lms.manager.service.ManagerLmsNoticeService;
 import gd.fintech.lms.teacher.service.TeacherLectureService;
 import gd.fintech.lms.vo.Lecture;
+import gd.fintech.lms.vo.LmsNotice;
 
 @Controller
 public class TeacherIndexController {
-	// @Autowired TeacherLectureService teacherLectureService;
+	@Autowired ManagerLmsNoticeService managerLmsNoticeService;
 	
-	// index페이지(강의목록 출력, 페이징은 상의해서 나중에 추가)
 	@GetMapping(value={"/teacher" ,"/teacher/index"})
-	public String index() {
-		// () 선언 -> ServletRequest request, Model model
-		// 세션 객체 선언
-		//HttpSession session = ((HttpServletRequest)request).getSession();
-		// 세션에서 로그인한 강사의 id값 받아오기
-		//String accountId = (String)session.getAttribute("teacherId");
-		// 강의목록을 list 객체를 선언하여 입력
-		//List<Lecture> list = teacherLectureService.getLectureList(accountId);
-		// model에 list 입력
-		//model.addAttribute("list", list);
+	public String index(Model model) {
+			
+		List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getLmsNoticeList(0, 5);
+
+		model.addAttribute("lmsNoticeList", lmsNoticeList);
 		
 		return "teacher/index";
 	}

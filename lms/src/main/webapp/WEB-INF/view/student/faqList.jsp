@@ -71,6 +71,15 @@
 				<div class="col-lg-12 col-md-12">
 					<div class="card" id="cardStyle">
 						<div class="card-body">
+							<div class="row">
+                            	<div class="col-lg-2 col-md-2"></div>
+                            	<div class="col-lg-4 col-md-4"></div>
+								<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
+								<div id="searchStyle" class="col-lg-6 col-md-6">
+									<input class="form-control-plaintext form-control border-black form-sm" type="text" id="faqTitle" value="${faqTitle}">&emsp;
+									<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn">검색</a>
+								</div>
+							</div>
 							<div class="table-responsive">
 								<table id="lmsTable" class="table table" style="margin-top: 20px;">
 									<thead>
@@ -233,13 +242,6 @@
 										</c:if>
 									</c:if>
 								</div>
-								<br>
-								<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
-								<div class="list-inline text-center mt-4 mb-0">
-									<input type="text" id="faqTitle" value="${faqTitle}" style="width:250px">&emsp;
-									<a id="searchBtn" href="">검색</a>
-								</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -247,6 +249,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 
 
 	<!-- script 코드 -->
@@ -255,19 +258,15 @@
 	<script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="${path}/dist/js/app-style-switcher.js"></script>
 	<script src="${path}/dist/js/feather.min.js"></script>
-	<script
-		src="${path}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+	<script src="${path}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
 	<script src="${path}/dist/js/sidebarmenu.js"></script>
 	<script src="${path}/dist/js/custom.min.js"></script>
 	<script src="${path}/assets/extra-libs/c3/d3.min.js"></script>
 	<script src="${path}/assets/extra-libs/c3/c3.min.js"></script>
 	<script src="${path}/assets/libs/chartist/dist/chartist.min.js"></script>
-	<script
-		src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-	<script
-		src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-	<script
-		src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+	<script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
 	<script>
 		// 검색창에 입력한 값을 바로 사용하기 위해서 jquery사용

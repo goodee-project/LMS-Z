@@ -212,7 +212,8 @@
 					for(var i=0; i<data.connectList.length; i++){
 						if(data.connectList[i].managerName != null){
 							var managerBody = '<div style="margin-top:7px">';					
-							managerBody += data.connectList[i].managerName;														managerBody += '</td></tr>';
+							managerBody += data.connectList[i].managerName;
+							managerBody += '</td></tr>';
 							managerBody += '</div>';
 
 							$('#managerConnect').append(managerBody);
