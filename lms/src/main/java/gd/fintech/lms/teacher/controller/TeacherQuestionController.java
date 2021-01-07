@@ -40,6 +40,7 @@ public class TeacherQuestionController {
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
+		int startPage = 1;
 		int totalCount = teacherQuestionService.getQuestionCount(lectureNo);
 		
 		//마지막 페이지
@@ -53,19 +54,20 @@ public class TeacherQuestionController {
 		model.addAttribute("questionList", questionList);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPage", startPage);
 		
-		System.out.println("List ==>>>" + questionList);
 		
 		return "teacher/questionList";
 	}
 	
 	//질문게시판 상세보기
-	@GetMapping("/teacher/questionOne/{teacherId}/{questionNo}/{currentPage}")
-	public String questionOne(Model model, @PathVariable(value = "teacherId") String teacherId, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
+	@GetMapping("/teacher/questionOne/{questionNo}/{currentPage}")
+	public String questionOne(Model model, @PathVariable(value = "questionNo") int questionNo, @PathVariable(value = "currentPage") int currentPage) {
 		
 		int rowPerPage = 5;
 		int beginRow = (currentPage - 1) * rowPerPage;
 		int lastPage = 0;
+		int startPage = 1;
 		int totalCount = teacherCommentService.getQuestionCommentCount(questionNo);
 		
 		//마지막 페이지
@@ -79,6 +81,7 @@ public class TeacherQuestionController {
 		model.addAttribute("question", question);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startPage", startPage);
 		
 		
 		return "teacher/questionOne";

@@ -110,8 +110,8 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${r.reportNo}/${teacherId}/${currentPage}">삭제</a></td>
-		<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${teacherId}/1">뒤로가기</a>
+		<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>
+		<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${reportOne.lectureNo}/1">뒤로가기</a>
 		
 	</div>
 	</div>

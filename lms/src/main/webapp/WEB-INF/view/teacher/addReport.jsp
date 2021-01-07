@@ -61,16 +61,9 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
-		<form method="post" action="${path}/teacher/addReport/${teacherId}/${currentPage}">
+		<form method="post" action="${path}/teacher/addReport/${lectureNo}/${currentPage}">
 			<table id="lmsNoticeTable" class="table table">
-				<tr>
-					<th class="font-weight-bold">report_no</th>
-					<td><input type="text" name="reportNo"></td>
-				</tr>
-				<tr>
-					<th class="font-weight-bold">lecture_no</th>
-					<td><input type="text" name="lectureNo"></td>
-				</tr>
+					<input type="hidden" name="lectureNo" value="${lectureNo}">
 				<tr>
 					<th class="font-weight-bold">report_title</th>
 					<td><input type="text" name="reportTitle" id="reportTitle" style="width:560px"></td>
@@ -82,16 +75,16 @@
 				<!-- 과제 시작일 -->
 				<tr>
 					<th class="font-weight-bold">report_startdate</th>
-					<td><input type="datetime-local" name="reportStartdate"></td>
+					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate"></td>
 				</tr>
 				<!-- 과제 마감일 -->
 				<tr>
 					<th class="font-weight-bold">report_enddate</th>
-					<td><input type="datetime-local" name="reportEnddate"></td>
+					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate"></td>
 				</tr>
 			</table>
 			<button class="btn btn-success" style="border-radius: 4px;" type="button" id="insertBtn">과제등록</button>
-			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${teacherId}/${currentPage}">뒤로가기</a>
+			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${lectureNo}/${currentPage}">뒤로가기</a>
 		</form>
 		
 		
@@ -136,6 +129,12 @@
 					}
 				else if($('#reportContent').val() == '<p>&nbsp;</p>' ||$('#reportContent').val() == ''){
 					alert('내용을 입력해주세요.');
+					}
+				else if($('#reportStartdate').val() == ""){
+					alert('시작날짜는 입력해주세요.');
+					}
+				else if($('#reportEnddate').val() == ""){
+					alert('마감날짜는 입력해주세요.');
 					}
 				else{
 					$('#insertBtn').removeAttr("type");

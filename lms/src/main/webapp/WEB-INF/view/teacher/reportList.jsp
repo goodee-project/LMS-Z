@@ -60,7 +60,7 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
-		<a  class="btn btn-success" style="border-radius: 4px;"  href="${path}/teacher/addReport/${currentPage}">과제등록</a>
+		<a  class="btn btn-success" style="border-radius: 4px;"  href="${path}/teacher/addReport/${lectureNo}/${currentPage}">과제등록</a>
 		<table id="lmsNoticeTable" class="table table">
 				<thead>
 					<tr>
@@ -75,7 +75,7 @@
 					<c:forEach var="r" items="${reportList}">
 						<tr>
 							<td>${r.reportNo}</td>
-							<td>${r.lectureNo}</td>
+							<td>${lectureNo}</td>
 							<td><a class="btn btn-outline-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
@@ -133,6 +133,7 @@
 			     	</span>
 		    	</c:if>
 		   	</div>
+		   	<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
 		</div>
 	</div>
 	</div>

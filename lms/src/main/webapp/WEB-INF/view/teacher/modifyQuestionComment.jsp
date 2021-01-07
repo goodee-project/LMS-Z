@@ -62,7 +62,7 @@
                             <div class="card-body">
 
 
-		<form method="post" action="${path}/teacher/modifyQuestionComment/${teacherId}/${questionComment.questionNo}/${currentPage}">
+		<form method="post" action="${path}/teacher/modifyQuestionComment/${questionComment.questionNo}/${currentPage}">
 			<table id="lmsNoticeTable" class="table table">
 				<tr>
 					<th class="font-weight-bold">question_comment_no</th>
@@ -82,7 +82,7 @@
 				</tr>
 			</table>
 			<button class="btn btn-info" style="border-radius: 4px;" type="submit">수정하기</button>
-			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/questionOne/${teacherId}/${questionComment.questionNo}/${currentPage}">뒤로가기</a>
+			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/questionOne/${questionComment.questionNo}/${currentPage}">뒤로가기</a>
 		</form>
 		
 		

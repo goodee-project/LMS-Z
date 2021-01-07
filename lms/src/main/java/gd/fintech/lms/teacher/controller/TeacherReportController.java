@@ -17,17 +17,17 @@ public class TeacherReportController {
 	@Autowired TeacherReportService teacherReportService;
 	
 	//과제목록
-	@GetMapping("/teacher/reportList/{teacherId}/{currentPage}")
+	@GetMapping("/teacher/reportList/{lectureNo}/{currentPage}")
 	public String reportList(Model model, 
-			@PathVariable(value = "teacherId") String teacherId,
+			@PathVariable(value = "lectureNo") int lectureNo,
 			@PathVariable(value = "currentPage") int currentPage) {
 		// page당 목록 갯수
 		int rowPerPage = 5;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage;
 		int startPage = ((currentPage/11)*rowPerPage)+1;
-		List<Report> reportList = teacherReportService.getReportList(teacherId,beginRow,rowPerPage);
-		int totalPage = teacherReportService.getReportCount(teacherId);
+		List<Report> reportList = teacherReportService.getReportList(lectureNo,beginRow,rowPerPage);
+		int totalPage = teacherReportService.getReportCount(lectureNo);
 		// 마지막 페이지
 		int lastPage = 0;
 		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
@@ -44,17 +44,19 @@ public class TeacherReportController {
 	}
 	
 	//과제등록 폼
-	@GetMapping("/teacher/addReport/{currentPage}")
+	@GetMapping("/teacher/addReport/{lectureNo}/{currentPage}")
 	public String addReport(Model model,
-						@PathVariable(name="currentPage") int currentPage) {
+						@PathVariable(name="currentPage") int currentPage,
+						@PathVariable(value = "lectureNo") int lectureNo) {
 		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lectureNo",lectureNo);
 		return "teacher/addReport";
 	}
 	
 	//과제등록 액션
-	@PostMapping("/teacher/addReport/{teacherId}/{currentPage}")
+	@PostMapping("/teacher/addReport/{lectureNo}/{currentPage}")
 	public String addReport(Report report,
-							@PathVariable(value = "teacherId") String teacherId,
+							@PathVariable(value = "lectureNo") int lectureNo,
 							@PathVariable(value = "currentPage") int currentPage) {
 		// db에 모든 html태그 접근 제한
 		String title = report.getReportTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
@@ -63,18 +65,17 @@ public class TeacherReportController {
 		report.setReportContent(content);
 		teacherReportService.addReport(report);
 		
-		return "redirect:/teacher/reportList/" + teacherId + "/" + currentPage;
+		return "redirect:/teacher/reportList/" + lectureNo + "/" + currentPage;
 	}
 	
 	//과제삭제
-	@GetMapping("/teacher/removeReport/{reportNo}/{teacherId}/{currentPage}")
-	public String removeReport(@PathVariable(value = "reportNo") int reportNo,
-							@PathVariable(value = "teacherId") String teacherId,
-							@PathVariable(value = "currentPage") int currentPage) {
+	@GetMapping("/teacher/removeReport/{lectureNo}/{reportNo}")
+	public String removeReport(@PathVariable(value = "lectureNo") int lectureNo,
+							@PathVariable(value = "reportNo") int reportNo) {
 		
 		teacherReportService.removeReport(reportNo);
 		
-		return "redirect:/teacher/reportList/" + teacherId + "/" + currentPage;
+		return "redirect:/teacher/reportList/" + lectureNo + "/1";
 	}
 	
 	//과제 상세보기

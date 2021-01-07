@@ -77,18 +77,63 @@
 					<tr>
 						<td>${q.questionNo}</td>
 						<td>${q.questionWriter}</td>
-						<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/modifyQuestionOneCount/${teacherId}/${q.questionNo}/${currentPage}">${q.questionTitle}</a></td>
+						<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/questionOne/${q.questionNo}/${currentPage}">${q.questionTitle}</a></td>
 						<td>${q.questionCount}</td>
 					</tr>
 				</c:forEach>
 				<!-- 숫자로 페이징 -->
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<span>
-                		<a href="${path}/teacher/questionList/${teacherId}/${i}">${i}&nbsp;&nbsp;</a>
-                	</span>
-                </c:forEach>
+                <div id="paging" style="text-align: center; padding: 7px;">
+						   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+						   		<c:if test="${startPage!=1 && lastPage!=1}">
+						    		<span>
+						    			<a href="${path}/teacher/questionList/${q.questionNo}/${startPage-10}">이전</a>
+						    		</span>
+						   		</c:if>
+						   		<!-- lastPage가 10개를 채울수 없을 때 -->
+						   		<c:if test="${startPage+9 > lastPage }">
+						     	<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+						     		<!-- 현재 페이지일 경우 -->
+						     		<c:if test="${currentPage == i }">
+							      		<span>
+							      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+							      		</span>
+						     		</c:if>
+						     		<!-- 현재 페이지가 아닐 경우 -->
+						     		<c:if test="${currentPage != i }">
+							      		<span>
+							      			<a class="font-18" href="${path}/teacher/questionList/${q.questionNo}/${i}">${i}</a>
+							      		</span>
+						     		</c:if>
+						     	</c:forEach>
+						    	</c:if>
+						    	<c:if test="${startPage+9<lastPage }">
+						    		<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+							     		<!-- 현재 페이지일 경우 -->
+							     		<c:if test="${currentPage == i }">
+								      		<span>
+								      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+								      		</span>
+							     		</c:if>
+							     		<!-- 현재 페이지가 아닐 경우 -->
+							     		<c:if test="${currentPage != i }">
+								      		<span>
+								      			<a class="font-18" href="${path}/teacher/questionList/${q.questionNo}/${i}">${i}</a>
+								      		</span>
+							     		</c:if>
+						     		</c:forEach>
+						    	</c:if>
+						    	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+						    	<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+							     	<span>
+							     		<a href="${path}/teacher/questionList/${q.questionNo}/${startPage+10}">다음</a>
+							     	</span>
+						    	</c:if>
+						   	</div>
+               
+                
 			</tbody>
 		</table>
+		<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
 		
 		</div>
 		</div>

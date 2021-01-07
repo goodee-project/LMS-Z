@@ -20,5 +20,5 @@ public interface TeacherReportMapper {
 	//과제수정
 	int updateReport(Report report);
 	//페이징을 위한 카운트
-	int selectReoprtCount(String teacherId);
+	int selectReoprtCount(int lectureNo);
 }

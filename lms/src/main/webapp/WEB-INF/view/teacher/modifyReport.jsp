@@ -82,11 +82,11 @@
 				</tr>
 				<tr>
 					<th>report_startdate</th>
-					<td><input type="datetime-local" name="reportStartdate" value="${reportOne.reportStartdate}"></td>
+					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate" value="${reportOne.reportStartdate}"></td>
 				</tr>
 				<tr>
 					<th>report_enddate</th>
-					<td><input type="datetime-local" name="reportEnddate" value="${reportOne.reportEnddate}"></td>
+					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate" value="${reportOne.reportEnddate}"></td>
 				</tr>
 			</table>
 			<button class="btn btn-info" style="border-radius: 4px;" type="button" id="updateBtn">수정하기</button>
@@ -137,6 +137,12 @@
 					}
 				else if($('#reportContent').val() == '<p>&nbsp;</p>' ||$('#reportContent').val() == ''){
 					alert('내용을 입력해주세요.');
+					}
+				else if($('#reportStartdate').val() == ""){
+					alert('시작날짜는 입력해주세요.');
+					}
+				else if($('#reportEnddate').val() == ""){
+					alert('마감날짜는 입력해주세요.');
 					}
 				else{
 					$('#updateBtn').removeAttr("type");

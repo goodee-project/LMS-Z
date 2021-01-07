@@ -86,8 +86,13 @@
 		<table id="lmsNoticeTable" class="table table">
 			<c:forEach var="qf" items="${question.questionfile}">
 				<tr>
+				<c:if test="${qf.questionFileUuid == null}">
+					<td>첨부파일이 없습니다</td>
+				</c:if>
+				<c:if test="${qf.questionFileUuid != null}">
 					<th>question_file</th>
 					<td><a href="${path}/teacher/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
+				</c:if>
 				</tr>
 			</c:forEach>
 		</table>
@@ -109,38 +114,81 @@
 			
 			<tbody>
 				<c:forEach var="qc" items="${question.questionCommentList}">
-				<c:if test="${qc.questionCommentNo != 0}">
-					<tr>
+				<tr>
+					<c:if test="${qc.questionCommentNo != 0}">
 						<td>${qc.questionCommentNo}</td>
 						<td>${qc.questionCommentWriter}</td>
 						<td>${qc.questionCommentContent}</td>
 						<td>${qc.questionCommentCreatedate}</td>
 						<td>${qc.questionCommentUpdatedate}</td>
-						<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeQuestionComment/${qc.accountId}/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>
-						<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${teacherId}/${qc.questionCommentNo}/${currentPage}">수정</a></td>
-					</tr>
-				</c:if>
+						<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeQuestionComment/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>
+						<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
+					</c:if>
+					
+					<c:if test="${qc.questionCommentNo == 0}">
+						<td>댓글이 없습니다.</td>
+					</c:if>
+				</tr>
 				</c:forEach>
 
 			</tbody>
 		</table>
 		
-		<div id="paging" style="text-align: center; padding: 7px;">
 				<!-- 숫자로 페이징 -->
-				<c:forEach var="i" begin="1" end="${lastPage}">
-					<span>
-                		<a href="${path}/teacher/questionOne/${teacherId}/${questionNo}/${i}">${i}&nbsp;&nbsp;</a>
-                	</span>
-                </c:forEach>
-		</div>
+                <div id="paging" style="text-align: center; padding: 7px;">
+						   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
+						   		<c:if test="${startPage!=1 && lastPage!=1}">
+						    		<span>
+						    			<a href="${path}/teacher/questionOne/${questionNo}/${startPage-10}">이전</a>
+						    		</span>
+						   		</c:if>
+						   		<!-- lastPage가 10개를 채울수 없을 때 -->
+						   		<c:if test="${startPage+9 > lastPage }">
+						     	<c:forEach var="i" begin="${startPage }" end="${lastPage}">
+						     		<!-- 현재 페이지일 경우 -->
+						     		<c:if test="${currentPage == i }">
+							      		<span>
+							      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+							      		</span>
+						     		</c:if>
+						     		<!-- 현재 페이지가 아닐 경우 -->
+						     		<c:if test="${currentPage != i }">
+							      		<span>
+							      			<a class="font-18" href="${path}/teacher/questionOne/${questionNo}/${i}">${i}</a>
+							      		</span>
+						     		</c:if>
+						     	</c:forEach>
+						    	</c:if>
+						    	<c:if test="${startPage+9<lastPage }">
+						    		<c:forEach var="i" begin="${startPage }" end="${startPage+9}">
+							     		<!-- 현재 페이지일 경우 -->
+							     		<c:if test="${currentPage == i }">
+								      		<span>
+								      			<a id="pagingStyle" class="bg-secondary font-18">${i}</a>
+								      		</span>
+							     		</c:if>
+							     		<!-- 현재 페이지가 아닐 경우 -->
+							     		<c:if test="${currentPage != i }">
+								      		<span>
+								      			<a class="font-18" href="${path}/teacher/questionOne/${questionNo}/${i}">${i}</a>
+								      		</span>
+							     		</c:if>
+						     		</c:forEach>
+						    	</c:if>
+						    	<!-- 한페이지에서 보여지는 10개의 페이지보다 마지막 페이지가 크고 / 마지막페이지가 시작페이지와 같이 않다면-->
+						    	<c:if test="${startPage+9<lastPage && lastPage != startPage}">
+							     	<span>
+							     		<a href="${path}/teacher/questionOne/${questionNo}/${startPage+10}">다음</a>
+							     	</span>
+						    	</c:if>
+						   	</div>
+		
 		
 		<c:forEach var="qc" items="${question.questionCommentList}">
-			<c:if test="${qc.questionCommentNo == 0}">
-					댓글이 없습니다.
-			</c:if>
+			
 		</c:forEach>
 		<!-- 댓글 추가 -->
-		<form method="post" action="${path}/teacher/addQuestionComment/${teacherId}">
+		<form method="post" action="${path}/teacher/addQuestionComment">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">
 			<input type="hidden" name="accountId" value="${question.accountId}">
 			작성자<br><input type="text" name="questionCommentWriter"><br>

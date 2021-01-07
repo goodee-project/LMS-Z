@@ -33,21 +33,19 @@
 		ON r.lecture_no = l.lecture_no
 		LEFT JOIN account a
 		ON l.account_id = a.account_id
-		WHERE a.account_id = #{accountId}
+		WHERE r.lecture_no = #{lectureNo}
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 과제 등록 -->
 	<insert id="insertReport" parameterType="gd.fintech.lms.vo.Report">
-		INSERT INTO report (report_no, 
-							lecture_no, 
+		INSERT INTO report (lecture_no, 
 							report_title, 
 							report_content,
 		 					report_createdate, 
 		 					report_updatedate, 
 		 					report_startdate, 
 		 					report_enddate)
-	 	VALUES (#{reportNo}, 
-	 			#{lectureNo}, 
+	 	VALUES (#{lectureNo}, 
 	 			#{reportTitle}, 
 	 			#{reportContent}, 
 	 			NOW(), 
@@ -126,12 +124,12 @@
 		WHERE report_no = #{reportNo}
 	</update>
 	<!-- 과제목록 페이징 -->
-	<select id="selectReoprtCount" parameterType="String" resultType="int">
+	<select id="selectReoprtCount" parameterType="int" resultType="int">
 		SELECT 
 			COUNT(*)
 		FROM report r , lecture l, account a
 		WHERE r.lecture_no = l.lecture_no
 		AND l.account_id = a.account_id
-		AND a.account_id = #{teacherId}
+		AND r.lecture_no = #{lectureNo}
 	</select>
 </mapper>
