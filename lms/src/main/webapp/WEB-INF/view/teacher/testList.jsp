@@ -88,6 +88,7 @@
 									<c:if test="${test == null}">
 										<a class="btn btn-success" style="border-radius: 4px; float:right;" href="${path}/teacher/addTest/${lectureNo}">시험 추가</a>
 									</c:if>
+									<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/lectureOne/${lectureNo}">< 목록</a>
 								</div>
 							</div>
 						</div>
