@@ -6,46 +6,56 @@
 	<!-- 출석한 횟수 -->
 	<select id="selectAttendanceTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM attendance
-		WHERE attendance_state='출석'
-		AND account_id=#{studentId}
-		AND lecture_no=#{lectureNo}
+		FROM attendance a
+		LEFT JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE a.attendance_state='출석'
+		AND cr.account_id=#{studentId}
+		AND cr.lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 지각한 횟수 -->
 	<select id="selectComLateTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM attendance
-		WHERE attendance_state='지각'
-		AND account_id=#{studentId}
-		AND lecture_no=#{lectureNo}
+		FROM attendance a
+		LEFT JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE a.attendance_state='지각'
+		AND cr.account_id=#{studentId}
+		AND cr.lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 조퇴한 횟수 -->
 	<select id="selectEarlyLeaveTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM attendance
-		WHERE attendance_state='조퇴'
-		AND account_id=#{studentId}
-		AND lecture_no=#{lectureNo}
+		FROM attendance a
+		LEFT JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE a.attendance_state='조퇴'
+		AND cr.account_id=#{studentId}
+		AND cr.lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 외출한 횟수 -->
 	<select id="selectOutingTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM attendance
-		WHERE attendance_state='외출'
-		AND account_id=#{studentId}
-		AND lecture_no=#{lectureNo}
+		FROM attendance a
+		LEFT JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE a.attendance_state='외출'
+		AND cr.account_id=#{studentId}
+		AND cr.lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 결석한 횟수 -->
 	<select id="selectAbsentTotal" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*)
-		FROM attendance
-		WHERE attendance_state='결석'
-		AND account_id=#{studentId}
-		AND lecture_no=#{lectureNo}
+		FROM attendance a
+		LEFT JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE a.attendance_state='결석'
+		AND cr.account_id=#{studentId}
+		AND cr.lecture_no=#{lectureNo}
 	</select>
 	
 	<!-- 수강 중인 강의기간 총 일수(주말제외)  -->

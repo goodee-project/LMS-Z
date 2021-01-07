@@ -77,13 +77,13 @@
                     <div class="col-5 align-self-center text-right">
                     	<div class="align-self-center">
                     		<c:if test="${myLectureListOne.classRegistrationState=='대기'}">
-		                        <a class="col-1 btn btn-success font-20 popover-item" style="color:white;">
+		                        <a class="col-2 btn btn-success font-20 popover-item" style="color:white;">
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 		                        &emsp;
-		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
-		                        href="${path }/student/WaitingClassCancel/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
-		                        style="color:white;">
+		                        <a class="col-3 btn btn-secondary font-20 popover-item" id="waitingCancelBtn"
+		                        	href="${path }/student/WaitingClassCancel/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}" 
+		                        	style="color:white;">
 		                        	수강 취소
 		                        </a>
 	                        </c:if>
@@ -359,9 +359,19 @@
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
 		$(document).ready(function(){
-			let timerId=null;
-			// 메세지 창이 열려있는지 닫혀있는지 체크
-			var msgOCCk=0;
+			//대기 중에 취소 확인
+			$('#waitingCancelBtn').click(function(){
+				let waitingCancelConfirm = confirm('수강 취소 하시겠습니까?');
+				if(waitingCancelConfirm){
+					$('#waitingCancelBtn').attr('href',"${path }/student/WaitingClassCancel/${myLectureListOne.classRegistrationNo}/${studentId}/${currentPage}");
+				}
+				else{
+					$('#waitingCancelBtn').removeAttr('href');
+				}
+			})
+			//취소 사유 적은 후 확인
+			
+			
 			// 수강 후기 입력란 열기
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
@@ -400,12 +410,18 @@
 				})
 				// 수강 취소 사유 입력
 			$('#classCancelInputBtn').click(function(){
-				if($("#cancelContent").val() == ""){
-					alert("후기를 입력해주세요");
-				}else{
-					$("#classCancelInputBtn").removeAttr('type');
-					$("#classCancelInputBtn").attr('type','submit');
-					alert("수강후기가 저장되었습니다.")
+				let classCancelConfirm = confirm('수강 취소 하시겠습니까?');
+				if(classCancelConfirm){
+					if($("#cancelContent").val() == ""){
+						alert("후기를 입력해주세요");
+					}else{
+						$("#classCancelInputBtn").removeAttr('type');
+						$("#classCancelInputBtn").attr('type','submit');
+						alert("수강후기가 저장되었습니다.");
+					}
+				}
+				else {
+					
 				}
 			})
 		})
