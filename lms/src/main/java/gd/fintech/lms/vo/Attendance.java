@@ -12,6 +12,9 @@ public class Attendance {
 	private String attendanceUpdatedate;
 	private String attendanceState;
 	private String attendanceRemark;
+	private String accountId;
+	private List<String> accountIdList;
+	private int lectureNo;
 	private List<Student> studentList;
 	private List<Lecture> lectureList;
 	private List<ClassRegistration> classRegistrationList;

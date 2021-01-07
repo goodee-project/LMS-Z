@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper">
+	<select id="selectLectureByName" parameterType="int" resultType="String">
+		SELECT lecture_name lectureName
+		FROM lecture
+		WHERE lecture_no = #{lectureNo}
+	</select>
+	
 	<select id="selectAttendanceByDay" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*)
 		FROM attendance
@@ -30,10 +36,50 @@
 						#{classRegistrationNo},
 						NOW(),
 						NOW(),
-						"비출석")
+						"미출석")
 	</insert>
 
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceEtcListResult">
+		<result property="attendanceState" column="attendance_state" />
+		<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentImage" column="student_image" />
+			<result property="studentId" column="student_id" />
+		</collection>
+	</resultMap>
+	<!-- 학생 출석부 일별 -->
+	<select id="selectAttendanceEtcList" parameterType="java.util.Map" resultMap="selectAttendanceEtcListResult">
+		SELECT s.student_id,s.student_name, s.student_image, a.attendance_state
+		FROM attendance a RIGHT JOIN class_registration cr
+			ON a.class_registration_no = cr.class_registration_no
+		INNER JOIN student s
+			ON cr.account_id = s.student_id
+		WHERE cr.lecture_no = #{lectureNo} AND a.attendance_day = #{attendanceDay}
+		AND a.attendance_state != "출석"
+		AND a.attendance_state != "미출석"
+	</select>
+	
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceYesListResult">
+		<result property="attendanceState" column="attendance_state" />
+		<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentName" column="student_name" />
+			<result property="studentImage" column="student_image" />
+			<result property="studentId" column="student_id" />
+		</collection>
+	</resultMap>
+	<!-- 학생 출석부 일별 -->
+	<select id="selectAttendanceYesList" parameterType="java.util.Map" resultMap="selectAttendanceYesListResult">
+		SELECT s.student_id,s.student_name, s.student_image, a.attendance_state
+		FROM attendance a RIGHT JOIN class_registration cr
+			ON a.class_registration_no = cr.class_registration_no
+		INNER JOIN student s
+			ON cr.account_id = s.student_id
+		WHERE cr.lecture_no = #{lectureNo} AND a.attendance_day = #{attendanceDay}
+		AND a.attendance_state = "출석"
+	</select>
+	
 	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceListResult">
+		<result property="attendanceState" column="attendance_state" />
 		<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
 			<result property="studentName" column="student_name" />
 			<result property="studentImage" column="student_image" />
@@ -42,7 +88,7 @@
 	</resultMap>
 	<!-- 학생 출석부 일별 -->
 	<select id="selectAttendanceList" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
-		SELECT s.student_id,s.student_name, s.student_image
+		SELECT s.student_id,s.student_name, s.student_image, a.attendance_state
 		FROM attendance a RIGHT JOIN class_registration cr
 			ON a.class_registration_no = cr.class_registration_no
 		INNER JOIN student s
@@ -69,17 +115,27 @@
 		WHERE cr.lecture_no = #{lectureNo}
 		AND s.student_id = #{studentId}
 		AND a.attendance_day = #{attendanceDay}
-		
+	</select>
+	
+	<select id="selectAttendanceStateCheck" parameterType="gd.fintech.lms.vo.Attendance" resultType="String">
+		SELECT a.attendance_state
+		FROM attendance a INNER JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
+		WHERE 
+			cr.lecture_no = #{lectureNo} AND 
+			cr.account_id = #{accountId} AND 
+			a.attendance_day = #{attendanceDay}
 	</select>
 	<!-- 학생 출석상태 변경 -->
 	<update id="updateAttendanceState" parameterType="gd.fintech.lms.vo.Attendance">
-		UPDATE attendance
+		UPDATE attendance a INNER JOIN class_registration cr
+		ON a.class_registration_no = cr.class_registration_no
 		SET 
-			attendance_state = #{attendanceState},
-			attendance_remark = #{attendanceRemark}, 
-			attendance_updatedate = NOW()
-		WHERE account_id = #{accountId}
-		AND lecture_no = #{lectureNo}
-		AND attendance_day = #{attendanceDay}
+			a.attendance_state = #{attendanceState},
+			a.attendance_remark = #{attendanceRemark}, 
+			a.attendance_updatedate = NOW()
+		WHERE cr.account_id = #{accountId}
+		AND cr.lecture_no = #{lectureNo}
+		AND a.attendance_day = #{attendanceDay}
 	</update>
 </mapper>

@@ -2,6 +2,7 @@ package gd.fintech.lms.teacher.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,40 @@ import gd.fintech.lms.vo.Attendance;
 public class TeacherAttendanceController {
 	
 	@Autowired TeacherAttendanceService teacherAttendanceService;
+	
+	@GetMapping("/teacher/modifyAttendacne/{lectureNo}/{attendanceDay}/{accountIdList}")
+	public String modifyAttendacne(
+			@PathVariable(value="lectureNo") int lectureNo,
+			@PathVariable(value="attendanceDay") String attendanceDay,
+			@PathVariable(value="accountIdList") List<String> accountIdList) {
+		
+		
+		Attendance attendance = new Attendance();
+		attendance.setAccountIdList(accountIdList);
+		attendance.setAttendanceDay(attendanceDay);
+		attendance.setLectureNo(lectureNo);
+		
+		teacherAttendanceService.modifyAttendanceState(attendance);
+		
+		String current[] = attendanceDay.split("-");
+		int currentYear = Integer.parseInt(current[0]);
+		String currentMonthStr = current[1];
+		int currentMonth = 0;
+		if(currentMonthStr.substring(0) == "0") {
+			currentMonth = Integer.parseInt(currentMonthStr.substring(1));
+		} else {
+			currentMonth = Integer.parseInt(currentMonthStr);
+		}
+		String currentDayStr = current[2];
+		int currentDay = 0;
+		if(currentDayStr.substring(0) == "0") {
+			currentDay = Integer.parseInt(currentDayStr.substring(1));
+		} else {
+			currentDay = Integer.parseInt(currentDayStr);
+		}
+		
+		return "redirect:/teacher/attendanceMonth/" + attendance.getLectureNo() + "/" + currentYear + "/" + currentMonth;
+	}
 	
 	//출석부 달력(월)
 	@GetMapping("/teacher/attendanceMonth/{lectureNo}/{currentYear}/{currentMonth}")
@@ -53,12 +88,12 @@ public class TeacherAttendanceController {
 		model.addAttribute("currentMonth", currentMonth);
 		model.addAttribute("lastDay", lastDay);
 		model.addAttribute("firstDay", firstDay);
+		model.addAttribute("lectureNo", lectureNo);
 		
 		
 		return "teacher/attendanceMonth";
 	}
-
-	
+	/*
 	//출석부 학생 목록 출력(일)
 	@GetMapping("/teacher/attendanceList/{lectureNo}/{currentYear}/{currentMonth}/{currentDay}")
 	public String attendanceList(Model model, 
@@ -88,16 +123,21 @@ public class TeacherAttendanceController {
 			attendanceDay += Integer.toString(targetDay.get(Calendar.DATE));
 		}
 
-		List<Attendance> attendanceList = teacherAttendanceService.getAttendanceList(lectureNo, attendanceDay);
+		Map<String, Object> map = teacherAttendanceService.getAttendanceList(lectureNo, attendanceDay);
+		List<Attendance> attendanceList = (List)map.get("attendanceList");
+		List<Attendance> attendanceYesList = (List)map.get("attendanceYesList");
 		
 
 		model.addAttribute("attendanceList", attendanceList);
+		model.addAttribute("attendanceYesList", attendanceYesList);
+		model.addAttribute("lectureNo", lectureNo);
+		model.addAttribute("attendanceDay", attendanceDay);
 		model.addAttribute("currentYear", targetDay.get(Calendar.YEAR));
 		model.addAttribute("currentMonth", targetDay.get(Calendar.MONTH) + 1);
 		model.addAttribute("currentDay", targetDay.get(Calendar.DATE));
 		
 		return "teacher/attendanceList";
-	}
+	}*/
 	
 	/*//출석부 학생 출석상태 수정 폼
 	@GetMapping("/teacher/modifyAttendanceStateOne/{studentId}/{lectureNo}/{attendanceDay}/{currentYear}/{currentMonth}/{currentDay}")
