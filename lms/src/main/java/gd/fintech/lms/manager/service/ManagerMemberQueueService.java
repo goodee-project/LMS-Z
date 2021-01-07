@@ -87,4 +87,18 @@ public class ManagerMemberQueueService {
 	public int getTeacherTotalCount() {
 		return managerMemberQueueMapper.selectTeacherQueueTotalCount();
 	}
+	//인덱스에 보여줄 최근 회원가입한 강사 3명
+	public List<TeacherQueue> getTeacherQueue(){
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("beginRowT", 0);
+		map.put("rowPerPage", 3);
+		return managerMemberQueueMapper.selectTeacherMemberQueue(map);
+	}
+	//인덱스에 보여줄 최근 회원가입한 학생 3명
+	public List<StudentQueue> getStudentQueue(){
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("beginRowS", 0);
+		map.put("rowPerPage", 3);
+		return managerMemberQueueMapper.selectStudentMemberQueue(map);
+	}
 }
