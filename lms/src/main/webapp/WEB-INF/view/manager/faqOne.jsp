@@ -40,15 +40,15 @@
         <div class="page-wrapper">
             <div class="page-breadcrumb">
 				<div class="row">
-					<div class="col-7 align-self-center"></div>
-					<div class="col-5 align-self-center text-right">
-						<div class="col-12 align-self-center"></div>
+					<div class="col-7 align-self-center">
+					 	<h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">FAQ</a></h3>
 					</div>
 				</div>
-				<br>
+			</div>
+				<div class="container-fluid">
 				<!-- 1번째 라인 카드 -->
 				<div class="row">
-					<div class="col-md-5 col-lg-12">
+					<div class="col-md-12 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<h4 class="card-title">● ${faqOne.faqTitle }</h4>
@@ -88,10 +88,11 @@
 										</tr>
 									</table>
 								</div>
+								<br>
 								<div>
-									<a href="${path }/manager/faqList/${faqOne.faqCategory }/${currentPage}">뒤로</a>&emsp;
-									<a href="${path }/manager/modifyFaq/${faqOne.faqNo}/${currentPage}">수정</a>&emsp;
-									<a href="${path }/manager/removeFaq/${faqOne.faqCategory}/${faqOne.faqNo}/${currentPage}">삭제</a>&emsp;
+									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/faqList/${faqOne.faqCategory }/${currentPage}">뒤로</a>
+									<a class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left:7px;" href="${path }/manager/removeFaq/${faqOne.faqCategory}/${faqOne.faqNo}/${currentPage}">삭제</a>
+									<a class="btn btn-outline-info" style="border-radius: 4px; float:right;" href="${path }/manager/modifyFaq/${faqOne.faqNo}/${currentPage}">수정</a>
 								</div>
 							</div>
 						</div>

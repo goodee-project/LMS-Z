@@ -91,7 +91,7 @@
 												</td>
 											</tr>
 										</table>
-										<button type="button" id="updateBtn">수정</button>
+										<button class="btn btn-success" style="border-radius: 4px; float:right;" type="button" id="updateBtn">수정완료</button>
 									</form>
 								</div>
 							</div>

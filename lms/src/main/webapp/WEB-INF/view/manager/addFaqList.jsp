@@ -49,7 +49,7 @@
 				<br>
 				<!-- 1번째 라인 카드 -->
 				<div class="row">
-					<div class="col-md-5 col-lg-12">
+					<div class="col-md-12 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<h4 class="card-title"></h4>
@@ -57,41 +57,35 @@
 									<form method="post" action="${path }/manager/addFaqList/${currentPage}">
 										<table class="table no-wrap v-middle mb-0">
 										<tr class="border-top-0 px-2 py-4">
-											<th>
+											<th style="width:10%">
 												작성자
 											</th>
 											<td>
-												<input type="text" name="accountId" value="${managerId }" readonly="readonly" hidden="hidden">
-												<input type="text" name="faqWriter" value="${faqWriter }" readonly="readonly" style="width:560px">
+												<input class="form-control" style="width:100%;" type="text" name="accountId" value="${managerId }" readonly="readonly" hidden="hidden">
+												<input class="form-control" style="width:100%;" type="text" name="faqWriter" value="${faqWriter }" readonly="readonly" style="width:560px">
 											</td>
 										</tr>
 										<tr>
 											<th>제목</th>
-											<td><input type="text" name="faqTitle" id="faqTitle" style="width:560px"></td>
+											<td><input class="form-control" style="width:100%;" type="text" name="faqTitle" id="faqTitle" style="width:560px"></td>
 										</tr>
 										<tr>
 											<th>내용</th>
-											<td><textarea class="form-control" name="faqContent" id="faqContent" rows="6"></textarea></td>
+											<td><textarea class="form-control" style="width:100%;" name="faqContent" id="faqContent" rows="6"></textarea></td>
 										</tr>
 										<tr class="border-1">
 											<th>카테고리</th>
 											<td>
-												<select name="faqCategory" style="width:560px">
+												<select class="form-control" style="width:100%;" name="faqCategory">
 													<c:forEach var="c" items="${categoryList}">
 														<option value="${c.faqCategory }">${c.faqCategory }</option>
 													</c:forEach>
 												</select>
 											</td>
 										</tr>
-										<tr><th></th><td></td></tr>
 									</table>
-									<br>
-									<div class="row">
-										<span class="col-1"><a href="${path }/manager/faqList/강의/1">뒤로</a></span>
-										<span class="col-1 ml-auto">
-											<button class="align-self-center" type="button" id="insertBtn">입력</button>
-										</span>
-									</div>
+										<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/faqList/강의/1">뒤로가기</a>
+										<button class="btn btn-success" style="border-radius: 4px; float:right;" type="button" id="insertBtn">입력</button>
 								</form>
 							</div>
 						</div>
