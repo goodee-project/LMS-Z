@@ -63,4 +63,7 @@ public interface TeacherTestMapper {
 	
 	// 강좌와 연결된 시험번호 조회
 	List<Integer> selectTestAndLecture(int lectureNo);
+	
+	// 강좌 삭제시 연결된 학생의 답안지 삭제
+	int deleteAnswerSheer(int multiplechoiceNo);
 }

@@ -138,4 +138,9 @@
 		AND cr.lecture_no = #{lectureNo}
 		AND a.attendance_day = #{attendanceDay}
 	</update>
+	<!-- 강좌 삭제시 삭제할 출석부 -->
+	<delete id="deleteAttendance" parameterType="int">
+		DELETE FROM attendance
+		WHERE class_registration_no = #{classRegistrationNo}
+	</delete>
 </mapper>

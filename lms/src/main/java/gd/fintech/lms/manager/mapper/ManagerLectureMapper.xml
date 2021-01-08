@@ -162,10 +162,17 @@
 		DELETE FROM report
 		WHERE lecture_no = #{lectureNo}
 	</delete>
-	<!-- 강좌를 삭제하기 위해 외래키로 연결된 수강중인 학생을 먼저 삭제하는 쿼리 -->
+	<!-- 강좌를 삭제하기 위해 외래키로 연결된 수강중인 학생리스트를 불러오는 쿼리 -->
+	<select id="selectClassRegistration" parameterType="int" resultType="int">
+		SELECT 
+			class_registration_no
+		FROM class_registration
+		WHERE lecture_no = #{lectureNo}
+	</select>
+	<!-- 강좌를 삭제하기 위해 연결된 수강학생 삭제 -->
 	<delete id="deleteClassRegistration" parameterType="int">
 		DELETE FROM class_registration
-		WHERE lecture_no = #{lectureNo}
+		WHERE class_registration_no = #{classRegistrationNo}
 	</delete>
 	<!-- 페이징에 필요한 전체 갯수를 구하는 쿼리 -->
 	<select id="selectLectureTotalPage" resultType="int">

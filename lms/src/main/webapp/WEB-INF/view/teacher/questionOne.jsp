@@ -59,81 +59,77 @@
 		<div class="container-fluid">
 		<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-
-
-		<table id="lmsNoticeTable" class="table table">
-			<tr>
-				<th>question_no</th>
-				<td>${question.questionNo}</td>
-			</tr>
-			<tr>
-				<th>question_writer</th>
-				<td>${question.questionWriter}</td>
-			</tr>
-			<tr>
-				<th>question_title</th>
-				<td>${question.questionTitle}</td>
-			</tr>
-			<tr>
-				<th>question_content</th>
-				<td>${question.questionContent}</td>
-			</tr>
-		</table>
-		<h3>질문게시판 첨부파일</h3>
-		<table id="lmsNoticeTable" class="table table">
-			<c:forEach var="qf" items="${question.questionfile}">
-				<tr>
-				<c:if test="${qf.questionFileUuid == null}">
-					<td>첨부파일이 없습니다</td>
-				</c:if>
-				<c:if test="${qf.questionFileUuid != null}">
-					<th>question_file</th>
-					<td><a href="${path}/teacher/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
-				</c:if>
-				</tr>
-			</c:forEach>
-		</table>
-		
-		
-		<h3>질문댓글게시판</h3>
-		<table id="lmsNoticeTable" class="table table">
-			<thead>
-				<tr>
-					<th>question_comment_no</th>
-					<th>question_comment_writer</th>
-					<th>question_comment_content</th>
-					<th>question_comment_createdate</th>
-					<th>question_comment_updatedate</th>
-					<th>삭제</th>
-					<th>수정</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach var="qc" items="${question.questionCommentList}">
-				<tr>
-					<c:if test="${qc.questionCommentNo != 0}">
-						<td>${qc.questionCommentNo}</td>
-						<td>${qc.questionCommentWriter}</td>
-						<td>${qc.questionCommentContent}</td>
-						<td>${qc.questionCommentCreatedate}</td>
-						<td>${qc.questionCommentUpdatedate}</td>
-						<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeQuestionComment/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>
-						<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
-					</c:if>
+				<table id="lmsNoticeTable" class="table table">
+					<tr>
+						<th style="width:10%;">번호 :</th>
+						<td>${question.questionNo}</td>
+					</tr>
+					<tr>
+						<th>글쓴이 :</th>
+						<td>${question.questionWriter}</td>
+					</tr>
+					<tr>
+						<th>제목 :</th>
+						<td>${question.questionTitle}</td>
+					</tr>
+					<tr>
+						<th>내용 :</th>
+						<td>${question.questionContent}</td>
+					</tr>
+				</table>
+				<h3>질문게시판 첨부파일</h3>
+				<table id="lmsNoticeTable" class="table table">
+					<c:forEach var="qf" items="${question.questionfile}">
+						<tr>
+						<c:if test="${qf.questionFileUuid == null}">
+							<td>첨부파일이 없습니다</td>
+						</c:if>
+						<c:if test="${qf.questionFileUuid != null}">
+							<th>question_file</th>
+							<td><a href="${path}/teacher/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a></td>
+						</c:if>
+						</tr>
+					</c:forEach>
+				</table>
+				
+				
+				<h3>질문댓글게시판</h3>
+				<table id="lmsNoticeTable" class="table table">
+					<thead>
+						<tr>
+							<th>댓글 번호</th>
+							<th>글쓴이</th>
+							<th>내용</th>
+							<th>글쓴 날짜</th>
+							<th>수정</th>
+							<th>삭제</th>
+						</tr>
+					</thead>
 					
-					<c:if test="${qc.questionCommentNo == 0}">
-						<td>댓글이 없습니다.</td>
-					</c:if>
-				</tr>
-				</c:forEach>
-
-			</tbody>
-		</table>
+					<tbody>
+						<c:forEach var="qc" items="${question.questionCommentList}">
+						<tr>
+							<c:if test="${qc.questionCommentNo != 0}">
+								<td>${qc.questionCommentNo}</td>
+								<td>${qc.questionCommentWriter}</td>
+								<td>${qc.questionCommentContent}</td>
+								<td>${qc.questionCommentCreatedate}</td>
+								<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
+								<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeQuestionComment/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>	
+							</c:if>
+							
+							<c:if test="${qc.questionCommentNo == 0}">
+								<td colspan="6">댓글이 없습니다.</td>
+							</c:if>
+						</tr>
+						</c:forEach>
 		
+					</tbody>
+				</table>
+				
 				<!-- 숫자로 페이징 -->
                 <div id="paging" style="text-align: center; padding: 7px;">
 						   		<!-- 첫페이지이고 전체 페이지가 '1'이 아닌 경우 이전버튼 표시 -->
@@ -191,11 +187,11 @@
 		<form method="post" action="${path}/teacher/addQuestionComment">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">
 			<input type="hidden" name="accountId" value="${question.accountId}">
-			작성자<br><input type="text" name="questionCommentWriter"><br>
-			댓글<br><textarea name="questionCommentContent" rows="3" cols="50"></textarea>
+			작성자<br><input class="form-control" style="width:100%;" type="text" name="questionCommentWriter"><br>
+			댓글<br><textarea class="form-control" style="width:100%;" name="questionCommentContent" rows="3" cols="50"></textarea>
 			<br>
-			<button class="btn btn-success" style="border-radius: 4px;"  type="submit">댓글입력</button>
-			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/questionList/${question.lectureNo}/1">뒤로가기</a>
+			<button class="btn btn-success" style="border-radius: 4px; float:right;"  type="submit">댓글입력</button>
+			<a class="btn btn-outline-secondary"style="border-radius: 4px;" href="${path}/teacher/questionList/${question.lectureNo}/1">뒤로가기</a>
 		</form>
 		
 	</div>

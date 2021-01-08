@@ -83,7 +83,7 @@
 														<span hidden="hidden">${l.lmsNoticeNo}</span>
 													</td>
 													<td>${l.lmsNoticeWriter}</td>
-													<td><a href="${path}/manager/noticeCountup/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
+													<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/manager/noticeCountup/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
 													<td>${l.lmsNoticeCreatedate }</td>
 													<td>${l.lmsNoticeUpdatedate }</td>
 													<td>${l.lmsNoticeCount}</td>

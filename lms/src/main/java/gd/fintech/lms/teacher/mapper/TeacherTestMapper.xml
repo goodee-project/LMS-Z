@@ -242,4 +242,9 @@
 		FROM multiplechoice
 		WHERE lecture_no = #{lectureNo}
 	</select>
+	<!-- 시험과 연결된 학생 답안지 삭제 -->
+	<delete id="deleteAnswerSheer" parameterType="int">
+		DELETE FROM answer_sheet
+		WHERE multiplechoice_no = #{multiplechoiceNo}
+	</delete>
 </mapper>

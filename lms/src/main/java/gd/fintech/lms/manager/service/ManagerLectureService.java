@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
+import gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
@@ -38,6 +39,7 @@ public class ManagerLectureService {
 	@Autowired TeacherTestMapper teacherTestMapper;
 	@Autowired TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
+	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -106,6 +108,7 @@ public class ManagerLectureService {
 		List<Integer> multiplechoiceNo = teacherTestMapper.selectTestAndLecture(lectureNo);
 		for(int m : multiplechoiceNo) {
 			//학생들의 해당 답안지 삭제
+			teacherTestMapper.deleteAnswerSheer(m);
 			// 해당 시험문제의 보기 삭제(외래키로 연결되어있어 먼저 삭제해줌)
 			teacherTestMapper.deleteTestQuestionExample(m);
 			// 해당 시험문제 삭제
@@ -133,7 +136,13 @@ public class ManagerLectureService {
 		//삭제할 강좌와 연결된 레포트 삭제
 		managerLectureMapper.deleteReport(lectureNo);
 		//삭제할 강좌와 연결된 수강학생 삭제
-		managerLectureMapper.deleteClassRegistration(lectureNo);
+		List<Integer> classRegistrationNo = managerLectureMapper.selectClassRegistration(lectureNo);
+		for(int c : classRegistrationNo) {
+			//수강학생을 삭제하기 위한 출석부 삭제
+			teacherAttendanceMapper.deleteAttendance(c);
+			//수강학생 삭제
+			managerLectureMapper.deleteClassRegistration(c);
+		}
 		//강좌 삭제
 		managerLectureMapper.deleteLecture(lectureNo);
 	}

@@ -126,7 +126,7 @@
 													<div>
 														<!-- 굵은 글씨 -->
 														<h5>
-															<a href="${path }/manager/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
+															<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path }/manager/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
 														</h5>
 													</div>
 												</td>

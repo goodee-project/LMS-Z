@@ -64,7 +64,7 @@
 											<c:forEach var="t" items="${textbookList }">
 												<tr>
 													<td>${t.textbookIsbn }</td>
-													<td><a href="${path }/manager/textbookOne/${t.textbookIsbn}">${t.textbookTitle }</a></td>
+													<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path }/manager/textbookOne/${t.textbookIsbn}">${t.textbookTitle }</a></td>
 													<td>${t.textbookWriter }</td>
 													<td>${t.textbookPublisher }</td>
 												</tr>

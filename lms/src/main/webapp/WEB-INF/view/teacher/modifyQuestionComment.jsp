@@ -57,7 +57,7 @@
 		<div class="container-fluid">
 		<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
@@ -65,24 +65,24 @@
 		<form method="post" action="${path}/teacher/modifyQuestionComment/${questionComment.questionNo}/${currentPage}">
 			<table id="lmsNoticeTable" class="table table">
 				<tr>
-					<th class="font-weight-bold">question_comment_no</th>
-					<td><input type="text" name="questionCommentNo" value="${questionComment.questionCommentNo}" readonly="readonly"></td>
+					<th class="font-weight-bold" style="width:10%;">댓글 번호 :</th>
+					<td><input class="form-control" style="width:100%"type="text" name="questionCommentNo" value="${questionComment.questionCommentNo}" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<th class="font-weight-bold">question_comment_writer</th>
-					<td><input type="text" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly"></td>
+					<th class="font-weight-bold">글쓴이 :</th>
+					<td><input class="form-control" style="width:100%"type="text" name="questionCommentWriter" value="${questionComment.questionCommentWriter}" readonly="readonly"></td>
 				</tr>
 				<tr>
-					<th class="font-weight-bold">question_comment_content</th>
-					<td><textarea rows="3" cols="50" name="questionCommentContent">${questionComment.questionCommentContent}</textarea></td>
+					<th class="font-weight-bold">내용 :</th>
+					<td><textarea class="form-control" style="width:100%"rows="3" cols="50" name="questionCommentContent">${questionComment.questionCommentContent}</textarea></td>
 				</tr>
 				<tr>
-					<th class="font-weight-bold">question_comment_updatedate</th>
-					<td><input type="text" name="questionCommentUpdatedate" value="${questionComment.questionCommentUpdatedate}" readonly="readonly"></td>
+					<th class="font-weight-bold">수정 날짜 :</th>
+					<td><input class="form-control" style="width:100%"type="text" name="questionCommentUpdatedate" value="${questionComment.questionCommentUpdatedate}" readonly="readonly"></td>
 				</tr>
 			</table>
-			<button class="btn btn-info" style="border-radius: 4px;" type="submit">수정하기</button>
-			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/questionOne/${questionComment.questionNo}/${currentPage}">뒤로가기</a>
+			<button class="btn btn-success" style="border-radius: 4px; float:right;" type="submit">수정하기</button>
+			<a class="btn btn-outline-secondary" style="border-radius: 4px;"href="${path}/teacher/questionOne/${questionComment.questionNo}/${currentPage}">뒤로가기</a>
 		</form>
 		
 		

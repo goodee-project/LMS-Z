@@ -36,8 +36,10 @@ public interface ManagerLectureMapper {
 	int deleteLecture(int lectureNo);
 	//강좌에 해당하는 레포트를 삭제하기 위해 필요한 메퍼
 	int deleteReport(int lectureNo);
-	//강좌에 수강하는 학생들을 삭제하기 위해 필요한 메퍼
-	int deleteClassRegistration(int lectureNo);
+	//강좌에 수강하는 학생들을 삭제하기 위해 강좌에 맞는 수강학생 번호 리스트를 가져오는 메퍼
+	List<Integer> selectClassRegistration(int lectureNo);
+	//강좌에 해당하는 수강학생을 삭제하기 위해 필요한 메퍼
+	int deleteClassRegistration(int classRegistrationNo);
 	//페이징에 필요한 메퍼
 	int selectLectureTotalPage();
 	//교재를 강좌에서 사용하는지 확인하기 위해 필요한 메퍼

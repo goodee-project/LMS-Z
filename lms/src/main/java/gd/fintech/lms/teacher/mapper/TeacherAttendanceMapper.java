@@ -28,4 +28,7 @@ public interface TeacherAttendanceMapper {
 	int insertAttendanceByDay(Attendance attendance);
 	List<Integer> selectClassRegistrationByNo(String attendanceDay, int lectureNo);
 	int selectAttendanceByDay(String attendanceDay, int classRegistrationNo);
+	
+	//강좌 삭제시 해당강좌에 출석부 삭제
+	int deleteAttendance(int classRegistrationNo);
 }
