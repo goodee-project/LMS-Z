@@ -18,28 +18,69 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 <body>
-	            <div>
-	            	 <span style="color:black; font-size:x-large;">${studentName }&nbsp;학생</span>
-	            </div>
-	            <div id="msgListDiv" style="width:50rem">
-	            	
-	            </div>
-	            <div>
-	                <div>
-				         <div>
-				              <textarea style="resize:none" cols="80" rows="6" id="toStudentMsgContent"
-				              name="msgContent" class="font-weight-medium text-dark px-4 py-4"></textarea>
-				         </div>
-				    </div>
-				    <div>
-				    	 <a href="${path}/teacher/studentList/${teacherId}/${lectureNo}" type="button">뒤로가기</a>
-				         <button id="startBtn" type="button">채팅시작</button>
-				         <button id="stopBtn" type="button">정지</button>
-				         <button type="button" id="teacherMsgBtn">입력</button>
-				    </div>
-	            </div>
+	<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        
+		<jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
+		        
+		<jsp:include page="/WEB-INF/view/teacher/inc/navbarMenu.jsp" flush="false"></jsp:include>
+	
+		<!-- 소제목 -->
+		<div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Message</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- 내용 -->
+            <div class="container-fluid">
+            	<div class="row">
+            		<div class="col-lg-8 col-md-12">
+            			<div class="card" id="card-style">
+            				<div class="card-body">
+            					<h4 class="card-title">학생목록</h4>
+					            <div>
+					            	 <span style="color:black; font-size:x-large;">${studentName }&nbsp;학생</span>
+					            </div>
+					            <div id="msgListDiv" style="width:50rem">
+					            	
+					            </div>
+					            <div>
+					                <div>
+								         <div>
+								              <textarea class="form-control" style="resize:none" cols="80" rows="6" id="toStudentMsgContent"
+								              name="msgContent" class="font-weight-medium text-dark px-4 py-4"></textarea>
+								         </div>
+								    </div>
+								    <br>
+								    <div>
+								    	 <a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/studentList/${teacherId}/${lectureNo}" type="button">뒤로가기</a>
+								         <button class="btn btn-outline-secondary" style="border-radius:4px; float:right; margin-left:8px;" type="button" id="teacherMsgBtn">입력</button>
+								         <button class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" id="stopBtn" type="button">정지</button>
+								         <button class="btn btn-outline-info" style="border-radius:4px; float:right;" id="startBtn" type="button">채팅시작</button>
+								    </div>
+					            </div>
+					    	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+					            
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
