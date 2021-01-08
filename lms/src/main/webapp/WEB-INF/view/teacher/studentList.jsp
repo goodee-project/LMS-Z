@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>dd</h1>
 	<c:forEach var="s" items="${studentList}" varStatus="status">
 		<div>
 			<input type="text" id="studentId${status.index }" value="${s.studentId }">
@@ -54,7 +55,8 @@
 					}
 				})
 	    	}
-        })
+        }
+    })
 	</script>
 </body>
 </html>
