@@ -19,6 +19,11 @@
 			<result property="lectureArchiveFileCount" column="lecture_archive_file_count"/>
 			<result property="lectureArchiveFileUuid" column="lecture_archive_file_uuid"/>
 		</collection>
+		
+		<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="lectureName" column="lecture_name"/>
+		</collection>
 	</resultMap>
 
 	<select id="selectLectureArchiveOne" resultMap="selectLectureArchiveOne" parameterType="int">
@@ -32,9 +37,12 @@
 			la.lecture_archive_count,
 			laf.lecture_archive_file_original,
 			laf.lecture_archive_file_uuid,
-			laf.lecture_archive_file_count
+			laf.lecture_archive_file_count,
+			l.lecture_name
 		FROM lecture_archive la left join lecture_archive_file laf
 			 on la.lecture_archive_no = laf.lecture_archive_no
+			 LEFT JOIN lecture l
+			 ON la.lecture_no = l.lecture_no
 		WHERE la.lecture_archive_no = #{lectureArchiveNo}
 	</select>
 	 
@@ -54,6 +62,11 @@
 			<result property="accountId" column="account_id"/>
 			<result property="classRegistrationState" column="class_registration_state"/>
 		</collection>
+		
+		<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
+			<result property="lectureNo" column="lecture_no"/>
+			<result property="lectureName" column="lecture_name"/>
+		</collection>
 	</resultMap>
 	<select id="selectLectureArchiveList" parameterType="java.util.Map" resultMap="selectLectureArchiveList">
 		SELECT
@@ -64,9 +77,12 @@
 			la.lecture_archive_title,
 			la.lecture_archive_content,
 			la.lecture_archive_createdate,
-			la.lecture_archive_count 
+			la.lecture_archive_count,
+			l.lecture_name 
 		FROM lecture_archive la LEFT JOIN class_registration cr
 			 ON la.lecture_no = cr.lecture_no
+			 LEFT JOIN lecture l
+			 ON la.lecture_no = l.lecture_no
 		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>

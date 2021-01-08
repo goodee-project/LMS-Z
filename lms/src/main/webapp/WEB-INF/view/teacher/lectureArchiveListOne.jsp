@@ -13,11 +13,10 @@
 	<a href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}/${teacherId}">삭제</a>
 	<table border="1">
 		<tr>
-			<td>lecture_no: ${lectureArchive.lectureNo }</td>
-			<td>account_id: ${lectureArchive.accountId }</td>
+			<td>강의: ${lecture.lectureName}</td>
+			<td>작성자: ${lectureArchive.lectureArchiveWriter} (${lectureArchive.accountId })</td>
 		</tr>
 		<tr>	
-			<td>lecture_archive_writer: ${lectureArchive.lectureArchiveWriter}</td>
 			<td>lecture_archive_title: ${lectureArchive.lectureArchiveTitle}</td>
 			<td>lecture_archive_content: ${lectureArchive.lectureArchiveContent}</td>
 			<td>lecture_archive_updatedate: ${lectureArchive.lectureArchiveUpdatedate}</td>

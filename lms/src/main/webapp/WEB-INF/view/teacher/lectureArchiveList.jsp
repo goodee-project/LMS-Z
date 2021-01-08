@@ -15,8 +15,7 @@
 		<thead>
 			<tr>
 				<th>강의 번호</th>
-				<th>과목 번호</th>
-				<th>작성자 아이디</th>
+				<th>과목</th>
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
@@ -29,10 +28,9 @@
 			<c:if test="${!empty lectureArchiveList}">
 				<c:forEach var="la" items="${lectureArchiveList}">
 					<tr>	
-						<td><a href="${path}/teacher/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureNo}: ${la.lecture.lectureName}</a></td>
-						<td>${la.accountId}: ${la.lecture.teacherName}</td>
-						<td>${la.subject.subjectNo}: ${la.subject.subjectName}</td>
-						<td>${la.lectureArchiveWriter}</td>
+						<td><a href="${path}/teacher/lectureArchiveCountUp/${teacherId}/${la.lectureNo}/${la.lectureArchiveNo}">${la.lectureNo}(${la.lecture.lectureName})</a></td>
+						<td>${la.subject.subjectName}</td>
+						<td>${la.lectureArchiveWriter}</td>			
 						<td>${la.lectureArchiveTitle}</td>
 						<td>${la.lectureArchiveCreatedate}</td>
 						<td>${la.lectureArchiveUpdatedate}</td>

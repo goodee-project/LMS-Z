@@ -11,7 +11,7 @@
 <body>
 	<table border="1">
 		<tr>
-			<td>lecture_no: ${lectureArchive.lectureNo }</td>
+			<td>lecture_no: ${lectureArchive.lectureNo}(${lectureArchive.lecture.lectureName})</td>
 			<td>account_id: ${lectureArchive.accountId }</td>
 			<td>lecture_archive_writer: ${lectureArchive.lectureArchiveWriter }</td>
 			<td>lecture_archive_title: ${lectureArchive.lectureArchiveTitle }</td>

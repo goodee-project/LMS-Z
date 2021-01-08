@@ -39,10 +39,11 @@
 			<td>report_no: <input type="text" name="reportNo" readonly="readonly" value="${report.reportNo}"></td>
 		</tr>
 		<tr>
-			<td>account_id: <input type="text" name="accountId" readonly="readonly" value="${studentId}"></td>
-		</tr>
-		<tr>
-			<td>report_submit_writer: <input type="text" name="reportSubmitWriter"></td>
+			<td>
+				<input type="hidden" name="accountId" value="${studentId}">
+			
+				작성자: <input type="text" readonly="readonly" name="reportSubmitWriter" value="${student.studentName}">
+			</td>
 		</tr>
 		<tr>
 			<td>report_submit_title: <input type="text" name="reportSubmitTitle" id="reportSubmitTitle" style="width:420px"></td>

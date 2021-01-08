@@ -12,7 +12,7 @@
 <script src="${path }/smarteditor2/js/HuskyEZCreator.js"></script>
 </head>
 <body>
-<form method="post" id="lectureArchiveModify" action="${path}/teacher/lectureArchiveModify/${lectureArchive.lectureArchiveNo}" enctype="multipart/form-data">
+<form method="post" id="lectureArchiveModify" action="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureNo}/${lectureArchive.lectureArchiveNo}" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<td>강의:
@@ -23,8 +23,10 @@
 				</select>
 			</td>
 			<td>자료 번호 ${lectureArchive.lectureArchiveNo}</td>
-			<td>작성자 아이디: <input type="text" name="accountId" readonly="readonly" value="${teacherId}"></td>
-			<td>작성자: <input type="text" name="lectureArchiveWriter"  value="${lectureArchive.lectureArchiveWriter}"></td>
+			<td>작성자: 
+				<input type="text" name="lectureArchiveWriter" readonly="readonly" value="${lectureArchive.lectureArchiveWriter}">
+				<input type="hidden" name="accountId" readonly="readonly" value="${teacherId}">
+			</td>
 		</tr>
 		
 		<tr>

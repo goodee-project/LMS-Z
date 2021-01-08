@@ -119,7 +119,7 @@
 			COUNT(*) count
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
-		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]>
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND cr.class_registration_state = '수강중'
 	</select>
 	
 	<select id="totalCountOverdueSearch" resultType="int" parameterType="String">
@@ -128,7 +128,7 @@
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
 		WHERE cr.account_id = #{accountId} 
-			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]>
+			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND cr.class_registration_state = '수강중'
 			 AND r.report_title = #{reportTitle}
 	</select>
 	
@@ -227,7 +227,6 @@
 	<update id="updateReportSubmit" parameterType="gd.fintech.lms.vo.ReportSubmit">
 		UPDATE report_submit 
 		SET
-			report_submit_writer = #{reportSubmitWriter},
 			report_submit_updatedate = NOW(),
 			report_submit_title = #{reportSubmitTitle},
 			report_submit_content = #{reportSubmitContent}
@@ -239,4 +238,11 @@
 		FROM report_submit
 		WHERE report_submit_no = #{reportSubmitNo}
 	</delete>
+	
+	<select id="selectStudentName" resultType="gd.fintech.lms.vo.Student" parameterType="String">
+  		SELECT
+  			student_name StudentName
+  		FROM student
+  		WHERE student_id = #{accountId}
+  	</select>
 </mapper>

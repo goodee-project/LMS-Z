@@ -50,9 +50,6 @@
             		<div class="col-lg-12 col-md-12">
             			<div class="card" id="card-style">
             				<div class="card-body">
-            					<div>
-									<a href="${path}/teacher/lectureArchiveList/${teacherId}/1">자료실</a>
-								</div>
             					<h4 class="card-title">강의목록</h4>
             					
             					<table id="lmsTable" class="table" style="margin-top: 20px; text-align: center;">

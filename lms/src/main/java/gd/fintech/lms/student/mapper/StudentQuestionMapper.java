@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
+import gd.fintech.lms.vo.QuestionComment;
 import gd.fintech.lms.vo.Student;
 
 @Mapper
@@ -26,6 +27,8 @@ public interface StudentQuestionMapper {
 	int totalCountQuestionSearchWriter(String questionWriter, String accountId);
 	
 	int totalCountQuestionSearchTitle(String questionTitle, String accountId);
+	
+	int totalCountQuestionComment(int questionNo);
 	
 	// 질문 등록
 	int insertQuestion(Question question); 
@@ -53,4 +56,6 @@ public interface StudentQuestionMapper {
 	
 	Student selectStudentName(String accountId);
 	
+	
+	List<QuestionComment> selectCommentList(Map<String, Object>map);
 }

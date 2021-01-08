@@ -26,15 +26,12 @@
 	<table border="1">
 		
 			<tr>
-				<td>account_id: ${reportSubmit.accountId}</td>
+				<td>작성자:${reportSubmit.reportSubmitWriter}(${reportSubmit.accountId})</td>
 			</tr>
 			<tr>	
 				<td>report_submit_content: 
 					<textarea class="form-control" name="reportSubmitContent" id="reportSubmitContent">${reportSubmit.reportSubmitContent}</textarea>
 				</td>
-			</tr>
-			<tr>	
-				<td>report_submit_writer: <input type="text" name="reportSubmitWriter" value="${reportSubmit.reportSubmitWriter}"></td>
 			</tr>
 			<tr>	
 				<td>report_submit_title: <input type="text" name="reportSubmitTitle" id="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}"></td>

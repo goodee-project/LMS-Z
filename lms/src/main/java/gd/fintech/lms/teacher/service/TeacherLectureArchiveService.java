@@ -23,6 +23,8 @@ import gd.fintech.lms.vo.LectureArchiveAddForm;
 import gd.fintech.lms.vo.LectureArchiveFile;
 import gd.fintech.lms.vo.QuestionAddForm;
 import gd.fintech.lms.vo.QuestionFile;
+import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Teacher;
 
 @Service
 public class TeacherLectureArchiveService {
@@ -56,6 +58,17 @@ public class TeacherLectureArchiveService {
 	
 	public int searchCountLectureArchive(String accountId, String lectureArchiveTitle) {
 		return teacherLectureArchiveMapper.totalSearchLectureArchive(accountId, lectureArchiveTitle);
+	}
+	
+	public Teacher getTeacherName(String accountId) {
+		return teacherLectureArchiveMapper.selectTeacherName(accountId);
+	}
+	
+	public Lecture getLectureName(String accountId, int lectureNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", accountId);
+		map.put("lectureNo", lectureNo);
+		return teacherLectureArchiveMapper.selectLectureName(map);
 	}
 	public void addLectureArchive(LectureArchiveAddForm lectureArchiveAddForm) {
 		LectureArchive lectureArchive = new LectureArchive();

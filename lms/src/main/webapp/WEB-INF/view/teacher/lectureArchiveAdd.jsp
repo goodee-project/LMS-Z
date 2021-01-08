@@ -24,10 +24,10 @@
 			</td>
 		</tr>	
 		<tr>	
-			<td>작성자 아이디: <input type="text" name="accountId" readonly="readonly" value="${teacherId}"></td>
-		</tr>
-		<tr>
-			<td>작성자: <input type="text" name="lectureArchiveWriter"></td>
+			<td>작성자: 
+				<input type="hidden" name="accountId" value="${teacherId}">
+				<input type="text" name="lectureArchiveWriter" readonly="readonly" value="${teacher.teacherName}">
+			</td>
 		</tr>
 		<tr>	
 			<td>제목: <input type="text" name="lectureArchiveTitle" id="lectureArchiveTitle"></td>

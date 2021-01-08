@@ -27,6 +27,8 @@ import gd.fintech.lms.teacher.service.TeacherLectureArchiveService;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureArchive;
 import gd.fintech.lms.vo.LectureArchiveAddForm;
+import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Teacher;
 
 
 @Controller
@@ -99,6 +101,8 @@ public class TeacherLectureArchiveController {
 	public String addLectureArchive(Model model,
 			@PathVariable(name="accountId")String accountId) {
 		List<Lecture> lectureList = teacherLectureArchiveService.getLectureList(accountId);
+		Teacher teacher = teacherLectureArchiveService.getTeacherName(accountId);
+		model.addAttribute("teacher", teacher);
 		model.addAttribute("lectureList", lectureList);
 		return "/teacher/lectureArchiveAdd";
 	}
@@ -114,15 +118,23 @@ public class TeacherLectureArchiveController {
 		return "redirect:/teacher/lectureArchiveList/"+teacherId+"/1";
 	}
 	
-	@GetMapping("/teacher/lectureArchiveCountUp/{lectureArchiveNo}")
-	public String CountUplectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
+	@GetMapping("/teacher/lectureArchiveCountUp/{accountId}/{lectureNo}/{lectureArchiveNo}")
+	public String CountUplectureArchive(
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
 		teacherLectureArchiveService.upCountLectureArchive(lectureArchiveNo);
-		return "redirect:/teacher/lectureArchiveOne/{lectureArchiveNo}";
+		return "redirect:/teacher/lectureArchiveOne/{accountId}/{lectureNo}/{lectureArchiveNo}";
 	}
 	
-	@GetMapping("/teacher/lectureArchiveOne/{lectureArchiveNo}")
-	public String oneLectureArchive(Model model,@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
+	@GetMapping("/teacher/lectureArchiveOne/{accountId}/{lectureNo}/{lectureArchiveNo}")
+	public String oneLectureArchive(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
 		LectureArchive lectureArchive = teacherLectureArchiveService.getLectureArchiveOne(lectureArchiveNo);
+		Lecture lecture = teacherLectureArchiveService.getLectureName(accountId, lectureNo);
+		model.addAttribute("lecture", lecture);
 		model.addAttribute("lectureArchive", lectureArchive);
 		return "/teacher/lectureArchiveListOne";
 	}
@@ -139,11 +151,13 @@ public class TeacherLectureArchiveController {
 		return "/teacher/lectureArchiveModify";
 	}
 	
-	@PostMapping("/teacher/lectureArchiveModify/{lectureArchiveNo}")
+	@PostMapping("/teacher/lectureArchiveModify/{accountId}/{lectureNo}/{lectureArchiveNo}")
 	public String modifylectureArchive(LectureArchiveAddForm lectureArchiveAddForm,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
 			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo) {
 		teacherLectureArchiveService.updateLectureArchive(lectureArchiveAddForm);
-		return "redirect:/teacher/lectureArchiveOne/"+lectureArchiveNo;
+		return "redirect:/teacher/lectureArchiveOne/{accountId}/{lectureNo}/{lectureArchiveNo}";
 	}
 	
 	

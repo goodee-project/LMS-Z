@@ -188,4 +188,19 @@
 		FROM lecture_archive
 		WHERE lecture_no = #{lectureNo}
 	</select>
+	
+	<select id="selectTeacherName" resultType="gd.fintech.lms.vo.Teacher" parameterType="String">
+  		SELECT
+  			teacher_name TeacherName
+  		FROM teacher
+  		WHERE teacher_id = #{accountId}
+  	</select>
+  	
+  	<select id="selectLectureName" resultType="gd.fintech.lms.vo.Lecture" parameterType="java.util.Map">
+  		SELECT
+  			teacher_name TeacherName,
+  			lecture_name LectureName
+  		FROM lecture
+  		WHERE account_id = #{accountId} AND lecture_no = #{lectureNo}
+  	</select>
   </mapper>

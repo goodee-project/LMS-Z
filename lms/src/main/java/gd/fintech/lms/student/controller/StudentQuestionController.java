@@ -31,6 +31,7 @@ import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
 import gd.fintech.lms.vo.QuestionAddForm;
+import gd.fintech.lms.vo.QuestionComment;
 import gd.fintech.lms.vo.Student;
 
 @Controller
@@ -41,7 +42,7 @@ public class StudentQuestionController {
 	public String listQuestion(Model model, 
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 10;
+		int rowPerPage = 5;
 	
 		List<Question> questionList = studentQuestionService.getQuestionPage(accountId,currentPage, rowPerPage);
 		int countQuestion = studentQuestionService.totalQuestion(accountId);
@@ -74,7 +75,7 @@ public class StudentQuestionController {
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="questionTitle")String questionTitle, 
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 10;
+		int rowPerPage = 5;
 		List<Question> questionList = studentQuestionService.getQuestionTitleSearch(accountId,questionTitle,currentPage, rowPerPage);
 		int countQuestionTitle = studentQuestionService.totalSearchTitleQuestion(questionTitle, accountId);
 		int lastTitlePage = countQuestionTitle / rowPerPage;
@@ -101,12 +102,44 @@ public class StudentQuestionController {
 		return "/student/questionList";
 	}
 	
+	// 질문 상세히 보기
+	@GetMapping("/student/questionOne/{questionNo}/{currentPage}")
+	public String oneQuestion(Model model, 
+			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage = 3;
+		Question question = studentQuestionService.getQuestionOne(questionNo);
+		List<QuestionComment> questionCommet = studentQuestionService.getCommentList(questionNo, currentPage, rowPerPage);
+		int countQuestionComment = studentQuestionService.totalQuestionComment(questionNo);
+		int lastCommentPage = countQuestionComment / rowPerPage;
+		int commentUnderPerPage = 10;	
+		int commentUnderFirstPage = currentPage - (currentPage %  commentUnderPerPage) + 1;
+		int  commentUnderLastPage =  commentUnderFirstPage +  commentUnderPerPage - 1;
+		
+		if (currentPage %  commentUnderPerPage == 0 && currentPage != 0) {
+			 commentUnderFirstPage =  commentUnderFirstPage -  commentUnderPerPage;
+			 commentUnderLastPage =  commentUnderLastPage -  commentUnderPerPage;
+		}
+		
+		if(countQuestionComment % rowPerPage !=0) {
+			lastCommentPage +=1;
+		}
+		model.addAttribute("commentUnderPerPage",commentUnderPerPage);
+		model.addAttribute("commentUnderFirstPage",commentUnderFirstPage);
+		model.addAttribute("commentUnderLastPage",commentUnderLastPage);
+		model.addAttribute("commentCurrentPage",currentPage);
+		model.addAttribute("lastCommentPage", lastCommentPage);
+		model.addAttribute("questionCommet",questionCommet);
+		model.addAttribute("question",question);
+		return "/student/questionOne";
+	}
+		
 	@GetMapping("/student/questionWriterSearch/{accountId}/{questionWriter}/{currentPage}")
 	public String searchWriterQuestion(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="questionWriter")String questionWriter,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage = 10;
+		int rowPerPage = 5;
 		List<Question> questionList = studentQuestionService.getQuestionWriterSearch(accountId,questionWriter,currentPage, rowPerPage);
 		int countQuestionWriter = studentQuestionService.totalSearchWriterQuestion(questionWriter, accountId);
 		int lastWriterPage = countQuestionWriter / rowPerPage;
@@ -136,14 +169,7 @@ public class StudentQuestionController {
 	@GetMapping("/student/questionCountUp/{questionNo}")
 	public String CountUpQuestion(@PathVariable(name="questionNo")int questionNo) {
 		studentQuestionService.updateQuestionCount(questionNo);
-		return "redirect:/student/questionOne/{questionNo}";
-	}
-	// 질문 상세히 보기
-	@GetMapping("/student/questionOne/{questionNo}")
-	public String oneQuestion(Model model, @PathVariable(name="questionNo")int questionNo) {
-		Question question = studentQuestionService.getQuestionOne(questionNo);
-		model.addAttribute("question",question);
-		return "/student/questionOne";
+		return "redirect:/student/questionOne/{questionNo}/1";
 	}
 	
 	// 질문 등록 폼
@@ -207,11 +233,12 @@ public class StudentQuestionController {
 		return "redirect:/student/questionList/"+accountId+"/1";
 	}
 	
-	@GetMapping("/student/questionFileRemove")
+	@GetMapping("/student/questionFileRemove/{accountId}")
 	public String removeQuestionFile(@RequestParam(value="questionFileUuid")String questionFileUuid,
-			@RequestParam(value="questionNo")int questionNo) {
+			@RequestParam(value="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
 		studentQuestionService.deleteQuestionOneFile(questionFileUuid);
-		return "redirect:/student/questionModify/"+questionNo;
+		return "redirect:/student/questionModify/{accountId}/"+questionNo;
 	}
 	
 	@GetMapping("/student/questionFileDownload/{questionFileUuid}")

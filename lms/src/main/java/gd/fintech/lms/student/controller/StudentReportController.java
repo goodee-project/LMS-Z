@@ -27,6 +27,7 @@ import gd.fintech.lms.student.service.StudentReportService;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
 import gd.fintech.lms.vo.ReportSubmitAddForm;
+import gd.fintech.lms.vo.Student;
 
 @Controller
 public class StudentReportController {
@@ -127,10 +128,13 @@ public class StudentReportController {
 		return "/student/reportOverdue";
 	}
 	
-	@GetMapping("/student/reportSubmitAdd/{reportNo}")
+	@GetMapping("/student/reportSubmitAdd/{reportNo}/{accountId}")
 	public String addReportSubmit(Model model,
-			@PathVariable(name="reportNo")int reportNo) {
+			@PathVariable(name="reportNo")int reportNo,
+			@PathVariable(name="accountId")String accountId) {
 		Report report = studentReportService.getReportOne(reportNo);
+		Student student = studentReportService.getStudentName(accountId);
+		model.addAttribute("student", student);
 		model.addAttribute("report", report);
 		return "/student/reportSubmitAdd";
 	}

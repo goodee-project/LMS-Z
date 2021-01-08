@@ -54,7 +54,7 @@
 </body>
 <script>
 	$('#reportSubmitContent').each(function(index, item){
-		let htmlAdd='<div><a href="${path}/student/reportSubmitAdd/${report.reportNo}">과제 작성</a></div>'
+		let htmlAdd='<div><a href="${path}/student/reportSubmitAdd/${report.reportNo}/${studentId}">과제 작성</a></div>'
 		let htmlUpdate='<div><a href="${path}/student/reportSubmitModify/${reportSubmit.reportNo}/${studentId}">과제 수정</a></div>'
 		let htmlDelete='<div><a href="${path}/student/reportSubmitAllRemove?reportSubmitNo=${reportSubmit.reportSubmitNo}">과제 삭제</a></div>'
 		if($(item).val()=='' && $('#reportDateCha').val()>0){

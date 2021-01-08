@@ -37,12 +37,12 @@
 	  		q.question_title,
 	  		q.question_count,
 	  		q.question_password,
-	  		q.question_createdate
+	  		DATE_FORMAT(q.question_createdate,'%Y-%m-%d') question_createdate
 	  	FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
 	  		 left join class_registration cr
 	  		 on q.lecture_no = cr.lecture_no
-	  	WHERE cr.account_id = #{accountId}	 
+	  	WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'	 
 	  	ORDER BY question_createdate DESC
 	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
@@ -88,7 +88,7 @@
   			count(*) count
   		FROM question q left join class_registration cr
 	  		 on q.lecture_no = cr.lecture_no
-  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId}
+  		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
   	</select>
   	
   	<select id="totalCountQuestionSearchWriter" resultType="int" parameterType="String">
@@ -96,16 +96,23 @@
   			count(*) count
   		FROM question q left join class_registration cr
 	  		 on q.lecture_no = cr.lecture_no
-  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%') AND cr.account_id = #{accountId}
+  		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%') AND cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
   	</select>
   	
   	<!-- 질문목록 리스트 총 행의 갯수 -->
-  	<select id="totalCountQuestion" resultType="int">
+  	<select id="totalCountQuestion" resultType="int" parameterType="String">
   		SELECT 
   			count(*) count
   		FROM question q left join class_registration cr
 	  		 on q.lecture_no = cr.lecture_no
-	  	WHERE cr.account_id = #{accountId} 	 
+	  	WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'	 
+  	</select>
+  	
+  	<select id="totalCountQuestionComment" resultType="int" parameterType="int">
+  		SELECT 
+  			count(*) count
+  		FROM question_comment
+	  	WHERE question_no = #{questionNo}
   	</select>
   	
   	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOne">
@@ -127,16 +134,6 @@
  		<result property="questionFileType" column="question_file_type"/>
  		<result property="questionFileCount" column="question_file_count"/>
  		<result property="questionFileCreatedate" column="question_file_createdate"/>
- 	</collection>
- 	
- 	<collection property="questionCommentList" ofType="gd.fintech.lms.vo.QuestionComment">
- 		<result property="questionCommentNo" column="question_comment_no"/>
- 		<result property="questionNo" column="question_no"/>
- 		<result property="accountId" column="account_id"/>
- 		<result property="questionCommentWriter" column="question_comment_writer"/>
- 		<result property="questionCommentContent" column="question_comment_content"/>
- 		<result property="questionCommentCreatedate" column="question_comment_createdate"/>
- 		<result property="questionCommentUpdatedate" column="question_comment_updatedate"/>
  	</collection>
  	
  	<collection property="lecture" ofType="gd.fintech.lms.vo.Lecture">
@@ -161,19 +158,24 @@
 	  		qf.question_file_original,
 	  		qf.question_file_count,
 	  		qf.question_file_createdate,
-	  		qf.question_file_uuid,
-	  		c.account_id,
-	  		c.question_comment_writer,
-	  		c.question_comment_content,
-	  		c.question_comment_createdate,
-	  		c.question_comment_updatedate
+	  		qf.question_file_uuid
 	  	FROM question q left join question_file qf
 	  		on q.question_no = qf.question_no
-	  		left join question_comment c
-	  		on q.question_no = c.question_no
 	  		left join lecture l
 	  		on q.lecture_no = l.lecture_no
 	  	WHERE q.question_no = #{questionNo}
+  	</select>
+  	
+  	<select id="selectCommentList" resultType="gd.fintech.lms.vo.QuestionComment" parameterType="java.util.Map">
+  		SELECT
+  			account_id accountId,
+  			question_comment_writer questionCommentWriter,
+	  		question_comment_content questionCommentContent,
+	  		DATE_FORMAT(question_comment_createdate,'%Y-%m-%d') questionCommentCreatedate,
+	  		question_comment_updatedate questionCommentUpdatedate
+  		FROM question_comment
+  		WHERE question_no = #{questionNo}
+  		LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	
   	<!-- 질문 등록 -->
@@ -209,7 +211,7 @@
 		FROM question
 		WHERE question_no = #{questionNo}
 	</delete>
-	  	
+	  	 	
   	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
   	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
   		SELECT 

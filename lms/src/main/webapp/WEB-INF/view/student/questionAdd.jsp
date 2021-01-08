@@ -25,8 +25,8 @@
 		</tr>
 		<tr>
 			<td>
-				account_id: <input type="text" name="accountId" readonly="readonly" value="${studentId}">
-				question_writer: <input type="text" name="questionWriter" readonly="readonly" value="${student.studentName}">
+				<input type="hidden" name="accountId" value="${studentId}">
+				작성자: <input type="text" name="questionWriter" readonly="readonly" value="${student.studentName}">
 			</td>
 		</tr>
 		<tr>

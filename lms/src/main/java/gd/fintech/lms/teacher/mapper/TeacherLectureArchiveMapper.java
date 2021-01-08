@@ -7,10 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureArchive;
+import gd.fintech.lms.vo.Student;
+import gd.fintech.lms.vo.Teacher;
 
 @Mapper
 public interface TeacherLectureArchiveMapper {
+	Lecture selectLectureName(Map<String, Object>map);
 	
+	Teacher selectTeacherName(String accountId);
 	// 자료실 리스트
 	List<LectureArchive> selectLectureArchive(Map<String, Object>map);
 	

@@ -22,6 +22,7 @@ import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
 import gd.fintech.lms.vo.ReportSubmitAddForm;
 import gd.fintech.lms.vo.ReportSubmitFile;
+import gd.fintech.lms.vo.Student;
 
 @Service
 public class StudentReportService {
@@ -47,6 +48,10 @@ public class StudentReportService {
 		map.put("rowPerPage", rowPerPage);
 		
 		return studentReportSubmitMapper.selectOverdueReportListPage(map);
+	}
+	
+	public Student getStudentName(String accountId) {
+		return studentReportSubmitMapper.selectStudentName(accountId);
 	}
 	
 	public List<Report> getOverdueReportSearch(int currentPage, int rowPerPage, String accountId, String reportTitle){

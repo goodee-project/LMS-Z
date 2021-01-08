@@ -28,6 +28,7 @@ import gd.fintech.lms.student.mapper.StudentQuestionMapper;
 import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Question;
 import gd.fintech.lms.vo.QuestionAddForm;
+import gd.fintech.lms.vo.QuestionComment;
 import gd.fintech.lms.vo.QuestionFile;
 import gd.fintech.lms.vo.Student;
 
@@ -64,6 +65,14 @@ public class StudentQuestionService {
 		return studentQuestionMapper.selectQuestionListPage(map);
 	}
 	
+	public List<QuestionComment> getCommentList(int questionNo,int currentPage, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("questionNo", questionNo);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		return studentQuestionMapper.selectCommentList(map);
+	}
+	
 	//질문 조회수 증가
 	public int updateQuestionCount(int questionNo) {
 		return studentQuestionMapper.updateQuestionCount(questionNo);
@@ -72,6 +81,10 @@ public class StudentQuestionService {
 	//질문목록 행의 갯수 (페이징에 사용)
 	public int totalQuestion(String accountId) {
 		return studentQuestionMapper.totalCountQuestion(accountId);
+	}
+	
+	public int totalQuestionComment(int questionNo) {
+		return studentQuestionMapper.totalCountQuestionComment(questionNo);
 	}
 	
 	public int totalSearchWriterQuestion(String questionWriter,String accountId) {

@@ -7,9 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
+import gd.fintech.lms.vo.Student;
 
 @Mapper
 public interface StudentReportSubmitMapper {
+	
+	Student selectStudentName(String accountId);
 	
 	ReportSubmit selectReportSubmitOne(Map<String, Object>map);
 	

@@ -13,10 +13,8 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<th>lectureArchiveNo</th>
 				<th>lecture_no</th>
-				<th>account_id</th>
-				<th>lecture_archive_writer</th>
+				<th>작성자</th>
 				<th>lecture_archive_title</th>
 				<th>lecture_archive_content</th>
 				<th>lecture_archive_createdate</th>
@@ -27,10 +25,8 @@
 			<c:if test="${!empty lectureArchive}">
 				<c:forEach var="la" items="${lectureArchive}">
 					<tr>
-						<td><a href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureArchiveNo}</a></td>
-						<td>${la.lectureNo}</td>
-						<td>${la.accountId}</td>
-						<td>${la.lectureArchiveWriter}</td>
+						<td><a href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureNo}(${la.lecture.lectureName})</a></td>
+						<td>${la.lectureArchiveWriter}(${la.accountId})</td>
 						<td>${la.lectureArchiveTitle}</td>
 						<td>${la.lectureArchiveContent}</td>
 						<td>${la.lectureArchiveCreatedate}</td>
