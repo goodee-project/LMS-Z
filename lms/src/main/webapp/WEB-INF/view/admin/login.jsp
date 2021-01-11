@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -65,7 +66,7 @@
                         <!-- 사용 시 줄 표시 -->
                         <li class="list-divider"></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href=""
+                        <li class="sidebar-item"> <a class="sidebar-link" href="${path}/adminLogin"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
                                     class="hide-menu">관리자 로그인
                                 </span></a>
@@ -89,13 +90,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">로그인</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"></h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                 	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">관리자
-                                    </li>
+                                    <li class="breadcrumb-item"></li>
                                 </ol>
                             </nav>
                         </div>
@@ -103,35 +103,41 @@
                 </div>
             </div>
 
-				<br>
-				
                 <!-- 2번째 라인 카드 -->
 	               <div class="row">
-	                    <div class="col-md-10 col-lg-10">
-	                        <div class="card">
+	               		<div class="col-md-3 col-lg-3"></div>
+	                    <div class="col-md-5 col-lg-4">
+	                        <div class="card" id="cardStyle" style="height:370px;">
 	                        	<form method="post" action="${path}/adminLogin">
 		                            <div class="card-body">
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	ID : <input type="text" name="accountId" value="admin1">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                    <span class="list-inline-item text-muted font-italic">
-		                                    	PW : <input type="password" name="accountPw" value="1234">
-		                                    </span>
-		                                </div>
-		                                <div class="list-inline text-center mt-4 mb-0">
-		                                	<button class="btn btn-success font-3" type="submit">로그인</button>
-		                                </div>
+		                            <div id="loginTitle" class="text-center font-7">
+		                            	<a>로그인</a>
+		                            </div>
+		                            <div id="loginSubTitle" class="text-center">
+	                            		<a>관리자</a>
+                            		</div>
+		                                <table id="loginTable">
+		                                	<tr>
+		                                		<td>
+		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px; margin-top:-5px;" name="accountId" value="admin1">
+		                                		</td>
+		                                	</tr>
+		                                	<tr>
+		                                		<td>
+		                                			<input type="password" class="form-control-plaintext form-control-lg border-black" style="padding: 10px;" name="accountPw" value="1234">
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                                
+		                                <button class="btn btn-success font-3 btn-block btn-lg border-rad" type="submit">로그인</button>
 		                            </div>
 	                            </form>
 	                        </div>
 	                    </div>
 	                </div>
-      			</div>
-      			</div>         
-	
+
+          </div>     
+	</div>
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
