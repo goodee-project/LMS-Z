@@ -79,7 +79,7 @@
             					<div>
 									<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testQuestionList/${testOne.lectureNo}">목록</a>
 									<a class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" href="${path}/teacher/removeTestQuestion/${testOne.lectureNo}/${multiplechoiceNo}">삭제</a>
-									<a class="btn btn-outline-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyTestQuestion/${multiplechoiceNo}">수정</a>
+									<a class="btn btn-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyTestQuestion/${multiplechoiceNo}">수정</a>
 								</div>
             				</div>
             			</div>

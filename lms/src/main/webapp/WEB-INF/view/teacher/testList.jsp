@@ -82,7 +82,7 @@
             					<div>
 									<!-- 시험이 있을 경우 수정만 할 수 있음 -->
 									<c:if test="${test != null}">
-										<a class="btn btn-outline-info" style="border-radius: 4px; float:right;" href="${path}/teacher/modifyTest/${lectureNo}">시험 수정</a>
+										<a class="btn btn-info" style="border-radius: 4px; float:right;" href="${path}/teacher/modifyTest/${lectureNo}">시험 수정</a>
 									</c:if>
 									<!-- 시험이 없을 경우 추가만 할 수 있음 -->
 									<c:if test="${test == null}">

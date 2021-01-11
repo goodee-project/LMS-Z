@@ -69,7 +69,7 @@
 											<td><input class="form-control" type="datetime" name="testEnddate" id="testEnddate" value="${test.testEnddate}"></td>
 										</tr>
             						</table>
-            						<button class="btn btn-outline-secondary" style="border-radius: 4px; float:right;" type="submit">수정</button>
+            						<button class="btn btn-info" style="border-radius: 4px; float:right;" type="submit">수정</button>
           	 					</form>
            					</div>
     					</div>
@@ -93,6 +93,6 @@
     <script src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>				
+    <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>	
 </body>
 </html>

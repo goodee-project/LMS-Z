@@ -70,7 +70,7 @@
 										</tr>
 									</table>
 									<div>
-										<button class="btn btn-outline-secondary" style="border-radius:4px;" type="submit">등록</button>
+										<button class="btn btn-success" style="border-radius:4px;" type="submit">등록</button>
 									</div>
 								</form>
 							</div>

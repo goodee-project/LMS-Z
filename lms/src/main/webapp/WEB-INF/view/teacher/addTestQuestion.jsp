@@ -105,7 +105,7 @@
             								</c:forEach>
             							</tbody>
             						</table>
-            						<button class="btn btn-outline-secondary" style="border-radius:4px; float:right;" id="btn" type="button">등록</button>
+            						<button class="btn btn-success" style="border-radius:4px; float:right;" id="btn" type="button">등록</button>
             					</form>
 							</div>
 						</div>

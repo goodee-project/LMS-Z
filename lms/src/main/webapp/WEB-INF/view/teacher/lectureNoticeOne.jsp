@@ -78,7 +78,7 @@
 										<a class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" href="${path}/teacher/removeLectureNotice/${lectureNo}/${lectureNoticeNo}">삭제</a>
 									</span>
 									<span>
-										<a class="btn btn-outline-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyLectureNotice/${lectureNo}/${lectureNoticeNo}">수정</a>
+										<a class="btn btn-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyLectureNotice/${lectureNo}/${lectureNoticeNo}">수정</a>
 									</span>
 								</div>
 							</div>

@@ -70,10 +70,10 @@
 												<td>${s.submissionStatus}</td>
 												<td>
 													<c:if test="${s.submissionStatus == '제출'}">
-														<a class="btn btn-outline-dark" style="border-radius:4px;" href="${path}/teacher/answerSheet/${lectureNo}/${s.studentId}">조회</a>
+														<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/answerSheet/${lectureNo}/${s.studentId}">조회</a>
 													</c:if>
 													<c:if test="${s.submissionStatus == '미제출'}">
-														<a class="btn btn-outline-dark disabled" style="border-radius:4px;" href="">조회불가</a>
+														<a class="btn btn-outline-secondary disabled" style="border-radius:4px;" href="">조회불가</a>
 													</c:if>
 												</td>
 											</tr>

@@ -67,10 +67,10 @@
             							</tr>
             							<tr>
             								<td>내용</td>
-            								<td><textarea style="width:50%;" rows="3" cols="50" name="lectureNoticeContent" id="lectureNoticeContent"></textarea></td>
+            								<td><textarea style="width:50%;" rows="13" cols="50" name="lectureNoticeContent" id="lectureNoticeContent"></textarea></td>
             							</tr>
             						</table>
-            						<button type="button" id="insertBtn" class="btn btn-outline-secondary" style="border-radius:4px; float:right;">등록</button>
+            						<button type="button" id="insertBtn" class="btn btn-success" style="border-radius:4px; float:right;">등록</button>
             					</form>
     						</div>
 						</div>

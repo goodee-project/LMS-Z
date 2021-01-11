@@ -68,10 +68,10 @@
 										</tr>
 										<tr>
 											<td>내용</td>
-											<td><textarea style="width:120%;" rows="3" cols="50" name="lectureNoticeContent" id="lectureNoticeContent">${noticeOne.lectureNoticeContent}</textarea></td>
+											<td><textarea style="width:120%;" rows="13" cols="50" name="lectureNoticeContent" id="lectureNoticeContent">${noticeOne.lectureNoticeContent}</textarea></td>
 										</tr>
             						</table>
-            						<button class="btn btn-outline-secondary" style="border-radius: 4px; float:right;" type="button" id="updateBtn">수정</button>
+            						<button class="btn btn-info" style="border-radius: 4px; float:right;" type="button" id="updateBtn">수정</button>
             					</form>
             				</div>
             			</div>

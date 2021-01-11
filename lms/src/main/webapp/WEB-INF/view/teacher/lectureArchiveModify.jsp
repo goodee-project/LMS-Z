@@ -110,7 +110,7 @@
 											</td>
 											<td>
 												<div>
-													<button class="btn btn-success" style="border-radius:4px;" type="button" id="addBtn">파일추가</button>
+													<button class="btn btn-outline-success" style="border-radius:4px;" type="button" id="addBtn">파일추가</button>
 													<button class="btn btn-outline-danger" style="border-radius:4px;" type="button" id="delBtn">파일삭제</button>
 												</div>
 											</td>

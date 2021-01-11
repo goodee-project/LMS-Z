@@ -99,7 +99,7 @@
             								</c:forEach>
             							</tbody>
             						</table>
-            						<button class="btn btn-outline-secondary" style="border-radius:4px; float:right;" id="btn" type="button">수정</button>
+            						<button class="btn btn-info" style="border-radius:4px; float:right;" id="btn" type="button">수정</button>
             					</form>
      						</div>
 						</div>
