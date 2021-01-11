@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.admin.service.AdminIndexService;
+import gd.fintech.lms.vo.Connect;
 import gd.fintech.lms.vo.ManagerQueue;
 
 @Controller
@@ -21,7 +22,10 @@ public class AdminIndexController {
 		public String index(Model model) {
 			// 승인대기 중인 운영자 전체 리스트 출력
 			List<ManagerQueue> managerQueueList = adminIndexService.getManagerQueueList();
+			// 6개월 이상 미접속자(휴면상태) 리스트
+			List<Connect> dormantStateList = adminIndexService.getDormantStateList();
 			model.addAttribute("managerQueueList",managerQueueList);
+			model.addAttribute("dormantStateList",dormantStateList);
 			return "admin/index";
 		}
 		// 운영자 승인
@@ -43,6 +47,13 @@ public class AdminIndexController {
 		public String disavowal(@PathVariable(name="managerId") String managerId) {
 			adminIndexService.removeManagerQueue(managerId);
 			adminIndexService.modifyManagerStateSecession(managerId);
+			return "redirect:/admin/index";
+		}
+		
+		// 휴면계정 활성화로 변경
+		@GetMapping("/admin/changeActivation/{accountId}")
+		public String changeActivation(@PathVariable(name="accountId") String accountId) {
+			adminIndexService.modifyChangeActivation(accountId);
 			return "redirect:/admin/index";
 		}
 }

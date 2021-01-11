@@ -80,4 +80,21 @@
 			account_updatedate=NOW()
 		WHERE account_id= #{managerId}
 	</update>
+	
+	<!-- 6개월 이상 미접속자(휴면상태) 리스트 -->
+	<select id="selectDormantStateList" resultType="gd.fintech.lms.vo.Connect">
+		SELECT 
+			c.account_id accountId,
+			c.connect_updatedate connectUpdatedate
+		FROM connect c
+		LEFT JOIN account a ON c.account_id=a.account_id
+		WHERE ABS(TIMESTAMPDIFF(MONTH,NOW(),connect_updatedate)) >= 6
+		AND a.account_state='휴면상태'
+	</select>
+	<!-- 휴면계정을 활성화로 변경 -->
+	<update id="updateChangeActivation" parameterType="java.lang.String">
+		UPDATE `account`
+		SET account_state='활성화'
+		WHERE account_id=#{accountId}
+	</update>
 </mapper>

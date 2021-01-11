@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.admin.mapper.AdminIndexMapper;
+import gd.fintech.lms.vo.Connect;
 import gd.fintech.lms.vo.ManagerQueue;
 
 @Transactional
@@ -37,5 +38,13 @@ public class AdminIndexService {
 	// 운영자 미승인 후 계정 탈퇴
 	public int modifyManagerStateSecession(String managerId) {
 		return adminIndexMapper.updateManagerStateSecession(managerId);
+	}
+	// 6개월 이상 미접속자(휴면상태) 리스트
+	public List<Connect> getDormantStateList(){
+		return adminIndexMapper.selectDormantStateList();
+	}
+	// 휴면계정을 활성화로 변경
+	public int modifyChangeActivation(String accountId) {
+		return adminIndexMapper.updateChangeActivation(accountId);
 	}
 }

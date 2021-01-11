@@ -99,16 +99,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">승인 대기자</h3>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                	<!-- 소제목 밑 글씨 -->
-                                    <li class="breadcrumb-item">운영자
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -119,6 +110,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                	<h3 class="page-title text-truncate text-dark font-weight-medium mb-1">승인 대기자</h3>
+			                        <div class="d-flex align-items-center">
+			                            <nav aria-label="breadcrumb">
+			                                <ol class="breadcrumb m-0 p-0">
+			                                	<!-- 소제목 밑 글씨 -->
+			                                    <li class="breadcrumb-item">운영자
+			                                    </li>
+			                                </ol>
+			                            </nav>
+			                        </div>
+			                        <br>
                                     <table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
@@ -203,6 +205,60 @@
 	                                                	<div class="popover-icon">
 	                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item"
                                                             	href="${path}/admin/disavowal/${c.managerId}">거부</a>
+                                                        </div>
+	                                                </td>
+	                                            </tr>
+	                                         </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                	<h3 class="page-title text-truncate text-dark font-weight-medium mb-1">휴면상태 리스트</h3>
+			                        <div class="d-flex align-items-center">
+			                            <nav aria-label="breadcrumb">
+			                                <ol class="breadcrumb m-0 p-0">
+			                                	<!-- 소제목 밑 글씨 -->
+			                                    <li class="breadcrumb-item">
+			                                    </li>
+			                                </ol>
+			                            </nav>
+			                        </div>
+			                        <br>
+                                    <table class="table no-wrap v-middle mb-0">
+                                        <thead>
+                                            <tr class="border-0">
+                                                <th class="border-0 font-14 text-dark px-2">아이디</th>
+                                                <th class="border-0 font-14 text-dark px-2">최근 접속일</th>
+                                                <th class="border-0 font-14 text-dark px-2">휴면계정 해지</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<c:forEach var="d" items="${dormantStateList}">
+	                                            <tr>
+	                                                <td class="px-2 py-4">
+	                                                    <div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.accountId }</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td class="text-muted px-2 py-4 font-14">
+	                                               		<div class="d-flex no-block align-items-center">
+	                                                    	<!-- 굵은 글씨 -->
+	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.connectUpdatedate }</h5>
+	                                                    </div>
+	                                                </td>
+	                                                <td>
+	                                                	<div class="popover-icon">
+	                                                        <a class="btn btn-primary rounded-circle btn-circle font-12"
+	                                                            href="${path }/admin/changeActivation/${d.accountId}">변경</a>
                                                         </div>
 	                                                </td>
 	                                            </tr>
