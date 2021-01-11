@@ -50,7 +50,7 @@
 			 left join report_submit rs 
 			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
 		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 AND cr.class_registration_state = '수강중'
-		ORDER BY r.report_createdate ASC
+		ORDER BY r.report_enddate ASC
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	
@@ -64,8 +64,8 @@
 			r.report_content,
 			r.report_createdate,
 			r.report_updatedate,
-			r.report_startdate,
-			r.report_enddate,
+			DATE_FORMAT(r.report_startdate,'%Y-%m-%d (%H:%i)') report_startdate,
+			DATE_FORMAT(r.report_enddate, '%Y-%m-%d (%H:%i)') report_enddate,
 			rs.report_submit_content,
 			DATEDIFF(r.report_enddate,NOW())
 		FROM report r left join class_registration cr
@@ -88,8 +88,8 @@
 			r.report_content,
 			r.report_createdate,
 			r.report_updatedate,
-			r.report_startdate,
-			r.report_enddate,
+			DATE_FORMAT(r.report_startdate,'%Y-%m-%d (%H:%i)') report_startdate,
+			DATE_FORMAT(r.report_enddate, '%Y-%m-%d (%H:%i)') report_enddate,
 			rs.report_submit_content,
 			DATEDIFF(r.report_enddate,NOW())
 		FROM report r left join class_registration cr
@@ -136,6 +136,7 @@
 		<result property="reportNo" column="report_no"/>
 		<result property="accountId" column="account_id"/>
 		<result property="reportSubmitNo" column="report_submit_no"/>
+		<result property="reportSubmitCreatedate" column="report_submit_createdate"/>
 		<result property="reportSubmitWriter" column="report_submit_writer"/>
 		<result property="reportSubmitTitle" column="report_submit_title"/>
 		<result property="reportSubmitContent" column="report_submit_content"/>
@@ -159,6 +160,7 @@
 			rs.report_submit_point,
 			rs.report_submit_feedback,
 			rs.report_submit_writer,
+			DATE_FORMAT(rs.report_submit_createdate,'%Y-%m-%d') report_submit_createdate,
 			rs.report_submit_title,
 			rsf.report_submit_file_uuid,
 			rsf.report_submit_file_original,
@@ -192,8 +194,8 @@
 		l.lecture_name,
 		r.report_title,
 		r.report_content,
-		r.report_startdate,
-		r.report_enddate,
+		DATE_FORMAT(r.report_startdate,'%Y-%m-%d') report_startdate,
+		DATE_FORMAT(r.report_enddate,'%Y-%m-%d') report_enddate,
 		DATEDIFF(r.report_enddate,NOW()) 
 	FROM report r left join lecture l
 		 on r.lecture_no = l.lecture_no

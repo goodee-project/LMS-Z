@@ -30,6 +30,7 @@
 			<div class="lds-pos"></div>
 		</div>
 	</div>
+	
 	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
 		data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
@@ -51,73 +52,76 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-<form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
-	<table id="questionTable" class="table table" style="margin-top: 20px;">
-		<tr>
-			<td class="border-0 font-14 font-weight-medium text-muted px-2">
-				작성자
-				<span class="d-flex no-block align-items-center">
-					${student.studentName}(${question.accountId})
-				</span>
-			</td>
-			<td>작성일: ${question.questionCreatedate}</td>
-		</tr>
-	
-		<tr>
-			<td>lecture_no
-				<select name="lectureNo">
-					<c:forEach var="l" items="${lectureList}">
-						<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
-					</c:forEach>
-				</select>
-			</td>
-			<td>제목: <input type="text" name="questionTitle" id="questionTitle" value="${question.questionTitle}" style="width:460px"></td>
-		</tr>
-		<tr>
-			<td>
-				내용
-				<textarea class="form-control" name="questionContent" id="questionContent">${question.questionContent}</textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>question_password: <input type="text" name="questionPassword" value="${question.questionPassword}"></td>
-		</tr>
-		<tr>
-			<td>question_file</td>
-			<td>
-			
-				<c:forEach var="qf" items="${question.questionfile}">
-					<div>
-						<span id="${qf.questionFileOriginal}">${qf.questionFileOriginal}</span>
-						<c:if test="${qf.questionFileUuid != null}">
-							<span>
-								<a href="${path}/student/questionFileRemove/${studentId}?questionFileUuid=${qf.questionFileUuid}&questionNo=${question.questionNo}">삭제</a>
-							</span>
-						</c:if>
+								<form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
+									<table id="questionTable" class="table table" style="margin-top: 10px;">
+		
+										<tr class="border border-0">
+											<td class="border border-0 d-flex justify-content-start">
+												<h4>작성일 &emsp;${question.questionCreatedate}</h4>
+											</td>
+										</tr>
+									
+										<tr class="border border-0">
+											<td class="border border-0 d-flex justify-content-start">강의
+												&nbsp;
+												<select style="width:20%;" name="lectureNo">
+													<c:forEach var="l" items="${lectureList}">
+														<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
+													</c:forEach>
+												</select>
+												&emsp;제목 &nbsp; <input type="text" style="width:30%;" name="questionTitle" id="questionTitle" value="${question.questionTitle}" style="width:460px">
+											</td>
+										</tr>
+										
+										<tr class="border border-0">
+											<td class="border border-0">
+												<textarea class="form-control" style="width:100%;" style="resize:none;overflow:visible;" rows="10" name="questionContent" id="questionContent">${question.questionContent}</textarea>
+											</td>
+											<td class="border border-0" style="width:30%;"></td>
+										</tr>
+										
+										<tr class="border border-0">
+											<td class="border border-0">				
+												<button type="button" class="btn btn-outline-success" id="addBtn">파일추가</button>
+												<button type="button" class="btn btn-outline-danger" id="delBtn">파일삭제</button>
+													
+											
+												<c:forEach var="qf" items="${question.questionfile}">
+													<div>
+														<span id="${qf.questionFileOriginal}">${qf.questionFileOriginal}</span>
+														<c:if test="${qf.questionFileUuid != null}">
+															<span>
+																<a href="${path}/student/questionFileRemove/${studentId}?questionFileUuid=${qf.questionFileUuid}&questionNo=${question.questionNo}">삭제</a>
+															</span>
+														</c:if>
+													</div>
+												</c:forEach>
+												<span id="fileinput"></span>
+											</td>
+										</tr>
+										
+										<tr class="border border-0">
+											<td class="border border-0">
+												질문 비밀번호 <input type="text" style="width:30%;" name="questionPassword" value="${question.questionPassword}">
+											</td>
+										</tr>
+										
+										<tr class="border border-0">
+											<td class="border border-0">
+												<button type="button" class="btn btn-outline-success" id="submitBtn">수정 완료</button>
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionOne/${question.questionNo}/1">이전 페이지</a>
+											</td>
+										</tr>
+										
+									</table>
+								</form>	
+							</div>
+						</div>
 					</div>
-				</c:forEach>
-		
-				<div id="fileinput"></div>
-			</td>
-		
-			<td>
-				<div>
-					<button type="button" id="addBtn">파일추가</button>
-					<button type="button" id="delBtn">파일삭제</button>
 				</div>
-			</td>
-		</tr>
-	</table>
-	<button type="button" id="submitBtn">수정 완료</button>
-</form>	
-	<a href="${path}/student/questionOne/${question.questionNo}/1">이전 페이지</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>

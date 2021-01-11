@@ -222,7 +222,7 @@ public class StudentQuestionController {
 		questionAddForm.setQuestionContent(content);
 		
 		studentQuestionService.updateQuestion(questionAddForm);
-		return "redirect:/student/questionOne/"+questionNo;
+		return "redirect:/student/questionOne/"+questionNo+"/1";
 	}
 	// 질문 삭제 
 	@GetMapping("/student/questionRemove/{accountId}/{questionNo}")

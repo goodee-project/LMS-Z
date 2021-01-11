@@ -56,7 +56,7 @@
   			q.question_writer,
   			q.question_title,
   			q.question_count,
-  			q.question_createdate
+  			DATE_FORMAT(q.question_createdate,'%Y-%m-%d') question_createdate
   		FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
 	  		 left join class_registration cr
@@ -73,7 +73,7 @@
   			q.question_writer,
   			q.question_title,
   			q.question_count,
-  			q.question_createdate
+  			DATE_FORMAT(q.question_createdate,'%Y-%m-%d') question_createdate
   		FROM question q left join lecture l 
 	  		 on q.lecture_no = l.lecture_no
 	  		 left join class_registration cr
@@ -152,8 +152,8 @@
 	  		q.question_writer,
 	  		q.question_title,
 	  		q.question_content,
-	  		q.question_createdate,
-	  		q.question_updatedate,
+	  		DATE_FORMAT(q.question_createdate,'%Y-%m-%d (%H:%i)') question_createdate,
+	  		DATE_FORMAT(q.question_updatedate,'%Y-%m-%d (%H:%i)') question_updatedate,
 	  		q.question_password,
 	  		qf.question_file_original,
 	  		qf.question_file_count,
@@ -171,7 +171,7 @@
   			account_id accountId,
   			question_comment_writer questionCommentWriter,
 	  		question_comment_content questionCommentContent,
-	  		DATE_FORMAT(question_comment_createdate,'%Y-%m-%d') questionCommentCreatedate,
+	  		DATE_FORMAT(question_comment_createdate,'%Y-%m-%d (%H:%i)') questionCommentCreatedate,
 	  		question_comment_updatedate questionCommentUpdatedate
   		FROM question_comment
   		WHERE question_no = #{questionNo}

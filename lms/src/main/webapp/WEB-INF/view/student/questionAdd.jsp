@@ -6,59 +6,124 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- 위의 사이트 아이콘 -->
+<link rel="icon" type="image/png" sizes="16x16"
+	href="${path}/assets/images/favicon.png">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+<link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+<link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+<link href="${path}/dist/css/style.min.css" rel="stylesheet">
+<link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 <!-- SmartEditor 텍스트편집기 -->
 <script src="${path }/smarteditor2/js/HuskyEZCreator.js"></script>
 </head>
 <body>
-<form method="post" id="questionAdd" action="${path}/student/questionAdd?studentId=${studentId}" enctype="multipart/form-data">
-	<table border="1">
-		<tr>
-			<td>lecture_no
-				<select name="lectureNo">
-					<c:forEach var="l" items="${lectureList}">
-						<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input type="hidden" name="accountId" value="${studentId}">
-				작성자: <input type="text" name="questionWriter" readonly="readonly" value="${student.studentName}">
-			</td>
-		</tr>
-		<tr>
-			<td>question_title: <input type="text" name="questionTitle" id="questionTitle" style="width:460px"></td>
-		</tr>
-		<tr>
-			<td>
-				<div>question_content</div>
-				<textarea class="form-control" name="questionContent" id="questionContent" rows="6"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>question_password: <input type="text" name="questionPassword"></td>
-		</tr>
-	</table>
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
 	
-	<table border="1">
-		<tr>
-			<td>question_file</td>
-			<td>
-				<div>
-					<button type="button" id="addBtn">파일 추가</button>
-					<button type="button" id="delBtn">파일 삭제</button>
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+
+		<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+		<jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
+		
+	
+		<div class="page-wrapper">
+			<div class="page-breadcrumb">
+				<div class="row">
+					<div class="col-7 align-self-center">
+						<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">질문 등록</h2>
+					</div>
 				</div>
-				<div id="fileinput"></div>
-			</td>
-		</tr>
-	</table>
-	<button type="button" id="submitBtn">등록완료</button>
-</form>		
-	<a href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
+			</div>	
+			<br>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12 col-md-12">
+						<div class="card" id="cardStyle">
+							<div class="card-body">
+								<div class="table-responsive">
+									<form method="post" id="questionAdd" action="${path}/student/questionAdd?studentId=${studentId}" enctype="multipart/form-data">
+										<table id="questionAddTable" class="table table" style="margin-top: 10px;">
+											<tr class="border border-0">
+												<td class="border border-0 d-flex justify-content-start">강의
+													&nbsp;
+													<select name="lectureNo">
+														<c:forEach var="l" items="${lectureList}">
+															<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
+														</c:forEach>
+													</select>
+													&emsp;제목 &nbsp;<input type="text" style="width:30%;" name="questionTitle" id="questionTitle" style="width:460px">
+												</td>
+											</tr>
+											
+											<tr class="border border-0">
+												<td class="border border-0">
+													<textarea class="form-control" style="width:100%;" style="resize:none;overflow:visible;" name="questionContent" id="questionContent" rows="10"></textarea>
+												</td>
+												<td class="border border-0" style="width:30%;"></td>
+											</tr>
+											
+										
+											<tr class="border border-0">
+												
+												<td class="border border-0">
+													
+													<button type="button" id="addBtn">파일 추가</button>
+													<button type="button" id="delBtn">파일 삭제</button>
+												
+													<div id="fileinput"></div>
+												</td>
+											</tr>
+											<tr class="border border-0">
+												<td class="border border-0">
+													질문 비밀번호 <input type="password" style="width:20%;" name="questionPassword">
+													<button type="button" class="btn btn-outline-success" id="submitBtn">등록완료</button>
+												</td>
+											</tr>
+											<tr class="border border-0">
+												<td class="border border-0">
+													<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
+												</td>
+											</tr>
+										</table>
+										<input type="hidden" name="questionWriter" value="${student.studentName}">
+										<input type="hidden" name="accountId" value="${studentId}">
+									</form>		
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>	
 </body>
+	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+	<script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${path}/dist/js/app-style-switcher.js"></script>
+	<script src="${path}/dist/js/feather.min.js"></script>
+	<script src="${path}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+	<script src="${path}/dist/js/sidebarmenu.js"></script>
+	<script src="${path}/dist/js/custom.min.js"></script>
+	<script src="${path}/assets/extra-libs/c3/d3.min.js"></script>
+	<script src="${path}/assets/extra-libs/c3/c3.min.js"></script>
+	<script src="${path}/assets/libs/chartist/dist/chartist.min.js"></script>
+	<script src="${path}/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+	<script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+	<script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+	<script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// SmartEditor2 스크립트 추가

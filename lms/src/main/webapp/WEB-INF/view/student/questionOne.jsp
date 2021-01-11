@@ -56,9 +56,9 @@
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="questionOneTable" class="table table" style="margin-top: 20px;">
+									<table id="questionOneTable" class="table table" style="margin-top: 20px; table-layout:fixed; word-break:break-all;">
 										<tr>
-											<td class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
+											<td style="width:140px" class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2">
 												<div class="d-flex no-block align-items-center">
 													${question.lectureNo}(${question.lecture.lectureName})
@@ -109,20 +109,21 @@
 										</tr>
 										<tr>
 											<td class="border-0 font-14 font-weight-medium text-muted px-2">첨부파일</td>
-											<td>
+											
 											<c:forEach var="qf" items="${question.questionfile}">
 												<c:if test="${!empty qf.questionFileUuid}">	
 														
-													<div>
-														<span class="border-0 font-14 font-weight-medium text-muted px-2">
-															<span class="d-flex no-block align-items-center">
+													<tr>
+													<td class="border-0 font-14 font-weight-medium text-muted px-2"></td>
+														<td class="font-weight-medium text-dark border-top-0 px-2 py-4">
+															<div class="d-flex no-block align-items-center">
 																<a href="${path}/student/questionFileDownload/${qf.questionFileUuid}">${qf.questionFileOriginal}</a>
-															</span>
-														</span>
-													</div>
+															</div>
+														</td>
+													</tr>
 												</c:if>	
+											
 												<c:if test="${empty qf.questionFileUuid}">
-													
 														<td class="font-weight-medium text-dark border-top-0 px-2">
 															<div class="d-flex no-block align-items-center">
 																등록된 첨부파일이 없습니다.
@@ -131,7 +132,6 @@
 													
 												</c:if>
 											</c:forEach>
-											</td>
 										</tr>
 										
 										<tr>
@@ -253,8 +253,8 @@ function view(str) {
 	}
 	
 	$('#accountId').each(function(index, item){
-		let htmlDelete = '&nbsp&nbsp<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionRemove/${studentId}/${question.questionNo}">질문 삭제</a>'
-		let htmlUpdate = '<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionModify/${studentId}/${question.questionNo}">질문 수정</a>'
+		let htmlDelete = '&nbsp&nbsp<a type="button" class="btn btn-outline-danger" href="${path}/student/questionRemove/${studentId}/${question.questionNo}">질문 삭제</a>'
+		let htmlUpdate = '<a type="button" class="btn btn-outline-success" href="${path}/student/questionModify/${studentId}/${question.questionNo}">질문 수정</a>'
 		let html = '<span>게시글의 수정과 삭제는 작성자만 할 수 있습니다.</span>'
 		if($(item).val()==$('#studentId').val()){
 				$('#delUp').append(htmlUpdate);

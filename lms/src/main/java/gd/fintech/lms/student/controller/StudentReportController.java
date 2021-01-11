@@ -37,7 +37,7 @@ public class StudentReportController {
 	public String listReport(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getReportPage(currentPage,rowPerPage,accountId);
 		
 		int listUnderPerPage = 10;	
@@ -54,7 +54,7 @@ public class StudentReportController {
 		if(totalReport % rowPerPage !=0) {
 			lastPage +=1;
 		}
-		System.out.println(reportList);
+	
 		model.addAttribute("listUnderPerPage",listUnderPerPage);
 		model.addAttribute("listUnderFirstPage",listUnderFirstPage);
 		model.addAttribute("listUnderLastPage",listUnderLastPage);
@@ -68,7 +68,7 @@ public class StudentReportController {
 	public String listOverdueReport(Model model,
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getOverdueReportPage(currentPage, rowPerPage, accountId);
 		
 		int overdueListUnderPerPage = 10;	
@@ -85,7 +85,7 @@ public class StudentReportController {
 		if(totalOverdueReport % rowPerPage !=0) {
 			lastOverduePage +=1;
 		}
-		System.out.println(reportList);
+	
 		model.addAttribute("overdueListUnderPerPage",overdueListUnderPerPage);
 		model.addAttribute("overdueListUnderFirstPage",overdueListUnderFirstPage);
 		model.addAttribute("overdueListUnderLastPage",overdueListUnderLastPage);
@@ -100,7 +100,7 @@ public class StudentReportController {
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="reportTitle")String reportTitle,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getOverdueReportSearch(currentPage, rowPerPage, accountId, reportTitle);
 		
 		int searchUnderPerPage = 10;	
@@ -173,21 +173,25 @@ public class StudentReportController {
 		return "/student/reportSubmitModify"; 
 	}
 	
-	@PostMapping("/student/reportSubmitModify")
+	@PostMapping("/student/reportSubmitModify/{reportSubmitNo}/{reportNo}/{accountId}")
 	public String modifyReportSubmit(ReportSubmitAddForm reportSubmitAddForm,
-			@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
+			@PathVariable(name="reportSubmitNo")int reportSubmitNo,
+			@PathVariable(name="reportNo")int reportNo,
+			@PathVariable(name="accountId")String accountId) {
 		String title = reportSubmitAddForm.getReportSubmitTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		reportSubmitAddForm.setReportSubmitTitle(title);
 		String content = reportSubmitAddForm.getReportSubmitContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		reportSubmitAddForm.setReportSubmitContent(content);
 		studentReportService.updateReportSubmit(reportSubmitAddForm);
-		return  "redirect:/student";
+		return  "redirect:/student/reportSubmitOne/{reportNo}/{accountId}";
 	}
 	
-	@GetMapping("student/reportSubmitOneFileRemove/{reportSubmitFileUuid}")
-	public String removeReportSubmitOneFile(@PathVariable(name="reportSubmitFileUuid")String reportSubmitFileUuid){
+	@GetMapping("student/reportSubmitOneFileRemove/{reportSubmitFileUuid}/{reportNo}/{accountId}")
+	public String removeReportSubmitOneFile(@PathVariable(name="reportSubmitFileUuid")String reportSubmitFileUuid,
+			@PathVariable(name="reportNo")int reportNo,
+			@PathVariable(name="accountId")String accountId){
 		studentReportService.deleteReportOneFile(reportSubmitFileUuid);
-		return "redirect:/student";
+		return "redirect:/student/reportSubmitModify/{reportNo}/{accountId}";
 	}
 	
 	@GetMapping("student/reportSubmitAllRemove")

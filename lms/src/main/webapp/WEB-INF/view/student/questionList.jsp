@@ -174,7 +174,8 @@
 									<option value="제목">제목</option>
 									<option value="작성자">작성자</option>
 								</select>
-								<input type="text" id="question"> <a type="button" class="btn btn-outline-secondary" id="btn" href="">검색</a>
+								<input type="text" id="question"> 
+								<a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
 							</div>	
 						</div>
 					</div>
