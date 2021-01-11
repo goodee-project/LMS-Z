@@ -36,4 +36,13 @@ public interface StudentLoginMapper {
 	int updateAccountToPw(String accountId, String accountPw);
 	Student selectStudentToNameAndEmail(Student student);
 	int selectStudentToNameAndEmailByCheck(Student student);
+	
+	// 휴면상태일 경우 휴면해제 인증 폼으로 이동하기 위한 조건
+	String selectAccountStateCk(String accountId);
+	
+	// 인증메일을 보낼 학생 메일 가져오기
+	String selectStudentEmail(String studentId);
+	
+	// 휴면계정 인증 성공시 업데이드
+	int updateChangeActivity(String studentId);
 }

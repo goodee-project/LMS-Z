@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.student.service.StudentLoginService;
@@ -48,15 +50,18 @@ public class StudentLoginController {
 			return "redirect:/studentLogin";
 		} else if(studentLoginService.getAccountToStudentLogin(account).equals("중복")) {
 			return "redirect:/studentLogin";
-		}
-		
+		}//휴면상태일 때 해제 인증 폼으로 이동 
+		else if(studentLoginService.getAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+	  		return "redirect:/dormantRelease/"+account.getAccountId();
+	  	}
 		HttpSession session = request.getSession();
 	    session.setAttribute("studentId", account.getAccountId());
 	    
 	    String studentImage = studentLoginService.getStudentImage(account.getAccountId());
 	    session.setAttribute("studentImage", studentImage);
-		
+	   
 		return "redirect:/student/index";
+		
 	}
 	
 	// 로그아웃
@@ -78,6 +83,31 @@ public class StudentLoginController {
 		studentLoginService.addSignup(studentForm);
 		
 		return "redirect:/studentLogin";
+	}
+	
+	// 휴면해제 인증 폼
+	@GetMapping("/dormantRelease/{studentId}")
+	public String dormantRealease(Model model,
+			@PathVariable(name="studentId") String studentId) {
+		model.addAttribute("studentId",studentId);
+		return "/student/dormantRelease";
+	}
+	// 휴면해제 인증 성공
+	@GetMapping("/dormantReleaseSuccess/{studentId}")
+	public String login(HttpServletRequest request,
+				@PathVariable(name="studentId") String studentId) {
+		
+		// 휴면 해제 인증 성공시 활성화 상태로 변경
+		studentLoginService.modifyChangeActivity(studentId);
+		
+		HttpSession session = request.getSession();
+	    session.setAttribute("studentId", studentId);
+	    
+	    String studentImage = studentLoginService.getStudentImage(studentId);
+	    session.setAttribute("studentImage", studentImage);
+	   
+		return "redirect:/student/index";
+		
 	}
 }
 

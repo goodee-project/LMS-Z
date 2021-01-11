@@ -92,9 +92,7 @@
 		                        	${myLectureListOne.classRegistrationState}
 		                        </a>
 		                        &emsp;
-		                        <a class="col-3 btn btn-secondary font-20 popover-item" 
-		                        id="classCancelBtn"
-		                        style="color:white;">
+		                        <a class="col-3 btn btn-secondary font-20 popover-item" id="classCancelBtn" style="color:white;">
 		                        	수강 취소
 		                        </a>
 	                        </c:if>
