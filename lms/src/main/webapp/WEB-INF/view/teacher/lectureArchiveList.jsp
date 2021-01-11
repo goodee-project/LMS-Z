@@ -42,7 +42,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Message</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Lecture Archive</h3>
                     </div>
                 </div>
             </div>
@@ -52,9 +52,9 @@
             		<div class="col-lg-12 col-md-12">
             			<div class="card" id="card-style">
             				<div class="card-body">
-            					<h4 class="card-title">학생목록</h4>
+            					<h4 class="card-title">자료목록</h4>
             					
-            					<div style="float:right;">
+            					<div style="float:right; margin-bottom:20px;">
 	            					<div class="row">
 		            					<input type="hidden" id="teacherId" value="${teacherId}">
 										<input class="form-control" style="width:70%; margin-right:8px;" type="text" id="title" placeholder="제목으로 검색됩니다"> 
@@ -119,7 +119,7 @@
 								
 								<!-- 검색 페이징 -->
 								<c:if test="${lectureArchiveTitle != null}">
-									<div>
+									<div id="paging" style="text-align:center; padding:7px;">
 										<c:if test="${searchCurrentPage>1}">
 											<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/1">처음으로</a>
 											<a href="${path}/teacher/lectureArchiveSearch/${teacherId}/${lectureArchiveTitle}/${searchCurrentPage-1}">이전</a>
