@@ -18,4 +18,12 @@ public class TeacherReportSubmitService {
 		
 		return teacherReportSubmitMapper.selectReportSubmit(reportNo);
 	}
+	
+	public ReportSubmit getReportSubmitOne(int reportSubmitNo) {
+		return teacherReportSubmitMapper.selectReportSubmitOne(reportSubmitNo);
+	}
+	
+	public void modifyReportSubmit(ReportSubmit reportSubmit) {
+		teacherReportSubmitMapper.updateReportSubmit(reportSubmit);
+	}
 }

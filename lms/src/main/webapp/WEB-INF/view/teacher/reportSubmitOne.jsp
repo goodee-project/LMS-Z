@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <!-- 위의 사이트 아이콘 -->
     <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
-<title>reportOne</title>
+<title>reportSubmitOne</title>
     <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
@@ -20,14 +20,14 @@
 </head>
 <body>
 
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
+	    <div class="preloader">
+	        <div class="lds-ripple">
+	            <div class="lds-pos"></div>
+	            <div class="lds-pos"></div>
+	        </div>
+	    </div>
     
-            <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
     
 		<jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
@@ -35,7 +35,7 @@
 
 
 
-<!-- 소제목 -->
+		<!-- 소제목 -->
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
@@ -57,77 +57,85 @@
 		<div class="container-fluid">
 		<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-7 col-md-7">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
-		<table class="table table">
-				<tr>
-					<th>report_no</th>
-					<td>${reportOne.reportNo}</td>
-				</tr>
-				<tr>
-					<th>lecture_no</th>
-					<td>${reportOne.lectureNo}</td>
-				</tr>
-				<tr>
-					<th>report_title</th>
-					<td>${reportOne.reportTitle}</td>
-				</tr>
-				<tr>
-					<th>report_content</th>
-					<td>${reportOne.reportContent}</td>
-				</tr>
-				<tr>
-					<th>report_startdate</th>
-					<td>${reportOne.reportStartdate}</td>
-				</tr>
-				<tr>
-					<th>report_enddate</th>
-					<td>${reportOne.reportEnddate}</td>
-				</tr>
-		</table>
-		<a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyReport/${reportOne.reportNo}">수정하기</a>
-		<br><br><br>
-		<h3>과제제출</h3>
-		<table id="lmsNoticeTable" class="table table">
-			<thead>
-				<tr>
-					<th>report_submit_no</th>
-					<th>report_submit_writer</th>
-					<th>report_submit_title</th>
-					<th>report_submit_point</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="rs" items="${reportOne.reportSubmitList}">
-				<tr>
-				<c:if test="${rs.reportSubmitNo == 0}">
-					<td></td>
-					<td></td>
-					<td>과제제출 인원이 없습니다.</td>
-				</c:if>
-				<c:if test="${rs.reportSubmitNo != 0}">
-					<td>${rs.reportSubmitNo}</td>
-					<td>${rs.reportSubmitWriter}</td>
-					<td><a href="${path}/teacher/reportSubmitOne/${rs.reportSubmitNo}">${rs.reportSubmitTitle}</a></td>
-					<td>${rs.reportSubmitPoint}점</td>
-				</c:if>
-				</tr>
+	<table class="table table">
+			<tr>
+				<th>report_submit_title</th>
+				<td>${reportSubmitOne.reportSubmitTitle}</td>
+			</tr>
+			<tr>
+				<th>report_submit_writer</th>
+				<td>${reportSubmitOne.reportSubmitWriter}</td>
+			</tr>
+			<tr>
+				<th>report_submit_content</th>
+				<td>${reportSubmitOne.reportSubmitContent}</td>
+			</tr>
+			<tr>
+				<th>report_submit_point</th>
+				<td>${reportSubmitOne.reportSubmitPoint}</td>
+			</tr>
+			<tr>
+				<th>report_submit_feedback</th>
+				<td>${reportSubmitOne.reportSubmitFeedback}</td>
+			</tr>
+			<tr>
+			<th>파일</th>
+			<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
+			<c:if test="${rs.reportSubmitFileUuid == null}">
+				<td>첨부파일이 없습니다.</td>
+			</c:if>
+			<c:if test="${rs.reportSubmitFileUuid != null}">
+				<td>${rs.reportSubmitFileOriginal}</td>
+			</c:if>
 			</c:forEach>
-			</tbody>
-		</table>
-		<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>
-		<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${reportOne.lectureNo}/1">뒤로가기</a>
-		
+		</tr>
+	</table>
+	
 	</div>
 	</div>
 	</div>
 	</div>
+
+			<!-- 2번째 라인 카드 -->
+				<div class="row">
+					<div class="col-lg-7 col-md-7">
+						<div class="card" id="cardStyle">
+							<div class="card-body">
+								<form id="modifyReportSubmit" method="post" action="${path}/teacher/modifyReportSubmit">
+									<input type="hidden" name="reportSubmitNo" value="${reportSubmitOne.reportSubmitNo}">
+									<table>
+										<tr>
+											<th>점수</th>
+											<td>
+												<input class="form-control" style="width:120%;"type="text" id="reportSubmitPoint" name="reportSubmitPoint">
+												<div id = "score"></div>
+											</td>
+										</tr>
+										<tr>
+											<th>피드백</th>
+											<td>
+												<input class="form-control" style="width:120%;"type="text" id="reportSubmitFeedback" name="reportSubmitFeedback">
+												<div id = "feedBack"></div>
+											</td>
+										</tr>
+									</table>
+								<button class="btn btn-success" style="border-radius: 4px; float:right;" id="btn" type="button">점수 추가</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	
 	</div>
 	</div>
 	</div>
-		
+	
+	
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -144,6 +152,26 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-		
+    
+    <script>
+		var score = '';
+		$('#btn').click(function(){
+			if(score== 'success'){
+				$('#modifyReportSubmit').submit();
+				} else{
+					alert('형식을 확인하세요');
+				}
+		})
+		var checkId = /^[0-9]{1,3}$/;
+		$('#reportSubmitPoint').on('propertychange change keyup paste input', function(){
+			if(checkId.test($('#reportSubmitPoint').val())){				
+				$('#score').text('');
+				score='success';
+			}else{
+				$('#score').text('1~3자리 숫자를 입력해주세요');
+				score = '';
+			}
+		});
+	</script>
 </body>
 </html>

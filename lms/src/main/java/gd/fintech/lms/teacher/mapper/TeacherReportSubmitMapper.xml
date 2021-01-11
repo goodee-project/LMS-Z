@@ -22,6 +22,7 @@
 			<result property="reportSubmitFileCreatedate" column="report_submit_file_createdate" />
 		</collection>
 	</resultMap>
+	<!-- 과제제출 목록 -->
 	<select id="selectReportSubmit" parameterType="java.util.Map" resultMap="selectReportSubmitResult">
 		SELECT
 			report_submit_no,
@@ -33,4 +34,29 @@
 		WHERE report_no = #{reportNo}
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
+	<!-- 과제제출 상세보기 -->
+	<select id="selectReportSubmitOne" parameterType="int" resultMap="selectReportSubmitResult">
+		SELECT
+			rs.report_submit_no,
+			rs.report_no,
+			rs.report_submit_writer,
+			rs.report_submit_title,
+			rs.report_submit_content,
+			rs.report_submit_point,
+			rs.report_submit_feedback,
+			rf.report_submit_file_uuid,
+			rf.report_submit_file_original,
+			rf.report_submit_file_count
+		FROM report_submit rs 
+		LEFT JOIN report_submit_file rf
+		ON rs.report_submit_no = rf.report_submit_no
+		WHERE rs.report_submit_no = #{reportSubmitNo}
+	</select>
+	<!-- 과제제출 점수, 피드백 업데이트 -->
+	<update id="updateReportSubmit" parameterType="gd.fintech.lms.vo.ReportSubmit">
+		UPDATE report_submit 
+		SET report_submit_point = #{reportSubmitPoint},
+			report_submit_feedback = #{reportSubmitFeedback}
+		WHERE report_submit_no = #{reportSubmitNo}
+	</update>
 </mapper>

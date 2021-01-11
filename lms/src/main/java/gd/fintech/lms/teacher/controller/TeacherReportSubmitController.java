@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherReportSubmitService;
 import gd.fintech.lms.vo.ReportSubmit;
@@ -24,5 +25,23 @@ public class TeacherReportSubmitController {
 		model.addAttribute("reportSubmitList", reportSubmitList);
 		
 		return "redirect:/teacher/reportSubmitList";
+	}
+	
+	//과제제출 상세보기
+	@GetMapping("/teacher/reportSubmitOne/{reportSubmitNo}")
+	public String reportSubmitOne(Model model, @PathVariable(value = "reportSubmitNo") int reportSubmitNo) {
+		
+		ReportSubmit reportSubmitOne = teacherReportSubmitService.getReportSubmitOne(reportSubmitNo);
+		model.addAttribute("reportSubmitOne", reportSubmitOne);
+		
+		return "teacher/reportSubmitOne";
+	}
+	
+	@PostMapping("/teacher/modifyReportSubmit")
+	public String PostReportSubmit(ReportSubmit reportSubmit) {
+		
+		teacherReportSubmitService.modifyReportSubmit(reportSubmit);
+		
+		return "redirect:/teacher/reportSubmitOne/" + reportSubmit.getReportSubmitNo();
 	}
 }
