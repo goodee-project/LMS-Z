@@ -97,4 +97,5 @@
 		SET account_state='활성화'
 		WHERE account_id=#{accountId}
 	</update>
+	
 </mapper>
