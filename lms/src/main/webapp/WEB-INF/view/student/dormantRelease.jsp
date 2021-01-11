@@ -71,11 +71,12 @@
                           		</div>
                           		<hr>
                           		<div class="row">
-                          			<div class="col-lg-4 col-md-4"></div>
-			           				<div class="col-lg-6 col-md-6">
+                          			<div class="col-lg-3 col-md-3"></div>
+			           				<div class="col-lg-9 col-md-9">
 			           					<input type="text" maxlength="4" name="numCk" id="numCk" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">&emsp;
 			           					<input type="text" id="numMsg">
 			           					<input type="text" id="studentId" value="${studentId }" hidden="hidden">
+			           					<span id="timer"></span>&emsp;
 		                          		<button type="button" id="requestBtn" class="col-2 btn btn-outline-info font-weight-bold" style="color:black">요청</button>
 	                          		</div>
 	                          	</div>
@@ -115,7 +116,21 @@
     <script>
 		$(document).ready(function(){
 			let studentId= $('#studentId').val();
+			let time=120;//2분
+			let min="";//분
+			let sec="";//초
+
 			$('#requestBtn').click(function(){
+				let timer = setInterval(function(){
+					min=parseInt(time/60);
+					sec= time%60;
+					document.getElementById("timer").innerHTML = min + " : " + sec;
+					time--;
+
+					if(time<0){
+						clearInterval(timer);
+						}
+					},1000)
 				$.ajax({
 					url:'${path}/studentDormantMsg/'+studentId,
 					type:'GET',
@@ -138,6 +153,7 @@
 					}
 				})
 			})
+
     </script>
 </body>
 <!-- 
