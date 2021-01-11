@@ -63,27 +63,19 @@
 
 		<table class="table table">
 				<tr>
-					<th>report_no</th>
-					<td>${reportOne.reportNo}</td>
-				</tr>
-				<tr>
-					<th>lecture_no</th>
-					<td>${reportOne.lectureNo}</td>
-				</tr>
-				<tr>
-					<th>report_title</th>
+					<th>과제 제목</th>
 					<td>${reportOne.reportTitle}</td>
 				</tr>
 				<tr>
-					<th>report_content</th>
+					<th>과제 내용</th>
 					<td>${reportOne.reportContent}</td>
 				</tr>
 				<tr>
-					<th>report_startdate</th>
+					<th>과제 출제일</th>
 					<td>${reportOne.reportStartdate}</td>
 				</tr>
 				<tr>
-					<th>report_enddate</th>
+					<th>과제 마감일</th>
 					<td>${reportOne.reportEnddate}</td>
 				</tr>
 		</table>
@@ -93,28 +85,24 @@
 		<table id="lmsNoticeTable" class="table table">
 			<thead>
 				<tr>
-					<th>report_submit_no</th>
-					<th>report_submit_writer</th>
-					<th>report_submit_title</th>
-					<th>report_submit_point</th>
+					<th>제출자</th>
+					<th>과제제출 제목</th>
+					<th>과제 점수</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="rs" items="${reportOne.reportSubmitList}">
-				<tr>
-				<c:if test="${rs.reportSubmitNo == 0}">
-					<td></td>
-					<td></td>
-					<td>과제제출 인원이 없습니다.</td>
-				</c:if>
-				<c:if test="${rs.reportSubmitNo != 0}">
-					<td>${rs.reportSubmitNo}</td>
-					<td>${rs.reportSubmitWriter}</td>
-					<td><a href="${path}/teacher/reportSubmitOne/${rs.reportSubmitNo}">${rs.reportSubmitTitle}</a></td>
-					<td>${rs.reportSubmitPoint}점</td>
-				</c:if>
-				</tr>
-			</c:forEach>
+				<c:forEach var="rs" items="${reportOne.reportSubmitList}">
+					<tr>
+					<c:if test="${rs.reportSubmitNo == 0}">
+						<td colspan="3">과제제출 인원이 없습니다.</td>
+					</c:if>
+					<c:if test="${rs.reportSubmitNo != 0}">
+						<td>${rs.reportSubmitWriter}</td>
+						<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/teacher/reportSubmitOne/${rs.reportSubmitNo}">${rs.reportSubmitTitle}</a></td>
+						<td>${rs.reportSubmitPoint}점</td>
+					</c:if>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>

@@ -62,36 +62,36 @@
                             <div class="card-body">
 
 	<table class="table table">
-			<tr>
-				<th>report_submit_title</th>
-				<td>${reportSubmitOne.reportSubmitTitle}</td>
-			</tr>
-			<tr>
-				<th>report_submit_writer</th>
-				<td>${reportSubmitOne.reportSubmitWriter}</td>
-			</tr>
-			<tr>
-				<th>report_submit_content</th>
-				<td>${reportSubmitOne.reportSubmitContent}</td>
-			</tr>
-			<tr>
-				<th>report_submit_point</th>
-				<td>${reportSubmitOne.reportSubmitPoint}</td>
-			</tr>
-			<tr>
-				<th>report_submit_feedback</th>
-				<td>${reportSubmitOne.reportSubmitFeedback}</td>
-			</tr>
-			<tr>
-			<th>파일</th>
-			<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
+		<tr>
+			<th>과제제출 제목</th>
+			<td>${reportSubmitOne.reportSubmitTitle}</td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>${reportSubmitOne.reportSubmitWriter}</td>
+		</tr>
+		<tr>
+			<th>과제제출 내용</th>
+			<td>${reportSubmitOne.reportSubmitContent}</td>
+		</tr>
+		<tr>
+			<th>과제 점수</th>
+			<td>${reportSubmitOne.reportSubmitPoint}</td>
+		</tr>
+		<tr>
+			<th>피드백</th>
+			<td>${reportSubmitOne.reportSubmitFeedback}</td>
+		</tr>
+		<tr>
+		<th>파일</th>
+		<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
 			<c:if test="${rs.reportSubmitFileUuid == null}">
-				<td>첨부파일이 없습니다.</td>
+				<td colspan="6">첨부파일이 없습니다.</td>
 			</c:if>
 			<c:if test="${rs.reportSubmitFileUuid != null}">
 				<td>${rs.reportSubmitFileOriginal}</td>
 			</c:if>
-			</c:forEach>
+		</c:forEach>
 		</tr>
 	</table>
 	
@@ -107,23 +107,25 @@
 							<div class="card-body">
 								<form id="modifyReportSubmit" method="post" action="${path}/teacher/modifyReportSubmit">
 									<input type="hidden" name="reportSubmitNo" value="${reportSubmitOne.reportSubmitNo}">
-									<table>
+									<table class="table table">
 										<tr>
 											<th>점수</th>
 											<td>
-												<input class="form-control" style="width:120%;"type="text" id="reportSubmitPoint" name="reportSubmitPoint">
+												<input class="form-control" style="width:100%;"type="text" id="reportSubmitPoint" name="reportSubmitPoint">
 												<div id = "score"></div>
 											</td>
 										</tr>
 										<tr>
 											<th>피드백</th>
 											<td>
-												<input class="form-control" style="width:120%;"type="text" id="reportSubmitFeedback" name="reportSubmitFeedback">
+												<textarea class="form-control" style="width:100%;" rows="3" cols="50" id="reportSubmitFeedback" name="reportSubmitFeedback"></textarea>
 												<div id = "feedBack"></div>
 											</td>
 										</tr>
 									</table>
-								<button class="btn btn-success" style="border-radius: 4px; float:right;" id="btn" type="button">점수 추가</button>
+									
+									<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportOne/${reportSubmitOne.reportNo}">뒤로가기</a>
+									<button class="btn btn-success" style="border-radius: 4px; float:right;" id="btn" type="button">점수 추가</button>
 							</form>
 						</div>
 					</div>

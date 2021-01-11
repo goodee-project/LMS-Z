@@ -63,29 +63,25 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 		<form method="post" action="${path}/teacher/modifyReport/${reportOne.reportNo}">
+					<div>
+						<input type="hidden" name="reportNo" value="${reportOne.reportNo}" readonly="readonly">
+						<input type="hidden" name="lectureNo" value="${reportOne.lectureNo}" readonly="readonly">
+					</div>
 			<table id="lmsNoticeTable" class="table table">
 				<tr>
-					<th>report_no</th>
-					<td><input type="text" name="reportNo" value="${reportOne.reportNo}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<th>lecture_no</th>
-					<td><input type="text" name="lectureNo" value="${reportOne.lectureNo}" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<th>report_title</th>
+					<th>과제 제목</th>
 					<td><input type="text" name="reportTitle" id="reportTitle" value="${reportOne.reportTitle}" style="width:560px"></td>
 				</tr>
 				<tr>
-					<th>report_content</th>
+					<th>과제 내용</th>
 					<td><textarea class="form-control" rows="3" cols="50" name="reportContent" id="reportContent">${reportOne.reportContent}</textarea></td>
 				</tr>
 				<tr>
-					<th>report_startdate</th>
+					<th>과제 출제일</th>
 					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate" value="${reportOne.reportStartdate}"></td>
 				</tr>
 				<tr>
-					<th>report_enddate</th>
+					<th>과제 마감일</th>
 					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate" value="${reportOne.reportEnddate}"></td>
 				</tr>
 			</table>

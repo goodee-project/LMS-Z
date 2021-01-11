@@ -64,19 +64,15 @@
 		<table id="lmsNoticeTable" class="table table">
 				<thead>
 					<tr>
-						<th class="font-weight-bold">report_no</th>
-						<th class="font-weight-bold">lecture_no</th>
-						<th class="font-weight-bold">report_title</th>
-						<th class="font-weight-bold">report_startdate</th>
-						<th class="font-weight-bold">report_enddate</th>
+						<th class="font-weight-bold">과제 제목</th>
+						<th class="font-weight-bold">과제 출제일</th>
+						<th class="font-weight-bold">과제 마감일</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="r" items="${reportList}">
 						<tr>
-							<td>${r.reportNo}</td>
-							<td>${lectureNo}</td>
-							<td><a class="btn btn-outline-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
+							<td><a class="btn btn-outline-light bg-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
 						</tr>

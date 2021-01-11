@@ -58,6 +58,11 @@
 		DELETE FROM report
 		WHERE report_no = #{reportNo}
 	</delete>
+	<!-- 과제 삭제하기 위해 외래키로 연결된 과제제출 삭제 -->
+	<delete id="deleteReportSubmit" parameterType="int">
+		DELETE FROM report_submit
+		WHERE report_no = #{reportNo}
+	</delete>
 	
 	<resultMap type="gd.fintech.lms.vo.Report" id="selectReportResult">
 		<result property="reportNo" column="report_no"/>

@@ -62,24 +62,24 @@
                             <div class="card-body">
 
 		<form method="post" action="${path}/teacher/addReport/${lectureNo}/${currentPage}">
+			<input type="hidden" name="lectureNo" value="${lectureNo}">
 			<table id="lmsNoticeTable" class="table table">
-					<input type="hidden" name="lectureNo" value="${lectureNo}">
 				<tr>
-					<th class="font-weight-bold">report_title</th>
+					<th class="font-weight-bold">과제 제목</th>
 					<td><input type="text" name="reportTitle" id="reportTitle" style="width:560px"></td>
 				</tr>
 				<tr>
-					<th class="font-weight-bold">report_content</th>
+					<th class="font-weight-bold">과제 내용</th>
 					<td><textarea class="form-control" rows="3" cols="50" name="reportContent" id="reportContent"></textarea></td>
 				</tr>
 				<!-- 과제 시작일 -->
 				<tr>
-					<th class="font-weight-bold">report_startdate</th>
+					<th class="font-weight-bold">과제 제출일</th>
 					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate"></td>
 				</tr>
 				<!-- 과제 마감일 -->
 				<tr>
-					<th class="font-weight-bold">report_enddate</th>
+					<th class="font-weight-bold">과제 마감일</th>
 					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate"></td>
 				</tr>
 			</table>

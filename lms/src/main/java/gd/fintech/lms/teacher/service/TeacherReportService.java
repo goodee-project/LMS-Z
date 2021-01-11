@@ -32,8 +32,9 @@ public class TeacherReportService {
 		return teacherReportMapper.insertReport(report);
 	}
 	//과제삭제
-	public int removeReport(int reportNo) {
-		return teacherReportMapper.deleteReport(reportNo);
+	public void removeReport(int reportNo) {
+		teacherReportMapper.deleteReportSubmit(reportNo);
+		teacherReportMapper.deleteReport(reportNo);
 	}
 	
 	//과제 상세보기
