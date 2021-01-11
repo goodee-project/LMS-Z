@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.admin.mapper.AdminRestictMapper">
+	<!-- 미접속 6개월 이상된 회원 검색 -->
+	<select id="selectUpdatedate" resultType="String">
+		SELECT 
+			account_id accountId
+		FROM connect
+		WHERE TIMESTAMPDIFF(MONTH, connect_updatedate, NOW()) > 6
+	</select>
+	<!-- 미접속 7개월차부터 휴먼계정으로 업데이트 -->
+	<update id="updateAccountState" parameterType="String">
+		UPDATE account
+		SET account_state = '휴면상태',
+			account_updatedate = now()
+		WHERE account_id = #{accountId}
+	</update>
+</mapper>
