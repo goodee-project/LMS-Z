@@ -90,10 +90,10 @@
 												<tr>
 													<td>${m.accountId }</td>
 													<c:if test="${m.student.studentName !=null }">
-													<td><a href="${path }/manager/studentOne/${m.accountId}/${searchLevel}">${m.student.studentName }</a></td>
+													<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path }/manager/studentOne/${m.accountId}/${searchLevel}">${m.student.studentName }</a></td>
 													</c:if>
 													<c:if test="${m.teacher.teacherName !=null }">
-													<td><a href="${path }/manager/teacherOne/${m.accountId}/${searchLevel}">${m.teacher.teacherName }</a></td>
+													<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path }/manager/teacherOne/${m.accountId}/${searchLevel}">${m.teacher.teacherName }</a></td>
 													</c:if>
 													<td>${m.accountLevel }</td>
 													<td>${m.accountState }</td>

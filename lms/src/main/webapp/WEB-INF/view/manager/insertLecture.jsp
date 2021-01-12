@@ -46,17 +46,17 @@
             <div class="container-fluid">
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
+                    <div class="col-lg-7 col-md-7">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                                <h4 class="card-title">강좌 등록</h4>
 	                            <div>
-	                            	<form method="post" action="${path }/manager/insertAction">
+	                            	<form id="lecture" method="post" action="${path }/manager/insertAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 		                            		<tr hidden="hidden">
 												<td><input type="text" name="accountId" id="accountId"></td>
 											<tr>
-												<th style="width:15%;">subject_name</th>
+												<th style="width:15%;">과목 :</th>
 												<td>
 													<select class="form-control" style="width:100%;" name="subjectNo">
 														<c:forEach var="s" items="${subjectList }">
@@ -92,26 +92,27 @@
 											</tr>
 											 -->
 											 <tr>
-												<th>Name</th>
+												<th>이름 :</th>
 												<td>
-													<input class="form-control" style="width:100%;" type="text" name="teacherName" id="teacherNameSelect" readonly>
+													<input class="form-control" style="width:70%; float:left;" type="text" name="teacherName" id="teacherNameSelect" readonly>
 													<button class="btn btn-outline-secondary" style="border-radius: 4px;" type="button" id="searchBtn">강사 검색</button>
 												</td>
 											</tr>
 											<tr>
-												<th>lecture_name</th>
+												<th>강좌명 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type="text" name="lectureName">
 												</td>
 											</tr>
 											<tr>
-												<th>total_date</th>
+												<th>일수 :</th>
 												<td>
-													<input class="form-control" style="width:100%;" type="text" name="lectureTotal">
+													<input id="totalDate" class="form-control" style="width:100%;" type="text" name="lectureTotal">
+													<div id="date"></div>
 												</td>
 											</tr>
 											<tr>
-												<th>textbook</th>
+												<th>교재 :</th>
 												<td>
 													<select class="form-control" style="width:100%;" name="textbookIsbn">
 														<c:forEach var="t" items="${textbookList }">
@@ -121,7 +122,7 @@
 												</td>
 											</tr>
 											<tr>
-												<th>syllabus</th>
+												<th>강의계획서 :</th>
 												<td>
 													<select class="form-control" style="width:100%;" name="syllabusNo">
 														<c:forEach var="s" items="${syllabusList }">
@@ -131,7 +132,7 @@
 												</td>
 											</tr>
 											<tr>
-												<th>classroom</th>
+												<th>강의실 :</th>
 												<td>
 													<select class="form-control" style="width:100%;" name="classroomNo">
 														<c:forEach var="c" items="${classroomList }">
@@ -141,54 +142,62 @@
 												</td>
 											</tr>
 											<tr>
-												<th>start_date</th>
+												<th>시작일 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type="date" name="lectureStartdate">
 												</td>
 											</tr>
 											<tr>
-												<th>end_date</th>
+												<th>종료일 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type="date" name="lectureEnddate">
 												</td>
 											</tr>
 										</table>
 										<a  class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/lectureList/1">돌아가기</a>
-										<button  class="btn btn-success" style="border-radius: 4px; float:right;" id="btn" type="submit">등록</button>
-									</form>
-									<form>
-										<div id="teacherList" hidden="hidden">
-											<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
-												<thead>
-												<tr>
-													<th></th>
-													<th>이름</th>
-													<th>이메일</th>
-													<th>성별</th>
-													<th>설명</th>
-													<th></th>
-												</tr>
-												</thead>
-												<tbody class="tableBody">
-													<c:forEach var="t" items="${teacherList }" varStatus="status">
-														<tr>
-															<td></td>
-															<td id="name${status.index }">${t.teacherName}</td>
-															<td id="email${status.index }">${t.teacherEmail}</td>
-															<td id="gender${status.index }">${t.teacherGender}</td>
-															<td id="birth${status.index }">${t.teacherBirth}</td>
-															<td>
-																<button class="btn btn-outline-secondary" style="border-radius: 4px;" type="button" id="${status.index }" value="">선택</button>
-															</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-										</div>
+										<button class="btn btn-success" style="border-radius: 4px; float:right;" id="btn" type="button">등록</button>
 									</form>
 								</div>
 							</div>
 						</div>
+					</div>
+					<!-- 1번째 라인 카드 -->
+                    <div class="col-lg-5 col-md-5">
+                        <div class="card" id="cardStyle">
+                            <div class="card-body">
+                               <h4 class="card-title">강사 목록</h4>
+	                            <div>
+								<form>
+									<div id="teacherList" hidden="hidden" style="overflow:auto; height:693px;" >
+										<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
+											<thead>
+											<tr>
+												<th>이름</th>
+												<th>이메일</th>
+												<th>성별</th>
+												<th>번호</th>
+												<th></th>
+											</tr>
+											</thead>
+											<tbody class="tableBody">
+												<c:forEach var="t" items="${teacherList }" varStatus="status">
+													<tr>
+														<td id="name${status.index }">${t.teacherName}</td>
+														<td id="email${status.index }">${t.teacherEmail}</td>
+														<td id="gender${status.index }">${t.teacherGender}</td>
+														<td id="phone${status.index }">${t.teacherPhone}</td>
+														<td>
+															<button class="btn btn-outline-secondary" style="border-radius: 4px;" type="button" id="${status.index }" value="">선택</button>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</form>
+								</div>
+							</div>
+						</div>	
 					</div>
 				</div>
 			</div>
@@ -229,7 +238,7 @@
 								teacherName:$('#name'+index).text(),
 								teacherEmail:$('#email'+index).text(),
 								teacherGender:$('#gender'+index).text(),
-								teacherBirth:$('#birth'+index).text()
+								teacherPhone:$('#phone'+index).text()
 								},
 							success:function(data){
 								console.log(data);
@@ -240,7 +249,24 @@
 				})
 				
 		})
-		
+		var num='';
+		$('#btn').click(function(){
+			if(num=='success'){
+				$('#lecture').submit();
+				} else{
+					alert('형식을 확인하세요');
+				}
+		})
+		var checkId = /^[0-9]{1,3}$/;
+		$('#totalDate').on('propertychange change keyup paste input', function(){
+			if(checkId.test($('#totalDate').val())){				
+				$('#date').text('');
+				num ='success';		
+			}else{
+				$('#date').text('1~3자리 숫자를 입력해주세요');
+				num  = '';	
+			}
+		});
 	</script>
 </body>
 </html>

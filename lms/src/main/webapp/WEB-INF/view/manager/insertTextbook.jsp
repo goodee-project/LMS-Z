@@ -51,47 +51,49 @@
                             <div class="card-body">
                                <h4 class="card-title">교재 추가</h4>
 	                            <div>
-	                            	<form method="post" action="${path }/manager/insertTextbookAction">
+	                            	<form id="textbook" method="post" action="${path }/manager/insertTextbookAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 		                            		<tr>
-												<th style="width:20%;">textbookIsbn :</th>
+												<th style="width:15%;">도서번호 :</th>
 												<td>
-													<input class="form-control" style="width:100%;" type="text" name="textbookIsbn">
+													<input class="form-control" style="width:100%;" type="text" id="textbookIsbn" name="textbookIsbn">
+													<div id="isbn"></div>
 												</td>
 											</tr>
 											<tr>
-												<th> textbookTitle :</th>
+												<th> 제목 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type = "text" name="textbookTitle">
 												</td>
 											</tr>
 											<tr>
-												<th> textbookInfo :</th>
+												<th> 책 소개 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type = "text" name="textbookInfo">
 												</td>
 											</tr>
 											<tr>
-												<th> textbookPublisher :</th>
+												<th> 출판사 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type = "text" name="textbookPublisher">
 												</td>
 											</tr>
 											<tr>
-												<th> textbookPrice :</th>
+												<th> 가격 :</th>
 												<td>
-													<input class="form-control" style="width:100%;" type = "text" name="textbookPrice">
+													<input class="form-control" style="width:100%;" type = "text" id="textbookPrice" name="textbookPrice">
+													<div id="price"></div>
 												</td>
 											</tr>
 											<tr>
-												<th> textbookWriter :</th>
+												<th> 글쓴이 :</th>
 												<td>
 													<input class="form-control" style="width:100%;" type = "text" name="textbookWriter">
 												</td>
 											</tr>
 										</table>
 										<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/textbookList/1">돌아가기</a>
-										<button class="btn btn-success" style="border-radius: 4px; float:right;" type="submit">교재 등록</button>
+										<button class="btn btn-success" id="btn" style="border-radius: 4px; float:right;" type="button">교재 등록</button>
 									</form>
 								</div>
 							</div>
@@ -116,5 +118,37 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+    	var num = '';
+    	var price = '';
+    	var checkPrice = /^[0-9]{4,7}$/;
+    	var checkNumber = /^[0-9\-]{17}$/;
+    	$('#btn').click(function(){
+			if(num== 'success' && price== 'success'){
+				$('#textbook').submit();
+				} else{
+					alert('형식을 확인하세요');
+				}
+		})
+    	$('#textbookIsbn').on('propertychange change keyup paste input', function(){
+			if(checkNumber.test($('#textbookIsbn').val())){				
+				$('#isbn').text('');
+				num='success';		
+			}else{
+				$('#isbn').text('숫자와 "-"로 이루어진 17자 isbn을 입력해주세요');
+				num = '';	
+			}
+		});
+    	$('#textbookPrice').on('propertychange change keyup paste input', function(){
+			if(checkPrice.test($('#textbookPrice').val())){				
+				$('#price').text('');
+				price='success';		
+			}else{
+				$('#price').text('4~7자리 숫자를 입력해주세요');
+				price = '';	
+			}
+		});
+		
+    </script>
 </body>
 </html>

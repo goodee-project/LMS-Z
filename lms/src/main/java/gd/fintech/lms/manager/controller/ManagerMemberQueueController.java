@@ -22,7 +22,7 @@ public class ManagerMemberQueueController {
 				@PathVariable(name = "currentPageS") int currentPageS,
 				@PathVariable(name = "currentPageT") int currentPageT) {
 		// page당 목록 갯수
-		int rowPerPage = 2;
+		int rowPerPage = 5;
 		// 시작 목록
 		int beginRowS = (currentPageS-1)*rowPerPage; 
 		int beginRowT = (currentPageT-1)*rowPerPage;

@@ -74,7 +74,7 @@
 			teacher_name teacherName,
 			teacher_email teacherEmail,
 			teacher_gender teacherGender,
-			teacher_birth teacherBirth
+			teacher_phone teacherPhone
 		FROM teacher
 	</select>
 	<!-- 과목 리스트를 출력해주는 쿼리 -->
@@ -150,7 +150,7 @@
 		WHERE teacher_name = #{teacherName}
 		AND teacher_email = #{teacherEmail}
 		AND teacher_gender = #{teacherGender}
-		AND teacher_birth = #{teacherBirth}
+		AND teacher_phone = #{teacherPhone}
 	</select>
 	<!-- 강좌를 삭제하기 위해 id값으로 삭제하는 쿼리 -->
 	<delete id="deleteLecture" parameterType="int">

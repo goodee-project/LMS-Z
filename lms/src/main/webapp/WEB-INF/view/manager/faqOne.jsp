@@ -80,7 +80,7 @@
 										<tr class="border-top-0 px-2 py-4">
 											<td class="font-14 font-weight-medium text-muted px-2" colspan="2">
 												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													<textarea style="resize: none; overflow: visible; border: none;"
+													<textarea style="width:100%;"
 														readonly="readonly" cols="150">${faqOne.faqContent}</textarea>
 												</span>
 											</td>

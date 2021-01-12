@@ -54,31 +54,31 @@
 	                            	<form method="post" action="${path }/manager/modifyTextbookOneAction">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 		                            		<tr>
-												<th style="width:20%;">textbook_isbn :</th>
+												<th style="width:15%;">도서 번호 :</th>
 												<td><input type="text" class="form-control"name="textbookIsbn" value="${textbookOne.textbookIsbn }" readonly="readonly"></td>
 											</tr>
 											<tr>
-												<th>textbook_title :</th>
+												<th>제목 :</th>
 												<td><input type="text" class="form-control"name="textbookTitle" value="${textbookOne.textbookTitle }"></td>
 											</tr>
 											<tr>
-												<th>textbook_writer :</th>
+												<th>글쓴이 :</th>
 												<td><input type="text" class="form-control"name="textbookWriter" value="${textbookOne.textbookWriter }"></td>
 											</tr>
 											<tr>
-												<th>textbook_publisher :</th>
+												<th>출판사 :</th>
 												<td><input type="text" class="form-control"name="textbookPublisher" value="${textbookOne.textbookPublisher }"></td>
 											</tr>
 											<tr>
-												<th>textbook_info :</th>
+												<th>책 소개 :</th>
 												<td><input type="text" class="form-control"name="textbookInfo" value="${textbookOne.textbookInfo }"></td>
 											</tr>
 											<tr>
-												<th>textbook_price :</th>
+												<th>가격 :</th>
 												<td><input type="text" class="form-control"name="textbookPrice" value="${textbookOne.textbookPrice }"></td>
 											</tr>
 											<tr>
-												<th>textbook_publishdate :</th>
+												<th>출판사 :</th>
 												<td><input type="text" class="form-control"name="textbookPublishdate" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
 											</tr>
 										</table>

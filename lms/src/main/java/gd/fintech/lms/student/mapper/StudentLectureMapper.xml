@@ -328,6 +328,11 @@
 		SET class_registration_state = '취소'
 		WHERE class_registration_no = #{classRegistrationNo}
 	</update>
+	<!-- 강좌 삭제를 위한 해당하는 강좌의 수강취소 내역 삭제 -->
+	<delete id="deleteClassRegistrationCancel" parameterType="int">
+		DELETE FROM class_registration_cancel
+		WHERE class_registration_no = #{classRegistrationNo}
+	</delete>
 </mapper>
 
 

@@ -54,4 +54,7 @@ public interface StudentLectureMapper {
 	
 	//=== 수강 중 취소시 상태 변화 / 수강중 -> 취소
 	public int updateClassStateChange(int classRegistrationNo);
+	
+	//강좌 삭제를 위한 수강취소한 목록 삭제
+	public int deleteClassRegistrationCancel(int classRegistrationNo);
 }

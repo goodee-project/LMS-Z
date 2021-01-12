@@ -87,7 +87,7 @@
 											<tr>
 												<th>내용</th>
 												<td>
-													<textarea class="form-control" style="width:100%;" name="lmsNoticeContent" id="lmsNoticeContent" style="resize:none;overflow:visible;" cols="50">${lmsNotice.lmsNoticeContent }</textarea>
+													<textarea class="form-control" style="width:100%;" name="lmsNoticeContent" id="lmsNoticeContent" style="resize:none;overflow:visible;" rows="15">${lmsNotice.lmsNoticeContent }</textarea>
 												</td>
 											</tr>
 										</table>
