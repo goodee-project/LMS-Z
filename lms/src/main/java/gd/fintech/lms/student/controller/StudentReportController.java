@@ -117,7 +117,6 @@ public class StudentReportController {
 		if(totalOverdueSearchReport % rowPerPage !=0) {
 			lastOverdueSearchPage +=1;
 		}
-		System.out.println(reportList);
 		model.addAttribute("searchUnderPerPage",searchUnderPerPage);
 		model.addAttribute("searchUnderFirstPage",searchUnderFirstPage);
 		model.addAttribute("searchUnderLastPage",searchUnderLastPage);
@@ -198,6 +197,12 @@ public class StudentReportController {
 	public String removeReportSubmitAll(@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
 		studentReportService.deleteReportAllSubmit(reportSubmitNo);
 		return "redirect:/student";
+	}
+	
+	@GetMapping("/student/reportSubmitFileCount/{reportSubmitFileUuid}")
+	public String reportSubmitFileCountUp(@PathVariable(name="reportSubmitFileUuid")String reportSubmitFileUuid) {
+		studentReportService.upCountReportFile(reportSubmitFileUuid);
+		return "redirect:/student/reportSubmitFileDownload/{reportSubmitFileUuid}";
 	}
 	
 	@GetMapping("/student/reportSubmitFileDownload/{reportSubmitFileUuid}")

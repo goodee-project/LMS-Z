@@ -241,6 +241,12 @@ public class StudentQuestionController {
 		return "redirect:/student/questionModify/{accountId}/"+questionNo;
 	}
 	
+	@GetMapping("/student/questionFileCount/{questionFileUuid}")
+	public String countUpQuestionFile(@PathVariable(name="questionFileUuid")String questionFileUuid) {
+		studentQuestionService.updateQuestionFileCount(questionFileUuid);
+		return "redirect:/student/questionFileDownload/{questionFileUuid}";
+	}
+	
 	@GetMapping("/student/questionFileDownload/{questionFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="questionFileUuid")String fileName,HttpServletResponse response)throws Exception{
 		// 파일을 다운로드 받기 위한 스트림

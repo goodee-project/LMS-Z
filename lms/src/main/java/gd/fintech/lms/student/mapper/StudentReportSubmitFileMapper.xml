@@ -35,6 +35,12 @@
 		WHERE report_submit_no = #{reportSubmitNo}
 	</delete>
 	
+	<update id="updateFileCount" parameterType="String">
+		UPDATE report_submit_file
+		SET report_submit_file_count = report_submit_file_count+1
+		WHERE report_submit_file_uuid = #{reportSubmitFileUuid}
+	</update>
+	
 	<select id="selectReportSubmitFileUuid" resultType="String" parameterType="int">
 		SELECT
 			report_submit_file_uuid reportSubmitFileUuid

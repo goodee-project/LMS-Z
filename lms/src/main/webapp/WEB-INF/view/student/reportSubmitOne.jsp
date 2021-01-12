@@ -88,7 +88,8 @@
 														<td class="border-0 font-14 font-weight-medium text-muted px-2"></td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4">
 															<div class="d-flex no-block align-items-center">
-																<a href="${path}/student/reportSubmitFileDownload/${rsf.reportSubmitFileUuid}">${rsf.reportSubmitFileOriginal}</a>
+																<a href="${path}/student/reportSubmitFileCount/${rsf.reportSubmitFileUuid}">${rsf.reportSubmitFileOriginal}</a>
+																&emsp;(다운로드 횟수: &nbsp; ${rsf.reportSubmitFileCount})
 															</div>
 														</td>				
 													</tr>

@@ -20,4 +20,6 @@ public interface StudentReportSubmitFileMapper {
 	
 	// 제출 과제를 한번에 삭제할때 경로에 저장된 첨부파일을 삭제하기 위해 사용
 	List<String> selectReportSubmitFileUuid(int reportSubmitNo);
+	
+	int updateFileCount(String reportSubmitFileUuid);
 }

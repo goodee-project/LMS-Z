@@ -19,4 +19,6 @@ public interface StudentQuestionFileMapper {
 	int deleteOneQuestionFile(String questionFileUuid);
 	
 	List<String> selectQuestionFileUuid(int questionNo);
+	
+	int updateQuestionFileCount(String questionFileUuid);
 }

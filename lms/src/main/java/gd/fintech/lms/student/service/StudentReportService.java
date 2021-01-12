@@ -75,7 +75,9 @@ public class StudentReportService {
 	public int totalOverdueReport(String accountId) {
 		return studentReportSubmitMapper.totalCountOverdueReport(accountId);
 	}
-	
+	public int upCountReportFile(String reportSubmitFileUuid) {
+		return studentReportSubmitFileMapper.updateFileCount(reportSubmitFileUuid);
+	}
 	public void addReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
 		ReportSubmit reportSubmit = new ReportSubmit();
 		reportSubmit.setReportNo(reportSubmitAddForm.getReportNo());

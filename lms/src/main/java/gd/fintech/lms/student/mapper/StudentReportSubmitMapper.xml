@@ -148,6 +148,7 @@
 		<result property="reportSubmitFileOriginal" column="report_submit_file_original"/>
 		<result property="reportSubmitNo" column="report_submit_no"/>
 		<result property="reportSubmitFileType" column="report_submit_file_type"/>
+		<result property="reportSubmitFileCount" column="report_submit_file_count"/>
 	</collection>	
 	</resultMap>
 	
@@ -164,6 +165,7 @@
 			rs.report_submit_title,
 			rsf.report_submit_file_uuid,
 			rsf.report_submit_file_original,
+			rsf.report_submit_file_count,
 			rsf.report_submit_file_type	
 		FROM report_submit rs left join report_submit_file rsf
 			 on rs.report_submit_no = rsf.report_submit_no

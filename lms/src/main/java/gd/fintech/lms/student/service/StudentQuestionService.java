@@ -78,6 +78,10 @@ public class StudentQuestionService {
 		return studentQuestionMapper.updateQuestionCount(questionNo);
 	}
 	
+	public int updateQuestionFileCount(String questionFileUuid) {
+		return studentQuestionFileMapper.updateQuestionFileCount(questionFileUuid);
+	}
+	
 	//질문목록 행의 갯수 (페이징에 사용)
 	public int totalQuestion(String accountId) {
 		return studentQuestionMapper.totalCountQuestion(accountId);
