@@ -95,6 +95,17 @@ public class StudentLectureService {
 	public int modifyClassStateChange(int classRegistrationNo) {
 		return studentLectureMapper.updateClassStateChange(classRegistrationNo);
 	}
+	//=== 과락, 수료 처리하기 위한 날짜 종료일 구분 ===
+	public int getLectureEnddate(int lectureNo) {
+		return studentLectureMapper.selectLectureEnddate(lectureNo);
+	}
+	//=== 해당 강의 과제 평균 점수 ===
+	public int getReportAvg(int lectureNo, String studentId) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("lectureNo", lectureNo);
+		map.put("studentId", studentId);
+		return studentLectureMapper.selectReportAvg(map);
+	}
 }
 
 

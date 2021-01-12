@@ -207,6 +207,7 @@
 								backgroundColor:'rgba(255, 99, 132, 0.5)',
 					            borderColor: 'rgba(255, 99, 132, 1)',
 						        data:[
+							        data.test,
 									data.fintech,
 									data.JAVAcc,
 									data.Doraemon,
@@ -218,6 +219,7 @@
 								backgroundColor:'rgba(54, 162, 235, 0.5)',
 						        borderColor:'rgba(54, 162, 235, 1)',
 							    data:[
+								    data.testAvg,
 									data.fintechAvg,
 									data.JAVAccAvg,
 									data.DoraemonAvg,

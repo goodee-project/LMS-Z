@@ -62,7 +62,7 @@ public class TeacherLectureNoticeController {
 	@PostMapping("/teacher/addLectureNotice/{lectureNo}")
 	public String addLectureNotice(LectureNotice lectureNotice) {
 		// 추가할 내용 값이 넘어왔는지 확인
-		System.out.println(lectureNotice);
+		//System.out.println(lectureNotice);
 		// db에 모는 html태그 접근 제한
 		String title = lectureNotice.getLectureNoticeTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lectureNotice.setLectureNoticeTitle(title);
@@ -115,7 +115,7 @@ public class TeacherLectureNoticeController {
 	@PostMapping("/teacher/modifyLectureNotice/{lectureNo}/{lectureNoticeNo}")
 	public String modifyLectureNotice(LectureNotice lectureNotice) {
 		// 수정한 값 정상적으로 받아왔는지 확인
-		System.out.println(lectureNotice);
+		//System.out.println(lectureNotice);
 		// db에 모든 html태그 접근 제한
 		String title = lectureNotice.getLectureNoticeTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lectureNotice.setLectureNoticeTitle(title);

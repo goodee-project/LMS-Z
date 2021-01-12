@@ -19,8 +19,8 @@
 				)
  	</insert>
  	<!-- 채점점수 -->
- 	<select id="selectTestScore" parameterType="java.util.Map" resultType="java.lang.String">
- 		SELECT SUM(score)
+ 	<select id="selectTestScore" parameterType="java.util.Map" resultType="Integer">
+ 		SELECT COALESCE(SUM(score),0)
 		FROM answer_sheet `as`
 		LEFT JOIN multiplechoice mc 
 		ON `as`.multiplechoice_no = mc.multiplechoice_no

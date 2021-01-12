@@ -44,8 +44,8 @@ public class StudentTestConroller {
 		List<Multiplechoice> multiplechoice = teacherTestService.getTestQuestionList(lectureNo);
 		
 		// 채점 점수
-		String testScore = "";
-		if(studentTestService.getTestScore(lectureNo, studentId) != null) {
+		int testScore = 0;
+		if(studentTestService.getTestScore(lectureNo, studentId) != 0) {
 			testScore = studentTestService.getTestScore(lectureNo, studentId);
 		}
 		//시험 전부 제출했는지 않했는지 체크
