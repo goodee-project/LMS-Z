@@ -18,6 +18,7 @@
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -27,29 +28,25 @@
             <div class="lds-pos"></div>
         </div>
     </div>
-
-
+    
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
             	<!-- 사이드바 로고 -->
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
-                        <span class="logo-text">
-								GOODEE LMS
-                        </span>
-                        <a href="index.html">
+                        <a href="">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="light-logo" />
                             </b>
-							
 							<!-- 사이트 이름 -->
                             <span class="logo-text">
-
+								GOODEE LMS
                             </span>
                         </a>
                     </div>
@@ -65,27 +62,29 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <!-- 마이페이지 사진 -->
-                                <img src="${path}/assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
-                                    width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark"><c:out value="${adminId}"/></span> 
-                                       <!-- <i data-feather="chevron-down" class="svg-icon"></i> 다운드롭 화살표-->
-                                </span>
+                                        class="text-dark"><c:out value="${adminId}"/></span> <i data-feather="chevron-down"
+                                        class="svg-icon"></i></span>
                             </a>
+                            <!-- 드롭다운 내용 -->
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <a class="dropdown-item" href="${path}/admin/logout"><i data-feather="power"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    Logout</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </nav>
         </header>
         
-        <!-- 로고 밑 메뉴 -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        <li class="nav-small-cap"><span class="hide-menu">기타</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/admin/logout"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -99,29 +98,28 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Index</h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                	<!-- 소제목 밑 글씨 -->
+                                    <li class="breadcrumb-item"><a href="">관리자</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
-
-                <!-- 테이블 -->
+            <div class="container-fluid">
+			 	<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-12">
-                        <div class="card">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
-                                <div class="table-responsive">
-                                	<h3 class="page-title text-truncate text-dark font-weight-medium mb-1">승인 대기자</h3>
-			                        <div class="d-flex align-items-center">
-			                            <nav aria-label="breadcrumb">
-			                                <ol class="breadcrumb m-0 p-0">
-			                                	<!-- 소제목 밑 글씨 -->
-			                                    <li class="breadcrumb-item">운영자
-			                                    </li>
-			                                </ol>
-			                            </nav>
-			                        </div>
-			                        <br>
-                                    <table class="table no-wrap v-middle mb-0">
+                                <h4 class="card-title">승인 대기자</h4>
+	                            <div>
+									<table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
                                                 <th class="border-0 font-14 font-weight-medium text-muted px-2">아이디</th>
@@ -211,70 +209,57 @@
 	                                         </c:forEach>
                                         </tbody>
                                     </table>
-                                </div>
+	                            </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                	<h3 class="page-title text-truncate text-dark font-weight-medium mb-1">휴면상태 리스트</h3>
-			                        <div class="d-flex align-items-center">
-			                            <nav aria-label="breadcrumb">
-			                                <ol class="breadcrumb m-0 p-0">
-			                                	<!-- 소제목 밑 글씨 -->
-			                                    <li class="breadcrumb-item">
-			                                    </li>
-			                                </ol>
-			                            </nav>
-			                        </div>
-			                        <br>
-                                    <table class="table no-wrap v-middle mb-0">
-                                        <thead>
-                                            <tr class="border-0">
-                                                <th class="border-0 font-14 text-dark px-2">아이디</th>
-                                                <th class="border-0 font-14 text-dark px-2">최근 접속일</th>
-                                                <th class="border-0 font-14 text-dark px-2">휴면계정 해지</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        	<c:forEach var="d" items="${dormantStateList}">
-	                                            <tr>
-	                                                <td class="px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.accountId }</h5>
-	                                                    </div>
-	                                                </td>
-	                                                <td class="text-muted px-2 py-4 font-14">
-	                                               		<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.connectUpdatedate }</h5>
-	                                                    </div>
-	                                                </td>
-	                                                <td>
-	                                                	<div class="popover-icon">
-	                                                        <a class="btn btn-primary rounded-circle btn-circle font-12"
+       			</div>
+	        	<!-- 2번째 라인 카드 -->     
+	        	<div class="row">
+	                <div class="col-lg-12 col-md-12">
+	                    <div class="card" id="cardStyle">
+			                <div class="card-body">
+			                    <h4 class="card-title">휴먼 상태 리스트</h4>
+			                    <table class="table no-wrap v-middle mb-0">
+                                     <thead>
+                                        <tr class="border-0">
+                                            <th class="border-0 font-14 text-dark px-2">아이디</th>
+                                            <th class="border-0 font-14 text-dark px-2">최근 접속일</th>
+                                            <th class="border-0 font-14 text-dark px-2">휴면계정 해지</th>
+                                        </tr>
+                                     </thead>
+                                     <tbody>
+                                       	<c:forEach var="d" items="${dormantStateList}">
+	                                       <tr>
+	                                           <td class="px-2 py-4">
+	                                               <div class="d-flex no-block align-items-center">
+	                                                	<!-- 굵은 글씨 -->
+	                                                   <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.accountId }</h5>
+	                                                </div>
+	                                           </td>
+	                                           <td class="text-muted px-2 py-4 font-14">
+	                                         		<div class="d-flex no-block align-items-center">
+	                                                   	<!-- 굵은 글씨 -->
+	                                                    <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.connectUpdatedate }</h5>
+	                                                </div>
+	                                           </td>
+	                                           <td>
+	                                              	<div class="popover-icon">
+	                                                   <a class="btn btn-primary rounded-circle btn-circle font-12"
 	                                                            href="${path }/admin/changeActivation/${d.accountId}">변경</a>
-                                                        </div>
-	                                                </td>
-	                                            </tr>
-	                                         </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-	
+                                                    </div>
+	                                           </td>
+	                                       </tr>
+	                                    </c:forEach>
+                                    </tbody>
+                                </table>
+			                </div>
+	                    </div>
+					</div>
+				</div>         
+			</div>
+	    </div>
+    </div>
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
@@ -294,3 +279,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <style>
 	    a { 
-    		color: #BDBDBD; 	
+    		color: #474747; 	
     	}
     	
     	a:visited { 
@@ -17,18 +17,18 @@
 <nav class="navbar">
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/myInfo/${teacherId}">개인정보</a>
+			<a class="nav-link font-weight-bold" href="${path}/teacher/myInfo/${teacherId}">개인정보</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/modifyMyInfo/${teacherId}">개인정보변경</a>
+			<a class="nav-link font-weight-bold" href="${path}/teacher/modifyMyInfo/${teacherId}">개인정보변경</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/myInfoAddress/${teacherId}">주소변경</a>
+			<a class="nav-link font-weight-bold" href="${path}/teacher/myInfoAddress/${teacherId}">주소변경</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/myInfoPw">Pw변경</a>
+			<a class="nav-link font-weight-bold" href="${path}/teacher/myInfoPw">Pw변경</a>
 		<li class="nav-item">
-			<a class="nav-link" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>
+			<a class="nav-link font-weight-bold" href="${path}/teacher/deleteMyInfo">회원탈퇴</a>
 		</li>
 	</ul>
 </nav>

@@ -61,7 +61,7 @@
                 <!-- 2번째 라인 카드 -->
                 <div class="row">
                     <div class="col-md-6 col-lg-3">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
                                     <h4 class="card-title mb-0">내 정보 관리</h4>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-7	">
-                        <div class="card">
+                        <div class="card" id="cardStyle">
                             <div class="card-body text-muted font-12">
                                 <h4 class="card-title">회원탈퇴</h4>
                                 <div class="mb-3">
