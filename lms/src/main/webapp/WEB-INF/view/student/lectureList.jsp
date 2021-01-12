@@ -41,7 +41,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 목록</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">수강 신청</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -61,48 +61,31 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="lmsTable" class="table table" style="margin-top: 20px;">
+                                    <table id="lmsTable" class="table table" style="margin-top: 20px;text-align: center;">
                                         <thead>
-                                            <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의명</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강사이름</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">강의기간</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">신청 인원/강좌 정원</th>
+                                            <tr>
+                                                <th class="text-dark">강의명</th>
+                                                <th class="text-dark">강사이름</th>
+                                                <th class="text-dark">강의기간</th>
+                                                <th class="text-dark">신청 인원/강좌 정원</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         	<c:forEach var="c" items="${lectureList}" varStatus="status">
 	                                            <tr>
-	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
-	                                               		<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">
-	                                                        	<a href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${c.lectureTotal}/${currentPage}">${c.lectureName}</a>
-	                                                        </h5>
-	                                                    </div>
+	                                                <td>
+	                                               		<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${c.lectureTotal}/${currentPage}">${c.lectureName}</a>
 	                                                </td>
-	                                                
-	                                                <!-- 아이콘 활용한 부트스트랩 -->
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.teacherName}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	<h5>${c.teacherName}</h5>
 	                                                </td>
-	                                                
-	                                                <!-- 눌렀을때 추가 옵션 -->
-	                                                <td class="border-top-0 text-center px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.lectureStartdate } ~ ${c.lectureEnddate }</h5>
-	                                                    </div>
+	                                                <td>
+	                                                 	<h5>${c.lectureStartdate } ~ ${c.lectureEnddate }</h5>
 	                                                </td>
-	                                                
-	                                                <!-- 일반적인 글씨 -->
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-	                                                	<div class="d-flex no-block align-self-center">
+	                                                <td>
+	                                                	<div>
 	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
+	                                                        <h5>
 	                                                        	<c:if test="${numberOfApplicants[status.index] != c.lectureTotal}">
 		                                                        	<span style="color:blue">${numberOfApplicants[status.index]}&nbsp;</span>
 		                                                        	<span>/ ${c.lectureTotal }&nbsp;</span>

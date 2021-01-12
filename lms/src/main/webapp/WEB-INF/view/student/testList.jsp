@@ -53,45 +53,33 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-								<table id="lmsTable" class="table table" style="margin-top: 20px;">
+								<table id="lmsTable" class="table table" style="margin-top: 20px;text-align: center;">
 									<thead>
-										<tr class="border-0">
-											<th class="border-top-0 text-dark font-14 px-2">시험번호</th>
-											<th class="border-top-0 text-dark font-14 px-2">시험내용</th>
-											<th class="border-top-0 text-dark font-14 px-2">시작시간</th>
-											<th class="border-top-0 text-dark font-14 px-2">종료시간</th>
+										<tr>
+											<th class="text-dark">시험번호</th>
+											<th class="text-dark">시험내용</th>
+											<th class="text-dark">시작시간</th>
+											<th class="text-dark">종료시간</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:if test="${test != null}">
 											<tr>
-												<td class="border-top-0 text-muted px-2 py-4 font-14">
-													<div class="d-flex no-block align-items-center">
-														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium text-center">
-															<span>${test.testNo}</span>
-														</h5>
-													</div>
+												<td>
+													<h5>
+														<span>${test.testNo}</span>
+													</h5>
 												</td>
-												<td class="border-top-0 px-2 py-4">
-													<div class="d-flex no-block align-items-center">
-														<!-- 굵은 글씨 -->
-														<a href="${path}/student/testQuestionList/${test.lectureNo}/${studentId }/1">${test.testContent}</a>
-													</div>
+												<td>
+													<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/testQuestionList/${test.lectureNo}/${studentId }/1">${test.testContent}</a>
 												</td>
-												<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-													<div class="d-flex no-block align-self-center">
-														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium align-self-center">
-															${test.testStartdate}
-														</h5>
-													</div>
+												<td>
+													<h5>
+														${test.testStartdate}
+													</h5>
 												</td>
-												<td class="border-top-0 text-center px-2 py-4">
-													<div class="d-flex no-block align-items-center">
-														<!-- 굵은 글씨 -->
-														<h5 class="text-dark mb-0 font-16 font-weight-medium">${test.testEnddate}</h5>
-													</div>
+												<td>
+													<h5>${test.testEnddate}</h5>
 												</td>
 											</tr>
 										</c:if>
@@ -102,7 +90,7 @@
 										</c:if>
 									</tbody>
 								</table>
-								<a href="${path }/student/myLectureListOne/${studentId }/${lectureNo }/${currentPage}">뒤로가기</a>
+								<a class="btn btn-outline-secondary" href="${path }/student/myLectureListOne/${studentId }/${lectureNo }/${currentPage}">뒤로</a>
 							</div>
 						</div>
 					</div>

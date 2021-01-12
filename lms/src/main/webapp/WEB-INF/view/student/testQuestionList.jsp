@@ -31,8 +31,8 @@
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         
-        <jsp:include page="/WEB-INF/view/manager/inc/logoMenu.jsp" flush="false"></jsp:include>
-        <jsp:include page="/WEB-INF/view/manager/inc/navbarMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
@@ -96,7 +96,7 @@
 										</c:if>
 									</div>
 									<br>
-									<a href="${path }/student/testList/${lectureNo }/${currentPage}">뒤로가기</a>
+									<a class="btn btn-outline-secondary" href="${path }/student/testList/${lectureNo }/${currentPage}">뒤로</a>
 								</div>
 							</div>
 						</div>
