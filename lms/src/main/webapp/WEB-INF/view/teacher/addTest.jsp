@@ -49,28 +49,37 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">시험일정 등록</h4>
 
-								<form method="post" action="${path}/teacher/addTest/${lectureNo}">
+								<form method="post" id="addTest" action="${path}/teacher/addTest/${lectureNo}">
 									<input type="hidden" name="lectureNo" value="${lectureNo}">
 									<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
 										<tr>
+											<td>시험내용</td>
+											<td>
+												<input class="form-control" type="text" name="testContent" id="testContent">
+												<div id="checkContent"></div>
+											</td>
+										</tr>
+										<tr>
 											<td style="width:10%;">시험 시작시간</td>
-											<td><input class="form-control" type="datetime-local" name="testStartdate"></td>
+											<td>
+												<input class="form-control" type="datetime-local" name="testStartdate" id="testStartdate">
+												<div id="checkStart"></div>
+											</td>
 										</tr>
 										<tr>
 											<td>시험 종료시간</td>
-											<td><input class="form-control" type="datetime-local" name="testEnddate"></td>
-										</tr>
-										<tr>
-											<td>시험내용</td>
-											<td><input class="form-control" type="text" name="testContent"></td>
+											<td>
+												<input class="form-control" type="datetime-local" name="testEnddate" id="testEnddate">
+												<div id="checkEnd"></div>
+											</td>
 										</tr>
 									</table>
-									<div>
-										<button class="btn btn-success" style="border-radius:4px;" type="submit">등록</button>
+									<div style="float:right;">
+										<button class="btn btn-success" style="border-radius:4px;" type="button" id="btn">등록</button>
 									</div>
 								</form>
 							</div>
@@ -96,5 +105,47 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+	    var content = '';
+		var startdate = '';
+		var enddate = '';
+		$('#btn').click(function(){
+			if($('#testContent').val() == ''){
+				$('#checkContent').text('시험내용을 입력해주세요.');
+				content = '';
+			}
+			
+			if($('#testStartdate').val() == ''){
+				$('#checkStart').text('시작일을 선택해주세요.');
+				startdate = '';
+			}else{
+				$('#checkStart').text('');
+				startdate = 'success';
+			}
+			
+			if($('#testEnddate').val() == ''){
+				$('#checkEnd').text('종료일을 선택해주세요.');
+				enddate = '';
+			}else{
+				$('#checkEnd').text('');
+				enddate = 'success';
+			}
+			
+			if(content == 'success' && startdate == 'success' && enddate == 'success'){
+				$('#addTest').submit();
+			}
+		});
+		
+		$('#testContent').on('propertychange change keyup paste input', function(){
+			if($('#testContent').val() == ''){
+				$('#checkContent').text('시험내용을 입력해주세요.');
+				content = '';
+			}else{
+				$('#checkContent').text('');
+				content = 'success';
+			}
+		});
+    </script>
 </body>
 </html>

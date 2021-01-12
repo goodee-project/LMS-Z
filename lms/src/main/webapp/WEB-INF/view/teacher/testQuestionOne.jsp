@@ -49,7 +49,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">평가 ${testOne.multiplechoiceId}번</h4>
             						
@@ -76,10 +76,10 @@
             						</c:forEach>
             					</table>
             					
-            					<div>
-									<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testQuestionList/${testOne.lectureNo}">목록</a>
-									<a class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" href="${path}/teacher/removeTestQuestion/${testOne.lectureNo}/${multiplechoiceNo}">삭제</a>
-									<a class="btn btn-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyTestQuestion/${multiplechoiceNo}">수정</a>
+            					<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testQuestionList/${testOne.lectureNo}">목록</a>
+            					<div style="float:right; display:inline-block;">
+									<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/modifyTestQuestion/${multiplechoiceNo}">수정</a>
+									<a class="btn btn-outline-danger" style="border-radius:4px;" href="${path}/teacher/removeTestQuestion/${testOne.lectureNo}/${multiplechoiceNo}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
 								</div>
             				</div>
             			</div>

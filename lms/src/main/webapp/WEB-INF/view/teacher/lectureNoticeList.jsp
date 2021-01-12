@@ -49,7 +49,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">강의 공지사항</h4>
             					
@@ -82,10 +82,6 @@
 										</c:if>
 									</tbody>
             					</table>
-            					
-            					<div>
-            						<a class="btn btn-success" style="border-radius: 3px; float: right;" href="${path}/teacher/addLectureNotice/${lectureNo}">공지 등록</a>
-            					</div>
             					
             					<!-- 페이징 -->
             					<br>
@@ -137,9 +133,10 @@
 							    	</c:if>
 							   	</div>
 							   	
-							   	<div>
-							   		<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path}/teacher/lectureOne/${lectureNo}">< 뒤로</a>
-							   	</div>
+							   	<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path}/teacher/lectureOne/${lectureNo}">< 뒤로</a>
+							   	<div style="float:right; display:inline-block;">
+            						<a class="btn btn-success" style="border-radius: 4px;" href="${path}/teacher/addLectureNotice/${lectureNo}">공지 등록</a>
+            					</div>
 							</div>
 						</div>
 					</div>
