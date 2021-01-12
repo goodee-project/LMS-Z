@@ -57,57 +57,54 @@
 		<div class="container-fluid">
 		<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-7 col-md-7">
+                    <div class="col-lg-6 col-md-6">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
-	<table class="table table">
-		<tr>
-			<th>과제제출 제목</th>
-			<td>${reportSubmitOne.reportSubmitTitle}</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${reportSubmitOne.reportSubmitWriter}</td>
-		</tr>
-		<tr>
-			<th>과제제출 내용</th>
-			<td>${reportSubmitOne.reportSubmitContent}</td>
-		</tr>
-		<tr>
-			<th>과제 점수</th>
-			<td>${reportSubmitOne.reportSubmitPoint}</td>
-		</tr>
-		<tr>
-			<th>피드백</th>
-			<td>${reportSubmitOne.reportSubmitFeedback}</td>
-		</tr>
-		<tr>
-		<th>파일</th>
-		<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
-			<c:if test="${rs.reportSubmitFileUuid == null}">
-				<td colspan="6">첨부파일이 없습니다.</td>
-			</c:if>
-			<c:if test="${rs.reportSubmitFileUuid != null}">
-				<td>${rs.reportSubmitFileOriginal}</td>
-			</c:if>
-		</c:forEach>
-		</tr>
-	</table>
+								<table class="table table" id="tableOneStyle">
+									<tr>
+										<th>과제제출 제목</th>
+										<td>${reportSubmitOne.reportSubmitTitle}</td>
+									</tr>
+									<tr>
+										<th>작성자</th>
+										<td>${reportSubmitOne.reportSubmitWriter}</td>
+									</tr>
+									<tr>
+										<th>과제제출 내용</th>
+										<td>${reportSubmitOne.reportSubmitContent}</td>
+									</tr>
+									<tr>
+										<th>과제 점수</th>
+										<td>${reportSubmitOne.reportSubmitPoint}</td>
+									</tr>
+									<tr>
+										<th>피드백</th>
+										<td>${reportSubmitOne.reportSubmitFeedback}</td>
+									</tr>
+									<tr>
+									<th>파일</th>
+									<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
+										<c:if test="${rs.reportSubmitFileUuid == null}">
+											<td colspan="6">첨부파일이 없습니다.</td>
+										</c:if>
+										<c:if test="${rs.reportSubmitFileUuid != null}">
+											<td>${rs.reportSubmitFileOriginal}</td>
+										</c:if>
+									</c:forEach>
+									</tr>
+								</table>
 	
-	</div>
-	</div>
-	</div>
-	</div>
+							</div>
+						</div>
+					</div>
 
-			<!-- 2번째 라인 카드 -->
-				<div class="row">
-					<div class="col-lg-7 col-md-7">
+					<div class="col-lg-6 col-md-6">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<form id="modifyReportSubmit" method="post" action="${path}/teacher/modifyReportSubmit">
 									<input type="hidden" name="reportSubmitNo" value="${reportSubmitOne.reportSubmitNo}">
-									<table class="table table">
+									<table class="table table" id="tableOneStyle">
 										<tr>
 											<th>점수</th>
 											<td>

@@ -20,11 +20,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gd.fintech.lms.student.service.StudentLoginService;
+import gd.fintech.lms.vo.Account;
 
 @RestController
 public class StudentLoginRestController {
 	@Autowired StudentLoginService studentLoginService;
 	@Autowired JavaMailSender mailSender;
+	
+	@GetMapping("/studentLoginCheck")
+	public Map<String, Object> studentLoginCheck(
+			@RequestParam(value="accountId", required = false) String accountId,
+			@RequestParam(value="accountPw", required = false) String accountPw){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Account account = new Account();
+		account.setAccountId(accountId);
+		account.setAccountPw(accountPw);
+		
+		String check = studentLoginService.getAccountToStudentLogin(account);
+		map.put("check", check);
+		return map;
+	}
+	
 	// 아이디/ 비밀번호 찾기
 	@GetMapping("/studentSearchToNameAndEmail")
 	public Map<String, Object> getStudentToNameAndEmailByCheck(

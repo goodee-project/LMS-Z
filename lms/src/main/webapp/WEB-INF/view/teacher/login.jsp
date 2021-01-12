@@ -108,7 +108,7 @@
 	               		<div class="col-md-3 col-lg-3"></div>
 	                    <div class="col-md-5 col-lg-4">
 	                        <div class="card" id="cardStyle" style="height:370px;">
-	                        	<form method="post" action="${path}/teacherLogin">
+	                        	<form id="loginForm" method="post" action="${path}/teacherLogin">
 		                            <div class="card-body">
 		                            <div id="loginTitle" class="text-center font-7">
 		                            	<a>로그인</a>
@@ -119,17 +119,17 @@
 		                                <table id="loginTable">
 		                                	<tr>
 		                                		<td>
-		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px; margin-top:-5px;" name="accountId" value="teacher1">
+		                                			<input type="text" class="form-control-plaintext form-control-lg border-black" style="padding: 10px; margin-top:-5px;" id="accountId" name="accountId" value="teacher1">
 		                                		</td>
 		                                	</tr>
 		                                	<tr>
 		                                		<td>
-		                                			<input type="password" class="form-control-plaintext form-control-lg border-black" style="padding: 10px;" name="accountPw" value="qwer1234!">
+		                                			<input type="password" class="form-control-plaintext form-control-lg border-black" style="padding: 10px;" id="accountPw" name="accountPw" value="qwer1234!">
 		                                		</td>
 		                                	</tr>
 		                                </table>
 		                                
-		                                <button class="btn btn-success font-3 btn-block btn-lg border-rad" type="submit">로그인</button>
+		                                <button id="btnResult" class="btn btn-success font-3 btn-block btn-lg border-rad" type="submit">로그인</button>
 		                            </div>
 	                            </form>
 	                            <div id="loginStyle">
@@ -158,6 +158,28 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+		$('#btnResult').click(function(){
+			if($('#accountId').val().length < 1 || $('#accountPw').val().length < 1){
+				alert('아이디와 비밀번호를 입력해주세요.');
+			} else{
+				$.ajax({
+					url:'${path}/teacherLoginCheck',
+					type:'GET',
+					data:{accountId: $('#accountId').val(), accountPw: $('#accountPw').val()},
+					success:function(data){
+						if(data.check == null){
+							alert('입력하신 아이디와 비밀번호를 다시 확번 한인해 주세요.');
+						} else if(data.check == '중복'){
+							alert('현재 사용중인 아이디입니다.');
+						} else{
+							$('#loginForm').submit();
+						}
+					}
+				});	
+			}
+		});
+    </script>
 </body>
 
 </html>

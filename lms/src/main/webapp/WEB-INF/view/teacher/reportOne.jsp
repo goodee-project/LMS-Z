@@ -35,7 +35,7 @@
 
 
 
-<!-- 소제목 -->
+		<!-- 소제목 -->
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
@@ -61,7 +61,7 @@
                         <div class="card" id="cardStyle">
                             <div class="card-body">
 
-		<table class="table table">
+		<table class="table table" id="tableOneStyle">
 				<tr>
 					<th>과제 제목</th>
 					<td>${reportOne.reportTitle}</td>
@@ -79,9 +79,10 @@
 					<td>${reportOne.reportEnddate}</td>
 				</tr>
 		</table>
-		<a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyReport/${reportOne.reportNo}">수정하기</a>
-		<br><br><br>
-		<h3>과제제출</h3>
+		<div class="text-right">
+			<a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyReport/${reportOne.reportNo}">수정하기</a>
+		</div>
+		<h3 style="border-top: 1px solid #444444; padding: 24px; margin-top: 30px">과제제출</h3>
 		<table id="lmsNoticeTable" class="table table">
 			<thead>
 				<tr>
@@ -105,9 +106,12 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>
-		<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${reportOne.lectureNo}/1">뒤로가기</a>
-		
+		<div style="float:left;">
+			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${reportOne.lectureNo}/1">뒤로가기</a>		
+		</div>
+		<div class="text-right">
+			<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>
+		</div>
 	</div>
 	</div>
 	</div>

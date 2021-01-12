@@ -9,10 +9,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import gd.fintech.lms.manager.service.ManagerLoginService;
+import gd.fintech.lms.vo.Account;
 
 @RestController
 public class ManagerLoginRestController {
 	@Autowired ManagerLoginService managerLoginService;
+	
+	@GetMapping("/managerLoginCheck")
+	public Map<String, Object> managerLoginCheck(
+			@RequestParam(value="accountId", required = false) String accountId,
+			@RequestParam(value="accountPw", required = false) String accountPw){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Account account = new Account();
+		account.setAccountId(accountId);
+		account.setAccountPw(accountPw);
+		
+		String check = managerLoginService.getAccountToManagerLogin(account);
+		map.put("check", check);
+		return map;
+	}
 	
 	// 아이디, 패스워드 체크
 	@GetMapping("/managerSearchToNameAndEmail")

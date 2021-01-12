@@ -353,3 +353,18 @@ body {
 	Color: #D5D5D5;
 }
 
+#tableOneStyle{
+	table-layout:fixed;
+    white-space: nowrap;
+}
+
+#tableOneStyle th{
+	width: 30%;
+	vertical-align: middle;
+}
+
+#tableOneStyle td{
+	width: 70%;
+	vertical-align: middle;
+	text-align:center;
+}
