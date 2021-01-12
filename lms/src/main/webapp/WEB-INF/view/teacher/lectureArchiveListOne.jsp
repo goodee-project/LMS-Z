@@ -80,12 +80,14 @@
 									</tr>
 								</table>
 								
-								<table id="lmsTable" class="table table-bordered" style="margin-top:20px; text-align:center;">
+								<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
 									<c:forEach var="laf" items="${lectureArchive.lectureArchiveFileList}">
 										<c:if test="${laf.lectureArchiveFileUuid != null}">
 											<tr>
-												<td>fileName:<a href="${path}/teacher/lectureArchiveFileCountUp/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
-												<td>count:${laf.lectureArchiveFileCount}</td>
+												<td style="width:10%;">첨부파일</td>
+												<td><a href="${path}/teacher/lectureArchiveFileCountUp/${laf.lectureArchiveFileUuid}">${laf.lectureArchiveFileOriginal}</a></td>
+												<td style="width:10%;">조회수</td>
+												<td>${laf.lectureArchiveFileCount}</td>
 											</tr>
 										</c:if>
 										<c:if test="${laf.lectureArchiveFileUuid == null}">
@@ -98,7 +100,7 @@
 								
 								<div style="float:right;">
 									<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureArchiveNo}">수정</a>
-									<a class="btn btn-outline-danger" style="border-radius:4px;" href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}/${teacherId}">삭제</a>
+									<a class="btn btn-outline-danger" style="border-radius:4px;" href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}/${teacherId}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
 								</div>
 							</div>
 						</div>
