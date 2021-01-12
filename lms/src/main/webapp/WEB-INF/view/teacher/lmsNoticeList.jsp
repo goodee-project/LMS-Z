@@ -60,7 +60,7 @@
             <div class="container-fluid">
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-11 col-md-11">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
                             	<div class="row">
@@ -82,6 +82,7 @@
 												<th class="font-weight-bold">작성자</th>
 												<td class="font-weight-bold">제목</td>
 												<th class="font-weight-bold">방문자 수</th>
+												<th class="font-weight-bold">작성 날짜</th>
 											</tr>
 										</thead>
 										<c:if test="${fn:length(lmsNoticeList) != 0}">
@@ -92,6 +93,7 @@
 														<td>${l.lmsNoticeWriter}</td>
 														<td><a class="btn btn-outline-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/modifyLmsNoticeCount/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
 														<td>${l.lmsNoticeCount}</td>
+														<td>${l.lmsNoticeCreatedate}</td>
 													</tr>
 												</c:forEach>
 											</tbody>

@@ -8,7 +8,8 @@
 			lms_notice_writer lmsNoticeWriter,
 			lms_notice_title lmsNoticeTitle,
 			lms_notice_content lmsNoticeContent,
-			lms_notice_count lmsNoticeCount
+			lms_notice_count lmsNoticeCount,
+			lms_notice_createdate lmsNoticeCreatedate
 		FROM lms_notice
 		<where>
 			<if test="searchTitle != null">
