@@ -5,15 +5,17 @@
 <mapper namespace="gd.fintech.lms.student.restmapper.StudentCourseGradesRestMapper">
 	<select id="selectCourseGreads" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT
-			nvl(SUM(case when l.lecture_no = 4 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'fintech',
+			nvl(SUM(case when l.lecture_no = 20 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'test',
+			ROUND(nvl(AVG(case when l.lecture_no = 20 then `as`.score END), 0),1) 'testAvg',
+			nvl(SUM(case when l.lecture_no = 4 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'fintech',
 			ROUND(nvl(AVG(case when l.lecture_no = 4 then `as`.score END), 0),1) 'fintechAvg',
-			nvl(SUM(case when l.lecture_no = 5 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'JAVAcc',
+			nvl(SUM(case when l.lecture_no = 5 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'JAVAcc',
 			ROUND(nvl(AVG(case when l.lecture_no = 5 then `as`.score END), 0),1) 'JAVAccAvg',
-			nvl(SUM(case when l.lecture_no = 10 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'Doraemon',
+			nvl(SUM(case when l.lecture_no = 10 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'Doraemon',
 			ROUND(nvl(AVG(case when l.lecture_no = 10 then `as`.score END), 0),1) 'DoraemonAvg',
-			nvl(SUM(case when l.lecture_no = 11 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'DigitalEngineering',
+			nvl(SUM(case when l.lecture_no = 11 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'DigitalEngineering',
 			ROUND(nvl(AVG(case when l.lecture_no = 11 then `as`.score END), 0),1) 'DigitalEngineeringAvg',
-			nvl(SUM(case when l.lecture_no = 12 AND `as`.account_id='modudaS2' then `as`.score END), 0) 'Cshop',
+			nvl(SUM(case when l.lecture_no = 12 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'Cshop',
 			ROUND(nvl(AVG(case when l.lecture_no = 12 then `as`.score END), 0),1) 'CshopAvg'
 		FROM lecture l
 		LEFT JOIN multiplechoice mc 

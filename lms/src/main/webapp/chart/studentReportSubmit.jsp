@@ -51,6 +51,11 @@
 											</td>
 											<td class="font-14 font-weight-medium text-muted px-2">
 												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+													test
+												</span>
+											</td>
+											<td class="font-14 font-weight-medium text-muted px-2">
+												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 													fintech
 												</span>
 											</td>
@@ -124,6 +129,11 @@
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.test}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										\${data.fintech}
 									</span>
 								</td>
@@ -152,6 +162,11 @@
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										강의별 과제
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.testAll}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
@@ -186,12 +201,13 @@
 					var chart = new Chart(ctx,{
 						type:'horizontalBar',
 						data:{
-							labels:['fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
+							labels:['test','fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
 							datasets:[{
 								label:'과제 제출 빈도',
 								backgroundColor:'rgba(255, 99, 132, 0.5)',
 					            borderColor: 'rgba(255, 99, 132, 1)',
 						        data:[
+							        data.test,
 									data.fintech,
 									data.JAVAcc,
 									data.Doraemon,
@@ -203,6 +219,7 @@
 								backgroundColor:'rgba(54, 162, 235, 0.5)',
 						        borderColor:'rgba(54, 162, 235, 1)',
 							    data:[
+								    data.testAll,
 									data.fintechAll,
 									data.JAVAccAll,
 									data.DoraemonAll,

@@ -51,6 +51,11 @@
 											</td>
 											<td class="font-14 font-weight-medium text-muted px-2">
 												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+													test
+												</span>
+											</td>
+											<td class="font-14 font-weight-medium text-muted px-2">
+												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 													fintech
 												</span>
 											</td>
@@ -124,6 +129,11 @@
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.test}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										\${data.fintech}
 									</span>
 								</td>
@@ -152,6 +162,11 @@
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										강의 평균 성적
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.testAvg}
 									</span>
 								</td>
 								<td class="font-14 font-weight-medium text-muted px-2">
