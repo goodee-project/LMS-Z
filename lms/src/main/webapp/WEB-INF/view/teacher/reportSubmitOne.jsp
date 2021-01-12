@@ -72,26 +72,26 @@
 									</tr>
 									<tr>
 										<th>과제제출 내용</th>
-										<td>${reportSubmitOne.reportSubmitContent}</td>
+										<td><textarea class="form-control" rows="4" cols="50" readonly>${reportSubmitOne.reportSubmitContent}</textarea></td>
 									</tr>
 									<tr>
 										<th>과제 점수</th>
-										<td>${reportSubmitOne.reportSubmitPoint}</td>
+										<td>${reportSubmitOne.reportSubmitPoint}점</td>
 									</tr>
 									<tr>
 										<th>피드백</th>
-										<td>${reportSubmitOne.reportSubmitFeedback}</td>
+										<td><textarea class="form-control" rows="4" cols="50" readonly>${reportSubmitOne.reportSubmitFeedback}</textarea></td>
 									</tr>
 									<tr>
 									<th>파일</th>
-									<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
-										<c:if test="${rs.reportSubmitFileUuid == null}">
-											<td colspan="6">첨부파일이 없습니다.</td>
-										</c:if>
-										<c:if test="${rs.reportSubmitFileUuid != null}">
-											<td>${rs.reportSubmitFileOriginal}</td>
-										</c:if>
-									</c:forEach>
+										<c:forEach var="rf" items="${reportSubmitOne.reportSubmitFile}">
+											<c:if test="${rf.reportSubmitFileUuid == null}">
+												<td colspan="6">첨부파일이 없습니다.</td>
+											</c:if>
+											<c:if test="${rf.reportSubmitFileUuid != null}">
+												<td><a href="${path}/teacher/questionFileDownload/${rf.reportSubmitFileUuid}">${rf.reportSubmitFileOriginal}</a></td>
+											</c:if>
+										</c:forEach>
 									</tr>
 								</table>
 	

@@ -33,6 +33,7 @@ public class TeacherReportService {
 	}
 	//과제삭제
 	public void removeReport(int reportNo) {
+		teacherReportMapper.deleteReportSubmitFile(reportNo);
 		teacherReportMapper.deleteReportSubmit(reportNo);
 		teacherReportMapper.deleteReport(reportNo);
 	}

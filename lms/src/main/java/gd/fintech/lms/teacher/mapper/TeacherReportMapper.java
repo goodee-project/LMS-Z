@@ -23,4 +23,6 @@ public interface TeacherReportMapper {
 	int selectReoprtCount(int lectureNo);
 	
 	int deleteReportSubmit(int reportNo);
+	
+	int deleteReportSubmitFile(int reportNo);
 }
