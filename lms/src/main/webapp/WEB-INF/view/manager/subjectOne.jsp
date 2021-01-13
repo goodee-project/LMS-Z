@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- 위의 사이트 아이콘 -->
     <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
-    <title>modiftyTextbook</title>
+    <title>subjectOne</title>
     <!-- css -->
     <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Textbook</a></h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Subject</a></h3>
                     </div>
                 </div>
             </div>
@@ -49,45 +49,37 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                               <h4 class="card-title">교재 수정</h4>
+                               <h4 class="card-title">과목 상세보기</h4>
 	                            <div>
-	                            	<form method="post" action="${path }/manager/modifyTextbookOneAction">
-		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
-		                            		<tr>
-												<th style="width:15%;">도서 번호 :</th>
-												<td><input type="text" class="form-control"name="textbookIsbn" value="${textbookOne.textbookIsbn }" readonly="readonly"></td>
-											</tr>
-											<tr>
-												<th>제목 :</th>
-												<td><input type="text" class="form-control"name="textbookTitle" value="${textbookOne.textbookTitle }"></td>
-											</tr>
-											<tr>
-												<th>글쓴이 :</th>
-												<td><input type="text" class="form-control"name="textbookWriter" value="${textbookOne.textbookWriter }"></td>
-											</tr>
-											<tr>
-												<th>출판사 :</th>
-												<td><input type="text" class="form-control"name="textbookPublisher" value="${textbookOne.textbookPublisher }"></td>
-											</tr>
-											<tr>
-												<th>책 소개 :</th>
-												<td><input type="text" class="form-control"name="textbookInfo" value="${textbookOne.textbookInfo }"></td>
-											</tr>
-											<tr>
-												<th>가격 :</th>
-												<td>
-													<input type="text" class="form-control" id="textbookPrice" name="textbookPrice" value="${textbookOne.textbookPrice }">
-													<div id="price"></div>
-												</td>
-											</tr>
-											<tr>
-												<th>출판사 :</th>
-												<td><input type="text" class="form-control"name="textbookPublishdate" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
-											</tr>
-										</table>
-										<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/textbookOne/${textbookOne.textbookIsbn }">돌아가기</a>
-										<button  class="btn btn-success" style="border-radius: 4px; float:right;" type="submit">수정 완료</button>
-									</form>
+	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
+	                            		<tr>
+											<th style="width:15%;">과목 번호 :</th>
+											<td><input id="subjectNo"class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectNo }" readonly="readonly"></td>
+										</tr>
+										<tr>
+											<th>과목 이름 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectName }" readonly="readonly"></td>
+										</tr>
+										<tr>
+											<th>과목 정보 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectInfo }" readonly="readonly"></td>
+										</tr>
+										<tr>
+											<th>교육 기간 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectTotalday }일" readonly="readonly"></td>
+										</tr>
+										<tr>
+											<th>생성 날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectCreatedate }" readonly="readonly"></td>
+										</tr>
+										<tr>
+											<th>수정 날짜 :</th>
+											<td><input class="form-control" style="width:100%;" type="text" value="${subjectOne.subjectUpdatedate }" readonly="readonly"></td>
+										</tr>
+									</table>
+									<a class="btn btn-success" style="border-radius: 4px;" href="${path }/manager/subjectList/1">돌아가기</a>
+									<button class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left: 8px;" id="deleteSubject" type="button" >삭제</button>
+									<button class="btn btn-outline-info" style="border-radius: 4px; float:right;" type="submit"  onclick="location.href='${path}/manager/modifySubjectOne/${subjectOne.subjectNo }'">수정</button>	
 								</div>
 							</div>
 						</div>
@@ -112,24 +104,22 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
-    var price = 'success';
-	var checkPrice = /^[0-9]{4,7}$/;
-	$('#btn').click(function(){
-		if(num== 'success' && price== 'success'){
-			$('#textbook').submit();
-			} else{
-				alert('형식을 확인하세요');
-			}
-	})
-    $('#textbookPrice').on('propertychange change keyup paste input', function(){
-		if(checkPrice.test($('#textbookPrice').val())){				
-			$('#price').text('');
-			price='success';		
-		}else{
-			$('#price').text('4~7자리 숫자를 입력해주세요');
-			price = '';	
-		}
-	});
+		$('#deleteSubject').click(function(){
+			$.ajax({
+				url:'${path}/manager/subjectCk',
+				type:'GET',
+				data:{subjectNo: $('#subjectNo').val()},
+				success:function(data){
+					if(data.subjectCount ==0){
+						location.href='${path}/manager/deleteSubjectOne/'+${subjectOne.subjectNo };
+					}else{
+						alert('강좌에서 사용중인 과목입니다.');	
+						return;
+						}
+					}
+			});
+		
+		});
     </script>
 </body>
 </html>

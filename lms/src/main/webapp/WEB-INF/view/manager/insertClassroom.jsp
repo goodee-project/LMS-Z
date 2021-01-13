@@ -49,7 +49,7 @@
                     <div class="col-lg-10 col-md-10">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                               <h4 class="card-title">강의실 목록</h4>
+                               <h4 class="card-title">강의실 추가</h4>
 	                            	<form id="classroom" method="post" action="${path }/manager/insertClassroomAction">
 		                            	<input type="hidden" name="classroomState" value="빈강의실">
 		                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">

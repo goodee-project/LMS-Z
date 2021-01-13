@@ -54,7 +54,7 @@
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
 											<th style="width:15%;">도서 번호 :</th>
-											<td><span id="textbookIsbn"><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookIsbn }" readonly="readonly"></span></td>
+											<td><input id="textbookIsbn" class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookIsbn }" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>제목 :</th>
@@ -74,7 +74,7 @@
 										</tr>
 										<tr>
 											<th>가격 :</th>
-											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPrice }" readonly="readonly"></td>
+											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPrice }원" readonly="readonly"></td>
 										</tr>
 										<tr>
 											<th>출판사 :</th>
@@ -112,7 +112,7 @@
 			$.ajax({
 				url:'${path}/manager/textbookCk',
 				type:'GET',
-				data:{textbookIsbn: $('#textbookIsbn').text()},
+				data:{textbookIsbn: $('#textbookIsbn').val()},
 				success:function(data){
 					if(data.textbookCount ==0){
 						location.href='${path}/manager/deleteTextbookOne/'+${textbookOne.textbookIsbn};
