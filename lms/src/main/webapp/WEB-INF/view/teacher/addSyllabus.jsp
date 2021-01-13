@@ -3,32 +3,85 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
-<html>
+<html dir="ltr" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>addSyllabus</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- 위의 사이트 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
+    <title>addSyllabus</title>
+    <!-- css -->
+    <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="${path}/dist/css/style.min.css" rel="stylesheet">
+    <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
 <body>
-	<h1>강의계획서 추가</h1>
-	<form id="syllabusForm" method="post" action="${path}/teacher/addSyllabus">
-		<table>
-			<tr>
-				<td>강의계획</td>
-				<td><textarea rows="5" cols="50" id="syllabuesContent" name="syllabusContent"></textarea></td>
-			</tr>
-			<tr>
-				<td>강사 사인</td>
-				<td>
-					<canvas id="myCanvas" style="background-color: aliceblue" width="800" height="300"></canvas>
-					<input type="hidden" id="syllabusTeachersign" name="syllabusTeachersign" value="">
-				</td>
-			</tr>
-		</table>
-		<div>
-			<button type="button" id="resetBtn">다시쓰기</button>
-			<button type="button" onclick="resultBtn();">확인</button>	
+	<div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        
+		<jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
+		        
+		<jsp:include page="/WEB-INF/view/teacher/inc/navbarMenu.jsp" flush="false"></jsp:include>
+	
+		<!-- 소제목 -->
+		<div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Syllabus</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- 내용 -->
+            <div class="container-fluid">
+            	<div class="row">
+            		<div class="col-lg-12 col-md-12">
+            			<div class="card" id="cardStyle">
+            				<div class="card-body">
+            					<h4 class="card-title">강의계획서 등록</h4>
+            					
+								<form id="syllabusForm" method="post" action="${path}/teacher/addSyllabus">
+									<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
+										<tr>
+											<td style="width:10%;">강의계획</td>
+											<td><textarea class="form-control" rows="5" cols="50" id="syllabuesContent" name="syllabusContent"></textarea></td>
+										</tr>
+										<tr>
+											<td>강사 사인</td>
+											<td>
+												<canvas id="myCanvas" style="background-color: aliceblue" width="900" height="300"></canvas>
+												<input type="hidden" id="syllabusTeachersign" name="syllabusTeachersign" value="">
+												<div style="float:right;">
+													<button class="btn btn-outline-secondary" style="border-radius:4px;" type="button" id="resetBtn">다시쓰기</button>
+												</div>
+											</td>
+										</tr>
+									</table>
+									<div style="float:right;">
+										
+										<button class="btn btn-success" style="border-radius:4px;" type="button" onclick="resultBtn();">등록</button>	
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</form>
+	</div>
 </body>
 	<!-- script 코드 -->
     <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>

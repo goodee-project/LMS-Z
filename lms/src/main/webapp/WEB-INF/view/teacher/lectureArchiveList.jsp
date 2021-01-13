@@ -78,7 +78,7 @@
 										<c:if test="${!empty lectureArchiveList}">
 											<c:forEach var="la" items="${lectureArchiveList}">
 												<tr>	
-													<td><a href="${path}/teacher/lectureArchiveCountUp/${teacherId}/${la.lectureNo}/${la.lectureArchiveNo}">${la.lectureNo}(${la.lecture.lectureName})</a></td>
+													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/lectureArchiveCountUp/${teacherId}/${la.lectureNo}/${la.lectureArchiveNo}">${la.lectureNo}(${la.lecture.lectureName})</a></td>
 													<td>${la.subject.subjectName}</td>
 													<td>${la.lectureArchiveWriter}</td>			
 													<td>${la.lectureArchiveTitle}</td>

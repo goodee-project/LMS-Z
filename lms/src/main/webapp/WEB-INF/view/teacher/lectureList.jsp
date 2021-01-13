@@ -64,7 +64,7 @@
 										<c:if test="${!empty list}">
 											<c:forEach var="l" items="${list}">
 												<tr>
-													<td><a href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></td>
+													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></td>
 													<td>${l.lectureStartdate} ~ ${l.lectureEnddate}</td>
 													<td>${l.lectureTotal}</td>
 												</tr>

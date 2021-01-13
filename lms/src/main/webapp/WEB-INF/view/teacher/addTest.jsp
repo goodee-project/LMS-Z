@@ -57,14 +57,14 @@
 									<input type="hidden" name="lectureNo" value="${lectureNo}">
 									<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
 										<tr>
-											<td>시험내용</td>
+											<td style="width:10%;">시험내용</td>
 											<td>
 												<input class="form-control" type="text" name="testContent" id="testContent">
 												<div id="checkContent"></div>
 											</td>
 										</tr>
 										<tr>
-											<td style="width:10%;">시험 시작시간</td>
+											<td>시험 시작시간</td>
 											<td>
 												<input class="form-control" type="datetime-local" name="testStartdate" id="testStartdate">
 												<div id="checkStart"></div>

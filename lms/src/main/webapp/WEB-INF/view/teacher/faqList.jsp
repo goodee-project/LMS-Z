@@ -90,7 +90,7 @@
 												<tr>
 													<td>${f.faqCategory}</td>
 													<td>${f.faqNo}</td>
-													<td><a href="${path}/teacher/modifyFaqCount/${f.faqNo}">${f.faqTitle}</a></td>
+													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/modifyFaqCount/${f.faqNo}">${f.faqTitle}</a></td>
 													<td>${f.faqWriter}</td>
 													<td>${f.faqCreatedate}</td>
 													<td>${f.faqCount}</td>

@@ -68,7 +68,7 @@
 											<c:forEach var="m" items="${multiplechoice}">
 												<tr>
 													<td>${m.multiplechoiceNo}</td>
-													<td><a href="${path}/teacher/testQuestionOne/${m.multiplechoiceNo}">평가 ${m.multiplechoiceId}번</a></td>
+													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/testQuestionOne/${m.multiplechoiceNo}">평가 ${m.multiplechoiceId}번</a></td>
 													<td>${m.multiplechoiceScore}</td>
 													<td>${m.multiplechoiceCreatedate}</td>
 													<td>${m.multiplechoiceUpdatedate}</td>
