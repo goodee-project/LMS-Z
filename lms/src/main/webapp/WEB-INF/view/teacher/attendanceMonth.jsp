@@ -118,7 +118,7 @@
 						<div class="card" id="cardStyle">
                             <div class="card-body">
                                 <h4 class="card-title" id="attendanceTitle"></h4>
-                                <div class="mb-3">
+                                <div id="attendanceSmallTitle" class="mb-3">
 	                            	변경사항을 체크 후 업데이트를 해주세요.
                             	</div>
                             	<div class="row">
@@ -418,6 +418,8 @@
        	$('#btnUpdate').show();
        	$('#btnBack').hide();
        	$('#btnHome').show();
+       	$('#attendanceCategory').show();
+       	$('#attendanceSmallTitle').text('변경사항을 체크 후 업데이트를 해주세요.');
     	$.ajax({
 			url:'${path}/teacher/attendanceListByDay',
 			type:'GET',
@@ -512,6 +514,8 @@
     	$('#btnModify').show();
        	$('#btnBack').show();
        	$('#btnHome').hide();
+       	$('#attendanceCategory').hide();
+       	$('#attendanceSmallTitle').text('변경 후 수정을 눌러주세요.');
     	$.ajax({
 			url:'${path}/teacher/attendanceOne',
 			type:'GET',
@@ -530,7 +534,7 @@
 				strbody += '<td>'+ data.studentList[0].studentPhone +'</td>';
 				strbody += '</tr>';
 				strbody += '<th>출결 상태</th>';
-				strbody += '<td><select name="attendanceState">';				
+				strbody += '<td><select class="form-control-plaintext form-control bg-light" name="attendanceState">';				
 				if(data.attendanceState == '미출석'){
 					strbody += '<option value="출석">미출석</option>'
 					strbody += '<option value="출석">출석</option>'
@@ -567,9 +571,9 @@
 				strbody += '</tr>';
 				strbody += '<th>추가사항</th>';
 				if(data.attendanceRemark == null){
-					strbody += '<td></td>';
+					strbody += '<td><input class="form-control-plaintext form-control bg-light" type="text" name="attendanceRemark"></td>';
 				} else{
-					strbody += '<td>'+ data.attendanceRemark +'</td>';
+					strbody += '<td><input class="form-control-plaintext form-control bg-light" type="text" name="attendanceRemark" value="'+ data.attendanceRemark +'"></td>';
 				}
 				strbody += '</tr>';
 				strbody += '</tr>';
