@@ -59,4 +59,10 @@
 			report_submit_feedback = #{reportSubmitFeedback}
 		WHERE report_submit_no = #{reportSubmitNo}
 	</update>
+	<select id="selectReportSubmitFileUuid" resultType="String" parameterType="int">
+		SELECT rf.report_submit_file_uuid
+		FROM report_submit rs INNER JOIN report_submit_file rf
+		ON rs.report_submit_no = rf.report_submit_no
+		WHERE rs.report_no = #{reportNo}
+	</select>
 </mapper>

@@ -65,7 +65,7 @@
 	</delete>
 	<!-- 과제 삭제하기 위해 외래키로 연결된 과제제출 첨부파일 삭제 -->
 	<delete id="deleteReportSubmitFile" parameterType="int">
-		DELETE rs, rf
+		DELETE rf
 		FROM report_submit rs INNER JOIN report_submit_file rf
 		ON rs.report_submit_no = rf.report_submit_no
 		WHERE rs.report_no = #{reportNo}

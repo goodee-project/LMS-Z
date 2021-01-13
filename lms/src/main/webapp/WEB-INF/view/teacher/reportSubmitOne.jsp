@@ -89,7 +89,7 @@
 												<td colspan="6">첨부파일이 없습니다.</td>
 											</c:if>
 											<c:if test="${rf.reportSubmitFileUuid != null}">
-												<td><a href="${path}/teacher/questionFileDownload/${rf.reportSubmitFileUuid}">${rf.reportSubmitFileOriginal}</a></td>
+												<td><a href="${path}/teacher/reportFileDownload/${rf.reportSubmitFileUuid}">${rf.reportSubmitFileOriginal}</a></td>
 											</c:if>
 										</c:forEach>
 									</tr>

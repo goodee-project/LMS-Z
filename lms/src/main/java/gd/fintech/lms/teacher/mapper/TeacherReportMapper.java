@@ -21,8 +21,8 @@ public interface TeacherReportMapper {
 	int updateReport(Report report);
 	//페이징을 위한 카운트
 	int selectReoprtCount(int lectureNo);
-	
+	//과제 삭제하기 위해 외래키로 연결된 과제제출 삭제
 	int deleteReportSubmit(int reportNo);
-	
+	//과제 삭제하기 위해 외래키로 연결된 과제제출 첨부파일 삭제
 	int deleteReportSubmitFile(int reportNo);
 }

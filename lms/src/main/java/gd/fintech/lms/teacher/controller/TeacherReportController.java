@@ -1,13 +1,26 @@
 package gd.fintech.lms.teacher.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.teacher.service.TeacherReportService;
 import gd.fintech.lms.vo.Report;
@@ -105,6 +118,39 @@ public class TeacherReportController {
 		teacherReportService.modifyReport(report);
 		
 		return "redirect:/teacher/reportOne/"+report.getReportNo();
+	}
+	
+	//파일다운로드
+	@GetMapping("/teacher/reportFileDownload/{reportSubmitFileUuid}")
+	public ResponseEntity<byte[]> displayFile(@PathVariable(name="reportSubmitFileUuid")String fileName,HttpServletResponse response)throws Exception{
+		
+		// 파일을 다운로드 받기 위한 스트림
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		
+		String attachPath = "uploadfile\\reportfile\\";
+		
+		File f = new File(rootPath + attachPath + fileName);
+		
+		InputStream in = null;
+		ResponseEntity<byte[]> entity= null;
+				
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			in = new FileInputStream(f);
+							
+			// 다운로드 파일 컨텐트 타입
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			in.close();
+		}
+		return entity;
 	}
 	
 }
