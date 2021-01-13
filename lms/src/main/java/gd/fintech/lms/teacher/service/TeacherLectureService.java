@@ -17,6 +17,10 @@ import gd.fintech.lms.vo.Syllabus;
 public class TeacherLectureService {
 	@Autowired TeacherLectureMapper teacherLectureMapper;
 	
+	public void modifyLectureImage(int lectureNo, String lectureImage, String lectureImageColor) {
+		teacherLectureMapper.updateLectureImage(lectureNo, lectureImage, lectureImageColor);
+	}
+	
 	// 강사별 강의목록 출력(강사 구분을 위해 accountId 받아옴)
 	public List<Lecture> getLectureList(String teacherId, int beginRow, int rowPerPage){
 		// Map 객체 선언

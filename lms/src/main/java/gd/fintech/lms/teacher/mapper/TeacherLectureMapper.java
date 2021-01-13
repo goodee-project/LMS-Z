@@ -18,4 +18,6 @@ public interface TeacherLectureMapper {
 	
 	// 강의 상세보기(강의계획서)(강의번호 -> lectureNo)
 	Lecture selectLectureOne(int lectureNo);
+	
+	int updateLectureImage(int lectureNo, String lectureImage, String lectureImageColor);
 }

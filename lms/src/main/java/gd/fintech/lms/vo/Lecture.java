@@ -23,4 +23,6 @@ public class Lecture {
 	private Subject subject;
 	private Syllabus syllabus;
 	private Textbook textbook;
+	private String lectureImage;
+	private String lectureImageColor;
 }

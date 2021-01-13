@@ -473,6 +473,7 @@
 					attendanceListLength += data.attendanceList[i].studentList.length;
 				}
 				$('#attendanceCount').text('총' + (attendanceListLength) + '명' + ' - ' + '출석' + (data.attendanceYesList.length) + '명');
+				$('#smallTitle').text(data.lectureName);
 			}
 		});	
     }

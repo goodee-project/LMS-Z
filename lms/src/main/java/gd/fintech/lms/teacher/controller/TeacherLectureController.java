@@ -38,6 +38,7 @@ public class TeacherLectureController {
 		
 		// 리스트 객체 선언 및 service 메소드 호출해서 객체에 값 입력
 		List<Lecture> list = teacherLectureService.getLectureList(teacherId, beginRow, rowPerPage);
+
 		// model에 페이징값, list값 입력
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", startPage);

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherLectureMapper">
+	<update id="updateLectureImage" parameterType="java.util.Map">
+		UPDATE lecture
+		SET lecture_image = #{lectureImage}, 
+			lecture_updatedate = NOW(), 
+			lecture_image_color = #{lectureImageColor}
+		WHERE lecture_no = #{lectureNo}
+	</update>
+
 	<!-- 강사별 강의목록 출력 -->
 	<select id="selectLectureList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Lecture">
 		SELECT
@@ -10,7 +18,9 @@
 			lecture_name lectureName,
 			lecture_startdate lectureStartdate,
 			lecture_enddate lectureEnddate,
-			lecture_total lectureTotal
+			lecture_total lectureTotal,
+			lecture_image lectureImage,
+			lecture_image_color lectureImageColor
 		FROM lecture
 		WHERE account_id = #{accountId}
 		LIMIT #{beginRow}, #{rowPerPage}

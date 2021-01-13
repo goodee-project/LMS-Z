@@ -40,7 +40,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Lecture</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 목록</h3>
                     </div>
                 </div>
             </div>
@@ -50,33 +50,40 @@
             		<div class="col-lg-12 col-md-12">
             			<div class="card" id="cardStyle">
             				<div class="card-body">
-            					<h4 class="card-title">강의목록</h4>
-            					
-            					<table id="lmsTable" class="table" style="margin-top: 20px; text-align: center;">
-            						<thead>
-            							<tr>
-            								<th>강의명</th>
-											<th>강의기간</th>
-											<th>정원</th>
-            							</tr>
-            						</thead>
-            						<tbody>
-										<c:if test="${!empty list}">
-											<c:forEach var="l" items="${list}">
-												<tr>
-													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/lectureOne/${l.lectureNo}">${l.lectureName}</a></td>
-													<td>${l.lectureStartdate} ~ ${l.lectureEnddate}</td>
-													<td>${l.lectureTotal}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
-										<c:if test="${empty list}">
-											<tr>
-												<td>등록된 강의가 없습니다.</td>
-											</tr>
-										</c:if>
-									</tbody>
-            					</table>
+            					<div class="row">
+            						<c:forEach var="l" items="${list}">
+            							<div class="col-sm-1 col-lg-1"></div>
+		            					<div class="col-sm-4 col-lg-4 text-center">
+											<div class="card" id="cardStyle2">
+												<div id="modifyBackground${l.lectureNo}" class="text-right modifyBackground">
+													<a href="javascript:click()" onclick="colorChange('red', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:red'></i></a>
+													<a href="javascript:click()" onclick="colorChange('orange', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:orange'></i></a>
+													<a href="javascript:click()" onclick="colorChange('yellow', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:yellow'></i></a>
+													<a href="javascript:click()" onclick="colorChange('green', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:green'></i></a>
+													<a href="javascript:click()" onclick="colorChange('blue', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:blue'></i></a>
+													<a href="javascript:click()" onclick="colorChange('indigo', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:indigo'></i></a>
+													<a href="javascript:click()" onclick="colorChange('purple', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:purple'></i></a>
+													<a href="javascript:click()" onclick="colorChange('black', ${l.lectureNo})"><i class='fas fa-square' style='font-size:24px;margin-top:7px; color:black'></i></a>
+													<button class="btn btn-sm btn-outline-secondary" style="border-radius: 4px; margin-left:10%;margin-bottom: 3px;" type="button" onclick="resetBtn('${l.lectureNo}')">초기화</button>
+													<button class="btn btn-sm btn-outline-secondary" style="border-radius: 4px; margin-bottom: 3px;margin-right:2%;" type="button" onclick="resultBtn('${l.lectureNo}')">저장</button>
+												</div>
+												<div id="modifyForm${l.lectureNo}" class="text-right modifyForm" style="margin-bottom: 3px;margin-right:2%;margin-top: 3px;">
+													<button class="btn btn-sm btn-outline-secondary" style="border-radius: 4px;" type="button" onclick="modifyBtn('${l.lectureNo}')">수정</button>
+												</div>
+												<div>
+													<canvas id="myCanvas${l.lectureNo}" height="250" style="background-image: url('${l.lectureImage}'); background-color:${l.lectureImageColor}; background-repeat: no-repeat; width: 100%; background-position: center center"></canvas>
+												</div>
+												<canvas class="myCanvas2"></canvas>
+												<div class="card-body">
+													<h4 class="card-title">${l.lectureName} (${l.lectureTotal})</h4>
+													<p class="card-text">${l.lectureStartdate} ~ ${l.lectureEnddate}</p>
+													<a href="${path}/teacher/lectureOne/${l.lectureNo}" class="btn btn-primary" style="border-radius: 4px;">상세보기</a>
+												</div>
+											</div>
+		            					</div>
+		            					<div class="col-sm-1 col-lg-1"></div>
+	            					</c:forEach>
+            					</div>
             					
             					<br>
             					<div id="paging" style="text-align: center; padding: 7px;">
@@ -134,7 +141,8 @@
 		</div>
 	</div>
    	
-   	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
+	<!-- script 코드 -->
+    <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${path}/dist/js/app-style-switcher.js"></script>
@@ -149,5 +157,143 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script>
+		var myColor = '';
+		
+		$('.myCanvas2').hide();
+    
+		function colorChange(color, lectureNo){
+			if(color == 'red'){
+				$('#myCanvas'+lectureNo).css('background-color', 'red');
+				myColor = 'red';
+			}
+			if(color == 'orange'){
+				$('#myCanvas'+lectureNo).css('background-color', 'orange');
+				myColor = 'orange';
+			}
+			if(color == 'yellow'){
+				$('#myCanvas'+lectureNo).css('background-color', 'yellow');
+				myColor = 'yellow';
+			}
+			if(color == 'green'){
+				$('#myCanvas'+lectureNo).css('background-color', 'green');
+				myColor = 'green';
+			}
+			if(color == 'blue'){
+				$('#myCanvas'+lectureNo).css('background-color', 'blue');
+				myColor = 'blue';
+			}
+			if(color == 'indigo'){
+				$('#myCanvas'+lectureNo).css('background-color', 'indigo');
+				myColor = 'indigo';
+			}
+			if(color == 'purple'){
+				$('#myCanvas'+lectureNo).css('background-color', 'purple');
+				myColor = 'purple';
+			}
+			if(color == 'black'){
+				$('#myCanvas'+lectureNo).css('background-color', 'black');
+				myColor = 'black';
+			}
+		}
+
+		function modifyBtn(lectureNo){
+			$('#modifyBackground'+lectureNo).show();
+			$('#modifyForm'+lectureNo).hide();
+			canvas = document.getElementById("myCanvas"+lectureNo);
+			context = canvas.getContext("2d");
+			document.getElementById("myCanvas"+lectureNo).getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+			$('#myCanvas'+lectureNo).removeAttr('style');
+			$('#myCanvas'+lectureNo).css('width', '100%');
+			
+			context.lineWidth = 2; // 선 굵기를 2로 설정
+			context.strokeStyle = "white";
+				 
+			// 마우스 리스너 등록. e는 MouseEvent 객체
+			canvas.addEventListener("mousemove", function (e) { move(e) }, false);
+			canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+			canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+			canvas.addEventListener("mouseout", function (e) { out(e) }, false);
+			
+		}
+    
+		function resetBtn(lectureNo){
+			document.getElementById("myCanvas"+lectureNo).getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+			$('#myCanvas'+lectureNo).removeAttr('style');
+			$('#myCanvas'+lectureNo).css('width', '100%');
+		}
+
+		// oneclick 형태로 확인을 누르고 조건이 만족할 경우 그려진 사인과 content가 submit
+		function resultBtn(lectureNo){
+			var dataURL = canvas.toDataURL();
+			$.ajax({
+				url:'${path}/teacher/lectureImage',
+				type:'GET',
+				data:{lectureNo: lectureNo, lectureImage: dataURL, lectureImageColor: myColor},
+				success:function(data){
+					alert("변경 완료");
+					$('#modifyBackground'+lectureNo).hide();
+					$('#modifyForm'+lectureNo).show();
+
+					canvas = document.getElementById("myCanvas2");
+					context = canvas.getContext("2d");
+					
+					context.lineWidth = 2; // 선 굵기를 2로 설정
+					context.strokeStyle = "white";
+					 
+					// 마우스 리스너 등록. e는 MouseEvent 객체
+					canvas.addEventListener("mousemove", function (e) { move(e) }, false);
+					canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+					canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+					canvas.addEventListener("mouseout", function (e) { out(e) }, false);
+				}
+				
+			});	
+		}
+
+		$('.modifyBackground').hide();
+		
+		var canvas, context;
+
+		canvas = document.getElementById("myCanvas2");
+		context = canvas.getContext("2d");
+		
+		context.lineWidth = 3; // 선 굵기를 2로 설정
+		context.strokeStyle = "white";
+		 
+		// 마우스 리스너 등록. e는 MouseEvent 객체
+		canvas.addEventListener("mousemove", function (e) { move(e) }, false);
+		canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+		canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+		canvas.addEventListener("mouseout", function (e) { out(e) }, false);
+
+		// 드래깅동안, 처음 마우스가 눌러진 좌표
+		var startX=0, startY=0;
+		var drawing=false;
+		function draw(curX, curY) {
+		    context.beginPath();
+		    context.moveTo(startX, startY);
+		    context.lineTo(curX, curY);
+		    context.stroke();
+		}
+		function down(e) {
+		    startX = e.offsetX; startY = e.offsetY;
+		    drawing = true;
+		}
+		function up(e) { drawing = false; }
+		function move(e) {
+			// 마우스가 눌러지지 않았으면 리턴
+		    if(!drawing) return; 
+		    var curX = e.offsetX, curY = e.offsetY;
+		    draw(curX, curY);
+		    startX = curX; startY = curY;
+		}
+		function out(e) { drawing = false; }
+
+		
+    </script>
 </body>
 </html>
+
+

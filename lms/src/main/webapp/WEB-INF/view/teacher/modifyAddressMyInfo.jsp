@@ -144,6 +144,8 @@
 			$.ajax({
 				url:'${path}/teacherAddressSearch',
 				type:'GET',
+		        processData : false,	
+		        contentType : false,	
 				data:{doro: $('#teacherAddressMain').val()},
 				success:function(data){
 					var strHead = '<thead>';

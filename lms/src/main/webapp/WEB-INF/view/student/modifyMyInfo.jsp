@@ -137,7 +137,7 @@
 											</c:if>
 											<c:if test="${studentOne.studentGender == '여'}">
 												<input type="radio" id="studentGender" name="studentGender" value="남">남
-												<input type="radio" id="studentGender2" name="studentGender" value="여" checked>여
+												<input type="radio" id="studentGender" name="studentGender" value="여" checked>여
 											</c:if>
 											<button type="button" id="btnGender" class="btn btn-outline-secondary text-dark" style="margin-left:10px;">변경</button>
 										</td>
