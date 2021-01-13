@@ -132,6 +132,11 @@
 												</div>
 											</td>		
 										</c:if>
+									</tr>
+									<tr>
+										<td class="border-0 font-14 font-weight-medium text-muted px-2">
+											<a type="button" class="btn btn-outline-secondary" href="${path}/student/lectureArchiveList/${studentId}/1">이전 페이지</a>
+										</td>
 									</tr>		
 								</table>
 								</div>	

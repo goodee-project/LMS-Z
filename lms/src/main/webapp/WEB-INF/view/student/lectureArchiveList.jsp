@@ -39,12 +39,18 @@
 			<div class="page-breadcrumb">
 				<div class="row">
 					<div class="col-7 align-self-center">
-						<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">질문 게시판</h2>
+						<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">자료실</h2>
 					</div>
 				</div>
 			</div>	
 			<br>
 			<div class="container-fluid">
+				&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/lectureArchiveList/${studentId}/1">전체</a></span>
+			<c:if test="${!empty lectureList}">
+				<c:forEach var="l" items="${lectureList}">
+					&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/lectureSearchArchive/${studentId}/${l.lectureNo}/1">${l.lectureName}</a></span>
+				</c:forEach>
+			</c:if>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
 						<div class="card" id="cardStyle">
@@ -52,6 +58,7 @@
 								<div class="table-responsive">
 									<table id="lectureTable" class="table table" style="margin-top: 20px;">
 										<thead>
+											<c:if test="${!empty lectureArchive}">
 											<tr class="border-0">
 												<th class="border-0 font-14 font-weight-medium text-muted px-2">강의</th>
 												<th class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
@@ -59,14 +66,24 @@
 												<th class="border-0 font-14 font-weight-medium text-muted px-2">작성일</th>
 												<th class="border-0 font-14 font-weight-medium text-muted px-2">조회수</th>
 											</tr>
+											</c:if>
+											<c:if test="${empty lectureArchive}">
+													<tr>
+														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
+															<div class="d-flex no-block align-items-center">
+																등록된 게시물이 없습니다.
+															</div>
+														</td>
+													</tr>
+											</c:if>
 										</thead>	
 										<tbody>
-											<c:if test="${!empty lectureArchive}">
+											
 												<c:forEach var="la" items="${lectureArchive}">
 													<tr>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 															<div class="d-flex no-block align-items-center">	
-																<a href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureNo}(${la.lecture.lectureName})</a>
+																${la.lectureNo}(${la.lecture.lectureName})
 															</div>
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
@@ -76,7 +93,7 @@
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 															<div class="d-flex no-block align-items-center">	
-																${la.lectureArchiveTitle}
+																<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureArchiveTitle}</a></h5>
 															</div>	
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
@@ -91,16 +108,8 @@
 														</td>
 													</tr>
 												</c:forEach>
-											</c:if>	
-											<c:if test="${empty lectureArchive}">
-													<tr>
-														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-															<div class="d-flex no-block align-items-center">
-																등록된 게시물이 없습니다.
-															</div>
-														</td>
-													</tr>
-											</c:if>
+									
+											
 										</tbody>
 									</table>
 									<div id="paging" style="text-align: center; padding: 7px;">							
@@ -125,6 +134,29 @@
 											</c:if>
 										</div>
 										
+										<!-- 강의 검색 -->
+										<c:if test="${!empty lectureNo}">
+										<div>
+											<c:if test="${searchLectureCurrentPage>1}">
+												<a href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/1">처음으로</a>
+												<a href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/${searchLectureCurrentPage-1}">이전</a>
+											</c:if>
+											
+											<c:forEach var="i" begin="${searchLectureUnderFirstPage}" end="${searchLectureUnderLastPage}">
+												<c:if test="${i<=searchLectureLastPage && searchLectureCurrentPage == i}">
+													<a id="pagingStyle" class="bg-secondary font-18" href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/${i}">${i}</a>
+												</c:if>
+												<c:if test="${i<=searchLectureLastPage && searchLectureCurrentPage != i}">
+													<a class="font-18" href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/${i}">${i}</a>
+												</c:if>
+											</c:forEach>
+											
+											<c:if test="${searchLectureCurrentPage<lastPage}">
+												<a href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/${searchLectureCurrentPage+1}">다음</a>
+												<a href="${path}/student/lectureSearchArchive/${studentId}/${lectureNo}/${searchLectureLastPage}">마지막으로</a>
+											</c:if>
+										</div>
+										</c:if>
 										<!-- 검색 페이징 -->
 										<c:if test="${lectureArchiveTitle != null}">
 											<div>

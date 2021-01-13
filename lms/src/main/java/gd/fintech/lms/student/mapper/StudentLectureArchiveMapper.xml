@@ -88,6 +88,25 @@
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	
+	<select id="selectLectureArchiveSearchLecture" parameterType="java.util.Map" resultMap="selectLectureArchiveList">
+		SELECT
+			la.lecture_archive_no,
+			la.lecture_no,
+			la.account_id,
+			la.lecture_archive_writer,
+			la.lecture_archive_title,
+			la.lecture_archive_content,
+			DATE_FORMAT(la.lecture_archive_createdate,'%Y-%m-%d') lecture_archive_createdate,
+			la.lecture_archive_count,
+			l.lecture_name 
+		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+			 LEFT JOIN lecture l
+			 ON la.lecture_no = l.lecture_no
+		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND la.lecture_no = #{lectureNo}
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
 	<select id="selectLectureArchiveSearchTitle" resultMap="selectLectureArchiveList" parameterType="java.util.Map">
 		SELECT
 			la.lecture_archive_no,
@@ -120,6 +139,14 @@
   		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
 	</select>
 	
+	<select id="totalSearchLecture" resultType="int" parameterType="java.util.Map">
+		SELECT
+  			count(*) count
+  		FROM lecture_archive la LEFT JOIN class_registration cr
+			 ON la.lecture_no = cr.lecture_no
+  		WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND la.lecture_no = #{lectureNo}
+	</select>
+	
 	<update id="upLectureArchiveCount" parameterType="int">
 		UPDATE lecture_archive
   		SET lecture_archive_count = lecture_archive_count+1
@@ -131,4 +158,13 @@
   		SET lecture_archive_file_count = lecture_archive_file_count+1
   		WHERE lecture_archive_file_uuid = #{lectureArchiveFileUuid}
 	</update>
+	
+	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture" parameterType="String">
+  		SELECT 
+  			l.lecture_no lectureNo,
+  			l.lecture_name lectureName
+  		FROM lecture l left join class_registration cr
+	  		 on l.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} and cr.class_registration_state='수강중' 	 
+  	</select>
 </mapper>

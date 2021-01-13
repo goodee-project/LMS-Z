@@ -21,6 +21,8 @@ public interface StudentQuestionMapper {
 	// 질문목록 검색
 	List<Question> selectQuestionTitleSearch(Map<String, Object>map);
 	
+	List<Question> selectQuestionLectureSearch(Map<String, Object>map);
+	
 	// 질문목록 페이징에 사용되는 총 행의 갯수
 	int totalCountQuestion(String accountId); 
 	
@@ -30,6 +32,7 @@ public interface StudentQuestionMapper {
 	
 	int totalCountQuestionComment(int questionNo);
 	
+	int totalCountQuestionSearchLecture(Map<String, Object>map);
 	// 질문 등록
 	int insertQuestion(Question question); 
 	
@@ -55,7 +58,6 @@ public interface StudentQuestionMapper {
 	List<Integer> selectLectureNo(int lectureNo);
 	
 	Student selectStudentName(String accountId);
-	
 	
 	List<QuestionComment> selectCommentList(Map<String, Object>map);
 }

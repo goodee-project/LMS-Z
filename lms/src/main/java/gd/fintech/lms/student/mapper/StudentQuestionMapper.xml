@@ -47,6 +47,24 @@
 	  	LIMIT #{beginRow},#{rowPerPage}
   	</select>
   	
+  	<select id="selectQuestionLectureSearch" resultMap="selectQuestionListPage" parameterType="java.util.Map">
+  		SELECT 
+	  		q.question_no,
+	  		q.lecture_no,
+	  		l.lecture_name,
+	  		q.question_writer,
+	  		q.question_title,
+	  		q.question_count,
+	  		q.question_password,
+	  		DATE_FORMAT(q.question_createdate,'%Y-%m-%d') question_createdate
+	  	FROM question q left join lecture l 
+	  		 on q.lecture_no = l.lecture_no
+	  		 left join class_registration cr
+	  		 on q.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND q.lecture_no = #{lectureNo}	 
+	  	ORDER BY question_createdate DESC
+	  	LIMIT #{beginRow},#{rowPerPage}
+  	</select>
   	
   	<select id="selectQuestionTitleSearch" resultMap="selectQuestionListPage" parameterType="java.util.Map">
   		SELECT 
@@ -87,7 +105,7 @@
   		SELECT 
   			count(*) count
   		FROM question q left join class_registration cr
-	  		 on q.lecture_no = cr.lecture_no
+	  		 on q.lecture_no = cr.lecture_no AND q.account_id = cr.account_id
   		WHERE question_title LIKE CONCAT('%',#{questionTitle},'%') AND cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
   	</select>
   	
@@ -95,7 +113,7 @@
   		SELECT 
   			count(*) count
   		FROM question q left join class_registration cr
-	  		 on q.lecture_no = cr.lecture_no
+	  		 on q.lecture_no = cr.lecture_no 
   		WHERE question_writer LIKE CONCAT('%',#{questionWriter},'%') AND cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'
   	</select>
   	
@@ -104,7 +122,7 @@
   		SELECT 
   			count(*) count
   		FROM question q left join class_registration cr
-	  		 on q.lecture_no = cr.lecture_no
+	  		 on q.lecture_no = cr.lecture_no 
 	  	WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중'	 
   	</select>
   	
@@ -113,6 +131,14 @@
   			count(*) count
   		FROM question_comment
 	  	WHERE question_no = #{questionNo}
+  	</select>
+  	
+  	<select id="totalCountQuestionSearchLecture" resultType="int" parameterType="java.util.Map">
+  		SELECT 
+  			count(*) count
+  		FROM question q left join class_registration cr
+  			 on q.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} AND cr.class_registration_state = '수강중' AND q.lecture_no = #{lectureNo}
   	</select>
   	
   	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOne">
@@ -213,7 +239,7 @@
 	</delete>
 	  	 	
   	<!-- 강의 번호 리스트를 가져옵니다(강의번호에 맞는 질문을 등록하기 위해) -->
-  	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture">
+  	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture" parameterType="String">
   		SELECT 
   			l.lecture_no lectureNo,
   			l.lecture_name lectureName

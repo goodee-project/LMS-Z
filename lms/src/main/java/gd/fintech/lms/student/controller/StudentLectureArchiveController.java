@@ -22,6 +22,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.student.service.StudentLectureArchiveService;
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.LectureArchive;
 
 @Controller
@@ -32,8 +33,9 @@ public class StudentLectureArchiveController {
 	public String listLectureArchive(Model model, 
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<LectureArchive> lectureArchive = studentLectureArchiveService.getLectureArchiveList(currentPage, rowPerPage, accountId);
+		List<Lecture> lectureList = studentLectureArchiveService.getLectureList(accountId);
 		int listUnderPerPage = 10;	
 		int listUnderFirstPage = currentPage - (currentPage % listUnderPerPage) + 1;
 		int listUnderLastPage = listUnderFirstPage + listUnderPerPage - 1;
@@ -54,9 +56,43 @@ public class StudentLectureArchiveController {
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("listCurrentPage",currentPage);
 		model.addAttribute("lectureArchive",lectureArchive);
+		model.addAttribute("lectureList",lectureList);
 		return "/student/lectureArchiveList";
 	}
 	
+	@GetMapping("/student/lectureSearchArchive/{accountId}/{lectureNo}/{currentPage}")
+	public String searchLectureArchiveLecture(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="currentPage")int currentPage) {
+		
+		int rowPerPage=1;
+		List<LectureArchive> lectureArchive = studentLectureArchiveService.getLectureArchiveSearchLecture(currentPage, rowPerPage, lectureNo, accountId);
+		List<Lecture> lectureList = studentLectureArchiveService.getLectureList(accountId);
+		int searchLectureCount = studentLectureArchiveService.searchCountLecture(accountId, lectureNo);
+		int searchLectureUnderPerPage = 10;	
+		int searchLectureUnderFirstPage = currentPage - (currentPage % searchLectureUnderPerPage) + 1;
+		int searchLectureUnderLastPage = searchLectureUnderFirstPage + searchLectureUnderPerPage - 1;
+		
+		if (currentPage % searchLectureUnderPerPage == 0 && currentPage != 0) {
+			searchLectureUnderFirstPage = searchLectureUnderFirstPage - searchLectureUnderPerPage;
+			searchLectureUnderLastPage = searchLectureUnderLastPage - searchLectureUnderPerPage;
+		}
+		
+		int lastPage = searchLectureCount/rowPerPage;
+		if(searchLectureCount % rowPerPage !=0) {
+			lastPage +=1;
+		}
+		model.addAttribute("searchLectureUnderPerPage",searchLectureUnderPerPage);
+		model.addAttribute("searchLectureUnderFirstPage",searchLectureUnderFirstPage);
+		model.addAttribute("searchLectureUnderLastPage",searchLectureUnderLastPage);
+		model.addAttribute("searchLectureLastPage",lastPage);
+		model.addAttribute("searchLectureCurrentPage",currentPage);
+		model.addAttribute("lectureArchive",lectureArchive);
+		model.addAttribute("lectureList",lectureList);
+		model.addAttribute("lectureNO",lectureNo);
+		return "/student/lectureArchiveList";
+	}
 	
 	@GetMapping("/student/lectureArchiveSearch/{accountId}/{lectureArchiveTitle}/{currentPage}")
 	public String searchLectureArchive(Model model,
@@ -64,7 +100,7 @@ public class StudentLectureArchiveController {
 			@PathVariable(name="lectureArchiveTitle")String lectureArchiveTitle,
 			@PathVariable(name="currentPage")int currentPage) {
 		
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<LectureArchive> lectureArchive = studentLectureArchiveService.getLectureArchiveSearchList(currentPage, rowPerPage, accountId, lectureArchiveTitle);
 		int searchCount = studentLectureArchiveService.searchCountLectureArchive(accountId, lectureArchiveTitle);
 		int searchUnderPerPage = 10;	

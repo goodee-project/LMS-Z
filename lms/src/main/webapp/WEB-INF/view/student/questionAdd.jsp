@@ -55,7 +55,7 @@
 								<div class="table-responsive">
 									<form method="post" id="questionAdd" action="${path}/student/questionAdd?studentId=${studentId}" enctype="multipart/form-data">
 										<table id="questionAddTable" class="table table" style="margin-top: 10px;">
-											<tr class="border border-0">
+											<tr>
 												<td class="border border-0 d-flex justify-content-start">강의
 													&nbsp;
 													<select name="lectureNo">
@@ -73,26 +73,35 @@
 												</td>
 												<td class="border border-0" style="width:30%;"></td>
 											</tr>
-											
-										
-											<tr class="border border-0">
-												
+										</table>	
+										<table id="questionFileTable" class="table" style="margin-top:20px;">	
+											<tr>
+												<td class="border border-0">첨부파일</td>
 												<td class="border border-0">
-													
-													<button type="button" id="addBtn">파일 추가</button>
-													<button type="button" id="delBtn">파일 삭제</button>
+													<span id="fileinput"></span>
+												</td>
+												<td class="border border-0" style="width: 600px">
+													<div>
+														
+														<button type="button" class="btn btn-outline-success" id="addBtn">파일 추가</button>
+														<button type="button" class="btn btn-outline-danger" id="delBtn">파일 삭제</button>
 												
-													<div id="fileinput"></div>
+													</div>
 												</td>
 											</tr>
-											<tr class="border border-0">
+											</table>	
+										<table id="questionPasswordTable" class="table" style="margin-top:20px;">
+											<tr>
 												<td class="border border-0">
-													질문 비밀번호 <input type="password" style="width:20%;" name="questionPassword">
+													질문 비밀번호
+												</td>
+												<td class="border border-0" style="width: 900px">
+													<input type="password" name="questionPassword">
+												</td>
+											</tr>
+											<tr>
+												<td class="border border-0">
 													<button type="button" class="btn btn-outline-success" id="submitBtn">등록완료</button>
-												</td>
-											</tr>
-											<tr class="border border-0">
-												<td class="border border-0">
 													<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
 												</td>
 											</tr>

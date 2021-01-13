@@ -45,7 +45,6 @@
 				</div>
 			</div>	
 			<br>
-		
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
@@ -53,7 +52,7 @@
 							<div class="card-body">
 							<h4 class="card-title">제출 과제</h4>
 								<div class="table-responsive">
-									<form method="post" id="reportSubmitAdd" action="${path}/student/reportSubmitAdd" enctype="multipart/form-data">	
+									<form method="post" id="reportSubmitAdd" action="${path}/student/reportSubmitAdd/${studentId}" enctype="multipart/form-data">	
 										<table id="reportSubmitTable" class="table table" style="margin-top: 10px;">
 											<tr>
 												<td class="border border-0">
@@ -65,16 +64,26 @@
 													<textarea class="form-control" style="width:80%;" style="resize:none;overflow:visible;" rows="10" name="reportSubmitContent" id="reportSubmitContent"></textarea>
 												</td>
 											</tr>
+										</table>	
+										<table id="reportFileTable" class="table table" style="margin-top:20px;">
 											<tr>
-												<td class="border border-0">
-													<button type="button" class="btn btn-outline-success" id="addBtn">파일 추가</button>
-													<button type="button" class="btn btn-outline-danger" id="delBtn">파일 삭제</button>
+												<td class="border border-0">첨부파일</td>
+												<td class="border border-0" style="width:55%;">
 													<div id="fileinput"></div>
 												</td>
+												<td class="border border-0">
+													<div>
+														<button type="button" class="btn btn-outline-success" id="addBtn">파일 추가</button>
+														<button type="button" class="btn btn-outline-danger" id="delBtn">파일 삭제</button>
+													</div>
+												</td>
 											</tr>
+										</table>	
+										<table id="reportFileTable" class="table table" style="margin-top:20px;">
 											<tr class="border border-0">
 												<td class="border border-0">
 													<button class="btn btn-outline-success" type="button" id="submitBtn">과제 제출</button>
+													<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportSubmitOne/${report.reportNo}/${studentId}">이전 페이지</a>
 												</td>
 											</tr>	
 										</table>
@@ -92,7 +101,6 @@
 								<h4 class="card-title">과제</h4>
 								<div class="table-responsive">
 									<table id="reportTable" class="table table" style="margin-top: 10px; table-layout:fixed; word-break:break-all;">
-										
 											<tr>
 												<td style="width:80px" class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
 												<td class="font-weight-medium text-dark border-top-0 px-2">

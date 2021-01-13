@@ -40,14 +40,15 @@
 			<div class="row">
 				<div class="col-7 align-self-center">
 					<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">과제 자세히 보기</h2>
-					<div id="up"></div>
-					<div id="add"></div>
-					<span id="delUp"></span>
+					<form action="${path}/student/reportSubmitAllRemove/${reportSubmit.reportSubmitNo}/${studentId}" name="form">
+						<div id="add"></div>
+					</form>	
 				</div>
 			</div>
 		</div>	
 		<br>
 			<div class="container-fluid">
+				<div id="up"></div>
 				<div class="row">				
 					<div class="col-lg-7 col-md-7">
 				    	<div class="card" id="cardStyle">
@@ -57,7 +58,7 @@
 								<table id="reporstSubmitOneTable" class="table table" style="margin-top: 20px; width=100; table-layout:fixed; word-break:break-all;">
 									<c:if test="${!empty reportSubmit.reportSubmitContent}">	
 										<tr>
-											<td style="width:80px" class="border-0 font-14 font-weight-medium text-muted px-2">내용</td>
+											<td style="width:140px" class="border-0 font-14 font-weight-medium text-muted px-2">내용</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2">
 												<div class="d-flex no-block align-items-center">
 													${reportSubmit.reportSubmitContent}
@@ -111,6 +112,20 @@
 											</div>
 										</td>
 									</c:if>
+									<c:if test="${report.dateCha>=0}">
+										<tr>
+											<td class="border-0 font-14 font-weight-medium text-muted px-2">
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportList/${studentId}/1">이전 페이지</a>
+											</td>
+										</tr>
+									</c:if>	
+									<c:if test="${report.dateCha<0}">
+										<tr>
+											<td class="border-0 font-14 font-weight-medium text-muted px-2">
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportOverdueList/${studentId}/1">이전 페이지</a>
+											</td>
+										</tr>
+									</c:if>	
 								</table>
 							</div>
 						</div>
@@ -208,7 +223,7 @@
 	$('#reportSubmitContent').each(function(index, item){
 		let htmlAdd='<div><a type="button" class="btn btn-outline-secondary" href="${path}/student/reportSubmitAdd/${report.reportNo}/${studentId}">과제 작성</a></div>'
 		let htmlUpdate='<span><a type="button" class="btn btn-outline-success" href="${path}/student/reportSubmitModify/${reportSubmit.reportNo}/${studentId}">과제 수정</a></span>'
-		let htmlDelete='&emsp;<span><a type="button" class="btn btn-outline-danger" href="${path}/student/reportSubmitAllRemove?reportSubmitNo=${reportSubmit.reportSubmitNo}">과제 삭제</a></span>'
+		let htmlDelete='&emsp;&nbsp&nbsp<input type="button" class="btn btn-outline-danger" value="과제 삭제" onclick="button_event();">'
 		if($(item).val()=='' && $('#reportDateCha').val()>=0){
 			$('#add').append(htmlAdd);
 		}
@@ -216,7 +231,7 @@
 			$('#add').append(htmlUpdate);
 			$('#add').append(htmlDelete);
 		}
-		});
+	});
 
 	$('#reportDateCha').each(function(index, item){
 		let htmlUp='<h3>마감된 과제는 작성및 수정/삭제 할 수 없습니다.</h3>'	
@@ -224,5 +239,13 @@
 			$('#up').append(htmlUp);
 		}
 	});
+
+	function button_event(){
+		if (confirm("정말 삭제하시겠습니까??") == true){   
+		    document.form.submit();
+		}else{   //취소
+		    return;
+		}
+	}
 </script>
 </html>

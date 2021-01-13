@@ -66,31 +66,37 @@
 													<textarea class="form-control" name="reportSubmitContent" style="width:100%;" style="resize:none;overflow:visible;" rows="6" id="reportSubmitContent">${reportSubmit.reportSubmitContent}</textarea>
 												</td>
 											</tr>
-											
+										</table>
+										<table id="reportFileTable" class="table" style="margin-top:20px;">
 											<tr>
+												<td class="border border-0" style="width: 100px">첨부파일</td>
 												<td class="border border-0">
-													<button type="button" class="btn btn-outline-success" id="addBtn">파일추가</button>
-													<button type="button" class="btn btn-outline-danger" id="delBtn">파일삭제</button>
-												
 													<c:forEach var="rsf" items="${reportSubmit.reportSubmitFile}">
 														<div>
-															<span id="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}
-																<c:if test="${rsf.reportSubmitFileUuid != null}">
+															<span id="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}</span>
+															<c:if test="${rsf.reportSubmitFileUuid != null}">
+																<span>
 																	<a href="${path}/student/reportSubmitOneFileRemove/${rsf.reportSubmitFileUuid}/${reportSubmit.reportNo}/${studentId}">삭제</a>
-																</c:if>
-															</span>
+																</span>
+															</c:if>
 														</div>
 													</c:forEach>
-													<br>
 													<span id="fileinput"></span>
 												</td>
-							
+												<td class="border border-0" style="width: 250px">
+													<div>
+														<button type="button" class="btn btn-outline-success" id="addBtn">파일추가</button>
+														<button type="button" class="btn btn-outline-danger" id="delBtn">파일삭제</button>	
+													</div>
+												</td>
+											</tr>
+										</table>	
+										<table id="reportFileTable" class="table table" style="margin-top:20px;">
 											<tr class="border border-0">
 												<td class="border border-0">
 													<button class="btn btn-outline-success" type="button" id="submitBtn">수정 완료</button>
-												
+													<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportSubmitOne/${reportSubmit.reportNo}/${studentId}">이전 페이지</a>
 												</td>
-											
 											</tr>
 										</table>
 									</form>
@@ -99,45 +105,44 @@
 						</div>
 					</div>	
 					<div class="col-lg-4 col-md-4">
-									<div class="card" id="cardStyle">
-										<div class="card-body">
-										<h4 class="card-title">과제</h4>
-											<div class="table-responsive">
-												<table id="reportTable" class="table table" style="margin-top: 10px;">
-														<tr>
-															<td class="border-0 font-14 font-weight-medium text-muted px-2">강의</td> 
-															<td class="font-weight-medium text-dark border-top-0 px-2">
-																<div class="d-flex no-block align-items-center">
-																	${report.lectureNo} (${report.lecture.lectureName})
-																</div>
-															</td>	
-														</tr>	
-														<tr>	
-															<td class="border-0 font-14 font-weight-medium text-muted px-2">제목</td> 
-															<td class="font-weight-medium text-dark border-top-0 px-2">
-																<div class="d-flex no-block align-items-center">
-																	${report.reportTitle}
-																</div>
-															</td>
-														</tr>
-														<tr>	
-															<td class="border-0 font-14 font-weight-medium text-muted px-2">내용</td> 
-															<td class="font-weight-medium text-dark border-top-0 px-2">
-																<div class="d-flex no-block align-items-center">
-																	${report.reportContent}
-																</div>
-															</td>
-														</tr>
-												</table>		
-											</div>
-										</div>
-									</div>
+						<div class="card" id="cardStyle">
+							<div class="card-body">
+								<h4 class="card-title">과제</h4>
+								<div class="table-responsive">
+									<table id="reportTable" class="table table" style="margin-top: 10px;">
+										<tr>
+											<td class="border-0 font-14 font-weight-medium text-muted px-2">강의</td> 
+											<td class="font-weight-medium text-dark border-top-0 px-2">
+												<div class="d-flex no-block align-items-center">
+													${report.lectureNo} (${report.lecture.lectureName})
+												</div>
+											</td>	
+										</tr>	
+										<tr>	
+											<td class="border-0 font-14 font-weight-medium text-muted px-2">제목</td> 
+											<td class="font-weight-medium text-dark border-top-0 px-2">
+												<div class="d-flex no-block align-items-center">
+													${report.reportTitle}
+												</div>
+											</td>
+										</tr>
+										<tr>	
+											<td class="border-0 font-14 font-weight-medium text-muted px-2">내용</td> 
+											<td class="font-weight-medium text-dark border-top-0 px-2">
+												<div class="d-flex no-block align-items-center">
+													${report.reportContent}
+												</div>
+											</td>
+										</tr>
+									</table>		
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
+			</div>
+		</div>
+	</div>
 </body>
 	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
 	<script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>

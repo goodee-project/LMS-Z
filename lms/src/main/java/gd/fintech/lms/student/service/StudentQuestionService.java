@@ -48,6 +48,15 @@ public class StudentQuestionService {
 		return studentQuestionMapper.selectQuestionTitleSearch(map);
 	}
 	
+	public List<Question> getQuestionLetureSearch(String accountId,int lectureNo,int currentPage, int rowPerPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		map.put("lectureNo", lectureNo);
+		return studentQuestionMapper.selectQuestionLectureSearch(map);
+	}
+	
 	public List<Question> getQuestionWriterSearch(String accountId,String questionWriter,int currentPage, int rowPerPage){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("accountId", accountId);
@@ -97,6 +106,13 @@ public class StudentQuestionService {
 	
 	public int totalSearchTitleQuestion(String questionTitle,String accountId) {
 		return studentQuestionMapper.totalCountQuestionSearchTitle(questionTitle, accountId);
+	}
+	
+	public int totalSearchLectureQuestion(int lectureNo, String accountId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		return studentQuestionMapper.totalCountQuestionSearchLecture(map);
 	}
 	
 	//질문 상세히 보기
@@ -232,6 +248,7 @@ public class StudentQuestionService {
 		
 		String attachPath = "uploadfile\\questionfile\\";
 		
+		//경로에 있는 파일 삭제
 		for(String s : questionFileUuid) {
 			File file = new File(rootPath + attachPath+s);
 			if(file.exists()) {
@@ -251,6 +268,7 @@ public class StudentQuestionService {
 		String attachPath = "uploadfile\\questionfile\\";
 		
 		File file = new File(rootPath+attachPath+questionFileUuid);
+		//경로에 있는 파일 삭제
 		if(file.exists()) {
 			file.delete();
 		}

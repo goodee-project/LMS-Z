@@ -46,20 +46,36 @@
 		</div>	
 		<br>
 		<div class="container-fluid">
+			&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/reportOverdueList/${studentId}/1">전체</a></span>
+			<c:forEach var="l" items="${lectureList}">
+					&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/reportOverdueLectureList/${studentId}/${l.lectureNo}/1">${l.lectureName}</a></span>
+				</c:forEach>
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
+								<div class="d-flex align-items-center">
+									<div><a type="button" class="btn btn-outline-secondary" href="${path}/student/reportList/${studentId}/1">진행중인 과제</a></div>
+								</div>
 								<table id="reportOverdueTable" class="table table" style="margin-top: 20px;">
 									<thead>
-										<tr class="border-0">
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">강의</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">과제명</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출시작일</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출마감일</th>
-											<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출현황</th>
-										</tr>
+										<c:if test="${!empty reportList}">
+											<tr class="border-0">
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">강의</th>
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">과제명</th>
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출시작일</th>
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출마감일</th>
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">과제 제출현황</th>
+											</tr>
+										</c:if>	
+										<c:if test="${empty reportList}">
+										<tr class="border-0">	
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">
+													<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 질문이 작성되지 않았습니다</h5>
+												</th>
+											</tr>	
+										</c:if>
 									</thead>
 									<tbody>
 										<c:forEach var="r" items="${reportList}">
@@ -150,6 +166,28 @@
 											<c:if test="${OverdueSearchCurrentPage<lastOverdueSearchPage}">
 												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/${OverdueSearchCurrentPage+1}">다음</a>
 												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/${lastOverdueSearchPage}">마지막으로</a>
+											</c:if>
+										</div>
+									</c:if>
+									<c:if test="${lectureNo != null}">
+										<div>
+											<c:if test="${lectureOverdueCurrentPage>1}">
+												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/1">처음으로</a>
+												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lectureOverdueCurrentPage-1}">이전</a>
+											</c:if>
+											
+											<c:forEach var="l" begin="${lectureOverdueUnderFirstPage}" end="${lectureOverdueUnderLastPage}">
+												<c:if test="${l<=lastLectureOverduePage && lectureOverdueCurrentPage == l}">
+													<a id="pagingStyle" class="bg-secondary font-18" href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${l}">${l}</a>
+												</c:if>
+												<c:if test="${l<=lastLectureOverduePage && lectureOverdueCurrentPage != l}">
+													<a class="font-18" href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${l}">${l}</a>
+												</c:if>
+											</c:forEach>
+											
+											<c:if test="${lectureOverdueCurrentPage<lastLectureOverduePage}">
+												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lectureOverdueCurrentPage+1}">다음</a>
+												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lastLectureOverduePage}">마지막으로</a>
 											</c:if>
 										</div>
 									</c:if>

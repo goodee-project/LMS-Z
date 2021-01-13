@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
 import gd.fintech.lms.vo.Student;
@@ -31,6 +32,10 @@ public interface StudentReportSubmitMapper {
 	//제출기한이 남아있는 수강중인 강의 과제목록 행의 갯수
 	int totalCountReport(String accountId);
 	
+	int totalCountLectureSearch(Map<String, Object>map);
+	
+	int totalCountOverdueLectureSearch(Map<String, Object>map);
+	
 	//제출기한이 지난 수강중인 강의 과제목록 행의 갯수
 	int totalCountOverdueReport(String accountId);
 	
@@ -45,4 +50,10 @@ public interface StudentReportSubmitMapper {
 	
 	//제출기한이 지난 수강중인 강의 과제목록 제목으로 검색
 	List<Report> selectOverdueReportSearch(Map<String, Object>map);
+	
+	List<Report> selectLectureReportSearch(Map<String, Object>map);
+	
+	List<Report> selectLectureOverdueReportSearch(Map<String, Object>map);
+	
+	List<Lecture> selectLectureList(String accountId);
 }

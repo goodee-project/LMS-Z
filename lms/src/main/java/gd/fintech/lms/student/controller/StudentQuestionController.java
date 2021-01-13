@@ -43,7 +43,7 @@ public class StudentQuestionController {
 			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage = 5;
-	
+		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
 		List<Question> questionList = studentQuestionService.getQuestionPage(accountId,currentPage, rowPerPage);
 		int countQuestion = studentQuestionService.totalQuestion(accountId);
 		int lastPage = countQuestion / rowPerPage;
@@ -68,8 +68,47 @@ public class StudentQuestionController {
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("rowPerPage", rowPerPage);
 		model.addAttribute("questionList", questionList);
+		model.addAttribute("lectureList", lectureList);
 		return "/student/questionList";
 	}
+	
+	// 페이징 변경해
+	@GetMapping("/student/questionLectureSearch/{accountId}/{lectureNo}/{currentPage}")
+	public String searchLectureQuestion(Model model, 
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage = 5;
+		List<Lecture> lectureList = studentQuestionService.getLectureList(accountId);
+		List<Question> questionList = studentQuestionService.getQuestionLetureSearch(accountId, lectureNo, currentPage, rowPerPage);
+		int countQuestionLecture = studentQuestionService.totalSearchLectureQuestion(lectureNo, accountId);
+		int lastLecturePage = countQuestionLecture / rowPerPage;
+		
+		int lectureUnderPerPage = 10;	
+		int lectureUnderFirstPage = currentPage - (currentPage % lectureUnderPerPage) + 1;
+		int lectureUnderLastPage = lectureUnderFirstPage + lectureUnderPerPage - 1;
+		
+		if (currentPage % lectureUnderPerPage == 0 && currentPage != 0) {
+			lectureUnderFirstPage = lectureUnderFirstPage - lectureUnderPerPage;
+			lectureUnderLastPage = lectureUnderLastPage - lectureUnderPerPage;
+		}
+		
+		if(countQuestionLecture % rowPerPage !=0) {
+			lastLecturePage +=1;
+		}
+	
+		model.addAttribute("lectureUnderPerPage",lectureUnderPerPage);
+		model.addAttribute("lectureUnderFirstPage",lectureUnderFirstPage);
+		model.addAttribute("lectureUnderLastPage",lectureUnderLastPage);
+		model.addAttribute("lectureCurrentPage",currentPage);
+		model.addAttribute("lastLecturePage", lastLecturePage);
+		model.addAttribute("rowPerPage", rowPerPage);
+		model.addAttribute("questionList", questionList);
+		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("lectureNo", lectureNo);
+		return "/student/questionList";
+	}
+	
 	@GetMapping("/student/questionTitleSearch/{accountId}/{questionTitle}/{currentPage}")
 	public String searchTitleQuestion(Model model, 
 			@PathVariable(name="accountId")String accountId,

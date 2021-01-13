@@ -24,6 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.student.service.StudentReportService;
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
 import gd.fintech.lms.vo.ReportSubmitAddForm;
@@ -39,7 +40,7 @@ public class StudentReportController {
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getReportPage(currentPage,rowPerPage,accountId);
-		
+		List<Lecture> lectureList = studentReportService.getLectureList(accountId);
 		int listUnderPerPage = 10;	
 		int listUnderFirstPage = currentPage - (currentPage % listUnderPerPage) + 1;
 		int listUnderLastPage = listUnderFirstPage + listUnderPerPage - 1;
@@ -61,7 +62,76 @@ public class StudentReportController {
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("listCurrentPage",currentPage);
 		model.addAttribute("reportList",reportList);
+		model.addAttribute("lectureList",lectureList);
 		return "/student/reportList";
+	}
+	
+	@GetMapping("/student/reportLectureList/{accountId}/{lectureNo}/{currentPage}")
+	public String listLectureReport(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage=5;
+		List<Report> reportList = studentReportService.getLectureReportSearch(currentPage, rowPerPage, accountId, lectureNo);
+		List<Lecture> lectureList = studentReportService.getLectureList(accountId);
+		int lectureUnderPerPage = 10;	
+		int lectureUnderFirstPage = currentPage - (currentPage % lectureUnderPerPage) + 1;
+		int lectureUnderLastPage = lectureUnderFirstPage + lectureUnderPerPage - 1;
+		
+		if (currentPage % lectureUnderPerPage == 0 && currentPage != 0) {
+			lectureUnderFirstPage = lectureUnderFirstPage - lectureUnderPerPage;
+			lectureUnderLastPage = lectureUnderLastPage - lectureUnderPerPage;
+		}
+		
+		int totalLectureReport = studentReportService.totalLectureSearch(accountId, lectureNo);
+		int lastLecturePage = totalLectureReport/rowPerPage;
+		if(totalLectureReport % rowPerPage !=0) {
+			lastLecturePage +=1;
+		}
+	
+		model.addAttribute("lectureUnderPerPage",lectureUnderPerPage);
+		model.addAttribute("lectureUnderFirstPage",lectureUnderFirstPage);
+		model.addAttribute("lectureUnderLastPage",lectureUnderLastPage);
+		model.addAttribute("lastLecturePage",lastLecturePage);
+		model.addAttribute("lectureCurrentPage",currentPage);
+		model.addAttribute("reportList",reportList);
+		model.addAttribute("lectureList",lectureList);
+		model.addAttribute("lectureNo",lectureNo);
+		return "/student/reportList";
+	}
+	
+	@GetMapping("/student/reportOverdueLectureList/{accountId}/{lectureNo}/{currentPage}")
+	public String listOverdueLectureReport(Model model,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
+			@PathVariable(name="currentPage")int currentPage) {
+		int rowPerPage=5;
+		List<Report> reportList = studentReportService.getLectureOverdueReportSearch(currentPage, rowPerPage, accountId, lectureNo);
+		List<Lecture> lectureList = studentReportService.getLectureList(accountId);
+		int lectureOverdueUnderPerPage = 10;	
+		int lectureOverdueUnderFirstPage = currentPage - (currentPage % lectureOverdueUnderPerPage) + 1;
+		int lectureOverdueUnderLastPage = lectureOverdueUnderFirstPage + lectureOverdueUnderPerPage - 1;
+		
+		if (currentPage % lectureOverdueUnderPerPage == 0 && currentPage != 0) {
+			lectureOverdueUnderFirstPage = lectureOverdueUnderFirstPage - lectureOverdueUnderPerPage;
+			lectureOverdueUnderLastPage = lectureOverdueUnderLastPage - lectureOverdueUnderPerPage;
+		}
+		
+		int totalOverdueLectureReport = studentReportService.totalOverdueLectureSearch(accountId, lectureNo);
+		int lastLectureOverduePage = totalOverdueLectureReport/rowPerPage;
+		if(totalOverdueLectureReport % rowPerPage !=0) {
+			lastLectureOverduePage +=1;
+		}
+	
+		model.addAttribute("lectureOverdueUnderPerPage",lectureOverdueUnderPerPage);
+		model.addAttribute("lectureOverdueUnderFirstPage",lectureOverdueUnderFirstPage);
+		model.addAttribute("lectureOverdueUnderLastPage",lectureOverdueUnderLastPage);
+		model.addAttribute("lastLectureOverduePage",lastLectureOverduePage);
+		model.addAttribute("lectureOverdueCurrentPage",currentPage);
+		model.addAttribute("reportList",reportList);
+		model.addAttribute("lectureList",lectureList);
+		model.addAttribute("lectureNo",lectureNo);
+		return "/student/reportOverdue";
 	}
 	
 	@GetMapping("/student/reportOverdueList/{accountId}/{currentPage}")
@@ -70,7 +140,7 @@ public class StudentReportController {
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage=5;
 		List<Report> reportList = studentReportService.getOverdueReportPage(currentPage, rowPerPage, accountId);
-		
+		List<Lecture> lectureList = studentReportService.getLectureList(accountId);
 		int overdueListUnderPerPage = 10;	
 		int overdueListUnderFirstPage = currentPage - (currentPage % overdueListUnderPerPage) + 1;
 		int overdueListUnderLastPage =  overdueListUnderFirstPage + overdueListUnderPerPage - 1;
@@ -92,6 +162,7 @@ public class StudentReportController {
 		model.addAttribute("lastOverduePage",lastOverduePage);
 		model.addAttribute("OverdueListCurrentPage",currentPage);
 		model.addAttribute("reportList",reportList);
+		model.addAttribute("lectureList",lectureList);
 		return "/student/reportOverdue";
 	}
 	
@@ -138,8 +209,9 @@ public class StudentReportController {
 		return "/student/reportSubmitAdd";
 	}
 	
-	@PostMapping("/student/reportSubmitAdd")
-	public String addReportSubmit(ReportSubmitAddForm reportSubmitAddForm) {
+	@PostMapping("/student/reportSubmitAdd/{accountId}")
+	public String addReportSubmit(ReportSubmitAddForm reportSubmitAddForm,
+			@PathVariable(name="accountId")String accountId) {
 		// db에 모든 html태그 접근 제한
 		String title = reportSubmitAddForm.getReportSubmitTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		reportSubmitAddForm.setReportSubmitTitle(title);
@@ -147,7 +219,7 @@ public class StudentReportController {
 		reportSubmitAddForm.setReportSubmitContent(content);
 		
 		studentReportService.addReportSubmit(reportSubmitAddForm);
-		return "redirect:/student";
+		return "redirect:/student/reportList/{accountId}/1";
 	}
 	
 	@GetMapping("/student/reportSubmitOne/{reportNo}/{accountId}")
@@ -193,10 +265,11 @@ public class StudentReportController {
 		return "redirect:/student/reportSubmitModify/{reportNo}/{accountId}";
 	}
 	
-	@GetMapping("student/reportSubmitAllRemove")
-	public String removeReportSubmitAll(@RequestParam(value="reportSubmitNo")int reportSubmitNo) {
+	@GetMapping("student/reportSubmitAllRemove/{reportSubmitNo}/{accountId}")
+	public String removeReportSubmitAll(@PathVariable(name="reportSubmitNo")int reportSubmitNo,
+			@PathVariable(name="accountId")String accountId) {
 		studentReportService.deleteReportAllSubmit(reportSubmitNo);
-		return "redirect:/student";
+		return "redirect:/student/reportList/{accountId}/1";
 	}
 	
 	@GetMapping("/student/reportSubmitFileCount/{reportSubmitFileUuid}")

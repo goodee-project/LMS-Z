@@ -40,7 +40,9 @@
 			<div class="row">
 				<div class="col-7 align-self-center">
 					<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">질문 자세히 보기</h2>
-					<span id="delUp"></span>
+					<form action="${path}/student/questionRemove/${studentId}/${question.questionNo}" name="form">
+						<span id="delUp"></span>
+					</form>
 				</div>
 			</div>
 		</div>	
@@ -48,7 +50,8 @@
 		
 		<div class="container-fluid">
 			<div id="add"></div> 
-			<div id="password"></div> 
+			<div id="password"></div>
+			<br><div id="list"></div>
 			<div id="view"></div>
 			<div id="tab">
 				<div class="row">
@@ -137,7 +140,7 @@
 										
 										<tr>
 											<td class="border-0 font-14 font-weight-medium text-muted px-2">
-												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId }/1">이전 페이지</a>
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
 											</td>
 										</tr>
 							
@@ -254,7 +257,7 @@ function view(str) {
 	}
 	
 	$('#accountId').each(function(index, item){
-		let htmlDelete = '&nbsp&nbsp<a type="button" class="btn btn-outline-danger" href="${path}/student/questionRemove/${studentId}/${question.questionNo}">질문 삭제</a>'
+		let htmlDelete = '&nbsp&nbsp<input type="button" class="btn btn-outline-danger" value="질문 삭제" onclick="button_event();">'
 		let htmlUpdate = '<a type="button" class="btn btn-outline-success" href="${path}/student/questionModify/${studentId}/${question.questionNo}">질문 수정</a>'
 		let html = '<span>게시글의 수정과 삭제는 작성자만 할 수 있습니다.</span>'
 		if($(item).val()==$('#studentId').val()){
@@ -269,29 +272,41 @@ function view(str) {
 	$('#questionPassword').each(function(index,item){
 		let htmlAdd = '<h1>이 질문은 비공개 질문입니다.</h1>'
 		let password = '<input type="password" class="password" placeholder="비밀번호를 입력해주세요"> <button type="button" id="btn">입력</button>'
+		let listLink = '<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>'
 		if($(item).val()!='' && $('#accountId').val()!= $('#studentId').val()){
 				$('#tab').wrapInner('<div id="viewcode" style="display:none;"></div>');
 		
 				$('#add').empty();
+				$('#list').append(listLink);
 				$('#add').append(htmlAdd);
 				$('#password').append(password);
-			}
+		}
 	});
 	
 	$('#btn').click(function(){	
 		$('.password').each(function(index,item){
-			let htmlView = '<a href="javascript:view(\'viewcode\');" >내용보기</a>'
+			let htmlView = '<a type="button" id="select" href="javascript:view(\'viewcode\');" >내용보기</a>'
 			let success = '<h3>아래 내용보기를 클릭하면 질문 내용이 나타납니다.</h3>'	
 			if($(item).val()==$('#questionPassword').val()){
 				$('#view').append(htmlView);
 				$('#password').empty();
 				$('#add').empty();
+				$('#list').empty();
 				$('#add').append(success);
+				$('#select').trigger("click");
 				}else if($(item).val()!=$('#questionPassword').val()){
 					alert('비밀번호가 다릅니다');	
 				}
 		})	
 	});	
+
+	function button_event(){
+		if (confirm("정말 삭제하시겠습니까??") == true){ // 확인   
+		    document.form.submit();
+		}else{   //취소
+		    return;
+		}
+	}
 
 </script>
 </html>

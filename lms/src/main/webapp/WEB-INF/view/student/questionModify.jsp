@@ -79,13 +79,11 @@
 											</td>
 											<td class="border border-0" style="width:30%;"></td>
 										</tr>
-										
-										<tr class="border border-0">
+										</table>
+										<table id="questionFileTable" class="table" style="margin-top:20px;">
+										<tr>
+											<td class="border border-0">첨부파일</td>
 											<td class="border border-0">				
-												<button type="button" class="btn btn-outline-success" id="addBtn">파일추가</button>
-												<button type="button" class="btn btn-outline-danger" id="delBtn">파일삭제</button>
-													
-											
 												<c:forEach var="qf" items="${question.questionfile}">
 													<div>
 														<span id="${qf.questionFileOriginal}">${qf.questionFileOriginal}</span>
@@ -98,17 +96,25 @@
 												</c:forEach>
 												<span id="fileinput"></span>
 											</td>
+											<td class="border border-0" style="width: 600px">
+												<div>
+													<button type="button" class="btn btn-outline-success" id="addBtn">파일추가</button>
+													<button type="button" class="btn btn-outline-danger" id="delBtn">파일삭제</button>
+												</div>
+											</td>
 										</tr>
-										
-										<tr class="border border-0">
+										</table>	
+											<table id="reportFileTable" class="table table" style="margin-top:20px;">
+										<tr>
 											<td class="border border-0">
-												질문 비밀번호 <input type="text" style="width:30%;" name="questionPassword" value="${question.questionPassword}">
+												질문 비밀번호
+												<input type="text" name="questionPassword" value="${question.questionPassword}">
 											</td>
 										</tr>
 										
-										<tr class="border border-0">
+										<tr>
 											<td class="border border-0">
-												<button type="button" class="btn btn-outline-success" id="submitBtn">수정 완료</button>
+												<button type="button" class="btn btn-outline-success" id="submitBtn">수정 완료</button>	
 												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionOne/${question.questionNo}/1">이전 페이지</a>
 											</td>
 										</tr>

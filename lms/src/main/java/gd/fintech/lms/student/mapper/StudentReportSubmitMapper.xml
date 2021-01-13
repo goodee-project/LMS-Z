@@ -54,6 +54,57 @@
 		LIMIT #{beginRow},#{rowPerPage}
 	</select>
 	
+	<select id="selectLectureReportSearch" resultMap="selectReportListPage" parameterType="java.util.Map">
+		SELECT
+			r.report_no,
+			r.lecture_no,
+			l.lecture_name,
+			r.report_title,
+			r.report_content,
+			r.report_createdate,
+			r.report_updatedate,
+			r.report_startdate,
+			r.report_enddate,
+			rs.report_submit_content,
+			DATEDIFF(r.report_enddate,NOW())
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+			 left join lecture l 
+			 on r.lecture_no = l.lecture_no
+			 left join report_submit rs 
+			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 
+			  AND cr.class_registration_state = '수강중'
+			  AND r.lecture_no = #{lectureNo}
+		ORDER BY r.report_enddate ASC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="selectLectureOverdueReportSearch" resultMap="selectReportListPage" parameterType="java.util.Map">
+		SELECT
+			r.report_no,
+			r.lecture_no,
+			l.lecture_name,
+			r.report_title,
+			r.report_content,
+			r.report_createdate,
+			r.report_updatedate,
+			r.report_startdate,
+			r.report_enddate,
+			rs.report_submit_content,
+			DATEDIFF(r.report_enddate,NOW())
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+			 left join lecture l 
+			 on r.lecture_no = l.lecture_no
+			 left join report_submit rs 
+			 on cr.account_id = rs.account_id AND r.report_no = rs.report_no
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> 
+			  AND cr.class_registration_state = '수강중'
+			  AND r.lecture_no = #{lectureNo}
+		ORDER BY r.report_enddate ASC
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
 	
 	<select id="selectOverdueReportListPage" resultMap="selectReportListPage" parameterType="java.util.Map">
 		SELECT
@@ -128,8 +179,28 @@
 		FROM report r left join class_registration cr
 			 on r.lecture_no = cr.lecture_no
 		WHERE cr.account_id = #{accountId} 
-			 AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND cr.class_registration_state = '수강중'
-			 AND r.report_title = #{reportTitle}
+			  AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> AND cr.class_registration_state = '수강중'
+			  AND r.report_title = #{reportTitle}
+	</select>
+	
+	<select id="totalCountLectureSearch" resultType="int" parameterType="java.util.Map">
+		SELECT
+			COUNT(*) count
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} AND DATEDIFF(r.report_enddate,NOW()) >= 0 
+			  AND cr.class_registration_state = '수강중'
+			  AND r.lecture_no = #{lectureNo} 
+	</select>
+	
+	<select id="totalCountOverdueLectureSearch" resultType="int" parameterType="java.util.Map">
+		SELECT
+			COUNT(*) count
+		FROM report r left join class_registration cr
+			 on r.lecture_no = cr.lecture_no
+		WHERE cr.account_id = #{accountId} AND <![CDATA[DATEDIFF(r.report_enddate,NOW()) < 0]]> 
+			  AND cr.class_registration_state = '수강중'
+			  AND r.lecture_no = #{lectureNo} 
 	</select>
 	
 	<resultMap type="gd.fintech.lms.vo.ReportSubmit" id="selectReportSubmitOne">
@@ -248,5 +319,14 @@
   			student_name StudentName
   		FROM student
   		WHERE student_id = #{accountId}
+  	</select>
+  	
+  	<select id="selectLectureList" resultType="gd.fintech.lms.vo.Lecture" parameterType="String">
+  		SELECT 
+  			l.lecture_no lectureNo,
+  			l.lecture_name lectureName
+  		FROM lecture l left join class_registration cr
+	  		 on l.lecture_no = cr.lecture_no
+	  	WHERE cr.account_id = #{accountId} and cr.class_registration_state='수강중' 	 
   	</select>
 </mapper>

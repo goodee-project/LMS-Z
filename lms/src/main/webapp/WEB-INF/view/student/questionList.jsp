@@ -38,13 +38,23 @@
 	<div class="page-wrapper">
 		<div class="page-breadcrumb">
 			<div class="row">
-				<div class="col-7 align-self-center">
-					<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">질문 게시판</h2>
+				<div  class="col-7 align-self-center">
+					
+						<h2 class="page-title text-truncate text-dark font-weight-medium mb-1">질문 게시판</h2>
+					
+						
+					
 				</div>
 			</div>
 		</div>	
 		<br>
 		<div class="container-fluid">
+			&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/questionList/${studentId}/1">전체</a></span>
+			<c:if test="${!empty lectureList}">
+				<c:forEach var="l" items="${lectureList}">
+					&emsp;<span><a type="button" class="btn btn-outline-secondary mb-2" href="${path}/student/questionLectureSearch/${studentId}/${l.lectureNo}/1">${l.lectureName}</a></span>
+				</c:forEach>
+			</c:if>
 			<div class="row">
 				<div class="col-lg-12 col-md-12">
 					<div class="card" id="cardStyle">
@@ -55,19 +65,29 @@
 							</div>
 								<table id="questionTable" class="table table" style="margin-top: 20px;">
 									<thead>
-										<tr class="border-0">
-										 	<th class="border-0 font-14 font-weight-medium text-muted px-2">강의</th>
-										 	<th class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
-										 	<th class="border-0 font-14 font-weight-medium text-muted px-2">제목</th>
-										 	<th class="border-0 font-14 font-weight-medium text-muted px-2">작성일</th>
-										 	<th class="border-0 font-14 font-weight-medium text-muted px-2">조회수</th>
-										</tr>
+										<c:if test="${!empty questionList}">
+											<tr class="border-0">
+											 	<th class="border-0 font-14 font-weight-medium text-muted px-2">강의</th>
+											 	<th class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
+											 	<th class="border-0 font-14 font-weight-medium text-muted px-2">제목</th>
+											 	<th class="border-0 font-14 font-weight-medium text-muted px-2">작성일</th>
+											 	<th class="border-0 font-14 font-weight-medium text-muted px-2">조회수</th>
+											</tr>
+										</c:if>
+										<c:if test="${empty questionList}">
+											<tr class="border-0">	
+												<th class="border-0 font-14 font-weight-medium text-muted px-2">
+													<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 질문이 작성되지 않았습니다</h5>
+												</th>
+											</tr>	
+										</c:if>
 									</thead>
+									
 									<tbody>
 									<c:forEach var="q" items="${questionList}" varStatus="status">
 										<tr>
 											<td class="border-top-0 text-muted px-2 py-4 font-14">
-												<a href="${path}/student/questionCountUp/${q.questionNo}">${q.lectureNo}: (${q.lecture.lectureName})</a>
+												<h1 class="text-dark mb-0 font-16 font-weight-medium">${q.lectureNo}: (${q.lecture.lectureName})</h1>
 												<c:if test="${!empty q.questionPassword}">
 													비밀글
 												</c:if>
@@ -79,9 +99,9 @@
 											</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 												<div class="d-flex no-block align-self-center">
-													<h5 class="text-dark mb-0 font-16 font-weight-medium">${q.questionTitle}</h5>
+													<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/questionCountUp/${q.questionNo}">${q.questionTitle}</a></h5>
 												</div>
-											</td>
+											</td>	
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 												<div class="d-flex no-block align-self-center">
 													<h5 class="text-dark mb-0 font-16 font-weight-medium">${q.questionCreatedate}</h5>
@@ -120,29 +140,53 @@
 									</c:if>
 								</div>
 							
-							<!-- 제목 검색에 대한 페이징 -->
-							<c:if test="${questionTitle != null}">	
-								<div>
-									<c:if test="${titleCurrentPage>1}">
-										<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/1">처음으로</a>
-										<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage-1}">이전</a>
-									</c:if>
-									
-									<c:forEach var="t" begin="${titleUnderFirstPage}" end="${titleUnderLastPage}">
-										<c:if test="${t<=lastTitlePage && titleCurrentPage == t}">
-											<a id="pagingStyle" class="bg-secondary font-18" href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${t}">${t}</a>
+								<!-- 강의 검색 리스트 페이징 -->
+								<c:if test="${lectureNo != null}">
+									<div>
+										<c:if test="${lectureCurrentPage>1}">
+											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/1">처음으로</a>
+											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lectureCurrentPage-1}">이전</a>
 										</c:if>
-										<c:if test="${t<=lastTitlePage && titleCurrentPage != t}">
-											<a class="font-18" href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${t}">${t}</a>
+										
+										<c:forEach var="l" begin="${lectureUnderFirstPage}" end="${lectureUnderLastPage}">
+											<c:if test="${l<=lastLecturePage && lectureCurrentPage == l}">
+												<a id="pagingStyle" class="bg-secondary font-18" href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${l}">${l}</a>
+											</c:if>
+											<c:if test="${l<=lastLecturePage && lectureCurrentPage != l}">
+												<a class="font-18" href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${l}">${l}</a>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${lectureCurrentPage<lastLecturePage}">
+											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lectureCurrentPage+1}">다음</a>
+											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lastLecturePage}">마지막으로</a>
 										</c:if>
-									</c:forEach>
-									
-									<c:if test="${titleCurrentPage<lastTitlePage}">
-										<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage+1}">다음</a>
-										<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${lastTitlePage}">마지막으로</a>
-									</c:if>
-								</div>
-							</c:if>	
+									</div>
+								</c:if>
+								
+								<!-- 제목 검색에 대한 페이징 -->
+								<c:if test="${questionTitle != null}">	
+									<div>
+										<c:if test="${titleCurrentPage>1}">
+											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/1">처음으로</a>
+											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage-1}">이전</a>
+										</c:if>
+										
+										<c:forEach var="t" begin="${titleUnderFirstPage}" end="${titleUnderLastPage}">
+											<c:if test="${t<=lastTitlePage && titleCurrentPage == t}">
+												<a id="pagingStyle" class="bg-secondary font-18" href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${t}">${t}</a>
+											</c:if>
+											<c:if test="${t<=lastTitlePage && titleCurrentPage != t}">
+												<a class="font-18" href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${t}">${t}</a>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${titleCurrentPage<lastTitlePage}">
+											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage+1}">다음</a>
+											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${lastTitlePage}">마지막으로</a>
+										</c:if>
+									</div>
+								</c:if>	
 							
 								<!-- 작성자 검색에 대한 페이징 -->
 								<c:if test="${questionWriter != null}">	

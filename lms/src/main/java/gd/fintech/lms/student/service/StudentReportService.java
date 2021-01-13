@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import gd.fintech.lms.student.mapper.StudentReportSubmitFileMapper;
 import gd.fintech.lms.student.mapper.StudentReportSubmitMapper;
+import gd.fintech.lms.vo.Lecture;
 import gd.fintech.lms.vo.QuestionFile;
 import gd.fintech.lms.vo.Report;
 import gd.fintech.lms.vo.ReportSubmit;
@@ -40,6 +41,26 @@ public class StudentReportService {
 		return studentReportSubmitMapper.selectReportListPage(map);
 	}
 	
+	public List<Report> getLectureReportSearch(int currentPage, int rowPerPage, String accountId, int lectureNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		return studentReportSubmitMapper.selectLectureReportSearch(map);
+	}
+	
+	public List<Report> getLectureOverdueReportSearch(int currentPage, int rowPerPage, String accountId, int lectureNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		map.put("beginRow", (currentPage-1)*rowPerPage);
+		map.put("rowPerPage", rowPerPage);
+		
+		return studentReportSubmitMapper.selectLectureOverdueReportSearch(map);
+	}
+	
 	public List<Report> getOverdueReportPage(int currentPage, int rowPerPage, String accountId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -52,6 +73,10 @@ public class StudentReportService {
 	
 	public Student getStudentName(String accountId) {
 		return studentReportSubmitMapper.selectStudentName(accountId);
+	}
+	
+	public List<Lecture> getLectureList(String accountId){
+		return studentReportSubmitMapper.selectLectureList(accountId);
 	}
 	
 	public List<Report> getOverdueReportSearch(int currentPage, int rowPerPage, String accountId, String reportTitle){
@@ -70,6 +95,20 @@ public class StudentReportService {
 	
 	public int totalOverdueSearch(String accountId, String reportTitle) {
 		return studentReportSubmitMapper.totalCountOverdueSearch(accountId, reportTitle);
+	}
+	
+	public int totalLectureSearch(String accountId, int lectureNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		return studentReportSubmitMapper.totalCountLectureSearch(map);
+	}
+	
+	public int totalOverdueLectureSearch(String accountId, int lectureNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("lectureNo", lectureNo);
+		map.put("accountId", accountId);
+		return studentReportSubmitMapper.totalCountOverdueLectureSearch(map);
 	}
 	
 	public int totalOverdueReport(String accountId) {
