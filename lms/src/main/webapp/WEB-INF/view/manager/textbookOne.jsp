@@ -53,31 +53,31 @@
 	                            <div>
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<tr>
-											<th style="width:20%;">textbook_isbn :</th>
+											<th style="width:15%;">도서 번호 :</th>
 											<td><span id="textbookIsbn"><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookIsbn }" readonly="readonly"></span></td>
 										</tr>
 										<tr>
-											<th>textbook_title :</th>
+											<th>제목 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookTitle }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>textbook_writer :</th>
+											<th>글쓴이 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookWriter }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>textbook_publisher :</th>
+											<th>출판사 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPublisher }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>textbook_info :</th>
+											<th>책 소개 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookInfo }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>textbook_price :</th>
+											<th>가격 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPrice }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>textbook_publishdate :</th>
+											<th>출판사 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${textbookOne.textbookPublishdate }" readonly="readonly"></td>
 										</tr>
 									</table>

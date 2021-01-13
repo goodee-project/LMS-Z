@@ -54,11 +54,11 @@
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
 											<tr>
-												<th>classroom_no</th>
-												<th>classroom_number</th>
-												<th>classroom_size</th>
-												<th>classroom_total</th>
-												<th>classroom_state</th>
+												<th>번호</th>
+												<th>강의실 호수</th>
+												<th>강의실 크기</th>
+												<th>강의실 인원</th>
+												<th>강의실 상태</th>
 												<th>삭제</th>
 											</tr>
 										</thead>

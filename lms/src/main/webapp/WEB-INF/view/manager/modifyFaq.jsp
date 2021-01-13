@@ -80,7 +80,7 @@
 												<th>내용</th>
 												<td>
 													<textarea class="form-control" style="resize:none;overflow:visible; width:100%;"  
-													name="faqContent" id="faqContent" cols="50" rows="10">${faqOne.faqContent}</textarea>
+													name="faqContent" id="faqContent" cols="50" rows="15">${faqOne.faqContent}</textarea>
 												</td>
 											</tr>
 										</table>

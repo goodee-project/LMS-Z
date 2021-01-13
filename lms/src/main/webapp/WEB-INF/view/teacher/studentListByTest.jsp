@@ -49,7 +49,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">학생 답안지 목록</h4>
             					

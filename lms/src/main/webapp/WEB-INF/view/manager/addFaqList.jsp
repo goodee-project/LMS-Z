@@ -34,8 +34,8 @@
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         
-        <jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
-        <jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/manager/inc/logoMenu.jsp" flush="false"></jsp:include>
+        <jsp:include page="/WEB-INF/view/manager/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
@@ -71,7 +71,7 @@
 										</tr>
 										<tr>
 											<th>내용</th>
-											<td><textarea class="form-control" style="width:100%;" name="faqContent" id="faqContent" rows="6"></textarea></td>
+											<td><textarea class="form-control" style="width:100%;" name="faqContent" id="faqContent" rows="15"></textarea></td>
 										</tr>
 										<tr class="border-1">
 											<th>카테고리</th>

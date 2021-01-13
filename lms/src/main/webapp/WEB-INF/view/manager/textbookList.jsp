@@ -54,10 +54,10 @@
 	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
 	                            		<thead>
                             				<tr>
-												<td>textbook_isbn</td>
-												<td>textbook_title</td>
-												<td>textbook_writer</td>
-												<td>textbook_publisher</td>
+												<td style="width:20%;">도서번호</td>
+												<td>제목</td>
+												<td style="width:15%;">글쓴이</td>
+												<td style="width:20%;">출판사</td>
 											</tr>
 										</thead>
 										<tbody>

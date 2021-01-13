@@ -129,6 +129,9 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <a class="btn btn-outline-primary" style="border-radius: 4px;"
+									href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
+									type="button">뒤로가기</a>
                             </div>
                         </div>
                     </div>

@@ -11,4 +11,5 @@ public interface TeacherReportSubmitMapper {
 	List<ReportSubmit> selectReportSubmit(int reportNo);
 	ReportSubmit selectReportSubmitOne(int reportSubmitNo);
 	int updateReportSubmit(ReportSubmit reportSubmit);
+	List<String> selectReportSubmitFileUuid(int reportNo);
 }

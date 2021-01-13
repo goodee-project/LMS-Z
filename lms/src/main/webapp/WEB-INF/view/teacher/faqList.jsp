@@ -71,7 +71,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
             						<thead>

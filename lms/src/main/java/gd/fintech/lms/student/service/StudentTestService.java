@@ -22,7 +22,7 @@ public class StudentTestService {
 	}
 	
 	//채점 점수
-	public String getTestScore(int lectureNo, String studentId) {
+	public int getTestScore(int lectureNo, String studentId) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("lectureNo", lectureNo);
 		map.put("accountId", studentId);

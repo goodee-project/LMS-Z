@@ -93,7 +93,7 @@
 											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherUpdatedate }" readonly="readonly"></td>
 										</tr>
 										<tr>
-											<th>정보 :</th>
+											<th>한줄소개 :</th>
 											<td><input class="form-control" style="width:100%;" type="text" value="${teacherOne.teacherInfo }" readonly="readonly"></td>
 										</tr>
 										<tr>

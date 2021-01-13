@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
+import gd.fintech.lms.student.mapper.StudentLectureMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
 import gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper;
@@ -40,6 +41,7 @@ public class ManagerLectureService {
 	@Autowired TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
 	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
+	@Autowired StudentLectureMapper studentLectureMapper;
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -140,6 +142,8 @@ public class ManagerLectureService {
 		for(int c : classRegistrationNo) {
 			//수강학생을 삭제하기 위한 출석부 삭제
 			teacherAttendanceMapper.deleteAttendance(c);
+			//수강취소 내역 삭제
+			studentLectureMapper.deleteClassRegistrationCancel(c);
 			//수강학생 삭제
 			managerLectureMapper.deleteClassRegistration(c);
 		}

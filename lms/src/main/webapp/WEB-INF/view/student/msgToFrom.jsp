@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div>
-				<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
+				<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">Message</span>
 			</div>
 			<br>
 			<div class="container-fluid">
@@ -66,22 +66,28 @@
                 <div class="col-md-7 col-lg-7">
                     <div class="card" id="cardStyle">
                         <div class="card-body" style="margin-top: 20px;">
-						<div id="msgListDiv" style="width: 50rem"></div>
+                        <div>
+							<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">${studentName }&nbsp;학생</span>
+						</div>
+						<div id="msgListDiv" style="width:100%">
+						
+						</div>
 						<div>
 							<div>
 								<div>
-									<textarea style="resize: none;" cols="80" rows="6"
+									<textarea class="form-control" style="resize: none;width:100%" cols="80" rows="6"
 										id="toTeacherMsgContent" name="msgContent"
 										class="font-weight-medium text-dark px-4 py-4"></textarea>
 								</div>
 							</div>
+							<br>
 							<div>
 								<a class="btn btn-outline-primary" style="border-radius: 4px;"
 									href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
 									type="button">뒤로가기</a>
-								<button class="btn btn-outline-primary" style="border-radius: 4px;" id="startBtn" type="button">채팅시작</button>
-								<button class="btn btn-outline-danger" style="border-radius: 4px;" id="stopBtn" type="button">정지</button>
-								<button class="btn btn-outline-success" style="border-radius: 4px;" type="button" id="studentMsgBtn">입력</button>
+								<button class="btn btn-outline-primary" style="border-radius: 4px;float:right; margin-left:8px;" id="startBtn" type="button">채팅시작</button>
+								<button class="btn btn-outline-danger" style="border-radius: 4px;float:right; margin-left:8px;" id="stopBtn" type="button">정지</button>
+								<button class="btn btn-outline-success" style="border-radius: 4px;float:right; margin-left:8px;" type="button" id="studentMsgBtn">입력</button>
 							</div>
 						</div>
 					</div>
@@ -170,15 +176,15 @@
 						//console.log(msgList.msgContent);
 						//console.log(msgList.isConfirm);
 						
-						//보낸 사람이 학생일 경우
+						//보낸 사람이 강사일 경우
 						if(msgList.fromId != "${studentId}"){
 							//읽지 않았다면 1을 출력
 							if(msgList.isConfirm == false){
 							html = `
-								 <div class="font-14 font-weight-medium px-2 py-2">
-								<textarea style="resize:none;overflow:visible;background-color:#FFFFC6" id="\${index}" readonly="readonly" cols="50"
-                                name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
-                                \${msgList.msgSendDatetime}<span style="color:yellow">1&emsp;</span>
+								 <div>
+								<textarea style="resize:none;background-color:#FFFFC6;" id=\${index} readonly="readonly" cols="50"
+                                	class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+                                	\${msgList.msgSendDatetime}<span style="color:yellow">1&emsp;</span>
 								</div>
 								`
 								$('#msgListDiv').append(html);
@@ -189,9 +195,9 @@
 							}else if(msgList.isConfirm == true){
 								html = `
 									 <div class="font-14 font-weight-medium px-2 py-2">
-									<textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
-                                    name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
-                                    \${msgList.msgSendDatetime}
+									<textarea style="resize:none;background-color:#FFFFC6;" id=\${index} readonly="readonly" cols="50"
+                                   		class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+                                    	\${msgList.msgSendDatetime}
 									</div>
 									`
 								$('#msgListDiv').append(html);
@@ -199,15 +205,15 @@
 									$("#"+index).focus();
 								}
 							}
-						//보낸 사람이 강사인 경우
+						//보낸 사람이 학생인 경우
 						}else if(msgList.fromId == "${studentId}"){
 							//읽지 않았을 경우 1표시
 							if(msgList.isConfirm == false){
 								html = `
 									<div class="font-14 font-weight-medium px-2 py-2 float-right">
 									<span style="color:yellow">1&emsp;</span>\${msgList.msgSendDatetime}
-									 <textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
-                                    name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+									 <textarea style="resize:none;background-color:#FFFFC6;" id=\${index} readonly="readonly" cols="50"
+                                    	class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                     </div>
 									`
 								$('#msgListDiv').append(html);
@@ -219,8 +225,8 @@
 								html = `
 									<div class="font-14 font-weight-medium px-2 py-2 float-right">
 									\${msgList.msgSendDatetime}
-									 <textarea style="resize:none;overflow:visible;background-color:#FFFFC6"" id=\${index} readonly="readonly" cols="50"
-                                    name="" class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
+									 <textarea style="resize:none;background-color:#FFFFC6;" id=\${index} readonly="readonly" cols="50"
+                                    	class="font-weight-medium text-dark px-4 py-4 align-right">\${msgList.msgContent}</textarea>
                                     </div>
 									`
 								$('#msgListDiv').append(html);

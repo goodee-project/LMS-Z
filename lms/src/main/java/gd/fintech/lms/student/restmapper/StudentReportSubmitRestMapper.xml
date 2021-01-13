@@ -6,6 +6,8 @@
 	<!-- 학생 과제 제출 빈도 -->
 	<select id="selectReportSubmit" parameterType="java.lang.String" resultType="java.util.Map">
 		SELECT
+			(SELECT COUNT(*) FROM report WHERE lecture_no=20) 'testAll',
+			nvl(SUM(case when r.lecture_no = 20 AND rs.account_id=#{studentId} then 1 END), 0) 'test',
 			(SELECT COUNT(*) FROM report WHERE lecture_no=4) 'fintechAll',
 			nvl(SUM(case when r.lecture_no = 4 AND rs.account_id=#{studentId} then 1 END), 0) 'fintech',
 			(SELECT COUNT(*) FROM report WHERE lecture_no=5) 'JAVAccAll',

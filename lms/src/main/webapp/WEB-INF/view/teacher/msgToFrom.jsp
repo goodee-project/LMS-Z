@@ -55,7 +55,7 @@
 					            <div>
 					            	 <span style="color:black; font-size:x-large;">${studentName }&nbsp;학생</span>
 					            </div>
-					            <div id="msgListDiv" style="width:50rem">
+					            <div id="msgListDiv" style="width:90%">
 					            	
 					            </div>
 					            <div>

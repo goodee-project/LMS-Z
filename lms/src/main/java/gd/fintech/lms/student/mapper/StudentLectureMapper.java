@@ -54,4 +54,13 @@ public interface StudentLectureMapper {
 	
 	//=== 수강 중 취소시 상태 변화 / 수강중 -> 취소
 	public int updateClassStateChange(int classRegistrationNo);
+	
+	//강좌 삭제를 위한 수강취소한 목록 삭제
+	public int deleteClassRegistrationCancel(int classRegistrationNo);
+	
+	//==== 과락, 수료 처리하기 위한 날짜 종료일 구분 ==
+	public int selectLectureEnddate(int lectureNo);
+	
+	//=== 해당 강의 과제 평균 점수 ====
+	public int selectReportAvg(Map<String,Object> map);
 }

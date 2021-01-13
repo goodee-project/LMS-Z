@@ -49,7 +49,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">${lectureNoticeNo}. ${noticeOne.lectureNoticeTitle}</h4>
             					
@@ -72,14 +72,11 @@
             						</tr>
             					</table>
 
-								<div>
-									<a class="btn btn-outline-secondary" style="border-radius: 4px;"  href="${path}/teacher/lectureNoticeList/${lectureNo}/1">목록</a>
-									<span>
-										<a class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" href="${path}/teacher/removeLectureNotice/${lectureNo}/${lectureNoticeNo}">삭제</a>
-									</span>
-									<span>
-										<a class="btn btn-info" style="border-radius:4px; float:right;" href="${path}/teacher/modifyLectureNotice/${lectureNo}/${lectureNoticeNo}">수정</a>
-									</span>
+
+								<a class="btn btn-outline-secondary" style="border-radius: 4px;"  href="${path}/teacher/lectureNoticeList/${lectureNo}/1">목록</a>
+								<div style="float:right; display:inline-block;">
+									<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/modifyLectureNotice/${lectureNo}/${lectureNoticeNo}">수정</a>
+									<a class="btn btn-outline-danger" style="border-radius:4px;" href="${path}/teacher/removeLectureNotice/${lectureNo}/${lectureNoticeNo}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
 								</div>
 							</div>
 						</div>

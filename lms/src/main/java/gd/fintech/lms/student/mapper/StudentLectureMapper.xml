@@ -328,6 +328,27 @@
 		SET class_registration_state = '취소'
 		WHERE class_registration_no = #{classRegistrationNo}
 	</update>
+	<!-- 강좌 삭제를 위한 해당하는 강좌의 수강취소 내역 삭제 -->
+	<delete id="deleteClassRegistrationCancel" parameterType="int">
+		DELETE FROM class_registration_cancel
+		WHERE class_registration_no = #{classRegistrationNo}
+	</delete>
+	<!-- 과락, 수료 처리하기 위한 날짜 종료일 구분 -->
+	<select id="selectLectureEnddate" parameterType="Integer" resultType="Integer">
+		SELECT
+			DATEDIFF(lecture_enddate,NOW())
+		FROM lecture
+		WHERE lecture_no=#{lectureNo}
+	</select>
+	<!-- 해당 강의 과제 평균 점수 -->
+	<select id="selectReportAvg" parameterType="java.util.Map" resultType="Integer">
+		SELECT 
+			coalesce(ROUND(AVG(rs.report_submit_point),0),0)
+		FROM report r
+		LEFT JOIN report_submit rs ON r.report_no=rs.report_no
+		WHERE r.lecture_no=#{lectureNo}
+		AND rs.account_id=#{studentId}
+	</select>
 </mapper>
 
 

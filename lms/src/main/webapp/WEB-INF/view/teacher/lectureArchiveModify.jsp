@@ -52,7 +52,7 @@
             <div class="container-fluid">
             	<div class="row">
             		<div class="col-lg-12 col-md-12">
-            			<div class="card" id="card-style">
+            			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">자료 수정</h4>
             					
@@ -101,7 +101,7 @@
 													<c:if test="${laf.lectureArchiveFileOriginal != null}">
 													<div>
 														<span id="${laf.lectureArchiveFileOriginal}">${laf.lectureArchiveFileOriginal}
-															<a href="${path}/teacher/lectureArchiveOneFileRemove/${laf.lectureArchiveFileUuid}/${lectureArchive.lectureArchiveNo}/${teacherId}">삭제</a>
+															<a class="btn btn-sm btn-outline-danger" style="border-radius:4px; margin-left:10px;" href="${path}/teacher/lectureArchiveOneFileRemove/${laf.lectureArchiveFileUuid}/${lectureArchive.lectureArchiveNo}/${teacherId}" onclick="return confirm('파일을 삭제하시겠습니까?');">삭제</a>
 														</span>
 													</div>
 													</c:if>

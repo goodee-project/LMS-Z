@@ -15,7 +15,7 @@ public class AdminRestictService {
 	//6개월 이상 접속안한 id 리스트 저장, account 상태를 변경하는 서비스
 	public void RestictAccount() {
 		List<String> resticList = adminRestictMapper.selectUpdatedate();
-		System.out.println(resticList);
+		//System.out.println(resticList);
 		for(String r : resticList) {
 			adminRestictMapper.updateAccountState(r);
 		}

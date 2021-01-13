@@ -12,7 +12,7 @@ public interface StudentTestMapper {
 	//객관식 문제 제출
 	int insertAnswerMultiplechoice(AnswerSheet answerSheet);
 	//채점 점수
-	String selectTestScore(Map<String, Object> map);
+	int selectTestScore(Map<String, Object> map);
 	//시험 문제 제출 유무 체크
 	List<AnswerSheet> selectTestAnswer(String accountId); 
 	//시험 전부 제출했는지 않했는지 체크

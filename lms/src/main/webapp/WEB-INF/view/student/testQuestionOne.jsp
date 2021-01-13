@@ -46,57 +46,48 @@
             <div class="container-fluid">
 				<!-- 1번째 라인 카드 -->
                 <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                    <div class="col-lg-12 col-md-12">
                         <div class="card" id="cardStyle">
                             <div class="card-body">
-                               <h4 class="card-title"></h4>
+                               <h4 class="card-title">평가 ${testOne.multiplechoiceId}번</h4>
 	                            <div>
 	                            	<form method="post" action="${path}/student/answerMultiplechoice/${lectureNo}/${studentId}/${currentPage}">
-		                            	<table id="lmsTable" class="table table" style="margin-top: 20px;">
-		                            		<tr>
+		                            	<table id="lmsTable" class="table table" style="margin-top: 20px;text-align:center;">
+											<tr>
+												<td style="width:10%;">문제</td>
 												<td>
-													<input type="text" name="multiplechoiceNo" value="${testOne.multiplechoiceNo}" class="text-dark">번
+													${testOne.multiplechoiceQuestion}
+													<input type="text" name="multiplechoiceNo" value="${testOne.multiplechoiceNo}" class="text-dark" hidden="hidden">
 													<input type="text" name="accountId" hidden="hidden" value="${studentId }">
 												</td>
 											</tr>
 											<tr>
-												<td class="text-dark">문제</td>
-											</tr>
-											<tr>
-												<td class="border-top-0 text-dark">
-													<textarea style="resize: none; overflow: visible; border: none;"
-														readonly="readonly">${testOne.multiplechoiceQuestion}</textarea>
-												</td>
-											</tr>
-											<tr>
-												<td class="text-dark">
-													답 :&emsp;
+												<td>답</td>
+												<td>
 													<c:forEach var="i" begin="1" end="5">
-														${i}&nbsp;<input type="radio" name="answerSelect" value="${i}">&nbsp;
+														${i}&emsp;<input type="radio" name="answerSelect" value="${i}">&emsp;
 													</c:forEach> 
 												</td>
 											</tr>
 											<tr>
-												<td class="text-dark">
-													점수 :
-													<input type="text" name="score" value="${testOne.multiplechoiceScore}">
+												<td>점수</td>
+												<td>
+													${testOne.multiplechoiceScore}
+													<input type="text" name="score" value="${testOne.multiplechoiceScore}" hidden="hidden">
 												</td>
 											</tr>
-											<tr>
-												<td class="text-dark">
-													<div>
-														<c:forEach var="me" items="${testOne.multiplechoiceExampleList}">
-															<div>(${me.multiplechoiceExampleId}) ${me.multiplechoiceExampleContent}</div>
-														</c:forEach>
-													</div>
-												</td>
-											</tr>
+											<c:forEach var="me" items="${testOne.multiplechoiceExampleList}">
+												<tr>
+													<td>보기 ${me.multiplechoiceExampleId}번</td>
+													<td>${me.multiplechoiceExampleContent}</td>
+												</tr>
+											</c:forEach>
 											<tr><td></td></tr>
 										</table>
 										
 										<br>
 										<div>
-											<button class="btn btn-outline-success" type="button" id="submitBtn">제출</button>
+											<button class="btn btn-outline-success" style="float:right;" type="button" id="submitBtn">제출</button>
 										</div>
 									</form>
 								</div>

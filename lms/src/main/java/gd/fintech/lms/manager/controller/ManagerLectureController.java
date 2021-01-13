@@ -28,7 +28,7 @@ public class ManagerLectureController {
 	public String LectureList(Model model,
 				@PathVariable(name="currentPage") int currentPage) {
 		// page당 목록 갯수
-		int rowPerPage = 2;
+		int rowPerPage = 5;
 		// 시작 목록
 		int beginRow = (currentPage-1)*rowPerPage; 
 		int startPage = ((currentPage/11)*rowPerPage)+1;

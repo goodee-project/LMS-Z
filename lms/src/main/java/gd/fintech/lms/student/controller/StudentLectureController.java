@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import gd.fintech.lms.student.service.StudentAttendanceService;
 import gd.fintech.lms.student.service.StudentLectureService;
 import gd.fintech.lms.student.service.StudentMsgService;
+import gd.fintech.lms.student.service.StudentTestService;
 import gd.fintech.lms.vo.ClassRegistration;
 import gd.fintech.lms.vo.ClassRegistrationCancel;
 import gd.fintech.lms.vo.ClassRegistrationForm;
@@ -24,6 +27,8 @@ import gd.fintech.lms.vo.Msg;
 public class StudentLectureController {
 	@Autowired StudentLectureService studentLectureService;
 	@Autowired StudentMsgService studentMsgService;
+	@Autowired StudentAttendanceService studentAttendanceService;
+	@Autowired StudentTestService studentTestService;
 	
 	//페이징 처리한 전체 강의 목록 리스트
 	@GetMapping("/student/lectureList/{currentPage}")
@@ -120,6 +125,49 @@ public class StudentLectureController {
 		}else { // 나누어 떨어진다면 
 			lastPage = listTotal/rowPerPage;
 		}
+		
+		//강의 종료일이 되면 과락 수료 처리 (취소한 강의는 제외)
+		for(ClassRegistration c : myLectureList) {
+			if(c.getClassRegistrationState().equals("수강중") && studentLectureService.getLectureEnddate(c.getLecture().getLectureNo())<=0) {
+				// 해당 강의에 출석한 횟수
+				int attendance = studentAttendanceService.getAttendanceTotal(studentId, c.getLecture().getLectureNo());
+				float attendancePer = 0;
+				int totalLectureDays = studentAttendanceService.getTotalLectureDays(
+						c.getLecture().getLectureStartdate(), 
+						c.getLecture().getLectureEnddate(),
+						c.getLecture().getLectureNo());
+				if(attendance != 0) {
+					attendancePer = ((float)attendance/(float)totalLectureDays)*(float)100;
+				}else {
+					attendancePer=0;
+				}
+				
+				// 해당 강의의 과제 점수
+				int myReportScore = 0;
+				if(studentLectureService.getReportAvg(c.getLecture().getLectureNo(), studentId) != 0) {
+					myReportScore = studentLectureService.getReportAvg(c.getLecture().getLectureNo(), studentId);
+				}
+				
+				// 해당 강의의 시험 점수
+				int myTestScore = 0;
+				if(studentTestService.getTestScore(c.getLecture().getLectureNo(), studentId) != 0) {
+					myTestScore = studentTestService.getTestScore(c.getLecture().getLectureNo(), studentId);
+				}
+				
+				//출석 30%
+				int attendanceScore = (int)attendancePer*(3/10);
+				//과제 30%
+				int reportScore = myReportScore*(3/10);
+				//시험 40%
+				int testScore = myTestScore*(4/10);
+				if(attendanceScore + reportScore + testScore >= 50) {
+					c.setClassRegistrationState("수료");
+				}else {
+					c.setClassRegistrationState("과락");
+				}
+			}
+		}
+		
 		model.addAttribute("myLectureList",myLectureList);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
@@ -146,6 +194,48 @@ public class StudentLectureController {
 				isConfirm = false;
 			}
 		}
+		
+		//강의 종료일이 되면 과락 수료 처리 (취소한 강의는 제외)
+		//강의가 종료되었을 때
+		if(myLectureListOne.getClassRegistrationState().equals("수강중") && studentLectureService.getLectureEnddate(lectureNo)<=0) {
+			// 해당 강의에 출석한 횟수
+			int attendance = studentAttendanceService.getAttendanceTotal(studentId, lectureNo);
+			float attendancePer = 0;
+			int totalLectureDays = studentAttendanceService.getTotalLectureDays(
+					myLectureListOne.getLecture().getLectureStartdate(), 
+					myLectureListOne.getLecture().getLectureEnddate(),
+					lectureNo);
+			if(attendance != 0) {
+				attendancePer = ((float)attendance/(float)totalLectureDays)*(float)100;
+			}else {
+				attendancePer=0;
+			}
+			
+			// 해당 강의의 과제 점수
+			int myReportScore = 0;
+			if(studentLectureService.getReportAvg(lectureNo, studentId) != 0) {
+				myReportScore = studentLectureService.getReportAvg(lectureNo, studentId);
+			}
+			
+			// 해당 강의의 시험 점수
+			int myTestScore = 0;
+			if(studentTestService.getTestScore(lectureNo, studentId) != 0) {
+				myTestScore = studentTestService.getTestScore(lectureNo, studentId);
+			}
+			
+			//출석 30%
+			int attendanceScore = (int)attendancePer*(3/10);
+			//과제 30%
+			int reportScore = myReportScore*(3/10);
+			//시험 40%
+			int testScore = myTestScore*(4/10);
+			if(attendanceScore + reportScore + testScore >= 50) {
+				myLectureListOne.setClassRegistrationState("수료");
+			}else {
+				myLectureListOne.setClassRegistrationState("과락");
+			}
+		}
+		
 		System.out.println("-------------"+isConfirm);
 		model.addAttribute("myLectureListOne",myLectureListOne);
 		model.addAttribute("currentPage",currentPage);
