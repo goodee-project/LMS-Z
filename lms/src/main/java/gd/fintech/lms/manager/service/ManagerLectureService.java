@@ -21,6 +21,8 @@ import gd.fintech.lms.teacher.mapper.TeacherAttendanceMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveFileMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureArchiveMapper;
 import gd.fintech.lms.teacher.mapper.TeacherLectureNoticeMapper;
+import gd.fintech.lms.teacher.mapper.TeacherReportMapper;
+import gd.fintech.lms.teacher.mapper.TeacherReportSubmitMapper;
 import gd.fintech.lms.teacher.mapper.TeacherTestMapper;
 import gd.fintech.lms.vo.Classroom;
 import gd.fintech.lms.vo.Lecture;
@@ -42,6 +44,8 @@ public class ManagerLectureService {
 	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
 	@Autowired TeacherAttendanceMapper teacherAttendanceMapper;
 	@Autowired StudentLectureMapper studentLectureMapper;
+	@Autowired TeacherReportMapper teacherReportMapper;
+	@Autowired TeacherReportSubmitMapper teacherReportSubmitMapper;
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -92,6 +96,7 @@ public class ManagerLectureService {
 		List<Integer> questionNo = studentQuestionMapper.selectLectureNo(lectureNo);
 		for(int q : questionNo) {
 			List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(q);
+			//저장되어있는 실제 파일들 제거
 			for(String s : questionFileUuid) {
 				attachPath = "uploadfile\\questionfile\\";
 				File file = new File(rootPath+attachPath+s);
@@ -105,6 +110,25 @@ public class ManagerLectureService {
 			studentQuestionMapper.deleteQuestionAllComment(q);
 			//질문 삭제
 			studentQuestionMapper.deleteQuestion(q);
+		}
+		//삭제할 강좌와 연결된 과제 삭제
+		List<Integer> reportNo = teacherReportMapper.selectReportNo(lectureNo);
+		for(int r : reportNo) {
+			List<String> reportSubmitFileUuid = teacherReportSubmitMapper.selectReportSubmitFileUuid(r);
+			//저장되어있는 실제 파일들 제거
+			for(String s : reportSubmitFileUuid) {
+				attachPath = "uploadfile\\reportfile\\";
+				File file = new File(rootPath+attachPath+s);
+				if(file.exists()) {
+					file.delete();
+				}
+			}
+			// 학생이 제출한 과제 파일 삭제
+			teacherReportMapper.deleteReportSubmitFile(r);
+			// 학생이 제출한 과제 삭제
+			teacherReportMapper.deleteReportSubmit(r);
+			// 강사가 제출한 과제 삭제
+			teacherReportMapper.deleteReport(r);
 		}
 		//삭제할 강좌와 연결된 시험 삭제
 		List<Integer> multiplechoiceNo = teacherTestMapper.selectTestAndLecture(lectureNo);
@@ -124,6 +148,7 @@ public class ManagerLectureService {
 		for(int l : lectureArchiveNo) {
 			List<String> lectureArchiveFileUuid = teacherLectureArchiveFileMapper.selectLectureArchiveFileUuid(l);
 			attachPath = "uploadfile\\lectureArchivefile\\";
+			//저장되어있는 실제 파일들 제거
 			for(String lf : lectureArchiveFileUuid) {
 				File file = new File(rootPath + attachPath+lf);
 				if(file.exists()) {

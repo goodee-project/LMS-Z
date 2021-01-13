@@ -25,4 +25,6 @@ public interface TeacherReportMapper {
 	int deleteReportSubmit(int reportNo);
 	//과제 삭제하기 위해 외래키로 연결된 과제제출 첨부파일 삭제
 	int deleteReportSubmitFile(int reportNo);
+	//강좌 삭제를 위한 과제 리스트 출력
+	List<Integer> selectReportNo(int lectureNo);
 }

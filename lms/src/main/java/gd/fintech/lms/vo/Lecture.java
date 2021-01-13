@@ -9,7 +9,7 @@ public class Lecture {
 	private int subjectNo;
 	private String teacherName;
 	private String lectureName;
-	private int textbookIsbn;
+	private String textbookIsbn;
 	private String lectureStartdate;
 	private String lectureEnddate;
 	private int lectureTotal;

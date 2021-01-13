@@ -144,4 +144,11 @@
 		AND l.account_id = a.account_id
 		AND r.lecture_no = #{lectureNo}
 	</select>
+	<!-- 강좌 삭제를 위한 강좌에 해당하는 reportNo 출력 -->
+	<select id="selectReportNo" parameterType="int" resultType="int">
+		SELECT
+			report_no
+		FROM report
+		WHERE lecture_no = #{lectureNo}
+	</select>
 </mapper>
