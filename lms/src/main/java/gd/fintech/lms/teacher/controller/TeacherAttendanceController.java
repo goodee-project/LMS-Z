@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import gd.fintech.lms.teacher.service.TeacherAttendanceService;
 import gd.fintech.lms.vo.Attendance;
@@ -19,7 +20,59 @@ public class TeacherAttendanceController {
 	
 	@Autowired TeacherAttendanceService teacherAttendanceService;
 	
-	@GetMapping("/teacher/modifyAttendacne/{lectureNo}/{attendanceDay}/{accountIdList}")
+	@GetMapping("/teacher/modifyAttendanceOneBack")
+	public String modifyAttendanceOneState(
+			@PathVariable(value="lectureNo") int lectureNo,
+			@PathVariable(value="attendanceDay") String attendanceDay) {
+		
+		String current[] = attendanceDay.split("-");
+		int currentYear = Integer.parseInt(current[0]);
+		String currentMonthStr = current[1];
+		int currentMonth = 0;
+		if(currentMonthStr.substring(0) == "0") {
+			currentMonth = Integer.parseInt(currentMonthStr.substring(1));
+		} else {
+			currentMonth = Integer.parseInt(currentMonthStr);
+		}
+		String currentDayStr = current[2];
+		int currentDay = 0;
+		if(currentDayStr.substring(0) == "0") {
+			currentDay = Integer.parseInt(currentDayStr.substring(1));
+		} else {
+			currentDay = Integer.parseInt(currentDayStr);
+		}
+		
+		return "redirect:/teacher/attendanceMonth/" + lectureNo + "/" + currentYear + "/" + currentMonth + "?currentDay=" + currentDay;
+	}
+	
+	@PostMapping("/teacher/modifyAttendanceOneState")
+	public String modifyAttendanceOneState(Attendance attendance) {
+		
+		String attendanceDay = attendance.getAttendanceDay();
+		
+		String current[] = attendanceDay.split("-");
+		int currentYear = Integer.parseInt(current[0]);
+		String currentMonthStr = current[1];
+		int currentMonth = 0;
+		if(currentMonthStr.substring(0) == "0") {
+			currentMonth = Integer.parseInt(currentMonthStr.substring(1));
+		} else {
+			currentMonth = Integer.parseInt(currentMonthStr);
+		}
+		String currentDayStr = current[2];
+		int currentDay = 0;
+		if(currentDayStr.substring(0) == "0") {
+			currentDay = Integer.parseInt(currentDayStr.substring(1));
+		} else {
+			currentDay = Integer.parseInt(currentDayStr);
+		}
+				
+		teacherAttendanceService.modifyAttendanceOneState(attendance);
+		
+		return "redirect:/teacher/attendanceMonth/" + attendance.getLectureNo() + "/" + currentYear + "/" + currentMonth + "?currentDay=" + currentDay;
+	}
+	
+	@GetMapping("/teacher/modifyAttendance/{lectureNo}/{attendanceDay}/{accountIdList}")
 	public String modifyAttendacne(
 			@PathVariable(value="lectureNo") int lectureNo,
 			@PathVariable(value="attendanceDay") String attendanceDay,
@@ -58,7 +111,8 @@ public class TeacherAttendanceController {
 	public String attendanceMonth(Model model, 
 			@PathVariable(value = "lectureNo") int lectureNo, 
 			@PathVariable(value = "currentYear") int currentYear, 
-			@PathVariable(value = "currentMonth") int currentMonth) {
+			@PathVariable(value = "currentMonth") int currentMonth,
+			@RequestParam(value = "currentDay", defaultValue = "0") int currentDay) {
 		
 		Calendar currentDays = Calendar.getInstance();
 	
@@ -89,6 +143,7 @@ public class TeacherAttendanceController {
 		model.addAttribute("lastDay", lastDay);
 		model.addAttribute("firstDay", firstDay);
 		model.addAttribute("lectureNo", lectureNo);
+		model.addAttribute("currentDay", currentDay);
 		
 		
 		return "teacher/attendanceMonth";
@@ -138,15 +193,12 @@ public class TeacherAttendanceController {
 		
 		return "teacher/attendanceList";
 	}*/
-	
-	/*//출석부 학생 출석상태 수정 폼
+	/*
+	//출석부 학생 출석상태 수정 폼
 	@GetMapping("/teacher/modifyAttendanceStateOne/{studentId}/{lectureNo}/{attendanceDay}/{currentYear}/{currentMonth}/{currentDay}")
 	public String modifyAttendanceStateOne(Model model, @PathVariable(value = "studentId") String studentId, 
 														@PathVariable(value = "lectureNo") int lectureNo, 
-														@PathVariable(value = "attendanceDay") String attendanceDay,
-														@PathVariable(value = "currentYear") int currentYear, 
-														@PathVariable(value = "currentMonth") int currentMonth, 
-														@PathVariable(value = "currentDay") int currentDay) {
+														@PathVariable(value = "attendanceDay") String attendanceDay) {
 		
 		Attendance attendanceStateList = teacherAttendanceService.getAttendanceStateOne(lectureNo, studentId, attendanceDay);
 		List<Attendance> attendanceList = teacherAttendanceService.getAttendanceList(lectureNo, currentYear, currentMonth, currentDay);
@@ -156,8 +208,9 @@ public class TeacherAttendanceController {
 		model.addAttribute("attendanceList", attendanceList);
 		
 		return "teacher/attendanceStateOne";
-	}
+	}*/
 	
+	/*
 	//출석부 학생 출석상태 수정 액션
 	@PostMapping("/teacher/modifyAttendanceStateOne/{studentId}/{lectureNo}/{attendanceDay}/{currentYear}/{currentMonth}/{currentDay}")
 	public String modifyAttendanceStateOne(Attendance attendance, @PathVariable(value = "studentId") String studentId, 

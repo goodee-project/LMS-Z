@@ -355,7 +355,6 @@ body {
 
 #tableOneStyle{
 	table-layout:fixed;
-    white-space: nowrap;
 }
 
 #tableOneStyle th{

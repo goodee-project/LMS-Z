@@ -96,25 +96,36 @@
 		WHERE cr.lecture_no = #{lectureNo} AND a.attendance_day = #{attendanceDay}
 	</select>
 	
+	<resultMap type="gd.fintech.lms.vo.Attendance" id="selectAttendanceOneResult">
+		<result property="attendanceState" column="attendance_state" />
+		<result property="attendanceRemark" column="attendance_remark" />
+		<result property="attendanceUpdatedate" column="attendance_updatedate" />
+		<collection property="studentList" ofType="gd.fintech.lms.vo.Student">
+			<result property="studentId" column="student_id" />
+			<result property="studentName" column="student_name" />
+			<result property="studentPhone" column="student_phone" />
+			<result property="studentImage" column="student_image" />
+		</collection>
+	</resultMap>
+	
 	<!-- 학생 출석부 상세보기 -->
-	<select id="selectAttendanceOne" parameterType="java.util.Map" resultMap="selectAttendanceListResult">
+	<select id="selectAttendanceOne" parameterType="java.util.Map" resultMap="selectAttendanceOneResult">
 		SELECT 
-			a.attendance_state,
-			a.attendance_remark,
-			a.attendance_day,
-			s.student_name,
-			s.student_gender,
-			s.student_phone,
-			s.student_id
-		FROM class_registration cr LEFT JOIN attendance a
-		ON cr.account_id = a.account_id
-		LEFT JOIN lecture l
-		ON cr.account_id = l.account_id
-		LEFT JOIN student s
-		ON cr.account_id = s.student_id
-		WHERE cr.lecture_no = #{lectureNo}
-		AND s.student_id = #{studentId}
-		AND a.attendance_day = #{attendanceDay}
+			s.student_id, 
+			s.student_name, 
+			s.student_phone, 
+			s.student_image, 
+			a.attendance_state, 
+			a.attendance_remark, 
+			a.attendance_updatedate
+		FROM attendance a INNER JOIN class_registration cr
+			ON a.class_registration_no = cr.class_registration_no
+		INNER JOIN student s
+			ON s.student_id = cr.account_id
+		WHERE 
+			cr.account_id = #{studentId} AND 
+			cr.lecture_no = #{lectureNo} AND
+			a.attendance_day = #{attendanceDay}
 	</select>
 	
 	<select id="selectAttendanceStateCheck" parameterType="gd.fintech.lms.vo.Attendance" resultType="String">

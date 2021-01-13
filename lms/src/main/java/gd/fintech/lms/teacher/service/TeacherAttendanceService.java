@@ -62,6 +62,11 @@ public class TeacherAttendanceService {
 		}
 	}
 	
+	//학생 출석부 상태변경
+	public void modifyAttendanceOneState(Attendance attendance) {
+		teacherAttendanceMapper.updateAttendanceState(attendance);
+	}
+	
 	//학생 출석부 상세보기
 	public Attendance getAttendanceStateOne(int lectureNo, String studentId, String attendanceDay) {
 		

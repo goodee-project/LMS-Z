@@ -20,6 +20,15 @@ import gd.fintech.lms.vo.Attendance;
 public class TeacherAttendanceRestController {
 	@Autowired TeacherAttendanceService teacherAttendanceService;
 	
+	@GetMapping("/teacher/attendanceOne")
+	public Attendance attendanceOne(
+			@RequestParam(value="studentId", required = false) String studentId,
+			@RequestParam(value="lectureNo", required = false) int lectureNo,
+			@RequestParam(value="attendanceDay", required = false) String attendanceDay){
+		
+		return teacherAttendanceService.getAttendanceStateOne(lectureNo, studentId, attendanceDay);
+	}
+	
 	@GetMapping("/teacher/attendanceListByNow")
 	public Map<String, Object> attendanceListByNow(
 			@RequestParam(value="lectureNo", required = false) int lectureNo){

@@ -128,15 +128,22 @@
                             			<a id="btnEtc" href="javascript:click()" onclick="attendanceEtcClick();">기타</a>
                             		</div>
                             	</div>
-                            	
-                                <table id="attendanceTable" class="table table">
-                                </table>
-                                <div style="float:left">
-                                	<a href="${path}/teacher/lectureOne/${lectureNo}" class="btn btn-outline-secondary" style="border-radius: 4px;">돌아가기</a>
-                                </div>
-                                <div class="text-right">
-                                	<button class="btn btn-success" style="border-radius: 4px;" id="btnUpdate" type="button">업데이트</button>
-                                </div>
+                            	<form id="attendanceForm" method="post" action="${path}/teacher/modifyAttendanceOneState">
+	                                <table id="attendanceTable" class="table table">
+	                                </table>
+	                                <div style="float:left">
+	                                	<a id="btnHome" href="${path}/teacher/lectureOne/${lectureNo}" class="btn btn-outline-secondary" style="border-radius: 4px;">돌아가기</a>
+	                                </div>
+	                                <div style="float:left">
+	                                	<button id="btnBack" class="btn btn-outline-secondary" style="border-radius: 4px;">뒤로</button>
+	                                </div>
+	                                <div class="text-right">
+	                                	<button class="btn btn-success" style="border-radius: 4px;" id="btnUpdate" type="button">업데이트</button>
+	                                </div>
+	                                <div class="text-right">
+	                                	<button id="btnModify" class="btn btn-info" style="border-radius: 4px;" type="button">수정</button>
+	                                </div>
+	                           </form>
                             </div>
                         </div>
 					</div>
@@ -189,7 +196,7 @@
 					$.each(attendance.studentList, function(index, student){
 						var strBody = '<tbody>';
 						strBody += '<tr>';
-						strBody += '<td><img width="100px" height="115px" src="${path}/images/';						
+						strBody += '<td><a href="javascript:click()" onclick="attendanceOne(\'' + student.studentId + '\')"><img width="100px" height="115px" src="${path}/images/';						
 						strBody += student.studentImage;
 						strBody += '"></a></td>';
 						strBody += '<td>' + student.studentName + '</td>';	
@@ -242,7 +249,7 @@
 					$.each(attendance.studentList, function(index, student){
 						var strBody = '<tbody>';
 						strBody += '<tr>';
-						strBody += '<td><img width="100px" height="115px" src="${path}/images/';						
+						strBody += '<td><a href="javascript:click()" onclick="attendanceOne(\'' + student.studentId + '\')"><img width="100px" height="115px" src="${path}/images/';						
 						strBody += student.studentImage;
 						strBody += '"></a></td>';
 						strBody += '<td>' + student.studentName + '</td>';	
@@ -295,7 +302,7 @@
 					$.each(attendance.studentList, function(index, student){
 						var strBody = '<tbody>';
 						strBody += '<tr>';
-						strBody += '<td><img width="100px" height="115px" src="${path}/images/';						
+						strBody += '<td><a href="javascript:click()" onclick="attendanceOne(\'' + student.studentId + '\')"><img width="100px" height="115px" src="${path}/images/';						
 						strBody += student.studentImage;
 						strBody += '"></a></td>';
 						strBody += '<td>' + student.studentName + '</td>';	
@@ -332,13 +339,17 @@
 			alert('변동 사항이 없습니다.');
 		} else{
 			alert(attendanceList.length + '명의 학생을 업데이트 합니다.');
-			location.href = '${path}/teacher/modifyAttendacne/${lectureNo}/'+updateAttendanceDay + '/' + attendanceList;
+			location.href = '${path}/teacher/modifyAttendance/${lectureNo}/'+updateAttendanceDay + '/' + attendanceList;
 		}
     });
     
     $(document).ready(function(){
-        if('${check}' != null){
-        	$('#attendanceTable').empty();
+        if('${currentDay}' == 0){
+	       	$('#attendanceTable').empty();
+	       	$('#btnModify').hide();
+	       	$('#btnUpdate').show();
+	       	$('#btnBack').hide();
+	       	$('#btnHome').show();
 			$.ajax({
 				url:'${path}/teacher/attendanceListByNow',
 				type:'GET',
@@ -351,14 +362,14 @@
 					strHead += '<td class="font-weight-bold">상태</td>';			
 					strHead += '</tr>';
 					strHead += '</thead>';
-		
+			
 					$('#attendanceTable').append(strHead);
-		
+			
 					$.each(data.attendanceList, function(index, attendance){
 						$.each(attendance.studentList, function(index, student){
 							var strBody = '<tbody>';
 							strBody += '<tr>';
-							strBody += '<td><img width="100px" height="115px" src="${path}/images/';						
+							strBody += '<td><a href="javascript:click()" onclick="attendanceOne(\'' + student.studentId + '\')"><img width="100px" height="115px" src="${path}/images/';						
 							strBody += student.studentImage;
 							strBody += '"></a></td>';
 							strBody += '<td>' + student.studentName + '</td>';						
@@ -371,20 +382,20 @@
 							}						
 							strBody += '</tr>';
 							strBody += '</tbody>';
-			
+				
 							$('#attendanceTable').append(strBody);
 						})
 					})
-					
+						
 					if(data.attendanceList.length == 0){
 						$('#attendanceTable').empty();
 						var strBody = '<tr>';
 						strBody += '<td colspan="3">수강 날짜가 아닙니다.</td>';						
 						strBody += '</tr>';
-	
+		
 						$('#attendanceTable').append(strBody);
 					}
-	
+		
 					$('#attendanceTitle').text(data.attendanceDay);
 					updateAttendanceDay = data.attendanceDay;
 					updateCurrentDay = data.currentDay;
@@ -396,13 +407,17 @@
 					$('#smallTitle').text(data.lectureName);
 				}
 			});	
-        } else{
-			
+    	} else{
+    		attendanceClick('${currentDay}');
         }
     });
 
     function attendanceClick(currentDay){
     	$('#attendanceTable').empty();
+       	$('#btnModify').hide();
+       	$('#btnUpdate').show();
+       	$('#btnBack').hide();
+       	$('#btnHome').show();
     	$.ajax({
 			url:'${path}/teacher/attendanceListByDay',
 			type:'GET',
@@ -422,7 +437,7 @@
 					$.each(attendance.studentList, function(index, student){
 						var strBody = '<tbody>';
 						strBody += '<tr>';
-						strBody += '<td><img width="100px" height="115px" src="${path}/images/';						
+						strBody += '<td><a href="javascript:click()" onclick="attendanceOne(\'' + student.studentId + '\')"><img width="100px" height="115px" src="${path}/images/';						
 						strBody += student.studentImage;
 						strBody += '"></a></td>';
 						strBody += '<td>' + student.studentName + '</td>';
@@ -480,6 +495,93 @@
 				return value != studentId;
 			});
 		}
+    }
+
+    $('#btnModify').click(function(){
+		alert('변경하신 출결 상태로 수정하였습니다.');
+		$('#attendanceForm').submit();
+    });
+
+    $('#btnBack').click(function(){
+    	location.href = '${path}/teacher/modifyAttendanceOneBack/${lectureNo}'+ updateAttendanceDay;
+    });
+
+    function attendanceOne(studentId){
+    	$('#attendanceTable').empty();
+    	$('#btnUpdate').hide();
+    	$('#btnModify').show();
+       	$('#btnBack').show();
+       	$('#btnHome').hide();
+    	$.ajax({
+			url:'${path}/teacher/attendanceOne',
+			type:'GET',
+			data:{studentId: studentId, lectureNo: '${lectureNo}', attendanceDay: updateAttendanceDay},
+			success:function(data){
+				
+				var strbody = '<tr>';
+				strbody += '<th>사진</th>';
+				strbody += '<td><img width="100px" height="115px" src="${path}/images/' + data.studentList[0].studentImage + '"></a></td>';
+				strbody += '</tr>';
+				strbody += '<tr>';
+				strbody += '<th>이름</th>';
+				strbody += '<td>'+ data.studentList[0].studentName +'</td>';
+				strbody += '</tr>';
+				strbody += '<th>전화번호</th>';
+				strbody += '<td>'+ data.studentList[0].studentPhone +'</td>';
+				strbody += '</tr>';
+				strbody += '<th>출결 상태</th>';
+				strbody += '<td><select name="attendanceState">';				
+				if(data.attendanceState == '미출석'){
+					strbody += '<option value="출석">미출석</option>'
+					strbody += '<option value="출석">출석</option>'
+					strbody += '<option value="결석">결석</option>'
+					strbody += '<option value="조퇴">조퇴</option>'
+					strbody += '<option value="지각">지각</option>'
+				} else if(data.attendanceState == '출석'){
+					strbody += '<option value="출석">출석</option>'
+					strbody += '<option value="미출석">미출석</option>'
+					strbody += '<option value="결석">결석</option>'
+					strbody += '<option value="조퇴">조퇴</option>'
+					strbody += '<option value="지각">지각</option>'
+				} else if(data.attendanceState == '결석'){
+					strbody += '<option value="결석">결석</option>'
+					strbody += '<option value="출석">출석</option>'
+					strbody += '<option value="미출석">미출석</option>'
+					strbody += '<option value="조퇴">조퇴</option>'
+					strbody += '<option value="지각">지각</option>'
+				} else if(data.attendanceState == '조퇴'){
+					strbody += '<option value="조퇴">조퇴</option>'
+					strbody += '<option value="출석">출석</option>'
+					strbody += '<option value="미출석">미출석</option>'
+					strbody += '<option value="결석">결석</option>'
+					strbody += '<option value="지각">지각</option>'
+				} else{
+					strbody += '<option value="지각">지각</option>'
+					strbody += '<option value="출석">출석</option>'
+					strbody += '<option value="미출석">미출석</option>'
+					strbody += '<option value="결석">결석</option>'
+					strbody += '<option value="조퇴">조퇴</option>'
+				}
+				strbody += '</select></td>';
+				strbody += '</tr>';
+				strbody += '</tr>';
+				strbody += '<th>추가사항</th>';
+				if(data.attendanceRemark == null){
+					strbody += '<td></td>';
+				} else{
+					strbody += '<td>'+ data.attendanceRemark +'</td>';
+				}
+				strbody += '</tr>';
+				strbody += '</tr>';
+				strbody += '<th>마지막 업데이트</th>';
+				strbody += '<td><input type="hidden" name="accountId" value="'+ studentId +'">';
+				strbody += '<input type="hidden" name="attendanceDay" value="'+ updateAttendanceDay +'">';
+				strbody += '<input type="hidden" name="lectureNo" value="${lectureNo}">'+ data.attendanceUpdatedate +'</td>';
+				strbody += '</tr>';
+	
+				$('#attendanceTable').append(strbody);
+			}
+		});	
     }
     </script>
 </body>
