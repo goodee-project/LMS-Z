@@ -13,7 +13,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import gd.fintech.lms.Path;
 import gd.fintech.lms.manager.mapper.ManagerInfoMapper;
 import gd.fintech.lms.vo.Account;
 import gd.fintech.lms.vo.Manager;

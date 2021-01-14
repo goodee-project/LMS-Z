@@ -8,4 +8,5 @@ public class Connect {
 	private String accountId;
 	private String connectState;
 	private String connectUpdatedate;
+	private int count;
 }

@@ -52,7 +52,7 @@
 	
 	<!-- 로그인 할 시 connect테이블에 데이터가 있는지 확인 -->
 	<select id="selectConnectToCheck" parameterType="String" resultType="gd.fintech.lms.vo.Connect">
-		SELECT connect_no connectNo, account_id accountId
+		SELECT connect_no connectNo, account_id accountId, COUNT(*) count
 		FROM connect
 		WHERE account_id = #{accountId}
 	</select>

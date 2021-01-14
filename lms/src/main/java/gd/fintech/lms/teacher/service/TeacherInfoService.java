@@ -22,6 +22,8 @@ import gd.fintech.lms.vo.Teacher;
 public class TeacherInfoService {
 	@Autowired TeacherInfoMapper teacherInfoMapper;
 	
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	
 	// 주소변경 사이트 주소 가져오기
 	public Teacher getTeacherByAddress(String teacherId) {
 		return teacherInfoMapper.selectTeacherByAddress(teacherId);
@@ -53,9 +55,17 @@ public class TeacherInfoService {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
 		// 서버의 상대경로
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		// 서버의 중간경로
-		String attachPath = "images\\";
+    	String rootPath = "";
+    	String attachPath = "";
+    	
+        if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "images/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "images\\";
+        }
 		
 		File f = new File(rootPath + attachPath + fileName);
 		File pastF = new File(rootPath + attachPath + pastFileName);
