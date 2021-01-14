@@ -73,7 +73,7 @@
 												<div>
 													<canvas id="myCanvas${l.lectureNo}" height="250" style="background-image: url('${l.lectureImage}'); background-color:${l.lectureImageColor}; background-repeat: no-repeat; background-position: center center;width:100%"></canvas>
 												</div>
-												<canvas class="myCanvas2"></canvas>
+												<canvas class="myCanvas2" id="myCanvas2"></canvas>
 												<div class="card-body">
 													<h4 class="card-title">${l.lectureName} (${l.lectureTotal})</h4>
 													<p class="card-text">${l.lectureStartdate} ~ ${l.lectureEnddate}</p>
@@ -160,8 +160,6 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script>
 		var myColor = '';
-		
-		$('.myCanvas2').hide();
     
 		function colorChange(color, lectureNo){
 			if(color == 'red'){
@@ -228,33 +226,33 @@
 
 		// oneclick 형태로 확인을 누르고 조건이 만족할 경우 그려진 사인과 content가 submit
 		function resultBtn(lectureNo){
-			var dataURL = canvas.toDataURL();
+			var dataURLs = canvas.toDataURL();
+			
 			$.ajax({
 				url:'${path}/teacher/lectureImage',
-				type:'GET',
-				data:{lectureNo: lectureNo, lectureImage: dataURL, lectureImageColor: myColor},
+				type:'POST',
+				data:{lectureNo: lectureNo, lectureImage: dataURLs, lectureImageColor: myColor},
 				success:function(data){
 					alert("변경 완료");
 					$('#modifyBackground'+lectureNo).hide();
 					$('#modifyForm'+lectureNo).show();
-
-					canvas = document.getElementById("myCanvas2");
-					context = canvas.getContext("2d");
-					
-					context.lineWidth = 2; // 선 굵기를 2로 설정
-					context.strokeStyle = "white";
-					 
-					// 마우스 리스너 등록. e는 MouseEvent 객체
-					canvas.addEventListener("mousemove", function (e) { move(e) }, false);
-					canvas.addEventListener("mousedown", function (e) { down(e) }, false);
-					canvas.addEventListener("mouseup", function (e) { up(e) }, false);
-					canvas.addEventListener("mouseout", function (e) { out(e) }, false);
 				}
-				
 			});	
+			canvas = document.getElementById("myCanvas2");
+			context = canvas.getContext("2d");
+			
+			context.lineWidth = 2; // 선 굵기를 2로 설정
+			context.strokeStyle = "white";
+			 
+			// 마우스 리스너 등록. e는 MouseEvent 객체
+			canvas.addEventListener("mousemove", function (e) { move(e) }, false);
+			canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+			canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+			canvas.addEventListener("mouseout", function (e) { out(e) }, false);
 		}
 
 		$('.modifyBackground').hide();
+		$('.myCanvas2').hide();
 		
 		var canvas, context;
 

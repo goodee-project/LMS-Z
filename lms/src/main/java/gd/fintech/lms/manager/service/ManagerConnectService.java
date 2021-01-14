@@ -45,7 +45,7 @@ public class ManagerConnectService {
 		connect.setAccountId(accountId);
 		connect.setConnectState("접속");
 		
-		if(checkConnect.getAccountId() == null) {
+		if(checkConnect == null) {
 			managerConnectMapper.insertConnect(connect);
 		} else {
 			managerConnectMapper.updateConnectToIn(connect);

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,7 @@ import gd.fintech.lms.teacher.service.TeacherLectureService;
 public class TeacherLectureRestController {
 	@Autowired TeacherLectureService teacherLectureService;
 	
-	@GetMapping("/teacher/lectureImage")
+	@PostMapping("/teacher/lectureImage")
 	public Map<String, Object> lectureImage(
 			@RequestParam(value="lectureNo") int lectureNo,
 			@RequestParam(value="lectureImage") String lectureImage,
