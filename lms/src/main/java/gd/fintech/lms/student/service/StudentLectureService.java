@@ -68,6 +68,15 @@ public class StudentLectureService {
 		map.put("rowPerPage", rowPerPage);
 		return studentLectureMapper.selectMyLectureList(map);
 	}
+	// ==== 날짜 종료 시 성적에 따른 과락,수료 업데이트 ====
+	public int modifyMyLectureState(String classRegistrationState, String studentId, int lectureNo) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("classRegistrationState", classRegistrationState);
+		map.put("studentId", studentId);
+		map.put("lectureNo", lectureNo);
+		return studentLectureMapper.updateMyLectureState(map);
+	}
+	
 	//==== 페이징)전체 나의 수강 현황 목록 수 =====
 	public int getMyLectureListTotal(String studentId) {
 		return studentLectureMapper.selectMyLectureListTotal(studentId);

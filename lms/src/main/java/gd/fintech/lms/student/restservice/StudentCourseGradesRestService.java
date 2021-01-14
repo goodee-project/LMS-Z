@@ -17,5 +17,5 @@ public class StudentCourseGradesRestService {
 	public Map<String,Object> getCouresGrades(String studentId){
 		return studentCourseGradesRestMapper.selectCourseGreads(studentId);
 	}
-	
+	//현재 수강중인 강의
 }

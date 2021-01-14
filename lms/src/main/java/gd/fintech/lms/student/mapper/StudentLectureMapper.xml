@@ -192,6 +192,16 @@
 		LEFT JOIN lecture l ON cr.lecture_no = l.lecture_no
 		WHERE cr.account_id = #{studentId}
 	</select>
+	
+	<!-- ==== 날짜 종료 시 성적에 따른 과락,수료 업데이트 ==== -->
+	<update id="updateMyLectureState" parameterType="java.util.Map">
+		UPDATE 
+			class_registration
+		SET class_registration_state = #{classRegistrationState}
+		WHERE account_id = #{studentId}
+		AND lecture_no = #{lectureNo}
+	</update>
+	
 	<!-- ==== 나의 수강 현황 상세보기 ==== -->
 	<resultMap type="gd.fintech.lms.vo.ClassRegistrationForm" id="selectMyLectureListOneResult">
 		<result property="classRegistrationNo" column="class_registration_no"/>

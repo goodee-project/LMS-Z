@@ -162,12 +162,13 @@ public class StudentLectureController {
 				int testScore = myTestScore*(4/10);
 				if(attendanceScore + reportScore + testScore >= 50) {
 					c.setClassRegistrationState("수료");
+					studentLectureService.modifyMyLectureState(c.getClassRegistrationState(), studentId, c.getLecture().getLectureNo());
 				}else {
 					c.setClassRegistrationState("과락");
+					studentLectureService.modifyMyLectureState(c.getClassRegistrationState(), studentId, c.getLecture().getLectureNo());
 				}
 			}
 		}
-		
 		model.addAttribute("myLectureList",myLectureList);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("currentPage",currentPage);
@@ -192,47 +193,6 @@ public class StudentLectureController {
 		for(Msg s : isConfirmList) {
 			if(s.getIsConfirm()==false) {
 				isConfirm = false;
-			}
-		}
-		
-		//강의 종료일이 되면 과락 수료 처리 (취소한 강의는 제외)
-		//강의가 종료되었을 때
-		if(myLectureListOne.getClassRegistrationState().equals("수강중") && studentLectureService.getLectureEnddate(lectureNo)<=0) {
-			// 해당 강의에 출석한 횟수
-			int attendance = studentAttendanceService.getAttendanceTotal(studentId, lectureNo);
-			float attendancePer = 0;
-			int totalLectureDays = studentAttendanceService.getTotalLectureDays(
-					myLectureListOne.getLecture().getLectureStartdate(), 
-					myLectureListOne.getLecture().getLectureEnddate(),
-					lectureNo);
-			if(attendance != 0) {
-				attendancePer = ((float)attendance/(float)totalLectureDays)*(float)100;
-			}else {
-				attendancePer=0;
-			}
-			
-			// 해당 강의의 과제 점수
-			int myReportScore = 0;
-			if(studentLectureService.getReportAvg(lectureNo, studentId) != 0) {
-				myReportScore = studentLectureService.getReportAvg(lectureNo, studentId);
-			}
-			
-			// 해당 강의의 시험 점수
-			int myTestScore = 0;
-			if(studentTestService.getTestScore(lectureNo, studentId) != 0) {
-				myTestScore = studentTestService.getTestScore(lectureNo, studentId);
-			}
-			
-			//출석 30%
-			int attendanceScore = (int)attendancePer*(3/10);
-			//과제 30%
-			int reportScore = myReportScore*(3/10);
-			//시험 40%
-			int testScore = myTestScore*(4/10);
-			if(attendanceScore + reportScore + testScore >= 50) {
-				myLectureListOne.setClassRegistrationState("수료");
-			}else {
-				myLectureListOne.setClassRegistrationState("과락");
 			}
 		}
 		

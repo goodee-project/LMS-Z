@@ -40,6 +40,9 @@ public interface StudentLectureMapper {
 	//==== 페이징)전체 나의 수강 현황 목록 수 =====
 	public int selectMyLectureListTotal(String studentId);
 	
+	//==== 날짜 종료 시 성적에 따른 과락,수료 업데이트 ====
+	public int updateMyLectureState(Map<String,Object> map);
+	
 	//==== 나의 수강 현황 상세보기 ====
 	public ClassRegistrationForm selectMyLectureListOne(Map<String,Object> map);
 	
