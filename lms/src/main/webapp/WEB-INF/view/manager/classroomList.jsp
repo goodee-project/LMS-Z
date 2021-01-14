@@ -71,7 +71,7 @@
 													<td>${c.classroomTotal }</td>
 													<td>${c.classroomState }</td>
 													<c:if test="${c.classroomState =='빈강의실'}">
-														<td><a class="btn btn-outline-danger" style="border-radius: 4px;"href="${path }/manager/deleteClassroom/${c.classroomNo}/${currentPage}">삭제</a></td>
+														<td><a onclick="return confirm('정말로 삭제하시겠습니까?');" class="btn btn-outline-danger" style="border-radius: 4px;"href="${path }/manager/deleteClassroom/${c.classroomNo}/${currentPage}">삭제</a></td>
 													</c:if>
 													<c:if test="${c.classroomState =='사용중'}">
 														<td>&nbsp;</td>

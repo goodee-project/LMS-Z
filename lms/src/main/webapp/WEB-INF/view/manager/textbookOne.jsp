@@ -109,20 +109,23 @@
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
 		$('#deleteIsbn').click(function(){
+			if(confirm("정말로 삭제하시겠습니까?") == false){
+				return ;
+			}else{
 			$.ajax({
-				url:'${path}/manager/textbookCk',
+				url:'${path}/manager/lectureCk',
 				type:'GET',
 				data:{textbookIsbn: $('#textbookIsbn').val()},
 				success:function(data){
 					if(data.textbookCount ==0){
-						location.href='${path}/manager/deleteTextbookOne/'+${textbookOne.textbookIsbn};
+						location.href='${path}/manager/deleteTextbookOne/'+ $('#textbookIsbn').val();
 					}else{
 						alert('강좌에서 사용중인 교재입니다.');	
 						return;
 						}
 					}
 			});
-		
+			}
 		});
     </script>
 </body>

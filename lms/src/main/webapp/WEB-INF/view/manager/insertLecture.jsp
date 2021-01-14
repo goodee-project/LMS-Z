@@ -257,13 +257,13 @@
 					alert('형식을 확인하세요');
 				}
 		})
-		var checkId = /^[0-9]{1,3}$/;
+		var checkId = /^[0-9]{2,3}$/;
 		$('#totalDate').on('propertychange change keyup paste input', function(){
 			if(checkId.test($('#totalDate').val())){				
 				$('#date').text('');
 				num ='success';		
 			}else{
-				$('#date').text('1~3자리 숫자를 입력해주세요');
+				$('#date').text('2~3자리 숫자를 입력해주세요');
 				num  = '';	
 			}
 		});

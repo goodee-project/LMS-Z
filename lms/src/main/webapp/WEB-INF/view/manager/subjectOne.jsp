@@ -105,20 +105,23 @@
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
 		$('#deleteSubject').click(function(){
-			$.ajax({
-				url:'${path}/manager/subjectCk',
-				type:'GET',
-				data:{subjectNo: $('#subjectNo').val()},
-				success:function(data){
-					if(data.subjectCount ==0){
-						location.href='${path}/manager/deleteSubjectOne/'+${subjectOne.subjectNo };
-					}else{
-						alert('강좌에서 사용중인 과목입니다.');	
-						return;
+			if(confirm("정말로 삭제하시겠습니까?") == false){
+				return ;
+			}else{
+				$.ajax({
+					url:'${path}/manager/subjectCk',
+					type:'GET',
+					data:{subjectNo: $('#subjectNo').val()},
+					success:function(data){
+						if(data.subjectCount ==0){
+							location.href='${path}/manager/deleteSubjectOne/'+${subjectOne.subjectNo };
+						}else{
+							alert('강좌에서 사용중인 과목입니다.');	
+							return;
+							}
 						}
-					}
-			});
-		
+				});
+			}
 		});
     </script>
 </body>

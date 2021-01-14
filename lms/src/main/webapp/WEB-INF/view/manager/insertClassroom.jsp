@@ -113,12 +113,13 @@
 				}
 		})
 		var checkId = /^[0-9]{1,3}$/;
+		var checkNum = /^[0-9]{0,9}$/;
 		$('#classroomNumber').on('propertychange change keyup paste input', function(){
-			if(checkId.test($('#classroomNumber').val())){				
+			if(checkNum.test($('#classroomNumber').val())){				
 				$('#number').text('중복 검사를 해주세요');
 				$('#btnNumber').prop('disabled', false);				
 			}else{
-				$('#number').text('1~3자리 숫자를 입력해주세요');
+				$('#number').text('숫자를 입력해주세요');
 				$('#btnNumber').prop('disabled', true);
 				num = '';	
 			}

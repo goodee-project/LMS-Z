@@ -5,13 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import gd.fintech.lms.manager.mapper.ManagerLectureMapper;
 import gd.fintech.lms.student.mapper.StudentLectureMapper;
@@ -46,6 +43,7 @@ public class ManagerLectureService {
 	@Autowired StudentLectureMapper studentLectureMapper;
 	@Autowired TeacherReportMapper teacherReportMapper;
 	@Autowired TeacherReportSubmitMapper teacherReportSubmitMapper;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	//강좌 리스트를 리턴시키기 위한 메퍼 호출
 	public List<Lecture> getLectureList(int beginRow, int rowPerPage){
@@ -88,17 +86,23 @@ public class ManagerLectureService {
 	}
 	//강좌를 삭제하기 위해 필요한 메퍼 호출
 	public void deleteLecture(int lectureNo) {
-		//파일 위치의 경로를 지정해주는 코드
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		String attachPath = null;
+		//서버 파일의 상대경로
+		String rootPath = "";
+        String attachPath = "";
 		//삭제할 강좌와 연결된 질문 삭제
 		List<Integer> questionNo = studentQuestionMapper.selectLectureNo(lectureNo);
 		for(int q : questionNo) {
 			List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(q);
 			//저장되어있는 실제 파일들 제거
 			for(String s : questionFileUuid) {
-				attachPath = "uploadfile\\questionfile\\";
+				 if ( OS.indexOf("nux") >= 0) {
+		            rootPath = "/var/lib/tomcat9/webapps/lms/";
+		            attachPath = "uploadfile\\questionfile\\";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\questionfile\\";
+		        }
 				File file = new File(rootPath+attachPath+s);
 				if(file.exists()) {
 					file.delete();
@@ -117,7 +121,14 @@ public class ManagerLectureService {
 			List<String> reportSubmitFileUuid = teacherReportSubmitMapper.selectReportSubmitFileUuid(r);
 			//저장되어있는 실제 파일들 제거
 			for(String s : reportSubmitFileUuid) {
-				attachPath = "uploadfile\\reportfile\\";
+				 if ( OS.indexOf("nux") >= 0) {
+		            rootPath = "/var/lib/tomcat9/webapps/lms/";
+		            attachPath = "uploadfile\\reportfile\\";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\reportfile\\";
+		        }
 				File file = new File(rootPath+attachPath+s);
 				if(file.exists()) {
 					file.delete();
@@ -147,9 +158,17 @@ public class ManagerLectureService {
 		List<Integer> lectureArchiveNo = teacherLectureArchiveMapper.selectArchiveAndLecture(lectureNo);
 		for(int l : lectureArchiveNo) {
 			List<String> lectureArchiveFileUuid = teacherLectureArchiveFileMapper.selectLectureArchiveFileUuid(l);
-			attachPath = "uploadfile\\lectureArchivefile\\";
+			
 			//저장되어있는 실제 파일들 제거
 			for(String lf : lectureArchiveFileUuid) {
+				if ( OS.indexOf("nux") >= 0) {
+		            rootPath = "/var/lib/tomcat9/webapps/lms/";
+		            attachPath = "uploadfile\\lectureArchivefile\\";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\lectureArchivefile\\";
+		        }
 				File file = new File(rootPath + attachPath+lf);
 				if(file.exists()) {
 					file.delete();

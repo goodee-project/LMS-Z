@@ -89,7 +89,7 @@
 										</tr>
 									</table>
 									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/lmsNoticeList/${currentPage}">뒤로</a>
-									<a class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left: 8px; "href="${path }/manager/removeLmsNotice/${lmsNotice.lmsNoticeNo}/${currentPage}">삭제</a>
+									<a class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left: 8px; " onclick="return confirm('정말로 삭제하시겠습니까?');" href="${path }/manager/removeLmsNotice/${lmsNotice.lmsNoticeNo}/${currentPage}">삭제</a>
 									<a class="btn btn-outline-info" style="border-radius: 4px; float:right;" href="${path }/manager/modifyLmsNotice/${lmsNotice.lmsNoticeNo}/${currentPage}">수정</a>
 								</div>
 							</div>

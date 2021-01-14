@@ -21,5 +21,6 @@ public interface ManagerTextbookMapper {
 	int updateTextbookOne(Textbook textbook);
 	//교재를 삭제하기 위한 메퍼 호출
 	int deleteTextbookOne(String textbookIsbn);
-	
+	//중복된 교재가 있는지 확인하기 위한 메퍼 호출
+	int selectTextbookCk(String textbookIsbn);	
 }

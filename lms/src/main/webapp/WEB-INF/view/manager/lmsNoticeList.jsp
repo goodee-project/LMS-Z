@@ -38,7 +38,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">LmsNotice</a></h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">Lms공지사항</a></h3>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,6 @@
 										</c:if>
 									</div>
 									<br>
-									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/index">메인으로</a>&emsp;
 									<a class="btn btn-success" style="border-radius: 4px; float:right;" href="${path}/manager/addLmsNotice/${managerId }/${currentPage}">추가</a>
 								</div>
 							</div>

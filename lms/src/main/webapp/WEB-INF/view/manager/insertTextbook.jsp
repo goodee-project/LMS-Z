@@ -59,6 +59,7 @@
 													<input class="form-control" style="width:100%;" type="text" id="textbookIsbn" name="textbookIsbn">
 													<div id="isbn"></div>
 												</td>
+												<td style="width:10%;"><button class="btn btn-outline-secondary" style="border-radius: 4px;"id="btnIsbn" type="button" disabled="disabled">중복검사</button></td>
 											</tr>
 											<tr>
 												<th> 제목 :</th>
@@ -130,14 +131,35 @@
 					alert('형식을 확인하세요');
 				}
 		})
-    	$('#textbookIsbn').on('propertychange change keyup paste input', function(){
+		$('#textbookIsbn').on('propertychange change keyup paste input', function(){
 			if(checkNumber.test($('#textbookIsbn').val())){				
-				$('#isbn').text('');
-				num='success';		
+				$('#isbn').text('중복 검사를 해주세요');
+				$('#btnIsbn').prop('disabled', false);				
 			}else{
 				$('#isbn').text('숫자와 "-"로 이루어진 17자 isbn을 입력해주세요');
+				$('#btnIsbn').prop('disabled', true);
 				num = '';	
 			}
+		});
+		$('#btnIsbn').click(function(){
+			$.ajax({
+				url:'${path}/manager/textbookCk',
+				type:'GET',
+				data:{textbookIsbn: $('#textbookIsbn').val()},
+				success:function(data){
+					if(data.textbookCount == 0){
+						if(confirm('추가 가능한 교재입니다.')){
+							$('#textbookIsbn').prop('readonly', true);
+							$('#btnIsbn').prop("disabled", true);
+							$('#isbn').text('');
+							num = 'success';
+						}
+					} else{
+						alert('이미 같은 교재가 등록되어 있습니다.');
+						num = '';
+					}
+				}
+			});	
 		});
     	$('#textbookPrice').on('propertychange change keyup paste input', function(){
 			if(checkPrice.test($('#textbookPrice').val())){				

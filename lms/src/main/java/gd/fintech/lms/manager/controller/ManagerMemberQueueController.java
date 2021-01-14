@@ -32,19 +32,19 @@ public class ManagerMemberQueueController {
 		int totalPageS = managerMemberQueueService.getStudentTotalCount();
 		// 마지막 페이지
 		int lastPageS = 0;
-		if(totalPageS%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
-			lastPageS = (totalPageS/rowPerPage)+1;
-		}else { // 나누어 떨어진다면 
+		if(totalPageS%rowPerPage==0) {  // 나누어 떨어진다면
 			lastPageS = totalPageS/rowPerPage;
+		}else { // 나누어 떨어지 않으면 +1
+			lastPageS = (totalPageS/rowPerPage)+1;
 		}
 		List<TeacherQueue> teacherList = managerMemberQueueService.getTeacherMemberQueueList(beginRowT,rowPerPage);
 		int totalPageT = managerMemberQueueService.getTeacherTotalCount();
 		// 마지막 페이지
 		int lastPageT = 0;
-		if(totalPageT%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
-			lastPageT = (totalPageT/rowPerPage)+1;
-		}else { // 나누어 떨어진다면 
+		if(totalPageT%rowPerPage==0) {  // 나누어 떨어진다면
 			lastPageT = totalPageT/rowPerPage;
+		}else { // 나누어 떨어지 않으면 +1
+			lastPageT = (totalPageT/rowPerPage)+1;
 		}
 		model.addAttribute("studentList",studentList);
 		model.addAttribute("teacherList",teacherList);

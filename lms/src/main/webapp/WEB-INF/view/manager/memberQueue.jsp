@@ -68,21 +68,28 @@
 											</tr>
 										</thead>
 	                            		<tbody>
-											<c:forEach var="s" items="${studentList }">
-												<tr>
-													<td>${s.studentId }</td>
-													<td>${s.studentEmail }</td>
-													<td>${s.studentName }</td>
-													<td>${s.studentPhone }</td>
-													<td>${s.studentGender }</td>
-													<td>${s.studentBirth }</td>
-													<td>${s.studentAddressMain }</td>
-													<td>${s.studentAddressSub }</td>
-													<td>${s.account.accountLevel }</td>
-													<td><a class="btn btn-outline-primary" style="border-radius: 4px;" href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
-													<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/manager/deleteStudentQueue/${s.studentId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
-												</tr>
-											</c:forEach>
+	                            			<c:if test="${!empty studentList }">
+												<c:forEach var="s" items="${studentList }">
+													<tr>
+														<td>${s.studentId }</td>
+														<td>${s.studentEmail }</td>
+														<td>${s.studentName }</td>
+														<td>${s.studentPhone }</td>
+														<td>${s.studentGender }</td>
+														<td>${s.studentBirth }</td>
+														<td>${s.studentAddressMain }</td>
+														<td>${s.studentAddressSub }</td>
+														<td>${s.account.accountLevel }</td>
+														<td><a class="btn btn-outline-primary" style="border-radius: 4px;" href="${path}/manager/insertStudentQueue/${s.studentId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
+														<td><a class="btn btn-outline-danger" style="border-radius: 4px;" onclick="return confirm('정말로 거절하시겠습니까?');" href="${path}/manager/deleteStudentQueue/${s.studentId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
+													</tr>
+												</c:forEach>
+											</c:if>
+												<c:if test="${empty studentList }">
+													<tr>
+														<td colspan="11">승인 대기중인 학생이 없습니다.</td>
+													</tr>
+												</c:if>
 										</tbody>
 	                            	</table>
 	                            	<br>
@@ -162,21 +169,28 @@
 												</tr>
 											</thead>
 											<tbody>
-												<c:forEach var="t" items="${teacherList }">
+												<c:if test="${!empty teacherList }">
+													<c:forEach var="t" items="${teacherList }">
+														<tr>
+															<td>${t.teacherId }</td>
+															<td>${t.teacherEmail }</td>
+															<td>${t.teacherName }</td>
+															<td>${t.teacherPhone }</td>
+															<td>${t.teacherGender }</td>
+															<td>${t.teacherBirth }</td>
+															<td>${t.teacherAddressMain }</td>
+															<td>${t.teacherAddressSub }</td>
+															<td>${t.account.accountLevel }</td>
+															<td><a class="btn btn-outline-primary" style="border-radius: 4px;" href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
+															<td><a class="btn btn-outline-danger" style="border-radius: 4px;" onclick="return confirm('정말로 거절하시겠습니까?');" href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
+														</tr>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty teacherList }">
 													<tr>
-														<td>${t.teacherId }</td>
-														<td>${t.teacherEmail }</td>
-														<td>${t.teacherName }</td>
-														<td>${t.teacherPhone }</td>
-														<td>${t.teacherGender }</td>
-														<td>${t.teacherBirth }</td>
-														<td>${t.teacherAddressMain }</td>
-														<td>${t.teacherAddressSub }</td>
-														<td>${t.account.accountLevel }</td>
-														<td><a class="btn btn-outline-primary" style="border-radius: 4px;" href="${path}/manager/insertTeacherQueue/${t.teacherId}/활성화/${managerId}/${currentPageS}/${currentPageT}">승인</a></td>
-														<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/manager/deleteTeacherQueue/${t.teacherId}/거절/${currentPageS}/${currentPageT}">거절</a></td>
+														<td colspan="11">승인 대기중인 강사가 없습니다.</td>
 													</tr>
-												</c:forEach>
+												</c:if>
 											</tbody>
 										</table>
 										<!-- 페이징 -->

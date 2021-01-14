@@ -42,4 +42,8 @@ public class ManagerTextbookService {
 	public void deleteTextbookOne(String textbookIsbn) {
 		managerTextbookMapper.deleteTextbookOne(textbookIsbn);
 	}
+	//교재 등록시 중복검사를 위한 메퍼 호출
+	public int getTextbookCk(String textbookIsbn) {
+		return managerTextbookMapper.selectTextbookCk(textbookIsbn);
+	}
 }

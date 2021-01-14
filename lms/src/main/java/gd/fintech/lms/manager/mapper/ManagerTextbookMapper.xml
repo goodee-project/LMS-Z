@@ -69,4 +69,11 @@
 		DELETE FROM textbook
 		WHERE textbook_isbn = #{textbookIsbn}
 	</delete>
+	<!-- 교재 중복검사를 위한 쿼리 -->
+	<select id="selectTextbookCk" parameterType="String" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM textbook
+		WHERE textbook_isbn = #{textbookIsbn}
+	</select>
 </mapper>

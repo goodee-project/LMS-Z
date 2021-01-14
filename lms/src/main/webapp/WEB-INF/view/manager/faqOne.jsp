@@ -51,7 +51,7 @@
 					<div class="col-md-12 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
-								<h4 class="card-title">● ${faqOne.faqTitle }</h4>
+								<h4 class="card-title">제목 : ${faqOne.faqTitle }</h4>
 								<div class="table-responsive">
 									<table class="table no-wrap v-middle mb-0">
 										<tr class="border-top-0 px-2 py-4">
@@ -80,8 +80,8 @@
 										<tr class="border-top-0 px-2 py-4">
 											<td class="font-14 font-weight-medium text-muted px-2" colspan="2">
 												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													<textarea style="width:100%;"
-														readonly="readonly" cols="150">${faqOne.faqContent}</textarea>
+													<textarea class="form-control" style="width:100%;"
+														readonly="readonly" cols="150" rows="6">${faqOne.faqContent}</textarea>
 												</span>
 											</td>
 											<td class="border-0"></td>
@@ -91,7 +91,7 @@
 								<br>
 								<div>
 									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/manager/faqList/${faqOne.faqCategory }/${currentPage}">뒤로</a>
-									<a class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left:7px;" href="${path }/manager/removeFaq/${faqOne.faqCategory}/${faqOne.faqNo}/${currentPage}">삭제</a>
+									<a class="btn btn-outline-danger" style="border-radius: 4px; float:right; margin-left:7px;" onclick="return confirm('정말로 삭제하시겠습니까?');" href="${path }/manager/removeFaq/${faqOne.faqCategory}/${faqOne.faqNo}/${currentPage}">삭제</a>
 									<a class="btn btn-outline-info" style="border-radius: 4px; float:right;" href="${path }/manager/modifyFaq/${faqOne.faqNo}/${currentPage}">수정</a>
 								</div>
 							</div>

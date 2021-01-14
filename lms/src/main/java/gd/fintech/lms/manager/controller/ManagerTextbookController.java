@@ -31,10 +31,10 @@ public class ManagerTextbookController {
 		List<Textbook> textbookList = managerTextbookService.getTextbookList(beginRow, rowPerPage);
 		int totalPage = managerTextbookService.getTextbookTotalCount();
 		int lastPage = 0;
-		if(totalPage%rowPerPage==1) { // 나누어 떨어지지 않는다면 페이지 + 1
-			lastPage = (totalPage/rowPerPage)+1;
-		}else { // 나누어 떨어진다면 
+		if(totalPage%rowPerPage==0) {  // 나누어 떨어진다면
 			lastPage = totalPage/rowPerPage;
+		}else { // 나누어 떨어지 않으면 +1
+			lastPage = (totalPage/rowPerPage)+1;
 		}
 		model.addAttribute("textbookList",textbookList);
 		model.addAttribute("currentPage",currentPage);

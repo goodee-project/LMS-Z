@@ -82,7 +82,7 @@
 													<td>${l.lectureTotal }</td>
 													<td>${l.syllabus.syllabusContent }</td>
 													<td>${l.classroom.classroomNumber }</td>
-													<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path }/manager/deleteLecture/${l.lectureNo}/${l.classroomNo}/${currentPage}">삭제</a></td>
+													<td><a class="btn btn-outline-danger" style="border-radius: 4px;" onclick="return confirm('정말로 삭제하시겠습니까?');" href="${path }/manager/deleteLecture/${l.lectureNo}/${l.classroomNo}/${currentPage}">삭제</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
