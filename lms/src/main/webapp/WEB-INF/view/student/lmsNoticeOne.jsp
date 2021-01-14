@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <!-- 위의 사이트 아이콘 -->
     <link rel="icon" type="image/png" sizes="16x16" href="${path}/assets/images/favicon.png">
-    <title>lms</title>
+    <title>lmsNoticeOne</title>
     <!-- css -->
     <link href="${path}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="${path}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -20,86 +20,86 @@
     <link href="${path}/dist/css/style.min.css" rel="stylesheet">
     <link href="${path}/dist/css/lmsStyle.css" rel="stylesheet">
 </head>
-
 <body>
-    <div class="preloader">
+	<div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-
-
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-       	<jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
+        
+        <jsp:include page="/WEB-INF/view/student/inc/logoMenu.jsp" flush="false"></jsp:include>
         <jsp:include page="/WEB-INF/view/student/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->
         <div class="page-wrapper">
             <div class="page-breadcrumb">
                 <div class="row">
-                   
-                    <div class="col-5 align-self-center text-right">
-                    	<div class="align-self-center">
-                    		
-		                </div>
-		           </div>
-		       </div>
-			<br>
-				
-				<!-- 1번째 라인 카드 -->
-                <div class="row">
-                    <div class="col-md-5 col-lg-7">
-                        <div class="card" id="cardStyle">
-                            <div class="card-body">
-                            	<h4 class="card-title"></h4>
-                                <div class="table-responsive">
-                                    <table class="table no-wrap v-middle mb-0">
-                                        <tr class="border-top-0 px-2 py-4">
-                                            <th class="font-14 font-weight-medium text-muted">번호</th>
-                                            <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lmsNotice.lmsNoticeNo}</span>
-                                           	</td>
-                                           	<td class="border-0"></td>
-                                        </tr>
-                                        <tr class="border-top-0 px-2 py-4">
-                                            <th class="border-0 font-14 font-weight-medium text-muted">작성자</th>
-                                            <td class="border-0 font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lmsNotice.lmsNoticeWriter}</span>
-                                           	</td>
-                                           	<td class="border-0"></td>
-                                        </tr>
-                                        <tr class="border-top-0 px-2 py-4">
-                                            <th class="border-0 font-14 font-weight-medium text-muted">제목</th>
-                                            <td class="border-0 font-weight-medium text-muted px-2" colspan="2">
-                                            	 <span class="font-weight-medium text-dark border-top-0 px-2 py-4">${lmsNotice.lmsNoticeTitle}</span>
-                                           	</td>
-                                           	<td class="border-0"></td>
-                                        </tr>
-                                        <tr class="border-top-0 px-2 py-4">
-                                            <th class="font-14 font-weight-medium text-muted">내용</th>
-                                            <td class="font-14 font-weight-medium text-muted px-2" colspan="2">
-                                            	<textarea style="resize:none" cols="30" rows="6" class="font-weight-medium text-dark border-0 px-2 py-4">${lmsNotice.lmsNoticeContent}</textarea>
-                                           	</td>
-                                           	<td class="border-0"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1"><a style="color: black;" href="">LmsNotice</a></h3>
                     </div>
                 </div>
-                <div>
-                	<a href="${path }/student/lmsNoticeList/${currentPage}">이전</a>
-                </div>
             </div>
-        </div>
-    </div>
-        
+            <div class="container-fluid">
+				<!-- 1번째 라인 카드 -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card" id="cardStyle">
+                            <div class="card-body">
+                               <h4 class="card-title">공지 상세보기</h4>
+	                            <div>
+	                            	<table id="lmsTable" class="table table" style="margin-top: 20px; text-align: center;">
+	                            		<tr>
+											<th style="width:10%;">NO</th>
+											<td>
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeNo }" readonly="readonly">
+											</td>
+										</tr>
+										<tr>
+											<th>게시일</th>
+											<td>
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeCreatedate }" readonly="readonly">
+											</td>
+										</tr>
+										<tr>
+											<th>수정일</th>
+											<td>
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeUpdatedate }" readonly="readonly">
+											</td>
+										</tr>
+										<tr>
+											<th>작성자</th>
+											<td>
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeWriter }" readonly="readonly">
+											</td>
+										</tr>
+										<tr>
+											<th>제목</th>
+											<td>
+												<input type="text" class="form-control" style="width:100%;" value="${lmsNotice.lmsNoticeTitle }" readonly="readonly">
+											</td>
+										</tr>
+										<tr>
+											<th>내용</th>
+											<td>
+												<textarea class="form-control" style="resize:none;overflow:visible; width:100%;" cols="50" readonly="readonly">${lmsNotice.lmsNoticeContent }</textarea>
+											</td>
+										</tr>
+									</table>
+									<a class="btn btn-outline-secondary" style="border-radius: 4px;" href="${path }/student/lmsNoticeList/${currentPage}">뒤로</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	
-	<!-- script 코드 -->
-    <script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
+	<script src="${path}/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="${path}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="${path}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="${path}/dist/js/app-style-switcher.js"></script>
@@ -114,7 +114,7 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
-  
+    <script>
+    </script>
 </body>
-
 </html>

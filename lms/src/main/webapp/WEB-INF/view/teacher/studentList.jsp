@@ -52,16 +52,16 @@
             			<div class="card" id="cardStyle">
             				<div class="card-body">
             					<h4 class="card-title">학생목록</h4>
-            					
 								<c:forEach var="s" items="${studentList}" varStatus="status">
 									<div class="row">
-										<input type="text" class="form-control" style="width:40%;" id="studentId${status.index }" value="${s.studentId }">
+										<input type="text" class="form-control" style="width:40%;" id="studentId${status.index }" value="${s.studentId }" readonly="readonly">
 										&emsp;
-										<input type="text" class="form-control" style="width:40%;" id="studentName${status.index }" value="${s.studentName }">
+										<input type="text" class="form-control" style="width:40%;" id="studentName${status.index }" value="${s.studentName }" readonly="readonly">
 										&emsp;
 										<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/msgToFrom/${s.studentId}/${s.studentName }/${teacherName}/${teacherId}/${lectureNo}">메세지 보기</a>
+										&emsp;
 										<c:if test="${s.msg.isConfirm == false }">
-											<span id="${status.index }">■</span>
+											<span id="${status.index }" class="fa fa-envelope" style="font-size:40px;"></span>
 										</c:if>
 									</div>
 									<br>

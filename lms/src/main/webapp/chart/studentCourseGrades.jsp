@@ -143,7 +143,8 @@
     <script>
 		$(document).ready(function(){
 			//script에서 session 값 받기
-			let studentId = '<%=(String)session.getAttribute("studentId")%>'
+			let studentId = '<%=(String)session.getAttribute("studentId")%>';
+			
 			$.ajax({
 				url:'${path}/chart/studentCourseGrades/'+studentId,
 				type:"get",

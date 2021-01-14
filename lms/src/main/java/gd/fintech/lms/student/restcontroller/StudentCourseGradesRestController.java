@@ -1,5 +1,6 @@
 package gd.fintech.lms.student.restcontroller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import gd.fintech.lms.student.restservice.StudentCourseGradesRestService;
+import gd.fintech.lms.vo.ClassRegistration;
 
 @RestController
 public class StudentCourseGradesRestController {
@@ -17,5 +19,11 @@ public class StudentCourseGradesRestController {
 	@GetMapping("/chart/studentCourseGrades/{studentId}")
 	public Map<String, Object> studentCouresGrades(@PathVariable(name="studentId") String studentId) {
 		return studentCourseGradesRestService.getCouresGrades(studentId);
+	}
+	//현재 수강중인 강의 목록
+	@GetMapping("/chart/AllMyLectureList/{studentId}")
+	public List<ClassRegistration> AllMyLectureList(@PathVariable(name="studentId") String studentId) {
+		List<ClassRegistration> myLectureList = studentCourseGradesRestService.getAllMyLectureList(studentId);
+		return myLectureList;
 	}
 }

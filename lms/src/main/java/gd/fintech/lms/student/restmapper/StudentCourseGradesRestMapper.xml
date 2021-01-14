@@ -27,31 +27,20 @@
 	<!-- ==== 나의 수강 현황 목록 ========= -->
 	<resultMap type="gd.fintech.lms.vo.ClassRegistration" id="selectMyLectureListResult">
 		<result property="classRegistrationNo" column="class_registration_no"/>
-		<result property="classRegistrationState" column="class_registration_state"/>
 		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
 			<result property="lectureNo" column="lecture_no"/>
-			<result property="accountId" column="account_id"/>
-			<result property="teacherName" column="teacher_name"/>
 			<result property="lectureName" column="lecture_name"/>
-			<result property="lectureStartdate" column="lecture_startdate"/>
-			<result property="lectureEnddate" column="lecture_enddate"/>
-			<result property="lectureTotal" column="lecture_total"/>
 		</association>
 	</resultMap>
 	<select id="selectAllMyLectureList" parameterType="java.lang.String" resultMap="selectMyLectureListResult">
 		SELECT
-			cr.class_registration_no,
-			cr.class_registration_state,
+			cr.account_id,
 			l.lecture_no,
-			l.account_id,
-			l.teacher_name,
-			l.lecture_name,
-			l.lecture_startdate,
-			l.lecture_enddate,
-			l.lecture_total
+			l.lecture_name
 		FROM class_registration cr
 		LEFT JOIN lecture l ON cr.lecture_no = l.lecture_no
 		WHERE cr.account_id = #{studentId}
+		AND cr.class_registration_state IN ('과락','수료','수강중')
 		ORDER BY lecture_no DESC
 	</select>
 </mapper>

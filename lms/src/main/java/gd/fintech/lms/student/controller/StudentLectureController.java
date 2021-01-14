@@ -66,12 +66,13 @@ public class StudentLectureController {
 	}
 	
 	// 강의목록 상세보기
-	@GetMapping("/student/lectureListOne/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}")
+	@GetMapping("/student/lectureListOne/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}/{applicants}")
 	public String lectureListOne(Model model,
 								@PathVariable(name="studentId") String studentId,
 								@PathVariable(name="lectureNo") int lectureNo,
 								@PathVariable(name="lectureTotal") int lectureTotal,
-								@PathVariable(name="currentPage") int currentPage) {
+								@PathVariable(name="currentPage") int currentPage,
+								@PathVariable(name="applicants") int applicants){
 		// 강의 정보
 		Lecture lectureOne = studentLectureService.getLectureListOne(lectureNo);
 		// ==== 강의 신청 여부 체크 ====
@@ -84,23 +85,30 @@ public class StudentLectureController {
 		if(studentLectureService.getCanIApplicant(lectureNo, lectureTotal) != 0) {
 			classPersonalCheck = true;
 		}
-		
+		//===== 강의 신청 정원이 강의 수강 인원과 같다면 true => 신청하는 것을 막기 위해
+		boolean numberOfApplicants = false;
+		if(lectureOne.getLectureTotal() == applicants) {
+			numberOfApplicants = true;
+		}
 		model.addAttribute("classRegistrationCk",classRegistrationCk);
 		model.addAttribute("lectureOne",lectureOne);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("classPersonalCheck",classPersonalCheck);
 		model.addAttribute("lectureTotal",lectureTotal);
+		model.addAttribute("numberOfApplicants",numberOfApplicants);
+		model.addAttribute("applicants",applicants);
 		return "student/lectureListOne";
 	}
 	// 수강 신청
-	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}")
+	@GetMapping("/student/classRegistration/{studentId}/{lectureNo}/{lectureTotal}/{currentPage}/{applicants}")
 	public String classRegistration(@PathVariable(name="studentId") String studentId,
 									@PathVariable(name="lectureNo") int lectureNo,
 									@PathVariable(name="lectureTotal") int lectureTotal,
-									@PathVariable(name="currentPage") int currentPage) {
+									@PathVariable(name="currentPage") int currentPage,
+									@PathVariable(name="applicants") int applicants) {
 		// 나의 강의목록에 추가
 		studentLectureService.addClassRegistration(studentId,lectureNo);
-		return "redirect:/student/lectureListOne/"+studentId+"/"+lectureNo+"/"+lectureTotal+"/"+currentPage;
+		return "redirect:/student/lectureListOne/"+studentId+"/"+lectureNo+"/"+lectureTotal+"/"+currentPage+"/"+applicants;
 	}
 	
 	//나의 강의목록 리스트 출력

@@ -88,9 +88,9 @@
 			c.connect_updatedate connectUpdatedate
 		FROM connect c
 		LEFT JOIN account a ON c.account_id=a.account_id
-		WHERE ABS(TIMESTAMPDIFF(MONTH,NOW(),connect_updatedate)) >= 6
-		OR a.account_state='휴면상태'
+		WHERE a.account_state='휴면상태'
 	</select>
+	
 	<!-- 휴면계정을 활성화로 변경 -->
 	<update id="updateChangeActivation" parameterType="java.lang.String">
 		UPDATE `account`

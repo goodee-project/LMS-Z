@@ -33,7 +33,6 @@
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         
 		<jsp:include page="/WEB-INF/view/teacher/inc/logoMenu.jsp" flush="false"></jsp:include>
-		        
 		<jsp:include page="/WEB-INF/view/teacher/inc/navbarMenu.jsp" flush="false"></jsp:include>
 	
 		<!-- 소제목 -->

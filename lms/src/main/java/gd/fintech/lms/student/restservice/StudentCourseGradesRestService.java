@@ -1,5 +1,6 @@
 package gd.fintech.lms.student.restservice;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import gd.fintech.lms.student.restmapper.StudentCourseGradesRestMapper;
+import gd.fintech.lms.vo.ClassRegistration;
 
 @Service
 @Transactional
@@ -18,4 +20,7 @@ public class StudentCourseGradesRestService {
 		return studentCourseGradesRestMapper.selectCourseGreads(studentId);
 	}
 	//현재 수강중인 강의
+	public List<ClassRegistration> getAllMyLectureList(String studentId) {
+		return studentCourseGradesRestMapper.selectAllMyLectureList(studentId);
+	}
 }

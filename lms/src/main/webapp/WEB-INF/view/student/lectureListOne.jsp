@@ -57,7 +57,7 @@
                     <div class="col-5 align-self-center text-right">
                     	<div class="col-12 align-self-center">
                     		<c:if test="${classRegistrationCk == false && classPersonalCheck == true}">
-		                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}/${lectureTotal }/${currentPage}">
+		                        <a class="btn btn-danger font-20 popover-item" href="${path }/student/classRegistration/${studentId}/${lectureOne.lectureNo}/${lectureTotal }/${currentPage}/${applicants}">
 		                        	수강 신청
 		                        </a>
 	                        </c:if>
@@ -68,7 +68,7 @@
 		                        </a>
 	                        </c:if>
 	                        &emsp;
-	                        <c:if test="${classPersonalCheck == false}">
+	                        <c:if test="${numberOfApplicants == true}">
 	                        	<a class="btn btn-danger font-20 popover-item" style="color:white">
 		                        	정원초과
 		                        </a>

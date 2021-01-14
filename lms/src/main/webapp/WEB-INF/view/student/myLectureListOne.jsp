@@ -56,6 +56,11 @@
                         <br>
                         <c:if test="${myLectureListOne.classRegistrationState=='수강중'}">
 	                        <span>
+	                        	<a href="${path }/student/lectureNoticeList/${myLectureListOne.lecture.lectureNo }/${currentPage}">
+	                        	강의 공지사항</a>
+	                        </span>
+	                        &emsp;
+	                        <span>
 	                        	<a href="${path }/student/attendance/${studentId}/${myLectureListOne.lecture.lectureNo }/${currentPage}">
 	                        	출석</a>
 	                        </span>
@@ -373,18 +378,18 @@
 			// 수강 후기 입력란 열기
 			$("#reviewBtn").click(function(){
 				if("${myLectureListOne.classRegistrationState}"=="수료"){
-						$("#reviewDiv").removeAttr('hidden');
-						if("${myLectureListOne.classRegistrationPoint}"!="0" && "${myLectureListOne.classRegistrationReview}"!= null){
-								$('input:radio[name="classRegistrationPoint"]:input[value="${myLectureListOne.classRegistrationPoint}"]').attr("checked",true);
-								$('textarea[name="classRegistrationReview"]').text("${myLectureListOne.classRegistrationReview}");
-						}
+					$("#reviewDiv").removeAttr('hidden');
+					if("${myLectureListOne.classRegistrationPoint}"!="0" && "${myLectureListOne.classRegistrationReview}"!= null){
+							$('input:radio[name="classRegistrationPoint"]:input[value="${myLectureListOne.classRegistrationPoint}"]').attr("checked",true);
+							$('textarea[name="classRegistrationReview"]').text("${myLectureListOne.classRegistrationReview}");
+					}
 					}else{
 						alert("수료한 학생만 작성할 수 있습니다.");
 					}
 				})
 				//수강 후기 입력란 닫기
 			$("#reviewCloseBtn").click(function(){
-				$("#reviewDiv").attr("hidden","hidden");
+					$("#reviewDiv").attr("hidden","hidden");
 				})
 				// 수강 후기 입력
 			$("#reviewInputBtn").click(function(){
@@ -415,7 +420,7 @@
 					}else{
 						$("#classCancelInputBtn").removeAttr('type');
 						$("#classCancelInputBtn").attr('type','submit');
-						alert("수강후기가 저장되었습니다.");
+						alert("취소사유가 저장되었습니다.");
 					}
 				}
 				else {

@@ -135,7 +135,6 @@
 			COUNT(*)
 		FROM class_registration
 		WHERE lecture_no = #{lectureNo}
-		AND NOT class_registration_state IN ('취소')
 	</select>
 	<!-- 수강신청 -->
 	<insert id ="insertClassRegistration" parameterType="java.util.Map">

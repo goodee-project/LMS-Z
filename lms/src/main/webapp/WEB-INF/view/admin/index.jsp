@@ -135,12 +135,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        	<c:forEach var="c" items="${managerQueueList}">
+                                        	<c:forEach var="c" items="${managerQueueList}" varStatus="status">
 	                                            <tr>
 	                                                <td class="border-top-0 px-2 py-4">
 	                                                    <div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
 	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerId}</h5>
+	                                                        <input type="text" id="${status.count }" value="${c.managerId }">
 	                                                    </div>
 	                                                </td>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
@@ -202,7 +203,7 @@
 	                                                <td>
 	                                                	<div class="popover-icon">
 	                                                        <a class="btn btn-danger rounded-circle btn-circle font-12 popover-item"
-                                                            	href="${path}/admin/disavowal/${c.managerId}">거부</a>
+                                                            	id="disavowalBtn${status.count }" href="${path }/admin/disavowal/${c.managerId}">거부</a>
                                                         </div>
 	                                                </td>
 	                                            </tr>
@@ -276,6 +277,20 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			for(let i=1;i<${managerQueueList.size()+1};i++)
+			$('#disavowalBtn'+i).click(function(){
+				let disavowalConfirm = confirm('승인 거부 하시겠습니까?');
+				if(disavowalConfirm){
+					$('#disavowalBtn').attr('href','${path }/admin/disavowal/'+$('#'+i).val());
+				}
+				else{
+					$('#disavowalBtn'+i).removeAttr('href');
+				}
+			})
+		})
+    </script>
 </body>
 
 </html>
