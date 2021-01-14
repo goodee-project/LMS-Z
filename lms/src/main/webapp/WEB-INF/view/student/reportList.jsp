@@ -69,7 +69,7 @@
 											<c:if test="${empty reportList}">
 												<tr class="border-0">	
 													<th class="border-0 font-14 font-weight-medium text-muted px-2">
-														<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 질문이 작성되지 않았습니다</h5>
+														<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 진행중인 과제가 없습니다</h5>
 													</th>
 												</tr>	
 											</c:if>
@@ -79,7 +79,7 @@
 												<tr>
 													<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 														<div class="d-flex no-block align-items-center">
-															${r.lectureNo}: (${r.lecture.lectureName})
+															${r.lecture.lectureName}
 														</div>	
 													</td>
 													

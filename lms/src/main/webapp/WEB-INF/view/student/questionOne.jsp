@@ -64,7 +64,7 @@
 											<td style="width:140px" class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2">
 												<div class="d-flex no-block align-items-center">
-													${question.lectureNo}(${question.lecture.lectureName})
+													${question.lecture.lectureName}
 												</div>
 											</td>
 										</tr>
@@ -285,15 +285,13 @@ function view(str) {
 	
 	$('#btn').click(function(){	
 		$('.password').each(function(index,item){
-			let htmlView = '<a type="button" id="select" href="javascript:view(\'viewcode\');" >내용보기</a>'
-			let success = '<h3>아래 내용보기를 클릭하면 질문 내용이 나타납니다.</h3>'	
+			let htmlView = '<a id="select" href="javascript:view(\'viewcode\');" ></a>'	
 			if($(item).val()==$('#questionPassword').val()){
 				$('#view').append(htmlView);
 				$('#password').empty();
 				$('#add').empty();
 				$('#list').empty();
-				$('#add').append(success);
-				$('#select').trigger("click");
+				$('#select').get(0).click();
 				}else if($(item).val()!=$('#questionPassword').val()){
 					alert('비밀번호가 다릅니다');	
 				}

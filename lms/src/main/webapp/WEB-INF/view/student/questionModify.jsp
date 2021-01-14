@@ -55,25 +55,29 @@
 								<form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
 									<table id="questionTable" class="table table" style="margin-top: 10px;">
 		
-										<tr class="border border-0">
+										<tr>
 											<td class="border border-0 d-flex justify-content-start">
 												<h4>작성일 &emsp;${question.questionCreatedate}</h4>
 											</td>
 										</tr>
 									
-										<tr class="border border-0">
+										<tr>
 											<td class="border border-0 d-flex justify-content-start">강의
 												&nbsp;
-												<select style="width:20%;" name="lectureNo">
+												<select style="width:40%;" name="lectureNo">
 													<c:forEach var="l" items="${lectureList}">
-														<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
+														<option value="${l.lectureNo}">${l.lectureName}</option>
 													</c:forEach>
 												</select>
-												&emsp;제목 &nbsp; <input type="text" style="width:30%;" name="questionTitle" id="questionTitle" value="${question.questionTitle}" style="width:460px">
+												
 											</td>
 										</tr>
-										
-										<tr class="border border-0">
+										<tr>
+											<td class="border border-0 d-flex justify-content-start">
+												제목 &nbsp; <input type="text" style="width:80%;" name="questionTitle" id="questionTitle" value="${question.questionTitle}">
+											</td>
+										</tr>
+										<tr>
 											<td class="border border-0">
 												<textarea class="form-control" style="width:100%;" style="resize:none;overflow:visible;" rows="10" name="questionContent" id="questionContent">${question.questionContent}</textarea>
 											</td>

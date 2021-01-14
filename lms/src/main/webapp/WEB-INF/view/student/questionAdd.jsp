@@ -60,7 +60,7 @@
 													&nbsp;
 													<select name="lectureNo">
 														<c:forEach var="l" items="${lectureList}">
-															<option value="${l.lectureNo}">${l.lectureNo}: ${l.lectureName}</option>
+															<option value="${l.lectureNo}">${l.lectureName}</option>
 														</c:forEach>
 													</select>
 													&emsp;제목 &nbsp;<input type="text" style="width:30%;" name="questionTitle" id="questionTitle" style="width:460px">

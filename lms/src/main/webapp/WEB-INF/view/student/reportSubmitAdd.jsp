@@ -61,7 +61,7 @@
 											</tr>
 											<tr>
 												<td class="border border-0">
-													<textarea class="form-control" style="width:80%;" style="resize:none;overflow:visible;" rows="10" name="reportSubmitContent" id="reportSubmitContent"></textarea>
+													<textarea class="form-control" style="width:100%;" style="resize:none;overflow:visible;" rows="10" name="reportSubmitContent" id="reportSubmitContent"></textarea>
 												</td>
 											</tr>
 										</table>	
@@ -105,7 +105,7 @@
 												<td style="width:80px" class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
 												<td class="font-weight-medium text-dark border-top-0 px-2">
 													<div class="d-flex no-block align-items-center">	
-														${report.lectureNo} (${report.lecture.lectureName})
+														${report.lecture.lectureName}
 													</div>
 												</td>
 											</tr>
@@ -126,14 +126,14 @@
 												</td>
 											</tr>
 											<tr>	
-												<td class="border-0 font-14 font-weight-medium text-muted px-2">과제 시작일</td>
+												<td class="border-0 font-14 font-weight-medium text-muted px-2">시작일</td>
 												<td class="font-weight-medium text-dark border-top-0 px-2">
 													<div class="d-flex no-block align-items-center">	
 														${report.reportStartdate}
 													</div>
 												</td>
 											<tr>	
-												<td class="border-0 font-14 font-weight-medium text-muted px-2">과제 마감일</td>
+												<td class="border-0 font-14 font-weight-medium text-muted px-2">마감일</td>
 												<td class="font-weight-medium text-dark border-top-0 px-2">
 													<div class="d-flex no-block align-items-center">	
 														${report.reportEnddate}

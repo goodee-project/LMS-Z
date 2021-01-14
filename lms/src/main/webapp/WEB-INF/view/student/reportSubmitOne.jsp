@@ -142,7 +142,7 @@
 											<td style="width:80px" class="border-0 font-14 font-weight-medium text-muted px-2">강의</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2">
 												<div class="d-flex no-block align-items-center">	
-													${report.lectureNo} (${report.lecture.lectureName})
+													${report.lecture.lectureName}
 												</div>
 											</td>
 										</tr>	

@@ -87,9 +87,9 @@
 									<c:forEach var="q" items="${questionList}" varStatus="status">
 										<tr>
 											<td class="border-top-0 text-muted px-2 py-4 font-14">
-												<h1 class="text-dark mb-0 font-16 font-weight-medium">${q.lectureNo}: (${q.lecture.lectureName})</h1>
+												<h1 class="text-dark mb-0 font-16 font-weight-medium">${q.lecture.lectureName}</h1>
 												<c:if test="${!empty q.questionPassword}">
-													비밀글
+													(비밀글)
 												</c:if>
 											</td>	
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4">

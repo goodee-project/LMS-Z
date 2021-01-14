@@ -83,12 +83,12 @@
 													<tr>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 															<div class="d-flex no-block align-items-center">	
-																${la.lectureNo}(${la.lecture.lectureName})
+																${la.lecture.lectureName}
 															</div>
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 															<div class="d-flex no-block align-items-center">	
-																${la.lectureArchiveWriter}(${la.accountId})
+																${la.lectureArchiveWriter}
 															</div>	
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">

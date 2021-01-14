@@ -72,7 +72,7 @@
 										<c:if test="${empty reportList}">
 										<tr class="border-0">	
 												<th class="border-0 font-14 font-weight-medium text-muted px-2">
-													<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 질문이 작성되지 않았습니다</h5>
+													<h5 class="text-dark mb-0 font-16 font-weight-medium">아직 마감된 과제가 없습니다.</h5>
 												</th>
 											</tr>	
 										</c:if>
