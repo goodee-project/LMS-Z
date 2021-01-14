@@ -41,7 +41,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Syllabus</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">강의 계획서</h3>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             		<div class="col-lg-12 col-md-12">
             			<div class="card" id="cardStyle">
             				<div class="card-body">
-            					<h4 class="card-title">강의계획서 등록</h4>
+            					<h4 class="card-title">강의계획서 신청</h4>
             					
 								<form id="syllabusForm" method="post" action="${path}/teacher/addSyllabus">
 									<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
@@ -62,7 +62,7 @@
 										<tr>
 											<td>강사 사인</td>
 											<td>
-												<canvas id="myCanvas" style="background-color: aliceblue" width="900" height="300"></canvas>
+												<canvas id="myCanvas" style="background-color: aliceblue;" height="300"></canvas>
 												<input type="hidden" id="syllabusTeachersign" name="syllabusTeachersign" value="">
 												<div style="float:right;">
 													<button class="btn btn-outline-secondary" style="border-radius:4px;" type="button" id="resetBtn">다시쓰기</button>
@@ -128,6 +128,12 @@
 		var canvas, context;
 		canvas = document.getElementById("myCanvas");
 		context = canvas.getContext("2d");
+
+		$(window).resize(function (){
+			var widthSize = window.outerWidth;
+			canvas.width = widthSize/2;
+		});
+
 		 
 		context.lineWidth = 2; // 선 굵기를 2로 설정
 		context.strokeStyle = "blue";

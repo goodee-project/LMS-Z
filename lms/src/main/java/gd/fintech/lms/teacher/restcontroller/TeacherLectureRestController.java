@@ -21,8 +21,6 @@ public class TeacherLectureRestController {
 			@RequestParam(value="lectureImageColor") String lectureImageColor){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println(lectureImageColor);
-		
 		teacherLectureService.modifyLectureImage(lectureNo, lectureImage, lectureImageColor);
 		return map;
 	}

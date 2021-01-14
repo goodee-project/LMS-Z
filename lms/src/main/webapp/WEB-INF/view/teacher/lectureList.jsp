@@ -71,7 +71,7 @@
 													<button class="btn btn-sm btn-outline-secondary" style="border-radius: 4px;" type="button" onclick="modifyBtn('${l.lectureNo}')">수정</button>
 												</div>
 												<div>
-													<canvas id="myCanvas${l.lectureNo}" height="250" style="background-image: url('${l.lectureImage}'); background-color:${l.lectureImageColor}; background-repeat: no-repeat; width: 100%; background-position: center center"></canvas>
+													<canvas id="myCanvas${l.lectureNo}" height="250" style="background-image: url('${l.lectureImage}'); background-color:${l.lectureImageColor}; background-repeat: no-repeat; background-position: center center;width:100%"></canvas>
 												</div>
 												<canvas class="myCanvas2"></canvas>
 												<div class="card-body">
@@ -206,6 +206,8 @@
 			document.getElementById("myCanvas"+lectureNo).getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 			$('#myCanvas'+lectureNo).removeAttr('style');
 			$('#myCanvas'+lectureNo).css('width', '100%');
+
+			resize(canvas);
 			
 			context.lineWidth = 2; // 선 굵기를 2로 설정
 			context.strokeStyle = "white";
@@ -291,6 +293,20 @@
 		}
 		function out(e) { drawing = false; }
 
+		function resize(canvas) {
+			  // 브라우저가 canvas를 표시하고 있는 크기 탐색
+			  var displayWidth  = canvas.clientWidth;
+			  var displayHeight = canvas.clientHeight;
+			 
+			  // canvas가 같은 크기가 아닌지 확인
+			  if (canvas.width  != displayWidth ||
+			      canvas.height != displayHeight) {
+			 
+			    // canvas를 동일한 크기로 만들기
+			    canvas.width  = displayWidth;
+			    canvas.height = displayHeight;
+			  }
+		}
 		
     </script>
 </body>
