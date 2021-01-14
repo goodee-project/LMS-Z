@@ -117,8 +117,14 @@
 								<td>${qc.questionCommentWriter}</td>
 								<td>${qc.questionCommentContent}</td>
 								<td>${qc.questionCommentCreatedate}</td>
+								<c:if test="${qc.accountId == teacherId}">
 								<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
-								<td><a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeQuestionComment/${qc.questionNo}/${qc.questionCommentNo}/${currentPage}">삭제</a></td>	
+								<td><a onclick="btn('${qc.questionNo}', '${qc.questionCommentNo}')" class="btn btn-outline-danger" style="border-radius: 4px;" href="javascript:click()">삭제</a></td>
+								</c:if>
+								<c:if test="${qc.accountId != teacherId}">
+								<td></td>
+								<td></td>
+								</c:if>
 							</c:if>
 							
 							<c:if test="${qc.questionCommentNo == 0}">
@@ -186,7 +192,7 @@
 		<!-- 댓글 추가 -->
 		<form method="post" action="${path}/teacher/addQuestionComment">
 			<input type="hidden" name="questionNo" value="${question.questionNo}">
-			<input type="hidden" name="accountId" value="${question.accountId}">
+			<input type="hidden" name="accountId" value="${teacherId}">
 			작성자<br><input class="form-control" style="width:100%;" type="text" name="questionCommentWriter"><br>
 			댓글<br><textarea class="form-control" style="width:100%;" name="questionCommentContent" rows="3" cols="50"></textarea>
 			<br>
@@ -219,5 +225,17 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+
+    function btn(questionNo, questionCommentNo){
+	    	if (confirm("정말 삭제하시겠습니까?") == true){ // 확인
+				location.href = '${path}/teacher/removeQuestionComment/' + questionNo + '/' + questionCommentNo + '/${currentPage}';
+			}else{   //취소
+			    return;
+			}
+        }
+
+    </script>
 </body>
 </html>

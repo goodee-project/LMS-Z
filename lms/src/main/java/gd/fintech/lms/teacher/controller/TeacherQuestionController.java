@@ -88,14 +88,13 @@ public class TeacherQuestionController {
 	}
 	
 	//질문상세보기 조회수 증가
-	@GetMapping("/teacher/modifyQuestionOneCount/{teacherId}/{questionNo}/{currentPage}")
-	public String modifyQuestionOneCount(@PathVariable(value = "teacherId") String teacherId, 
-										@PathVariable(value = "questionNo") int questionNo, 
+	@GetMapping("/teacher/modifyQuestionOneCount/{questionNo}/{currentPage}")
+	public String modifyQuestionOneCount(@PathVariable(value = "questionNo") int questionNo, 
 										@PathVariable(value = "currentPage") int currentPage) {
 		
 		teacherQuestionService.modifyQuestionOneCount(questionNo);
 		
-		return "redirect:/teacher/questionOne/" + teacherId + "/" + questionNo + "/" + currentPage;
+		return "redirect:/teacher/questionOne/" + questionNo + "/" + currentPage;
 	}
 	
 	//파일다운로드

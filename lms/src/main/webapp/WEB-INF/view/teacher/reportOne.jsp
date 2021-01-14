@@ -99,7 +99,7 @@
 					</c:if>
 					<c:if test="${rs.reportSubmitNo != 0}">
 						<td>${rs.reportSubmitWriter}</td>
-						<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/teacher/reportSubmitOne/${rs.reportSubmitNo}">${rs.reportSubmitTitle}</a></td>
+						<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/reportSubmitOne/${rs.reportSubmitNo}">${rs.reportSubmitTitle}</a></td>
 						<td>${rs.reportSubmitPoint}점</td>
 					</c:if>
 					</tr>

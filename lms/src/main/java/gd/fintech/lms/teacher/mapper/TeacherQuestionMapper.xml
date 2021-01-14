@@ -25,7 +25,6 @@
 	<resultMap type="gd.fintech.lms.vo.Question" id="selectQuestionOneResult">
 		<result property="questionNo" column="question_no"/>
 		<result property="lectureNo" column="lecture_no"/>
-		<result property="accountId" column="account_id"/>
 		<result property="questionWriter" column="question_writer"/>
 		<result property="questionTitle" column="question_title"/>
 		<result property="questionContent" column="question_content"/>
@@ -56,7 +55,6 @@
 		SELECT
 			q.question_no,
 			q.lecture_no,
-			q.account_id,
 			q.question_writer,
 			q.question_title,
 			q.question_content,
@@ -76,6 +74,7 @@
 		LEFT JOIN question_file qf
 		ON q.question_no = qf.question_no
 		WHERE q.question_no = #{questionNo}
+		ORDER BY qc.question_comment_createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	

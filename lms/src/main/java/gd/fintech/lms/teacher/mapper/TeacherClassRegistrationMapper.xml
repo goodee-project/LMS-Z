@@ -2,17 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherClassRegistrationMapper">
 <!-- 강의 시작하면 수강상태를 수강중으로 변경하는 쿼리 -->
-<update id="updateClassRegistrationStateStart" parameterType="String">
+<update id="updateClassRegistrationState" parameterType="String">
 	UPDATE class_registration c INNER JOIN lecture l 
 	ON c.lecture_no = l.lecture_no
 	SET c.class_registration_state = '수강중'
 	WHERE l.lecture_startdate = CURDATE()
-</update>
-<!-- 강의 시작하면 수강상태를 수료로 변경하는 쿼리 -->
-<update id="updateClassRegistrationStateEnd" parameterType="String">
-	UPDATE class_registration c INNER JOIN lecture l 
-	ON c.lecture_no = l.lecture_no
-	SET c.class_registration_state = '수료'
-	WHERE l.lecture_enddate = CURDATE()
 </update>
 </mapper>

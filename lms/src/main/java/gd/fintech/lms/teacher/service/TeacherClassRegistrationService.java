@@ -13,7 +13,6 @@ public class TeacherClassRegistrationService {
 	
 	//수강상태 변경
 	public void updateClassRegistrationState() {
-		teacherClassRegistrationMapper.updateClassRegistrationStateStart();
-		teacherClassRegistrationMapper.updateClassRegistrationStateEnd();
+		teacherClassRegistrationMapper.updateClassRegistrationState();
 	}
 }

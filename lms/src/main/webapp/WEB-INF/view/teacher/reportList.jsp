@@ -72,7 +72,7 @@
 				<tbody>
 					<c:forEach var="r" items="${reportList}">
 						<tr>
-							<td><a class="btn btn-outline-light bg-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
+							<td><a class="btn btn-outline-light text-secondary btn-block" style="border-radius: 4px;" href="${path}/teacher/reportOne/${r.reportNo}">${r.reportTitle}</a></td>
 							<td>${r.reportStartdate}</td>
 							<td>${r.reportEnddate}</td>
 						</tr>

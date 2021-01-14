@@ -77,7 +77,7 @@
 					<tr>
 						<td>${q.questionNo}</td>
 						<td>${q.questionWriter}</td>
-						<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/teacher/questionOne/${q.questionNo}/${currentPage}">${q.questionTitle}</a></td>
+						<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/modifyQuestionOneCount/${q.questionNo}/${currentPage}">${q.questionTitle}</a></td>
 						<td>${q.questionCount}</td>
 					</tr>
 				</c:forEach>
