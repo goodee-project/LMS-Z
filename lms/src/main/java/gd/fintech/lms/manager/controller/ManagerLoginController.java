@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +52,10 @@ public class ManagerLoginController {
 			return "redirect:/managerLogin";
 		} else if(managerLoginService.getAccountToManagerLogin(account).equals("중복")) {
 			return "redirect:/managerLogin";
-		}
+		}//휴면상태일 때 해제 인증 폼으로 이동 
+		else if(managerLoginService.getAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+	  		return "redirect:/managerDormantRelease/"+account.getAccountId();
+	  	}
 		
 		HttpSession session = request.getSession();
 	    session.setAttribute("managerId", account.getAccountId());
@@ -81,5 +85,29 @@ public class ManagerLoginController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/managerLogin";
+	}
+	// 휴면해제 인증 폼
+	@GetMapping("/managerDormantRelease/{managerId}")
+	public String dormantRealease(Model model,
+			@PathVariable(name="managerId") String managerId) {
+		model.addAttribute("managerId",managerId);
+		return "/manager/managerDormantRelease";
+	}
+	// 휴면해제 인증 성공
+	@GetMapping("/managerDormantReleaseSuccess/{managerId}")
+	public String login(HttpServletRequest request,
+				@PathVariable(name="managerId") String managerId) {
+		
+		// 휴면 해제 인증 성공시 활성화 상태로 변경
+		managerLoginService.modifyChangeActivity(managerId);
+		
+		HttpSession session = request.getSession();
+	    session.setAttribute("managerId", managerId);
+	    
+	    String managerImage = managerLoginService.getManagerImage(managerId);
+	    session.setAttribute("managerImage", managerImage);
+	   
+		return "redirect:/manager/index";
+		
 	}
 }

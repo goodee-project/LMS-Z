@@ -41,7 +41,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Message</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">메세지</h3>
                     </div>
                 </div>
             </div>
@@ -68,9 +68,7 @@
 								    <br>
 								    <div>
 								    	 <a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/studentList/${teacherId}/${lectureNo}" type="button">뒤로가기</a>
-								         <button class="btn btn-outline-secondary" style="border-radius:4px; float:right; margin-left:8px;" type="button" id="teacherMsgBtn">입력</button>
-								         <button class="btn btn-outline-danger" style="border-radius:4px; float:right; margin-left:8px;" id="stopBtn" type="button">정지</button>
-								         <button class="btn btn-outline-info" style="border-radius:4px; float:right;" id="startBtn" type="button">채팅시작</button>
+								         <button class="btn btn-outline-success" style="border-radius:4px; float:right;" id="startBtn" type="button">채팅시작</button>
 								    </div>
 					            </div>
 					    	</div>

@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div>
-				<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">Message</span>
+				<span class="col-md-7 col-lg-7" style="color: black; font-size: x-large;">메세지</span>
 			</div>
 			<br>
 			<div class="container-fluid">
@@ -85,8 +85,6 @@
 								<a class="btn btn-outline-primary" style="border-radius: 4px;"
 									href="${path}/student/myLectureListOne/${studentId}/${lectureNo}/${currentPage}"
 									type="button">뒤로가기</a>
-								<button class="btn btn-outline-primary" style="border-radius: 4px;float:right; margin-left:8px;" id="startBtn" type="button">채팅시작</button>
-								<button class="btn btn-outline-danger" style="border-radius: 4px;float:right; margin-left:8px;" id="stopBtn" type="button">정지</button>
 								<button class="btn btn-outline-success" style="border-radius: 4px;float:right; margin-left:8px;" type="button" id="studentMsgBtn">입력</button>
 							</div>
 						</div>
@@ -131,7 +129,7 @@
 				console.log(data);
 				}
 		})
-			//데이터 입력
+		//메세지 입력
   		$('#studentMsgBtn').click(function(){
 					// 메세지를 입력하지 않았을 때는 아무 작동 하지 않도록 함
 					if($('#toTeacherMsgContent').val() != ""){
@@ -142,7 +140,7 @@
 								fromId:"${studentId}",
 								toId:"${teacher_Id}",
 								fromName:"${studentName}",
-								msgContent:$('#toTeacherMsgContent').val()
+								msgContent:$('#toTeacherMsgContent').val().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "")
 								},
 							success:function(data){
 								//console.log(data);

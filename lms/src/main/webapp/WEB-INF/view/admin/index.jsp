@@ -141,7 +141,6 @@
 	                                                    <div class="d-flex no-block align-items-center">
 	                                                    	<!-- 굵은 글씨 -->
 	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerId}</h5>
-	                                                        <input type="text" id="${status.count }" value="${c.managerId }">
 	                                                    </div>
 	                                                </td>
 	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">

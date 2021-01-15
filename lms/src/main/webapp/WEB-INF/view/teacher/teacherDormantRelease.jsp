@@ -74,8 +74,8 @@
                           			<div class="col-lg-3 col-md-3"></div>
 			           				<div class="col-lg-9 col-md-9">
 			           					<input type="text" maxlength="4" name="numCk" id="numCk" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">&emsp;
-			           					<input type="text" id="numMsg">
-			           					<input type="text" id="studentId" value="${studentId }" hidden="hidden">
+			           					<input type="text" id="numMsg" hidden="hidden">
+			           					<input type="text" id="teacherId" value="${teacherId }" hidden="hidden">
 			           					<span id="timer"></span>&emsp;
 		                          		<button type="button" id="requestBtn" class="col-2 btn btn-outline-info font-weight-bold" style="color:black">요청</button>
 	                          		</div>
@@ -115,7 +115,7 @@
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
     <script>
 		$(document).ready(function(){
-			let studentId= $('#studentId').val();
+			let teacherId= $('#teacherId').val();
 			let time=120;//2분
 			let min="";//분
 			let sec="";//초
@@ -132,7 +132,7 @@
 						}
 					},1000)
 				$.ajax({
-					url:'${path}/studentDormantMsg/'+studentId,
+					url:'${path}/teacherDormantMsg/'+teacherId,
 					type:'GET',
 					success:function(data){
 						console.log(data);
@@ -149,7 +149,7 @@
 						alert("인증번호를 다시 확인해주세요");
 					}else{
 						alert("인증에 성공하였습니다.");
-						$('#confirmBtn').attr("href","${path}/dormantReleaseSuccess/${studentId}");
+						$('#confirmBtn').attr("href","${path}/teacherDormantReleaseSuccess/${teacherId}");
 					}
 				})
 			})

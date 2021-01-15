@@ -38,7 +38,9 @@
 						<span>차트를 선택하세요</span><i data-feather="chevron-down"></i>
 					</a>
 					<!-- 드롭다운 내용 -->
-					<div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+					<div id="dropDown" class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+						
+					<!--  
 						<a class="dropdown-item" href="${path }/chart/teacherInOutCount.jsp">
 							<i class="svg-icon mr-2 ml-1"></i>
 							강사 가입/탈퇴수 
@@ -53,7 +55,7 @@
 							<i class="svg-icon mr-2 ml-1"></i>
 							lms이용자
 						</a>
-						
+					-->
 					</div>
 				</li>
 			</ul>
@@ -72,46 +74,15 @@
 							<div class="table-responsive">
 								<table class="table no-wrap v-middle mb-0">
 									<thead>
-									<tr class="border-top-0 px-2 py-4">
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												test
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												fintech
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												JAVAcc
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												Doraemon
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												DigitalEngineering
-											</span>
-										</td>
-										<td class="font-14 font-weight-medium text-muted px-2">
-											<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												Cshop
-											</span>
-										</td>
-									</tr>
+										<tr id="lectureList" class="border-top-0 px-2 py-4">
+											
+										</tr>
 									</thead>
-									<tbody id="tableBody">
-									
+									<tbody>
+										<tr id="score" class="border-top-0 px-2 py-4">
+										</tr>
+										<tr id="scoreAvg">
+										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -144,6 +115,63 @@
 		$(document).ready(function(){
 			//script에서 session 값 받기
 			let studentId = '<%=(String)session.getAttribute("studentId")%>';
+			let space =
+				`
+				<td class="font-14 font-weight-medium text-muted px-2">
+					<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+						
+					</span>
+				</td>
+				`
+			$('#lectureList').append(space);
+			
+			$.ajax({
+				url:'${path}/chart/allMyLectureList/'+studentId,
+				type:'GET',
+				success:function(data){
+					console.log(data);
+					for(let i=0;i<data.length;i++){
+						let dropDown=
+							`
+							<button type="button" class="dropdown-item" id="\${i}">
+								\${data[i].lecture.lectureName}
+							</button>
+							`
+						$('#dropDown').append(dropDown);
+						}
+					
+					for(let i=0;i<data.length;i++){
+						let list=
+							`
+							<td class="font-14 font-weight-medium text-muted px-2">
+								<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+									\${data[i].lecture.lectureName}
+								</span>
+							</td>
+							`
+						$('#lectureList').append(list);
+						}
+					}
+				})
+			
+			let scoreTitle=
+				`
+				<td class="font-14 font-weight-medium text-muted px-2">
+					<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+						성적
+					</span>
+				</td>
+				`
+			let scoreAvgTitle=
+				`
+				<td class="font-14 font-weight-medium text-muted px-2">
+					<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+						강의 평균 성적
+					</span>
+				</td>
+				`
+			$('#score').append(scoreTitle);
+			$('#scoreAvg').append(scoreAvgTitle);
 			
 			$.ajax({
 				url:'${path}/chart/studentCourseGrades/'+studentId,
@@ -154,79 +182,21 @@
 							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										성적
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										\${data.test}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.fintech}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.JAVAcc}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.Doraemon}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DigitalEngineering}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.Cshop}
 									</span>
 								</td>
 							</tr>
 							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										강의 평균 성적
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
 										\${data.testAvg}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.fintechAvg}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.JAVAccAvg}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DoraemonAvg}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DigitalEngineeringAvg}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.CshopAvg}
 									</span>
 								</td>
 							</tr>
 							`
 						$('#tableBody').html(html)
+						
+						
 					var ctx = document.getElementById('barChart');
 					var chart = new Chart(ctx,{
 						type:'bar',

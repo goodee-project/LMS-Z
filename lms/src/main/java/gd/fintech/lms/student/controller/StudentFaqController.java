@@ -74,7 +74,7 @@ public class StudentFaqController {
 			// 페이징) 1~10 한묶음 중 첫번째 페이지
 			int startPage = ((currentPage / 11) * rowPerPage) + 1;
 			// 페이징) 검색했을 때 일치하는 DB데이터 총 개수
-			int totalRow = managerFaqService.getSearchTotal(faqTitle, faqCategory);
+			int totalRow = managerFaqService.getSearchTotal(faqTitle.replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", ""), faqCategory);
 			// 페이징) 마지막 페이지
 			int lastPage = 0;
 			if (totalRow % rowPerPage != 0) {
@@ -86,7 +86,8 @@ public class StudentFaqController {
 			// UI에서는 규칙적인 NO를 보여주기 위해
 			int ruleNo = (totalRow-(rowPerPage*(currentPage-1)));
 			// 카테고리 별 faq 리스트
-			List<Faq> faqList = managerFaqService.getSearchFaqList(faqTitle, faqCategory, beginRow, rowPerPage);
+			// html 태그 방지
+			List<Faq> faqList = managerFaqService.getSearchFaqList(faqTitle.replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", ""), faqCategory, beginRow, rowPerPage);
 			// 카테고리 리스트
 			List<FaqCategory> categoryList = managerFaqService.getFaqCategoryList();
 

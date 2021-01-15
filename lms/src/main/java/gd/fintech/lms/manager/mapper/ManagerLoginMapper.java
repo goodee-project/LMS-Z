@@ -37,4 +37,13 @@ public interface ManagerLoginMapper {
 	int updateAccountToPw(String accountId, String accountPw);
 	Manager selectManagerToNameAndEmail(Manager manager);
 	int selectManagerToNameAndEmailByCheck(Manager manager);
+	
+	// 휴면상태일 경우 휴면해제 인증 폼으로 이동하기 위한 조건
+	String selectAccountStateCk(String accountId);
+	
+	// 인증메일을 보낼 운영자 메일 가져오기
+	String selectManagerEmail(String managerId);
+	
+	// 휴면계정 인증 성공시 업데이드
+	int updateChangeActivity(String managerId);
 }

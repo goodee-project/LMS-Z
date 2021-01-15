@@ -3,8 +3,12 @@ package gd.fintech.lms.manager.restcontroller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -76,5 +80,15 @@ public class ManagerLoginRestController {
 		map.put("overlapEmail", overlapEmail);
 			
 		return map;
+	}
+	// 휴면계정 인증 번호 보내기
+	@GetMapping("/managerDormantMsg/{managerId}")
+	public int getStudentDormantMsg(HttpServletRequest request,
+			@PathVariable(name="managerId") String managerId) {
+		int dormantMsg = 0;
+		dormantMsg = Integer.parseInt(managerLoginService.getDormantMsg(managerId));
+		HttpSession session = request.getSession();
+		session.setAttribute("dormantMsg", dormantMsg);
+		return dormantMsg;
 	}
 }

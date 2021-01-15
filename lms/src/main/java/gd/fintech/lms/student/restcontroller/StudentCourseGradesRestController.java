@@ -21,9 +21,10 @@ public class StudentCourseGradesRestController {
 		return studentCourseGradesRestService.getCouresGrades(studentId);
 	}
 	//현재 수강중인 강의 목록
-	@GetMapping("/chart/AllMyLectureList/{studentId}")
+	@GetMapping("/chart/allMyLectureList/{studentId}")
 	public List<ClassRegistration> AllMyLectureList(@PathVariable(name="studentId") String studentId) {
 		List<ClassRegistration> myLectureList = studentCourseGradesRestService.getAllMyLectureList(studentId);
+		System.out.println(myLectureList);
 		return myLectureList;
 	}
 }

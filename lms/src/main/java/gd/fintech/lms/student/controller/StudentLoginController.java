@@ -52,7 +52,7 @@ public class StudentLoginController {
 			return "redirect:/studentLogin";
 		}//휴면상태일 때 해제 인증 폼으로 이동 
 		else if(studentLoginService.getAccountStateCk(account.getAccountId()).equals("휴면상태")) {
-	  		return "redirect:/dormantRelease/"+account.getAccountId();
+	  		return "redirect:/studentDormantRelease/"+account.getAccountId();
 	  	}
 		HttpSession session = request.getSession();
 	    session.setAttribute("studentId", account.getAccountId());
@@ -86,14 +86,14 @@ public class StudentLoginController {
 	}
 	
 	// 휴면해제 인증 폼
-	@GetMapping("/dormantRelease/{studentId}")
+	@GetMapping("/studentDormantRelease/{studentId}")
 	public String dormantRealease(Model model,
 			@PathVariable(name="studentId") String studentId) {
 		model.addAttribute("studentId",studentId);
-		return "/student/dormantRelease";
+		return "/student/studentDormantRelease";
 	}
 	// 휴면해제 인증 성공
-	@GetMapping("/dormantReleaseSuccess/{studentId}")
+	@GetMapping("/studentDormantReleaseSuccess/{studentId}")
 	public String login(HttpServletRequest request,
 				@PathVariable(name="studentId") String studentId) {
 		

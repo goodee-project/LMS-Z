@@ -75,7 +75,7 @@
                                         	<c:forEach var="c" items="${myLectureList}">
 	                                            <tr>
 	                                                <td>
-	                                                	<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/myLectureListOne/${studentId}/${c.lecture.lectureNo}/${currentPage}">${c.lecture.lectureName}</a>
+	                                                	<a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/myLectureListOne/${studentId}/${c.lecture.lectureNo}/${currentPage}">${c.lecture.lectureName}</a>
 	                                                </td>
 	                                                <td>
 	                                                	<h5>${c.lecture.teacherName}</h5>

@@ -72,7 +72,7 @@ public class StudentNoticeController {
 			//last 페이지
 			int lastPage = 0; 
 			//공지사항 total Count
-			int totalRow = managerLmsNoticeService.getSearchNoticeTotal(lmsNoticeTitle);
+			int totalRow = managerLmsNoticeService.getSearchNoticeTotal(lmsNoticeTitle.replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", ""));
 			
 			//나누어 떨어지면 
 			if(totalRow % rowPerPage == 0) {
@@ -83,8 +83,8 @@ public class StudentNoticeController {
 			// 데이터마다 갖고 있는 no값이 1,2,3처럼 규칙이 없기 때문에
 			// UI에서는 규칙적인 NO를 보여주기 위해
 			int ruleNo = (totalRow-(rowPerPage*(currentPage-1)));
-			
-			List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getSearchLmsNotice(lmsNoticeTitle, beginRow, rowPerPage);
+			//html 태그 제거
+			List<LmsNotice> lmsNoticeList = managerLmsNoticeService.getSearchLmsNotice(lmsNoticeTitle.replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", ""), beginRow, rowPerPage);
 
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("lastPage", lastPage);

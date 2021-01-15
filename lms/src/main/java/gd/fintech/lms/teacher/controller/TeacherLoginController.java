@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import gd.fintech.lms.teacher.service.TeacherLoginService;
@@ -63,7 +65,10 @@ public class TeacherLoginController {
 			return "redirect:/teacherLogin";
 		} else if(teacherLoginService.getAccountToTeacherLogin(account).equals("중복")) {
 			return "redirect:/teacherLogin";
-		}
+		}//휴면상태일 때 해제 인증 폼으로 이동 
+		else if(teacherLoginService.getAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+	  		return "redirect:/teacherDormantRelease/"+account.getAccountId();
+	  	}
 		
 		HttpSession session = request.getSession();
 	    session.setAttribute("teacherId", account.getAccountId());
@@ -73,7 +78,30 @@ public class TeacherLoginController {
 		
 		return "redirect:/teacher/index";
 	}
-	
+	// 휴면해제 인증 폼
+	@GetMapping("/teacherDormantRelease/{teacherId}")
+	public String dormantRealease(Model model,
+			@PathVariable(name="teacherId") String teacherId) {
+		model.addAttribute("teacherId",teacherId);
+		return "/teacher/teacherDormantRelease";
+	}
+	// 휴면해제 인증 성공
+	@GetMapping("/teacherDormantReleaseSuccess/{teacherId}")
+	public String login(HttpServletRequest request,
+				@PathVariable(name="teacherId") String teacherId) {
+		
+		// 휴면 해제 인증 성공시 활성화 상태로 변경
+		teacherLoginService.modifyChangeActivity(teacherId);
+		
+		HttpSession session = request.getSession();
+	    session.setAttribute("teacherId", teacherId);
+	    
+	    String teacherImage = teacherLoginService.getTeacherImage(teacherId);
+	    session.setAttribute("teacherImage", teacherImage);
+	   
+		return "redirect:/teacher/index";
+		
+	}
 	// 로그아웃 액션
 	@GetMapping("/teacher/logout")
 	public String logout(HttpSession session) {

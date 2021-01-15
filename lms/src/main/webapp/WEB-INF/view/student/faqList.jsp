@@ -78,7 +78,7 @@
 									<div class="col-lg-5 col-md-5"></div>
 									<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
 									<div class="col-lg-5 col-md-5">
-										<input type="text" id="faqTitle" value="${faqTitle}" class="form-control-plaintext form-control border-black form-sm">
+										<input type="text" id="faqTitle" value="${faqTitle}" placeholder="검색할 제목을 입력해주세요" class="form-control-plaintext form-control border-black form-sm">
 									</div>
 									<div class="col-lg-2 col-md-2">
 										<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn" href="">검색</a>
@@ -126,7 +126,7 @@
 														<div>
 															<!-- 굵은 글씨 -->
 															<h5>
-																<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path }/student/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
+																<a class="btn btn-outline-light text-secondary btn-block" href="${path }/student/faqCountUp/${f.faqNo }/${currentPage}">${f.faqTitle}</a>
 															</h5>
 														</div>
 													</td>

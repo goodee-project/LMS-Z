@@ -74,7 +74,7 @@
                                         	<c:forEach var="c" items="${lectureList}" varStatus="status">
 	                                            <tr>
 	                                                <td>
-	                                               		<a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${c.lectureTotal}/${currentPage}/${numberOfApplicants[status.index]}">${c.lectureName}</a>
+	                                               		<a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/lectureListOne/${studentId }/${c.lectureNo}/${c.lectureTotal}/${currentPage}/${numberOfApplicants[status.index]}">${c.lectureName}</a>
 	                                                </td>
 	                                                <td>
 	                                                	<h5>${c.teacherName}</h5>

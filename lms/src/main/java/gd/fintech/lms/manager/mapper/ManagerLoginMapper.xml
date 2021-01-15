@@ -100,4 +100,24 @@
 			   #{managerGender}, #{managerBirth},
 			   #{managerAddressMain}, #{managerAddressSub})
 	</insert>
+	<!-- 휴면상태일 경우 휴면해제 인증 폼으로 이동하기 위한 조건 -->
+	<select id="selectAccountStateCk" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT 
+			account_state accountState
+		FROM `account`
+		WHERE account_id=#{accountId}
+	</select>
+	<!-- 인증메일을 보낼 운영자 메일 가져오기 -->
+	<select id="selectManagerEmail" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			manager_email managerEmail
+		FROM manager
+		WHERE manager_id=#{managerId}
+	</select>
+	<!-- 휴면계정 인증 성공시 업데이트 -->
+	<update id="updateChangeActivity" parameterType="java.lang.String">
+		UPDATE `account`
+		SET account_state ='활성화'
+		WHERE account_id=#{managerId}
+	</update>
 </mapper>

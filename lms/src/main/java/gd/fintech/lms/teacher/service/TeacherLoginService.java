@@ -123,6 +123,14 @@ public class TeacherLoginService {
 		connect.setAccountId(account.getAccountId());
 		connect.setConnectState("접속");
 		if(teacherLoginMapper.selectConnectByOverlapLogin(connect) == 0) {
+			// 회원 리스트에 존재하지만 휴면상태인 회원 구분
+			if(teacherLoginMapper.selectAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+				System.out.println("휴면상태");
+				account.setAccountLevel("강사");
+				account.setAccountState("휴면상태");
+				
+				return teacherLoginMapper.selectAccountToTeacherLogin(account);
+			}
 			account.setAccountLevel("강사");
 			account.setAccountState("활성화");
 			
@@ -130,4 +138,43 @@ public class TeacherLoginService {
 		}
 		return "중복";
 	}
+	// 휴면상태일 경우 휴면해제 인증 폼으로 이동하기 위한 조건
+		public String getAccountStateCk(String accountId) {
+			return teacherLoginMapper.selectAccountStateCk(accountId);
+		}
+		
+		// 휴면계정 인증번호 보내기
+		public String getDormantMsg(String teacherId) {
+			String teacherEmail = teacherLoginMapper.selectTeacherEmail(teacherId);
+			
+			//메세지 보낼 값을 담을 변수
+			String dormantMsg = "";
+			Random rnd = new Random();
+			//4자리의 인증메일
+		     for (int i = 0; i < 4; i++) {
+		    	 //0~9까지 랜덤 숫자
+		         String ran = Integer.toString(rnd.nextInt(10));
+		         dormantMsg += ran;
+		     }
+			     
+		     try {
+			     MimeMessage msg = mailSender.createMimeMessage();
+			     MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
+			             
+			     messageHelper.setSubject("LMS - 휴면계정 인증 번호입니다.");
+			     messageHelper.setText("인증번호는 "+dormantMsg+" 입니다. \n");
+			     messageHelper.setTo(teacherEmail);
+			     msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(teacherEmail));
+			     mailSender.send(msg);
+		             
+		     } catch(MessagingException e) {
+		    	 e.printStackTrace();	     
+		     }
+		     return dormantMsg;
+		}
+		
+		// 휴면계정 인증 성공 시 활성화 상태로 업데이트
+		public int modifyChangeActivity(String teacherId) {
+			return teacherLoginMapper.updateChangeActivity(teacherId);
+		}
 }

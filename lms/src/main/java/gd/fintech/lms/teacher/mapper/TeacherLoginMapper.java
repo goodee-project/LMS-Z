@@ -36,4 +36,13 @@ public interface TeacherLoginMapper {
 	int updateAccountToPw(String accountId, String accountPw);
 	Teacher selectTeacherToNameAndEmail(Teacher teacher);
 	int selectTeacherToNameAndEmailByCheck(Teacher teacher);
+	
+	// 휴면상태일 경우 휴면해제 인증 폼으로 이동하기 위한 조건
+	String selectAccountStateCk(String accountId);
+	
+	// 인증메일을 보낼 강사 메일 가져오기
+	String selectTeacherEmail(String teacherId);
+	
+	// 휴면계정 인증 성공시 업데이드
+	int updateChangeActivity(String teacherId);
 }

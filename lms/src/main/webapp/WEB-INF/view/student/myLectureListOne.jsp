@@ -69,7 +69,7 @@
 	                        	<a href="${path }/student/msgToFrom/${studentId}/${myLectureListOne.student.studentName}/${myLectureListOne.lecture.accountId}/${myLectureListOne.lecture.lectureNo }/${currentPage}">
 	                        		메세지</a>
 	                        	<c:if test="${isConfirm == false }">
-									<span>■</span>
+									<span class="fa fa-envelope" style="font-size:16px;"></span>
 								</c:if>
 	                        </span>
 	                        &emsp;

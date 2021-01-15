@@ -53,7 +53,7 @@
 	                            	<div class="col-lg-5 col-md-5"></div>
 	                            	<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
 									<div class="col-lg-5 col-md-5">
-										<input type="text" id="lmsNoticeTitle" value="${lmsNoticeTitle}" class="form-control-plaintext form-control border-black form-sm">
+										<input type="text" id="lmsNoticeTitle" value="${lmsNoticeTitle}" placeholder="검색할 제목을 입력해주세요" class="form-control-plaintext form-control border-black form-sm">
 									</div>
 									<div class="col-lg-2 col-md-2">
 										<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn" href="">검색</a>
@@ -65,7 +65,7 @@
 	                            			<tr>
 												<th>NO</th>
 												<th>작성자</th>
-												<th>내용</th>
+												<th>제목</th>
 												<th>작성일</th>
 												<th>수정일</th>
 												<th>조회수</th>
@@ -83,7 +83,7 @@
 														<span hidden="hidden">${l.lmsNoticeNo}</span>
 													</td>
 													<td>${l.lmsNoticeWriter}</td>
-													<td><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/noticeCountup/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
+													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/noticeCountup/${l.lmsNoticeNo}/${currentPage}">${l.lmsNoticeTitle}</a></td>
 													<td>${l.lmsNoticeCreatedate }</td>
 													<td>${l.lmsNoticeUpdatedate }</td>
 													<td>${l.lmsNoticeCount}</td>
