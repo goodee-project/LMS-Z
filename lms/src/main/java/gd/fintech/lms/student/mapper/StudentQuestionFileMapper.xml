@@ -35,6 +35,8 @@
 		WHERE question_file_uuid = #{questionFileUuid}
 	</delete>
 	
+	
+	
 	<update id="updateQuestionFileCount" parameterType="String">
 		UPDATE question_file
 		SET question_file_count = question_file_count+1
@@ -47,4 +49,6 @@
 		FROM question_file
 		WHERE question_no = #{questionNo}
 	</select>
+	
+	
 </mapper>

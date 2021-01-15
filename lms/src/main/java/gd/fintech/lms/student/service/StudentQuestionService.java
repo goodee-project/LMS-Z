@@ -23,6 +23,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import gd.fintech.lms.student.mapper.StudentQuestionCommentMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionFileMapper;
 import gd.fintech.lms.student.mapper.StudentQuestionMapper;
 import gd.fintech.lms.vo.Lecture;
@@ -38,6 +39,8 @@ public class StudentQuestionService {
 
 	@Autowired private StudentQuestionMapper studentQuestionMapper;
 	@Autowired private StudentQuestionFileMapper studentQuestionFileMapper;
+	@Autowired private StudentQuestionCommentMapper studentQuestionCommentMapper;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	public List<Question> getQuestionTitleSearch(String accountId,String questionTitle,int currentPage, int rowPerPage){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -121,8 +124,15 @@ public class StudentQuestionService {
 		return question;
 	}
 	
+	public QuestionComment getQuestionCommetnOne(int questionCommentNo) {
+		return studentQuestionCommentMapper.selectOneQuestionComment(questionCommentNo);
+	}
+	
 	public Student getStudentName(String accountId) {
 		return studentQuestionMapper.selectStudentName(accountId);
+	}
+	public int addQuestionComment(QuestionComment questionComment) {
+		return studentQuestionCommentMapper.insertQuestionComment(questionComment);
 	}
 	
 	//질문 등록 +(질문 파일)
@@ -159,11 +169,19 @@ public class StudentQuestionService {
 				qf.setQuestionFileCount(count);
 				questionFile.add(qf);
 				
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String rootPath = "";
 				
-				String attachPath = "uploadfile\\questionfile\\";
+				String attachPath = "";
+				
+				if ( OS.indexOf("nux") >= 0) {
+		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+		        	attachPath = "uploadfile/questionfile/";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\questionfile\\";
+		        }
 				
 				File f = new File(rootPath + attachPath + filename + ext);
 				try {
@@ -184,6 +202,10 @@ public class StudentQuestionService {
 	// 질문 생성시 강의 목록중 질문 강의를 선택하기 위해 사용
 	public List<Lecture> getLectureList(String accountId){
 		return studentQuestionMapper.selectLectureList(accountId);
+	}
+	
+	public int updateQuestionComment(QuestionComment questionComment) {
+		return studentQuestionCommentMapper.updateQuestionComment(questionComment);
 	}
 	
 	// 작성 질문 수정
@@ -217,11 +239,20 @@ public class StudentQuestionService {
 				qf.setQuestionFileCount(count);
 				questionFile.add(qf);
 				
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String rootPath = "";
 				
-				String attachPath = "uploadfile\\questionfile\\";
+				String attachPath = "";
+				
+				
+				 if ( OS.indexOf("nux") >= 0) {
+			        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+			        	attachPath = "uploadfile/questionfile/";
+			        } else {
+			            File file = new File("");
+			            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+			            attachPath = "uploadfile\\questionfile\\";
+			        }
 				
 				File f = new File(rootPath + attachPath + filename + ext);
 				try {
@@ -239,14 +270,26 @@ public class StudentQuestionService {
 		}
 	}
 	
+	public int deleteQuestionComment(int questionCommentNo) {
+		return studentQuestionCommentMapper.deleteOneQuestionComment(questionCommentNo);
+	}
+	
 	// 작성 질문 전체 삭제 (삭제는 작성자만 할 수 있게 스크립트 코드를 사용합니다)
 	public void deleteQuestion(int questionNo) {
 		List<String> questionFileUuid = studentQuestionFileMapper.selectQuestionFileUuid(questionNo);
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
-		String attachPath = "uploadfile\\questionfile\\";
+		String attachPath = "";
+		
+		 if ( OS.indexOf("nux") >= 0) {
+	        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+	        	attachPath = "uploadfile/questionfile/";
+	        } else {
+	            File file = new File("");
+	            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+	            attachPath = "uploadfile\\questionfile\\";
+	        }
 		
 		//경로에 있는 파일 삭제
 		for(String s : questionFileUuid) {
@@ -261,11 +304,19 @@ public class StudentQuestionService {
 	}
 	
 	public int deleteQuestionOneFile(String questionFileUuid) {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
-		String attachPath = "uploadfile\\questionfile\\";
+		String attachPath = "";
+		
+		 if ( OS.indexOf("nux") >= 0) {
+	        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+	        	attachPath = "uploadfile/questionfile/";
+	        } else {
+	            File file = new File("");
+	            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+	            attachPath = "uploadfile\\questionfile\\";
+	        }
 		
 		File file = new File(rootPath+attachPath+questionFileUuid);
 		//경로에 있는 파일 삭제

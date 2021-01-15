@@ -28,6 +28,7 @@ import gd.fintech.lms.vo.LectureArchive;
 @Controller
 public class StudentLectureArchiveController {
 	@Autowired StudentLectureArchiveService studentLectureArchiveService;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	@GetMapping("/student/lectureArchiveList/{accountId}/{currentPage}")
 	public String listLectureArchive(Model model, 
@@ -66,7 +67,7 @@ public class StudentLectureArchiveController {
 			@PathVariable(name="lectureNo")int lectureNo,
 			@PathVariable(name="currentPage")int currentPage) {
 		
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<LectureArchive> lectureArchive = studentLectureArchiveService.getLectureArchiveSearchLecture(currentPage, rowPerPage, lectureNo, accountId);
 		List<Lecture> lectureList = studentLectureArchiveService.getLectureList(accountId);
 		int searchLectureCount = studentLectureArchiveService.searchCountLecture(accountId, lectureNo);
@@ -147,11 +148,19 @@ public class StudentLectureArchiveController {
 	
 	@GetMapping("/student/lectureArchiveFileDownload/{lectureArchiveFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="lectureArchiveFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
-		String attachPath = "uploadfile\\lectureArchivefile\\";
+		String attachPath = "";
+		
+		 if ( OS.indexOf("nux") >= 0) {
+	        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+	        	attachPath = "uploadfile/lectureArchivefile/";
+	        } else {
+	            File file = new File("");
+	            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+	            attachPath = "uploadfile\\lectureArchivefile\\";
+	        }
 		
 		File f = new File(rootPath + attachPath + fileName);
 		// 파일을 다운로드 받기 위한 스트림

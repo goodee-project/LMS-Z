@@ -133,8 +133,8 @@
 										</tbody>
 									</table>
 									<div id="paging" style="text-align: center; padding: 7px;">
-										<c:if test="${listCurrentPage>1}">
-											<a href="${path}/student/reportList/${studentId}/1">처음으로</a>
+										<c:if test="${listCurrentPage%10==1 && listCurrentPage>10}">
+								
 											<a href="${path}/student/reportList/${studentId}/${listCurrentPage-1}">이전</a>
 										</c:if>
 										
@@ -147,15 +147,15 @@
 											</c:if>
 										</c:forEach>
 										
-										<c:if test="${listCurrentPage<lastPage}">
+										<c:if test="${listCurrentPage%10==0 && listCurrentPage<lastPage}">
 											<a href="${path}/student/reportList/${studentId}/${listCurrentPage+1}">다음</a>
-											<a href="${path}/student/reportList/${studentId}/${lastPage}">마지막으로</a>
+											
 										</c:if>
 										
 										<c:if test="${lectureNo != null}">
 											<div>
-												<c:if test="${lectureCurrentPage>1}">
-													<a href="${path}/student/reportLectureList/${studentId}/${lectureNo}/1">처음으로</a>
+												<c:if test="${lectureCurrentPage%10==1 && lectureCurrentPage>10}">
+												
 													<a href="${path}/student/reportLectureList/${studentId}/${lectureNo}/${lectureCurrentPage-1}">이전</a>
 												</c:if>
 																		
@@ -168,9 +168,9 @@
 													</c:if>
 												</c:forEach>
 																		
-												<c:if test="${lectureCurrentPage<lastLecturePage}">
+												<c:if test="${lectureCurrentPage%10==0 && lectureCurrentPage<lastLecturePage}">
 													<a href="${path}/student/reportLectureList/${studentId}/${lectureNo}/${lectureCurrentPage+1}">다음</a>
-													<a href="${path}/student/reportLectureList/${studentId}/${lectureNo}/${lastLecturePage}">마지막으로</a>
+													
 												</c:if>
 											</div>
 										</c:if>

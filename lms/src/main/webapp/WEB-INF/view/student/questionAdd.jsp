@@ -94,20 +94,23 @@
 											<tr>
 												<td class="border border-0">
 													질문 비밀번호
-												</td>
-												<td class="border border-0" style="width: 900px">
-													<input type="password" name="questionPassword">
-												</td>
-											</tr>
-											<tr>
-												<td class="border border-0">
-													<button type="button" class="btn btn-outline-success" id="submitBtn">등록완료</button>
-													<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
+												
+													&emsp;<input type="password" name="questionPassword">
 												</td>
 											</tr>
+											
 										</table>
 										<input type="hidden" name="questionWriter" value="${student.studentName}">
 										<input type="hidden" name="accountId" value="${studentId}">
+										<span class="border border-0 d-flex justify-content-between">
+											<span>
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>
+											</span>
+											<span>
+												<button type="button"  class="btn btn-outline-success" id="submitBtn">등록완료</button>
+											</span>
+										</span>
+										
 									</form>		
 								</div>
 							</div>

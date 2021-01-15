@@ -30,7 +30,8 @@ public class StudentReportService {
 	// 질문 파일업로드를 사용할시 파일이 저장될 경로(uploadfile폴더의 경로)를 지정해주세요
 	
 	@Autowired private StudentReportSubmitMapper studentReportSubmitMapper;
-	@Autowired private StudentReportSubmitFileMapper studentReportSubmitFileMapper;	
+	@Autowired private StudentReportSubmitFileMapper studentReportSubmitFileMapper;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	public List<Report> getReportPage(int currentPage, int rowPerPage, String accountId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -148,11 +149,19 @@ public class StudentReportService {
 				reportSubmitFile.add(rf);
 				
 
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String rootPath = "";
 				
 				String attachPath = "uploadfile\\reportfile\\";
+				
+				if ( OS.indexOf("nux") >= 0) {
+		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+		        	attachPath = "uploadfile/reportfile/";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\reportfile\\";
+		        }
 				
 				File f = new File(rootPath + attachPath + filename + ext);
 				
@@ -173,11 +182,19 @@ public class StudentReportService {
 	}
 	
 	public int deleteReportOneFile(String reportSubmitFileUuid) {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
 		String attachPath = "uploadfile\\reportfile\\";
+		
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/reportfile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\reportfile\\";
+        }
 		
 		File file = new File(rootPath+attachPath+reportSubmitFileUuid);
 		if(file.exists()) {
@@ -188,11 +205,19 @@ public class StudentReportService {
 	
 	public void deleteReportAllSubmit(int reportSubmitNo) {
 		List<String> reportSubmitFileUuid = studentReportSubmitFileMapper.selectReportSubmitFileUuid(reportSubmitNo);
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
 		String attachPath = "uploadfile\\reportfile\\";
+		
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/reportfile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\reportfile\\";
+        }
 		
 		for(String s : reportSubmitFileUuid) {
 			File file = new File(rootPath+attachPath+reportSubmitFileUuid);
@@ -244,11 +269,19 @@ public class StudentReportService {
 				rf.setReportSubmitFileCount(count);
 				reportSubmitFile.add(rf);
 				
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String rootPath = "";
 				
 				String attachPath = "uploadfile\\reportfile\\";
+				
+				if ( OS.indexOf("nux") >= 0) {
+		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+		        	attachPath = "uploadfile/reportfile/";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\reportfile\\";
+		        }
 				
 				try {
 					mf.transferTo(new File(rootPath+attachPath+filename+ext));

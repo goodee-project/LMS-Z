@@ -52,7 +52,7 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-								<form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify?questionNo=${question.questionNo}">
+								<form method="post" id="updateQuesitonForm" enctype="multipart/form-data" action="${path}/student/questionModify/${studentId}?questionNo=${question.questionNo}">
 									<table id="questionTable" class="table table" style="margin-top: 10px;">
 		
 										<tr>
@@ -117,9 +117,10 @@
 										</tr>
 										
 										<tr>
-											<td class="border border-0">
+											<td class="border border-0 d-flex justify-content-between">
+												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionOne/${question.questionNo}/${studentId}/1">이전 페이지</a>
 												<button type="button" class="btn btn-outline-success" id="submitBtn">수정 완료</button>	
-												<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionOne/${question.questionNo}/1">이전 페이지</a>
+												
 											</td>
 										</tr>
 										

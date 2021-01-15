@@ -69,7 +69,7 @@
 	<a class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 4px;" href="${path}/teacher/testList/${lectureNo}">시험목록</a>
 	<a class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 4px;" href="${path}/teacher/studentList/${teacherId}/${lectureNo}">메세지</a>
 	<a class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 4px;" href="${path}/teacher/reportList/${lectureNo}/1">과제</a>
-	<a class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 4px;" href="${path}/teacher/lectureArchiveList/${teacherId}/1">자료실</a>
+	<a class="btn btn-outline-primary btn-lg btn-block" style="border-radius: 4px;" href="${path}/teacher/lectureArchiveList/${teacherId}/${lectureNo}/1">자료실</a>
 	
 	
 	</div>

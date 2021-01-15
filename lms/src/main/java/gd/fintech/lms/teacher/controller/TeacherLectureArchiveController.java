@@ -35,11 +35,12 @@ import gd.fintech.lms.vo.Teacher;
 public class TeacherLectureArchiveController {
 	@Autowired TeacherLectureArchiveService teacherLectureArchiveService;
 	
-	@GetMapping("/teacher/lectureArchiveList/{accountId}/{currentPage}")
+	@GetMapping("/teacher/lectureArchiveList/{accountId}/{lectureNo}/{currentPage}")
 	public String listLectureArchive(Model model,
 			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo,
 			@PathVariable(name="currentPage")int currentPage) {
-		int rowPerPage=10;
+		int rowPerPage=5;
 		List<LectureArchive> lectureArchiveList = teacherLectureArchiveService.getLectureArchiveList(currentPage, rowPerPage, accountId);
 		
 		int listUnderPerPage = 10;	
@@ -62,6 +63,7 @@ public class TeacherLectureArchiveController {
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("listCurrentPage",currentPage);
 		model.addAttribute("lectureArchiveList",lectureArchiveList);
+		model.addAttribute("lectureNo",lectureNo);
 		return "/teacher/lectureArchiveList";
 	}
 	
@@ -71,7 +73,7 @@ public class TeacherLectureArchiveController {
 			@PathVariable(name="lectureArchiveTitle")String lectureArchiveTitle,
 			@PathVariable(name="currentPage")int currentPage) {
 		
-		int rowPerPage=1;
+		int rowPerPage=5;
 		List<LectureArchive> lectureArchiveList = teacherLectureArchiveService.getLectureArchiveSearchList(currentPage, rowPerPage, accountId, lectureArchiveTitle);
 		int searchCount = teacherLectureArchiveService.searchCountLectureArchive(accountId, lectureArchiveTitle);
 		int searchUnderPerPage = 10;	
@@ -97,13 +99,15 @@ public class TeacherLectureArchiveController {
 		return "/teacher/lectureArchiveList";
 	}
 	
-	@GetMapping("/teacher/lectureArchiveAdd/{accountId}")
+	@GetMapping("/teacher/lectureArchiveAdd/{accountId}/{lectureNo}")
 	public String addLectureArchive(Model model,
-			@PathVariable(name="accountId")String accountId) {
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="lectureNo")int lectureNo) {
 		List<Lecture> lectureList = teacherLectureArchiveService.getLectureList(accountId);
 		Teacher teacher = teacherLectureArchiveService.getTeacherName(accountId);
 		model.addAttribute("teacher", teacher);
 		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("lectureNo", lectureNo);
 		return "/teacher/lectureArchiveAdd";
 	}
 	
@@ -142,11 +146,14 @@ public class TeacherLectureArchiveController {
 	@GetMapping("/teacher/lectureArchiveModify/{accountId}/{lectureArchiveNo}")
 	public String modifylectureArchive(Model model,
 			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
-			@PathVariable(name="accountId")String accountId) {
+			@PathVariable(name="accountId")String accountId,
+			@RequestParam(value="lectureNo")int lectureNo) {
 		List<Lecture> lectureList = teacherLectureArchiveService.getLectureList(accountId);
 		LectureArchive lectureArchive = teacherLectureArchiveService.getLectureArchiveOne(lectureArchiveNo);
 		model.addAttribute("lectureArchive", lectureArchive);
+		model.addAttribute("lectureArchiveNo", lectureArchiveNo);
 		model.addAttribute("lectureList", lectureList);
+		model.addAttribute("lectureNo", lectureNo);
 		
 		return "/teacher/lectureArchiveModify";
 	}

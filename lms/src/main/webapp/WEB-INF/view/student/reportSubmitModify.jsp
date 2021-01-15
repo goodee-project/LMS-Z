@@ -92,10 +92,11 @@
 											</tr>
 										</table>	
 										<table id="reportFileTable" class="table table" style="margin-top:20px;">
-											<tr class="border border-0">
-												<td class="border border-0">
-													<button class="btn btn-outline-success" type="button" id="submitBtn">수정 완료</button>
+											<tr>
+												<td class="border border-0 d-flex justify-content-between">
 													<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportSubmitOne/${reportSubmit.reportNo}/${studentId}">이전 페이지</a>
+													<button class="btn btn-outline-success" type="button" id="submitBtn">수정 완료</button>
+													
 												</td>
 											</tr>
 										</table>

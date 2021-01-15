@@ -97,9 +97,9 @@
 										</c:if>
 									</c:forEach>	
 								</table>
-								
+								<a class="btn btn-outline-secondary text-dark" style="border-radius:4px; float:left;" href="${path}/teacher/lectureArchiveList/${teacherId}/${lectureArchive.lectureNo}/1">뒤로가기</a>
 								<div style="float:right;">
-									<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureArchiveNo}">수정</a>
+									<a class="btn btn-info" style="border-radius:4px;" href="${path}/teacher/lectureArchiveModify/${teacherId}/${lectureArchive.lectureArchiveNo}?lectureNo=${lectureArchive.lectureNo}">수정</a>
 									<a class="btn btn-outline-danger" style="border-radius:4px;" href="${path}/teacher/lectureArchiveRemove/${lectureArchive.lectureArchiveNo}/${teacherId}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
 								</div>
 							</div>

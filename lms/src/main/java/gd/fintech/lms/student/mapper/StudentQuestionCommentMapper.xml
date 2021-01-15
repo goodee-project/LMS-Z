@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gd.fintech.lms.student.mapper.StudentQuestionCommentMapper">
+  
+  	<select id="selectOneQuestionComment" resultType="gd.fintech.lms.vo.QuestionComment" parameterType="int">
+  		SELECT
+  			question_comment_no questionCommentNo,
+  			question_comment_writer questionCommentWriter,
+  			question_comment_content questionCommentContent,
+  			DATE_FORMAT(question_comment_createdate,'%Y-%m-%d (%H:%i)') questionCommentCreatedate,
+  			DATE_FORMAT(question_comment_updatedate,'%Y-%m-%d (%H:%i)') questionCommentUpdatedate
+  		FROM question_comment
+  		WHERE question_comment_no = #{questionCommentNo}
+  	</select>
+  
+  	<update id="updateQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+  		UPDATE question_comment
+  		SET
+  			question_comment_content = #{questionCommentContent},
+  			question_comment_updatedate = NOW()
+  		WHERE question_comment_no = #{questionCommentNo}
+  	</update>
+  
+	<delete id="deleteOneQuestionComment" parameterType="int">
+		DELETE
+		FROM question_comment
+		WHERE question_comment_no = #{questionCommentNo}
+	</delete>
+	
+	<insert id="insertQuestionComment" parameterType="gd.fintech.lms.vo.QuestionComment">
+		INSERT INTO
+			question_comment(
+				account_id,
+				question_no,
+				question_comment_writer,
+				question_comment_content,
+				question_comment_createdate,
+				question_comment_updatedate
+			)VALUES(
+				#{accountId},
+				#{questionNo},
+				#{questionCommentWriter},
+				#{questionCommentContent},
+				NOW(),
+				NOW()
+			)
+	</insert>
+  </mapper>

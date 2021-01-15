@@ -95,9 +95,8 @@
 										</c:if>
 									</tbody>
 								</table>
-								
-								<a class="btn btn-success" style="border-radius:4px; float:right;" href="${path}/teacher/lectureArchiveAdd/${teacherId}">자료 추가</a>
-							
+								<a class="btn btn-outline-secondary text-dark" style="border-radius:4px; float:left;" href="${path}/teacher/lectureOne/${lectureNo}">뒤로가기</a>
+								<a class="btn btn-success" style="border-radius:4px; float:right;" href="${path}/teacher/lectureArchiveAdd/${teacherId}/${lectureNo}">자료 추가</a>
 								<br>
 								<div id="paging" style="text-align:center; padding:7px;">
 									<c:if test="${listCurrentPage>1}">

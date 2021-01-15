@@ -194,6 +194,7 @@
   	
   	<select id="selectCommentList" resultType="gd.fintech.lms.vo.QuestionComment" parameterType="java.util.Map">
   		SELECT
+  			question_comment_no questionCommentNo,
   			account_id accountId,
   			question_comment_writer questionCommentWriter,
 	  		question_comment_content questionCommentContent,

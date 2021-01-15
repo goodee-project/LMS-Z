@@ -80,10 +80,11 @@
 											</tr>
 										</table>	
 										<table id="reportFileTable" class="table table" style="margin-top:20px;">
-											<tr class="border border-0">
-												<td class="border border-0">
-													<button class="btn btn-outline-success" type="button" id="submitBtn">과제 제출</button>
+											<tr>
+												<td class="border border-0 d-flex justify-content-between">
 													<a type="button" class="btn btn-outline-secondary" href="${path}/student/reportSubmitOne/${report.reportNo}/${studentId}">이전 페이지</a>
+													<button class="btn btn-outline-success" type="button" id="submitBtn">과제 제출</button>
+													
 												</td>
 											</tr>	
 										</table>

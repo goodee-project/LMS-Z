@@ -55,8 +55,12 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-								<div class="d-flex align-items-center">
-									<div><a type="button" class="btn btn-outline-secondary" href="${path}/student/reportList/${studentId}/1">진행중인 과제</a></div>
+								<div class="border border-0 d-flex justify-content-between">
+									<div class="border border-0"><a type="button" class="btn btn-outline-secondary" href="${path}/student/reportList/${studentId}/1">진행중인 과제</a></div>
+								
+									<div class="list-inline text-center mt-4 mb-0">
+										<input type="text" id="reportTitle" placeholder="과제명을 입력해주세요"> <a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
+									</div>
 								</div>
 								<table id="reportOverdueTable" class="table table" style="margin-top: 20px;">
 									<thead>
@@ -124,8 +128,8 @@
 								</table>
 								<div id="paging" style="text-align: center; padding: 7px;">
 									<div>
-										<c:if test="${OverdueListCurrentPage>1}">
-											<a href="${path}/student/reportOverdueList/${studentId}/1">처음으로</a>
+										<c:if test="${OverdueListCurrentPage%10==1 && OverdueListCurrentPage>10}">
+											
 											<a href="${path}/student/reportOverdueList/${studentId}/${OverdueListCurrentPage-1}">이전</a>
 										</c:if>
 										<c:forEach var="o" begin="${overdueListUnderFirstPage}" end="${overdueListUnderLastPage}">
@@ -140,15 +144,16 @@
 												</span>
 											</c:if>		
 										</c:forEach>
-										<c:if test="${OverdueListCurrentPage<lastOverduePage}">
+										<c:if test="${OverdueListCurrentPage%10==0 && OverdueListCurrentPage<lastOverduePage}">
 											<a href="${path}/student/reportOverdueList/${studentId}/${OverdueListCurrentPage+1}">다음</a>
-											<a href="${path}/student/reportOverdueList/${studentId}/${lastOverduePage}">마지막으로</a>
+											
 										</c:if>
 									</div>
+									
 									<c:if test="${reportTitle != null}">
 										<div>
-											<c:if test="${OverdueSearchCurrentPage>1}">
-												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/1">처음으로</a>
+											<c:if test="${OverdueSearchCurrentPage%10==1 && OverdueSearchCurrentPage>10}">
+												
 												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/${OverdueSearchCurrentPage-1}">이전</a>
 											</c:if>
 											<c:forEach var="s" begin="${searchUnderFirstPage}" end="${searchUnderLastPage}">
@@ -163,16 +168,16 @@
 													</span>
 												</c:if>	
 											</c:forEach>
-											<c:if test="${OverdueSearchCurrentPage<lastOverdueSearchPage}">
+											<c:if test="${OverdueSearchCurrentPage%10==0 && OverdueSearchCurrentPage<lastOverdueSearchPage}">
 												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/${OverdueSearchCurrentPage+1}">다음</a>
-												<a href="${path}/student/reportOverdueSearch/${studentId}/${reportTitle}/${lastOverdueSearchPage}">마지막으로</a>
+												
 											</c:if>
 										</div>
 									</c:if>
 									<c:if test="${lectureNo != null}">
 										<div>
-											<c:if test="${lectureOverdueCurrentPage>1}">
-												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/1">처음으로</a>
+											<c:if test="${lectureOverdueCurrentPage%10==1 && lectureOverdueCurrentPage>10}">
+												
 												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lectureOverdueCurrentPage-1}">이전</a>
 											</c:if>
 											
@@ -185,17 +190,14 @@
 												</c:if>
 											</c:forEach>
 											
-											<c:if test="${lectureOverdueCurrentPage<lastLectureOverduePage}">
+											<c:if test="${lectureOverdueCurrentPage%10==0 && lectureOverdueCurrentPage<lastLectureOverduePage}">
 												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lectureOverdueCurrentPage+1}">다음</a>
-												<a href="${path}/student/reportOverdueLectureList/${studentId}/${lectureNo}/${lastLectureOverduePage}">마지막으로</a>
+												
 											</c:if>
 										</div>
 									</c:if>
 								</div>		
 								<input type="hidden" id="studentId" value="${studentId}">
-								<div class="list-inline text-center mt-4 mb-0">
-									<input type="text" id="reportTitle" placeholder="과제명을 입력해주세요"> <a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
-								</div>
 							</div>
 						</div>
 					</div>

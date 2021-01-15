@@ -60,10 +60,18 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-							<div class="d-flex align-items-center">
-								<div><a type="button" class="btn btn-outline-secondary" href="${path}/student/questionAdd/${studentId}">질문 등록하기</a></div>
+							<div class="border border-0 d-flex justify-content-between">
+								<div class="border border-0"><a type="button" class="btn btn-outline-secondary" href="${path}/student/questionAdd/${studentId}">질문 등록하기</a></div>
+								<div class="list-inline text-center mt-4 mb-0">
+									<select id="sub">
+										<option value="제목">제목</option>
+										<option value="작성자">작성자</option>
+									</select>
+									<input type="text" id="question"> 
+									<a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
+								</div>
 							</div>
-								<table id="questionTable" class="table table" style="margin-top: 20px;">
+								<table id="questionTable" class="table table" style="margin-top: 20px; text-align: center;">
 									<thead>
 										<c:if test="${!empty questionList}">
 											<tr class="border-0">
@@ -93,24 +101,24 @@
 												</c:if>
 											</td>	
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4">
-												<div class="d-flex no-block align-items-center">
+												
 													<h5 class="text-dark mb-0 font-16 font-weight-medium">${q.questionWriter}</h5>
-												</div>	
+											
 											</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-												<div class="d-flex no-block align-self-center">
-													<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/questionCountUp/${q.questionNo}">${q.questionTitle}</a></h5>
-												</div>
+												
+													<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/questionCountUp/${studentId}/${q.questionNo}">${q.questionTitle}</a></h5>
+												
 											</td>	
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-												<div class="d-flex no-block align-self-center">
+												
 													<h5 class="text-dark mb-0 font-16 font-weight-medium">${q.questionCreatedate}</h5>
-												</div>	
+												
 											</td>
 											<td class="font-weight-medium text-dark border-top-0 text-center px-2 py-4">
-												<div class="d-flex no-block align-items-center">
+										
 													<h5 class="text-dark mb-0 font-16 font-weight-medium">${q.questionCount}</h5>
-												</div>
+									
 											</td>
 										</tr>
 									</c:forEach>
@@ -120,8 +128,7 @@
 							<div id="paging" style="text-align: center; padding: 7px;">
 							<!-- 질문 검색전 리스트 페이징 -->
 								<div>
-									<c:if test="${listCurrentPage>1}">
-										<a href="${path}/student/questionList/${studentId}/1">처음으로</a>
+									<c:if test="${listCurrentPage%10==1 && listCurrentPage>10}">
 										<a href="${path}/student/questionList/${studentId}/${listCurrentPage-1}">이전</a>
 									</c:if>
 									
@@ -134,17 +141,15 @@
 										</c:if>
 									</c:forEach>
 									
-									<c:if test="${listCurrentPage<lastPage}">
+									<c:if test="${listCurrentPage%10==0 && listCurrentPage<lastPage}">
 										<a href="${path}/student/questionList/${studentId}/${listCurrentPage+1}">다음</a>
-										<a href="${path}/student/questionList/${studentId}/${lastPage}">마지막으로</a>
 									</c:if>
 								</div>
 							
 								<!-- 강의 검색 리스트 페이징 -->
 								<c:if test="${lectureNo != null}">
 									<div>
-										<c:if test="${lectureCurrentPage>1}">
-											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/1">처음으로</a>
+										<c:if test="${lectureCurrentPage%10==1 && lectureCurrentPage>10}">
 											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lectureCurrentPage-1}">이전</a>
 										</c:if>
 										
@@ -157,9 +162,8 @@
 											</c:if>
 										</c:forEach>
 										
-										<c:if test="${lectureCurrentPage<lastLecturePage}">
+										<c:if test="${lectureCurrentPage%10==0 && lectureCurrentPage<lastLecturePage}">
 											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lectureCurrentPage+1}">다음</a>
-											<a href="${path}/student/questionLectureSearch/${studentId}/${lectureNo}/${lastLecturePage}">마지막으로</a>
 										</c:if>
 									</div>
 								</c:if>
@@ -167,8 +171,7 @@
 								<!-- 제목 검색에 대한 페이징 -->
 								<c:if test="${questionTitle != null}">	
 									<div>
-										<c:if test="${titleCurrentPage>1}">
-											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/1">처음으로</a>
+										<c:if test="${titleCurrentPage%10==1 && titleCurrentPage>10}">
 											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage-1}">이전</a>
 										</c:if>
 										
@@ -181,9 +184,8 @@
 											</c:if>
 										</c:forEach>
 										
-										<c:if test="${titleCurrentPage<lastTitlePage}">
+										<c:if test="${titleCurrentPage%10==0 && titleCurrentPage<lastTitlePage}">
 											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${titleCurrentPage+1}">다음</a>
-											<a href="${path}/student/questionTitleSearch/${studentId}/${questionTitle}/${lastTitlePage}">마지막으로</a>
 										</c:if>
 									</div>
 								</c:if>	
@@ -191,8 +193,7 @@
 								<!-- 작성자 검색에 대한 페이징 -->
 								<c:if test="${questionWriter != null}">	
 									<div>
-										<c:if test="${writerCurrentPage>1}">
-											<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/1">처음으로</a>
+										<c:if test="${writerCurrentPage%10==1 && writerCurrentPage>10}">
 											<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${writerCurrentPage-1}">이전</a>
 										</c:if>
 										<div class="btn-group me-2" role="group" aria-label="First group">
@@ -205,22 +206,13 @@
 												</c:if>
 											</c:forEach>
 										</div>
-										<c:if test="${writerCurrentPage<lastWriterPage}">
+										<c:if test="${writerCurrentPage%10==0 && writerCurrentPage<lastWriterPage}">
 											<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${writerCurrentPage+1}">다음</a>
-											<a href="${path}/student/questionWriterSearch/${studentId}/${questionWriter}/${lastWriterPage}">마지막으로</a>
 										</c:if>
 									</div>
 								</c:if>
 							</div>	
 							<input type="hidden" id="studentId" value="${studentId}">
-							<div class="list-inline text-center mt-4 mb-0">
-								<select id="sub">
-									<option value="제목">제목</option>
-									<option value="작성자">작성자</option>
-								</select>
-								<input type="text" id="question"> 
-								<a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
-							</div>	
 						</div>
 					</div>
 				</div>

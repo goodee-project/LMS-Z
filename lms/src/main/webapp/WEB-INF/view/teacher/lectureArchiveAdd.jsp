@@ -100,6 +100,7 @@
 											</td>
 										</tr>
 									</table>
+									<a class="btn btn-outline-secondary text-dark" style="border-radius:4px; float:left;" href="${path}/teacher/lectureArchiveList/${teacherId}/${lectureNo}/1">뒤로가기</a>
 									<button class="btn btn-success" style="border-radius:4px; float:right;" type="button" id="submitBtn">작성완료</button>
 								</form>
 							</div>

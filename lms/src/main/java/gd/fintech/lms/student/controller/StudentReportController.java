@@ -33,6 +33,7 @@ import gd.fintech.lms.vo.Student;
 @Controller
 public class StudentReportController {
 	@Autowired StudentReportService studentReportService;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	@GetMapping("/student/reportList/{accountId}/{currentPage}")
 	public String listReport(Model model,
@@ -280,11 +281,19 @@ public class StudentReportController {
 	
 	@GetMapping("/student/reportSubmitFileDownload/{reportSubmitFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="reportSubmitFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
 		String attachPath = "uploadfile\\reportfile\\";
+		
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/reportfile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\reportfile\\";
+        }
 		
 		File f = new File(rootPath + attachPath + fileName);
 		// 파일을 다운로드 받기 위한 스트림

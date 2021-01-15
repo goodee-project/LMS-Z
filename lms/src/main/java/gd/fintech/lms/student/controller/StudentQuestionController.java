@@ -37,6 +37,7 @@ import gd.fintech.lms.vo.Student;
 @Controller
 public class StudentQuestionController {
 	@Autowired StudentQuestionService studentQuestionService;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	// 질문 목록 리스트
 	@GetMapping("/student/questionList/{accountId}/{currentPage}")
 	public String listQuestion(Model model, 
@@ -142,13 +143,17 @@ public class StudentQuestionController {
 	}
 	
 	// 질문 상세히 보기
-	@GetMapping("/student/questionOne/{questionNo}/{currentPage}")
+	@GetMapping("/student/questionOne/{questionNo}/{accountId}/{currentPage}")
 	public String oneQuestion(Model model, 
 			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId,
 			@PathVariable(name="currentPage")int currentPage) {
 		int rowPerPage = 3;
 		Question question = studentQuestionService.getQuestionOne(questionNo);
 		List<QuestionComment> questionCommet = studentQuestionService.getCommentList(questionNo, currentPage, rowPerPage);
+		Student student = studentQuestionService.getStudentName(accountId);
+		
+		
 		int countQuestionComment = studentQuestionService.totalQuestionComment(questionNo);
 		int lastCommentPage = countQuestionComment / rowPerPage;
 		int commentUnderPerPage = 10;	
@@ -170,6 +175,7 @@ public class StudentQuestionController {
 		model.addAttribute("lastCommentPage", lastCommentPage);
 		model.addAttribute("questionCommet",questionCommet);
 		model.addAttribute("question",question);
+		model.addAttribute("student", student);
 		return "/student/questionOne";
 	}
 		
@@ -205,10 +211,11 @@ public class StudentQuestionController {
 		return "/student/questionList";
 	}
 	
-	@GetMapping("/student/questionCountUp/{questionNo}")
-	public String CountUpQuestion(@PathVariable(name="questionNo")int questionNo) {
+	@GetMapping("/student/questionCountUp/{accountId}/{questionNo}")
+	public String CountUpQuestion(@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="questionNo")int questionNo) {
 		studentQuestionService.updateQuestionCount(questionNo);
-		return "redirect:/student/questionOne/{questionNo}/1";
+		return "redirect:/student/questionOne/{questionNo}/{accountId}/1";
 	}
 	
 	// 질문 등록 폼
@@ -236,6 +243,39 @@ public class StudentQuestionController {
 		return "redirect:/student/questionList/"+studentId+"/1";
 	}
 	
+	@PostMapping("/student/questionCommentAdd/{questionNo}/{accountId}")
+	public String addQuestionCommetn(QuestionComment questionComment,
+			@RequestParam(value="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
+		studentQuestionService.addQuestionComment(questionComment);
+		return "redirect:/student/questionOne/{questionNo}/{accountId}/1";
+	}
+	
+	//댓글 수정 폼
+	@GetMapping("/student/questionCommentModify/{questionNo}/{questionCommentNo}/{accountId}")
+	public String modifyQuestionComment(Model model,
+			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId,
+			@PathVariable(name="questionCommentNo")int questionCommentNo) {
+		Question question = studentQuestionService.getQuestionOne(questionNo);
+		QuestionComment questionComment = studentQuestionService.getQuestionCommetnOne(questionCommentNo);
+		
+		Student student = studentQuestionService.getStudentName(accountId);
+		model.addAttribute("student", student);
+		
+		model.addAttribute("question",question);
+		model.addAttribute("questionComment",questionComment);
+		return "/student/questionCommentModify";
+	}
+	
+	@PostMapping("/student/questionCommentModify/{questionNo}/{accountId}")
+	public String modifyQuestionComment(QuestionComment questionComment,
+			@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
+		studentQuestionService.updateQuestionComment(questionComment);
+		return "redirect:/student//questionOne/{questionNo}/{accountId}/1";
+	}
+	
 	//질문 수정 폼
 	@GetMapping("/student/questionModify/{accountId}/{questionNo}")
 	public String modifyQuestion(Model model,
@@ -251,8 +291,10 @@ public class StudentQuestionController {
 	}
 	
 	//질문 수정 액션
-	@PostMapping("student/questionModify")
-	public String modifyQuestion(QuestionAddForm questionAddForm,@RequestParam(value="questionNo")int questionNo) {
+	@PostMapping("student/questionModify/{accountId}")
+	public String modifyQuestion(QuestionAddForm questionAddForm,
+			@RequestParam(value="questionNo")int questionNo,
+			@PathVariable(name="accountId")String accountId) {
 		
 		// db에 모든 html태그 접근 제한
 		String title = questionAddForm.getQuestionTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
@@ -261,7 +303,7 @@ public class StudentQuestionController {
 		questionAddForm.setQuestionContent(content);
 		
 		studentQuestionService.updateQuestion(questionAddForm);
-		return "redirect:/student/questionOne/"+questionNo+"/1";
+		return "redirect:/student/questionOne/"+questionNo+"/{accountId}/1";
 	}
 	// 질문 삭제 
 	@GetMapping("/student/questionRemove/{accountId}/{questionNo}")
@@ -270,6 +312,15 @@ public class StudentQuestionController {
 			@PathVariable(name="accountId")String accountId) {
 		studentQuestionService.deleteQuestion(questionNo);
 		return "redirect:/student/questionList/"+accountId+"/1";
+	}
+	
+	@GetMapping("/student/questionCommentRemove/{questionNo}/{questionCommentNo}/{accountId}")
+	public String removeQuestionComment(@PathVariable(name="questionNo")int questionNo,
+			@PathVariable(name="questionCommentNo")int questionCommentNo,
+			@PathVariable(name="accountId")String accountId) {
+		studentQuestionService.deleteQuestionComment(questionCommentNo);
+		return "redirect:/student/questionOne/{questionNo}/{accountId}/1";
+		
 	}
 	
 	@GetMapping("/student/questionFileRemove/{accountId}")
@@ -289,11 +340,19 @@ public class StudentQuestionController {
 	@GetMapping("/student/questionFileDownload/{questionFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="questionFileUuid")String fileName,HttpServletResponse response)throws Exception{
 		// 파일을 다운로드 받기 위한 스트림
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String rootPath = "";
 		
-		String attachPath = "uploadfile\\questionfile\\";
+		String attachPath = "";
+		
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/questionfile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\questionfile\\";
+        }
 		
 		File f = new File(rootPath + attachPath + fileName);
 		
