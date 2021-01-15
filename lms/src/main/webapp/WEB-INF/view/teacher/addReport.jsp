@@ -66,24 +66,24 @@
 			<table id="lmsNoticeTable" class="table table">
 				<tr>
 					<th class="font-weight-bold">과제 제목</th>
-					<td><input type="text" name="reportTitle" id="reportTitle" style="width:560px"></td>
+					<td><input class="form-control" style="width:100%" type="text" name="reportTitle" id="reportTitle" style="width:560px"></td>
 				</tr>
 				<tr>
 					<th class="font-weight-bold">과제 내용</th>
-					<td><textarea class="form-control" rows="3" cols="50" name="reportContent" id="reportContent"></textarea></td>
+					<td><textarea class="form-control" style="width:100%"rows="3" cols="50" name="reportContent" id="reportContent"></textarea></td>
 				</tr>
 				<!-- 과제 시작일 -->
 				<tr>
 					<th class="font-weight-bold">과제 제출일</th>
-					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate"></td>
+					<td><input class="form-control" type="datetime-local" name="reportStartdate" id="reportStartdate"></td>
 				</tr>
 				<!-- 과제 마감일 -->
 				<tr>
 					<th class="font-weight-bold">과제 마감일</th>
-					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate"></td>
+					<td><input class="form-control" type="datetime-local" name="reportEnddate" id="reportEnddate"></td>
 				</tr>
 			</table>
-			<button class="btn btn-success" style="border-radius: 4px;" type="button" id="insertBtn">과제등록</button>
+			<button class="btn btn-success" style="border-radius: 4px; float:right;" type="button" id="insertBtn">과제등록</button>
 			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${lectureNo}/${currentPage}">뒤로가기</a>
 		</form>
 		

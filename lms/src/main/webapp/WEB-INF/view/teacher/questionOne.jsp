@@ -103,7 +103,7 @@
 							<th>댓글 번호</th>
 							<th>글쓴이</th>
 							<th>내용</th>
-							<th>글쓴 날짜</th>
+							<th>최근 작성 날짜</th>
 							<th>수정</th>
 							<th>삭제</th>
 						</tr>
@@ -116,7 +116,7 @@
 								<td>${qc.questionCommentNo}</td>
 								<td>${qc.questionCommentWriter}</td>
 								<td>${qc.questionCommentContent}</td>
-								<td>${qc.questionCommentCreatedate}</td>
+								<td>${qc.questionCommentUpdatedate}</td>
 								<c:if test="${qc.accountId == teacherId}">
 								<td><a class="btn btn-info" style="border-radius: 4px;" href="${path}/teacher/modifyQuestionComment/${qc.questionCommentNo}/${currentPage}">수정</a></td>
 								<td><a onclick="btn('${qc.questionNo}', '${qc.questionCommentNo}')" class="btn btn-outline-danger" style="border-radius: 4px;" href="javascript:click()">삭제</a></td>

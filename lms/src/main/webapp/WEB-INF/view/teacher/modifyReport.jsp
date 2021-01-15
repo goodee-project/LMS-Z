@@ -70,22 +70,22 @@
 			<table id="lmsNoticeTable" class="table table">
 				<tr>
 					<th>과제 제목</th>
-					<td><input type="text" name="reportTitle" id="reportTitle" value="${reportOne.reportTitle}" style="width:560px"></td>
+					<td><input class="form-control" style="width:100%" type="text" name="reportTitle" id="reportTitle" value="${reportOne.reportTitle}" style="width:560px"></td>
 				</tr>
 				<tr>
 					<th>과제 내용</th>
-					<td><textarea class="form-control" rows="3" cols="50" name="reportContent" id="reportContent">${reportOne.reportContent}</textarea></td>
+					<td><textarea class="form-control" style="width:100%" rows="3" cols="50" name="reportContent" id="reportContent">${reportOne.reportContent}</textarea></td>
 				</tr>
 				<tr>
 					<th>과제 출제일</th>
-					<td><input type="datetime-local" name="reportStartdate" id="reportStartdate" value="${reportOne.reportStartdate}"></td>
+					<td><input class="form-control" type="datetime-local" name="reportStartdate" id="reportStartdate" value="${reportOne.reportStartdate}"></td>
 				</tr>
 				<tr>
 					<th>과제 마감일</th>
-					<td><input type="datetime-local" name="reportEnddate" id="reportEnddate" value="${reportOne.reportEnddate}"></td>
+					<td><input class="form-control" type="datetime-local" name="reportEnddate" id="reportEnddate" value="${reportOne.reportEnddate}"></td>
 				</tr>
 			</table>
-			<button class="btn btn-info" style="border-radius: 4px;" type="button" id="updateBtn">수정하기</button>
+			<button class="btn btn-success" style="border-radius: 4px; float:right;" type="button" id="updateBtn">수정하기</button>
 			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportOne/${reportOne.reportNo}">뒤로가기</a>
 		</form>
 		
