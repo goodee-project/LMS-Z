@@ -78,6 +78,8 @@
 											</td>
 										</tr>
 									</table>
+									
+									<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testList/${lectureNo}">< 뒤로</a>
 									<div style="float:right;">
 										<button class="btn btn-success" style="border-radius:4px;" type="button" id="btn">등록</button>
 									</div>

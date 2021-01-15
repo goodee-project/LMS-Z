@@ -78,7 +78,10 @@
 											</td>
 										</tr>
             						</table>
-            						<button class="btn btn-info" style="border-radius: 4px; float:right;" type="button" id="btn">수정</button>
+            						<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testList/${lectureNo}">< 뒤로</a>
+            						<div style="float:right;">
+            						<button class="btn btn-info" style="border-radius: 4px;" type="button" id="btn">수정</button>
+            						</div>
           	 					</form>
            					</div>
     					</div>

@@ -105,7 +105,10 @@
             								</c:forEach>
             							</tbody>
             						</table>
-            						<button class="btn btn-success" style="border-radius:4px; float:right;" id="btn" type="button">등록</button>
+            						<a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/testQuestionList/${lectureNo}">< 뒤로</a>
+            						<div  style="float:right";>
+            						<button class="btn btn-success" style="border-radius:4px;" id="btn" type="button">등록</button>
+            						</div>
             					</form>
 							</div>
 						</div>

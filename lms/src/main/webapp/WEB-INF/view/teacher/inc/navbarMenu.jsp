@@ -29,7 +29,7 @@
                                 </span></a>
                         </li>
                         <!-- FAQ -->
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/faqList/1/total"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path}/teacher/faqList/1/강의"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">FAQ
                                 </span></a>

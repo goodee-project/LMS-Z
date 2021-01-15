@@ -63,6 +63,7 @@
 										</tr>
 									</thead>
 									<tbody>
+										<c:if test="${!empty list}">
 										<c:forEach var="s" items="${list}">
 											<tr>
 												<td>${s.studentName}</td>
@@ -78,6 +79,12 @@
 												</td>
 											</tr>
 										</c:forEach>
+										</c:if>
+										<c:if test="${empty list}">
+											<tr>
+												<td colspan="4">수강중인 학생이 없습니다.</td>
+											</tr>
+										</c:if>
 									</tbody>
             					</table>
             					

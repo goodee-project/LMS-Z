@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.teacher.mapper.TeacherFaqMapper">
-	<!-- 전체 FAQ 목록 출력 -->
-	<select id="selectFaqList" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Faq">
-		SELECT
-			faq_no faqNo,
-			faq_writer faqWriter,
-			faq_title faqTitle,
-			faq_createdate faqCreatedate,
-			faq_updatedate faqUpdatedate,
-			faq_count faqCount,
-			faq_category faqCategory
-		FROM faq
-		ORDER BY faq_createdate DESC
-		LIMIT #{beginRow}, #{rowPerPage}
-	</select>
-	
 	<!-- 카테고리별 FAQ목록 -->
 	<select id="selectFaqListByCategory" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Faq">
 		SELECT
@@ -28,6 +13,7 @@
 			faq_category faqCategory
 		FROM faq
 		WHERE faq_category = #{faqCategory}
+		ORDER BY faq_createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
@@ -37,14 +23,7 @@
 			faq_category faqCategory
 		FROM faq_category
 	</select>
-	
-	<!-- 전체 FAQ목록 개수 -->
-	<select id="selectFaqCount" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM faq
-	</select>
-	
+
 	<!-- 카테고리별 FAQ목록 개수 -->
 	<select id="selectFaqCountByCategory" parameterType="String" resultType="int">
 		SELECT
@@ -74,4 +53,29 @@
 		SET faq_count = faq_count + 1
 		WHERE faq_no = #{faqNo}
 	</update>
+	
+	<!-- 검색했을 때의 FAQ 목록 -->
+	<select id="selectFaqListBySearch" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Faq">
+		SELECT
+			faq_no faqNo,
+			faq_writer faqWriter,
+			faq_title faqTitle,
+			faq_createdate faqCreatedate,
+			faq_updatedate faqUpdatedate,
+			faq_count faqCount,
+			faq_category faqCategory
+		FROM faq
+		WHERE faq_title LIKE CONCAT('%',#{faqTitle},'%')
+		AND `faq_category`= #{faqCategory}
+		ORDER BY faq_createdate DESC
+		LIMIT #{beginRow}, #{rowPerPage}	
+	</select>
+	
+	<select id="selectFaqCountBySearch" parameterType="java.util.Map" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM faq
+		WHERE faq_title LIKE CONCAT('%',#{faqTitle},'%')
+		AND `faq_category`= #{faqCategory}
+	</select>
 </mapper>

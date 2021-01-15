@@ -44,14 +44,6 @@
                         
                         <br>
                         <div>
-                        	<c:if test="${currentCategory == 'total'}">
-                        		<span>전체</span>
-                        		&emsp;
-                        	</c:if>
-                        	<c:if test="${currentCategory != 'total'}">
-                        		<span><a href="${path}/teacher/faqList/1/total">전체</a></span>
-                        		&emsp;
-                        	</c:if>
 							<c:forEach var="c" items="${category}">
 								<c:if test="${c.faqCategory == currentCategory}">
 									<span>${c.faqCategory}</span>
@@ -73,12 +65,23 @@
             		<div class="col-lg-12 col-md-12">
             			<div class="card" id="cardStyle">
             				<div class="card-body">
+            				
+            					<div class="row">
+	                            	<div class="col-lg-2 col-md-2"></div>
+	                            	<div class="col-lg-4 col-md-4"></div>
+									<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
+									<div id="searchStyle" class="col-lg-6 col-md-6">
+										<input class="form-control-plaintext form-control border-black form-sm" type="text" id="faqTitle" value="${faqTitle}">&emsp;
+										<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn">검색</a>
+									</div>
+								</div>
+								
             					<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
             						<thead>
 										<tr>
 											<th>카테고리</th>
 											<th>번호</th>
-											<th>제목</th>
+											<th style="width:100%;">제목</th>
 											<th>작성자</th>
 											<th>작성일자</th>
 											<th>조회수</th>
@@ -233,5 +236,13 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    <script>
+		// 검색창에 입력한 값을 바로 사용하기 위해서 jquery사용
+		$(document).ready(function(){
+			$('#searchBtn').on('click',function(){
+				$('#searchBtn').prop('href',"${path}/teacher/faqList/1/${currentCategory}/"+$('#faqTitle').val());
+				})
+			})
+	</script>
 </body>
 </html>
