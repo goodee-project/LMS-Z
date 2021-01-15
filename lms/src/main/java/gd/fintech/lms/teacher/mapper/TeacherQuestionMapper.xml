@@ -10,6 +10,7 @@
 			question_count questionCount
 		FROM question
 		WHERE lecture_no = #{lectureNo}
+		ORDER BY questionNo DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	

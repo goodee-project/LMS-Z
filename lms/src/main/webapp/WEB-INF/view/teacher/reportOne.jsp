@@ -110,7 +110,7 @@
 			<a class="btn btn-outline-secondary text-dark" href="${path}/teacher/reportList/${reportOne.lectureNo}/1">뒤로가기</a>		
 		</div>
 		<div class="text-right">
-			<a class="btn btn-outline-danger" style="border-radius: 4px;" href="${path}/teacher/removeReport/${reportOne.lectureNo}/${reportOne.reportNo}">삭제</a>
+			<a onclick="btn('${reportOne.lectureNo}', '${reportOne.reportNo}')" class="btn btn-outline-danger" style="border-radius: 4px;" href="javascript:click()">삭제</a>
 		</div>
 	</div>
 	</div>
@@ -136,6 +136,18 @@
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
     <script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
+    
+    <script>
+    
+    function btn(lectureNo, reportNo){
+    	if (confirm("정말 삭제하시겠습니까?") == true){ // 확인
+			location.href = '${path}/teacher/removeReport/'+ lectureNo + '/' + reportNo;
+		}else{   //취소
+		    return;
+		}
+    }
+    
+    </script>
 		
 </body>
 </html>

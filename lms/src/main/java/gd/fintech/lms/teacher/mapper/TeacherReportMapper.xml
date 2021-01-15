@@ -34,6 +34,7 @@
 		LEFT JOIN account a
 		ON l.account_id = a.account_id
 		WHERE r.lecture_no = #{lectureNo}
+		ORDER BY r.report_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	<!-- 과제 등록 -->
@@ -123,6 +124,7 @@
 		LEFT JOIN report_submit_file rf
 		ON rs.report_submit_no = rf.report_submit_no
 		WHERE r.report_no = #{reportNo}
+		ORDER BY rs.report_submit_no DESC
 	</select>
 	<!-- 과제수정 -->
 	<update id="updateReport" parameterType="gd.fintech.lms.vo.Report">
