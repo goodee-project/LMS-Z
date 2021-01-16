@@ -1,5 +1,7 @@
 package gd.fintech.lms.student.restcontroller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +19,12 @@ public class StudentCourseGradesRestController {
 	
 	//강의별 성적 및 평균 성적 view에 전달
 	@GetMapping("/chart/studentCourseGrades/{studentId}")
-	public Map<String, Object> studentCouresGrades(@PathVariable(name="studentId") String studentId) {
-		return studentCourseGradesRestService.getCouresGrades(studentId);
+	public Map<String,Object> studentCouresGrades(
+			@PathVariable(name="studentId") String studentId){
+		
+		Map<String,Object> map=studentCourseGradesRestService.getCouresGrades(studentId);
+		
+		return map;
 	}
 	//현재 수강중인 강의 목록
 	@GetMapping("/chart/allMyLectureList/{studentId}")

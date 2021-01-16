@@ -68,7 +68,7 @@
 								    <br>
 								    <div>
 								    	 <a class="btn btn-outline-secondary" style="border-radius:4px;" href="${path}/teacher/studentList/${teacherId}/${lectureNo}" type="button">뒤로가기</a>
-								         <button class="btn btn-outline-success" style="border-radius:4px; float:right;" id="startBtn" type="button">채팅시작</button>
+								         <button class="btn btn-outline-success" style="border-radius: 4px;float:right; margin-left:8px;" type="button" id="teacherMsgBtn">입력</button>
 								    </div>
 					            </div>
 					    	</div>
@@ -99,19 +99,8 @@
   	$(document).ready(function(){
   	  	let timerId=null;
   		let html;
-  		// 학생의 메세지를 읽음
-  		$.ajax({
-			url:'${path}/teacher/teacherReadMsg',
-			type:'post',
-			data:{
-				toId:"${teacherId}",
-				fromId:"${student_Id}"
-				},
-			success:function(data){
-				console.log(data);
-				}
-		})
-			//데이터 입력
+  	
+		//데이터 입력
   		$('#teacherMsgBtn').click(function(){
 					// 메세지를 입력하지 않았을 때는 아무 작동 하지 않도록 함
 					if($('#toStudentMsgContent').val() != ""){
@@ -132,17 +121,24 @@
 						})
 					}
 				})
-			$('#startBtn').click(function(){//실시간 갱신 다시 실행
-				timerId=setInterval(msgList,5000);//5초
-				})
-			$('#stopBtn').click(function(){//실시간 갱신 정지
-				clearInterval(timerId);
+				timerId=setInterval(msgList,3000);//3초
 			})
-			timerId=setInterval(msgList,5000);//5초
-  	  	})
+			
   	  	
-  	  		//리스트 출력
+  	  	//리스트 출력
   	  	function msgList(){
+  		// 학생의 메세지를 읽음
+  		$.ajax({
+			url:'${path}/teacher/teacherReadMsg',
+			type:'post',
+			data:{
+				toId:"${teacherId}",
+				fromId:"${student_Id}"
+				},
+			success:function(data){
+				console.log(data);
+				}
+		})
 		$.ajax({
 			url:"${path}/teacher/msgList",
 			type:"get",

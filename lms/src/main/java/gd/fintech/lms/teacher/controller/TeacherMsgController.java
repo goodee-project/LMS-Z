@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import gd.fintech.lms.teacher.service.TeacherLectureService;
 import gd.fintech.lms.teacher.service.TeacherMsgService;
+import gd.fintech.lms.vo.Msg;
 import gd.fintech.lms.vo.Student;
 
 @Controller
@@ -26,6 +27,20 @@ public class TeacherMsgController {
 		//메세지 보낸 강사 이름
 		String teacherName = teacherLectureService.getLectureOne(lectureNo).getTeacherName();
 		
+		//안읽은 메세지 유무 판단
+		for(Student s : studentList) {
+			List<Msg> ckList = teacherMsgService.getMsgReadCheck(teacherId, s.getStudentId());
+			for(Msg m : ckList) {
+				System.out.println(m.getIsConfirm());
+				if(m.getIsConfirm() == true) {
+					s.getMsg().setConfirm(true);
+				}//안읽은 메세지 존재 시 false 후 반복문 중지
+				else {
+					s.getMsg().setConfirm(false);
+					break;
+				}
+			}
+		}
 		model.addAttribute("studentList",studentList);
 		model.addAttribute("lectureNo",lectureNo);
 		model.addAttribute("teacherName",teacherName);

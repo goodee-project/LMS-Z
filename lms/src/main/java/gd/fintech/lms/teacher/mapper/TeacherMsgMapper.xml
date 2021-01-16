@@ -20,6 +20,15 @@
 		LEFT JOIN student s ON cr.account_id=s.student_id
 		LEFT JOIN msg m ON s.student_id = m.from_id
 		WHERE lecture_no=#{lectureNo}
+		AND cr.class_registration_state ='수강중'
+	</select>
+	<!-- 메세지 읽음표시 -->
+	<select id="selectMsgReadCheck" parameterType="java.util.Map" resultType="gd.fintech.lms.vo.Msg">
+		SELECT
+			is_confirm isConfirm
+		FROM msg
+		WHERE to_id = #{teacherId}
+		AND from_id = #{studentId}
 	</select>
 	
 	<!-- 메세지 기록 리스트 불러오기 -->

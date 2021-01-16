@@ -117,18 +117,7 @@
     $(document).ready(function(){
   	  	let timerId=null;
   		let html;
-  		// 학생의 메세지를 읽음
-  		$.ajax({
-			url:'${path}/student/studentReadMsg',
-			type:'post',
-			data:{
-				toId:"${studentId}",
-				fromId:"${teacher_Id}"
-				},
-			success:function(data){
-				console.log(data);
-				}
-		})
+  		
 		//메세지 입력
   		$('#studentMsgBtn').click(function(){
 					// 메세지를 입력하지 않았을 때는 아무 작동 하지 않도록 함
@@ -150,17 +139,24 @@
 						})
 					}
 				})
-			$('#startBtn').click(function(){//실시간 갱신 다시 실행
-				timerId=setInterval(msgList,5000);//5초
-				})
-			$('#stopBtn').click(function(){//실시간 갱신 정지
-				clearInterval(timerId);
 			})
-			timerId=setInterval(msgList,5000);//5초
+			timerId=setInterval(msgList,3000);//3초
   	  	})
   	  	
-  	  		//리스트 출력
+  	  	//리스트 출력
   	  	function msgList(){
+    	// 학생의 메세지를 읽음
+  		$.ajax({
+			url:'${path}/student/studentReadMsg',
+			type:'post',
+			data:{
+				toId:"${studentId}",
+				fromId:"${teacher_Id}"
+				},
+			success:function(data){
+				console.log(data);
+				}
+		})
 		$.ajax({
 			url:"${path}/student/msgList",
 			type:"get",

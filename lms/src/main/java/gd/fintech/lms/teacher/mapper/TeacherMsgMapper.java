@@ -17,6 +17,8 @@ public interface TeacherMsgMapper {
 	public List<Msg> selectTeacherMsgList(Map<String, Object> map);
 	//메세지 보내기
 	public int insertToStudentMsg(Msg msg);
-	//메세지 읽음 표시
+	//메세지 읽음 
 	public int updateTeacherReadMsg(Msg msg);
+	//메세지 읽음 표시
+	public List<Msg> selectMsgReadCheck(Map<String,Object> map);
 }

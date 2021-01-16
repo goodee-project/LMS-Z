@@ -25,18 +25,24 @@ public class TeacherMsgService {
 		return teacherMsgMapper.selectLectureInStudentList(map);
 	}
 	// 메세지 기록 리스트 출력
-		public List<Msg> getTeacherMsgList(String studentId, String teacherId){
-			Map<String,Object> map = new HashMap<>();
-			map.put("studentId", studentId);
-			map.put("teacherId", teacherId);
-			return teacherMsgMapper.selectTeacherMsgList(map);
-		}
-		// 메세지 보내기
-		public int addToStudentMsg(Msg msg) {
-			return teacherMsgMapper.insertToStudentMsg(msg);
-		}
-		// 메세지 읽음 표시
-		public int modifyTeacherMsgRead(Msg msg) {
-			return teacherMsgMapper.updateTeacherReadMsg(msg);
-		}
+	public List<Msg> getTeacherMsgList(String studentId, String teacherId){
+		Map<String,Object> map = new HashMap<>();
+		map.put("studentId", studentId);
+		map.put("teacherId", teacherId);
+		return teacherMsgMapper.selectTeacherMsgList(map);
+	}
+	// 메세지 보내기
+	public int addToStudentMsg(Msg msg) {
+		return teacherMsgMapper.insertToStudentMsg(msg);
+	}
+	// 메세지 읽음 표시
+	public int modifyTeacherMsgRead(Msg msg) {
+		return teacherMsgMapper.updateTeacherReadMsg(msg);
+	}
+	public List<Msg> getMsgReadCheck(String teacherId, String studentId){
+		Map<String,Object> map = new HashMap<>();
+		map.put("teacherId", teacherId);
+		map.put("studentId", studentId);
+		return teacherMsgMapper.selectMsgReadCheck(map);
+	}
 }

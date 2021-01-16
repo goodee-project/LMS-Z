@@ -30,36 +30,7 @@
         
         <div class="page-wrapper">
             <div class="page-breadcrumb">
-            <div>
-            <ul class="navbar-nav float-left">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						<span>차트를 선택하세요</span><i data-feather="chevron-down"></i>
-					</a>
-					<!-- 드롭다운 내용 -->
-					<div id="dropDown" class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-						
-					<!--  
-						<a class="dropdown-item" href="${path }/chart/teacherInOutCount.jsp">
-							<i class="svg-icon mr-2 ml-1"></i>
-							강사 가입/탈퇴수 
-						</a>
-						<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="${path }/chart/studentInOutCount.jsp">
-							<i class="svg-icon mr-2 ml-1"></i>
-							학생 가입/탈퇴수
-						</a>
-						<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="${path }/chart/teacherAndStudentCount.jsp">
-							<i class="svg-icon mr-2 ml-1"></i>
-							lms이용자
-						</a>
-					-->
-					</div>
-				</li>
-			</ul>
-			</div>
+            
            	<div class="row">
 				<div class="col-md-8 col-lg-8">
 					<canvas id="barChart">
@@ -125,20 +96,12 @@
 				`
 			$('#lectureList').append(space);
 			
+			//현재 학생의 수강중,수료,과락 상태의 강의 리스트
 			$.ajax({
 				url:'${path}/chart/allMyLectureList/'+studentId,
 				type:'GET',
 				success:function(data){
 					console.log(data);
-					for(let i=0;i<data.length;i++){
-						let dropDown=
-							`
-							<button type="button" class="dropdown-item" id="\${i}">
-								\${data[i].lecture.lectureName}
-							</button>
-							`
-						$('#dropDown').append(dropDown);
-						}
 					
 					for(let i=0;i<data.length;i++){
 						let list=
@@ -153,7 +116,7 @@
 						}
 					}
 				})
-			
+				
 			let scoreTitle=
 				`
 				<td class="font-14 font-weight-medium text-muted px-2">
@@ -172,59 +135,98 @@
 				`
 			$('#score').append(scoreTitle);
 			$('#scoreAvg').append(scoreAvgTitle);
-			
+
+			//테이블 값 및 차트 데이터
 			$.ajax({
 				url:'${path}/chart/studentCourseGrades/'+studentId,
 				type:"get",
 				success:function(data){
-						let html=
+						let score=
 							`
-							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.test}
+										\${data.Cshop}
 									</span>
 								</td>
-							</tr>
-							<tr class="border-top-0 px-2 py-4">
 								<td class="font-14 font-weight-medium text-muted px-2">
 									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.testAvg}
+										\${data.DigitalEngineering}
 									</span>
 								</td>
-							</tr>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.Doraemon}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.JAVA}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.fintech}
+									</span>
+								</td>
 							`
-						$('#tableBody').html(html)
+						let scoreAvg=
+							`
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.CshopAvg}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.DigitalEngineeringAvg}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.DoraemonAvg}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.JAVAAvg}
+									</span>
+								</td>
+								<td class="font-14 font-weight-medium text-muted px-2">
+									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
+										\${data.fintechAvg}
+									</span>
+								</td>
+							`
+						$('#score').append(score);
+						$('#scoreAvg').append(scoreAvg);
 						
 						
 					var ctx = document.getElementById('barChart');
 					var chart = new Chart(ctx,{
 						type:'bar',
 						data:{
-							labels:['JAVA123','fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
+							labels:['Cshop','DigitalEngineering','Doraemon','JAVA','fintech'],
 							datasets:[{
 								label:'강의별 성적',
 								backgroundColor:'rgba(255, 99, 132, 0.5)',
 					            borderColor: 'rgba(255, 99, 132, 1)',
 						        data:[
-							        data.test,
-									data.fintech,
-									data.JAVAcc,
-									data.Doraemon,
-									data.DigitalEngineering,
-									data.Cshop
+							        data.Cshop,
+							        data.DigitalEngineering,
+							        data.Doraemon,
+							        data.JAVA,
+									data.fintech
 							        ]
 								}, {
 								label:'강의별 평균 성적',
 								backgroundColor:'rgba(54, 162, 235, 0.5)',
 						        borderColor:'rgba(54, 162, 235, 1)',
 							    data:[
-								    data.testAvg,
-									data.fintechAvg,
-									data.JAVAccAvg,
-									data.DoraemonAvg,
-									data.DigitalEngineeringAvg,
-									data.CshopAvg
+							    	data.CshopAvg,
+							        data.DigitalEngineeringAvg,
+							        data.DoraemonAvg,
+							        data.JAVAAvg,
+									data.fintechAvg
 								    ]
 								}]
 							}
