@@ -1,5 +1,6 @@
 package gd.fintech.lms.teacher.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,11 @@ public class TeacherInfoController {
 	
 	// 회원 탈퇴
 	@GetMapping("/teacher/deleteMyInfoById/{teacherId}")
-	public String deleteMyInfoById(
+	public String deleteMyInfoById(HttpSession session,
 			@PathVariable(value="teacherId") String teacherId) {
 		teacherInfoService.deleteTeacher(teacherId);
+		
+		session.invalidate();
 		
 		return "redirect:/teacherLogin";
 	}

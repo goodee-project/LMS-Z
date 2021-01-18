@@ -129,20 +129,22 @@
                             		</div>
                             	</div>
                             	<form id="attendanceForm" method="post" action="${path}/teacher/modifyAttendanceOneState">
-	                                <table id="attendanceTable" class="table table">
-	                                </table>
-	                                <div style="float:left">
-	                                	<a id="btnHome" href="${path}/teacher/lectureOne/${lectureNo}" class="btn btn-outline-secondary" style="border-radius: 4px;">돌아가기</a>
+                            		<div id="tableHeight" style="overflow:auto; height: 500px">
+		                                <table id="attendanceTable" class="table table">
+		                                </table>
 	                                </div>
-	                                <div style="float:left">
-	                                	<button id="btnBack" class="btn btn-outline-secondary" style="border-radius: 4px;">뒤로</button>
-	                                </div>
-	                                <div class="text-right">
-	                                	<button class="btn btn-success" style="border-radius: 4px;" id="btnUpdate" type="button">업데이트</button>
-	                                </div>
-	                                <div class="text-right">
-	                                	<button id="btnModify" class="btn btn-info" style="border-radius: 4px;" type="button">수정</button>
-	                                </div>
+		                            <div style="float:left">
+		                                <a id="btnHome" href="${path}/teacher/lectureOne/${lectureNo}" class="btn btn-outline-secondary" style="border-radius: 4px;">돌아가기</a>
+		                            </div>
+		                            <div style="float:left">
+		                                <button id="btnBack" class="btn btn-outline-secondary" style="border-radius: 4px;">뒤로</button>
+		                            </div>
+		                            <div class="text-right">
+		                                <button class="btn btn-success" style="border-radius: 4px;" id="btnUpdate" type="button">업데이트</button>
+		                            </div>
+		                            <div class="text-right">
+		                                <button id="btnModify" class="btn btn-info" style="border-radius: 4px;" type="button">수정</button>
+		                            </div>
 	                           </form>
                             </div>
                         </div>
@@ -394,8 +396,8 @@
 						strBody += '</tr>';
 		
 						$('#attendanceTable').append(strBody);
-					}
-		
+					} 
+					
 					$('#attendanceTitle').text(data.attendanceDay);
 					updateAttendanceDay = data.attendanceDay;
 					updateCurrentDay = data.currentDay;
@@ -461,7 +463,8 @@
 					var strBody = '<tr>';
 					strBody += '<td colspan="3">수강 날짜가 아닙니다.</td>';						
 					strBody += '</tr>';
-
+					
+					$('#attendanceCount').text('총 0명' + ' - ' + '출석 0명');
 					$('#attendanceTable').append(strBody);
 				}
 
@@ -472,7 +475,7 @@
 				for(var i=0; i<data.attendanceList.length; i++){
 					attendanceListLength += data.attendanceList[i].studentList.length;
 				}
-				$('#attendanceCount').text('총' + (attendanceListLength) + '명' + ' - ' + '출석' + (data.attendanceYesList.length) + '명');
+				$('#attendanceCount').text('총' + (attendanceListLength) + '명' + ' - ' + '출석' + (data.attendanceYesList[0].studentList.length) + '명');
 				$('#smallTitle').text(data.lectureName);
 			}
 		});	

@@ -42,9 +42,11 @@ public class StudentInfoController {
 	
 	// 회원 탈퇴
 	@GetMapping("/student/deleteMyInfoById/{studentId}")
-	public String deleteMyInfoById(
+	public String deleteMyInfoById(HttpSession session,
 			@PathVariable(value="studentId") String studentId) {
 		studentInfoService.deleteStudent(studentId);
+		
+		session.invalidate();
 		
 		return "redirect:/studentLogin";
 	}
