@@ -34,6 +34,7 @@ import gd.fintech.lms.vo.Teacher;
 @Controller
 public class TeacherLectureArchiveController {
 	@Autowired TeacherLectureArchiveService teacherLectureArchiveService;
+	private static String OS = System.getProperty("os.name").toLowerCase();
 	
 	@GetMapping("/teacher/lectureArchiveList/{accountId}/{lectureNo}/{currentPage}")
 	public String listLectureArchive(Model model,
@@ -111,15 +112,16 @@ public class TeacherLectureArchiveController {
 		return "/teacher/lectureArchiveAdd";
 	}
 	
-	@PostMapping("/teacher/lectureArchiveAdd")
-	public String accLectureArchive(LectureArchiveAddForm lectureArchiveAddForm,
-			@RequestParam(value="teacherId")String teacherId) {
+	@PostMapping("/teacher/lectureArchiveAdd/{lectureNo}")
+	public String addLectureArchive(LectureArchiveAddForm lectureArchiveAddForm,
+			@RequestParam(value="teacherId")String teacherId,
+			@PathVariable(name="lectureNo")int lectureNo) {
 		teacherLectureArchiveService.addLectureArchive(lectureArchiveAddForm);
 		String title = lectureArchiveAddForm.getLectureArchiveTitle().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lectureArchiveAddForm.setLectureArchiveTitle(title);
 		String content = lectureArchiveAddForm.getLectureArchiveContent().replaceAll("<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>", "");
 		lectureArchiveAddForm.setLectureArchiveContent(content);
-		return "redirect:/teacher/lectureArchiveList/"+teacherId+"/1";
+		return "redirect:/teacher/lectureArchiveList/"+teacherId+"/{lectureNo}/1";
 	}
 	
 	@GetMapping("/teacher/lectureArchiveCountUp/{accountId}/{lectureNo}/{lectureArchiveNo}")
@@ -143,11 +145,11 @@ public class TeacherLectureArchiveController {
 		return "/teacher/lectureArchiveListOne";
 	}
 	
-	@GetMapping("/teacher/lectureArchiveModify/{accountId}/{lectureArchiveNo}")
+	@GetMapping("/teacher/lectureArchiveModify/{accountId}/{lectureNo}/{lectureArchiveNo}")
 	public String modifylectureArchive(Model model,
 			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
 			@PathVariable(name="accountId")String accountId,
-			@RequestParam(value="lectureNo")int lectureNo) {
+			@PathVariable(name="lectureNo")int lectureNo) {
 		List<Lecture> lectureList = teacherLectureArchiveService.getLectureList(accountId);
 		LectureArchive lectureArchive = teacherLectureArchiveService.getLectureArchiveOne(lectureArchiveNo);
 		model.addAttribute("lectureArchive", lectureArchive);
@@ -168,18 +170,19 @@ public class TeacherLectureArchiveController {
 	}
 	
 	
-	@GetMapping("/teacher/lectureArchiveOneFileRemove/{lectureArchiveFileUuid}/{lectureArchiveNo}/{accountId}")
+	@GetMapping("/teacher/lectureArchiveOneFileRemove/{lectureArchiveFileUuid}/{lectureArchiveNo}/{accountId}/{lectureNo}")
 	public String removeLectureArchiveOneFile(@PathVariable(name="lectureArchiveFileUuid")String lectureArchiveFileUuid,
 			@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
+			@PathVariable(name="lectureNo")int lectureNo,
 			@PathVariable(name="accountId")String accountId) {
 		teacherLectureArchiveService.deleteLectureArchiveOneFile(lectureArchiveFileUuid);
-		return "redirect:/teacher/lectureArchiveModify/{accountId}/{lectureArchiveNo}";
+		return "redirect:/teacher/lectureArchiveModify/{accountId}/{lectureNo}/{lectureArchiveNo}";
 	}
-	@GetMapping("/teacher/lectureArchiveRemove/{lectureArchiveNo}/{accountId}")
+	@GetMapping("/teacher/lectureArchiveRemove/{lectureArchiveNo}/{accountId}/{lectureNo}")
 	public String removeLectureArchive(@PathVariable(name="lectureArchiveNo")int lectureArchiveNo,
 			@PathVariable(name="accountId")String accountId) {
 		teacherLectureArchiveService.deleteLectureArchive(lectureArchiveNo);
-		return "redirect:/teacher/lectureArchiveList/{accountId}/1";
+		return "redirect:/teacher/lectureArchiveList/{accountId}/{lectureNo}/1";
 	}
 	
 	@GetMapping("/teacher/lectureArchiveFileCountUp/{lectureArchiveFileUuid}")
@@ -190,11 +193,18 @@ public class TeacherLectureArchiveController {
 	
 	@GetMapping("/teacher/lectureArchiveFileDownload/{lectureArchiveFileUuid}")
 	public ResponseEntity<byte[]> displayFile(@PathVariable(name="lectureArchiveFileUuid")String fileName,HttpServletResponse response)throws Exception{
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String rootPath = "";
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String attachPath = "";
 		
-		String attachPath = "uploadfile\\lectureArchivefile\\";
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/lectureArchivefile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\lectureArchivefile\\";
+        }
 		
 		File f = new File(rootPath + attachPath + fileName);
 		

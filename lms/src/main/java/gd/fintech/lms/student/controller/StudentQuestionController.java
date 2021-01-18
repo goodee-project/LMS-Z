@@ -179,6 +179,15 @@ public class StudentQuestionController {
 		return "/student/questionOne";
 	}
 		
+	@GetMapping("/student/questionPw/{questionNo}")
+	public String PwQuestion(Model model,
+			@PathVariable(name="questionNo")int questionNo) {
+		Question question = studentQuestionService.getQuestionOne(questionNo);
+		
+		model.addAttribute("question", question);
+		return "/student/questionPw";
+	}
+	
 	@GetMapping("/student/questionWriterSearch/{accountId}/{questionWriter}/{currentPage}")
 	public String searchWriterQuestion(Model model,
 			@PathVariable(name="accountId")String accountId,

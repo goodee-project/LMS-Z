@@ -148,8 +148,10 @@
 									</div>
 								</div>
 							</div>
-						</div>		
-						<input type="hidden" id="questionPassword" value="${question.questionPassword}">
+						</div>
+								
+							<input type="hidden" id="questionPassword" value="${question.questionPassword}">
+					
 						<div class="col-lg-6 col-md-6">
 	                        <div class="card" id="cardStyle">
 	                            <div class="card-body">
@@ -159,7 +161,7 @@
 												<thead>
 													<tr class="border-0">
 														<th style="width:15%;"class="border-0 font-14 font-weight-medium text-muted px-2">작성자</th>
-														<th style="width:30%;" class="border-0 font-10 font-weight-medium text-muted px-2">내용</th>
+														<th style="width:30%;" class="border-0 font-14 font-weight-medium text-muted px-2">내용</th>
 														<th style="width:30%;" class="border-0 font-14 font-weight-medium text-muted px-2">작성일</th>
 													</tr>
 												</thead>
@@ -187,7 +189,8 @@
 														<c:if test="${qc.accountId == studentId}">
 															<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 																<div class="d-flex no-block align-items-center">
-																	<a type="button" class="btn btn-outline-danger btn-default btn-sm" href="${path}/student/questionCommentRemove/${question.questionNo}/${qc.questionCommentNo}/${studentId}">삭제</a>
+													
+																	<a href="${path}/student/questionCommentRemove/${question.questionNo}/${qc.questionCommentNo}/${studentId}" type="button" class="btn btn-outline-danger btn-default btn-sm" onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
 																	&emsp;<a type="button" class="btn btn-outline-success btn-default btn-sm" href="${path}/student/questionCommentModify/${question.questionNo}/${qc.questionCommentNo}/${studentId}">수정</a>
 																</div>
 															</td>
@@ -213,10 +216,10 @@
 											<table id="questionCommentTable" class="table table" style="margin-top: 20px;">
 												<tr>
 													<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-														<textarea class="form-control" style="width:100%;" rows="2" name="questionCommentContent"></textarea>
+														<textarea id="questionComment" class="form-control" style="width:100%;" rows="2" name="questionCommentContent"></textarea>
 													</td>
 													<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-														<button class="btn btn-outline-success" type="submit">댓글 작성</button>
+														<button id="insert" class="btn btn-outline-success" type="submit">댓글 작성</button>
 													</td>
 												</tr>
 											</table>
@@ -272,15 +275,6 @@
 	<script src="${path}/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
 	<script src="${path}/dist/js/pages/dashboards/dashboard1.min.js"></script>
 <script>
-function view(str) {
-	 var obj = document.getElementById(str);
-
-	 if (obj.style.display=="")
-	  obj.style.display="none";
-	 else
-	  obj.style.display="";
-	}
-	
 	$('#accountId').each(function(index, item){
 		let htmlDelete = '&nbsp&nbsp<input type="button" class="btn btn-outline-danger" value="질문 삭제" onclick="button_event();">'
 		let htmlUpdate = '<a type="button" class="btn btn-outline-success" href="${path}/student/questionModify/${studentId}/${question.questionNo}">질문 수정</a>'
@@ -293,36 +287,7 @@ function view(str) {
 				$('#add').append(html);
 			}
 	});
-
-	$('#questionPassword').each(function(index,item){
-		let htmlAdd = '<h1>이 질문은 비공개 질문입니다.</h1>'
-		let password = '<input type="password" class="password" placeholder="비밀번호를 입력해주세요"> <button type="button" id="btn">입력</button>'
-		let listLink = '<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionList/${studentId}/1">이전 페이지</a>'
-		if($(item).val()!='' && $('#accountId').val()!= $('#studentId').val()){
-				$('#tab').wrapInner('<div id="viewcode" style="display:none;"></div>');
-		
-				$('#add').empty();
-				$('#list').append(listLink);
-				$('#add').append(htmlAdd);
-				$('#password').append(password);
-		}
-	});
 	
-	$('#btn').click(function(){	
-		$('.password').each(function(index,item){
-			let htmlView = '<a id="select" href="javascript:view(\'viewcode\');" ></a>'	
-			if($(item).val()==$('#questionPassword').val()){
-				$('#view').append(htmlView);
-				$('#password').empty();
-				$('#add').empty();
-				$('#list').empty();
-				$('#select').get(0).click();
-				}else if($(item).val()!=$('#questionPassword').val()){
-					alert('비밀번호가 다릅니다');	
-				}
-		})	
-	});	
-
 	function button_event(){
 		if (confirm("정말 삭제하시겠습니까??") == true){ // 확인   
 		    document.form.submit();
@@ -331,5 +296,6 @@ function view(str) {
 		}
 	}
 
+	
 </script>
 </html>

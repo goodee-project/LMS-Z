@@ -63,10 +63,13 @@
 															<option value="${l.lectureNo}">${l.lectureName}</option>
 														</c:forEach>
 													</select>
-													&emsp;제목 &nbsp;<input type="text" style="width:30%;" name="questionTitle" id="questionTitle" style="width:460px">
 												</td>
 											</tr>
-											
+											<tr>
+												<td class="border border-0 d-flex justify-content-start">
+													제목 &nbsp;<input type="text" class="form-control" style="width:70%;" name="questionTitle" id="questionTitle" style="width:460px">
+												</td>
+											</tr>
 											<tr class="border border-0">
 												<td class="border border-0">
 													<textarea class="form-control" style="width:100%;" style="resize:none;overflow:visible;" name="questionContent" id="questionContent" rows="10"></textarea>
@@ -92,10 +95,10 @@
 											</table>	
 										<table id="questionPasswordTable" class="table" style="margin-top:20px;">
 											<tr>
-												<td class="border border-0">
+												<td class="border border-0 d-flex justify-content-start">
 													질문 비밀번호
 												
-													&emsp;<input type="password" name="questionPassword">
+													&emsp;<input type="password" style="width:30%;" class="form-control" name="questionPassword">
 												</td>
 											</tr>
 											

@@ -59,7 +59,9 @@
 												<td class="border border-0">작성일 &emsp;${reportSubmit.reportSubmitCreatedate}</td>
 											</tr>
 											<tr>	
-												<td class="border border-0">제목 &emsp;<input type="text" name="reportSubmitTitle" id="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}"></td>
+												<td class="border border-0 d-flex justify-content-start">
+													제목 &emsp;<input type="text" class="form-control" style="width:70%;" name="reportSubmitTitle" id="reportSubmitTitle" value="${reportSubmit.reportSubmitTitle}">
+												</td>
 											</tr>
 											<tr>	
 												<td class="border border-0">
@@ -76,7 +78,7 @@
 															<span id="${rsf.reportSubmitFileOriginal}">${rsf.reportSubmitFileOriginal}</span>
 															<c:if test="${rsf.reportSubmitFileUuid != null}">
 																<span>
-																	<a href="${path}/student/reportSubmitOneFileRemove/${rsf.reportSubmitFileUuid}/${reportSubmit.reportNo}/${studentId}">삭제</a>
+																	<a href="${path}/student/reportSubmitOneFileRemove/${rsf.reportSubmitFileUuid}/${reportSubmit.reportNo}/${studentId}" onclick="return confirm('파일을 삭제하시겠습니까?');">삭제</a>
 																</span>
 															</c:if>
 														</div>

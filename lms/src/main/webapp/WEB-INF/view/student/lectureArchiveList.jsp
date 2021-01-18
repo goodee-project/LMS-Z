@@ -56,8 +56,13 @@
 						<div class="card" id="cardStyle">
 							<div class="card-body">
 								<div class="table-responsive">
-									<div class="list-inline text-center mt-1 mb-0" style="float:right;">	
-										<input type="text" id="title" placeholder="제목으로 검색됩니다"> <a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
+									<div class="border border-0 d-flex justify-content-end">	
+										<div class="border  border-0">
+											<input type="text" id="title" style="width: 400px" class="form-control-plaintext form-control border-black form-sm" placeholder="제목으로 검색됩니다"> 
+										</div>		
+										<div class="border  border-0">	
+											&nbsp;<a type="button" style="border-radius: 4px;" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
+										</div>	
 									</div>
 									<table id="lectureTable" class="table table" style="margin-top: 20px; text-align: center;">
 										<thead>
@@ -93,7 +98,7 @@
 															
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-																<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureArchiveTitle}</a></h5>
+																<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/lectureArchiveCountUp/${la.lectureArchiveNo}">${la.lectureArchiveTitle}</a></h5>
 															
 														</td>
 														<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">

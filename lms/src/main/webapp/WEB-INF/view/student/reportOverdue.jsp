@@ -55,13 +55,19 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-								<div class="border border-0 d-flex justify-content-between">
+								<div class="border border-0">
 									<div class="border border-0"><a type="button" class="btn btn-outline-secondary" href="${path}/student/reportList/${studentId}/1">진행중인 과제</a></div>
-								
-									<div class="list-inline text-center mt-4 mb-0">
-										<input type="text" id="reportTitle" placeholder="과제명을 입력해주세요"> <a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
-									</div>
 								</div>
+								
+									<div class="border border-0 d-flex justify-content-end">
+										<div>
+											<input type="text" id="reportTitle" style="width: 400px" class="form-control-plaintext form-control border-black form-sm" placeholder="과제명을 입력해주세요"> 
+										</div>
+										<div>
+											&nbsp;<a type="button" class="btn btn-outline-secondary btn-default btn-sm" style="border-radius: 4px;" id="btn" href="">검색</a>
+										</div>
+									</div>
+								
 								<table id="reportOverdueTable" class="table table" style="margin-top: 20px;">
 									<thead>
 										<c:if test="${!empty reportList}">

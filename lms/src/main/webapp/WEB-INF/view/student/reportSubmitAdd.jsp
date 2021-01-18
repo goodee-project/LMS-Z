@@ -55,8 +55,8 @@
 									<form method="post" id="reportSubmitAdd" action="${path}/student/reportSubmitAdd/${studentId}" enctype="multipart/form-data">	
 										<table id="reportSubmitTable" class="table table" style="margin-top: 10px;">
 											<tr>
-												<td class="border border-0">
-													제목 <input type="text" name="reportSubmitTitle" id="reportSubmitTitle" style="width:420px">
+												<td class="border border-0 d-flex justify-content-start">
+													제목 &nbsp; <input type="text" class="form-control" name="reportSubmitTitle" id="reportSubmitTitle" style="width:420px">
 												</td>
 											</tr>
 											<tr>

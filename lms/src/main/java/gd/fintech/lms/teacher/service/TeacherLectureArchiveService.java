@@ -31,6 +31,8 @@ public class TeacherLectureArchiveService {
 	
 	@Autowired TeacherLectureArchiveMapper teacherLectureArchiveMapper;
 	@Autowired TeacherLectureArchiveFileMapper teacherLectureArchiveFileMapper;
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	
 	public List<LectureArchive> getLectureArchiveList(int currentPage, int rowPerPage, String accountId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -103,11 +105,20 @@ public class TeacherLectureArchiveService {
 				lf.setLectureArchiveFileCount(count);
 				lectureArchiveFile.add(lf);
 				
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String rootPath = "";
 				
-				String attachPath = "uploadfile\\lectureArchivefile\\";
+				String attachPath = "";
+				
+				if ( OS.indexOf("nux") >= 0) {
+		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+		        	attachPath = "uploadfile/lectureArchivefile/";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\lectureArchivefile\\";
+		        }
+				
 				
 				File f = new File(rootPath + attachPath + filename + ext);
 				
@@ -133,11 +144,20 @@ public class TeacherLectureArchiveService {
 		return lectureArchive;
 	}
 	public int deleteLectureArchiveOneFile(String lectureArchiveFileUuid) {
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String rootPath = "";
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String attachPath = "";
 		
-		String attachPath = "uploadfile\\lectureArchivefile\\";
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/lectureArchivefile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\lectureArchivefile\\";
+        }
+		
+		
 		File file = new File(rootPath+attachPath+lectureArchiveFileUuid);
 		if(file.exists()) {
 			file.delete();
@@ -147,11 +167,18 @@ public class TeacherLectureArchiveService {
 	
 	public void deleteLectureArchive(int lectureArchiveNo) {
 		List<String> lectureArchiveFileUuid = teacherLectureArchiveFileMapper.selectLectureArchiveFileUuid(lectureArchiveNo);
-		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+		String rootPath = "";
 		
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
+		String attachPath = "";
 		
-		String attachPath = "uploadfile\\lectureArchivefile\\";
+		if ( OS.indexOf("nux") >= 0) {
+        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+        	attachPath = "uploadfile/lectureArchivefile/";
+        } else {
+            File file = new File("");
+            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+            attachPath = "uploadfile\\lectureArchivefile\\";
+        }
 		
 		for(String s : lectureArchiveFileUuid) {
 			File file = new File(rootPath + attachPath+s);
@@ -192,11 +219,18 @@ public class TeacherLectureArchiveService {
 				lf.setLectureArchiveFileCount(count);
 				lectureArchiveFile.add(lf);
 				
-				HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+				String rootPath = "";
 				
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				String attachPath = "";
 				
-				String attachPath = "uploadfile\\lectureArchivefile\\";
+				if ( OS.indexOf("nux") >= 0) {
+		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
+		        	attachPath = "uploadfile/lectureArchivefile/";
+		        } else {
+		            File file = new File("");
+		            rootPath =  file.getAbsolutePath() + "\\src\\main\\webapp\\";
+		            attachPath = "uploadfile\\lectureArchivefile\\";
+		        }
 				
 				File f = new File(rootPath + attachPath + filename + ext);
 				
