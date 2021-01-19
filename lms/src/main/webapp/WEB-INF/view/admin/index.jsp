@@ -122,76 +122,52 @@
 									<table class="table no-wrap v-middle mb-0">
                                         <thead>
                                             <tr class="border-0">
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">아이디</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">이름</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">전화번호</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">이메일</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">성별</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">생일</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">주소</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2">상세주소</th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
-                                                <th class="border-0 font-14 font-weight-medium text-muted px-2"></th>
+                                                <th class="border-0 font-14 text-dark px-2">아이디</th>
+                                                <th class="border-0 font-14 text-dark px-2">이름</th>
+                                                <th class="border-0 font-14 text-dark px-2">전화번호</th>
+                                                <th class="border-0 font-14 text-dark px-2">이메일</th>
+                                                <th class="border-0 font-14 text-dark px-2">성별</th>
+                                                <th class="border-0 font-14 text-dark px-2">생일</th>
+                                                <th class="border-0 font-14 text-dark px-2">주소</th>
+                                                <th class="border-0 font-14 text-dark px-2">상세주소</th>
+                                                <th class="border-0 font-14 text-dark px-2"></th>
+                                                <th class="border-0 font-14 text-dark px-2"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                         	<c:forEach var="c" items="${managerQueueList}" varStatus="status">
 	                                            <tr>
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerId}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerId}
 	                                                </td>
-	                                                <td class="border-top-0 text-muted px-2 py-4 font-14">
-	                                               		<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerName}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerName}
 	                                                </td>
 	                                                
 	                                                <!-- 아이콘 활용한 부트스트랩 -->
-	                                                <td class="border-top-0 px-2 py-4">
-	                                                    <div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerPhone}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerPhone}
 	                                                </td>
 	                                                
 	                                                <!-- 눌렀을때 추가 옵션 -->
-	                                                <td class="border-top-0 text-center px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerEmail}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerEmail}
 	                                                </td>
 	                                                
 	                                                <!-- 살짝 굵은 글씨 -->
-	                                                <td class="bord	er-top-0 text-center font-weight-medium text-muted px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerGender}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerGender}
 	                                                </td>
 	                                                
 	                                                <!-- 일반적인 글씨 -->
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerBirth}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerBirth}
 	                                                </td>
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerAddressMain}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerAddressMain}
 	                                                </td>
-	                                                <td class="font-weight-medium text-dark border-top-0 px-2 py-4">
-	                                                	<div class="d-flex no-block align-items-center">
-	                                                    	<!-- 굵은 글씨 -->
-	                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">${c.managerAddressSub}</h5>
-	                                                    </div>
+	                                                <td>
+	                                                	${c.managerAddressSub}
 	                                                </td>
 	                                                <td>
 	                                                	<div class="popover-icon">
@@ -231,17 +207,11 @@
                                      <tbody>
                                        	<c:forEach var="d" items="${dormantStateList}">
 	                                       <tr>
-	                                           <td class="px-2 py-4">
-	                                               <div class="d-flex no-block align-items-center">
-	                                                	<!-- 굵은 글씨 -->
-	                                                   <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.accountId }</h5>
-	                                                </div>
+	                                           <td>
+	                                           		${d.accountId }
 	                                           </td>
-	                                           <td class="text-muted px-2 py-4 font-14">
-	                                         		<div class="d-flex no-block align-items-center">
-	                                                   	<!-- 굵은 글씨 -->
-	                                                    <h5 class="text-dark mb-0 font-16 font-weight-medium">${d.connectUpdatedate }</h5>
-	                                                </div>
+	                                           <td>
+	                                           		${d.connectUpdatedate }
 	                                           </td>
 	                                           <td>
 	                                              	<div class="popover-icon">
