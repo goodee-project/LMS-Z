@@ -139,9 +139,9 @@
 						})
 					}
 				})
+				timerId=setInterval(msgList,3000);//3초
 			})
-			timerId=setInterval(msgList,3000);//3초
-  	  	})
+			
   	  	
   	  	//리스트 출력
   	  	function msgList(){
