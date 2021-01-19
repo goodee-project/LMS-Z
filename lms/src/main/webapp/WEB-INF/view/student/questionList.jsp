@@ -60,17 +60,26 @@
 					<div class="card" id="cardStyle">
 						<div class="card-body">
 							<div class="table-responsive">
-							<div class="border border-0 d-flex justify-content-between">
-								<div class="border border-0"><a type="button" class="btn btn-outline-secondary" href="${path}/student/questionAdd/${studentId}">질문 등록하기</a></div>
-								<div class="list-inline text-center mt-4 mb-0">
-									<select id="sub">
-										<option value="제목">제목</option>
-										<option value="작성자">작성자</option>
-									</select>
-									<input type="text" id="question"> 
-									<a type="button" class="btn btn-outline-secondary btn-default btn-sm" id="btn" href="">검색</a>
-								</div>
-							</div>
+							
+							<div class="border border-0">
+								<a type="button" class="btn btn-outline-secondary" href="${path}/student/questionAdd/${studentId}">질문 등록하기</a>
+							</div>	
+								<div class="border border-0 d-flex justify-content-end">
+									<div class="border  border-0">
+										<select id="sub">
+											<option value="제목">제목</option>
+											<option value="작성자">작성자</option>
+										</select> &nbsp;
+									</div>
+									<div class="border  border-0">
+										<input type="text" id="question" style="width: 400px" class="form-control-plaintext form-control border-black form-sm"> 
+									</div>
+									<div class="border  border-0">	
+										&nbsp;<a type="button" class="btn btn-outline-secondary btn-default btn-sm" style="border-radius: 4px;" id="btn" href="">검색</a>
+									</div>
+								</div>	
+								
+							
 								<table id="questionTable" class="table table" style="margin-top: 20px; text-align: center;">
 									<thead>
 										<c:if test="${!empty questionList}">
@@ -106,9 +115,16 @@
 											
 											</td>
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
-												
-													<h5 class="text-dark mb-0 font-16 font-weight-medium"><a class="btn btn-outline-light bg-light text-secondary btn-block" href="${path}/student/questionCountUp/${studentId}/${q.questionNo}">${q.questionTitle}</a></h5>
-												
+												<c:if test="${empty q.questionPassword || q.accountId == studentId}">
+													<h5 class="text-dark mb-0 font-16 font-weight-medium">
+														<a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/questionCountUp/${studentId}/${q.questionNo}">${q.questionTitle}</a>
+													</h5>
+												</c:if>
+												<c:if test="${!empty q.questionPassword && q.accountId != studentId}">
+													<h5 class="text-dark mb-0 font-16 font-weight-medium">
+														<a class="btn btn-outline-light text-secondary btn-block" href="${path}/student/questionPw/${q.questionNo}">${q.questionTitle}</a>
+													</h5>
+												</c:if>
 											</td>	
 											<td class="font-weight-medium text-dark border-top-0 px-2 py-4 align-self-center">
 												

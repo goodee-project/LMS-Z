@@ -74,7 +74,7 @@
 										</tr>
 										<tr>
 											<td class="border border-0 d-flex justify-content-start">
-												제목 &nbsp; <input type="text" style="width:80%;" name="questionTitle" id="questionTitle" value="${question.questionTitle}">
+												제목 &nbsp; <input type="text" class="form-control" style="width:80%;" name="questionTitle" id="questionTitle" value="${question.questionTitle}">
 											</td>
 										</tr>
 										<tr>
@@ -93,7 +93,7 @@
 														<span id="${qf.questionFileOriginal}">${qf.questionFileOriginal}</span>
 														<c:if test="${qf.questionFileUuid != null}">
 															<span>
-																<a href="${path}/student/questionFileRemove/${studentId}?questionFileUuid=${qf.questionFileUuid}&questionNo=${question.questionNo}">삭제</a>
+																<a href="${path}/student/questionFileRemove/${studentId}?questionFileUuid=${qf.questionFileUuid}&questionNo=${question.questionNo}" onclick="return confirm('파일을 삭제하시겠습니까?');">삭제</a>
 															</span>
 														</c:if>
 													</div>
@@ -110,9 +110,9 @@
 										</table>	
 											<table id="reportFileTable" class="table table" style="margin-top:20px;">
 										<tr>
-											<td class="border border-0">
+											<td class="border border-0 d-flex justify-content-start">
 												질문 비밀번호
-												<input type="text" name="questionPassword" value="${question.questionPassword}">
+												&nbsp; <input type="text" class="form-control" style="width: 600px" name="questionPassword" value="${question.questionPassword}">
 											</td>
 										</tr>
 										

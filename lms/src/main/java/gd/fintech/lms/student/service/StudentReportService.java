@@ -152,7 +152,7 @@ public class StudentReportService {
 				
 				String rootPath = "";
 				
-				String attachPath = "uploadfile\\reportfile\\";
+				String attachPath = "";
 				
 				if ( OS.indexOf("nux") >= 0) {
 		        	rootPath = "/var/lib/tomcat9/webapps/lms/";
@@ -185,7 +185,7 @@ public class StudentReportService {
 		
 		String rootPath = "";
 		
-		String attachPath = "uploadfile\\reportfile\\";
+		String attachPath = "";
 		
 		if ( OS.indexOf("nux") >= 0) {
         	rootPath = "/var/lib/tomcat9/webapps/lms/";
@@ -272,7 +272,7 @@ public class StudentReportService {
 				
 				String rootPath = "";
 				
-				String attachPath = "uploadfile\\reportfile\\";
+				String attachPath = "";
 				
 				if ( OS.indexOf("nux") >= 0) {
 		        	rootPath = "/var/lib/tomcat9/webapps/lms/";

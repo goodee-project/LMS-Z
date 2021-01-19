@@ -32,6 +32,7 @@
 	  	SELECT 
 	  		q.question_no,
 	  		q.lecture_no,
+	  		q.account_id,
 	  		l.lecture_name,
 	  		q.question_writer,
 	  		q.question_title,
@@ -51,6 +52,7 @@
   		SELECT 
 	  		q.question_no,
 	  		q.lecture_no,
+	  		q.account_id,
 	  		l.lecture_name,
 	  		q.question_writer,
 	  		q.question_title,
@@ -70,6 +72,7 @@
   		SELECT 
   			q.question_no,
   			q.lecture_no,
+  			q.account_id,
   			l.lecture_name,
   			q.question_writer,
   			q.question_title,
@@ -87,6 +90,7 @@
   		SELECT 
   			q.question_no,
   			q.lecture_no,
+  			q.account_id,
   			l.lecture_name,
   			q.question_writer,
   			q.question_title,

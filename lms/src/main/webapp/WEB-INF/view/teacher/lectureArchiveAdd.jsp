@@ -56,7 +56,7 @@
             				<div class="card-body">
             					<h4 class="card-title">자료 추가</h4>
             					
-								<form method="post" id="lectureArchiveAdd" action="${path}/teacher/lectureArchiveAdd?teacherId=${teacherId}" enctype="multipart/form-data">
+								<form method="post" id="lectureArchiveAdd" action="${path}/teacher/lectureArchiveAdd/${lectureNo}?teacherId=${teacherId}" enctype="multipart/form-data">
 									<table id="lmsTable" class="table" style="margin-top:20px;">
 										<tr>
 											<td style="width:5%;">강의번호</td>

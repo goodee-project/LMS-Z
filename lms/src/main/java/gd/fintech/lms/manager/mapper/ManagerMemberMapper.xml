@@ -43,6 +43,7 @@
 		FROM account a, teacher t, student s
 		WHERE account_id = teacher_id OR account_id = student_id
 		AND account_level IN ('학생','강사')
+		AND account_state = '활성화'
 		GROUP BY account_id
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
@@ -65,6 +66,7 @@
 		FROM account a, teacher t, student s
 		WHERE (account_id = teacher_id OR account_id = student_id)
 		AND account_level = #{searchLevel}
+		AND account_state = '활성화'
 		GROUP BY account_id
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>

@@ -36,9 +36,11 @@ public class ManagerInfoController {
 	
 	// 회원 탈퇴
 	@GetMapping("/manager/deleteMyInfoById/{managerId}")
-	public String deleteMyInfoById(
+	public String deleteMyInfoById(HttpSession session,
 			@PathVariable(value="managerId") String managerId) {
 		managerInfoService.deleteManager(managerId);
+		
+		session.invalidate();
 		
 		return "redirect:/managerLogin";
 	}
