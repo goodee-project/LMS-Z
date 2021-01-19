@@ -36,7 +36,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/textbookList/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">교재 관리</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/faqList/강의/1"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/faqList/강사/1"
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">FAQ</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="${path }/manager/memberList/1/선택안함"
