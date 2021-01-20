@@ -3,23 +3,57 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.restmapper.StudentReportSubmitRestMapper">
-	<!-- 학생 과제 제출 빈도 -->
-	<select id="selectReportSubmit" parameterType="java.lang.String" resultType="java.util.Map">
+	<!-- 수강중인 강의 리스트 -->
+	<select id="selectMyLectureList" parameterType="java.lang.String" resultType="java.lang.String">
 		SELECT
-			(SELECT COUNT(*) FROM report WHERE lecture_no=20) 'testAll',
-			nvl(SUM(case when r.lecture_no = 20 AND rs.account_id=#{studentId} then 1 END), 0) 'test',
-			(SELECT COUNT(*) FROM report WHERE lecture_no=4) 'fintechAll',
-			nvl(SUM(case when r.lecture_no = 4 AND rs.account_id=#{studentId} then 1 END), 0) 'fintech',
-			(SELECT COUNT(*) FROM report WHERE lecture_no=5) 'JAVAccAll',
-			nvl(SUM(case when r.lecture_no = 5 AND rs.account_id=#{studentId} then 1 END), 0) 'JAVAcc',
-			(SELECT COUNT(*) FROM report WHERE lecture_no=10) 'DoraemonAll',
-			nvl(SUM(case when r.lecture_no = 10 AND rs.account_id=#{studentId} then 1 END), 0) 'Doraemon',
-			(SELECT COUNT(*) FROM report WHERE lecture_no=11) 'DigitalEngineeringAll',
-			nvl(SUM(case when r.lecture_no = 11 AND rs.account_id=#{studentId} then 1 END), 0) 'DigitalEngineering',
-			(SELECT COUNT(*) FROM report WHERE lecture_no=12) 'CshopAll',
-			nvl(SUM(case when r.lecture_no = 12 AND rs.account_id=#{studentId} then 1 END), 0) 'Cshop'
-		FROM report r
+			lecture_name
+		FROM lecture l
+		LEFT JOIN class_registration cr
+		ON l.lecture_no = cr.lecture_no
+		LEFT JOIN report r
+		ON l.lecture_no = r.lecture_no
 		LEFT JOIN report_submit rs
 		ON r.report_no = rs.report_no
+		WHERE cr.account_id =#{studentId}
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
+	</select>
+	<!-- 나의 과제 점수 -->
+	<select id="selectMyReportScore" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			coalesce(SUM(rs.report_submit_point),0) 'score'
+		FROM lecture l
+		LEFT JOIN class_registration cr
+		ON l.lecture_no = cr.lecture_no
+		LEFT JOIN report r
+		ON l.lecture_no = r.lecture_no
+		LEFT JOIN report_submit rs
+		ON r.report_no = rs.report_no
+		WHERE cr.account_id =#{studentId}
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
+	</select>
+	<!-- 전체 학생 과제 평균 점수 -->
+	<select id="selectAvgReportScore" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			coalesce(ROUND(AVG(rs.report_submit_point),1),0) 'scoreAvg'
+		FROM lecture l
+		left join report r
+		ON l.lecture_no = r.lecture_no
+		LEFT JOIN report_submit rs
+		ON r.report_no = rs.report_no
+		WHERE l.lecture_no IN (SELECT
+				l.lecture_no
+				FROM lecture l
+				LEFT JOIN class_registration cr
+				ON l.lecture_no = cr.lecture_no
+				LEFT JOIN report r
+				ON l.lecture_no = r.lecture_no
+				LEFT JOIN report_submit rs
+				ON r.report_no = rs.report_no
+				WHERE cr.account_id =#{studentId}
+				GROUP BY l.lecture_no)
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
 	</select>
 </mapper>

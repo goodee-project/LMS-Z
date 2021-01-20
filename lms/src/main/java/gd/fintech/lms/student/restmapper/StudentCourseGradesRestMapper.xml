@@ -3,42 +3,62 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gd.fintech.lms.student.restmapper.StudentCourseGradesRestMapper">
-	<select id="selectCourseGreads" parameterType="java.lang.String" resultType="java.util.Map">
+	<!-- 수강중인 강의 리스트 -->
+	<select id="selectLectureName" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT 
+			lecture_name lectureName
+		FROM student s
+		LEFT JOIN class_registration cr
+		ON s.student_id = cr.account_id
+		LEFT JOIN lecture l
+		ON cr.lecture_no = l.lecture_no
+		LEFT JOIN multiplechoice mc 
+		ON cr.lecture_no = mc.lecture_no
+		LEFT JOIN answer_sheet `as`
+		ON `as`.multiplechoice_no = mc.multiplechoice_no
+		WHERE s.student_id = #{studentId}
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
+	</select>
+	<!-- 강의 성적 -->
+	<select id="selectScore" parameterType="java.lang.String" resultType="java.lang.String">
 		SELECT
-			nvl(SUM(case when l.lecture_no = 12 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'Cshop',
-			ROUND(nvl(AVG(case when l.lecture_no = 12 then `as`.score END), 0),1) 'CshopAvg',
-			nvl(SUM(case when l.lecture_no = 11 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'DigitalEngineering',
-			ROUND(nvl(AVG(case when l.lecture_no = 11 then `as`.score END), 0),1) 'DigitalEngineeringAvg',
-			nvl(SUM(case when l.lecture_no = 10 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'Doraemon',
-			ROUND(nvl(AVG(case when l.lecture_no = 10 then `as`.score END), 0),1) 'DoraemonAvg',
-			nvl(SUM(case when l.lecture_no = 5 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'JAVA',
-			ROUND(nvl(AVG(case when l.lecture_no = 5 then `as`.score END), 0),1) 'JAVAAvg',
-			nvl(SUM(case when l.lecture_no = 4 AND `as`.account_id=#{studentId} then `as`.score END), 0) 'fintech',
-			ROUND(nvl(AVG(case when l.lecture_no = 4 then `as`.score END), 0),1) 'fintechAvg'
+			coalesce(SUM(`as`.score),0) 'score'
+		FROM student s
+		LEFT JOIN class_registration cr
+		ON s.student_id = cr.account_id
+		LEFT JOIN lecture l
+		ON cr.lecture_no = l.lecture_no
+		LEFT JOIN multiplechoice mc 
+		ON cr.lecture_no = mc.lecture_no
+		LEFT JOIN answer_sheet `as`
+		ON `as`.multiplechoice_no = mc.multiplechoice_no
+		WHERE s.student_id = #{studentId}
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
+	</select>
+	
+	<!-- ==== 강의 전체 평균 성적 ========= -->
+	<select id="selectScoreAvg" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			coalesce(ROUND(AVG(`as`.score),1),0) 'scoreAvg'
 		FROM lecture l
 		LEFT JOIN multiplechoice mc 
 		ON l.lecture_no = mc.lecture_no
 		LEFT JOIN answer_sheet `as`
 		ON `as`.multiplechoice_no = mc.multiplechoice_no
-
-	</select>
-	
-	<!-- ==== 나의 수강 현황 목록 ========= -->
-	<resultMap type="gd.fintech.lms.vo.ClassRegistration" id="selectMyLectureListResult">
-		<result property="classRegistrationNo" column="class_registration_no"/>
-		<association property="lecture" javaType="gd.fintech.lms.vo.Lecture">
-			<result property="lectureNo" column="lecture_no"/>
-			<result property="lectureName" column="lecture_name"/>
-		</association>
-	</resultMap>
-	<select id="selectAllMyLectureList" parameterType="java.lang.String" resultMap="selectMyLectureListResult">
-		SELECT
-			cr.account_id,
-			l.lecture_no,
-			l.lecture_name
-		FROM class_registration cr
-		LEFT JOIN lecture l ON cr.lecture_no = l.lecture_no
-		WHERE cr.account_id = #{studentId}
-		ORDER BY lecture_no DESC
+		WHERE l.lecture_no in (SELECT l.lecture_no FROM student s
+									LEFT JOIN class_registration cr
+									ON s.student_id = cr.account_id
+									LEFT JOIN lecture l
+									ON cr.lecture_no = l.lecture_no
+									LEFT JOIN multiplechoice mc 
+									ON cr.lecture_no = mc.lecture_no
+									LEFT JOIN answer_sheet `as`
+									ON `as`.multiplechoice_no = mc.multiplechoice_no
+									WHERE s.student_id = #{studentId}
+									GROUP BY l.lecture_no)
+		GROUP BY l.lecture_no
+		ORDER BY l.lecture_no DESC
 	</select>
 </mapper>

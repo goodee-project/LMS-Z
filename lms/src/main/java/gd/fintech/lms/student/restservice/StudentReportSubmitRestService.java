@@ -1,5 +1,6 @@
 package gd.fintech.lms.student.restservice;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,16 @@ import gd.fintech.lms.student.restmapper.StudentReportSubmitRestMapper;
 public class StudentReportSubmitRestService {
 	@Autowired StudentReportSubmitRestMapper studentReportSubmitRestMapper;
 	
-	//학생 과제 제출 빈도 및 강의별 총 과제 수
-	public Map<String, Object> getReportSubmit(String studentId){
-		return studentReportSubmitRestMapper.selectReportSubmit(studentId);
+	//수강중인 강의 리스트
+	public List<String> getMyLectureList(String studentId){
+		return studentReportSubmitRestMapper.selectMyLectureList(studentId);
+	}
+	//나의 과제 점수
+	public List<String> getMyReportScore(String studentId){
+		return studentReportSubmitRestMapper.selectMyReportScore(studentId);
+	}
+	//강의 과제 평균 점수
+	public List<String> getAvgReportScore(String studentId){
+		return studentReportSubmitRestMapper.selectAvgReportScore(studentId);
 	}
 }

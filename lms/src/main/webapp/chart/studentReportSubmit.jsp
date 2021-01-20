@@ -39,50 +39,19 @@
 					<div class="col-md-5 col-lg-12">
 						<div class="card" id="cardStyle">
 							<div class="card-body">
-								<h4 class="card-title">● 과제 제출 빈도</h4>
+								<h4 class="card-title">● 과제 점수 및 평균 점수</h4>
 								<div class="table-responsive">
 									<table class="table no-wrap v-middle mb-0">
 										<thead>
-										<tr class="border-top-0 px-2 py-4">
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													test
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													fintech
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													JAVAcc
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													Doraemon
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													DigitalEngineering
-												</span>
-											</td>
-											<td class="font-14 font-weight-medium text-muted px-2">
-												<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-													Cshop
-												</span>
-											</td>
-										</tr>
+											<tr id="lectureList" class="border-top-0 px-2 py-4">
+												
+											</tr>
 										</thead>
-										<tbody id="tableBody">
-										
+										<tbody>
+											<tr id="score" class="border-top-0 px-2 py-4">
+											</tr>
+											<tr id="scoreAvg">
+											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -114,117 +83,91 @@
     <script>
 		$(document).ready(function(){
 			//script에서 session 값 받기
-			let studentId = '<%=(String)session.getAttribute("studentId")%>'
+			let studentId = '<%=(String)session.getAttribute("studentId")%>';
+			let space =
+				`
+				<td></td>
+				`
+			$('#lectureList').append(space);
+			let scoreTitle=
+				`
+				<td>
+					성적
+				</td>
+				`
+			let scoreAvgTitle=
+				`
+				<td>
+					강의 평균 성적
+				</td>
+				`
+			$('#score').append(scoreTitle);
+			$('#scoreAvg').append(scoreAvgTitle);
+			
 			$.ajax({
 				url:'${path}/chart/reportSubmit/'+studentId,
 				type:"get",
 				success:function(data){
-						let html=
+					console.log(data);
+					for(let i=0;i<data.lectureName.length;i++){
+						let lectureName=
 							`
-							<tr class="border-top-0 px-2 py-4">
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										제출한 과제
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.test}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.fintech}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.JAVAcc}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.Doraemon}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DigitalEngineering}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.Cshop}
-									</span>
-								</td>
-							</tr>
-							<tr class="border-top-0 px-2 py-4">
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										강의별 과제
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.testAll}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.fintechAll}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.JAVAccAll}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DoraemonAll}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.DigitalEngineeringAll}
-									</span>
-								</td>
-								<td class="font-14 font-weight-medium text-muted px-2">
-									<span class="font-weight-medium text-dark border-top-0 px-2 py-4">
-										\${data.CshopAll}
-									</span>
-								</td>
-							</tr>
+							<td>
+								\${data.lectureName[i]}
+							</td>	
 							`
-						$('#tableBody').html(html)
+						lectureList += "'"+data.lectureName[i]+"'";
+						if(i<data.lectureName.length-1){
+							lectureList += ",";
+						}
+						console.log(lectureList);
+						$('#lectureList').append(lectureName);
+					}
+					for(let i=0;i<data.score.length;i++){
+						let score=
+							`
+							<td>
+								\${data.score[i]}
+							</td>	
+							`
+						$('#score').append(score);
+					}
+					for(let i=0;i<data.scoreAvg.length;i++){
+						let scoreAvg=
+							`
+							<td>
+								\${data.scoreAvg[i]}
+							</td>	
+							`
+						$('#scoreAvg').append(scoreAvg);
+					}
+					
 					var ctx = document.getElementById('horizontalBarChart');
 					var chart = new Chart(ctx,{
 						type:'horizontalBar',
 						data:{
-							labels:['test','fintech','JAVAcc','Doraemon','DigitalEngineering','Cshop'],
+							labels:[data.lectureName[0],data.lectureName[1],data.lectureName[2],data.lectureName[3],data.lectureName[4]],
 							datasets:[{
 								label:'과제 제출 빈도',
 								backgroundColor:'rgba(255, 99, 132, 0.5)',
 					            borderColor: 'rgba(255, 99, 132, 1)',
 						        data:[
-							        data.test,
-									data.fintech,
-									data.JAVAcc,
-									data.Doraemon,
-									data.DigitalEngineering,
-									data.Cshop
+						        	data.score[0],
+						        	data.score[1],
+						        	data.score[2],
+						        	data.score[3],
+						        	data.score[4]
 							        ]
 								}, {
 								label:'강의별 총 과제',
 								backgroundColor:'rgba(54, 162, 235, 0.5)',
 						        borderColor:'rgba(54, 162, 235, 1)',
 							    data:[
-								    data.testAll,
-									data.fintechAll,
-									data.JAVAccAll,
-									data.DoraemonAll,
-									data.DigitalEngineeringAll,
-									data.CshopAll
+							    	data.scoreAvg[0],
+						    		data.scoreAvg[1],
+						    		data.scoreAvg[2],
+						    		data.scoreAvg[3],
+						    		data.scoreAvg[4]
 								    ]
 								}]
 							}

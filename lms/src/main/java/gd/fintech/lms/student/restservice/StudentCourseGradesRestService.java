@@ -15,13 +15,17 @@ import gd.fintech.lms.vo.ClassRegistration;
 @Transactional
 public class StudentCourseGradesRestService {
 	@Autowired StudentCourseGradesRestMapper studentCourseGradesRestMapper;
-	
-	//강의별 성적 및 강의 평균 성적 가져오기
-	public Map<String,Object> getCouresGrades(String studentId){
-		return studentCourseGradesRestMapper.selectCourseGreads(studentId);
+	//강의 이름
+	public List<String> getLectureName(String studentId){
+		return studentCourseGradesRestMapper.selectLectureName(studentId);
 	}
-	//현재 수강중인 강의
-	public List<ClassRegistration> getAllMyLectureList(String studentId) {
-		return studentCourseGradesRestMapper.selectAllMyLectureList(studentId);
+	
+	//학생 성적
+	public List<String> getScore(String studentId){
+		return studentCourseGradesRestMapper.selectScore(studentId);
+	}
+	//강의 평균 점수
+	public List<String> getScoreAvg(String studentId) {
+		return studentCourseGradesRestMapper.selectScoreAvg(studentId);
 	}
 }

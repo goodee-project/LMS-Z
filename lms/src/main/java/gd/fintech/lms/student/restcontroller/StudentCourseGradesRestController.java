@@ -22,15 +22,11 @@ public class StudentCourseGradesRestController {
 	public Map<String,Object> studentCouresGrades(
 			@PathVariable(name="studentId") String studentId){
 		
-		Map<String,Object> map=studentCourseGradesRestService.getCouresGrades(studentId);
+		Map<String,Object> map= new HashMap<>();
+		map.put("lectureName",studentCourseGradesRestService.getLectureName(studentId));
+		map.put("score", studentCourseGradesRestService.getScore(studentId));
+		map.put("scoreAvg", studentCourseGradesRestService.getScoreAvg(studentId));
 		
 		return map;
-	}
-	//현재 수강중인 강의 목록
-	@GetMapping("/chart/allMyLectureList/{studentId}")
-	public List<ClassRegistration> AllMyLectureList(@PathVariable(name="studentId") String studentId) {
-		List<ClassRegistration> myLectureList = studentCourseGradesRestService.getAllMyLectureList(studentId);
-		System.out.println(myLectureList);
-		return myLectureList;
 	}
 }

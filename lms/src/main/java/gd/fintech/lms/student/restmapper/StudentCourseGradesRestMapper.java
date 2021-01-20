@@ -9,8 +9,10 @@ import gd.fintech.lms.vo.ClassRegistration;
 
 @Mapper
 public interface StudentCourseGradesRestMapper {
-	//강좌별 성적 차트
-	public Map<String, Object> selectCourseGreads(String studentId);
-	//현재 수강중인 강의 목록
-	public List<ClassRegistration> selectAllMyLectureList(String studentId);
+	// 학생이 수강중인 강의 이름 리스트
+	public List<String> selectLectureName(String studentId);
+	//강좌별 성적 리스트
+	public List<String> selectScore(String studentId);
+	//강좌별 전체 평균 성적 리스트
+	public List<String> selectScoreAvg(String studentId);
 }

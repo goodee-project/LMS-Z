@@ -1,11 +1,16 @@
 package gd.fintech.lms.student.restmapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface StudentReportSubmitRestMapper {
-	//과제 제출 빈도
-	public Map<String, Object> selectReportSubmit(String studentId);
+	// 수강중인 강의 리스트
+	public List<String> selectMyLectureList(String studentId);
+	// 나의 과제 점수
+	public List<String> selectMyReportScore(String studentId);
+	// 강의 과제 평균 점수
+	public List<String> selectAvgReportScore(String studentId);
 }
