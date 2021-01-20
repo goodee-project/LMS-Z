@@ -54,7 +54,7 @@
                            	</li>
                            	<li class="sidebar-item">
                            		<a href="${path }/chart/studentReportSubmit.jsp" class="sidebar-link">
-                           			<span class="hide-menu">과제 제출 빈도 chart</span>
+                           			<span class="hide-menu">과제 성적 chart</span>
                            		</a>
                           	</li>
                         </ul>
