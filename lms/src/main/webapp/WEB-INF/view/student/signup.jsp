@@ -31,7 +31,7 @@
                 <div class="navbar-header" data-logobg="skin6">
                     <div class="navbar-brand">
                         <!-- 사이트 이름 -->
-                        <a href="index">
+                        <a href="${path}/studentLogin">
                             <b class="logo-icon">
                             	<!-- 사이트 이름 옆 로고 -->
                                 <img src="${path}/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
