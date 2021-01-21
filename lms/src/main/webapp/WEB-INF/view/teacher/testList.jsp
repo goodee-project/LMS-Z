@@ -56,7 +56,6 @@
             					<table id="lmsTable" class="table table" style="margin-top:20px; text-align:center;">
             						<thead>
 										<tr>
-											<th>시험번호</th>
 											<th>시험내용</th>
 											<th>시작시간</th>
 											<th>종료시간</th>
@@ -65,7 +64,6 @@
 									<tbody>
 										<c:if test="${test != null}">
 											<tr>
-												<td>${test.testNo}</td>
 												<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/testOne/${test.lectureNo}">${test.testContent}</a></td>
 												<td>${test.testStartdate}</td>
 												<td>${test.testEnddate}</td>

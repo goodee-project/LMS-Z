@@ -56,7 +56,6 @@
 								<table id="lmsTable" class="table" style="margin-top:20px; text-align:center;">
 									<thead>
 										<tr>
-											<th>No</th>
 											<th>문항번호</th>
 											<th>점수</th>
 											<th>작성일시</th>
@@ -67,7 +66,6 @@
 										<c:if test="${!empty multiplechoice}">
 											<c:forEach var="m" items="${multiplechoice}">
 												<tr>
-													<td>${m.multiplechoiceNo}</td>
 													<td><a class="btn btn-outline-light text-secondary btn-block" href="${path}/teacher/testQuestionOne/${m.multiplechoiceNo}">평가 ${m.multiplechoiceId}번</a></td>
 													<td>${m.multiplechoiceScore}</td>
 													<td>${m.multiplechoiceCreatedate}</td>

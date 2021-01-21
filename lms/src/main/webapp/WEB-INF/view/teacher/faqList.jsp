@@ -71,7 +71,7 @@
 	                            	<div class="col-lg-4 col-md-4"></div>
 									<!-- 검색기능 (현재 카테고리에서 검색하면 그 카테고리에 속한 FAQ가 출력됩니다.) -->
 									<div id="searchStyle" class="col-lg-6 col-md-6">
-										<input class="form-control-plaintext form-control border-black form-sm" type="text" id="faqTitle" value="${faqTitle}">&emsp;
+										<input class="form-control-plaintext form-control border-black form-sm" type="text" id="faqTitle" value="${faqTitle}" placeholder="제목을 입력하세요">&emsp;
 										<a class="btn btn btn-outline-secondary" style="border-radius: 4px;" id="searchBtn">검색</a>
 									</div>
 								</div>
