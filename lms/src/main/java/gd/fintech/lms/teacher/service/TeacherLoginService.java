@@ -124,12 +124,14 @@ public class TeacherLoginService {
 		connect.setConnectState("접속");
 		if(teacherLoginMapper.selectConnectByOverlapLogin(connect) == 0) {
 			// 회원 리스트에 존재하지만 휴면상태인 회원 구분
-			if(teacherLoginMapper.selectAccountStateCk(account.getAccountId()).equals("휴면상태")) {
-				System.out.println("휴면상태");
-				account.setAccountLevel("강사");
-				account.setAccountState("휴면상태");
-				
-				return teacherLoginMapper.selectAccountToTeacherLogin(account);
+			if(teacherLoginMapper.selectAccountStateCk(account.getAccountId()) != null ) {
+				if(teacherLoginMapper.selectAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+					System.out.println("휴면상태");
+					account.setAccountLevel("강사");
+					account.setAccountState("휴면상태");
+					
+					return teacherLoginMapper.selectAccountToTeacherLogin(account);
+				}
 			}
 			account.setAccountLevel("강사");
 			account.setAccountState("활성화");

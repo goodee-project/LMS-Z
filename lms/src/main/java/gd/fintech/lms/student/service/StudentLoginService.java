@@ -115,14 +115,16 @@ public class StudentLoginService {
 		connect.setConnectState("접속");
 		if(studentLoginMapper.selectConnectByOverlapLogin(connect) == 0) {
 			// 회원 리스트에 존재하지만 휴면상태인 회원 구분
-			if(studentLoginMapper.selectAccountStateCk(account.getAccountId()).equals("휴면상태")) {
-				System.out.println("휴면상태");
-				account.setAccountLevel("학생");
-				account.setAccountState("휴면상태");
-				
-				return studentLoginMapper.selectAccountToStudentLogin(account);
+			if(studentLoginMapper.selectAccountStateCk(account.getAccountId()) != null) {
+				if(studentLoginMapper.selectAccountStateCk(account.getAccountId()).equals("휴면상태")) {
+					//System.out.println("휴면상태");
+					account.setAccountLevel("학생");
+					account.setAccountState("휴면상태");
+					
+					return studentLoginMapper.selectAccountToStudentLogin(account);
+				}
 			}
-			System.out.println("휴면상태 x");
+			//System.out.println("휴면상태 x");
 			account.setAccountLevel("학생");
 			account.setAccountState("활성화");
 			

@@ -139,6 +139,19 @@
 	                        </div>
 	                    </div>
 	                </div>
+	                
+	               <div class="row">
+	               		<div class="col-md-3 col-lg-3"></div>
+	                    <div class="col-md-5 col-lg-4">
+	                        <div class="card" id="cardStyle">
+	                        	<form id="loginForm" method="post" action="${path}/studentLogin">
+		                            <div class="card-body">
+		                            	현재 아이디가 중복 중이라면 <br>아이디 : student80 ~ student100 <br> 비밀번호 qwer1234!<br>를 이용해주세요.
+		                            </div>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
 
           </div>     
 	</div>
